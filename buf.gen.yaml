@@ -5,7 +5,7 @@ managed:
     - file_option: go_package_prefix
       value: github.com/infracost/proto/gen/go
 plugins:
-  - local: protoc-gen-go
+  - remote: buf.build/protocolbuffers/go:v1.36.10
     out: gen/go
     opt:
       - paths=source_relative
