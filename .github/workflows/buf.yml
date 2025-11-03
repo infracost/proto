@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-go@v5
         with:
@@ -38,7 +40,8 @@ jobs:
 
       - name: Breaking change detection
         if: github.event_name == 'pull_request'
-        run: buf breaking --against '.git#branch=main'
+        run: |
+          buf breaking --against '.git#branch=origin/main'
 
       - name: Generate
         run: rm -rf gen/ && buf generate
