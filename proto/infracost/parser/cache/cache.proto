@@ -19,16 +19,16 @@ message TerraformProject {
 
 message Metadata {
   string key = 1;
-  CacheFlavor flavor = 2;
+  Flavor flavor = 2;
   string runner_version = 3;
   string parser_version = 4;
   google.protobuf.Timestamp created_at = 5;
 }
 
-enum CacheFlavor {
-  CACHE_FLAVOR_UNSPECIFIED = 0;
-  CACHE_FLAVOR_TERRAFORM = 1;
-  CACHE_FLAVOR_CLOUDFORMATION = 2;
+enum Flavor {
+  FLAVOR_UNSPECIFIED = 0;
+  FLAVOR_TERRAFORM = 1;
+  FLAVOR_CLOUDFORMATION = 2;
 }
 
 // BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
@@ -36,7 +36,7 @@ message BranchSummary {
   string branch = 1;
   map<string, string> sha_to_id_map = 2;
   map<string, string> sha_to_project_name_map = 3;
-  map<string, CacheFlavor> sha_to_flavor_map = 4;
+  map<string, Flavor> sha_to_flavor_map = 4;
 }
 
 message EncryptionEnvelope {
