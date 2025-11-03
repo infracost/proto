@@ -41,11 +41,7 @@ jobs:
       - name: Breaking change detection
         if: github.event_name == 'pull_request'
         run: |
-          if git rev-parse --verify origin/main >/dev/null 2>&1; then
-            buf breaking --against '.git#branch=origin/main'
-          else
-            echo "Skipping breaking change detection: main branch does not exist yet"
-          fi
+          buf breaking --against '.git#branch=origin/main'
 
       - name: Generate
         run: rm -rf gen/ && buf generate
