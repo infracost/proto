@@ -5,47 +5,47 @@ package infracost.parser.cloudformation;
 import "infracost/parser/metadata.proto";
 
 message ValueProto {
-    oneof value {
-      NullValueProto null = 1;
-      ScalarValueProto scalar = 2;
-      ListValueProto list = 3;
-      MapValueProto map = 4;
-    }
-    parser.SourceRange source_range = 5;
-    uint64 flags = 6;
+  oneof value {
+    NullValueProto null = 1;
+    ScalarValueProto scalar = 2;
+    ListValueProto list = 3;
+    MapValueProto map = 4;
   }
+  parser.SourceRange source_range = 5;
+  uint64 flags = 6;
+}
 
 message NullValueProto {
-    // Empty
+  // Empty
 }
 
 // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 enum ScalarType {
-    SCALAR_TYPE_STRING = 0;
-    SCALAR_TYPE_BOOL = 1;
-    SCALAR_TYPE_INT = 2;
-    SCALAR_TYPE_FLOAT = 3;
+  SCALAR_TYPE_STRING = 0;
+  SCALAR_TYPE_BOOL = 1;
+  SCALAR_TYPE_INT = 2;
+  SCALAR_TYPE_FLOAT = 3;
 }
 
 message ScalarValueProto {
-    ScalarType type = 1;
-    oneof value {
-        string string_value = 2;
-        bool bool_value = 3;
-        int64 int_value = 4;
-        double double_value = 5;
-    }
+  ScalarType type = 1;
+  oneof value {
+    string string_value = 2;
+    bool bool_value = 3;
+    int64 int_value = 4;
+    double double_value = 5;
+  }
 }
 
 message ListValueProto {
-    repeated ValueProto values = 1;
+  repeated ValueProto values = 1;
 }
 
 message MapValueProto {
-    repeated MapEntryProto entries = 1;
+  repeated MapEntryProto entries = 1;
 }
 
 message MapEntryProto {
-    ValueProto key = 1;
-    ValueProto value = 2;
+  ValueProto key = 1;
+  ValueProto value = 2;
 }

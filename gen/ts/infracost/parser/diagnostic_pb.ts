@@ -45,7 +45,7 @@ export enum DiagnosticType {
   MISSING_FUNC = 4,
 
   /**
-   * failed to call function, cty function errored 
+   * failed to call function, cty function errored
    *
    * @generated from enum value: DIAGNOSTIC_TYPE_FAILED_FUNCTION_CALL = 5;
    */
@@ -247,7 +247,7 @@ proto3.util.setEnumType(DiagnosticType, "infracost.parser.DiagnosticType", [
  * Diagnostic is information about something that went wrong during
  * parsing, for any reason.
  * A Diagnostic is considered Critical if it is something the user needs
- * to be alerted about, e.g. a module download failing due to invalid 
+ * to be alerted about, e.g. a module download failing due to invalid
  * credentials.
  *
  * @generated from message infracost.parser.Diagnostic

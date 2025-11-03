@@ -486,7 +486,7 @@ var File_infracost_parser_hcl_value_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_hcl_value_proto_rawDesc = "" +
 	"\n" +
-	" infracost/parser/hcl/value.proto\x12\x14infracost.parser.hcl\x1a\x1finfracost/parser/metadata.proto\x1a\"infracost/parser/expectation.proto\"\xe9\x02\n" +
+	" infracost/parser/hcl/value.proto\x12\x14infracost.parser.hcl\x1a\"infracost/parser/expectation.proto\x1a\x1finfracost/parser/metadata.proto\"\xe9\x02\n" +
 	"\n" +
 	"ValueProto\x12I\n" +
 	"\tprimitive\x18\x01 \x01(\v2).infracost.parser.hcl.PrimitiveValueProtoH\x00R\tprimitive\x12:\n" +

@@ -490,7 +490,7 @@ var File_infracost_parser_cloudformation_result_proto protoreflect.FileDescripto
 
 const file_infracost_parser_cloudformation_result_proto_rawDesc = "" +
 	"\n" +
-	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a+infracost/parser/cloudformation/value.proto\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xc2\a\n" +
+	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a\x1einfracost/parser/address.proto\x1a+infracost/parser/cloudformation/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xc2\a\n" +
 	"\vResultProto\x12\\\n" +
 	"\n" +
 	"parameters\x18\x01 \x03(\v2<.infracost.parser.cloudformation.ResultProto.ParametersEntryR\n" +

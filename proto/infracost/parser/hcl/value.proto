@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package infracost.parser.hcl;
 
-import "infracost/parser/metadata.proto";
 import "infracost/parser/expectation.proto";
+import "infracost/parser/metadata.proto";
 
 message ValueProto {
   oneof value {
@@ -19,15 +19,15 @@ message ValueProto {
 message PrimitiveValueProto {
   oneof value {
     string string_value = 1;
-    string number_value = 2;  // big.Float as string
+    string number_value = 2; // big.Float as string
     bool bool_value = 3;
   }
-  uint32 primitive_type = 4;  // primitiveType enum
+  uint32 primitive_type = 4; // primitiveType enum
 }
 
 message ListValueProto {
   repeated ValueProto values = 1;
-  optional parser.Expectation element_type = 2;  // cty.Type as string
+  optional parser.Expectation element_type = 2; // cty.Type as string
   bool is_tuple = 3;
   bool is_set = 4;
 }
@@ -47,4 +47,3 @@ message MapEntryProto {
 message NullValueProto {
   // Empty - null values only need metadata which is in parent
 }
-

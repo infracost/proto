@@ -451,7 +451,7 @@ var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a,infracost/parser/cloudformation/result.proto\"\xe9\x02\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\xe9\x02\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +

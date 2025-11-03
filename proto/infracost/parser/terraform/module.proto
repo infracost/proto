@@ -2,13 +2,10 @@ syntax = "proto3";
 
 package infracost.parser.terraform;
 
-import "infracost/parser/metadata.proto";
-
 import "infracost/parser/address.proto";
-
-import "infracost/parser/terraform/resource.proto";
-
+import "infracost/parser/metadata.proto";
 import "infracost/parser/terraform/modules/loader.proto";
+import "infracost/parser/terraform/resource.proto";
 
 message ModuleResult {
   map<string, ModuleResultList> modules = 1;
@@ -16,7 +13,7 @@ message ModuleResult {
   uint64 definition_flags = 3;
   optional parser.Address address = 4;
   map<string, ProviderResult> providers = 5;
-  optional modules.LoadedModule load_data = 6;            
+  optional modules.LoadedModule load_data = 6;
   string version = 7;
   repeated Resource resources = 8;
   repeated Output outputs = 9;
@@ -33,5 +30,3 @@ message ProviderResult {
   int64 start_line = 4;
   int64 end_line = 5;
 }
-
-

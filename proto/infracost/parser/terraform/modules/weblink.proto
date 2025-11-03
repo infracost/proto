@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 
 package infracost.parser.terraform.modules;
@@ -11,12 +10,12 @@ package infracost.parser.terraform.modules;
 message WebLink {
   // url.URL.Scheme
   string scheme = 1;
-	// url.URL.Host
+  // url.URL.Host
   string host = 2;
-	// A path under the Host to the parent VCS repository of this module
+  // A path under the Host to the parent VCS repository of this module
   string repo = 3;
-	// A VCS (git) tree-ish object representing the version of this module
+  // A VCS (git) tree-ish object representing the version of this module
   string commitish = 4;
-	// A subdirectory *within* the associated Repo
+  // A subdirectory *within* the associated Repo
   string subdirectory = 5;
 }

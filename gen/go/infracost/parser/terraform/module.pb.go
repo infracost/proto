@@ -255,7 +255,7 @@ var File_infracost_parser_terraform_module_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_module_proto_rawDesc = "" +
 	"\n" +
-	"'infracost/parser/terraform/module.proto\x12\x1ainfracost.parser.terraform\x1a\x1finfracost/parser/metadata.proto\x1a\x1einfracost/parser/address.proto\x1a)infracost/parser/terraform/resource.proto\x1a/infracost/parser/terraform/modules/loader.proto\"\xbb\x06\n" +
+	"'infracost/parser/terraform/module.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a/infracost/parser/terraform/modules/loader.proto\x1a)infracost/parser/terraform/resource.proto\"\xbb\x06\n" +
 	"\fModuleResult\x12O\n" +
 	"\amodules\x18\x01 \x03(\v25.infracost.parser.terraform.ModuleResult.ModulesEntryR\amodules\x12@\n" +
 	"\fsource_range\x18\x02 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12)\n" +

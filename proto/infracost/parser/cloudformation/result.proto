@@ -2,43 +2,43 @@ syntax = "proto3";
 
 package infracost.parser.cloudformation;
 
-import "infracost/parser/cloudformation/value.proto";
 import "infracost/parser/address.proto";
+import "infracost/parser/cloudformation/value.proto";
 import "infracost/parser/metadata.proto";
 import "infracost/parser/stack.proto";
 
 message ResultProto {
-    map<string, ValueProto> parameters = 1;
-    map<string, NestedMapBranch> mappings = 2;
-    map<string, bool> conditions = 3;
-    map<string, ResourceProto> resources = 4;
-    map<string, ValueProto> outputs = 5;
+  map<string, ValueProto> parameters = 1;
+  map<string, NestedMapBranch> mappings = 2;
+  map<string, bool> conditions = 3;
+  map<string, ResourceProto> resources = 4;
+  map<string, ValueProto> outputs = 5;
 }
 
 message NestedMapBranch {
-    map<string, NestedMapLeaf> values = 1;
+  map<string, NestedMapLeaf> values = 1;
 }
 
 message NestedMapLeaf {
-    map<string, ValueProto> values = 1;
+  map<string, ValueProto> values = 1;
 }
 
 message ResourceProto {
-    string id = 1;
-    string type = 2;
-    parser.Address address = 3;
-    map<string, ValueProto> properties = 4;
-    map<string, ValueProto> metadata = 5;
-    parser.SourceRange source_range = 6;
-    uint64 flags = 7;
-    bool supported = 8;
-    bool free = 9;
-    parser.CallStack call_stack = 10;
-    string region = 11;
-    bool region_is_synthetic = 12;
-    bool supports_tags = 13;
-    bool supports_default_tags = 14;
-    TagData tag_data = 15;
+  string id = 1;
+  string type = 2;
+  parser.Address address = 3;
+  map<string, ValueProto> properties = 4;
+  map<string, ValueProto> metadata = 5;
+  parser.SourceRange source_range = 6;
+  uint64 flags = 7;
+  bool supported = 8;
+  bool free = 9;
+  parser.CallStack call_stack = 10;
+  string region = 11;
+  bool region_is_synthetic = 12;
+  bool supports_tags = 13;
+  bool supports_default_tags = 14;
+  TagData tag_data = 15;
 }
 
 message TagData {

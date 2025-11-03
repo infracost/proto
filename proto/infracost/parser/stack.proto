@@ -6,11 +6,11 @@ import "infracost/parser/address.proto";
 import "infracost/parser/metadata.proto";
 
 message CallStack {
-    repeated StackFrame frames = 1;
+  repeated StackFrame frames = 1;
 }
 
 message StackFrame {
-    Address address = 1;
-    SourceRange source_range = 2;
-    string source = 3;
+  Address address = 1;
+  SourceRange source_range = 2;
+  string source = 3;
 }

@@ -2,12 +2,9 @@ syntax = "proto3";
 
 package infracost.parser.terraform;
 
-import "infracost/parser/hcl/value.proto";
-
-import "infracost/parser/metadata.proto";
-
 import "infracost/parser/address.proto";
-
+import "infracost/parser/hcl/value.proto";
+import "infracost/parser/metadata.proto";
 import "infracost/parser/stack.proto";
 
 message Resource {
@@ -60,4 +57,3 @@ message Output {
   hcl.ValueProto value = 1;
   string name = 2;
 }
-

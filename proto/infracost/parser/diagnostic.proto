@@ -7,7 +7,7 @@ import "infracost/parser/metadata.proto";
 // Diagnostic is information about something that went wrong during
 // parsing, for any reason.
 // A Diagnostic is considered Critical if it is something the user needs
-// to be alerted about, e.g. a module download failing due to invalid 
+// to be alerted about, e.g. a module download failing due to invalid
 // credentials.
 message Diagnostic {
   string error = 1;
@@ -22,14 +22,14 @@ message Diagnostic {
 enum DiagnosticType {
   DIAGNOSTIC_TYPE_UNSPECIFIED = 0;
   // failed operation e.g. adding a string to an int, or error in operation func
-  DIAGNOSTIC_TYPE_FAILED_OPERATION = 1; 
+  DIAGNOSTIC_TYPE_FAILED_OPERATION = 1;
   // bug in the parser code
-  DIAGNOSTIC_TYPE_DEFECT = 2; 
+  DIAGNOSTIC_TYPE_DEFECT = 2;
   // could not parse the hcl, invalid code
-  DIAGNOSTIC_TYPE_HCL_PARSE_ERROR = 3; 
+  DIAGNOSTIC_TYPE_HCL_PARSE_ERROR = 3;
   // missing function, i.e. not defined
-  DIAGNOSTIC_TYPE_MISSING_FUNC = 4; 
-  // failed to call function, cty function errored 
+  DIAGNOSTIC_TYPE_MISSING_FUNC = 4;
+  // failed to call function, cty function errored
   DIAGNOSTIC_TYPE_FAILED_FUNCTION_CALL = 5;
   DIAGNOSTIC_TYPE_UNEXPECTED_TYPE = 6; // e.g. string used for int
   DIAGNOSTIC_TYPE_MODULE_FETCH_ERROR = 7; // failed to download module
@@ -39,27 +39,27 @@ enum DiagnosticType {
   // unknown expression type - possibly an expression we don't yet support
   DIAGNOSTIC_TYPE_UNKNOWN_EXPRESSION = 11;
   // error trying to relatively traverse into a value e.g. function()[3]
-  DIAGNOSTIC_TYPE_RELATIVE_TRAVERSAL_ERROR = 12; 
+  DIAGNOSTIC_TYPE_RELATIVE_TRAVERSAL_ERROR = 12;
   // invalid terraform configuration, e.g. dynamic block with no for_each
-  DIAGNOSTIC_TYPE_INVALID_TERRAFORM_CONFIGURATION = 13; 
+  DIAGNOSTIC_TYPE_INVALID_TERRAFORM_CONFIGURATION = 13;
   // invalid terragrunt configuration, e.g. missing source
-  DIAGNOSTIC_TYPE_INVALID_TERRAGRUNT_CONFIGURATION = 14; 
+  DIAGNOSTIC_TYPE_INVALID_TERRAGRUNT_CONFIGURATION = 14;
   // cyclic dependencies detected
-  DIAGNOSTIC_TYPE_TERRAFORM_CYCLIC_DEPENDENCY_DETECTED = 15; 
+  DIAGNOSTIC_TYPE_TERRAFORM_CYCLIC_DEPENDENCY_DETECTED = 15;
   // terragrunt cyclic dependency detected
-  DIAGNOSTIC_TYPE_TERRAGRUNT_CYCLIC_DEPENDENCY_DETECTED = 16; 
+  DIAGNOSTIC_TYPE_TERRAGRUNT_CYCLIC_DEPENDENCY_DETECTED = 16;
   // security error, e.g. trying to access a file outside of the repo directory
-  DIAGNOSTIC_TYPE_SECURITY_ERROR = 17; 
+  DIAGNOSTIC_TYPE_SECURITY_ERROR = 17;
   // dependency error, e.g. missing module
-  DIAGNOSTIC_TYPE_DEPENDENCY_ERROR = 18; 
+  DIAGNOSTIC_TYPE_DEPENDENCY_ERROR = 18;
   // filesystem error, e.g. missing file
-  DIAGNOSTIC_TYPE_FILESYSTEM_ERROR = 19; 
+  DIAGNOSTIC_TYPE_FILESYSTEM_ERROR = 19;
   // invalid source map
   DIAGNOSTIC_TYPE_INVALID_SOURCE_MAP = 20;
   // no source files found
-  DIAGNOSTIC_TYPE_NO_SOURCE_FILES_FOUND = 21; 
+  DIAGNOSTIC_TYPE_NO_SOURCE_FILES_FOUND = 21;
   // yor error
-  DIAGNOSTIC_TYPE_YOR_ERROR = 22; 
+  DIAGNOSTIC_TYPE_YOR_ERROR = 22;
   // remote variable load error, e.g. TFC/Spacelift
   DIAGNOSTIC_TYPE_REMOTE_VARIABLE_LOAD_ERROR = 23;
   // cloudformation template error

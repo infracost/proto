@@ -10,8 +10,12 @@ lint:
 clean:
 	rm -rf gen/
 
+.PHONY: format
+format:
+	buf format -w
+
 .PHONY: generate
-generate: clean lint _generate verify
+generate: clean lint format _generate verify
 
 .PHONY: _generate
 _generate:

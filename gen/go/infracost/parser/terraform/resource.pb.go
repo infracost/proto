@@ -495,7 +495,7 @@ var File_infracost_parser_terraform_resource_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_resource_proto_rawDesc = "" +
 	"\n" +
-	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1einfracost/parser/address.proto\x1a\x1cinfracost/parser/stack.proto\"\x96\x05\n" +
+	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\x96\x05\n" +
 	"\bResource\x124\n" +
 	"\x04data\x18\x01 \x01(\v2 .infracost.parser.hcl.ValueProtoR\x04data\x12@\n" +
 	"\bprovider\x18\x02 \x01(\v2$.infracost.parser.terraform.ProviderR\bprovider\x123\n" +

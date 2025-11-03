@@ -3,9 +3,9 @@ syntax = "proto3";
 package infracost.parser.cache;
 
 import "google/protobuf/timestamp.proto";
+import "infracost/parser/cloudformation/result.proto";
 import "infracost/parser/diagnostic.proto";
 import "infracost/parser/terraform/module.proto";
-import "infracost/parser/cloudformation/result.proto";
 
 message TerraformProject {
   terraform.ModuleResult result = 1;
