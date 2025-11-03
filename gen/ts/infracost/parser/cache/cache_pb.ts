@@ -10,29 +10,29 @@ import { Diagnostic } from "../diagnostic_pb.js";
 import { Result } from "../cloudformation/result_pb.js";
 
 /**
- * @generated from enum infracost.parser.cache.CacheFlavor
+ * @generated from enum infracost.parser.cache.Flavor
  */
-export enum CacheFlavor {
+export enum Flavor {
   /**
-   * @generated from enum value: CACHE_FLAVOR_UNSPECIFIED = 0;
+   * @generated from enum value: FLAVOR_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: CACHE_FLAVOR_TERRAFORM = 1;
+   * @generated from enum value: FLAVOR_TERRAFORM = 1;
    */
   TERRAFORM = 1,
 
   /**
-   * @generated from enum value: CACHE_FLAVOR_CLOUDFORMATION = 2;
+   * @generated from enum value: FLAVOR_CLOUDFORMATION = 2;
    */
   CLOUDFORMATION = 2,
 }
-// Retrieve enum metadata with: proto3.getEnumType(CacheFlavor)
-proto3.util.setEnumType(CacheFlavor, "infracost.parser.cache.CacheFlavor", [
-  { no: 0, name: "CACHE_FLAVOR_UNSPECIFIED" },
-  { no: 1, name: "CACHE_FLAVOR_TERRAFORM" },
-  { no: 2, name: "CACHE_FLAVOR_CLOUDFORMATION" },
+// Retrieve enum metadata with: proto3.getEnumType(Flavor)
+proto3.util.setEnumType(Flavor, "infracost.parser.cache.Flavor", [
+  { no: 0, name: "FLAVOR_UNSPECIFIED" },
+  { no: 1, name: "FLAVOR_TERRAFORM" },
+  { no: 2, name: "FLAVOR_CLOUDFORMATION" },
 ]);
 
 /**
@@ -122,9 +122,9 @@ export class Metadata extends Message<Metadata> {
   key = "";
 
   /**
-   * @generated from field: infracost.parser.cache.CacheFlavor flavor = 2;
+   * @generated from field: infracost.parser.cache.Flavor flavor = 2;
    */
-  flavor = CacheFlavor.UNSPECIFIED;
+  flavor = Flavor.UNSPECIFIED;
 
   /**
    * @generated from field: string runner_version = 3;
@@ -150,7 +150,7 @@ export class Metadata extends Message<Metadata> {
   static readonly typeName = "infracost.parser.cache.Metadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "flavor", kind: "enum", T: proto3.getEnumType(CacheFlavor) },
+    { no: 2, name: "flavor", kind: "enum", T: proto3.getEnumType(Flavor) },
     { no: 3, name: "runner_version", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "parser_version", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "created_at", kind: "message", T: Timestamp },
@@ -195,9 +195,9 @@ export class BranchSummary extends Message<BranchSummary> {
   shaToProjectNameMap: { [key: string]: string } = {};
 
   /**
-   * @generated from field: map<string, infracost.parser.cache.CacheFlavor> sha_to_flavor_map = 4;
+   * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4;
    */
-  shaToFlavorMap: { [key: string]: CacheFlavor } = {};
+  shaToFlavorMap: { [key: string]: Flavor } = {};
 
   constructor(data?: PartialMessage<BranchSummary>) {
     super();
@@ -210,7 +210,7 @@ export class BranchSummary extends Message<BranchSummary> {
     { no: 1, name: "branch", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "sha_to_id_map", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
     { no: 3, name: "sha_to_project_name_map", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
-    { no: 4, name: "sha_to_flavor_map", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "enum", T: proto3.getEnumType(CacheFlavor)} },
+    { no: 4, name: "sha_to_flavor_map", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "enum", T: proto3.getEnumType(Flavor)} },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BranchSummary {

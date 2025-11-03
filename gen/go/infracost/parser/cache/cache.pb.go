@@ -25,52 +25,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CacheFlavor int32
+type Flavor int32
 
 const (
-	CacheFlavor_CACHE_FLAVOR_UNSPECIFIED    CacheFlavor = 0
-	CacheFlavor_CACHE_FLAVOR_TERRAFORM      CacheFlavor = 1
-	CacheFlavor_CACHE_FLAVOR_CLOUDFORMATION CacheFlavor = 2
+	Flavor_FLAVOR_UNSPECIFIED    Flavor = 0
+	Flavor_FLAVOR_TERRAFORM      Flavor = 1
+	Flavor_FLAVOR_CLOUDFORMATION Flavor = 2
 )
 
-// Enum value maps for CacheFlavor.
+// Enum value maps for Flavor.
 var (
-	CacheFlavor_name = map[int32]string{
-		0: "CACHE_FLAVOR_UNSPECIFIED",
-		1: "CACHE_FLAVOR_TERRAFORM",
-		2: "CACHE_FLAVOR_CLOUDFORMATION",
+	Flavor_name = map[int32]string{
+		0: "FLAVOR_UNSPECIFIED",
+		1: "FLAVOR_TERRAFORM",
+		2: "FLAVOR_CLOUDFORMATION",
 	}
-	CacheFlavor_value = map[string]int32{
-		"CACHE_FLAVOR_UNSPECIFIED":    0,
-		"CACHE_FLAVOR_TERRAFORM":      1,
-		"CACHE_FLAVOR_CLOUDFORMATION": 2,
+	Flavor_value = map[string]int32{
+		"FLAVOR_UNSPECIFIED":    0,
+		"FLAVOR_TERRAFORM":      1,
+		"FLAVOR_CLOUDFORMATION": 2,
 	}
 )
 
-func (x CacheFlavor) Enum() *CacheFlavor {
-	p := new(CacheFlavor)
+func (x Flavor) Enum() *Flavor {
+	p := new(Flavor)
 	*p = x
 	return p
 }
 
-func (x CacheFlavor) String() string {
+func (x Flavor) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (CacheFlavor) Descriptor() protoreflect.EnumDescriptor {
+func (Flavor) Descriptor() protoreflect.EnumDescriptor {
 	return file_infracost_parser_cache_cache_proto_enumTypes[0].Descriptor()
 }
 
-func (CacheFlavor) Type() protoreflect.EnumType {
+func (Flavor) Type() protoreflect.EnumType {
 	return &file_infracost_parser_cache_cache_proto_enumTypes[0]
 }
 
-func (x CacheFlavor) Number() protoreflect.EnumNumber {
+func (x Flavor) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use CacheFlavor.Descriptor instead.
-func (CacheFlavor) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use Flavor.Descriptor instead.
+func (Flavor) EnumDescriptor() ([]byte, []int) {
 	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{0}
 }
 
@@ -169,7 +169,7 @@ func (x *TerraformProject) GetTerraformModuleSuffix() string {
 type Metadata struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Flavor        CacheFlavor            `protobuf:"varint,2,opt,name=flavor,proto3,enum=infracost.parser.cache.CacheFlavor" json:"flavor,omitempty"`
+	Flavor        Flavor                 `protobuf:"varint,2,opt,name=flavor,proto3,enum=infracost.parser.cache.Flavor" json:"flavor,omitempty"`
 	RunnerVersion string                 `protobuf:"bytes,3,opt,name=runner_version,json=runnerVersion,proto3" json:"runner_version,omitempty"`
 	ParserVersion string                 `protobuf:"bytes,4,opt,name=parser_version,json=parserVersion,proto3" json:"parser_version,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -214,11 +214,11 @@ func (x *Metadata) GetKey() string {
 	return ""
 }
 
-func (x *Metadata) GetFlavor() CacheFlavor {
+func (x *Metadata) GetFlavor() Flavor {
 	if x != nil {
 		return x.Flavor
 	}
-	return CacheFlavor_CACHE_FLAVOR_UNSPECIFIED
+	return Flavor_FLAVOR_UNSPECIFIED
 }
 
 func (x *Metadata) GetRunnerVersion() string {
@@ -248,7 +248,7 @@ type BranchSummary struct {
 	Branch              string                 `protobuf:"bytes,1,opt,name=branch,proto3" json:"branch,omitempty"`
 	ShaToIdMap          map[string]string      `protobuf:"bytes,2,rep,name=sha_to_id_map,json=shaToIdMap,proto3" json:"sha_to_id_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	ShaToProjectNameMap map[string]string      `protobuf:"bytes,3,rep,name=sha_to_project_name_map,json=shaToProjectNameMap,proto3" json:"sha_to_project_name_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ShaToFlavorMap      map[string]CacheFlavor `protobuf:"bytes,4,rep,name=sha_to_flavor_map,json=shaToFlavorMap,proto3" json:"sha_to_flavor_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=infracost.parser.cache.CacheFlavor"`
+	ShaToFlavorMap      map[string]Flavor      `protobuf:"bytes,4,rep,name=sha_to_flavor_map,json=shaToFlavorMap,proto3" json:"sha_to_flavor_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=infracost.parser.cache.Flavor"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -304,7 +304,7 @@ func (x *BranchSummary) GetShaToProjectNameMap() map[string]string {
 	return nil
 }
 
-func (x *BranchSummary) GetShaToFlavorMap() map[string]CacheFlavor {
+func (x *BranchSummary) GetShaToFlavorMap() map[string]Flavor {
 	if x != nil {
 		return x.ShaToFlavorMap
 	}
@@ -460,14 +460,14 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
 	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12#\n" +
 	"\ris_terragrunt\x18\x06 \x01(\bR\fisTerragrunt\x126\n" +
-	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\"\xe2\x01\n" +
+	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12;\n" +
-	"\x06flavor\x18\x02 \x01(\x0e2#.infracost.parser.cache.CacheFlavorR\x06flavor\x12%\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
+	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12%\n" +
 	"\x0erunner_version\x18\x03 \x01(\tR\rrunnerVersion\x12%\n" +
 	"\x0eparser_version\x18\x04 \x01(\tR\rparserVersion\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xcc\x04\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xc7\x04\n" +
 	"\rBranchSummary\x12\x16\n" +
 	"\x06branch\x18\x01 \x01(\tR\x06branch\x12X\n" +
 	"\rsha_to_id_map\x18\x02 \x03(\v25.infracost.parser.cache.BranchSummary.ShaToIdMapEntryR\n" +
@@ -479,10 +479,10 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aF\n" +
 	"\x18ShaToProjectNameMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1af\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aa\n" +
 	"\x13ShaToFlavorMapEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\x0e2#.infracost.parser.cache.CacheFlavorR\x05value:\x028\x01\"p\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x124\n" +
+	"\x05value\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x05value:\x028\x01\"p\n" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
@@ -493,11 +493,11 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12\x1d\n" +
 	"\n" +
 	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
-	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfigJ\x04\b\x06\x10\aR\x06is_cdk*h\n" +
-	"\vCacheFlavor\x12\x1c\n" +
-	"\x18CACHE_FLAVOR_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16CACHE_FLAVOR_TERRAFORM\x10\x01\x12\x1f\n" +
-	"\x1bCACHE_FLAVOR_CLOUDFORMATION\x10\x02B\xdc\x01\n" +
+	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfigJ\x04\b\x06\x10\aR\x06is_cdk*Q\n" +
+	"\x06Flavor\x12\x16\n" +
+	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10FLAVOR_TERRAFORM\x10\x01\x12\x19\n" +
+	"\x15FLAVOR_CLOUDFORMATION\x10\x02B\xdc\x01\n" +
 	"\x1acom.infracost.parser.cacheB\n" +
 	"CacheProtoP\x01Z8github.com/infracost/proto/gen/go/infracost/parser/cache\xa2\x02\x03IPC\xaa\x02\x16Infracost.Parser.Cache\xca\x02\x16Infracost\\Parser\\Cache\xe2\x02\"Infracost\\Parser\\Cache\\GPBMetadata\xea\x02\x18Infracost::Parser::Cacheb\x06proto3"
 
@@ -516,7 +516,7 @@ func file_infracost_parser_cache_cache_proto_rawDescGZIP() []byte {
 var file_infracost_parser_cache_cache_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_infracost_parser_cache_cache_proto_goTypes = []any{
-	(CacheFlavor)(0),               // 0: infracost.parser.cache.CacheFlavor
+	(Flavor)(0),                    // 0: infracost.parser.cache.Flavor
 	(*TerraformProject)(nil),       // 1: infracost.parser.cache.TerraformProject
 	(*Metadata)(nil),               // 2: infracost.parser.cache.Metadata
 	(*BranchSummary)(nil),          // 3: infracost.parser.cache.BranchSummary
@@ -534,7 +534,7 @@ var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	9,  // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
 	2,  // 1: infracost.parser.cache.TerraformProject.metadata:type_name -> infracost.parser.cache.Metadata
 	10, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
-	0,  // 3: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.CacheFlavor
+	0,  // 3: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.Flavor
 	11, // 4: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
 	6,  // 5: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
 	7,  // 6: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
@@ -542,7 +542,7 @@ var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	12, // 8: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
 	2,  // 9: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
 	10, // 10: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
-	0,  // 11: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.CacheFlavor
+	0,  // 11: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
