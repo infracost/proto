@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Install TypeScript
+        run: npm install -g typescript
+
       - uses: bufbuild/buf-setup-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
