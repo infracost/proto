@@ -7,7 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
 import { ModuleResult } from "../terraform/module_pb.js";
 import { Diagnostic } from "../diagnostic_pb.js";
-import { ResultProto } from "../cloudformation/result_pb.js";
+import { Result } from "../cloudformation/result_pb.js";
 
 /**
  * @generated from enum infracost.parser.cache.CacheFlavor
@@ -286,9 +286,9 @@ export class EncryptionEnvelope extends Message<EncryptionEnvelope> {
  */
 export class CloudFormationProject extends Message<CloudFormationProject> {
   /**
-   * @generated from field: infracost.parser.cloudformation.ResultProto result = 1;
+   * @generated from field: infracost.parser.cloudformation.Result result = 1;
    */
-  result?: ResultProto;
+  result?: Result;
 
   /**
    * @generated from field: infracost.parser.cache.Metadata metadata = 2;
@@ -322,7 +322,7 @@ export class CloudFormationProject extends Message<CloudFormationProject> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "infracost.parser.cache.CloudFormationProject";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "result", kind: "message", T: ResultProto },
+    { no: 1, name: "result", kind: "message", T: Result },
     { no: 2, name: "metadata", kind: "message", T: Metadata },
     { no: 3, name: "diags", kind: "message", T: Diagnostic, repeated: true },
     { no: 4, name: "usage_file", kind: "scalar", T: 12 /* ScalarType.BYTES */ },

@@ -22,35 +22,35 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ValueProto struct {
+type Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*ValueProto_Primitive
-	//	*ValueProto_List
-	//	*ValueProto_Map
-	//	*ValueProto_Null
-	Value         isValueProto_Value  `protobuf_oneof:"value"`
+	//	*Value_Primitive
+	//	*Value_List
+	//	*Value_Map
+	//	*Value_Null
+	Value         isValue_Value       `protobuf_oneof:"value"`
 	SourceRange   *parser.SourceRange `protobuf:"bytes,5,opt,name=source_range,json=sourceRange,proto3" json:"source_range,omitempty"`
 	Flags         uint64              `protobuf:"varint,6,opt,name=flags,proto3" json:"flags,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ValueProto) Reset() {
-	*x = ValueProto{}
+func (x *Value) Reset() {
+	*x = Value{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ValueProto) String() string {
+func (x *Value) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ValueProto) ProtoMessage() {}
+func (*Value) ProtoMessage() {}
 
-func (x *ValueProto) ProtoReflect() protoreflect.Message {
+func (x *Value) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -62,123 +62,123 @@ func (x *ValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ValueProto.ProtoReflect.Descriptor instead.
-func (*ValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use Value.ProtoReflect.Descriptor instead.
+func (*Value) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ValueProto) GetValue() isValueProto_Value {
+func (x *Value) GetValue() isValue_Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *ValueProto) GetPrimitive() *PrimitiveValueProto {
+func (x *Value) GetPrimitive() *PrimitiveValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Primitive); ok {
+		if x, ok := x.Value.(*Value_Primitive); ok {
 			return x.Primitive
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetList() *ListValueProto {
+func (x *Value) GetList() *ListValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_List); ok {
+		if x, ok := x.Value.(*Value_List); ok {
 			return x.List
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetMap() *MapValueProto {
+func (x *Value) GetMap() *MapValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Map); ok {
+		if x, ok := x.Value.(*Value_Map); ok {
 			return x.Map
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetNull() *NullValueProto {
+func (x *Value) GetNull() *NullValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Null); ok {
+		if x, ok := x.Value.(*Value_Null); ok {
 			return x.Null
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetSourceRange() *parser.SourceRange {
+func (x *Value) GetSourceRange() *parser.SourceRange {
 	if x != nil {
 		return x.SourceRange
 	}
 	return nil
 }
 
-func (x *ValueProto) GetFlags() uint64 {
+func (x *Value) GetFlags() uint64 {
 	if x != nil {
 		return x.Flags
 	}
 	return 0
 }
 
-type isValueProto_Value interface {
-	isValueProto_Value()
+type isValue_Value interface {
+	isValue_Value()
 }
 
-type ValueProto_Primitive struct {
-	Primitive *PrimitiveValueProto `protobuf:"bytes,1,opt,name=primitive,proto3,oneof"`
+type Value_Primitive struct {
+	Primitive *PrimitiveValue `protobuf:"bytes,1,opt,name=primitive,proto3,oneof"`
 }
 
-type ValueProto_List struct {
-	List *ListValueProto `protobuf:"bytes,2,opt,name=list,proto3,oneof"`
+type Value_List struct {
+	List *ListValue `protobuf:"bytes,2,opt,name=list,proto3,oneof"`
 }
 
-type ValueProto_Map struct {
-	Map *MapValueProto `protobuf:"bytes,3,opt,name=map,proto3,oneof"`
+type Value_Map struct {
+	Map *MapValue `protobuf:"bytes,3,opt,name=map,proto3,oneof"`
 }
 
-type ValueProto_Null struct {
-	Null *NullValueProto `protobuf:"bytes,4,opt,name=null,proto3,oneof"`
+type Value_Null struct {
+	Null *NullValue `protobuf:"bytes,4,opt,name=null,proto3,oneof"`
 }
 
-func (*ValueProto_Primitive) isValueProto_Value() {}
+func (*Value_Primitive) isValue_Value() {}
 
-func (*ValueProto_List) isValueProto_Value() {}
+func (*Value_List) isValue_Value() {}
 
-func (*ValueProto_Map) isValueProto_Value() {}
+func (*Value_Map) isValue_Value() {}
 
-func (*ValueProto_Null) isValueProto_Value() {}
+func (*Value_Null) isValue_Value() {}
 
-type PrimitiveValueProto struct {
+type PrimitiveValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*PrimitiveValueProto_StringValue
-	//	*PrimitiveValueProto_NumberValue
-	//	*PrimitiveValueProto_BoolValue
-	Value         isPrimitiveValueProto_Value `protobuf_oneof:"value"`
-	PrimitiveType uint32                      `protobuf:"varint,4,opt,name=primitive_type,json=primitiveType,proto3" json:"primitive_type,omitempty"` // primitiveType enum
+	//	*PrimitiveValue_StringValue
+	//	*PrimitiveValue_NumberValue
+	//	*PrimitiveValue_BoolValue
+	Value         isPrimitiveValue_Value `protobuf_oneof:"value"`
+	PrimitiveType uint32                 `protobuf:"varint,4,opt,name=primitive_type,json=primitiveType,proto3" json:"primitive_type,omitempty"` // primitiveType enum
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PrimitiveValueProto) Reset() {
-	*x = PrimitiveValueProto{}
+func (x *PrimitiveValue) Reset() {
+	*x = PrimitiveValue{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PrimitiveValueProto) String() string {
+func (x *PrimitiveValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrimitiveValueProto) ProtoMessage() {}
+func (*PrimitiveValue) ProtoMessage() {}
 
-func (x *PrimitiveValueProto) ProtoReflect() protoreflect.Message {
+func (x *PrimitiveValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -190,77 +190,77 @@ func (x *PrimitiveValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrimitiveValueProto.ProtoReflect.Descriptor instead.
-func (*PrimitiveValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use PrimitiveValue.ProtoReflect.Descriptor instead.
+func (*PrimitiveValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PrimitiveValueProto) GetValue() isPrimitiveValueProto_Value {
+func (x *PrimitiveValue) GetValue() isPrimitiveValue_Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *PrimitiveValueProto) GetStringValue() string {
+func (x *PrimitiveValue) GetStringValue() string {
 	if x != nil {
-		if x, ok := x.Value.(*PrimitiveValueProto_StringValue); ok {
+		if x, ok := x.Value.(*PrimitiveValue_StringValue); ok {
 			return x.StringValue
 		}
 	}
 	return ""
 }
 
-func (x *PrimitiveValueProto) GetNumberValue() string {
+func (x *PrimitiveValue) GetNumberValue() string {
 	if x != nil {
-		if x, ok := x.Value.(*PrimitiveValueProto_NumberValue); ok {
+		if x, ok := x.Value.(*PrimitiveValue_NumberValue); ok {
 			return x.NumberValue
 		}
 	}
 	return ""
 }
 
-func (x *PrimitiveValueProto) GetBoolValue() bool {
+func (x *PrimitiveValue) GetBoolValue() bool {
 	if x != nil {
-		if x, ok := x.Value.(*PrimitiveValueProto_BoolValue); ok {
+		if x, ok := x.Value.(*PrimitiveValue_BoolValue); ok {
 			return x.BoolValue
 		}
 	}
 	return false
 }
 
-func (x *PrimitiveValueProto) GetPrimitiveType() uint32 {
+func (x *PrimitiveValue) GetPrimitiveType() uint32 {
 	if x != nil {
 		return x.PrimitiveType
 	}
 	return 0
 }
 
-type isPrimitiveValueProto_Value interface {
-	isPrimitiveValueProto_Value()
+type isPrimitiveValue_Value interface {
+	isPrimitiveValue_Value()
 }
 
-type PrimitiveValueProto_StringValue struct {
+type PrimitiveValue_StringValue struct {
 	StringValue string `protobuf:"bytes,1,opt,name=string_value,json=stringValue,proto3,oneof"`
 }
 
-type PrimitiveValueProto_NumberValue struct {
+type PrimitiveValue_NumberValue struct {
 	NumberValue string `protobuf:"bytes,2,opt,name=number_value,json=numberValue,proto3,oneof"` // big.Float as string
 }
 
-type PrimitiveValueProto_BoolValue struct {
+type PrimitiveValue_BoolValue struct {
 	BoolValue bool `protobuf:"varint,3,opt,name=bool_value,json=boolValue,proto3,oneof"`
 }
 
-func (*PrimitiveValueProto_StringValue) isPrimitiveValueProto_Value() {}
+func (*PrimitiveValue_StringValue) isPrimitiveValue_Value() {}
 
-func (*PrimitiveValueProto_NumberValue) isPrimitiveValueProto_Value() {}
+func (*PrimitiveValue_NumberValue) isPrimitiveValue_Value() {}
 
-func (*PrimitiveValueProto_BoolValue) isPrimitiveValueProto_Value() {}
+func (*PrimitiveValue_BoolValue) isPrimitiveValue_Value() {}
 
-type ListValueProto struct {
+type ListValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Values        []*ValueProto          `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
+	Values        []*Value               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
 	ElementType   *parser.Expectation    `protobuf:"bytes,2,opt,name=element_type,json=elementType,proto3,oneof" json:"element_type,omitempty"` // cty.Type as string
 	IsTuple       bool                   `protobuf:"varint,3,opt,name=is_tuple,json=isTuple,proto3" json:"is_tuple,omitempty"`
 	IsSet         bool                   `protobuf:"varint,4,opt,name=is_set,json=isSet,proto3" json:"is_set,omitempty"`
@@ -268,20 +268,20 @@ type ListValueProto struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListValueProto) Reset() {
-	*x = ListValueProto{}
+func (x *ListValue) Reset() {
+	*x = ListValue{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListValueProto) String() string {
+func (x *ListValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListValueProto) ProtoMessage() {}
+func (*ListValue) ProtoMessage() {}
 
-func (x *ListValueProto) ProtoReflect() protoreflect.Message {
+func (x *ListValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -293,61 +293,61 @@ func (x *ListValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListValueProto.ProtoReflect.Descriptor instead.
-func (*ListValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListValue.ProtoReflect.Descriptor instead.
+func (*ListValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListValueProto) GetValues() []*ValueProto {
+func (x *ListValue) GetValues() []*Value {
 	if x != nil {
 		return x.Values
 	}
 	return nil
 }
 
-func (x *ListValueProto) GetElementType() *parser.Expectation {
+func (x *ListValue) GetElementType() *parser.Expectation {
 	if x != nil {
 		return x.ElementType
 	}
 	return nil
 }
 
-func (x *ListValueProto) GetIsTuple() bool {
+func (x *ListValue) GetIsTuple() bool {
 	if x != nil {
 		return x.IsTuple
 	}
 	return false
 }
 
-func (x *ListValueProto) GetIsSet() bool {
+func (x *ListValue) GetIsSet() bool {
 	if x != nil {
 		return x.IsSet
 	}
 	return false
 }
 
-type MapValueProto struct {
+type MapValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entries       []*MapEntryProto       `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	Entries       []*MapEntry            `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
 	IsObject      bool                   `protobuf:"varint,2,opt,name=is_object,json=isObject,proto3" json:"is_object,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MapValueProto) Reset() {
-	*x = MapValueProto{}
+func (x *MapValue) Reset() {
+	*x = MapValue{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MapValueProto) String() string {
+func (x *MapValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MapValueProto) ProtoMessage() {}
+func (*MapValue) ProtoMessage() {}
 
-func (x *MapValueProto) ProtoReflect() protoreflect.Message {
+func (x *MapValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -359,49 +359,49 @@ func (x *MapValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MapValueProto.ProtoReflect.Descriptor instead.
-func (*MapValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use MapValue.ProtoReflect.Descriptor instead.
+func (*MapValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *MapValueProto) GetEntries() []*MapEntryProto {
+func (x *MapValue) GetEntries() []*MapEntry {
 	if x != nil {
 		return x.Entries
 	}
 	return nil
 }
 
-func (x *MapValueProto) GetIsObject() bool {
+func (x *MapValue) GetIsObject() bool {
 	if x != nil {
 		return x.IsObject
 	}
 	return false
 }
 
-type MapEntryProto struct {
+type MapEntry struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Key            string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value          *ValueProto            `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Value          *Value                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	KeySourceRange *parser.SourceRange    `protobuf:"bytes,3,opt,name=key_source_range,json=keySourceRange,proto3" json:"key_source_range,omitempty"`
 	KeyFlags       uint64                 `protobuf:"varint,4,opt,name=key_flags,json=keyFlags,proto3" json:"key_flags,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *MapEntryProto) Reset() {
-	*x = MapEntryProto{}
+func (x *MapEntry) Reset() {
+	*x = MapEntry{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MapEntryProto) String() string {
+func (x *MapEntry) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MapEntryProto) ProtoMessage() {}
+func (*MapEntry) ProtoMessage() {}
 
-func (x *MapEntryProto) ProtoReflect() protoreflect.Message {
+func (x *MapEntry) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -413,59 +413,59 @@ func (x *MapEntryProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MapEntryProto.ProtoReflect.Descriptor instead.
-func (*MapEntryProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use MapEntry.ProtoReflect.Descriptor instead.
+func (*MapEntry) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *MapEntryProto) GetKey() string {
+func (x *MapEntry) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *MapEntryProto) GetValue() *ValueProto {
+func (x *MapEntry) GetValue() *Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *MapEntryProto) GetKeySourceRange() *parser.SourceRange {
+func (x *MapEntry) GetKeySourceRange() *parser.SourceRange {
 	if x != nil {
 		return x.KeySourceRange
 	}
 	return nil
 }
 
-func (x *MapEntryProto) GetKeyFlags() uint64 {
+func (x *MapEntry) GetKeyFlags() uint64 {
 	if x != nil {
 		return x.KeyFlags
 	}
 	return 0
 }
 
-type NullValueProto struct {
+type NullValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NullValueProto) Reset() {
-	*x = NullValueProto{}
+func (x *NullValue) Reset() {
+	*x = NullValue{}
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NullValueProto) String() string {
+func (x *NullValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NullValueProto) ProtoMessage() {}
+func (*NullValue) ProtoMessage() {}
 
-func (x *NullValueProto) ProtoReflect() protoreflect.Message {
+func (x *NullValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_hcl_value_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -477,8 +477,8 @@ func (x *NullValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NullValueProto.ProtoReflect.Descriptor instead.
-func (*NullValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use NullValue.ProtoReflect.Descriptor instead.
+func (*NullValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_hcl_value_proto_rawDescGZIP(), []int{5}
 }
 
@@ -486,38 +486,37 @@ var File_infracost_parser_hcl_value_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_hcl_value_proto_rawDesc = "" +
 	"\n" +
-	" infracost/parser/hcl/value.proto\x12\x14infracost.parser.hcl\x1a\"infracost/parser/expectation.proto\x1a\x1finfracost/parser/metadata.proto\"\xe9\x02\n" +
-	"\n" +
-	"ValueProto\x12I\n" +
-	"\tprimitive\x18\x01 \x01(\v2).infracost.parser.hcl.PrimitiveValueProtoH\x00R\tprimitive\x12:\n" +
-	"\x04list\x18\x02 \x01(\v2$.infracost.parser.hcl.ListValueProtoH\x00R\x04list\x127\n" +
-	"\x03map\x18\x03 \x01(\v2#.infracost.parser.hcl.MapValueProtoH\x00R\x03map\x12:\n" +
-	"\x04null\x18\x04 \x01(\v2$.infracost.parser.hcl.NullValueProtoH\x00R\x04null\x12@\n" +
+	" infracost/parser/hcl/value.proto\x12\x14infracost.parser.hcl\x1a\"infracost/parser/expectation.proto\x1a\x1finfracost/parser/metadata.proto\"\xd0\x02\n" +
+	"\x05Value\x12D\n" +
+	"\tprimitive\x18\x01 \x01(\v2$.infracost.parser.hcl.PrimitiveValueH\x00R\tprimitive\x125\n" +
+	"\x04list\x18\x02 \x01(\v2\x1f.infracost.parser.hcl.ListValueH\x00R\x04list\x122\n" +
+	"\x03map\x18\x03 \x01(\v2\x1e.infracost.parser.hcl.MapValueH\x00R\x03map\x125\n" +
+	"\x04null\x18\x04 \x01(\v2\x1f.infracost.parser.hcl.NullValueH\x00R\x04null\x12@\n" +
 	"\fsource_range\x18\x05 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12\x14\n" +
 	"\x05flags\x18\x06 \x01(\x04R\x05flagsB\a\n" +
-	"\x05value\"\xb0\x01\n" +
-	"\x13PrimitiveValueProto\x12#\n" +
+	"\x05value\"\xab\x01\n" +
+	"\x0ePrimitiveValue\x12#\n" +
 	"\fstring_value\x18\x01 \x01(\tH\x00R\vstringValue\x12#\n" +
 	"\fnumber_value\x18\x02 \x01(\tH\x00R\vnumberValue\x12\x1f\n" +
 	"\n" +
 	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12%\n" +
 	"\x0eprimitive_type\x18\x04 \x01(\rR\rprimitiveTypeB\a\n" +
-	"\x05value\"\xd4\x01\n" +
-	"\x0eListValueProto\x128\n" +
-	"\x06values\x18\x01 \x03(\v2 .infracost.parser.hcl.ValueProtoR\x06values\x12E\n" +
+	"\x05value\"\xca\x01\n" +
+	"\tListValue\x123\n" +
+	"\x06values\x18\x01 \x03(\v2\x1b.infracost.parser.hcl.ValueR\x06values\x12E\n" +
 	"\felement_type\x18\x02 \x01(\v2\x1d.infracost.parser.ExpectationH\x00R\velementType\x88\x01\x01\x12\x19\n" +
 	"\bis_tuple\x18\x03 \x01(\bR\aisTuple\x12\x15\n" +
 	"\x06is_set\x18\x04 \x01(\bR\x05isSetB\x0f\n" +
-	"\r_element_type\"k\n" +
-	"\rMapValueProto\x12=\n" +
-	"\aentries\x18\x01 \x03(\v2#.infracost.parser.hcl.MapEntryProtoR\aentries\x12\x1b\n" +
-	"\tis_object\x18\x02 \x01(\bR\bisObject\"\xbf\x01\n" +
-	"\rMapEntryProto\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
-	"\x05value\x18\x02 \x01(\v2 .infracost.parser.hcl.ValueProtoR\x05value\x12G\n" +
+	"\r_element_type\"a\n" +
+	"\bMapValue\x128\n" +
+	"\aentries\x18\x01 \x03(\v2\x1e.infracost.parser.hcl.MapEntryR\aentries\x12\x1b\n" +
+	"\tis_object\x18\x02 \x01(\bR\bisObject\"\xb5\x01\n" +
+	"\bMapEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x05value\x12G\n" +
 	"\x10key_source_range\x18\x03 \x01(\v2\x1d.infracost.parser.SourceRangeR\x0ekeySourceRange\x12\x1b\n" +
-	"\tkey_flags\x18\x04 \x01(\x04R\bkeyFlags\"\x10\n" +
-	"\x0eNullValueProtoB\xd0\x01\n" +
+	"\tkey_flags\x18\x04 \x01(\x04R\bkeyFlags\"\v\n" +
+	"\tNullValueB\xd0\x01\n" +
 	"\x18com.infracost.parser.hclB\n" +
 	"ValueProtoP\x01Z6github.com/infracost/proto/gen/go/infracost/parser/hcl\xa2\x02\x03IPH\xaa\x02\x14Infracost.Parser.Hcl\xca\x02\x14Infracost\\Parser\\Hcl\xe2\x02 Infracost\\Parser\\Hcl\\GPBMetadata\xea\x02\x16Infracost::Parser::Hclb\x06proto3"
 
@@ -535,26 +534,26 @@ func file_infracost_parser_hcl_value_proto_rawDescGZIP() []byte {
 
 var file_infracost_parser_hcl_value_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_infracost_parser_hcl_value_proto_goTypes = []any{
-	(*ValueProto)(nil),          // 0: infracost.parser.hcl.ValueProto
-	(*PrimitiveValueProto)(nil), // 1: infracost.parser.hcl.PrimitiveValueProto
-	(*ListValueProto)(nil),      // 2: infracost.parser.hcl.ListValueProto
-	(*MapValueProto)(nil),       // 3: infracost.parser.hcl.MapValueProto
-	(*MapEntryProto)(nil),       // 4: infracost.parser.hcl.MapEntryProto
-	(*NullValueProto)(nil),      // 5: infracost.parser.hcl.NullValueProto
-	(*parser.SourceRange)(nil),  // 6: infracost.parser.SourceRange
-	(*parser.Expectation)(nil),  // 7: infracost.parser.Expectation
+	(*Value)(nil),              // 0: infracost.parser.hcl.Value
+	(*PrimitiveValue)(nil),     // 1: infracost.parser.hcl.PrimitiveValue
+	(*ListValue)(nil),          // 2: infracost.parser.hcl.ListValue
+	(*MapValue)(nil),           // 3: infracost.parser.hcl.MapValue
+	(*MapEntry)(nil),           // 4: infracost.parser.hcl.MapEntry
+	(*NullValue)(nil),          // 5: infracost.parser.hcl.NullValue
+	(*parser.SourceRange)(nil), // 6: infracost.parser.SourceRange
+	(*parser.Expectation)(nil), // 7: infracost.parser.Expectation
 }
 var file_infracost_parser_hcl_value_proto_depIdxs = []int32{
-	1,  // 0: infracost.parser.hcl.ValueProto.primitive:type_name -> infracost.parser.hcl.PrimitiveValueProto
-	2,  // 1: infracost.parser.hcl.ValueProto.list:type_name -> infracost.parser.hcl.ListValueProto
-	3,  // 2: infracost.parser.hcl.ValueProto.map:type_name -> infracost.parser.hcl.MapValueProto
-	5,  // 3: infracost.parser.hcl.ValueProto.null:type_name -> infracost.parser.hcl.NullValueProto
-	6,  // 4: infracost.parser.hcl.ValueProto.source_range:type_name -> infracost.parser.SourceRange
-	0,  // 5: infracost.parser.hcl.ListValueProto.values:type_name -> infracost.parser.hcl.ValueProto
-	7,  // 6: infracost.parser.hcl.ListValueProto.element_type:type_name -> infracost.parser.Expectation
-	4,  // 7: infracost.parser.hcl.MapValueProto.entries:type_name -> infracost.parser.hcl.MapEntryProto
-	0,  // 8: infracost.parser.hcl.MapEntryProto.value:type_name -> infracost.parser.hcl.ValueProto
-	6,  // 9: infracost.parser.hcl.MapEntryProto.key_source_range:type_name -> infracost.parser.SourceRange
+	1,  // 0: infracost.parser.hcl.Value.primitive:type_name -> infracost.parser.hcl.PrimitiveValue
+	2,  // 1: infracost.parser.hcl.Value.list:type_name -> infracost.parser.hcl.ListValue
+	3,  // 2: infracost.parser.hcl.Value.map:type_name -> infracost.parser.hcl.MapValue
+	5,  // 3: infracost.parser.hcl.Value.null:type_name -> infracost.parser.hcl.NullValue
+	6,  // 4: infracost.parser.hcl.Value.source_range:type_name -> infracost.parser.SourceRange
+	0,  // 5: infracost.parser.hcl.ListValue.values:type_name -> infracost.parser.hcl.Value
+	7,  // 6: infracost.parser.hcl.ListValue.element_type:type_name -> infracost.parser.Expectation
+	4,  // 7: infracost.parser.hcl.MapValue.entries:type_name -> infracost.parser.hcl.MapEntry
+	0,  // 8: infracost.parser.hcl.MapEntry.value:type_name -> infracost.parser.hcl.Value
+	6,  // 9: infracost.parser.hcl.MapEntry.key_source_range:type_name -> infracost.parser.SourceRange
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -568,15 +567,15 @@ func file_infracost_parser_hcl_value_proto_init() {
 		return
 	}
 	file_infracost_parser_hcl_value_proto_msgTypes[0].OneofWrappers = []any{
-		(*ValueProto_Primitive)(nil),
-		(*ValueProto_List)(nil),
-		(*ValueProto_Map)(nil),
-		(*ValueProto_Null)(nil),
+		(*Value_Primitive)(nil),
+		(*Value_List)(nil),
+		(*Value_Map)(nil),
+		(*Value_Null)(nil),
 	}
 	file_infracost_parser_hcl_value_proto_msgTypes[1].OneofWrappers = []any{
-		(*PrimitiveValueProto_StringValue)(nil),
-		(*PrimitiveValueProto_NumberValue)(nil),
-		(*PrimitiveValueProto_BoolValue)(nil),
+		(*PrimitiveValue_StringValue)(nil),
+		(*PrimitiveValue_NumberValue)(nil),
+		(*PrimitiveValue_BoolValue)(nil),
 	}
 	file_infracost_parser_hcl_value_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}

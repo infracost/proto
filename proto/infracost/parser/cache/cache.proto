@@ -46,7 +46,7 @@ message EncryptionEnvelope {
 }
 
 message CloudFormationProject {
-  cloudformation.ResultProto result = 1;
+  cloudformation.Result result = 1;
   Metadata metadata = 2;
   repeated parser.Diagnostic diags = 3;
   bytes usage_file = 4; // raw yaml of usage file

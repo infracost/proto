@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
-import { ValueProto } from "../hcl/value_pb.js";
+import { Value } from "../hcl/value_pb.js";
 import { Address } from "../address_pb.js";
 import { SourceRange } from "../metadata_pb.js";
 import { CallStack } from "../stack_pb.js";
@@ -15,9 +15,9 @@ import { CallStack } from "../stack_pb.js";
  */
 export class Resource extends Message<Resource> {
   /**
-   * @generated from field: infracost.parser.hcl.ValueProto data = 1;
+   * @generated from field: infracost.parser.hcl.Value data = 1;
    */
-  data?: ValueProto;
+  data?: Value;
 
   /**
    * @generated from field: infracost.parser.terraform.Provider provider = 2;
@@ -102,7 +102,7 @@ export class Resource extends Message<Resource> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "infracost.parser.terraform.Resource";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "data", kind: "message", T: ValueProto },
+    { no: 1, name: "data", kind: "message", T: Value },
     { no: 2, name: "provider", kind: "message", T: Provider },
     { no: 3, name: "address", kind: "message", T: Address },
     { no: 4, name: "source_range", kind: "message", T: SourceRange },
@@ -343,9 +343,9 @@ export class Tag extends Message<Tag> {
  */
 export class Output extends Message<Output> {
   /**
-   * @generated from field: infracost.parser.hcl.ValueProto value = 1;
+   * @generated from field: infracost.parser.hcl.Value value = 1;
    */
-  value?: ValueProto;
+  value?: Value;
 
   /**
    * @generated from field: string name = 2;
@@ -360,7 +360,7 @@ export class Output extends Message<Output> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "infracost.parser.terraform.Output";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "value", kind: "message", T: ValueProto },
+    { no: 1, name: "value", kind: "message", T: Value },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 

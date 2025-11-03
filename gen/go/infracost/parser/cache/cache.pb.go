@@ -372,12 +372,12 @@ func (x *EncryptionEnvelope) GetEncryptedData() string {
 }
 
 type CloudFormationProject struct {
-	state         protoimpl.MessageState      `protogen:"open.v1"`
-	Result        *cloudformation.ResultProto `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
-	Metadata      *Metadata                   `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Diags         []*parser.Diagnostic        `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
-	UsageFile     []byte                      `protobuf:"bytes,4,opt,name=usage_file,json=usageFile,proto3" json:"usage_file,omitempty"`             // raw yaml of usage file
-	ProjectConfig []byte                      `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        *cloudformation.Result `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Metadata      *Metadata              `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Diags         []*parser.Diagnostic   `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
+	UsageFile     []byte                 `protobuf:"bytes,4,opt,name=usage_file,json=usageFile,proto3" json:"usage_file,omitempty"`             // raw yaml of usage file
+	ProjectConfig []byte                 `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -412,7 +412,7 @@ func (*CloudFormationProject) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CloudFormationProject) GetResult() *cloudformation.ResultProto {
+func (x *CloudFormationProject) GetResult() *cloudformation.Result {
 	if x != nil {
 		return x.Result
 	}
@@ -486,9 +486,9 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xa3\x02\n" +
-	"\x15CloudFormationProject\x12D\n" +
-	"\x06result\x18\x01 \x01(\v2,.infracost.parser.cloudformation.ResultProtoR\x06result\x12<\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x9e\x02\n" +
+	"\x15CloudFormationProject\x12?\n" +
+	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
 	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12\x1d\n" +
 	"\n" +
@@ -516,19 +516,19 @@ func file_infracost_parser_cache_cache_proto_rawDescGZIP() []byte {
 var file_infracost_parser_cache_cache_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_infracost_parser_cache_cache_proto_goTypes = []any{
-	(CacheFlavor)(0),                   // 0: infracost.parser.cache.CacheFlavor
-	(*TerraformProject)(nil),           // 1: infracost.parser.cache.TerraformProject
-	(*Metadata)(nil),                   // 2: infracost.parser.cache.Metadata
-	(*BranchSummary)(nil),              // 3: infracost.parser.cache.BranchSummary
-	(*EncryptionEnvelope)(nil),         // 4: infracost.parser.cache.EncryptionEnvelope
-	(*CloudFormationProject)(nil),      // 5: infracost.parser.cache.CloudFormationProject
-	nil,                                // 6: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	nil,                                // 7: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	nil,                                // 8: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	(*terraform.ModuleResult)(nil),     // 9: infracost.parser.terraform.ModuleResult
-	(*parser.Diagnostic)(nil),          // 10: infracost.parser.Diagnostic
-	(*timestamppb.Timestamp)(nil),      // 11: google.protobuf.Timestamp
-	(*cloudformation.ResultProto)(nil), // 12: infracost.parser.cloudformation.ResultProto
+	(CacheFlavor)(0),               // 0: infracost.parser.cache.CacheFlavor
+	(*TerraformProject)(nil),       // 1: infracost.parser.cache.TerraformProject
+	(*Metadata)(nil),               // 2: infracost.parser.cache.Metadata
+	(*BranchSummary)(nil),          // 3: infracost.parser.cache.BranchSummary
+	(*EncryptionEnvelope)(nil),     // 4: infracost.parser.cache.EncryptionEnvelope
+	(*CloudFormationProject)(nil),  // 5: infracost.parser.cache.CloudFormationProject
+	nil,                            // 6: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	nil,                            // 7: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	nil,                            // 8: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	(*terraform.ModuleResult)(nil), // 9: infracost.parser.terraform.ModuleResult
+	(*parser.Diagnostic)(nil),      // 10: infracost.parser.Diagnostic
+	(*timestamppb.Timestamp)(nil),  // 11: google.protobuf.Timestamp
+	(*cloudformation.Result)(nil),  // 12: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	9,  // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
@@ -539,7 +539,7 @@ var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	6,  // 5: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
 	7,  // 6: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
 	8,  // 7: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	12, // 8: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.ResultProto
+	12, // 8: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
 	2,  // 9: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
 	10, // 10: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
 	0,  // 11: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.CacheFlavor

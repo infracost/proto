@@ -4,18 +4,18 @@ package infracost.parser.cloudformation;
 
 import "infracost/parser/metadata.proto";
 
-message ValueProto {
+message Value {
   oneof value {
-    NullValueProto null = 1;
-    ScalarValueProto scalar = 2;
-    ListValueProto list = 3;
-    MapValueProto map = 4;
+    NullValue null = 1;
+    ScalarValue scalar = 2;
+    ListValue list = 3;
+    MapValue map = 4;
   }
   parser.SourceRange source_range = 5;
   uint64 flags = 6;
 }
 
-message NullValueProto {
+message NullValue {
   // Empty
 }
 
@@ -27,7 +27,7 @@ enum ScalarType {
   SCALAR_TYPE_FLOAT = 3;
 }
 
-message ScalarValueProto {
+message ScalarValue {
   ScalarType type = 1;
   oneof value {
     string string_value = 2;
@@ -37,15 +37,15 @@ message ScalarValueProto {
   }
 }
 
-message ListValueProto {
-  repeated ValueProto values = 1;
+message ListValue {
+  repeated Value values = 1;
 }
 
-message MapValueProto {
-  repeated MapEntryProto entries = 1;
+message MapValue {
+  repeated MapEntry entries = 1;
 }
 
-message MapEntryProto {
-  ValueProto key = 1;
-  ValueProto value = 2;
+message MapEntry {
+  Value key = 1;
+  Value value = 2;
 }

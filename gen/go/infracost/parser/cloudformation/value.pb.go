@@ -75,35 +75,35 @@ func (ScalarType) EnumDescriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{0}
 }
 
-type ValueProto struct {
+type Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*ValueProto_Null
-	//	*ValueProto_Scalar
-	//	*ValueProto_List
-	//	*ValueProto_Map
-	Value         isValueProto_Value  `protobuf_oneof:"value"`
+	//	*Value_Null
+	//	*Value_Scalar
+	//	*Value_List
+	//	*Value_Map
+	Value         isValue_Value       `protobuf_oneof:"value"`
 	SourceRange   *parser.SourceRange `protobuf:"bytes,5,opt,name=source_range,json=sourceRange,proto3" json:"source_range,omitempty"`
 	Flags         uint64              `protobuf:"varint,6,opt,name=flags,proto3" json:"flags,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ValueProto) Reset() {
-	*x = ValueProto{}
+func (x *Value) Reset() {
+	*x = Value{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ValueProto) String() string {
+func (x *Value) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ValueProto) ProtoMessage() {}
+func (*Value) ProtoMessage() {}
 
-func (x *ValueProto) ProtoReflect() protoreflect.Message {
+func (x *Value) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -115,116 +115,116 @@ func (x *ValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ValueProto.ProtoReflect.Descriptor instead.
-func (*ValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use Value.ProtoReflect.Descriptor instead.
+func (*Value) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ValueProto) GetValue() isValueProto_Value {
+func (x *Value) GetValue() isValue_Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *ValueProto) GetNull() *NullValueProto {
+func (x *Value) GetNull() *NullValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Null); ok {
+		if x, ok := x.Value.(*Value_Null); ok {
 			return x.Null
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetScalar() *ScalarValueProto {
+func (x *Value) GetScalar() *ScalarValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Scalar); ok {
+		if x, ok := x.Value.(*Value_Scalar); ok {
 			return x.Scalar
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetList() *ListValueProto {
+func (x *Value) GetList() *ListValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_List); ok {
+		if x, ok := x.Value.(*Value_List); ok {
 			return x.List
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetMap() *MapValueProto {
+func (x *Value) GetMap() *MapValue {
 	if x != nil {
-		if x, ok := x.Value.(*ValueProto_Map); ok {
+		if x, ok := x.Value.(*Value_Map); ok {
 			return x.Map
 		}
 	}
 	return nil
 }
 
-func (x *ValueProto) GetSourceRange() *parser.SourceRange {
+func (x *Value) GetSourceRange() *parser.SourceRange {
 	if x != nil {
 		return x.SourceRange
 	}
 	return nil
 }
 
-func (x *ValueProto) GetFlags() uint64 {
+func (x *Value) GetFlags() uint64 {
 	if x != nil {
 		return x.Flags
 	}
 	return 0
 }
 
-type isValueProto_Value interface {
-	isValueProto_Value()
+type isValue_Value interface {
+	isValue_Value()
 }
 
-type ValueProto_Null struct {
-	Null *NullValueProto `protobuf:"bytes,1,opt,name=null,proto3,oneof"`
+type Value_Null struct {
+	Null *NullValue `protobuf:"bytes,1,opt,name=null,proto3,oneof"`
 }
 
-type ValueProto_Scalar struct {
-	Scalar *ScalarValueProto `protobuf:"bytes,2,opt,name=scalar,proto3,oneof"`
+type Value_Scalar struct {
+	Scalar *ScalarValue `protobuf:"bytes,2,opt,name=scalar,proto3,oneof"`
 }
 
-type ValueProto_List struct {
-	List *ListValueProto `protobuf:"bytes,3,opt,name=list,proto3,oneof"`
+type Value_List struct {
+	List *ListValue `protobuf:"bytes,3,opt,name=list,proto3,oneof"`
 }
 
-type ValueProto_Map struct {
-	Map *MapValueProto `protobuf:"bytes,4,opt,name=map,proto3,oneof"`
+type Value_Map struct {
+	Map *MapValue `protobuf:"bytes,4,opt,name=map,proto3,oneof"`
 }
 
-func (*ValueProto_Null) isValueProto_Value() {}
+func (*Value_Null) isValue_Value() {}
 
-func (*ValueProto_Scalar) isValueProto_Value() {}
+func (*Value_Scalar) isValue_Value() {}
 
-func (*ValueProto_List) isValueProto_Value() {}
+func (*Value_List) isValue_Value() {}
 
-func (*ValueProto_Map) isValueProto_Value() {}
+func (*Value_Map) isValue_Value() {}
 
-type NullValueProto struct {
+type NullValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NullValueProto) Reset() {
-	*x = NullValueProto{}
+func (x *NullValue) Reset() {
+	*x = NullValue{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NullValueProto) String() string {
+func (x *NullValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NullValueProto) ProtoMessage() {}
+func (*NullValue) ProtoMessage() {}
 
-func (x *NullValueProto) ProtoReflect() protoreflect.Message {
+func (x *NullValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -236,39 +236,39 @@ func (x *NullValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NullValueProto.ProtoReflect.Descriptor instead.
-func (*NullValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use NullValue.ProtoReflect.Descriptor instead.
+func (*NullValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{1}
 }
 
-type ScalarValueProto struct {
+type ScalarValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Type  ScalarType             `protobuf:"varint,1,opt,name=type,proto3,enum=infracost.parser.cloudformation.ScalarType" json:"type,omitempty"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*ScalarValueProto_StringValue
-	//	*ScalarValueProto_BoolValue
-	//	*ScalarValueProto_IntValue
-	//	*ScalarValueProto_DoubleValue
-	Value         isScalarValueProto_Value `protobuf_oneof:"value"`
+	//	*ScalarValue_StringValue
+	//	*ScalarValue_BoolValue
+	//	*ScalarValue_IntValue
+	//	*ScalarValue_DoubleValue
+	Value         isScalarValue_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ScalarValueProto) Reset() {
-	*x = ScalarValueProto{}
+func (x *ScalarValue) Reset() {
+	*x = ScalarValue{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ScalarValueProto) String() string {
+func (x *ScalarValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ScalarValueProto) ProtoMessage() {}
+func (*ScalarValue) ProtoMessage() {}
 
-func (x *ScalarValueProto) ProtoReflect() protoreflect.Message {
+func (x *ScalarValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -280,110 +280,110 @@ func (x *ScalarValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ScalarValueProto.ProtoReflect.Descriptor instead.
-func (*ScalarValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use ScalarValue.ProtoReflect.Descriptor instead.
+func (*ScalarValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ScalarValueProto) GetType() ScalarType {
+func (x *ScalarValue) GetType() ScalarType {
 	if x != nil {
 		return x.Type
 	}
 	return ScalarType_SCALAR_TYPE_STRING
 }
 
-func (x *ScalarValueProto) GetValue() isScalarValueProto_Value {
+func (x *ScalarValue) GetValue() isScalarValue_Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *ScalarValueProto) GetStringValue() string {
+func (x *ScalarValue) GetStringValue() string {
 	if x != nil {
-		if x, ok := x.Value.(*ScalarValueProto_StringValue); ok {
+		if x, ok := x.Value.(*ScalarValue_StringValue); ok {
 			return x.StringValue
 		}
 	}
 	return ""
 }
 
-func (x *ScalarValueProto) GetBoolValue() bool {
+func (x *ScalarValue) GetBoolValue() bool {
 	if x != nil {
-		if x, ok := x.Value.(*ScalarValueProto_BoolValue); ok {
+		if x, ok := x.Value.(*ScalarValue_BoolValue); ok {
 			return x.BoolValue
 		}
 	}
 	return false
 }
 
-func (x *ScalarValueProto) GetIntValue() int64 {
+func (x *ScalarValue) GetIntValue() int64 {
 	if x != nil {
-		if x, ok := x.Value.(*ScalarValueProto_IntValue); ok {
+		if x, ok := x.Value.(*ScalarValue_IntValue); ok {
 			return x.IntValue
 		}
 	}
 	return 0
 }
 
-func (x *ScalarValueProto) GetDoubleValue() float64 {
+func (x *ScalarValue) GetDoubleValue() float64 {
 	if x != nil {
-		if x, ok := x.Value.(*ScalarValueProto_DoubleValue); ok {
+		if x, ok := x.Value.(*ScalarValue_DoubleValue); ok {
 			return x.DoubleValue
 		}
 	}
 	return 0
 }
 
-type isScalarValueProto_Value interface {
-	isScalarValueProto_Value()
+type isScalarValue_Value interface {
+	isScalarValue_Value()
 }
 
-type ScalarValueProto_StringValue struct {
+type ScalarValue_StringValue struct {
 	StringValue string `protobuf:"bytes,2,opt,name=string_value,json=stringValue,proto3,oneof"`
 }
 
-type ScalarValueProto_BoolValue struct {
+type ScalarValue_BoolValue struct {
 	BoolValue bool `protobuf:"varint,3,opt,name=bool_value,json=boolValue,proto3,oneof"`
 }
 
-type ScalarValueProto_IntValue struct {
+type ScalarValue_IntValue struct {
 	IntValue int64 `protobuf:"varint,4,opt,name=int_value,json=intValue,proto3,oneof"`
 }
 
-type ScalarValueProto_DoubleValue struct {
+type ScalarValue_DoubleValue struct {
 	DoubleValue float64 `protobuf:"fixed64,5,opt,name=double_value,json=doubleValue,proto3,oneof"`
 }
 
-func (*ScalarValueProto_StringValue) isScalarValueProto_Value() {}
+func (*ScalarValue_StringValue) isScalarValue_Value() {}
 
-func (*ScalarValueProto_BoolValue) isScalarValueProto_Value() {}
+func (*ScalarValue_BoolValue) isScalarValue_Value() {}
 
-func (*ScalarValueProto_IntValue) isScalarValueProto_Value() {}
+func (*ScalarValue_IntValue) isScalarValue_Value() {}
 
-func (*ScalarValueProto_DoubleValue) isScalarValueProto_Value() {}
+func (*ScalarValue_DoubleValue) isScalarValue_Value() {}
 
-type ListValueProto struct {
+type ListValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Values        []*ValueProto          `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
+	Values        []*Value               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListValueProto) Reset() {
-	*x = ListValueProto{}
+func (x *ListValue) Reset() {
+	*x = ListValue{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListValueProto) String() string {
+func (x *ListValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListValueProto) ProtoMessage() {}
+func (*ListValue) ProtoMessage() {}
 
-func (x *ListValueProto) ProtoReflect() protoreflect.Message {
+func (x *ListValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -395,39 +395,39 @@ func (x *ListValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListValueProto.ProtoReflect.Descriptor instead.
-func (*ListValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListValue.ProtoReflect.Descriptor instead.
+func (*ListValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListValueProto) GetValues() []*ValueProto {
+func (x *ListValue) GetValues() []*Value {
 	if x != nil {
 		return x.Values
 	}
 	return nil
 }
 
-type MapValueProto struct {
+type MapValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entries       []*MapEntryProto       `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	Entries       []*MapEntry            `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MapValueProto) Reset() {
-	*x = MapValueProto{}
+func (x *MapValue) Reset() {
+	*x = MapValue{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MapValueProto) String() string {
+func (x *MapValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MapValueProto) ProtoMessage() {}
+func (*MapValue) ProtoMessage() {}
 
-func (x *MapValueProto) ProtoReflect() protoreflect.Message {
+func (x *MapValue) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -439,40 +439,40 @@ func (x *MapValueProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MapValueProto.ProtoReflect.Descriptor instead.
-func (*MapValueProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use MapValue.ProtoReflect.Descriptor instead.
+func (*MapValue) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *MapValueProto) GetEntries() []*MapEntryProto {
+func (x *MapValue) GetEntries() []*MapEntry {
 	if x != nil {
 		return x.Entries
 	}
 	return nil
 }
 
-type MapEntryProto struct {
+type MapEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           *ValueProto            `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         *ValueProto            `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Key           *Value                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         *Value                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MapEntryProto) Reset() {
-	*x = MapEntryProto{}
+func (x *MapEntry) Reset() {
+	*x = MapEntry{}
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MapEntryProto) String() string {
+func (x *MapEntry) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MapEntryProto) ProtoMessage() {}
+func (*MapEntry) ProtoMessage() {}
 
-func (x *MapEntryProto) ProtoReflect() protoreflect.Message {
+func (x *MapEntry) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_value_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -484,19 +484,19 @@ func (x *MapEntryProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MapEntryProto.ProtoReflect.Descriptor instead.
-func (*MapEntryProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use MapEntry.ProtoReflect.Descriptor instead.
+func (*MapEntry) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_value_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *MapEntryProto) GetKey() *ValueProto {
+func (x *MapEntry) GetKey() *Value {
 	if x != nil {
 		return x.Key
 	}
 	return nil
 }
 
-func (x *MapEntryProto) GetValue() *ValueProto {
+func (x *MapEntry) GetValue() *Value {
 	if x != nil {
 		return x.Value
 	}
@@ -507,32 +507,31 @@ var File_infracost_parser_cloudformation_value_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cloudformation_value_proto_rawDesc = "" +
 	"\n" +
-	"+infracost/parser/cloudformation/value.proto\x12\x1finfracost.parser.cloudformation\x1a\x1finfracost/parser/metadata.proto\"\x8c\x03\n" +
-	"\n" +
-	"ValueProto\x12E\n" +
-	"\x04null\x18\x01 \x01(\v2/.infracost.parser.cloudformation.NullValueProtoH\x00R\x04null\x12K\n" +
-	"\x06scalar\x18\x02 \x01(\v21.infracost.parser.cloudformation.ScalarValueProtoH\x00R\x06scalar\x12E\n" +
-	"\x04list\x18\x03 \x01(\v2/.infracost.parser.cloudformation.ListValueProtoH\x00R\x04list\x12B\n" +
-	"\x03map\x18\x04 \x01(\v2..infracost.parser.cloudformation.MapValueProtoH\x00R\x03map\x12@\n" +
+	"+infracost/parser/cloudformation/value.proto\x12\x1finfracost.parser.cloudformation\x1a\x1finfracost/parser/metadata.proto\"\xf3\x02\n" +
+	"\x05Value\x12@\n" +
+	"\x04null\x18\x01 \x01(\v2*.infracost.parser.cloudformation.NullValueH\x00R\x04null\x12F\n" +
+	"\x06scalar\x18\x02 \x01(\v2,.infracost.parser.cloudformation.ScalarValueH\x00R\x06scalar\x12@\n" +
+	"\x04list\x18\x03 \x01(\v2*.infracost.parser.cloudformation.ListValueH\x00R\x04list\x12=\n" +
+	"\x03map\x18\x04 \x01(\v2).infracost.parser.cloudformation.MapValueH\x00R\x03map\x12@\n" +
 	"\fsource_range\x18\x05 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12\x14\n" +
 	"\x05flags\x18\x06 \x01(\x04R\x05flagsB\a\n" +
-	"\x05value\"\x10\n" +
-	"\x0eNullValueProto\"\xe6\x01\n" +
-	"\x10ScalarValueProto\x12?\n" +
+	"\x05value\"\v\n" +
+	"\tNullValue\"\xe1\x01\n" +
+	"\vScalarValue\x12?\n" +
 	"\x04type\x18\x01 \x01(\x0e2+.infracost.parser.cloudformation.ScalarTypeR\x04type\x12#\n" +
 	"\fstring_value\x18\x02 \x01(\tH\x00R\vstringValue\x12\x1f\n" +
 	"\n" +
 	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12\x1d\n" +
 	"\tint_value\x18\x04 \x01(\x03H\x00R\bintValue\x12#\n" +
 	"\fdouble_value\x18\x05 \x01(\x01H\x00R\vdoubleValueB\a\n" +
-	"\x05value\"U\n" +
-	"\x0eListValueProto\x12C\n" +
-	"\x06values\x18\x01 \x03(\v2+.infracost.parser.cloudformation.ValueProtoR\x06values\"Y\n" +
-	"\rMapValueProto\x12H\n" +
-	"\aentries\x18\x01 \x03(\v2..infracost.parser.cloudformation.MapEntryProtoR\aentries\"\x91\x01\n" +
-	"\rMapEntryProto\x12=\n" +
-	"\x03key\x18\x01 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value*f\n" +
+	"\x05value\"K\n" +
+	"\tListValue\x12>\n" +
+	"\x06values\x18\x01 \x03(\v2&.infracost.parser.cloudformation.ValueR\x06values\"O\n" +
+	"\bMapValue\x12C\n" +
+	"\aentries\x18\x01 \x03(\v2).infracost.parser.cloudformation.MapEntryR\aentries\"\x82\x01\n" +
+	"\bMapEntry\x128\n" +
+	"\x03key\x18\x01 \x01(\v2&.infracost.parser.cloudformation.ValueR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value*f\n" +
 	"\n" +
 	"ScalarType\x12\x16\n" +
 	"\x12SCALAR_TYPE_STRING\x10\x00\x12\x14\n" +
@@ -558,25 +557,25 @@ var file_infracost_parser_cloudformation_value_proto_enumTypes = make([]protoimp
 var file_infracost_parser_cloudformation_value_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_infracost_parser_cloudformation_value_proto_goTypes = []any{
 	(ScalarType)(0),            // 0: infracost.parser.cloudformation.ScalarType
-	(*ValueProto)(nil),         // 1: infracost.parser.cloudformation.ValueProto
-	(*NullValueProto)(nil),     // 2: infracost.parser.cloudformation.NullValueProto
-	(*ScalarValueProto)(nil),   // 3: infracost.parser.cloudformation.ScalarValueProto
-	(*ListValueProto)(nil),     // 4: infracost.parser.cloudformation.ListValueProto
-	(*MapValueProto)(nil),      // 5: infracost.parser.cloudformation.MapValueProto
-	(*MapEntryProto)(nil),      // 6: infracost.parser.cloudformation.MapEntryProto
+	(*Value)(nil),              // 1: infracost.parser.cloudformation.Value
+	(*NullValue)(nil),          // 2: infracost.parser.cloudformation.NullValue
+	(*ScalarValue)(nil),        // 3: infracost.parser.cloudformation.ScalarValue
+	(*ListValue)(nil),          // 4: infracost.parser.cloudformation.ListValue
+	(*MapValue)(nil),           // 5: infracost.parser.cloudformation.MapValue
+	(*MapEntry)(nil),           // 6: infracost.parser.cloudformation.MapEntry
 	(*parser.SourceRange)(nil), // 7: infracost.parser.SourceRange
 }
 var file_infracost_parser_cloudformation_value_proto_depIdxs = []int32{
-	2,  // 0: infracost.parser.cloudformation.ValueProto.null:type_name -> infracost.parser.cloudformation.NullValueProto
-	3,  // 1: infracost.parser.cloudformation.ValueProto.scalar:type_name -> infracost.parser.cloudformation.ScalarValueProto
-	4,  // 2: infracost.parser.cloudformation.ValueProto.list:type_name -> infracost.parser.cloudformation.ListValueProto
-	5,  // 3: infracost.parser.cloudformation.ValueProto.map:type_name -> infracost.parser.cloudformation.MapValueProto
-	7,  // 4: infracost.parser.cloudformation.ValueProto.source_range:type_name -> infracost.parser.SourceRange
-	0,  // 5: infracost.parser.cloudformation.ScalarValueProto.type:type_name -> infracost.parser.cloudformation.ScalarType
-	1,  // 6: infracost.parser.cloudformation.ListValueProto.values:type_name -> infracost.parser.cloudformation.ValueProto
-	6,  // 7: infracost.parser.cloudformation.MapValueProto.entries:type_name -> infracost.parser.cloudformation.MapEntryProto
-	1,  // 8: infracost.parser.cloudformation.MapEntryProto.key:type_name -> infracost.parser.cloudformation.ValueProto
-	1,  // 9: infracost.parser.cloudformation.MapEntryProto.value:type_name -> infracost.parser.cloudformation.ValueProto
+	2,  // 0: infracost.parser.cloudformation.Value.null:type_name -> infracost.parser.cloudformation.NullValue
+	3,  // 1: infracost.parser.cloudformation.Value.scalar:type_name -> infracost.parser.cloudformation.ScalarValue
+	4,  // 2: infracost.parser.cloudformation.Value.list:type_name -> infracost.parser.cloudformation.ListValue
+	5,  // 3: infracost.parser.cloudformation.Value.map:type_name -> infracost.parser.cloudformation.MapValue
+	7,  // 4: infracost.parser.cloudformation.Value.source_range:type_name -> infracost.parser.SourceRange
+	0,  // 5: infracost.parser.cloudformation.ScalarValue.type:type_name -> infracost.parser.cloudformation.ScalarType
+	1,  // 6: infracost.parser.cloudformation.ListValue.values:type_name -> infracost.parser.cloudformation.Value
+	6,  // 7: infracost.parser.cloudformation.MapValue.entries:type_name -> infracost.parser.cloudformation.MapEntry
+	1,  // 8: infracost.parser.cloudformation.MapEntry.key:type_name -> infracost.parser.cloudformation.Value
+	1,  // 9: infracost.parser.cloudformation.MapEntry.value:type_name -> infracost.parser.cloudformation.Value
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -590,16 +589,16 @@ func file_infracost_parser_cloudformation_value_proto_init() {
 		return
 	}
 	file_infracost_parser_cloudformation_value_proto_msgTypes[0].OneofWrappers = []any{
-		(*ValueProto_Null)(nil),
-		(*ValueProto_Scalar)(nil),
-		(*ValueProto_List)(nil),
-		(*ValueProto_Map)(nil),
+		(*Value_Null)(nil),
+		(*Value_Scalar)(nil),
+		(*Value_List)(nil),
+		(*Value_Map)(nil),
 	}
 	file_infracost_parser_cloudformation_value_proto_msgTypes[2].OneofWrappers = []any{
-		(*ScalarValueProto_StringValue)(nil),
-		(*ScalarValueProto_BoolValue)(nil),
-		(*ScalarValueProto_IntValue)(nil),
-		(*ScalarValueProto_DoubleValue)(nil),
+		(*ScalarValue_StringValue)(nil),
+		(*ScalarValue_BoolValue)(nil),
+		(*ScalarValue_IntValue)(nil),
+		(*ScalarValue_DoubleValue)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

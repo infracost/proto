@@ -9,35 +9,35 @@ import { SourceRange } from "../metadata_pb.js";
 import { Expectation } from "../expectation_pb.js";
 
 /**
- * @generated from message infracost.parser.hcl.ValueProto
+ * @generated from message infracost.parser.hcl.Value
  */
-export class ValueProto extends Message<ValueProto> {
+export class Value extends Message<Value> {
   /**
-   * @generated from oneof infracost.parser.hcl.ValueProto.value
+   * @generated from oneof infracost.parser.hcl.Value.value
    */
   value: {
     /**
-     * @generated from field: infracost.parser.hcl.PrimitiveValueProto primitive = 1;
+     * @generated from field: infracost.parser.hcl.PrimitiveValue primitive = 1;
      */
-    value: PrimitiveValueProto;
+    value: PrimitiveValue;
     case: "primitive";
   } | {
     /**
-     * @generated from field: infracost.parser.hcl.ListValueProto list = 2;
+     * @generated from field: infracost.parser.hcl.ListValue list = 2;
      */
-    value: ListValueProto;
+    value: ListValue;
     case: "list";
   } | {
     /**
-     * @generated from field: infracost.parser.hcl.MapValueProto map = 3;
+     * @generated from field: infracost.parser.hcl.MapValue map = 3;
      */
-    value: MapValueProto;
+    value: MapValue;
     case: "map";
   } | {
     /**
-     * @generated from field: infracost.parser.hcl.NullValueProto null = 4;
+     * @generated from field: infracost.parser.hcl.NullValue null = 4;
      */
-    value: NullValueProto;
+    value: NullValue;
     case: "null";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -51,45 +51,45 @@ export class ValueProto extends Message<ValueProto> {
    */
   flags = protoInt64.zero;
 
-  constructor(data?: PartialMessage<ValueProto>) {
+  constructor(data?: PartialMessage<Value>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.ValueProto";
+  static readonly typeName = "infracost.parser.hcl.Value";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "primitive", kind: "message", T: PrimitiveValueProto, oneof: "value" },
-    { no: 2, name: "list", kind: "message", T: ListValueProto, oneof: "value" },
-    { no: 3, name: "map", kind: "message", T: MapValueProto, oneof: "value" },
-    { no: 4, name: "null", kind: "message", T: NullValueProto, oneof: "value" },
+    { no: 1, name: "primitive", kind: "message", T: PrimitiveValue, oneof: "value" },
+    { no: 2, name: "list", kind: "message", T: ListValue, oneof: "value" },
+    { no: 3, name: "map", kind: "message", T: MapValue, oneof: "value" },
+    { no: 4, name: "null", kind: "message", T: NullValue, oneof: "value" },
     { no: 5, name: "source_range", kind: "message", T: SourceRange },
     { no: 6, name: "flags", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ValueProto {
-    return new ValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Value {
+    return new Value().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ValueProto {
-    return new ValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Value {
+    return new Value().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ValueProto {
-    return new ValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Value {
+    return new Value().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ValueProto | PlainMessage<ValueProto> | undefined, b: ValueProto | PlainMessage<ValueProto> | undefined): boolean {
-    return proto3.util.equals(ValueProto, a, b);
+  static equals(a: Value | PlainMessage<Value> | undefined, b: Value | PlainMessage<Value> | undefined): boolean {
+    return proto3.util.equals(Value, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.hcl.PrimitiveValueProto
+ * @generated from message infracost.parser.hcl.PrimitiveValue
  */
-export class PrimitiveValueProto extends Message<PrimitiveValueProto> {
+export class PrimitiveValue extends Message<PrimitiveValue> {
   /**
-   * @generated from oneof infracost.parser.hcl.PrimitiveValueProto.value
+   * @generated from oneof infracost.parser.hcl.PrimitiveValue.value
    */
   value: {
     /**
@@ -120,13 +120,13 @@ export class PrimitiveValueProto extends Message<PrimitiveValueProto> {
    */
   primitiveType = 0;
 
-  constructor(data?: PartialMessage<PrimitiveValueProto>) {
+  constructor(data?: PartialMessage<PrimitiveValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.PrimitiveValueProto";
+  static readonly typeName = "infracost.parser.hcl.PrimitiveValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "string_value", kind: "scalar", T: 9 /* ScalarType.STRING */, oneof: "value" },
     { no: 2, name: "number_value", kind: "scalar", T: 9 /* ScalarType.STRING */, oneof: "value" },
@@ -134,31 +134,31 @@ export class PrimitiveValueProto extends Message<PrimitiveValueProto> {
     { no: 4, name: "primitive_type", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PrimitiveValueProto {
-    return new PrimitiveValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PrimitiveValue {
+    return new PrimitiveValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PrimitiveValueProto {
-    return new PrimitiveValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PrimitiveValue {
+    return new PrimitiveValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PrimitiveValueProto {
-    return new PrimitiveValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PrimitiveValue {
+    return new PrimitiveValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: PrimitiveValueProto | PlainMessage<PrimitiveValueProto> | undefined, b: PrimitiveValueProto | PlainMessage<PrimitiveValueProto> | undefined): boolean {
-    return proto3.util.equals(PrimitiveValueProto, a, b);
+  static equals(a: PrimitiveValue | PlainMessage<PrimitiveValue> | undefined, b: PrimitiveValue | PlainMessage<PrimitiveValue> | undefined): boolean {
+    return proto3.util.equals(PrimitiveValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.hcl.ListValueProto
+ * @generated from message infracost.parser.hcl.ListValue
  */
-export class ListValueProto extends Message<ListValueProto> {
+export class ListValue extends Message<ListValue> {
   /**
-   * @generated from field: repeated infracost.parser.hcl.ValueProto values = 1;
+   * @generated from field: repeated infracost.parser.hcl.Value values = 1;
    */
-  values: ValueProto[] = [];
+  values: Value[] = [];
 
   /**
    * cty.Type as string
@@ -177,93 +177,93 @@ export class ListValueProto extends Message<ListValueProto> {
    */
   isSet = false;
 
-  constructor(data?: PartialMessage<ListValueProto>) {
+  constructor(data?: PartialMessage<ListValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.ListValueProto";
+  static readonly typeName = "infracost.parser.hcl.ListValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "values", kind: "message", T: ValueProto, repeated: true },
+    { no: 1, name: "values", kind: "message", T: Value, repeated: true },
     { no: 2, name: "element_type", kind: "message", T: Expectation, opt: true },
     { no: 3, name: "is_tuple", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "is_set", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListValueProto {
-    return new ListValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListValue {
+    return new ListValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListValueProto {
-    return new ListValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListValue {
+    return new ListValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListValueProto {
-    return new ListValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListValue {
+    return new ListValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ListValueProto | PlainMessage<ListValueProto> | undefined, b: ListValueProto | PlainMessage<ListValueProto> | undefined): boolean {
-    return proto3.util.equals(ListValueProto, a, b);
+  static equals(a: ListValue | PlainMessage<ListValue> | undefined, b: ListValue | PlainMessage<ListValue> | undefined): boolean {
+    return proto3.util.equals(ListValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.hcl.MapValueProto
+ * @generated from message infracost.parser.hcl.MapValue
  */
-export class MapValueProto extends Message<MapValueProto> {
+export class MapValue extends Message<MapValue> {
   /**
-   * @generated from field: repeated infracost.parser.hcl.MapEntryProto entries = 1;
+   * @generated from field: repeated infracost.parser.hcl.MapEntry entries = 1;
    */
-  entries: MapEntryProto[] = [];
+  entries: MapEntry[] = [];
 
   /**
    * @generated from field: bool is_object = 2;
    */
   isObject = false;
 
-  constructor(data?: PartialMessage<MapValueProto>) {
+  constructor(data?: PartialMessage<MapValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.MapValueProto";
+  static readonly typeName = "infracost.parser.hcl.MapValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "entries", kind: "message", T: MapEntryProto, repeated: true },
+    { no: 1, name: "entries", kind: "message", T: MapEntry, repeated: true },
     { no: 2, name: "is_object", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapValueProto {
-    return new MapValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapValue {
+    return new MapValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapValueProto {
-    return new MapValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapValue {
+    return new MapValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapValueProto {
-    return new MapValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapValue {
+    return new MapValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: MapValueProto | PlainMessage<MapValueProto> | undefined, b: MapValueProto | PlainMessage<MapValueProto> | undefined): boolean {
-    return proto3.util.equals(MapValueProto, a, b);
+  static equals(a: MapValue | PlainMessage<MapValue> | undefined, b: MapValue | PlainMessage<MapValue> | undefined): boolean {
+    return proto3.util.equals(MapValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.hcl.MapEntryProto
+ * @generated from message infracost.parser.hcl.MapEntry
  */
-export class MapEntryProto extends Message<MapEntryProto> {
+export class MapEntry extends Message<MapEntry> {
   /**
    * @generated from field: string key = 1;
    */
   key = "";
 
   /**
-   * @generated from field: infracost.parser.hcl.ValueProto value = 2;
+   * @generated from field: infracost.parser.hcl.Value value = 2;
    */
-  value?: ValueProto;
+  value?: Value;
 
   /**
    * @generated from field: infracost.parser.SourceRange key_source_range = 3;
@@ -275,67 +275,67 @@ export class MapEntryProto extends Message<MapEntryProto> {
    */
   keyFlags = protoInt64.zero;
 
-  constructor(data?: PartialMessage<MapEntryProto>) {
+  constructor(data?: PartialMessage<MapEntry>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.MapEntryProto";
+  static readonly typeName = "infracost.parser.hcl.MapEntry";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "value", kind: "message", T: ValueProto },
+    { no: 2, name: "value", kind: "message", T: Value },
     { no: 3, name: "key_source_range", kind: "message", T: SourceRange },
     { no: 4, name: "key_flags", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapEntry {
+    return new MapEntry().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapEntry {
+    return new MapEntry().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapEntry {
+    return new MapEntry().fromJsonString(jsonString, options);
   }
 
-  static equals(a: MapEntryProto | PlainMessage<MapEntryProto> | undefined, b: MapEntryProto | PlainMessage<MapEntryProto> | undefined): boolean {
-    return proto3.util.equals(MapEntryProto, a, b);
+  static equals(a: MapEntry | PlainMessage<MapEntry> | undefined, b: MapEntry | PlainMessage<MapEntry> | undefined): boolean {
+    return proto3.util.equals(MapEntry, a, b);
   }
 }
 
 /**
  * Empty - null values only need metadata which is in parent
  *
- * @generated from message infracost.parser.hcl.NullValueProto
+ * @generated from message infracost.parser.hcl.NullValue
  */
-export class NullValueProto extends Message<NullValueProto> {
-  constructor(data?: PartialMessage<NullValueProto>) {
+export class NullValue extends Message<NullValue> {
+  constructor(data?: PartialMessage<NullValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.hcl.NullValueProto";
+  static readonly typeName = "infracost.parser.hcl.NullValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NullValueProto {
-    return new NullValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NullValue {
+    return new NullValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NullValueProto {
-    return new NullValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NullValue {
+    return new NullValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NullValueProto {
-    return new NullValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NullValue {
+    return new NullValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: NullValueProto | PlainMessage<NullValueProto> | undefined, b: NullValueProto | PlainMessage<NullValueProto> | undefined): boolean {
-    return proto3.util.equals(NullValueProto, a, b);
+  static equals(a: NullValue | PlainMessage<NullValue> | undefined, b: NullValue | PlainMessage<NullValue> | undefined): boolean {
+    return proto3.util.equals(NullValue, a, b);
   }
 }
 
