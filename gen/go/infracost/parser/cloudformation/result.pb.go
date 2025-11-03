@@ -22,31 +22,31 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ResultProto struct {
+type Result struct {
 	state         protoimpl.MessageState      `protogen:"open.v1"`
-	Parameters    map[string]*ValueProto      `protobuf:"bytes,1,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Parameters    map[string]*Value           `protobuf:"bytes,1,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Mappings      map[string]*NestedMapBranch `protobuf:"bytes,2,rep,name=mappings,proto3" json:"mappings,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Conditions    map[string]bool             `protobuf:"bytes,3,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	Resources     map[string]*ResourceProto   `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Outputs       map[string]*ValueProto      `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Resources     map[string]*Resource        `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Outputs       map[string]*Value           `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResultProto) Reset() {
-	*x = ResultProto{}
+func (x *Result) Reset() {
+	*x = Result{}
 	mi := &file_infracost_parser_cloudformation_result_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResultProto) String() string {
+func (x *Result) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResultProto) ProtoMessage() {}
+func (*Result) ProtoMessage() {}
 
-func (x *ResultProto) ProtoReflect() protoreflect.Message {
+func (x *Result) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_result_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -58,40 +58,40 @@ func (x *ResultProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResultProto.ProtoReflect.Descriptor instead.
-func (*ResultProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use Result.ProtoReflect.Descriptor instead.
+func (*Result) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_result_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ResultProto) GetParameters() map[string]*ValueProto {
+func (x *Result) GetParameters() map[string]*Value {
 	if x != nil {
 		return x.Parameters
 	}
 	return nil
 }
 
-func (x *ResultProto) GetMappings() map[string]*NestedMapBranch {
+func (x *Result) GetMappings() map[string]*NestedMapBranch {
 	if x != nil {
 		return x.Mappings
 	}
 	return nil
 }
 
-func (x *ResultProto) GetConditions() map[string]bool {
+func (x *Result) GetConditions() map[string]bool {
 	if x != nil {
 		return x.Conditions
 	}
 	return nil
 }
 
-func (x *ResultProto) GetResources() map[string]*ResourceProto {
+func (x *Result) GetResources() map[string]*Resource {
 	if x != nil {
 		return x.Resources
 	}
 	return nil
 }
 
-func (x *ResultProto) GetOutputs() map[string]*ValueProto {
+func (x *Result) GetOutputs() map[string]*Value {
 	if x != nil {
 		return x.Outputs
 	}
@@ -144,7 +144,7 @@ func (x *NestedMapBranch) GetValues() map[string]*NestedMapLeaf {
 
 type NestedMapLeaf struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Values        map[string]*ValueProto `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Values        map[string]*Value      `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,20 +179,20 @@ func (*NestedMapLeaf) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_result_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *NestedMapLeaf) GetValues() map[string]*ValueProto {
+func (x *NestedMapLeaf) GetValues() map[string]*Value {
 	if x != nil {
 		return x.Values
 	}
 	return nil
 }
 
-type ResourceProto struct {
+type Resource struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Id                  string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type                string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	Address             *parser.Address        `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Properties          map[string]*ValueProto `protobuf:"bytes,4,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Metadata            map[string]*ValueProto `protobuf:"bytes,5,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties          map[string]*Value      `protobuf:"bytes,4,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Metadata            map[string]*Value      `protobuf:"bytes,5,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	SourceRange         *parser.SourceRange    `protobuf:"bytes,6,opt,name=source_range,json=sourceRange,proto3" json:"source_range,omitempty"`
 	Flags               uint64                 `protobuf:"varint,7,opt,name=flags,proto3" json:"flags,omitempty"`
 	Supported           bool                   `protobuf:"varint,8,opt,name=supported,proto3" json:"supported,omitempty"`
@@ -207,20 +207,20 @@ type ResourceProto struct {
 	sizeCache           protoimpl.SizeCache
 }
 
-func (x *ResourceProto) Reset() {
-	*x = ResourceProto{}
+func (x *Resource) Reset() {
+	*x = Resource{}
 	mi := &file_infracost_parser_cloudformation_result_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResourceProto) String() string {
+func (x *Resource) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResourceProto) ProtoMessage() {}
+func (*Resource) ProtoMessage() {}
 
-func (x *ResourceProto) ProtoReflect() protoreflect.Message {
+func (x *Resource) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_parser_cloudformation_result_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -232,110 +232,110 @@ func (x *ResourceProto) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResourceProto.ProtoReflect.Descriptor instead.
-func (*ResourceProto) Descriptor() ([]byte, []int) {
+// Deprecated: Use Resource.ProtoReflect.Descriptor instead.
+func (*Resource) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_cloudformation_result_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ResourceProto) GetId() string {
+func (x *Resource) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ResourceProto) GetType() string {
+func (x *Resource) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-func (x *ResourceProto) GetAddress() *parser.Address {
+func (x *Resource) GetAddress() *parser.Address {
 	if x != nil {
 		return x.Address
 	}
 	return nil
 }
 
-func (x *ResourceProto) GetProperties() map[string]*ValueProto {
+func (x *Resource) GetProperties() map[string]*Value {
 	if x != nil {
 		return x.Properties
 	}
 	return nil
 }
 
-func (x *ResourceProto) GetMetadata() map[string]*ValueProto {
+func (x *Resource) GetMetadata() map[string]*Value {
 	if x != nil {
 		return x.Metadata
 	}
 	return nil
 }
 
-func (x *ResourceProto) GetSourceRange() *parser.SourceRange {
+func (x *Resource) GetSourceRange() *parser.SourceRange {
 	if x != nil {
 		return x.SourceRange
 	}
 	return nil
 }
 
-func (x *ResourceProto) GetFlags() uint64 {
+func (x *Resource) GetFlags() uint64 {
 	if x != nil {
 		return x.Flags
 	}
 	return 0
 }
 
-func (x *ResourceProto) GetSupported() bool {
+func (x *Resource) GetSupported() bool {
 	if x != nil {
 		return x.Supported
 	}
 	return false
 }
 
-func (x *ResourceProto) GetFree() bool {
+func (x *Resource) GetFree() bool {
 	if x != nil {
 		return x.Free
 	}
 	return false
 }
 
-func (x *ResourceProto) GetCallStack() *parser.CallStack {
+func (x *Resource) GetCallStack() *parser.CallStack {
 	if x != nil {
 		return x.CallStack
 	}
 	return nil
 }
 
-func (x *ResourceProto) GetRegion() string {
+func (x *Resource) GetRegion() string {
 	if x != nil {
 		return x.Region
 	}
 	return ""
 }
 
-func (x *ResourceProto) GetRegionIsSynthetic() bool {
+func (x *Resource) GetRegionIsSynthetic() bool {
 	if x != nil {
 		return x.RegionIsSynthetic
 	}
 	return false
 }
 
-func (x *ResourceProto) GetSupportsTags() bool {
+func (x *Resource) GetSupportsTags() bool {
 	if x != nil {
 		return x.SupportsTags
 	}
 	return false
 }
 
-func (x *ResourceProto) GetSupportsDefaultTags() bool {
+func (x *Resource) GetSupportsDefaultTags() bool {
 	if x != nil {
 		return x.SupportsDefaultTags
 	}
 	return false
 }
 
-func (x *ResourceProto) GetTagData() *TagData {
+func (x *Resource) GetTagData() *TagData {
 	if x != nil {
 		return x.TagData
 	}
@@ -490,50 +490,50 @@ var File_infracost_parser_cloudformation_result_proto protoreflect.FileDescripto
 
 const file_infracost_parser_cloudformation_result_proto_rawDesc = "" +
 	"\n" +
-	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a\x1einfracost/parser/address.proto\x1a+infracost/parser/cloudformation/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xc2\a\n" +
-	"\vResultProto\x12\\\n" +
+	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a\x1einfracost/parser/address.proto\x1a+infracost/parser/cloudformation/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\x95\a\n" +
+	"\x06Result\x12W\n" +
 	"\n" +
-	"parameters\x18\x01 \x03(\v2<.infracost.parser.cloudformation.ResultProto.ParametersEntryR\n" +
-	"parameters\x12V\n" +
-	"\bmappings\x18\x02 \x03(\v2:.infracost.parser.cloudformation.ResultProto.MappingsEntryR\bmappings\x12\\\n" +
+	"parameters\x18\x01 \x03(\v27.infracost.parser.cloudformation.Result.ParametersEntryR\n" +
+	"parameters\x12Q\n" +
+	"\bmappings\x18\x02 \x03(\v25.infracost.parser.cloudformation.Result.MappingsEntryR\bmappings\x12W\n" +
 	"\n" +
-	"conditions\x18\x03 \x03(\v2<.infracost.parser.cloudformation.ResultProto.ConditionsEntryR\n" +
-	"conditions\x12Y\n" +
-	"\tresources\x18\x04 \x03(\v2;.infracost.parser.cloudformation.ResultProto.ResourcesEntryR\tresources\x12S\n" +
-	"\aoutputs\x18\x05 \x03(\v29.infracost.parser.cloudformation.ResultProto.OutputsEntryR\aoutputs\x1aj\n" +
+	"conditions\x18\x03 \x03(\v27.infracost.parser.cloudformation.Result.ConditionsEntryR\n" +
+	"conditions\x12T\n" +
+	"\tresources\x18\x04 \x03(\v26.infracost.parser.cloudformation.Result.ResourcesEntryR\tresources\x12N\n" +
+	"\aoutputs\x18\x05 \x03(\v24.infracost.parser.cloudformation.Result.OutputsEntryR\aoutputs\x1ae\n" +
 	"\x0fParametersEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value:\x028\x01\x1am\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\x1am\n" +
 	"\rMappingsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12F\n" +
 	"\x05value\x18\x02 \x01(\v20.infracost.parser.cloudformation.NestedMapBranchR\x05value:\x028\x01\x1a=\n" +
 	"\x0fConditionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01\x1al\n" +
+	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01\x1ag\n" +
 	"\x0eResourcesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12D\n" +
-	"\x05value\x18\x02 \x01(\v2..infracost.parser.cloudformation.ResourceProtoR\x05value:\x028\x01\x1ag\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12?\n" +
+	"\x05value\x18\x02 \x01(\v2).infracost.parser.cloudformation.ResourceR\x05value:\x028\x01\x1ab\n" +
 	"\fOutputsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value:\x028\x01\"\xd2\x01\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\"\xd2\x01\n" +
 	"\x0fNestedMapBranch\x12T\n" +
 	"\x06values\x18\x01 \x03(\v2<.infracost.parser.cloudformation.NestedMapBranch.ValuesEntryR\x06values\x1ai\n" +
 	"\vValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12D\n" +
-	"\x05value\x18\x02 \x01(\v2..infracost.parser.cloudformation.NestedMapLeafR\x05value:\x028\x01\"\xcb\x01\n" +
+	"\x05value\x18\x02 \x01(\v2..infracost.parser.cloudformation.NestedMapLeafR\x05value:\x028\x01\"\xc6\x01\n" +
 	"\rNestedMapLeaf\x12R\n" +
-	"\x06values\x18\x01 \x03(\v2:.infracost.parser.cloudformation.NestedMapLeaf.ValuesEntryR\x06values\x1af\n" +
+	"\x06values\x18\x01 \x03(\v2:.infracost.parser.cloudformation.NestedMapLeaf.ValuesEntryR\x06values\x1aa\n" +
 	"\vValuesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value:\x028\x01\"\xa4\a\n" +
-	"\rResourceProto\x12\x0e\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\"\x8b\a\n" +
+	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x123\n" +
-	"\aaddress\x18\x03 \x01(\v2\x19.infracost.parser.AddressR\aaddress\x12^\n" +
+	"\aaddress\x18\x03 \x01(\v2\x19.infracost.parser.AddressR\aaddress\x12Y\n" +
 	"\n" +
-	"properties\x18\x04 \x03(\v2>.infracost.parser.cloudformation.ResourceProto.PropertiesEntryR\n" +
-	"properties\x12X\n" +
-	"\bmetadata\x18\x05 \x03(\v2<.infracost.parser.cloudformation.ResourceProto.MetadataEntryR\bmetadata\x12@\n" +
+	"properties\x18\x04 \x03(\v29.infracost.parser.cloudformation.Resource.PropertiesEntryR\n" +
+	"properties\x12S\n" +
+	"\bmetadata\x18\x05 \x03(\v27.infracost.parser.cloudformation.Resource.MetadataEntryR\bmetadata\x12@\n" +
 	"\fsource_range\x18\x06 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12\x14\n" +
 	"\x05flags\x18\a \x01(\x04R\x05flags\x12\x1c\n" +
 	"\tsupported\x18\b \x01(\bR\tsupported\x12\x12\n" +
@@ -545,13 +545,13 @@ const file_infracost_parser_cloudformation_result_proto_rawDesc = "" +
 	"\x13region_is_synthetic\x18\f \x01(\bR\x11regionIsSynthetic\x12#\n" +
 	"\rsupports_tags\x18\r \x01(\bR\fsupportsTags\x122\n" +
 	"\x15supports_default_tags\x18\x0e \x01(\bR\x13supportsDefaultTags\x12C\n" +
-	"\btag_data\x18\x0f \x01(\v2(.infracost.parser.cloudformation.TagDataR\atagData\x1aj\n" +
+	"\btag_data\x18\x0f \x01(\v2(.infracost.parser.cloudformation.TagDataR\atagData\x1ae\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value:\x028\x01\x1ah\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\x1ac\n" +
 	"\rMetadataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.infracost.parser.cloudformation.ValueProtoR\x05value:\x028\x01\"Y\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\"Y\n" +
 	"\aTagData\x12\x14\n" +
 	"\x05flags\x18\x01 \x01(\x04R\x05flags\x128\n" +
 	"\x04tags\x18\x02 \x03(\v2$.infracost.parser.cloudformation.TagR\x04tags\"\xa0\x02\n" +
@@ -581,51 +581,51 @@ func file_infracost_parser_cloudformation_result_proto_rawDescGZIP() []byte {
 
 var file_infracost_parser_cloudformation_result_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_infracost_parser_cloudformation_result_proto_goTypes = []any{
-	(*ResultProto)(nil),        // 0: infracost.parser.cloudformation.ResultProto
+	(*Result)(nil),             // 0: infracost.parser.cloudformation.Result
 	(*NestedMapBranch)(nil),    // 1: infracost.parser.cloudformation.NestedMapBranch
 	(*NestedMapLeaf)(nil),      // 2: infracost.parser.cloudformation.NestedMapLeaf
-	(*ResourceProto)(nil),      // 3: infracost.parser.cloudformation.ResourceProto
+	(*Resource)(nil),           // 3: infracost.parser.cloudformation.Resource
 	(*TagData)(nil),            // 4: infracost.parser.cloudformation.TagData
 	(*Tag)(nil),                // 5: infracost.parser.cloudformation.Tag
-	nil,                        // 6: infracost.parser.cloudformation.ResultProto.ParametersEntry
-	nil,                        // 7: infracost.parser.cloudformation.ResultProto.MappingsEntry
-	nil,                        // 8: infracost.parser.cloudformation.ResultProto.ConditionsEntry
-	nil,                        // 9: infracost.parser.cloudformation.ResultProto.ResourcesEntry
-	nil,                        // 10: infracost.parser.cloudformation.ResultProto.OutputsEntry
+	nil,                        // 6: infracost.parser.cloudformation.Result.ParametersEntry
+	nil,                        // 7: infracost.parser.cloudformation.Result.MappingsEntry
+	nil,                        // 8: infracost.parser.cloudformation.Result.ConditionsEntry
+	nil,                        // 9: infracost.parser.cloudformation.Result.ResourcesEntry
+	nil,                        // 10: infracost.parser.cloudformation.Result.OutputsEntry
 	nil,                        // 11: infracost.parser.cloudformation.NestedMapBranch.ValuesEntry
 	nil,                        // 12: infracost.parser.cloudformation.NestedMapLeaf.ValuesEntry
-	nil,                        // 13: infracost.parser.cloudformation.ResourceProto.PropertiesEntry
-	nil,                        // 14: infracost.parser.cloudformation.ResourceProto.MetadataEntry
+	nil,                        // 13: infracost.parser.cloudformation.Resource.PropertiesEntry
+	nil,                        // 14: infracost.parser.cloudformation.Resource.MetadataEntry
 	(*parser.Address)(nil),     // 15: infracost.parser.Address
 	(*parser.SourceRange)(nil), // 16: infracost.parser.SourceRange
 	(*parser.CallStack)(nil),   // 17: infracost.parser.CallStack
-	(*ValueProto)(nil),         // 18: infracost.parser.cloudformation.ValueProto
+	(*Value)(nil),              // 18: infracost.parser.cloudformation.Value
 }
 var file_infracost_parser_cloudformation_result_proto_depIdxs = []int32{
-	6,  // 0: infracost.parser.cloudformation.ResultProto.parameters:type_name -> infracost.parser.cloudformation.ResultProto.ParametersEntry
-	7,  // 1: infracost.parser.cloudformation.ResultProto.mappings:type_name -> infracost.parser.cloudformation.ResultProto.MappingsEntry
-	8,  // 2: infracost.parser.cloudformation.ResultProto.conditions:type_name -> infracost.parser.cloudformation.ResultProto.ConditionsEntry
-	9,  // 3: infracost.parser.cloudformation.ResultProto.resources:type_name -> infracost.parser.cloudformation.ResultProto.ResourcesEntry
-	10, // 4: infracost.parser.cloudformation.ResultProto.outputs:type_name -> infracost.parser.cloudformation.ResultProto.OutputsEntry
+	6,  // 0: infracost.parser.cloudformation.Result.parameters:type_name -> infracost.parser.cloudformation.Result.ParametersEntry
+	7,  // 1: infracost.parser.cloudformation.Result.mappings:type_name -> infracost.parser.cloudformation.Result.MappingsEntry
+	8,  // 2: infracost.parser.cloudformation.Result.conditions:type_name -> infracost.parser.cloudformation.Result.ConditionsEntry
+	9,  // 3: infracost.parser.cloudformation.Result.resources:type_name -> infracost.parser.cloudformation.Result.ResourcesEntry
+	10, // 4: infracost.parser.cloudformation.Result.outputs:type_name -> infracost.parser.cloudformation.Result.OutputsEntry
 	11, // 5: infracost.parser.cloudformation.NestedMapBranch.values:type_name -> infracost.parser.cloudformation.NestedMapBranch.ValuesEntry
 	12, // 6: infracost.parser.cloudformation.NestedMapLeaf.values:type_name -> infracost.parser.cloudformation.NestedMapLeaf.ValuesEntry
-	15, // 7: infracost.parser.cloudformation.ResourceProto.address:type_name -> infracost.parser.Address
-	13, // 8: infracost.parser.cloudformation.ResourceProto.properties:type_name -> infracost.parser.cloudformation.ResourceProto.PropertiesEntry
-	14, // 9: infracost.parser.cloudformation.ResourceProto.metadata:type_name -> infracost.parser.cloudformation.ResourceProto.MetadataEntry
-	16, // 10: infracost.parser.cloudformation.ResourceProto.source_range:type_name -> infracost.parser.SourceRange
-	17, // 11: infracost.parser.cloudformation.ResourceProto.call_stack:type_name -> infracost.parser.CallStack
-	4,  // 12: infracost.parser.cloudformation.ResourceProto.tag_data:type_name -> infracost.parser.cloudformation.TagData
+	15, // 7: infracost.parser.cloudformation.Resource.address:type_name -> infracost.parser.Address
+	13, // 8: infracost.parser.cloudformation.Resource.properties:type_name -> infracost.parser.cloudformation.Resource.PropertiesEntry
+	14, // 9: infracost.parser.cloudformation.Resource.metadata:type_name -> infracost.parser.cloudformation.Resource.MetadataEntry
+	16, // 10: infracost.parser.cloudformation.Resource.source_range:type_name -> infracost.parser.SourceRange
+	17, // 11: infracost.parser.cloudformation.Resource.call_stack:type_name -> infracost.parser.CallStack
+	4,  // 12: infracost.parser.cloudformation.Resource.tag_data:type_name -> infracost.parser.cloudformation.TagData
 	5,  // 13: infracost.parser.cloudformation.TagData.tags:type_name -> infracost.parser.cloudformation.Tag
 	16, // 14: infracost.parser.cloudformation.Tag.key_source_range:type_name -> infracost.parser.SourceRange
 	16, // 15: infracost.parser.cloudformation.Tag.value_source_range:type_name -> infracost.parser.SourceRange
-	18, // 16: infracost.parser.cloudformation.ResultProto.ParametersEntry.value:type_name -> infracost.parser.cloudformation.ValueProto
-	1,  // 17: infracost.parser.cloudformation.ResultProto.MappingsEntry.value:type_name -> infracost.parser.cloudformation.NestedMapBranch
-	3,  // 18: infracost.parser.cloudformation.ResultProto.ResourcesEntry.value:type_name -> infracost.parser.cloudformation.ResourceProto
-	18, // 19: infracost.parser.cloudformation.ResultProto.OutputsEntry.value:type_name -> infracost.parser.cloudformation.ValueProto
+	18, // 16: infracost.parser.cloudformation.Result.ParametersEntry.value:type_name -> infracost.parser.cloudformation.Value
+	1,  // 17: infracost.parser.cloudformation.Result.MappingsEntry.value:type_name -> infracost.parser.cloudformation.NestedMapBranch
+	3,  // 18: infracost.parser.cloudformation.Result.ResourcesEntry.value:type_name -> infracost.parser.cloudformation.Resource
+	18, // 19: infracost.parser.cloudformation.Result.OutputsEntry.value:type_name -> infracost.parser.cloudformation.Value
 	2,  // 20: infracost.parser.cloudformation.NestedMapBranch.ValuesEntry.value:type_name -> infracost.parser.cloudformation.NestedMapLeaf
-	18, // 21: infracost.parser.cloudformation.NestedMapLeaf.ValuesEntry.value:type_name -> infracost.parser.cloudformation.ValueProto
-	18, // 22: infracost.parser.cloudformation.ResourceProto.PropertiesEntry.value:type_name -> infracost.parser.cloudformation.ValueProto
-	18, // 23: infracost.parser.cloudformation.ResourceProto.MetadataEntry.value:type_name -> infracost.parser.cloudformation.ValueProto
+	18, // 21: infracost.parser.cloudformation.NestedMapLeaf.ValuesEntry.value:type_name -> infracost.parser.cloudformation.Value
+	18, // 22: infracost.parser.cloudformation.Resource.PropertiesEntry.value:type_name -> infracost.parser.cloudformation.Value
+	18, // 23: infracost.parser.cloudformation.Resource.MetadataEntry.value:type_name -> infracost.parser.cloudformation.Value
 	24, // [24:24] is the sub-list for method output_type
 	24, // [24:24] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name

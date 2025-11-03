@@ -8,7 +8,7 @@ import "infracost/parser/metadata.proto";
 import "infracost/parser/stack.proto";
 
 message Resource {
-  hcl.ValueProto data = 1;
+  hcl.Value data = 1;
   Provider provider = 2;
   parser.Address address = 3;
   parser.SourceRange source_range = 4;
@@ -54,6 +54,6 @@ message Tag {
 }
 
 message Output {
-  hcl.ValueProto value = 1;
+  hcl.Value value = 1;
   string name = 2;
 }

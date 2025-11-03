@@ -5,19 +5,19 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
-import { ValueProto } from "./value_pb.js";
+import { Value } from "./value_pb.js";
 import { Address } from "../address_pb.js";
 import { SourceRange } from "../metadata_pb.js";
 import { CallStack } from "../stack_pb.js";
 
 /**
- * @generated from message infracost.parser.cloudformation.ResultProto
+ * @generated from message infracost.parser.cloudformation.Result
  */
-export class ResultProto extends Message<ResultProto> {
+export class Result extends Message<Result> {
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ValueProto> parameters = 1;
+   * @generated from field: map<string, infracost.parser.cloudformation.Value> parameters = 1;
    */
-  parameters: { [key: string]: ValueProto } = {};
+  parameters: { [key: string]: Value } = {};
 
   /**
    * @generated from field: map<string, infracost.parser.cloudformation.NestedMapBranch> mappings = 2;
@@ -30,44 +30,44 @@ export class ResultProto extends Message<ResultProto> {
   conditions: { [key: string]: boolean } = {};
 
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ResourceProto> resources = 4;
+   * @generated from field: map<string, infracost.parser.cloudformation.Resource> resources = 4;
    */
-  resources: { [key: string]: ResourceProto } = {};
+  resources: { [key: string]: Resource } = {};
 
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ValueProto> outputs = 5;
+   * @generated from field: map<string, infracost.parser.cloudformation.Value> outputs = 5;
    */
-  outputs: { [key: string]: ValueProto } = {};
+  outputs: { [key: string]: Value } = {};
 
-  constructor(data?: PartialMessage<ResultProto>) {
+  constructor(data?: PartialMessage<Result>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.ResultProto";
+  static readonly typeName = "infracost.parser.cloudformation.Result";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "parameters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ValueProto} },
+    { no: 1, name: "parameters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 2, name: "mappings", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: NestedMapBranch} },
     { no: 3, name: "conditions", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 8 /* ScalarType.BOOL */} },
-    { no: 4, name: "resources", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ResourceProto} },
-    { no: 5, name: "outputs", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ValueProto} },
+    { no: 4, name: "resources", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Resource} },
+    { no: 5, name: "outputs", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResultProto {
-    return new ResultProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Result {
+    return new Result().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResultProto {
-    return new ResultProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Result {
+    return new Result().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResultProto {
-    return new ResultProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Result {
+    return new Result().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ResultProto | PlainMessage<ResultProto> | undefined, b: ResultProto | PlainMessage<ResultProto> | undefined): boolean {
-    return proto3.util.equals(ResultProto, a, b);
+  static equals(a: Result | PlainMessage<Result> | undefined, b: Result | PlainMessage<Result> | undefined): boolean {
+    return proto3.util.equals(Result, a, b);
   }
 }
 
@@ -113,9 +113,9 @@ export class NestedMapBranch extends Message<NestedMapBranch> {
  */
 export class NestedMapLeaf extends Message<NestedMapLeaf> {
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ValueProto> values = 1;
+   * @generated from field: map<string, infracost.parser.cloudformation.Value> values = 1;
    */
-  values: { [key: string]: ValueProto } = {};
+  values: { [key: string]: Value } = {};
 
   constructor(data?: PartialMessage<NestedMapLeaf>) {
     super();
@@ -125,7 +125,7 @@ export class NestedMapLeaf extends Message<NestedMapLeaf> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "infracost.parser.cloudformation.NestedMapLeaf";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "values", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ValueProto} },
+    { no: 1, name: "values", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NestedMapLeaf {
@@ -146,9 +146,9 @@ export class NestedMapLeaf extends Message<NestedMapLeaf> {
 }
 
 /**
- * @generated from message infracost.parser.cloudformation.ResourceProto
+ * @generated from message infracost.parser.cloudformation.Resource
  */
-export class ResourceProto extends Message<ResourceProto> {
+export class Resource extends Message<Resource> {
   /**
    * @generated from field: string id = 1;
    */
@@ -165,14 +165,14 @@ export class ResourceProto extends Message<ResourceProto> {
   address?: Address;
 
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ValueProto> properties = 4;
+   * @generated from field: map<string, infracost.parser.cloudformation.Value> properties = 4;
    */
-  properties: { [key: string]: ValueProto } = {};
+  properties: { [key: string]: Value } = {};
 
   /**
-   * @generated from field: map<string, infracost.parser.cloudformation.ValueProto> metadata = 5;
+   * @generated from field: map<string, infracost.parser.cloudformation.Value> metadata = 5;
    */
-  metadata: { [key: string]: ValueProto } = {};
+  metadata: { [key: string]: Value } = {};
 
   /**
    * @generated from field: infracost.parser.SourceRange source_range = 6;
@@ -224,19 +224,19 @@ export class ResourceProto extends Message<ResourceProto> {
    */
   tagData?: TagData;
 
-  constructor(data?: PartialMessage<ResourceProto>) {
+  constructor(data?: PartialMessage<Resource>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.ResourceProto";
+  static readonly typeName = "infracost.parser.cloudformation.Resource";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "address", kind: "message", T: Address },
-    { no: 4, name: "properties", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ValueProto} },
-    { no: 5, name: "metadata", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ValueProto} },
+    { no: 4, name: "properties", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 5, name: "metadata", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 6, name: "source_range", kind: "message", T: SourceRange },
     { no: 7, name: "flags", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 8, name: "supported", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
@@ -249,20 +249,20 @@ export class ResourceProto extends Message<ResourceProto> {
     { no: 15, name: "tag_data", kind: "message", T: TagData },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResourceProto {
-    return new ResourceProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Resource {
+    return new Resource().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResourceProto {
-    return new ResourceProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Resource {
+    return new Resource().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResourceProto {
-    return new ResourceProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Resource {
+    return new Resource().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ResourceProto | PlainMessage<ResourceProto> | undefined, b: ResourceProto | PlainMessage<ResourceProto> | undefined): boolean {
-    return proto3.util.equals(ResourceProto, a, b);
+  static equals(a: Resource | PlainMessage<Resource> | undefined, b: Resource | PlainMessage<Resource> | undefined): boolean {
+    return proto3.util.equals(Resource, a, b);
   }
 }
 

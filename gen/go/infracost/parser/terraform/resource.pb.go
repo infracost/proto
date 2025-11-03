@@ -25,7 +25,7 @@ const (
 
 type Resource struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	Data                *hcl.ValueProto        `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data                *hcl.Value             `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	Provider            *Provider              `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
 	Address             *parser.Address        `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
 	SourceRange         *parser.SourceRange    `protobuf:"bytes,4,opt,name=source_range,json=sourceRange,proto3" json:"source_range,omitempty"`
@@ -75,7 +75,7 @@ func (*Resource) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_terraform_resource_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Resource) GetData() *hcl.ValueProto {
+func (x *Resource) GetData() *hcl.Value {
 	if x != nil {
 		return x.Data
 	}
@@ -441,7 +441,7 @@ func (x *Tag) GetIsDefault() bool {
 
 type Output struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Value         *hcl.ValueProto        `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Value         *hcl.Value             `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -477,7 +477,7 @@ func (*Output) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_terraform_resource_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Output) GetValue() *hcl.ValueProto {
+func (x *Output) GetValue() *hcl.Value {
 	if x != nil {
 		return x.Value
 	}
@@ -495,9 +495,9 @@ var File_infracost_parser_terraform_resource_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_resource_proto_rawDesc = "" +
 	"\n" +
-	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\x96\x05\n" +
-	"\bResource\x124\n" +
-	"\x04data\x18\x01 \x01(\v2 .infracost.parser.hcl.ValueProtoR\x04data\x12@\n" +
+	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\x91\x05\n" +
+	"\bResource\x12/\n" +
+	"\x04data\x18\x01 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x04data\x12@\n" +
 	"\bprovider\x18\x02 \x01(\v2$.infracost.parser.terraform.ProviderR\bprovider\x123\n" +
 	"\aaddress\x18\x03 \x01(\v2\x19.infracost.parser.AddressR\aaddress\x12@\n" +
 	"\fsource_range\x18\x04 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12\x14\n" +
@@ -537,9 +537,9 @@ const file_infracost_parser_terraform_resource_proto_rawDesc = "" +
 	"\vvalue_flags\x18\x06 \x01(\x04R\n" +
 	"valueFlags\x12\x1d\n" +
 	"\n" +
-	"is_default\x18\a \x01(\bR\tisDefault\"T\n" +
-	"\x06Output\x126\n" +
-	"\x05value\x18\x01 \x01(\v2 .infracost.parser.hcl.ValueProtoR\x05value\x12\x12\n" +
+	"is_default\x18\a \x01(\bR\tisDefault\"O\n" +
+	"\x06Output\x121\n" +
+	"\x05value\x18\x01 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x05value\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04nameB\xf7\x01\n" +
 	"\x1ecom.infracost.parser.terraformB\rResourceProtoP\x01Z<github.com/infracost/proto/gen/go/infracost/parser/terraform\xa2\x02\x03IPT\xaa\x02\x1aInfracost.Parser.Terraform\xca\x02\x1aInfracost\\Parser\\Terraform\xe2\x02&Infracost\\Parser\\Terraform\\GPBMetadata\xea\x02\x1cInfracost::Parser::Terraformb\x06proto3"
 
@@ -562,13 +562,13 @@ var file_infracost_parser_terraform_resource_proto_goTypes = []any{
 	(*Provider)(nil),           // 2: infracost.parser.terraform.Provider
 	(*Tag)(nil),                // 3: infracost.parser.terraform.Tag
 	(*Output)(nil),             // 4: infracost.parser.terraform.Output
-	(*hcl.ValueProto)(nil),     // 5: infracost.parser.hcl.ValueProto
+	(*hcl.Value)(nil),          // 5: infracost.parser.hcl.Value
 	(*parser.Address)(nil),     // 6: infracost.parser.Address
 	(*parser.SourceRange)(nil), // 7: infracost.parser.SourceRange
 	(*parser.CallStack)(nil),   // 8: infracost.parser.CallStack
 }
 var file_infracost_parser_terraform_resource_proto_depIdxs = []int32{
-	5,  // 0: infracost.parser.terraform.Resource.data:type_name -> infracost.parser.hcl.ValueProto
+	5,  // 0: infracost.parser.terraform.Resource.data:type_name -> infracost.parser.hcl.Value
 	2,  // 1: infracost.parser.terraform.Resource.provider:type_name -> infracost.parser.terraform.Provider
 	6,  // 2: infracost.parser.terraform.Resource.address:type_name -> infracost.parser.Address
 	7,  // 3: infracost.parser.terraform.Resource.source_range:type_name -> infracost.parser.SourceRange
@@ -579,7 +579,7 @@ var file_infracost_parser_terraform_resource_proto_depIdxs = []int32{
 	1,  // 8: infracost.parser.terraform.Provider.default_tag_data:type_name -> infracost.parser.terraform.TagData
 	7,  // 9: infracost.parser.terraform.Tag.key_source_range:type_name -> infracost.parser.SourceRange
 	7,  // 10: infracost.parser.terraform.Tag.value_source_range:type_name -> infracost.parser.SourceRange
-	5,  // 11: infracost.parser.terraform.Output.value:type_name -> infracost.parser.hcl.ValueProto
+	5,  // 11: infracost.parser.terraform.Output.value:type_name -> infracost.parser.hcl.Value
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name

@@ -42,35 +42,35 @@ proto3.util.setEnumType(ScalarType, "infracost.parser.cloudformation.ScalarType"
 ]);
 
 /**
- * @generated from message infracost.parser.cloudformation.ValueProto
+ * @generated from message infracost.parser.cloudformation.Value
  */
-export class ValueProto extends Message<ValueProto> {
+export class Value extends Message<Value> {
   /**
-   * @generated from oneof infracost.parser.cloudformation.ValueProto.value
+   * @generated from oneof infracost.parser.cloudformation.Value.value
    */
   value: {
     /**
-     * @generated from field: infracost.parser.cloudformation.NullValueProto null = 1;
+     * @generated from field: infracost.parser.cloudformation.NullValue null = 1;
      */
-    value: NullValueProto;
+    value: NullValue;
     case: "null";
   } | {
     /**
-     * @generated from field: infracost.parser.cloudformation.ScalarValueProto scalar = 2;
+     * @generated from field: infracost.parser.cloudformation.ScalarValue scalar = 2;
      */
-    value: ScalarValueProto;
+    value: ScalarValue;
     case: "scalar";
   } | {
     /**
-     * @generated from field: infracost.parser.cloudformation.ListValueProto list = 3;
+     * @generated from field: infracost.parser.cloudformation.ListValue list = 3;
      */
-    value: ListValueProto;
+    value: ListValue;
     case: "list";
   } | {
     /**
-     * @generated from field: infracost.parser.cloudformation.MapValueProto map = 4;
+     * @generated from field: infracost.parser.cloudformation.MapValue map = 4;
      */
-    value: MapValueProto;
+    value: MapValue;
     case: "map";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -84,83 +84,83 @@ export class ValueProto extends Message<ValueProto> {
    */
   flags = protoInt64.zero;
 
-  constructor(data?: PartialMessage<ValueProto>) {
+  constructor(data?: PartialMessage<Value>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.ValueProto";
+  static readonly typeName = "infracost.parser.cloudformation.Value";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "null", kind: "message", T: NullValueProto, oneof: "value" },
-    { no: 2, name: "scalar", kind: "message", T: ScalarValueProto, oneof: "value" },
-    { no: 3, name: "list", kind: "message", T: ListValueProto, oneof: "value" },
-    { no: 4, name: "map", kind: "message", T: MapValueProto, oneof: "value" },
+    { no: 1, name: "null", kind: "message", T: NullValue, oneof: "value" },
+    { no: 2, name: "scalar", kind: "message", T: ScalarValue, oneof: "value" },
+    { no: 3, name: "list", kind: "message", T: ListValue, oneof: "value" },
+    { no: 4, name: "map", kind: "message", T: MapValue, oneof: "value" },
     { no: 5, name: "source_range", kind: "message", T: SourceRange },
     { no: 6, name: "flags", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ValueProto {
-    return new ValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Value {
+    return new Value().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ValueProto {
-    return new ValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Value {
+    return new Value().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ValueProto {
-    return new ValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Value {
+    return new Value().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ValueProto | PlainMessage<ValueProto> | undefined, b: ValueProto | PlainMessage<ValueProto> | undefined): boolean {
-    return proto3.util.equals(ValueProto, a, b);
+  static equals(a: Value | PlainMessage<Value> | undefined, b: Value | PlainMessage<Value> | undefined): boolean {
+    return proto3.util.equals(Value, a, b);
   }
 }
 
 /**
  * Empty
  *
- * @generated from message infracost.parser.cloudformation.NullValueProto
+ * @generated from message infracost.parser.cloudformation.NullValue
  */
-export class NullValueProto extends Message<NullValueProto> {
-  constructor(data?: PartialMessage<NullValueProto>) {
+export class NullValue extends Message<NullValue> {
+  constructor(data?: PartialMessage<NullValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.NullValueProto";
+  static readonly typeName = "infracost.parser.cloudformation.NullValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NullValueProto {
-    return new NullValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NullValue {
+    return new NullValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NullValueProto {
-    return new NullValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NullValue {
+    return new NullValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NullValueProto {
-    return new NullValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NullValue {
+    return new NullValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: NullValueProto | PlainMessage<NullValueProto> | undefined, b: NullValueProto | PlainMessage<NullValueProto> | undefined): boolean {
-    return proto3.util.equals(NullValueProto, a, b);
+  static equals(a: NullValue | PlainMessage<NullValue> | undefined, b: NullValue | PlainMessage<NullValue> | undefined): boolean {
+    return proto3.util.equals(NullValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.cloudformation.ScalarValueProto
+ * @generated from message infracost.parser.cloudformation.ScalarValue
  */
-export class ScalarValueProto extends Message<ScalarValueProto> {
+export class ScalarValue extends Message<ScalarValue> {
   /**
    * @generated from field: infracost.parser.cloudformation.ScalarType type = 1;
    */
   type = ScalarType.STRING;
 
   /**
-   * @generated from oneof infracost.parser.cloudformation.ScalarValueProto.value
+   * @generated from oneof infracost.parser.cloudformation.ScalarValue.value
    */
   value: {
     /**
@@ -188,13 +188,13 @@ export class ScalarValueProto extends Message<ScalarValueProto> {
     case: "doubleValue";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
-  constructor(data?: PartialMessage<ScalarValueProto>) {
+  constructor(data?: PartialMessage<ScalarValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.ScalarValueProto";
+  static readonly typeName = "infracost.parser.cloudformation.ScalarValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(ScalarType) },
     { no: 2, name: "string_value", kind: "scalar", T: 9 /* ScalarType.STRING */, oneof: "value" },
@@ -203,137 +203,137 @@ export class ScalarValueProto extends Message<ScalarValueProto> {
     { no: 5, name: "double_value", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, oneof: "value" },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ScalarValueProto {
-    return new ScalarValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ScalarValue {
+    return new ScalarValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ScalarValueProto {
-    return new ScalarValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ScalarValue {
+    return new ScalarValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ScalarValueProto {
-    return new ScalarValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ScalarValue {
+    return new ScalarValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ScalarValueProto | PlainMessage<ScalarValueProto> | undefined, b: ScalarValueProto | PlainMessage<ScalarValueProto> | undefined): boolean {
-    return proto3.util.equals(ScalarValueProto, a, b);
+  static equals(a: ScalarValue | PlainMessage<ScalarValue> | undefined, b: ScalarValue | PlainMessage<ScalarValue> | undefined): boolean {
+    return proto3.util.equals(ScalarValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.cloudformation.ListValueProto
+ * @generated from message infracost.parser.cloudformation.ListValue
  */
-export class ListValueProto extends Message<ListValueProto> {
+export class ListValue extends Message<ListValue> {
   /**
-   * @generated from field: repeated infracost.parser.cloudformation.ValueProto values = 1;
+   * @generated from field: repeated infracost.parser.cloudformation.Value values = 1;
    */
-  values: ValueProto[] = [];
+  values: Value[] = [];
 
-  constructor(data?: PartialMessage<ListValueProto>) {
+  constructor(data?: PartialMessage<ListValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.ListValueProto";
+  static readonly typeName = "infracost.parser.cloudformation.ListValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "values", kind: "message", T: ValueProto, repeated: true },
+    { no: 1, name: "values", kind: "message", T: Value, repeated: true },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListValueProto {
-    return new ListValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListValue {
+    return new ListValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListValueProto {
-    return new ListValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListValue {
+    return new ListValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListValueProto {
-    return new ListValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListValue {
+    return new ListValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ListValueProto | PlainMessage<ListValueProto> | undefined, b: ListValueProto | PlainMessage<ListValueProto> | undefined): boolean {
-    return proto3.util.equals(ListValueProto, a, b);
+  static equals(a: ListValue | PlainMessage<ListValue> | undefined, b: ListValue | PlainMessage<ListValue> | undefined): boolean {
+    return proto3.util.equals(ListValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.cloudformation.MapValueProto
+ * @generated from message infracost.parser.cloudformation.MapValue
  */
-export class MapValueProto extends Message<MapValueProto> {
+export class MapValue extends Message<MapValue> {
   /**
-   * @generated from field: repeated infracost.parser.cloudformation.MapEntryProto entries = 1;
+   * @generated from field: repeated infracost.parser.cloudformation.MapEntry entries = 1;
    */
-  entries: MapEntryProto[] = [];
+  entries: MapEntry[] = [];
 
-  constructor(data?: PartialMessage<MapValueProto>) {
+  constructor(data?: PartialMessage<MapValue>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.MapValueProto";
+  static readonly typeName = "infracost.parser.cloudformation.MapValue";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "entries", kind: "message", T: MapEntryProto, repeated: true },
+    { no: 1, name: "entries", kind: "message", T: MapEntry, repeated: true },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapValueProto {
-    return new MapValueProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapValue {
+    return new MapValue().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapValueProto {
-    return new MapValueProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapValue {
+    return new MapValue().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapValueProto {
-    return new MapValueProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapValue {
+    return new MapValue().fromJsonString(jsonString, options);
   }
 
-  static equals(a: MapValueProto | PlainMessage<MapValueProto> | undefined, b: MapValueProto | PlainMessage<MapValueProto> | undefined): boolean {
-    return proto3.util.equals(MapValueProto, a, b);
+  static equals(a: MapValue | PlainMessage<MapValue> | undefined, b: MapValue | PlainMessage<MapValue> | undefined): boolean {
+    return proto3.util.equals(MapValue, a, b);
   }
 }
 
 /**
- * @generated from message infracost.parser.cloudformation.MapEntryProto
+ * @generated from message infracost.parser.cloudformation.MapEntry
  */
-export class MapEntryProto extends Message<MapEntryProto> {
+export class MapEntry extends Message<MapEntry> {
   /**
-   * @generated from field: infracost.parser.cloudformation.ValueProto key = 1;
+   * @generated from field: infracost.parser.cloudformation.Value key = 1;
    */
-  key?: ValueProto;
+  key?: Value;
 
   /**
-   * @generated from field: infracost.parser.cloudformation.ValueProto value = 2;
+   * @generated from field: infracost.parser.cloudformation.Value value = 2;
    */
-  value?: ValueProto;
+  value?: Value;
 
-  constructor(data?: PartialMessage<MapEntryProto>) {
+  constructor(data?: PartialMessage<MapEntry>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "infracost.parser.cloudformation.MapEntryProto";
+  static readonly typeName = "infracost.parser.cloudformation.MapEntry";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "key", kind: "message", T: ValueProto },
-    { no: 2, name: "value", kind: "message", T: ValueProto },
+    { no: 1, name: "key", kind: "message", T: Value },
+    { no: 2, name: "value", kind: "message", T: Value },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MapEntry {
+    return new MapEntry().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MapEntry {
+    return new MapEntry().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapEntryProto {
-    return new MapEntryProto().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MapEntry {
+    return new MapEntry().fromJsonString(jsonString, options);
   }
 
-  static equals(a: MapEntryProto | PlainMessage<MapEntryProto> | undefined, b: MapEntryProto | PlainMessage<MapEntryProto> | undefined): boolean {
-    return proto3.util.equals(MapEntryProto, a, b);
+  static equals(a: MapEntry | PlainMessage<MapEntry> | undefined, b: MapEntry | PlainMessage<MapEntry> | undefined): boolean {
+    return proto3.util.equals(MapEntry, a, b);
   }
 }
 

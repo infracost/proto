@@ -5,18 +5,18 @@ package infracost.parser.hcl;
 import "infracost/parser/expectation.proto";
 import "infracost/parser/metadata.proto";
 
-message ValueProto {
+message Value {
   oneof value {
-    PrimitiveValueProto primitive = 1;
-    ListValueProto list = 2;
-    MapValueProto map = 3;
-    NullValueProto null = 4;
+    PrimitiveValue primitive = 1;
+    ListValue list = 2;
+    MapValue map = 3;
+    NullValue null = 4;
   }
   parser.SourceRange source_range = 5;
   uint64 flags = 6;
 }
 
-message PrimitiveValueProto {
+message PrimitiveValue {
   oneof value {
     string string_value = 1;
     string number_value = 2; // big.Float as string
@@ -25,25 +25,25 @@ message PrimitiveValueProto {
   uint32 primitive_type = 4; // primitiveType enum
 }
 
-message ListValueProto {
-  repeated ValueProto values = 1;
+message ListValue {
+  repeated Value values = 1;
   optional parser.Expectation element_type = 2; // cty.Type as string
   bool is_tuple = 3;
   bool is_set = 4;
 }
 
-message MapValueProto {
-  repeated MapEntryProto entries = 1;
+message MapValue {
+  repeated MapEntry entries = 1;
   bool is_object = 2;
 }
 
-message MapEntryProto {
+message MapEntry {
   string key = 1;
-  ValueProto value = 2;
+  Value value = 2;
   parser.SourceRange key_source_range = 3;
   uint64 key_flags = 4;
 }
 
-message NullValueProto {
+message NullValue {
   // Empty - null values only need metadata which is in parent
 }
