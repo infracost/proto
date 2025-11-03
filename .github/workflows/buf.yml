@@ -1,0 +1,52 @@
+name: Buf
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - uses: bufbuild/buf-setup-action@v1
+
+      - name: Install protoc-gen-go
+        run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.10
+
+      - name: Lint
+        run: buf lint
+
+      - name: Format check
+        run: buf format --diff --exit-code
+
+      - name: Breaking change detection
+        if: github.event_name == 'pull_request'
+        run: buf breaking --against '.git#branch=main'
+
+      - name: Generate
+        run: rm -rf gen/ && buf generate
+
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Generated code is out of sync. Run 'buf generate' and commit the changes."
+            git status --porcelain
+            exit 1
+          fi
+
+      - name: Verify generated Go code
+        run: go build ./gen/go/...
+
+      - name: Verify generated TypeScript code
+        run: find gen/ts -name '*.ts' -exec npx -y tsc --noEmit --skipLibCheck {} +
+        

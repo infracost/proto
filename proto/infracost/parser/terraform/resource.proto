@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package infracost.parser.terraform;
+
+import "infracost/parser/hcl/value.proto";
+
+import "infracost/parser/metadata.proto";
+
+import "infracost/parser/address.proto";
+
+import "infracost/parser/stack.proto";
+
+message Resource {
+  hcl.ValueProto data = 1;
+  Provider provider = 2;
+  parser.Address address = 3;
+  parser.SourceRange source_range = 4;
+  uint64 flags = 5;
+  string region = 6;
+  string id = 7;
+  string name = 8;
+  string type = 9;
+  TagData tag_data = 10;
+  bool region_is_synthetic = 11;
+  bool supported = 12;
+  bool supports_tags = 13;
+  bool supports_default_tags = 14;
+  bool free = 15;
+  parser.CallStack call_stack = 16;
+}
+
+message TagData {
+  uint64 flags = 1;
+  repeated Tag tags = 2;
+}
+
+message Provider {
+  parser.SourceRange source_range = 1;
+  uint64 flags = 2;
+  string name = 3;
+  string family = 4;
+  string region = 5;
+  TagData default_tag_data = 6;
+  bool region_is_synthetic = 7;
+  string version_constraints = 8;
+  bool is_supported = 9;
+}
+
+message Tag {
+  string key = 1;
+  parser.SourceRange key_source_range = 2;
+  uint64 key_flags = 3;
+  string value = 4;
+  parser.SourceRange value_source_range = 5;
+  uint64 value_flags = 6;
+  bool is_default = 7;
+}
+
+message Output {
+  hcl.ValueProto value = 1;
+  string name = 2;
+}
+

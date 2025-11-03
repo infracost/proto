@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+package infracost.parser.terraform.modules;
+
+import "infracost/parser/terraform/modules/weblink.proto";
+
+message LoadedModule {
+  optional Source source = 1;
+  optional modules.WebLink base_link = 2;
+  string dir = 3;
+  bool from_cache = 4;
+}
+
+message Source {
+  string original = 1;
+  string source = 2; // after source map applied
+  string base = 3; // the module address with subdirectory removed
+  string sub_dir = 4; // anything after // for sub directory into module
+  string version = 5; // from version attribute or "ref" query param - constraint for registry modules
+  string cache_key = 6;
+  bool is_sparse = 7;
+  uint64 flags = 8;
+}

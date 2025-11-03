@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package infracost.parser;
+
+message Expectation {
+    ExpectationType type = 1;
+    oneof type_data {
+        Primitive primitive = 2;
+        Map map = 3;
+        Object object = 4;
+        List list = 5;
+        Tuple tuple = 6;
+        Set set = 7;
+    }
+}
+
+enum ExpectationType {
+    EXPECTATION_TYPE_UNSPECIFIED = 0;
+    EXPECTATION_TYPE_ANY = 1;
+    EXPECTATION_TYPE_STRING = 2;
+    EXPECTATION_TYPE_NUMBER = 3;
+    EXPECTATION_TYPE_BOOL = 4;
+    EXPECTATION_TYPE_MAP = 5;
+    EXPECTATION_TYPE_OBJECT = 6;
+    EXPECTATION_TYPE_LIST = 7;
+    EXPECTATION_TYPE_TUPLE = 8;
+    EXPECTATION_TYPE_SET = 9;
+}
+
+message Primitive {
+    bool is_non_zero = 1;
+}
+
+message Map {
+    Expectation element_type = 1;
+}
+
+message Object {
+    map<string, Expectation> types = 1;
+}
+
+message List {
+    Expectation element_type = 1;
+}
+
+message Tuple {
+    repeated Expectation element_types = 1;
+}
+
+message Set {
+    Expectation element_type = 1;
+}

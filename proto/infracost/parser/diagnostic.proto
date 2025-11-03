@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package infracost.parser;
+
+import "infracost/parser/metadata.proto";
+
+// Diagnostic is information about something that went wrong during
+// parsing, for any reason.
+// A Diagnostic is considered Critical if it is something the user needs
+// to be alerted about, e.g. a module download failing due to invalid 
+// credentials.
+message Diagnostic {
+  string error = 1;
+  map<string, string> labels = 2;
+  parser.SourceRange source_range = 3;
+  DiagnosticType type = 4;
+  bool critical = 5;
+  bool warning = 6;
+  bool ignored = 7;
+}
+
+enum DiagnosticType {
+  DIAGNOSTIC_TYPE_UNSPECIFIED = 0;
+  // failed operation e.g. adding a string to an int, or error in operation func
+  DIAGNOSTIC_TYPE_FAILED_OPERATION = 1; 
+  // bug in the parser code
+  DIAGNOSTIC_TYPE_DEFECT = 2; 
+  // could not parse the hcl, invalid code
+  DIAGNOSTIC_TYPE_HCL_PARSE_ERROR = 3; 
+  // missing function, i.e. not defined
+  DIAGNOSTIC_TYPE_MISSING_FUNC = 4; 
+  // failed to call function, cty function errored 
+  DIAGNOSTIC_TYPE_FAILED_FUNCTION_CALL = 5;
+  DIAGNOSTIC_TYPE_UNEXPECTED_TYPE = 6; // e.g. string used for int
+  DIAGNOSTIC_TYPE_MODULE_FETCH_ERROR = 7; // failed to download module
+  DIAGNOSTIC_TYPE_MISSING_INPUT_VARIABLE = 8; // specifically a missing var input
+  DIAGNOSTIC_TYPE_MISSING_REFERENCE = 9;
+  DIAGNOSTIC_TYPE_VALUE_INDEX_ERROR = 10; // e.g. cannot index into map
+  // unknown expression type - possibly an expression we don't yet support
+  DIAGNOSTIC_TYPE_UNKNOWN_EXPRESSION = 11;
+  // error trying to relatively traverse into a value e.g. function()[3]
+  DIAGNOSTIC_TYPE_RELATIVE_TRAVERSAL_ERROR = 12; 
+  // invalid terraform configuration, e.g. dynamic block with no for_each
+  DIAGNOSTIC_TYPE_INVALID_TERRAFORM_CONFIGURATION = 13; 
+  // invalid terragrunt configuration, e.g. missing source
+  DIAGNOSTIC_TYPE_INVALID_TERRAGRUNT_CONFIGURATION = 14; 
+  // cyclic dependencies detected
+  DIAGNOSTIC_TYPE_TERRAFORM_CYCLIC_DEPENDENCY_DETECTED = 15; 
+  // terragrunt cyclic dependency detected
+  DIAGNOSTIC_TYPE_TERRAGRUNT_CYCLIC_DEPENDENCY_DETECTED = 16; 
+  // security error, e.g. trying to access a file outside of the repo directory
+  DIAGNOSTIC_TYPE_SECURITY_ERROR = 17; 
+  // dependency error, e.g. missing module
+  DIAGNOSTIC_TYPE_DEPENDENCY_ERROR = 18; 
+  // filesystem error, e.g. missing file
+  DIAGNOSTIC_TYPE_FILESYSTEM_ERROR = 19; 
+  // invalid source map
+  DIAGNOSTIC_TYPE_INVALID_SOURCE_MAP = 20;
+  // no source files found
+  DIAGNOSTIC_TYPE_NO_SOURCE_FILES_FOUND = 21; 
+  // yor error
+  DIAGNOSTIC_TYPE_YOR_ERROR = 22; 
+  // remote variable load error, e.g. TFC/Spacelift
+  DIAGNOSTIC_TYPE_REMOTE_VARIABLE_LOAD_ERROR = 23;
+  // cloudformation template error
+  DIAGNOSTIC_TYPE_INVALID_CLOUDFORMATION_TEMPLATE = 24;
+  //cloudformation unsupported transform
+  DIAGNOSTIC_TYPE_UNSUPPORTED_CLOUDFORMATION_TRANSFORM = 25;
+  //cloudformation unsupported intrinsic function
+  DIAGNOSTIC_TYPE_UNSUPPORTED_CLOUDFORMATION_INTRINSIC_FUNCTION = 26;
+  //cloudformation synthetic template url
+  DIAGNOSTIC_TYPE_SYNTHETIC_CLOUDFORMATION_TEMPLATE_URL = 27;
+  // cloudformation transform failed
+  DIAGNOSTIC_TYPE_FAILED_CLOUDFORMATION_TRANSFORM = 28;
+}

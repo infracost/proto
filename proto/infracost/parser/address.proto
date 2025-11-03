@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package infracost.parser;
+
+message Address {
+  repeated Segment segments = 1;
+}
+
+message Segment {
+  string value = 1;
+  optional int64 index_int = 2;
+  optional string index_string = 3;
+}

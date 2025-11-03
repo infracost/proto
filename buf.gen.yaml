@@ -1,0 +1,15 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/infracost/proto/gen/go
+plugins:
+  - local: protoc-gen-go
+    out: gen/go
+    opt:
+      - paths=source_relative
+  - remote: buf.build/bufbuild/es:v1.10.0
+    out: gen/ts
+    opt:
+      - target=ts

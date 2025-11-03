@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package infracost.parser.cache;
+
+import "google/protobuf/timestamp.proto";
+import "infracost/parser/diagnostic.proto";
+import "infracost/parser/terraform/module.proto";
+import "infracost/parser/cloudformation/result.proto";
+
+message TerraformProject {
+  terraform.ModuleResult result = 1;
+  Metadata metadata = 2;
+  repeated parser.Diagnostic diags = 3;
+  bytes usage_file = 4; // raw yaml of usage file
+  bytes project_config = 5; // raw yaml of config file
+  bool is_terragrunt = 6;
+  string terraform_module_suffix = 7;
+}
+
+message Metadata {
+  string key = 1;
+  CacheFlavor flavor = 2;
+  string runner_version = 3;
+  string parser_version = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+enum CacheFlavor {
+  CACHE_FLAVOR_UNSPECIFIED = 0;
+  CACHE_FLAVOR_TERRAFORM = 1;
+  CACHE_FLAVOR_CLOUDFORMATION = 2;
+}
+
+// BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
+message BranchSummary {
+  string branch = 1;
+  map<string, string> sha_to_id_map = 2;
+  map<string, string> sha_to_project_name_map = 3;
+  map<string, CacheFlavor> sha_to_flavor_map = 4;
+}
+
+message EncryptionEnvelope {
+  bytes encrypted_dek = 1;
+  bytes iv = 2;
+  string encrypted_data = 3; // base64 encoded, thus string
+}
+
+message CloudFormationProject {
+  cloudformation.ResultProto result = 1;
+  Metadata metadata = 2;
+  repeated parser.Diagnostic diags = 3;
+  bytes usage_file = 4; // raw yaml of usage file
+  bytes project_config = 5; // raw yaml of config file
+  reserved 6; // not used
+  reserved "is_cdk"; // not used
+}

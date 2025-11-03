@@ -1,0 +1,22 @@
+
+syntax = "proto3";
+
+package infracost.parser.terraform.modules;
+
+// A container for constructing web(browser) links to a resolved remote or
+// registry module
+//
+// Its purpose is transporting the low level URL details that we'll need to
+// construct a full VCS aware link (much) later, for user interactions
+message WebLink {
+  // url.URL.Scheme
+  string scheme = 1;
+	// url.URL.Host
+  string host = 2;
+	// A path under the Host to the parent VCS repository of this module
+  string repo = 3;
+	// A VCS (git) tree-ish object representing the version of this module
+  string commitish = 4;
+	// A subdirectory *within* the associated Repo
+  string subdirectory = 5;
+}
