@@ -1,2 +1,4 @@
 # Buf
 .buf/
+# JetBrains IDEs
+.idea/

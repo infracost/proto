@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package infracost.parser.event;
+
+message RunParameters {
+  BaseScope scope = 1;
+  UsageDefaults usage_defaults = 2;
+  repeated ProductionFilter production_filters = 3;
+  repeated TagPolicy tag_policies = 4;
+  repeated FinopsPolicySettings finops_policies = 5;
+}
+
+message BaseScope {
+  string repo_name = 1;
+  string repo_url = 2;
+  string branch_name = 3;
+}
+
+message UsageDefaults {
+  // Key is resource_type
+  map<string, UsageResourceMap> resources = 1;
+}
+
+message UsageResourceMap {
+  // Key is usage_key
+  map<string, UsageDefaultList> usages = 1;
+}
+
+message UsageDefaultList {
+  repeated UsageDefault list = 1;
+}
+
+message UsageDefault {
+  string quantity = 1;
+  int32 priority = 2;
+  UsageFilters filters = 3;
+}
+
+message UsageFilters {
+  StringFilter project = 1;
+}
+
+// Filter represents a unified-input filter with a type and a value pattern
+// Value may contain '*' wildcards that are translated to a regex.
+// Word boundaries (\\b) are implicitly added at the start and end unless
+// the pattern starts/ends with a wildcard.
+message ProductionFilter {
+  // Type represents the filter type (e.g., repo/project/branch) and aliases the proto enum.
+  enum Type {
+    UNSPECIFIED = 0;
+    REPO = 1;
+    PROJECT = 2;
+    BRANCH = 3;
+  }
+
+  string id = 1;
+  Type type = 2;
+  string value = 3;
+  bool include = 4;
+}
+
+message TagPolicy {
+  string id = 1;
+  string name = 2;
+  string message = 3;
+  StringFilter resource_filter = 4;
+  StringFilter branch_filter = 5;
+  StringFilter project_filter = 6;
+  MapFilter tag_filter = 7;
+  repeated TagPolicyRequirement requirements = 8;
+  bool pr_comment = 9;
+  bool block_pr = 10;
+}
+
+message TagPolicyRequirement {
+  enum Type {
+    UNSPECIFIED = 0;
+    ANY = 1;
+    LIST = 2;
+    REGEX = 3;
+  }
+
+  string key = 1;
+  Type type = 2;
+  string value_regex = 3;
+  string message = 4;
+  repeated string allowed_values = 5;
+  bool mandatory = 6;
+}
+
+message StringFilter {
+  repeated string include = 1;
+  repeated string exclude = 2;
+}
+
+message MapFilter {
+  map<string, string> include = 1;
+  map<string, string> exclude = 2;
+}
+
+message FinopsPolicySettings {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+  string message = 4;
+  StringFilter project_filter = 5;
+  StringFilter branch_filter = 6;
+  MapFilter tag_filter = 7;
+  string settings = 8; // JSON blob
+  bool pr_comment = 9;
+  bool block_pr = 10;
+  bool only_new_resources = 11;
+}
