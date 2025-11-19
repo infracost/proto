@@ -1,0 +1,169 @@
+syntax = "proto3";
+
+package infracost.parser.event;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "infracost/parser/event/runparameters.proto";
+
+message Event {
+  enum Type {
+    UNSPECIFIED = 0;
+    // pr
+    PULL_REQUEST_OPENED = 1;
+    PULL_REQUEST_CHANGED = 2;
+    PULL_REQUEST_EDITED = 3;
+    // branch
+    BRANCH_BASE_CHANGED = 4;
+    BRANCH_DEFAULT_CHANGED = 5;
+    REPO_INIT = 6;
+    REPO_REFETCH_BASE_BRANCH = 7;
+    // debug
+    DEV_INFRACOST_CLONE = 8;
+    // reevaluate
+    REPO_REEVALUATE_BASE_BRANCH = 9;
+    // ai
+    FIX_ISSUE = 10;
+  }
+
+  Type type = 1;
+  Metadata metadata = 2;
+  Environment environment = 3;
+
+  AWSConfig aws_config = 4;
+  VCS vcs = 5;
+
+  JobBehavior job_behavior = 6;
+  JobConfiguration job_configuration = 7;
+  InfracostServices services = 8;
+  Telemetry telemetry = 9;
+  DecryptionKey decryption_key = 10;
+  RunParameters run_parameters = 11;
+}
+
+message Environment {
+  enum Type {
+    DEV = 0;
+    PROD = 1;
+    LOCAL = 2;
+  }
+  Type type = 1;
+  bool ci = 2;
+}
+
+message DecryptionKey {
+  string encrypted_dek = 1;
+}
+
+message Secret {
+  string encrypted = 1;
+}
+
+message VCS {
+  enum Type {
+    UNSPECIFIED = 0;
+    GITLAB = 1;
+    GITHUB = 2;
+    AZURE_REPOS = 3;
+  }
+
+  Type type = 1;
+  string source_raw_event = 2;
+  GitHubApplication github_application = 3;
+  AzureRepos azure_repos = 4;
+  string pullrequest_check_id = 5;
+  bool reuse_cloned_repos = 6;
+  string clone_base_dir = 7;
+}
+
+message Metadata {
+  google.protobuf.Timestamp timestamp_received = 1;
+  google.protobuf.Timestamp timestamp_created = 2;
+  google.protobuf.Timestamp timestamp_queued = 3;
+  string replay_id = 4;
+  string pipeline_id = 5;
+  string delivery_id = 6;
+  bool is_last_try = 7;
+}
+
+message AWSConfig {
+  string region = 1;
+  string endpoint = 2;
+}
+
+message Cache {
+  bool disabled = 1;
+  string s3_module_cache_region = 2;
+  string s3_module_cache_bucket = 3;
+  string s3_module_cache_prefix = 4;
+  bool s3_module_cache_private = 5;
+}
+
+message GitHubApplication {
+  Secret access_token = 1;
+  string base_url = 2;
+  int64 app_id = 3;
+}
+
+message AzureRepos {
+  Secret access_token = 1;
+  string base_url = 2;
+}
+
+message FeatureFlags {
+  bool enable_cloud_formation = 1;
+  bool enable_cloud_formation_cdk = 2;
+}
+
+// What gets executed
+message JobBehavior {
+  bool no_comment = 1;
+  bool usage_api_enabled = 2;
+  string build_script = 3;
+  string custom_property_mapping_script = 4;
+  FeatureFlags feature_flags = 5;
+}
+
+// How it gets executed
+message JobConfiguration {
+  string log_level = 1;
+  string prompt_path = 2;
+  string infracost_binary = 3;
+  string runner_provider = 4;
+  string go_max_procs = 5;
+  int32 max_vcs_redirects = 6;
+  int32 infracost_parallelism = 7;
+  google.protobuf.Duration max_wait_vcs_api = 8;
+  bool interactive_shell = 9;
+  bool debug_run = 10;
+  bool sparse_checkout = 11;
+  bool use_s3_results_ingestion = 12;
+  bool wait_for_metrics_during_shutdown = 13;
+  Cache cache = 14;
+}
+
+message InfracostServices {
+  Secret auth_token = 1;
+  string registry_proxy = 2;
+  string web_url = 3;
+  string pricing_api_endpoint = 4;
+  string recommendation_api_endpoint = 5;
+  string dashboard_api_endpoint = 6;
+  string auth0_claims_namespace = 7;
+  google.protobuf.Duration api_client_timeout = 8;
+  bool use_graph_evaluator = 9;
+}
+
+message Telemetry {
+  string sentry_dsn = 1;
+  string metrics_addr = 2;
+  bool disable_observability = 3;
+  bool enable_environmental_metrics = 4;
+  Langfuse langfuse = 5;
+}
+
+message Langfuse {
+  string base_url = 1;
+  string public_key = 2;
+  Secret private_key = 3;
+}
