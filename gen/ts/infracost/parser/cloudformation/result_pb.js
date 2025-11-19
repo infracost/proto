@@ -2,248 +2,57 @@
 // @generated from file infracost/parser/cloudformation/result.proto (package infracost.parser.cloudformation, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Address } from "../address_pb.js";
 import { file_infracost_parser_address } from "../address_pb.js";
-import type { Value } from "./value_pb.js";
 import { file_infracost_parser_cloudformation_value } from "./value_pb.js";
-import type { SourceRange } from "../metadata_pb.js";
 import { file_infracost_parser_metadata } from "../metadata_pb.js";
-import type { CallStack } from "../stack_pb.js";
 import { file_infracost_parser_stack } from "../stack_pb.js";
-import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/cloudformation/result.proto.
  */
-export const file_infracost_parser_cloudformation_result: GenFile = /*@__PURE__*/
+export const file_infracost_parser_cloudformation_result = /*@__PURE__*/
   fileDesc("CixpbmZyYWNvc3QvcGFyc2VyL2Nsb3VkZm9ybWF0aW9uL3Jlc3VsdC5wcm90bxIfaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbiKjBgoGUmVzdWx0EksKCnBhcmFtZXRlcnMYASADKAsyNy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdC5QYXJhbWV0ZXJzRW50cnkSRwoIbWFwcGluZ3MYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdC5NYXBwaW5nc0VudHJ5EksKCmNvbmRpdGlvbnMYAyADKAsyNy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdC5Db25kaXRpb25zRW50cnkSSQoJcmVzb3VyY2VzGAQgAygLMjYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHQuUmVzb3VyY2VzRW50cnkSRQoHb3V0cHV0cxgFIAMoCzI0LmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uUmVzdWx0Lk91dHB1dHNFbnRyeRpZCg9QYXJhbWV0ZXJzRW50cnkSCwoDa2V5GAEgASgJEjUKBXZhbHVlGAIgASgLMiYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5WYWx1ZToCOAEaYQoNTWFwcGluZ3NFbnRyeRILCgNrZXkYASABKAkSPwoFdmFsdWUYAiABKAsyMC5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLk5lc3RlZE1hcEJyYW5jaDoCOAEaMQoPQ29uZGl0aW9uc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCDoCOAEaWwoOUmVzb3VyY2VzRW50cnkSCwoDa2V5GAEgASgJEjgKBXZhbHVlGAIgASgLMikuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXNvdXJjZToCOAEaVgoMT3V0cHV0c0VudHJ5EgsKA2tleRgBIAEoCRI1CgV2YWx1ZRgCIAEoCzImLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVmFsdWU6AjgBIr4BCg9OZXN0ZWRNYXBCcmFuY2gSTAoGdmFsdWVzGAEgAygLMjwuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5OZXN0ZWRNYXBCcmFuY2guVmFsdWVzRW50cnkaXQoLVmFsdWVzRW50cnkSCwoDa2V5GAEgASgJEj0KBXZhbHVlGAIgASgLMi4uaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5OZXN0ZWRNYXBMZWFmOgI4ASKyAQoNTmVzdGVkTWFwTGVhZhJKCgZ2YWx1ZXMYASADKAsyOi5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLk5lc3RlZE1hcExlYWYuVmFsdWVzRW50cnkaVQoLVmFsdWVzRW50cnkSCwoDa2V5GAEgASgJEjUKBXZhbHVlGAIgASgLMiYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5WYWx1ZToCOAEi0wUKCFJlc291cmNlEgoKAmlkGAEgASgJEgwKBHR5cGUYAiABKAkSKgoHYWRkcmVzcxgDIAEoCzIZLmluZnJhY29zdC5wYXJzZXIuQWRkcmVzcxJNCgpwcm9wZXJ0aWVzGAQgAygLMjkuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXNvdXJjZS5Qcm9wZXJ0aWVzRW50cnkSSQoIbWV0YWRhdGEYBSADKAsyNy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc291cmNlLk1ldGFkYXRhRW50cnkSMwoMc291cmNlX3JhbmdlGAYgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5Tb3VyY2VSYW5nZRINCgVmbGFncxgHIAEoBBIRCglzdXBwb3J0ZWQYCCABKAgSDAoEZnJlZRgJIAEoCBIvCgpjYWxsX3N0YWNrGAogASgLMhsuaW5mcmFjb3N0LnBhcnNlci5DYWxsU3RhY2sSDgoGcmVnaW9uGAsgASgJEhsKE3JlZ2lvbl9pc19zeW50aGV0aWMYDCABKAgSFQoNc3VwcG9ydHNfdGFncxgNIAEoCBIdChVzdXBwb3J0c19kZWZhdWx0X3RhZ3MYDiABKAgSOgoIdGFnX2RhdGEYDyABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlRhZ0RhdGEaWQoPUHJvcGVydGllc0VudHJ5EgsKA2tleRgBIAEoCRI1CgV2YWx1ZRgCIAEoCzImLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVmFsdWU6AjgBGlcKDU1ldGFkYXRhRW50cnkSCwoDa2V5GAEgASgJEjUKBXZhbHVlGAIgASgLMiYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5WYWx1ZToCOAEiTAoHVGFnRGF0YRINCgVmbGFncxgBIAEoBBIyCgR0YWdzGAIgAygLMiQuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5UYWci0QEKA1RhZxILCgNrZXkYASABKAkSNwoQa2V5X3NvdXJjZV9yYW5nZRgCIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USEQoJa2V5X2ZsYWdzGAMgASgEEg0KBXZhbHVlGAQgASgJEjkKEnZhbHVlX3NvdXJjZV9yYW5nZRgFIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USEwoLdmFsdWVfZmxhZ3MYBiABKAQSEgoKaXNfZGVmYXVsdBgHIAEoCEKTAgojY29tLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb25CC1Jlc3VsdFByb3RvUAFaQWdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2Nsb3VkZm9ybWF0aW9uogIDSVBDqgIfSW5mcmFjb3N0LlBhcnNlci5DbG91ZGZvcm1hdGlvbsoCH0luZnJhY29zdFxQYXJzZXJcQ2xvdWRmb3JtYXRpb27iAitJbmZyYWNvc3RcUGFyc2VyXENsb3VkZm9ybWF0aW9uXEdQQk1ldGFkYXRh6gIhSW5mcmFjb3N0OjpQYXJzZXI6OkNsb3VkZm9ybWF0aW9uYgZwcm90bzM", [file_infracost_parser_address, file_infracost_parser_cloudformation_value, file_infracost_parser_metadata, file_infracost_parser_stack]);
-
-/**
- * @generated from message infracost.parser.cloudformation.Result
- */
-export type Result = Message<"infracost.parser.cloudformation.Result"> & {
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Value> parameters = 1;
-   */
-  parameters: { [key: string]: Value };
-
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.NestedMapBranch> mappings = 2;
-   */
-  mappings: { [key: string]: NestedMapBranch };
-
-  /**
-   * @generated from field: map<string, bool> conditions = 3;
-   */
-  conditions: { [key: string]: boolean };
-
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Resource> resources = 4;
-   */
-  resources: { [key: string]: Resource };
-
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Value> outputs = 5;
-   */
-  outputs: { [key: string]: Value };
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.Result.
  * Use `create(ResultSchema)` to create a new message.
  */
-export const ResultSchema: GenMessage<Result> = /*@__PURE__*/
+export const ResultSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 0);
-
-/**
- * @generated from message infracost.parser.cloudformation.NestedMapBranch
- */
-export type NestedMapBranch = Message<"infracost.parser.cloudformation.NestedMapBranch"> & {
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.NestedMapLeaf> values = 1;
-   */
-  values: { [key: string]: NestedMapLeaf };
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.NestedMapBranch.
  * Use `create(NestedMapBranchSchema)` to create a new message.
  */
-export const NestedMapBranchSchema: GenMessage<NestedMapBranch> = /*@__PURE__*/
+export const NestedMapBranchSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 1);
-
-/**
- * @generated from message infracost.parser.cloudformation.NestedMapLeaf
- */
-export type NestedMapLeaf = Message<"infracost.parser.cloudformation.NestedMapLeaf"> & {
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Value> values = 1;
-   */
-  values: { [key: string]: Value };
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.NestedMapLeaf.
  * Use `create(NestedMapLeafSchema)` to create a new message.
  */
-export const NestedMapLeafSchema: GenMessage<NestedMapLeaf> = /*@__PURE__*/
+export const NestedMapLeafSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 2);
-
-/**
- * @generated from message infracost.parser.cloudformation.Resource
- */
-export type Resource = Message<"infracost.parser.cloudformation.Resource"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: string type = 2;
-   */
-  type: string;
-
-  /**
-   * @generated from field: infracost.parser.Address address = 3;
-   */
-  address?: Address;
-
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Value> properties = 4;
-   */
-  properties: { [key: string]: Value };
-
-  /**
-   * @generated from field: map<string, infracost.parser.cloudformation.Value> metadata = 5;
-   */
-  metadata: { [key: string]: Value };
-
-  /**
-   * @generated from field: infracost.parser.SourceRange source_range = 6;
-   */
-  sourceRange?: SourceRange;
-
-  /**
-   * @generated from field: uint64 flags = 7;
-   */
-  flags: bigint;
-
-  /**
-   * @generated from field: bool supported = 8;
-   */
-  supported: boolean;
-
-  /**
-   * @generated from field: bool free = 9;
-   */
-  free: boolean;
-
-  /**
-   * @generated from field: infracost.parser.CallStack call_stack = 10;
-   */
-  callStack?: CallStack;
-
-  /**
-   * @generated from field: string region = 11;
-   */
-  region: string;
-
-  /**
-   * @generated from field: bool region_is_synthetic = 12;
-   */
-  regionIsSynthetic: boolean;
-
-  /**
-   * @generated from field: bool supports_tags = 13;
-   */
-  supportsTags: boolean;
-
-  /**
-   * @generated from field: bool supports_default_tags = 14;
-   */
-  supportsDefaultTags: boolean;
-
-  /**
-   * @generated from field: infracost.parser.cloudformation.TagData tag_data = 15;
-   */
-  tagData?: TagData;
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.Resource.
  * Use `create(ResourceSchema)` to create a new message.
  */
-export const ResourceSchema: GenMessage<Resource> = /*@__PURE__*/
+export const ResourceSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 3);
-
-/**
- * @generated from message infracost.parser.cloudformation.TagData
- */
-export type TagData = Message<"infracost.parser.cloudformation.TagData"> & {
-  /**
-   * @generated from field: uint64 flags = 1;
-   */
-  flags: bigint;
-
-  /**
-   * @generated from field: repeated infracost.parser.cloudformation.Tag tags = 2;
-   */
-  tags: Tag[];
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.TagData.
  * Use `create(TagDataSchema)` to create a new message.
  */
-export const TagDataSchema: GenMessage<TagData> = /*@__PURE__*/
+export const TagDataSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 4);
-
-/**
- * @generated from message infracost.parser.cloudformation.Tag
- */
-export type Tag = Message<"infracost.parser.cloudformation.Tag"> & {
-  /**
-   * @generated from field: string key = 1;
-   */
-  key: string;
-
-  /**
-   * @generated from field: infracost.parser.SourceRange key_source_range = 2;
-   */
-  keySourceRange?: SourceRange;
-
-  /**
-   * @generated from field: uint64 key_flags = 3;
-   */
-  keyFlags: bigint;
-
-  /**
-   * @generated from field: string value = 4;
-   */
-  value: string;
-
-  /**
-   * @generated from field: infracost.parser.SourceRange value_source_range = 5;
-   */
-  valueSourceRange?: SourceRange;
-
-  /**
-   * @generated from field: uint64 value_flags = 6;
-   */
-  valueFlags: bigint;
-
-  /**
-   * @generated from field: bool is_default = 7;
-   */
-  isDefault: boolean;
-};
 
 /**
  * Describes the message infracost.parser.cloudformation.Tag.
  * Use `create(TagSchema)` to create a new message.
  */
-export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
+export const TagSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_cloudformation_result, 5);
 

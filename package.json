@@ -1,0 +1,31 @@
+{
+  "name": "@infracost/proto",
+  "version": "1.1.0",
+  "description": "Infracost protobuf definitions",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infracost/proto.git"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "files": [
+    "gen/ts/**/*_pb.ts",
+    "gen/ts/**/*_pb.js",
+    "proto",
+    "LICENSE",
+    "README.md"
+  ],
+  "types": [
+    "gen/ts/**/*.d.ts"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.10.1"
+  },
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^2.10.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

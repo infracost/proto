@@ -2,50 +2,18 @@
 // @generated from file infracost/parser/metadata.proto (package infracost.parser, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/metadata.proto.
  */
-export const file_infracost_parser_metadata: GenFile = /*@__PURE__*/
+export const file_infracost_parser_metadata = /*@__PURE__*/
   fileDesc("Ch9pbmZyYWNvc3QvcGFyc2VyL21ldGFkYXRhLnByb3RvEhBpbmZyYWNvc3QucGFyc2VyIm8KC1NvdXJjZVJhbmdlEhAKCGZpbGVuYW1lGAEgASgJEhIKCnN0YXJ0X2xpbmUYAiABKAMSEAoIZW5kX2xpbmUYAyABKAMSFAoMc3RhcnRfY29sdW1uGAQgASgDEhIKCmVuZF9jb2x1bW4YBSABKANCugEKFGNvbS5pbmZyYWNvc3QucGFyc2VyQg1NZXRhZGF0YVByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyogIDSVBYqgIQSW5mcmFjb3N0LlBhcnNlcsoCEEluZnJhY29zdFxQYXJzZXLiAhxJbmZyYWNvc3RcUGFyc2VyXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQYXJzZXJiBnByb3RvMw");
-
-/**
- * @generated from message infracost.parser.SourceRange
- */
-export type SourceRange = Message<"infracost.parser.SourceRange"> & {
-  /**
-   * @generated from field: string filename = 1;
-   */
-  filename: string;
-
-  /**
-   * @generated from field: int64 start_line = 2;
-   */
-  startLine: bigint;
-
-  /**
-   * @generated from field: int64 end_line = 3;
-   */
-  endLine: bigint;
-
-  /**
-   * @generated from field: int64 start_column = 4;
-   */
-  startColumn: bigint;
-
-  /**
-   * @generated from field: int64 end_column = 5;
-   */
-  endColumn: bigint;
-};
 
 /**
  * Describes the message infracost.parser.SourceRange.
  * Use `create(SourceRangeSchema)` to create a new message.
  */
-export const SourceRangeSchema: GenMessage<SourceRange> = /*@__PURE__*/
+export const SourceRangeSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_metadata, 0);
 

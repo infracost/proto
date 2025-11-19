@@ -3,23 +3,19 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Expectation } from "../expectation_pb.js";
-import { file_infracost_parser_expectation } from "../expectation_pb.js";
-import type { SourceRange } from "../metadata_pb.js";
-import { file_infracost_parser_metadata } from "../metadata_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { SourceRange } from "../metadata_pb.js";
+import type { Expectation } from "../expectation_pb.js";
 
 /**
  * Describes the file infracost/parser/hcl/value.proto.
  */
-export const file_infracost_parser_hcl_value: GenFile = /*@__PURE__*/
-  fileDesc("CiBpbmZyYWNvc3QvcGFyc2VyL2hjbC92YWx1ZS5wcm90bxIUaW5mcmFjb3N0LnBhcnNlci5oY2wioAIKBVZhbHVlEjkKCXByaW1pdGl2ZRgBIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuaGNsLlByaW1pdGl2ZVZhbHVlSAASLwoEbGlzdBgCIAEoCzIfLmluZnJhY29zdC5wYXJzZXIuaGNsLkxpc3RWYWx1ZUgAEi0KA21hcBgDIAEoCzIeLmluZnJhY29zdC5wYXJzZXIuaGNsLk1hcFZhbHVlSAASLwoEbnVsbBgEIAEoCzIfLmluZnJhY29zdC5wYXJzZXIuaGNsLk51bGxWYWx1ZUgAEjMKDHNvdXJjZV9yYW5nZRgFIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USDQoFZmxhZ3MYBiABKARCBwoFdmFsdWUidwoOUHJpbWl0aXZlVmFsdWUSFgoMc3RyaW5nX3ZhbHVlGAEgASgJSAASFgoMbnVtYmVyX3ZhbHVlGAIgASgJSAASFAoKYm9vbF92YWx1ZRgDIAEoCEgAEhYKDnByaW1pdGl2ZV90eXBlGAQgASgNQgcKBXZhbHVlIqUBCglMaXN0VmFsdWUSKwoGdmFsdWVzGAEgAygLMhsuaW5mcmFjb3N0LnBhcnNlci5oY2wuVmFsdWUSOAoMZWxlbWVudF90eXBlGAIgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvbkgAiAEBEhAKCGlzX3R1cGxlGAMgASgIEg4KBmlzX3NldBgEIAEoCEIPCg1fZWxlbWVudF90eXBlIk4KCE1hcFZhbHVlEi8KB2VudHJpZXMYASADKAsyHi5pbmZyYWNvc3QucGFyc2VyLmhjbC5NYXBFbnRyeRIRCglpc19vYmplY3QYAiABKAgijwEKCE1hcEVudHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLmluZnJhY29zdC5wYXJzZXIuaGNsLlZhbHVlEjcKEGtleV9zb3VyY2VfcmFuZ2UYAyABKAsyHS5pbmZyYWNvc3QucGFyc2VyLlNvdXJjZVJhbmdlEhEKCWtleV9mbGFncxgEIAEoBCILCglOdWxsVmFsdWVC0AEKGGNvbS5pbmZyYWNvc3QucGFyc2VyLmhjbEIKVmFsdWVQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9oY2yiAgNJUEiqAhRJbmZyYWNvc3QuUGFyc2VyLkhjbMoCFEluZnJhY29zdFxQYXJzZXJcSGNs4gIgSW5mcmFjb3N0XFBhcnNlclxIY2xcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6SGNsYgZwcm90bzM", [file_infracost_parser_expectation, file_infracost_parser_metadata]);
+export declare const file_infracost_parser_hcl_value: GenFile;
 
 /**
  * @generated from message infracost.parser.hcl.Value
  */
-export type Value = Message<"infracost.parser.hcl.Value"> & {
+export declare type Value = Message<"infracost.parser.hcl.Value"> & {
   /**
    * @generated from oneof infracost.parser.hcl.Value.value
    */
@@ -64,13 +60,12 @@ export type Value = Message<"infracost.parser.hcl.Value"> & {
  * Describes the message infracost.parser.hcl.Value.
  * Use `create(ValueSchema)` to create a new message.
  */
-export const ValueSchema: GenMessage<Value> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 0);
+export declare const ValueSchema: GenMessage<Value>;
 
 /**
  * @generated from message infracost.parser.hcl.PrimitiveValue
  */
-export type PrimitiveValue = Message<"infracost.parser.hcl.PrimitiveValue"> & {
+export declare type PrimitiveValue = Message<"infracost.parser.hcl.PrimitiveValue"> & {
   /**
    * @generated from oneof infracost.parser.hcl.PrimitiveValue.value
    */
@@ -108,13 +103,12 @@ export type PrimitiveValue = Message<"infracost.parser.hcl.PrimitiveValue"> & {
  * Describes the message infracost.parser.hcl.PrimitiveValue.
  * Use `create(PrimitiveValueSchema)` to create a new message.
  */
-export const PrimitiveValueSchema: GenMessage<PrimitiveValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 1);
+export declare const PrimitiveValueSchema: GenMessage<PrimitiveValue>;
 
 /**
  * @generated from message infracost.parser.hcl.ListValue
  */
-export type ListValue = Message<"infracost.parser.hcl.ListValue"> & {
+export declare type ListValue = Message<"infracost.parser.hcl.ListValue"> & {
   /**
    * @generated from field: repeated infracost.parser.hcl.Value values = 1;
    */
@@ -142,13 +136,12 @@ export type ListValue = Message<"infracost.parser.hcl.ListValue"> & {
  * Describes the message infracost.parser.hcl.ListValue.
  * Use `create(ListValueSchema)` to create a new message.
  */
-export const ListValueSchema: GenMessage<ListValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 2);
+export declare const ListValueSchema: GenMessage<ListValue>;
 
 /**
  * @generated from message infracost.parser.hcl.MapValue
  */
-export type MapValue = Message<"infracost.parser.hcl.MapValue"> & {
+export declare type MapValue = Message<"infracost.parser.hcl.MapValue"> & {
   /**
    * @generated from field: repeated infracost.parser.hcl.MapEntry entries = 1;
    */
@@ -164,13 +157,12 @@ export type MapValue = Message<"infracost.parser.hcl.MapValue"> & {
  * Describes the message infracost.parser.hcl.MapValue.
  * Use `create(MapValueSchema)` to create a new message.
  */
-export const MapValueSchema: GenMessage<MapValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 3);
+export declare const MapValueSchema: GenMessage<MapValue>;
 
 /**
  * @generated from message infracost.parser.hcl.MapEntry
  */
-export type MapEntry = Message<"infracost.parser.hcl.MapEntry"> & {
+export declare type MapEntry = Message<"infracost.parser.hcl.MapEntry"> & {
   /**
    * @generated from field: string key = 1;
    */
@@ -196,21 +188,19 @@ export type MapEntry = Message<"infracost.parser.hcl.MapEntry"> & {
  * Describes the message infracost.parser.hcl.MapEntry.
  * Use `create(MapEntrySchema)` to create a new message.
  */
-export const MapEntrySchema: GenMessage<MapEntry> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 4);
+export declare const MapEntrySchema: GenMessage<MapEntry>;
 
 /**
  * Empty - null values only need metadata which is in parent
  *
  * @generated from message infracost.parser.hcl.NullValue
  */
-export type NullValue = Message<"infracost.parser.hcl.NullValue"> & {
+export declare type NullValue = Message<"infracost.parser.hcl.NullValue"> & {
 };
 
 /**
  * Describes the message infracost.parser.hcl.NullValue.
  * Use `create(NullValueSchema)` to create a new message.
  */
-export const NullValueSchema: GenMessage<NullValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_hcl_value, 5);
+export declare const NullValueSchema: GenMessage<NullValue>;
 

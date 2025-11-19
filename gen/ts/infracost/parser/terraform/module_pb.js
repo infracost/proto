@@ -2,132 +2,36 @@
 // @generated from file infracost/parser/terraform/module.proto (package infracost.parser.terraform, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Address } from "../address_pb.js";
 import { file_infracost_parser_address } from "../address_pb.js";
-import type { SourceRange } from "../metadata_pb.js";
 import { file_infracost_parser_metadata } from "../metadata_pb.js";
-import type { LoadedModule } from "./modules/loader_pb.js";
 import { file_infracost_parser_terraform_modules_loader } from "./modules/loader_pb.js";
-import type { Output, Resource } from "./resource_pb.js";
 import { file_infracost_parser_terraform_resource } from "./resource_pb.js";
-import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/terraform/module.proto.
  */
-export const file_infracost_parser_terraform_module: GenFile = /*@__PURE__*/
+export const file_infracost_parser_terraform_module = /*@__PURE__*/
   fileDesc("CidpbmZyYWNvc3QvcGFyc2VyL3RlcnJhZm9ybS9tb2R1bGUucHJvdG8SGmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtIsEFCgxNb2R1bGVSZXN1bHQSRgoHbW9kdWxlcxgBIAMoCzI1LmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdC5Nb2R1bGVzRW50cnkSMwoMc291cmNlX3JhbmdlGAIgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5Tb3VyY2VSYW5nZRIYChBkZWZpbml0aW9uX2ZsYWdzGAMgASgEEi8KB2FkZHJlc3MYBCABKAsyGS5pbmZyYWNvc3QucGFyc2VyLkFkZHJlc3NIAIgBARJKCglwcm92aWRlcnMYBSADKAsyNy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5Nb2R1bGVSZXN1bHQuUHJvdmlkZXJzRW50cnkSSAoJbG9hZF9kYXRhGAYgASgLMjAuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0ubW9kdWxlcy5Mb2FkZWRNb2R1bGVIAYgBARIPCgd2ZXJzaW9uGAcgASgJEjcKCXJlc291cmNlcxgIIAMoCzIkLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLlJlc291cmNlEjMKB291dHB1dHMYCSADKAsyIi5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5PdXRwdXQaXAoMTW9kdWxlc0VudHJ5EgsKA2tleRgBIAEoCRI7CgV2YWx1ZRgCIAEoCzIsLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdExpc3Q6AjgBGlwKDlByb3ZpZGVyc0VudHJ5EgsKA2tleRgBIAEoCRI5CgV2YWx1ZRgCIAEoCzIqLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLlByb3ZpZGVyUmVzdWx0OgI4AUIKCghfYWRkcmVzc0IMCgpfbG9hZF9kYXRhIk0KEE1vZHVsZVJlc3VsdExpc3QSOQoHcmVzdWx0cxgBIAMoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdCLdAQoOUHJvdmlkZXJSZXN1bHQSDAoEbmFtZRgBIAEoCRJRCgxkZWZhdWx0X3RhZ3MYAiADKAsyOy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5Qcm92aWRlclJlc3VsdC5EZWZhdWx0VGFnc0VudHJ5EhAKCGZpbGVuYW1lGAMgASgJEhIKCnN0YXJ0X2xpbmUYBCABKAMSEAoIZW5kX2xpbmUYBSABKAMaMgoQRGVmYXVsdFRhZ3NFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQvUBCh5jb20uaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm1CC01vZHVsZVByb3RvUAFaPGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL3RlcnJhZm9ybaICA0lQVKoCGkluZnJhY29zdC5QYXJzZXIuVGVycmFmb3JtygIaSW5mcmFjb3N0XFBhcnNlclxUZXJyYWZvcm3iAiZJbmZyYWNvc3RcUGFyc2VyXFRlcnJhZm9ybVxHUEJNZXRhZGF0YeoCHEluZnJhY29zdDo6UGFyc2VyOjpUZXJyYWZvcm1iBnByb3RvMw", [file_infracost_parser_address, file_infracost_parser_metadata, file_infracost_parser_terraform_modules_loader, file_infracost_parser_terraform_resource]);
-
-/**
- * @generated from message infracost.parser.terraform.ModuleResult
- */
-export type ModuleResult = Message<"infracost.parser.terraform.ModuleResult"> & {
-  /**
-   * @generated from field: map<string, infracost.parser.terraform.ModuleResultList> modules = 1;
-   */
-  modules: { [key: string]: ModuleResultList };
-
-  /**
-   * @generated from field: infracost.parser.SourceRange source_range = 2;
-   */
-  sourceRange?: SourceRange;
-
-  /**
-   * @generated from field: uint64 definition_flags = 3;
-   */
-  definitionFlags: bigint;
-
-  /**
-   * @generated from field: optional infracost.parser.Address address = 4;
-   */
-  address?: Address;
-
-  /**
-   * @generated from field: map<string, infracost.parser.terraform.ProviderResult> providers = 5;
-   */
-  providers: { [key: string]: ProviderResult };
-
-  /**
-   * @generated from field: optional infracost.parser.terraform.modules.LoadedModule load_data = 6;
-   */
-  loadData?: LoadedModule;
-
-  /**
-   * @generated from field: string version = 7;
-   */
-  version: string;
-
-  /**
-   * @generated from field: repeated infracost.parser.terraform.Resource resources = 8;
-   */
-  resources: Resource[];
-
-  /**
-   * @generated from field: repeated infracost.parser.terraform.Output outputs = 9;
-   */
-  outputs: Output[];
-};
 
 /**
  * Describes the message infracost.parser.terraform.ModuleResult.
  * Use `create(ModuleResultSchema)` to create a new message.
  */
-export const ModuleResultSchema: GenMessage<ModuleResult> = /*@__PURE__*/
+export const ModuleResultSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_terraform_module, 0);
-
-/**
- * @generated from message infracost.parser.terraform.ModuleResultList
- */
-export type ModuleResultList = Message<"infracost.parser.terraform.ModuleResultList"> & {
-  /**
-   * @generated from field: repeated infracost.parser.terraform.ModuleResult results = 1;
-   */
-  results: ModuleResult[];
-};
 
 /**
  * Describes the message infracost.parser.terraform.ModuleResultList.
  * Use `create(ModuleResultListSchema)` to create a new message.
  */
-export const ModuleResultListSchema: GenMessage<ModuleResultList> = /*@__PURE__*/
+export const ModuleResultListSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_terraform_module, 1);
-
-/**
- * @generated from message infracost.parser.terraform.ProviderResult
- */
-export type ProviderResult = Message<"infracost.parser.terraform.ProviderResult"> & {
-  /**
-   * @generated from field: string name = 1;
-   */
-  name: string;
-
-  /**
-   * @generated from field: map<string, string> default_tags = 2;
-   */
-  defaultTags: { [key: string]: string };
-
-  /**
-   * @generated from field: string filename = 3;
-   */
-  filename: string;
-
-  /**
-   * @generated from field: int64 start_line = 4;
-   */
-  startLine: bigint;
-
-  /**
-   * @generated from field: int64 end_line = 5;
-   */
-  endLine: bigint;
-};
 
 /**
  * Describes the message infracost.parser.terraform.ProviderResult.
  * Use `create(ProviderResultSchema)` to create a new message.
  */
-export const ProviderResultSchema: GenMessage<ProviderResult> = /*@__PURE__*/
+export const ProviderResultSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_terraform_module, 2);
 

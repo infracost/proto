@@ -3,19 +3,17 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/metadata.proto.
  */
-export const file_infracost_parser_metadata: GenFile = /*@__PURE__*/
-  fileDesc("Ch9pbmZyYWNvc3QvcGFyc2VyL21ldGFkYXRhLnByb3RvEhBpbmZyYWNvc3QucGFyc2VyIm8KC1NvdXJjZVJhbmdlEhAKCGZpbGVuYW1lGAEgASgJEhIKCnN0YXJ0X2xpbmUYAiABKAMSEAoIZW5kX2xpbmUYAyABKAMSFAoMc3RhcnRfY29sdW1uGAQgASgDEhIKCmVuZF9jb2x1bW4YBSABKANCugEKFGNvbS5pbmZyYWNvc3QucGFyc2VyQg1NZXRhZGF0YVByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyogIDSVBYqgIQSW5mcmFjb3N0LlBhcnNlcsoCEEluZnJhY29zdFxQYXJzZXLiAhxJbmZyYWNvc3RcUGFyc2VyXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQYXJzZXJiBnByb3RvMw");
+export declare const file_infracost_parser_metadata: GenFile;
 
 /**
  * @generated from message infracost.parser.SourceRange
  */
-export type SourceRange = Message<"infracost.parser.SourceRange"> & {
+export declare type SourceRange = Message<"infracost.parser.SourceRange"> & {
   /**
    * @generated from field: string filename = 1;
    */
@@ -46,6 +44,5 @@ export type SourceRange = Message<"infracost.parser.SourceRange"> & {
  * Describes the message infracost.parser.SourceRange.
  * Use `create(SourceRangeSchema)` to create a new message.
  */
-export const SourceRangeSchema: GenMessage<SourceRange> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_metadata, 0);
+export declare const SourceRangeSchema: GenMessage<SourceRange>;
 
