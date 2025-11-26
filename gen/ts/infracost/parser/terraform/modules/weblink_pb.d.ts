@@ -3,14 +3,12 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/terraform/modules/weblink.proto.
  */
-export const file_infracost_parser_terraform_modules_weblink: GenFile = /*@__PURE__*/
-  fileDesc("CjBpbmZyYWNvc3QvcGFyc2VyL3RlcnJhZm9ybS9tb2R1bGVzL3dlYmxpbmsucHJvdG8SImluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLm1vZHVsZXMiXgoHV2ViTGluaxIOCgZzY2hlbWUYASABKAkSDAoEaG9zdBgCIAEoCRIMCgRyZXBvGAMgASgJEhEKCWNvbW1pdGlzaBgEIAEoCRIUCgxzdWJkaXJlY3RvcnkYBSABKAlCqAIKJmNvbS5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5tb2R1bGVzQgxXZWJsaW5rUHJvdG9QAVpEZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvdGVycmFmb3JtL21vZHVsZXOiAgRJUFRNqgIiSW5mcmFjb3N0LlBhcnNlci5UZXJyYWZvcm0uTW9kdWxlc8oCIkluZnJhY29zdFxQYXJzZXJcVGVycmFmb3JtXE1vZHVsZXPiAi5JbmZyYWNvc3RcUGFyc2VyXFRlcnJhZm9ybVxNb2R1bGVzXEdQQk1ldGFkYXRh6gIlSW5mcmFjb3N0OjpQYXJzZXI6OlRlcnJhZm9ybTo6TW9kdWxlc2IGcHJvdG8z");
+export declare const file_infracost_parser_terraform_modules_weblink: GenFile;
 
 /**
  * A container for constructing web(browser) links to a resolved remote or
@@ -21,7 +19,7 @@ export const file_infracost_parser_terraform_modules_weblink: GenFile = /*@__PUR
  *
  * @generated from message infracost.parser.terraform.modules.WebLink
  */
-export type WebLink = Message<"infracost.parser.terraform.modules.WebLink"> & {
+export declare type WebLink = Message<"infracost.parser.terraform.modules.WebLink"> & {
   /**
    * url.URL.Scheme
    *
@@ -62,6 +60,5 @@ export type WebLink = Message<"infracost.parser.terraform.modules.WebLink"> & {
  * Describes the message infracost.parser.terraform.modules.WebLink.
  * Use `create(WebLinkSchema)` to create a new message.
  */
-export const WebLinkSchema: GenMessage<WebLink> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_modules_weblink, 0);
+export declare const WebLinkSchema: GenMessage<WebLink>;
 

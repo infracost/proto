@@ -3,16 +3,13 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { SourceRange } from "./metadata_pb.js";
-import { file_infracost_parser_metadata } from "./metadata_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { SourceRange } from "./metadata_pb.js";
 
 /**
  * Describes the file infracost/parser/diagnostic.proto.
  */
-export const file_infracost_parser_diagnostic: GenFile = /*@__PURE__*/
-  fileDesc("CiFpbmZyYWNvc3QvcGFyc2VyL2RpYWdub3N0aWMucHJvdG8SEGluZnJhY29zdC5wYXJzZXIinQIKCkRpYWdub3N0aWMSDQoFZXJyb3IYASABKAkSOAoGbGFiZWxzGAIgAygLMiguaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljLkxhYmVsc0VudHJ5EjMKDHNvdXJjZV9yYW5nZRgDIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USLgoEdHlwZRgEIAEoDjIgLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpY1R5cGUSEAoIY3JpdGljYWwYBSABKAgSDwoHd2FybmluZxgGIAEoCBIPCgdpZ25vcmVkGAcgASgIGi0KC0xhYmVsc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEqlQoKDkRpYWdub3N0aWNUeXBlEh8KG0RJQUdOT1NUSUNfVFlQRV9VTlNQRUNJRklFRBAAEiQKIERJQUdOT1NUSUNfVFlQRV9GQUlMRURfT1BFUkFUSU9OEAESGgoWRElBR05PU1RJQ19UWVBFX0RFRkVDVBACEiMKH0RJQUdOT1NUSUNfVFlQRV9IQ0xfUEFSU0VfRVJST1IQAxIgChxESUFHTk9TVElDX1RZUEVfTUlTU0lOR19GVU5DEAQSKAokRElBR05PU1RJQ19UWVBFX0ZBSUxFRF9GVU5DVElPTl9DQUxMEAUSIwofRElBR05PU1RJQ19UWVBFX1VORVhQRUNURURfVFlQRRAGEiYKIkRJQUdOT1NUSUNfVFlQRV9NT0RVTEVfRkVUQ0hfRVJST1IQBxIqCiZESUFHTk9TVElDX1RZUEVfTUlTU0lOR19JTlBVVF9WQVJJQUJMRRAIEiUKIURJQUdOT1NUSUNfVFlQRV9NSVNTSU5HX1JFRkVSRU5DRRAJEiUKIURJQUdOT1NUSUNfVFlQRV9WQUxVRV9JTkRFWF9FUlJPUhAKEiYKIkRJQUdOT1NUSUNfVFlQRV9VTktOT1dOX0VYUFJFU1NJT04QCxIsCihESUFHTk9TVElDX1RZUEVfUkVMQVRJVkVfVFJBVkVSU0FMX0VSUk9SEAwSMwovRElBR05PU1RJQ19UWVBFX0lOVkFMSURfVEVSUkFGT1JNX0NPTkZJR1VSQVRJT04QDRI0CjBESUFHTk9TVElDX1RZUEVfSU5WQUxJRF9URVJSQUdSVU5UX0NPTkZJR1VSQVRJT04QDhI4CjRESUFHTk9TVElDX1RZUEVfVEVSUkFGT1JNX0NZQ0xJQ19ERVBFTkRFTkNZX0RFVEVDVEVEEA8SOQo1RElBR05PU1RJQ19UWVBFX1RFUlJBR1JVTlRfQ1lDTElDX0RFUEVOREVOQ1lfREVURUNURUQQEBIiCh5ESUFHTk9TVElDX1RZUEVfU0VDVVJJVFlfRVJST1IQERIkCiBESUFHTk9TVElDX1RZUEVfREVQRU5ERU5DWV9FUlJPUhASEiQKIERJQUdOT1NUSUNfVFlQRV9GSUxFU1lTVEVNX0VSUk9SEBMSJgoiRElBR05PU1RJQ19UWVBFX0lOVkFMSURfU09VUkNFX01BUBAUEikKJURJQUdOT1NUSUNfVFlQRV9OT19TT1VSQ0VfRklMRVNfRk9VTkQQFRIdChlESUFHTk9TVElDX1RZUEVfWU9SX0VSUk9SEBYSLgoqRElBR05PU1RJQ19UWVBFX1JFTU9URV9WQVJJQUJMRV9MT0FEX0VSUk9SEBcSMwovRElBR05PU1RJQ19UWVBFX0lOVkFMSURfQ0xPVURGT1JNQVRJT05fVEVNUExBVEUQGBI4CjRESUFHTk9TVElDX1RZUEVfVU5TVVBQT1JURURfQ0xPVURGT1JNQVRJT05fVFJBTlNGT1JNEBkSQQo9RElBR05PU1RJQ19UWVBFX1VOU1VQUE9SVEVEX0NMT1VERk9STUFUSU9OX0lOVFJJTlNJQ19GVU5DVElPThAaEjkKNURJQUdOT1NUSUNfVFlQRV9TWU5USEVUSUNfQ0xPVURGT1JNQVRJT05fVEVNUExBVEVfVVJMEBsSMwovRElBR05PU1RJQ19UWVBFX0ZBSUxFRF9DTE9VREZPUk1BVElPTl9UUkFOU0ZPUk0QHEK8AQoUY29tLmluZnJhY29zdC5wYXJzZXJCD0RpYWdub3N0aWNQcm90b1ABWjJnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlcqICA0lQWKoCEEluZnJhY29zdC5QYXJzZXLKAhBJbmZyYWNvc3RcUGFyc2Vy4gIcSW5mcmFjb3N0XFBhcnNlclxHUEJNZXRhZGF0YeoCEUluZnJhY29zdDo6UGFyc2VyYgZwcm90bzM", [file_infracost_parser_metadata]);
+export declare const file_infracost_parser_diagnostic: GenFile;
 
 /**
  * Diagnostic is information about something that went wrong during
@@ -23,7 +20,7 @@ export const file_infracost_parser_diagnostic: GenFile = /*@__PURE__*/
  *
  * @generated from message infracost.parser.Diagnostic
  */
-export type Diagnostic = Message<"infracost.parser.Diagnostic"> & {
+export declare type Diagnostic = Message<"infracost.parser.Diagnostic"> & {
   /**
    * @generated from field: string error = 1;
    */
@@ -64,8 +61,7 @@ export type Diagnostic = Message<"infracost.parser.Diagnostic"> & {
  * Describes the message infracost.parser.Diagnostic.
  * Use `create(DiagnosticSchema)` to create a new message.
  */
-export const DiagnosticSchema: GenMessage<Diagnostic> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_diagnostic, 0);
+export declare const DiagnosticSchema: GenMessage<Diagnostic>;
 
 /**
  * @generated from enum infracost.parser.DiagnosticType
@@ -274,6 +270,5 @@ export enum DiagnosticType {
 /**
  * Describes the enum infracost.parser.DiagnosticType.
  */
-export const DiagnosticTypeSchema: GenEnum<DiagnosticType> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_diagnostic, 0);
+export declare const DiagnosticTypeSchema: GenEnum<DiagnosticType>;
 

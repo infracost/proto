@@ -3,21 +3,18 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { WebLink } from "./weblink_pb.js";
-import { file_infracost_parser_terraform_modules_weblink } from "./weblink_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { WebLink } from "./weblink_pb.js";
 
 /**
  * Describes the file infracost/parser/terraform/modules/loader.proto.
  */
-export const file_infracost_parser_terraform_modules_loader: GenFile = /*@__PURE__*/
-  fileDesc("Ci9pbmZyYWNvc3QvcGFyc2VyL3RlcnJhZm9ybS9tb2R1bGVzL2xvYWRlci5wcm90bxIiaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0ubW9kdWxlcyLOAQoMTG9hZGVkTW9kdWxlEj8KBnNvdXJjZRgBIAEoCzIqLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLm1vZHVsZXMuU291cmNlSACIAQESQwoJYmFzZV9saW5rGAIgASgLMisuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0ubW9kdWxlcy5XZWJMaW5rSAGIAQESCwoDZGlyGAMgASgJEhIKCmZyb21fY2FjaGUYBCABKAhCCQoHX3NvdXJjZUIMCgpfYmFzZV9saW5rIo8BCgZTb3VyY2USEAoIb3JpZ2luYWwYASABKAkSDgoGc291cmNlGAIgASgJEgwKBGJhc2UYAyABKAkSDwoHc3ViX2RpchgEIAEoCRIPCgd2ZXJzaW9uGAUgASgJEhEKCWNhY2hlX2tleRgGIAEoCRIRCglpc19zcGFyc2UYByABKAgSDQoFZmxhZ3MYCCABKARCpwIKJmNvbS5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5tb2R1bGVzQgtMb2FkZXJQcm90b1ABWkRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci90ZXJyYWZvcm0vbW9kdWxlc6ICBElQVE2qAiJJbmZyYWNvc3QuUGFyc2VyLlRlcnJhZm9ybS5Nb2R1bGVzygIiSW5mcmFjb3N0XFBhcnNlclxUZXJyYWZvcm1cTW9kdWxlc+ICLkluZnJhY29zdFxQYXJzZXJcVGVycmFmb3JtXE1vZHVsZXNcR1BCTWV0YWRhdGHqAiVJbmZyYWNvc3Q6OlBhcnNlcjo6VGVycmFmb3JtOjpNb2R1bGVzYgZwcm90bzM", [file_infracost_parser_terraform_modules_weblink]);
+export declare const file_infracost_parser_terraform_modules_loader: GenFile;
 
 /**
  * @generated from message infracost.parser.terraform.modules.LoadedModule
  */
-export type LoadedModule = Message<"infracost.parser.terraform.modules.LoadedModule"> & {
+export declare type LoadedModule = Message<"infracost.parser.terraform.modules.LoadedModule"> & {
   /**
    * @generated from field: optional infracost.parser.terraform.modules.Source source = 1;
    */
@@ -43,13 +40,12 @@ export type LoadedModule = Message<"infracost.parser.terraform.modules.LoadedMod
  * Describes the message infracost.parser.terraform.modules.LoadedModule.
  * Use `create(LoadedModuleSchema)` to create a new message.
  */
-export const LoadedModuleSchema: GenMessage<LoadedModule> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_modules_loader, 0);
+export declare const LoadedModuleSchema: GenMessage<LoadedModule>;
 
 /**
  * @generated from message infracost.parser.terraform.modules.Source
  */
-export type Source = Message<"infracost.parser.terraform.modules.Source"> & {
+export declare type Source = Message<"infracost.parser.terraform.modules.Source"> & {
   /**
    * @generated from field: string original = 1;
    */
@@ -103,6 +99,5 @@ export type Source = Message<"infracost.parser.terraform.modules.Source"> & {
  * Describes the message infracost.parser.terraform.modules.Source.
  * Use `create(SourceSchema)` to create a new message.
  */
-export const SourceSchema: GenMessage<Source> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_modules_loader, 1);
+export declare const SourceSchema: GenMessage<Source>;
 

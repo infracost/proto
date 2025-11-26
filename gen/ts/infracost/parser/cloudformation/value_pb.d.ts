@@ -3,21 +3,18 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { SourceRange } from "../metadata_pb.js";
-import { file_infracost_parser_metadata } from "../metadata_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { SourceRange } from "../metadata_pb.js";
 
 /**
  * Describes the file infracost/parser/cloudformation/value.proto.
  */
-export const file_infracost_parser_cloudformation_value: GenFile = /*@__PURE__*/
-  fileDesc("CitpbmZyYWNvc3QvcGFyc2VyL2Nsb3VkZm9ybWF0aW9uL3ZhbHVlLnByb3RvEh9pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uIsYCCgVWYWx1ZRI6CgRudWxsGAEgASgLMiouaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5OdWxsVmFsdWVIABI+CgZzY2FsYXIYAiABKAsyLC5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlNjYWxhclZhbHVlSAASOgoEbGlzdBgDIAEoCzIqLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uTGlzdFZhbHVlSAASOAoDbWFwGAQgASgLMikuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5NYXBWYWx1ZUgAEjMKDHNvdXJjZV9yYW5nZRgFIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USDQoFZmxhZ3MYBiABKARCBwoFdmFsdWUiCwoJTnVsbFZhbHVlIqwBCgtTY2FsYXJWYWx1ZRI5CgR0eXBlGAEgASgOMisuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5TY2FsYXJUeXBlEhYKDHN0cmluZ192YWx1ZRgCIAEoCUgAEhQKCmJvb2xfdmFsdWUYAyABKAhIABITCglpbnRfdmFsdWUYBCABKANIABIWCgxkb3VibGVfdmFsdWUYBSABKAFIAEIHCgV2YWx1ZSJDCglMaXN0VmFsdWUSNgoGdmFsdWVzGAEgAygLMiYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5WYWx1ZSJGCghNYXBWYWx1ZRI6CgdlbnRyaWVzGAEgAygLMikuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5NYXBFbnRyeSJ2CghNYXBFbnRyeRIzCgNrZXkYASABKAsyJi5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlZhbHVlEjUKBXZhbHVlGAIgASgLMiYuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5WYWx1ZSpmCgpTY2FsYXJUeXBlEhYKElNDQUxBUl9UWVBFX1NUUklORxAAEhQKEFNDQUxBUl9UWVBFX0JPT0wQARITCg9TQ0FMQVJfVFlQRV9JTlQQAhIVChFTQ0FMQVJfVFlQRV9GTE9BVBADQpICCiNjb20uaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbkIKVmFsdWVQcm90b1ABWkFnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9jbG91ZGZvcm1hdGlvbqICA0lQQ6oCH0luZnJhY29zdC5QYXJzZXIuQ2xvdWRmb3JtYXRpb27KAh9JbmZyYWNvc3RcUGFyc2VyXENsb3VkZm9ybWF0aW9u4gIrSW5mcmFjb3N0XFBhcnNlclxDbG91ZGZvcm1hdGlvblxHUEJNZXRhZGF0YeoCIUluZnJhY29zdDo6UGFyc2VyOjpDbG91ZGZvcm1hdGlvbmIGcHJvdG8z", [file_infracost_parser_metadata]);
+export declare const file_infracost_parser_cloudformation_value: GenFile;
 
 /**
  * @generated from message infracost.parser.cloudformation.Value
  */
-export type Value = Message<"infracost.parser.cloudformation.Value"> & {
+export declare type Value = Message<"infracost.parser.cloudformation.Value"> & {
   /**
    * @generated from oneof infracost.parser.cloudformation.Value.value
    */
@@ -62,28 +59,26 @@ export type Value = Message<"infracost.parser.cloudformation.Value"> & {
  * Describes the message infracost.parser.cloudformation.Value.
  * Use `create(ValueSchema)` to create a new message.
  */
-export const ValueSchema: GenMessage<Value> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 0);
+export declare const ValueSchema: GenMessage<Value>;
 
 /**
  * Empty
  *
  * @generated from message infracost.parser.cloudformation.NullValue
  */
-export type NullValue = Message<"infracost.parser.cloudformation.NullValue"> & {
+export declare type NullValue = Message<"infracost.parser.cloudformation.NullValue"> & {
 };
 
 /**
  * Describes the message infracost.parser.cloudformation.NullValue.
  * Use `create(NullValueSchema)` to create a new message.
  */
-export const NullValueSchema: GenMessage<NullValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 1);
+export declare const NullValueSchema: GenMessage<NullValue>;
 
 /**
  * @generated from message infracost.parser.cloudformation.ScalarValue
  */
-export type ScalarValue = Message<"infracost.parser.cloudformation.ScalarValue"> & {
+export declare type ScalarValue = Message<"infracost.parser.cloudformation.ScalarValue"> & {
   /**
    * @generated from field: infracost.parser.cloudformation.ScalarType type = 1;
    */
@@ -123,13 +118,12 @@ export type ScalarValue = Message<"infracost.parser.cloudformation.ScalarValue">
  * Describes the message infracost.parser.cloudformation.ScalarValue.
  * Use `create(ScalarValueSchema)` to create a new message.
  */
-export const ScalarValueSchema: GenMessage<ScalarValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 2);
+export declare const ScalarValueSchema: GenMessage<ScalarValue>;
 
 /**
  * @generated from message infracost.parser.cloudformation.ListValue
  */
-export type ListValue = Message<"infracost.parser.cloudformation.ListValue"> & {
+export declare type ListValue = Message<"infracost.parser.cloudformation.ListValue"> & {
   /**
    * @generated from field: repeated infracost.parser.cloudformation.Value values = 1;
    */
@@ -140,13 +134,12 @@ export type ListValue = Message<"infracost.parser.cloudformation.ListValue"> & {
  * Describes the message infracost.parser.cloudformation.ListValue.
  * Use `create(ListValueSchema)` to create a new message.
  */
-export const ListValueSchema: GenMessage<ListValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 3);
+export declare const ListValueSchema: GenMessage<ListValue>;
 
 /**
  * @generated from message infracost.parser.cloudformation.MapValue
  */
-export type MapValue = Message<"infracost.parser.cloudformation.MapValue"> & {
+export declare type MapValue = Message<"infracost.parser.cloudformation.MapValue"> & {
   /**
    * @generated from field: repeated infracost.parser.cloudformation.MapEntry entries = 1;
    */
@@ -157,13 +150,12 @@ export type MapValue = Message<"infracost.parser.cloudformation.MapValue"> & {
  * Describes the message infracost.parser.cloudformation.MapValue.
  * Use `create(MapValueSchema)` to create a new message.
  */
-export const MapValueSchema: GenMessage<MapValue> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 4);
+export declare const MapValueSchema: GenMessage<MapValue>;
 
 /**
  * @generated from message infracost.parser.cloudformation.MapEntry
  */
-export type MapEntry = Message<"infracost.parser.cloudformation.MapEntry"> & {
+export declare type MapEntry = Message<"infracost.parser.cloudformation.MapEntry"> & {
   /**
    * @generated from field: infracost.parser.cloudformation.Value key = 1;
    */
@@ -179,8 +171,7 @@ export type MapEntry = Message<"infracost.parser.cloudformation.MapEntry"> & {
  * Describes the message infracost.parser.cloudformation.MapEntry.
  * Use `create(MapEntrySchema)` to create a new message.
  */
-export const MapEntrySchema: GenMessage<MapEntry> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cloudformation_value, 5);
+export declare const MapEntrySchema: GenMessage<MapEntry>;
 
 /**
  * buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -212,6 +203,5 @@ export enum ScalarType {
 /**
  * Describes the enum infracost.parser.cloudformation.ScalarType.
  */
-export const ScalarTypeSchema: GenEnum<ScalarType> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_cloudformation_value, 0);
+export declare const ScalarTypeSchema: GenEnum<ScalarType>;
 

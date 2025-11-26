@@ -3,19 +3,17 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/address.proto.
  */
-export const file_infracost_parser_address: GenFile = /*@__PURE__*/
-  fileDesc("Ch5pbmZyYWNvc3QvcGFyc2VyL2FkZHJlc3MucHJvdG8SEGluZnJhY29zdC5wYXJzZXIiNgoHQWRkcmVzcxIrCghzZWdtZW50cxgBIAMoCzIZLmluZnJhY29zdC5wYXJzZXIuU2VnbWVudCJqCgdTZWdtZW50Eg0KBXZhbHVlGAEgASgJEhYKCWluZGV4X2ludBgCIAEoA0gAiAEBEhkKDGluZGV4X3N0cmluZxgDIAEoCUgBiAEBQgwKCl9pbmRleF9pbnRCDwoNX2luZGV4X3N0cmluZ0K5AQoUY29tLmluZnJhY29zdC5wYXJzZXJCDEFkZHJlc3NQcm90b1ABWjJnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlcqICA0lQWKoCEEluZnJhY29zdC5QYXJzZXLKAhBJbmZyYWNvc3RcUGFyc2Vy4gIcSW5mcmFjb3N0XFBhcnNlclxHUEJNZXRhZGF0YeoCEUluZnJhY29zdDo6UGFyc2VyYgZwcm90bzM");
+export declare const file_infracost_parser_address: GenFile;
 
 /**
  * @generated from message infracost.parser.Address
  */
-export type Address = Message<"infracost.parser.Address"> & {
+export declare type Address = Message<"infracost.parser.Address"> & {
   /**
    * @generated from field: repeated infracost.parser.Segment segments = 1;
    */
@@ -26,13 +24,12 @@ export type Address = Message<"infracost.parser.Address"> & {
  * Describes the message infracost.parser.Address.
  * Use `create(AddressSchema)` to create a new message.
  */
-export const AddressSchema: GenMessage<Address> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_address, 0);
+export declare const AddressSchema: GenMessage<Address>;
 
 /**
  * @generated from message infracost.parser.Segment
  */
-export type Segment = Message<"infracost.parser.Segment"> & {
+export declare type Segment = Message<"infracost.parser.Segment"> & {
   /**
    * @generated from field: string value = 1;
    */
@@ -53,6 +50,5 @@ export type Segment = Message<"infracost.parser.Segment"> & {
  * Describes the message infracost.parser.Segment.
  * Use `create(SegmentSchema)` to create a new message.
  */
-export const SegmentSchema: GenMessage<Segment> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_address, 1);
+export declare const SegmentSchema: GenMessage<Segment>;
 

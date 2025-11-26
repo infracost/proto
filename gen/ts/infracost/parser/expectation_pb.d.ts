@@ -3,19 +3,17 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/expectation.proto.
  */
-export const file_infracost_parser_expectation: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2V4cGVjdGF0aW9uLnByb3RvEhBpbmZyYWNvc3QucGFyc2VyIscCCgtFeHBlY3RhdGlvbhIvCgR0eXBlGAEgASgOMiEuaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvblR5cGUSMAoJcHJpbWl0aXZlGAIgASgLMhsuaW5mcmFjb3N0LnBhcnNlci5QcmltaXRpdmVIABIkCgNtYXAYAyABKAsyFS5pbmZyYWNvc3QucGFyc2VyLk1hcEgAEioKBm9iamVjdBgEIAEoCzIYLmluZnJhY29zdC5wYXJzZXIuT2JqZWN0SAASJgoEbGlzdBgFIAEoCzIWLmluZnJhY29zdC5wYXJzZXIuTGlzdEgAEigKBXR1cGxlGAYgASgLMhcuaW5mcmFjb3N0LnBhcnNlci5UdXBsZUgAEiQKA3NldBgHIAEoCzIVLmluZnJhY29zdC5wYXJzZXIuU2V0SABCCwoJdHlwZV9kYXRhIiAKCVByaW1pdGl2ZRITCgtpc19ub25femVybxgBIAEoCCI6CgNNYXASMwoMZWxlbWVudF90eXBlGAEgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvbiKJAQoGT2JqZWN0EjIKBXR5cGVzGAEgAygLMiMuaW5mcmFjb3N0LnBhcnNlci5PYmplY3QuVHlwZXNFbnRyeRpLCgpUeXBlc0VudHJ5EgsKA2tleRgBIAEoCRIsCgV2YWx1ZRgCIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuRXhwZWN0YXRpb246AjgBIjsKBExpc3QSMwoMZWxlbWVudF90eXBlGAEgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvbiI9CgVUdXBsZRI0Cg1lbGVtZW50X3R5cGVzGAEgAygLMh0uaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvbiI6CgNTZXQSMwoMZWxlbWVudF90eXBlGAEgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5FeHBlY3RhdGlvbiqqAgoPRXhwZWN0YXRpb25UeXBlEiAKHEVYUEVDVEFUSU9OX1RZUEVfVU5TUEVDSUZJRUQQABIYChRFWFBFQ1RBVElPTl9UWVBFX0FOWRABEhsKF0VYUEVDVEFUSU9OX1RZUEVfU1RSSU5HEAISGwoXRVhQRUNUQVRJT05fVFlQRV9OVU1CRVIQAxIZChVFWFBFQ1RBVElPTl9UWVBFX0JPT0wQBBIYChRFWFBFQ1RBVElPTl9UWVBFX01BUBAFEhsKF0VYUEVDVEFUSU9OX1RZUEVfT0JKRUNUEAYSGQoVRVhQRUNUQVRJT05fVFlQRV9MSVNUEAcSGgoWRVhQRUNUQVRJT05fVFlQRV9UVVBMRRAIEhgKFEVYUEVDVEFUSU9OX1RZUEVfU0VUEAlCvQEKFGNvbS5pbmZyYWNvc3QucGFyc2VyQhBFeHBlY3RhdGlvblByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyogIDSVBYqgIQSW5mcmFjb3N0LlBhcnNlcsoCEEluZnJhY29zdFxQYXJzZXLiAhxJbmZyYWNvc3RcUGFyc2VyXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQYXJzZXJiBnByb3RvMw");
+export declare const file_infracost_parser_expectation: GenFile;
 
 /**
  * @generated from message infracost.parser.Expectation
  */
-export type Expectation = Message<"infracost.parser.Expectation"> & {
+export declare type Expectation = Message<"infracost.parser.Expectation"> & {
   /**
    * @generated from field: infracost.parser.ExpectationType type = 1;
    */
@@ -67,13 +65,12 @@ export type Expectation = Message<"infracost.parser.Expectation"> & {
  * Describes the message infracost.parser.Expectation.
  * Use `create(ExpectationSchema)` to create a new message.
  */
-export const ExpectationSchema: GenMessage<Expectation> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 0);
+export declare const ExpectationSchema: GenMessage<Expectation>;
 
 /**
  * @generated from message infracost.parser.Primitive
  */
-export type Primitive = Message<"infracost.parser.Primitive"> & {
+export declare type Primitive = Message<"infracost.parser.Primitive"> & {
   /**
    * @generated from field: bool is_non_zero = 1;
    */
@@ -84,13 +81,12 @@ export type Primitive = Message<"infracost.parser.Primitive"> & {
  * Describes the message infracost.parser.Primitive.
  * Use `create(PrimitiveSchema)` to create a new message.
  */
-export const PrimitiveSchema: GenMessage<Primitive> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 1);
+export declare const PrimitiveSchema: GenMessage<Primitive>;
 
 /**
  * @generated from message infracost.parser.Map
  */
-export type Map = Message<"infracost.parser.Map"> & {
+export declare type Map = Message<"infracost.parser.Map"> & {
   /**
    * @generated from field: infracost.parser.Expectation element_type = 1;
    */
@@ -101,13 +97,12 @@ export type Map = Message<"infracost.parser.Map"> & {
  * Describes the message infracost.parser.Map.
  * Use `create(MapSchema)` to create a new message.
  */
-export const MapSchema: GenMessage<Map> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 2);
+export declare const MapSchema: GenMessage<Map>;
 
 /**
  * @generated from message infracost.parser.Object
  */
-export type Object$ = Message<"infracost.parser.Object"> & {
+export declare type Object$ = Message<"infracost.parser.Object"> & {
   /**
    * @generated from field: map<string, infracost.parser.Expectation> types = 1;
    */
@@ -118,13 +113,12 @@ export type Object$ = Message<"infracost.parser.Object"> & {
  * Describes the message infracost.parser.Object.
  * Use `create(ObjectSchema)` to create a new message.
  */
-export const ObjectSchema: GenMessage<Object$> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 3);
+export declare const ObjectSchema: GenMessage<Object$>;
 
 /**
  * @generated from message infracost.parser.List
  */
-export type List = Message<"infracost.parser.List"> & {
+export declare type List = Message<"infracost.parser.List"> & {
   /**
    * @generated from field: infracost.parser.Expectation element_type = 1;
    */
@@ -135,13 +129,12 @@ export type List = Message<"infracost.parser.List"> & {
  * Describes the message infracost.parser.List.
  * Use `create(ListSchema)` to create a new message.
  */
-export const ListSchema: GenMessage<List> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 4);
+export declare const ListSchema: GenMessage<List>;
 
 /**
  * @generated from message infracost.parser.Tuple
  */
-export type Tuple = Message<"infracost.parser.Tuple"> & {
+export declare type Tuple = Message<"infracost.parser.Tuple"> & {
   /**
    * @generated from field: repeated infracost.parser.Expectation element_types = 1;
    */
@@ -152,13 +145,12 @@ export type Tuple = Message<"infracost.parser.Tuple"> & {
  * Describes the message infracost.parser.Tuple.
  * Use `create(TupleSchema)` to create a new message.
  */
-export const TupleSchema: GenMessage<Tuple> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 5);
+export declare const TupleSchema: GenMessage<Tuple>;
 
 /**
  * @generated from message infracost.parser.Set
  */
-export type Set = Message<"infracost.parser.Set"> & {
+export declare type Set = Message<"infracost.parser.Set"> & {
   /**
    * @generated from field: infracost.parser.Expectation element_type = 1;
    */
@@ -169,8 +161,7 @@ export type Set = Message<"infracost.parser.Set"> & {
  * Describes the message infracost.parser.Set.
  * Use `create(SetSchema)` to create a new message.
  */
-export const SetSchema: GenMessage<Set> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_expectation, 6);
+export declare const SetSchema: GenMessage<Set>;
 
 /**
  * @generated from enum infracost.parser.ExpectationType
@@ -230,6 +221,5 @@ export enum ExpectationType {
 /**
  * Describes the enum infracost.parser.ExpectationType.
  */
-export const ExpectationTypeSchema: GenEnum<ExpectationType> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_expectation, 0);
+export declare const ExpectationTypeSchema: GenEnum<ExpectationType>;
 

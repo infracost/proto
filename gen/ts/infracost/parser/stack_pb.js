@@ -2,61 +2,27 @@
 // @generated from file infracost/parser/stack.proto (package infracost.parser, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Address } from "./address_pb.js";
 import { file_infracost_parser_address } from "./address_pb.js";
-import type { SourceRange } from "./metadata_pb.js";
 import { file_infracost_parser_metadata } from "./metadata_pb.js";
-import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/stack.proto.
  */
-export const file_infracost_parser_stack: GenFile = /*@__PURE__*/
+export const file_infracost_parser_stack = /*@__PURE__*/
   fileDesc("ChxpbmZyYWNvc3QvcGFyc2VyL3N0YWNrLnByb3RvEhBpbmZyYWNvc3QucGFyc2VyIjkKCUNhbGxTdGFjaxIsCgZmcmFtZXMYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLlN0YWNrRnJhbWUifQoKU3RhY2tGcmFtZRIqCgdhZGRyZXNzGAEgASgLMhkuaW5mcmFjb3N0LnBhcnNlci5BZGRyZXNzEjMKDHNvdXJjZV9yYW5nZRgCIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USDgoGc291cmNlGAMgASgJQrcBChRjb20uaW5mcmFjb3N0LnBhcnNlckIKU3RhY2tQcm90b1ABWjJnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlcqICA0lQWKoCEEluZnJhY29zdC5QYXJzZXLKAhBJbmZyYWNvc3RcUGFyc2Vy4gIcSW5mcmFjb3N0XFBhcnNlclxHUEJNZXRhZGF0YeoCEUluZnJhY29zdDo6UGFyc2VyYgZwcm90bzM", [file_infracost_parser_address, file_infracost_parser_metadata]);
-
-/**
- * @generated from message infracost.parser.CallStack
- */
-export type CallStack = Message<"infracost.parser.CallStack"> & {
-  /**
-   * @generated from field: repeated infracost.parser.StackFrame frames = 1;
-   */
-  frames: StackFrame[];
-};
 
 /**
  * Describes the message infracost.parser.CallStack.
  * Use `create(CallStackSchema)` to create a new message.
  */
-export const CallStackSchema: GenMessage<CallStack> = /*@__PURE__*/
+export const CallStackSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_stack, 0);
-
-/**
- * @generated from message infracost.parser.StackFrame
- */
-export type StackFrame = Message<"infracost.parser.StackFrame"> & {
-  /**
-   * @generated from field: infracost.parser.Address address = 1;
-   */
-  address?: Address;
-
-  /**
-   * @generated from field: infracost.parser.SourceRange source_range = 2;
-   */
-  sourceRange?: SourceRange;
-
-  /**
-   * @generated from field: string source = 3;
-   */
-  source: string;
-};
 
 /**
  * Describes the message infracost.parser.StackFrame.
  * Use `create(StackFrameSchema)` to create a new message.
  */
-export const StackFrameSchema: GenMessage<StackFrame> = /*@__PURE__*/
+export const StackFrameSchema = /*@__PURE__*/
   messageDesc(file_infracost_parser_stack, 1);
 

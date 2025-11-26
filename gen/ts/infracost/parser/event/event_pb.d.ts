@@ -3,23 +3,19 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
-import { file_google_protobuf_duration, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { RunParameters } from "./runparameters_pb.js";
-import { file_infracost_parser_event_runparameters } from "./runparameters_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { RunParameters } from "./runparameters_pb.js";
+import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file infracost/parser/event/event.proto.
  */
-export const file_infracost_parser_event_event: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2V2ZW50L2V2ZW50LnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmV2ZW50IooHCgVFdmVudBIwCgR0eXBlGAEgASgOMiIuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5FdmVudC5UeXBlEjIKCG1ldGFkYXRhGAIgASgLMiAuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NZXRhZGF0YRI4CgtlbnZpcm9ubWVudBgDIAEoCzIjLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuRW52aXJvbm1lbnQSNQoKYXdzX2NvbmZpZxgEIAEoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQVdTQ29uZmlnEigKA3ZjcxgFIAEoCzIbLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVkNTEjkKDGpvYl9iZWhhdmlvchgGIAEoCzIjLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuSm9iQmVoYXZpb3ISQwoRam9iX2NvbmZpZ3VyYXRpb24YByABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkpvYkNvbmZpZ3VyYXRpb24SOwoIc2VydmljZXMYCCABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkluZnJhY29zdFNlcnZpY2VzEjQKCXRlbGVtZXRyeRgJIAEoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVGVsZW1ldHJ5Ej0KDmRlY3J5cHRpb25fa2V5GAogASgLMiUuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5EZWNyeXB0aW9uS2V5Ej0KDnJ1bl9wYXJhbWV0ZXJzGAsgASgLMiUuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5SdW5QYXJhbWV0ZXJzIo4CCgRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASFwoTUFVMTF9SRVFVRVNUX09QRU5FRBABEhgKFFBVTExfUkVRVUVTVF9DSEFOR0VEEAISFwoTUFVMTF9SRVFVRVNUX0VESVRFRBADEhcKE0JSQU5DSF9CQVNFX0NIQU5HRUQQBBIaChZCUkFOQ0hfREVGQVVMVF9DSEFOR0VEEAUSDQoJUkVQT19JTklUEAYSHAoYUkVQT19SRUZFVENIX0JBU0VfQlJBTkNIEAcSFwoTREVWX0lORlJBQ09TVF9DTE9ORRAIEh8KG1JFUE9fUkVFVkFMVUFURV9CQVNFX0JSQU5DSBAJEg0KCUZJWF9JU1NVRRAKIncKC0Vudmlyb25tZW50EjYKBHR5cGUYASABKA4yKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkVudmlyb25tZW50LlR5cGUSCgoCY2kYAiABKAgiJAoEVHlwZRIHCgNERVYQABIICgRQUk9EEAESCQoFTE9DQUwQAiImCg1EZWNyeXB0aW9uS2V5EhUKDWVuY3J5cHRlZF9kZWsYASABKAkiGwoGU2VjcmV0EhEKCWVuY3J5cHRlZBgBIAEoCSLjAgoDVkNTEi4KBHR5cGUYASABKA4yIC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlZDUy5UeXBlEhgKEHNvdXJjZV9yYXdfZXZlbnQYAiABKAkSRQoSZ2l0aHViX2FwcGxpY2F0aW9uGAMgASgLMikuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5HaXRIdWJBcHBsaWNhdGlvbhI3CgthenVyZV9yZXBvcxgEIAEoCzIiLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQXp1cmVSZXBvcxIcChRwdWxscmVxdWVzdF9jaGVja19pZBgFIAEoCRIaChJyZXVzZV9jbG9uZWRfcmVwb3MYBiABKAgSFgoOY2xvbmVfYmFzZV9kaXIYByABKAkiQAoEVHlwZRIPCgtVTlNQRUNJRklFRBAAEgoKBkdJVExBQhABEgoKBkdJVEhVQhACEg8KC0FaVVJFX1JFUE9TEAMigQIKCE1ldGFkYXRhEjYKEnRpbWVzdGFtcF9yZWNlaXZlZBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASNQoRdGltZXN0YW1wX2NyZWF0ZWQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjQKEHRpbWVzdGFtcF9xdWV1ZWQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXJlcGxheV9pZBgEIAEoCRITCgtwaXBlbGluZV9pZBgFIAEoCRITCgtkZWxpdmVyeV9pZBgGIAEoCRITCgtpc19sYXN0X3RyeRgHIAEoCCItCglBV1NDb25maWcSDgoGcmVnaW9uGAEgASgJEhAKCGVuZHBvaW50GAIgASgJIpoBCgVDYWNoZRIQCghkaXNhYmxlZBgBIAEoCBIeChZzM19tb2R1bGVfY2FjaGVfcmVnaW9uGAIgASgJEh4KFnMzX21vZHVsZV9jYWNoZV9idWNrZXQYAyABKAkSHgoWczNfbW9kdWxlX2NhY2hlX3ByZWZpeBgEIAEoCRIfChdzM19tb2R1bGVfY2FjaGVfcHJpdmF0ZRgFIAEoCCJrChFHaXRIdWJBcHBsaWNhdGlvbhI0CgxhY2Nlc3NfdG9rZW4YASABKAsyHi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlNlY3JldBIQCghiYXNlX3VybBgCIAEoCRIOCgZhcHBfaWQYAyABKAMiVAoKQXp1cmVSZXBvcxI0CgxhY2Nlc3NfdG9rZW4YASABKAsyHi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlNlY3JldBIQCghiYXNlX3VybBgCIAEoCSJSCgxGZWF0dXJlRmxhZ3MSHgoWZW5hYmxlX2Nsb3VkX2Zvcm1hdGlvbhgBIAEoCBIiChplbmFibGVfY2xvdWRfZm9ybWF0aW9uX2NkaxgCIAEoCCK3AQoLSm9iQmVoYXZpb3ISEgoKbm9fY29tbWVudBgBIAEoCBIZChF1c2FnZV9hcGlfZW5hYmxlZBgCIAEoCBIUCgxidWlsZF9zY3JpcHQYAyABKAkSJgoeY3VzdG9tX3Byb3BlcnR5X21hcHBpbmdfc2NyaXB0GAQgASgJEjsKDWZlYXR1cmVfZmxhZ3MYBSABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkZlYXR1cmVGbGFncyKzAwoQSm9iQ29uZmlndXJhdGlvbhIRCglsb2dfbGV2ZWwYASABKAkSEwoLcHJvbXB0X3BhdGgYAiABKAkSGAoQaW5mcmFjb3N0X2JpbmFyeRgDIAEoCRIXCg9ydW5uZXJfcHJvdmlkZXIYBCABKAkSFAoMZ29fbWF4X3Byb2NzGAUgASgJEhkKEW1heF92Y3NfcmVkaXJlY3RzGAYgASgFEh0KFWluZnJhY29zdF9wYXJhbGxlbGlzbRgHIAEoBRIzChBtYXhfd2FpdF92Y3NfYXBpGAggASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uEhkKEWludGVyYWN0aXZlX3NoZWxsGAkgASgIEhEKCWRlYnVnX3J1bhgKIAEoCBIXCg9zcGFyc2VfY2hlY2tvdXQYCyABKAgSIAoYdXNlX3MzX3Jlc3VsdHNfaW5nZXN0aW9uGAwgASgIEigKIHdhaXRfZm9yX21ldHJpY3NfZHVyaW5nX3NodXRkb3duGA0gASgIEiwKBWNhY2hlGA4gASgLMh0uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5DYWNoZSLHAgoRSW5mcmFjb3N0U2VydmljZXMSMgoKYXV0aF90b2tlbhgBIAEoCzIeLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU2VjcmV0EhYKDnJlZ2lzdHJ5X3Byb3h5GAIgASgJEg8KB3dlYl91cmwYAyABKAkSHAoUcHJpY2luZ19hcGlfZW5kcG9pbnQYBCABKAkSIwobcmVjb21tZW5kYXRpb25fYXBpX2VuZHBvaW50GAUgASgJEh4KFmRhc2hib2FyZF9hcGlfZW5kcG9pbnQYBiABKAkSHgoWYXV0aDBfY2xhaW1zX25hbWVzcGFjZRgHIAEoCRI1ChJhcGlfY2xpZW50X3RpbWVvdXQYCCABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb24SGwoTdXNlX2dyYXBoX2V2YWx1YXRvchgJIAEoCCKuAQoJVGVsZW1ldHJ5EhIKCnNlbnRyeV9kc24YASABKAkSFAoMbWV0cmljc19hZGRyGAIgASgJEh0KFWRpc2FibGVfb2JzZXJ2YWJpbGl0eRgDIAEoCBIkChxlbmFibGVfZW52aXJvbm1lbnRhbF9tZXRyaWNzGAQgASgIEjIKCGxhbmdmdXNlGAUgASgLMiAuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5MYW5nZnVzZSJlCghMYW5nZnVzZRIQCghiYXNlX3VybBgBIAEoCRISCgpwdWJsaWNfa2V5GAIgASgJEjMKC3ByaXZhdGVfa2V5GAMgASgLMh4uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TZWNyZXRC3AEKGmNvbS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50QgpFdmVudFByb3RvUAFaOGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2V2ZW50ogIDSVBFqgIWSW5mcmFjb3N0LlBhcnNlci5FdmVudMoCFkluZnJhY29zdFxQYXJzZXJcRXZlbnTiAiJJbmZyYWNvc3RcUGFyc2VyXEV2ZW50XEdQQk1ldGFkYXRh6gIYSW5mcmFjb3N0OjpQYXJzZXI6OkV2ZW50YgZwcm90bzM", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_infracost_parser_event_runparameters]);
+export declare const file_infracost_parser_event_event: GenFile;
 
 /**
  * @generated from message infracost.parser.event.Event
  */
-export type Event = Message<"infracost.parser.event.Event"> & {
+export declare type Event = Message<"infracost.parser.event.Event"> & {
   /**
    * @generated from field: infracost.parser.event.Event.Type type = 1;
    */
@@ -80,8 +76,7 @@ export type Event = Message<"infracost.parser.event.Event"> & {
  * Describes the message infracost.parser.event.Event.
  * Use `create(EventSchema)` to create a new message.
  */
-export const EventSchema: GenMessage<Event> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 0);
+export declare const EventSchema: GenMessage<Event>;
 
 /**
  * @generated from enum infracost.parser.event.Event.Type
@@ -156,13 +151,12 @@ export enum Event_Type {
 /**
  * Describes the enum infracost.parser.event.Event.Type.
  */
-export const Event_TypeSchema: GenEnum<Event_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_event, 0, 0);
+export declare const Event_TypeSchema: GenEnum<Event_Type>;
 
 /**
  * @generated from message infracost.parser.event.Environment
  */
-export type Environment = Message<"infracost.parser.event.Environment"> & {
+export declare type Environment = Message<"infracost.parser.event.Environment"> & {
   /**
    * @generated from field: infracost.parser.event.Environment.Type type = 1;
    */
@@ -178,8 +172,7 @@ export type Environment = Message<"infracost.parser.event.Environment"> & {
  * Describes the message infracost.parser.event.Environment.
  * Use `create(EnvironmentSchema)` to create a new message.
  */
-export const EnvironmentSchema: GenMessage<Environment> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 1);
+export declare const EnvironmentSchema: GenMessage<Environment>;
 
 /**
  * @generated from enum infracost.parser.event.Environment.Type
@@ -204,13 +197,12 @@ export enum Environment_Type {
 /**
  * Describes the enum infracost.parser.event.Environment.Type.
  */
-export const Environment_TypeSchema: GenEnum<Environment_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_event, 1, 0);
+export declare const Environment_TypeSchema: GenEnum<Environment_Type>;
 
 /**
  * @generated from message infracost.parser.event.DecryptionKey
  */
-export type DecryptionKey = Message<"infracost.parser.event.DecryptionKey"> & {
+export declare type DecryptionKey = Message<"infracost.parser.event.DecryptionKey"> & {
   /**
    * @generated from field: string encrypted_dek = 1;
    */
@@ -221,13 +213,12 @@ export type DecryptionKey = Message<"infracost.parser.event.DecryptionKey"> & {
  * Describes the message infracost.parser.event.DecryptionKey.
  * Use `create(DecryptionKeySchema)` to create a new message.
  */
-export const DecryptionKeySchema: GenMessage<DecryptionKey> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 2);
+export declare const DecryptionKeySchema: GenMessage<DecryptionKey>;
 
 /**
  * @generated from message infracost.parser.event.Secret
  */
-export type Secret = Message<"infracost.parser.event.Secret"> & {
+export declare type Secret = Message<"infracost.parser.event.Secret"> & {
   /**
    * @generated from field: string encrypted = 1;
    */
@@ -238,13 +229,12 @@ export type Secret = Message<"infracost.parser.event.Secret"> & {
  * Describes the message infracost.parser.event.Secret.
  * Use `create(SecretSchema)` to create a new message.
  */
-export const SecretSchema: GenMessage<Secret> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 3);
+export declare const SecretSchema: GenMessage<Secret>;
 
 /**
  * @generated from message infracost.parser.event.VCS
  */
-export type VCS = Message<"infracost.parser.event.VCS"> & {
+export declare type VCS = Message<"infracost.parser.event.VCS"> & {
   /**
    * @generated from field: infracost.parser.event.VCS.Type type = 1;
    */
@@ -285,8 +275,7 @@ export type VCS = Message<"infracost.parser.event.VCS"> & {
  * Describes the message infracost.parser.event.VCS.
  * Use `create(VCSSchema)` to create a new message.
  */
-export const VCSSchema: GenMessage<VCS> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 4);
+export declare const VCSSchema: GenMessage<VCS>;
 
 /**
  * @generated from enum infracost.parser.event.VCS.Type
@@ -316,13 +305,12 @@ export enum VCS_Type {
 /**
  * Describes the enum infracost.parser.event.VCS.Type.
  */
-export const VCS_TypeSchema: GenEnum<VCS_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_event, 4, 0);
+export declare const VCS_TypeSchema: GenEnum<VCS_Type>;
 
 /**
  * @generated from message infracost.parser.event.Metadata
  */
-export type Metadata = Message<"infracost.parser.event.Metadata"> & {
+export declare type Metadata = Message<"infracost.parser.event.Metadata"> & {
   /**
    * @generated from field: google.protobuf.Timestamp timestamp_received = 1;
    */
@@ -363,13 +351,12 @@ export type Metadata = Message<"infracost.parser.event.Metadata"> & {
  * Describes the message infracost.parser.event.Metadata.
  * Use `create(MetadataSchema)` to create a new message.
  */
-export const MetadataSchema: GenMessage<Metadata> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 5);
+export declare const MetadataSchema: GenMessage<Metadata>;
 
 /**
  * @generated from message infracost.parser.event.AWSConfig
  */
-export type AWSConfig = Message<"infracost.parser.event.AWSConfig"> & {
+export declare type AWSConfig = Message<"infracost.parser.event.AWSConfig"> & {
   /**
    * @generated from field: string region = 1;
    */
@@ -385,13 +372,12 @@ export type AWSConfig = Message<"infracost.parser.event.AWSConfig"> & {
  * Describes the message infracost.parser.event.AWSConfig.
  * Use `create(AWSConfigSchema)` to create a new message.
  */
-export const AWSConfigSchema: GenMessage<AWSConfig> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 6);
+export declare const AWSConfigSchema: GenMessage<AWSConfig>;
 
 /**
  * @generated from message infracost.parser.event.Cache
  */
-export type Cache = Message<"infracost.parser.event.Cache"> & {
+export declare type Cache = Message<"infracost.parser.event.Cache"> & {
   /**
    * @generated from field: bool disabled = 1;
    */
@@ -422,13 +408,12 @@ export type Cache = Message<"infracost.parser.event.Cache"> & {
  * Describes the message infracost.parser.event.Cache.
  * Use `create(CacheSchema)` to create a new message.
  */
-export const CacheSchema: GenMessage<Cache> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 7);
+export declare const CacheSchema: GenMessage<Cache>;
 
 /**
  * @generated from message infracost.parser.event.GitHubApplication
  */
-export type GitHubApplication = Message<"infracost.parser.event.GitHubApplication"> & {
+export declare type GitHubApplication = Message<"infracost.parser.event.GitHubApplication"> & {
   /**
    * @generated from field: infracost.parser.event.Secret access_token = 1;
    */
@@ -449,13 +434,12 @@ export type GitHubApplication = Message<"infracost.parser.event.GitHubApplicatio
  * Describes the message infracost.parser.event.GitHubApplication.
  * Use `create(GitHubApplicationSchema)` to create a new message.
  */
-export const GitHubApplicationSchema: GenMessage<GitHubApplication> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 8);
+export declare const GitHubApplicationSchema: GenMessage<GitHubApplication>;
 
 /**
  * @generated from message infracost.parser.event.AzureRepos
  */
-export type AzureRepos = Message<"infracost.parser.event.AzureRepos"> & {
+export declare type AzureRepos = Message<"infracost.parser.event.AzureRepos"> & {
   /**
    * @generated from field: infracost.parser.event.Secret access_token = 1;
    */
@@ -471,13 +455,12 @@ export type AzureRepos = Message<"infracost.parser.event.AzureRepos"> & {
  * Describes the message infracost.parser.event.AzureRepos.
  * Use `create(AzureReposSchema)` to create a new message.
  */
-export const AzureReposSchema: GenMessage<AzureRepos> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 9);
+export declare const AzureReposSchema: GenMessage<AzureRepos>;
 
 /**
  * @generated from message infracost.parser.event.FeatureFlags
  */
-export type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"> & {
+export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"> & {
   /**
    * @generated from field: bool enable_cloud_formation = 1;
    */
@@ -493,15 +476,14 @@ export type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"> & {
  * Describes the message infracost.parser.event.FeatureFlags.
  * Use `create(FeatureFlagsSchema)` to create a new message.
  */
-export const FeatureFlagsSchema: GenMessage<FeatureFlags> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 10);
+export declare const FeatureFlagsSchema: GenMessage<FeatureFlags>;
 
 /**
  * What gets executed
  *
  * @generated from message infracost.parser.event.JobBehavior
  */
-export type JobBehavior = Message<"infracost.parser.event.JobBehavior"> & {
+export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> & {
   /**
    * @generated from field: bool no_comment = 1;
    */
@@ -532,15 +514,14 @@ export type JobBehavior = Message<"infracost.parser.event.JobBehavior"> & {
  * Describes the message infracost.parser.event.JobBehavior.
  * Use `create(JobBehaviorSchema)` to create a new message.
  */
-export const JobBehaviorSchema: GenMessage<JobBehavior> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 11);
+export declare const JobBehaviorSchema: GenMessage<JobBehavior>;
 
 /**
  * How it gets executed
  *
  * @generated from message infracost.parser.event.JobConfiguration
  */
-export type JobConfiguration = Message<"infracost.parser.event.JobConfiguration"> & {
+export declare type JobConfiguration = Message<"infracost.parser.event.JobConfiguration"> & {
   /**
    * @generated from field: string log_level = 1;
    */
@@ -616,13 +597,12 @@ export type JobConfiguration = Message<"infracost.parser.event.JobConfiguration"
  * Describes the message infracost.parser.event.JobConfiguration.
  * Use `create(JobConfigurationSchema)` to create a new message.
  */
-export const JobConfigurationSchema: GenMessage<JobConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 12);
+export declare const JobConfigurationSchema: GenMessage<JobConfiguration>;
 
 /**
  * @generated from message infracost.parser.event.InfracostServices
  */
-export type InfracostServices = Message<"infracost.parser.event.InfracostServices"> & {
+export declare type InfracostServices = Message<"infracost.parser.event.InfracostServices"> & {
   /**
    * @generated from field: infracost.parser.event.Secret auth_token = 1;
    */
@@ -673,13 +653,12 @@ export type InfracostServices = Message<"infracost.parser.event.InfracostService
  * Describes the message infracost.parser.event.InfracostServices.
  * Use `create(InfracostServicesSchema)` to create a new message.
  */
-export const InfracostServicesSchema: GenMessage<InfracostServices> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 13);
+export declare const InfracostServicesSchema: GenMessage<InfracostServices>;
 
 /**
  * @generated from message infracost.parser.event.Telemetry
  */
-export type Telemetry = Message<"infracost.parser.event.Telemetry"> & {
+export declare type Telemetry = Message<"infracost.parser.event.Telemetry"> & {
   /**
    * @generated from field: string sentry_dsn = 1;
    */
@@ -710,13 +689,12 @@ export type Telemetry = Message<"infracost.parser.event.Telemetry"> & {
  * Describes the message infracost.parser.event.Telemetry.
  * Use `create(TelemetrySchema)` to create a new message.
  */
-export const TelemetrySchema: GenMessage<Telemetry> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 14);
+export declare const TelemetrySchema: GenMessage<Telemetry>;
 
 /**
  * @generated from message infracost.parser.event.Langfuse
  */
-export type Langfuse = Message<"infracost.parser.event.Langfuse"> & {
+export declare type Langfuse = Message<"infracost.parser.event.Langfuse"> & {
   /**
    * @generated from field: string base_url = 1;
    */
@@ -737,6 +715,5 @@ export type Langfuse = Message<"infracost.parser.event.Langfuse"> & {
  * Describes the message infracost.parser.event.Langfuse.
  * Use `create(LangfuseSchema)` to create a new message.
  */
-export const LangfuseSchema: GenMessage<Langfuse> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_event, 15);
+export declare const LangfuseSchema: GenMessage<Langfuse>;
 

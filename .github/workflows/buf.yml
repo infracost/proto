@@ -57,6 +57,9 @@ jobs:
       - name: Verify generated Go code
         run: go build ./gen/go/...
 
+      - name: install dependencies for TypeScript verification
+        run: npm install
+
       - name: Verify generated TypeScript code
         run: find gen/ts -name '*.ts' -exec npx -y tsc --noEmit --skipLibCheck {} +
         

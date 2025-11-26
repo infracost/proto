@@ -3,27 +3,21 @@
 /* eslint-disable */
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Address } from "../address_pb.js";
-import { file_infracost_parser_address } from "../address_pb.js";
-import type { Value } from "../hcl/value_pb.js";
-import { file_infracost_parser_hcl_value } from "../hcl/value_pb.js";
-import type { SourceRange } from "../metadata_pb.js";
-import { file_infracost_parser_metadata } from "../metadata_pb.js";
-import type { CallStack } from "../stack_pb.js";
-import { file_infracost_parser_stack } from "../stack_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { Value } from "../hcl/value_pb.js";
+import type { Address } from "../address_pb.js";
+import type { SourceRange } from "../metadata_pb.js";
+import type { CallStack } from "../stack_pb.js";
 
 /**
  * Describes the file infracost/parser/terraform/resource.proto.
  */
-export const file_infracost_parser_terraform_resource: GenFile = /*@__PURE__*/
-  fileDesc("CilpbmZyYWNvc3QvcGFyc2VyL3RlcnJhZm9ybS9yZXNvdXJjZS5wcm90bxIaaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0i8QMKCFJlc291cmNlEikKBGRhdGEYASABKAsyGy5pbmZyYWNvc3QucGFyc2VyLmhjbC5WYWx1ZRI2Cghwcm92aWRlchgCIAEoCzIkLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLlByb3ZpZGVyEioKB2FkZHJlc3MYAyABKAsyGS5pbmZyYWNvc3QucGFyc2VyLkFkZHJlc3MSMwoMc291cmNlX3JhbmdlGAQgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5Tb3VyY2VSYW5nZRINCgVmbGFncxgFIAEoBBIOCgZyZWdpb24YBiABKAkSCgoCaWQYByABKAkSDAoEbmFtZRgIIAEoCRIMCgR0eXBlGAkgASgJEjUKCHRhZ19kYXRhGAogASgLMiMuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFnRGF0YRIbChNyZWdpb25faXNfc3ludGhldGljGAsgASgIEhEKCXN1cHBvcnRlZBgMIAEoCBIVCg1zdXBwb3J0c190YWdzGA0gASgIEh0KFXN1cHBvcnRzX2RlZmF1bHRfdGFncxgOIAEoCBIMCgRmcmVlGA8gASgIEi8KCmNhbGxfc3RhY2sYECABKAsyGy5pbmZyYWNvc3QucGFyc2VyLkNhbGxTdGFjayJHCgdUYWdEYXRhEg0KBWZsYWdzGAEgASgEEi0KBHRhZ3MYAiADKAsyHy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5UYWciiwIKCFByb3ZpZGVyEjMKDHNvdXJjZV9yYW5nZRgBIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USDQoFZmxhZ3MYAiABKAQSDAoEbmFtZRgDIAEoCRIOCgZmYW1pbHkYBCABKAkSDgoGcmVnaW9uGAUgASgJEj0KEGRlZmF1bHRfdGFnX2RhdGEYBiABKAsyIy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5UYWdEYXRhEhsKE3JlZ2lvbl9pc19zeW50aGV0aWMYByABKAgSGwoTdmVyc2lvbl9jb25zdHJhaW50cxgIIAEoCRIUCgxpc19zdXBwb3J0ZWQYCSABKAgi0QEKA1RhZxILCgNrZXkYASABKAkSNwoQa2V5X3NvdXJjZV9yYW5nZRgCIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USEQoJa2V5X2ZsYWdzGAMgASgEEg0KBXZhbHVlGAQgASgJEjkKEnZhbHVlX3NvdXJjZV9yYW5nZRgFIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USEwoLdmFsdWVfZmxhZ3MYBiABKAQSEgoKaXNfZGVmYXVsdBgHIAEoCCJCCgZPdXRwdXQSKgoFdmFsdWUYASABKAsyGy5pbmZyYWNvc3QucGFyc2VyLmhjbC5WYWx1ZRIMCgRuYW1lGAIgASgJQvcBCh5jb20uaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm1CDVJlc291cmNlUHJvdG9QAVo8Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvdGVycmFmb3JtogIDSVBUqgIaSW5mcmFjb3N0LlBhcnNlci5UZXJyYWZvcm3KAhpJbmZyYWNvc3RcUGFyc2VyXFRlcnJhZm9ybeICJkluZnJhY29zdFxQYXJzZXJcVGVycmFmb3JtXEdQQk1ldGFkYXRh6gIcSW5mcmFjb3N0OjpQYXJzZXI6OlRlcnJhZm9ybWIGcHJvdG8z", [file_infracost_parser_address, file_infracost_parser_hcl_value, file_infracost_parser_metadata, file_infracost_parser_stack]);
+export declare const file_infracost_parser_terraform_resource: GenFile;
 
 /**
  * @generated from message infracost.parser.terraform.Resource
  */
-export type Resource = Message<"infracost.parser.terraform.Resource"> & {
+export declare type Resource = Message<"infracost.parser.terraform.Resource"> & {
   /**
    * @generated from field: infracost.parser.hcl.Value data = 1;
    */
@@ -109,13 +103,12 @@ export type Resource = Message<"infracost.parser.terraform.Resource"> & {
  * Describes the message infracost.parser.terraform.Resource.
  * Use `create(ResourceSchema)` to create a new message.
  */
-export const ResourceSchema: GenMessage<Resource> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_resource, 0);
+export declare const ResourceSchema: GenMessage<Resource>;
 
 /**
  * @generated from message infracost.parser.terraform.TagData
  */
-export type TagData = Message<"infracost.parser.terraform.TagData"> & {
+export declare type TagData = Message<"infracost.parser.terraform.TagData"> & {
   /**
    * @generated from field: uint64 flags = 1;
    */
@@ -131,13 +124,12 @@ export type TagData = Message<"infracost.parser.terraform.TagData"> & {
  * Describes the message infracost.parser.terraform.TagData.
  * Use `create(TagDataSchema)` to create a new message.
  */
-export const TagDataSchema: GenMessage<TagData> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_resource, 1);
+export declare const TagDataSchema: GenMessage<TagData>;
 
 /**
  * @generated from message infracost.parser.terraform.Provider
  */
-export type Provider = Message<"infracost.parser.terraform.Provider"> & {
+export declare type Provider = Message<"infracost.parser.terraform.Provider"> & {
   /**
    * @generated from field: infracost.parser.SourceRange source_range = 1;
    */
@@ -188,13 +180,12 @@ export type Provider = Message<"infracost.parser.terraform.Provider"> & {
  * Describes the message infracost.parser.terraform.Provider.
  * Use `create(ProviderSchema)` to create a new message.
  */
-export const ProviderSchema: GenMessage<Provider> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_resource, 2);
+export declare const ProviderSchema: GenMessage<Provider>;
 
 /**
  * @generated from message infracost.parser.terraform.Tag
  */
-export type Tag = Message<"infracost.parser.terraform.Tag"> & {
+export declare type Tag = Message<"infracost.parser.terraform.Tag"> & {
   /**
    * @generated from field: string key = 1;
    */
@@ -235,13 +226,12 @@ export type Tag = Message<"infracost.parser.terraform.Tag"> & {
  * Describes the message infracost.parser.terraform.Tag.
  * Use `create(TagSchema)` to create a new message.
  */
-export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_resource, 3);
+export declare const TagSchema: GenMessage<Tag>;
 
 /**
  * @generated from message infracost.parser.terraform.Output
  */
-export type Output = Message<"infracost.parser.terraform.Output"> & {
+export declare type Output = Message<"infracost.parser.terraform.Output"> & {
   /**
    * @generated from field: infracost.parser.hcl.Value value = 1;
    */
@@ -257,6 +247,5 @@ export type Output = Message<"infracost.parser.terraform.Output"> & {
  * Describes the message infracost.parser.terraform.Output.
  * Use `create(OutputSchema)` to create a new message.
  */
-export const OutputSchema: GenMessage<Output> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_terraform_resource, 4);
+export declare const OutputSchema: GenMessage<Output>;
 

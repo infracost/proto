@@ -3,19 +3,17 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
  */
-export const file_infracost_parser_event_runparameters: GenFile = /*@__PURE__*/
-  fileDesc("CippbmZyYWNvc3QvcGFyc2VyL2V2ZW50L3J1bnBhcmFtZXRlcnMucHJvdG8SFmluZnJhY29zdC5wYXJzZXIuZXZlbnQixgIKDVJ1blBhcmFtZXRlcnMSMAoFc2NvcGUYASABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJhc2VTY29wZRI9Cg51c2FnZV9kZWZhdWx0cxgCIAEoCzIlLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cxJEChJwcm9kdWN0aW9uX2ZpbHRlcnMYAyADKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXISNwoMdGFnX3BvbGljaWVzGAQgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3kSRQoPZmlub3BzX3BvbGljaWVzGAUgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncyJFCglCYXNlU2NvcGUSEQoJcmVwb19uYW1lGAEgASgJEhAKCHJlcG9fdXJsGAIgASgJEhMKC2JyYW5jaF9uYW1lGAMgASgJIrQBCg1Vc2FnZURlZmF1bHRzEkcKCXJlc291cmNlcxgBIAMoCzI0LmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cy5SZXNvdXJjZXNFbnRyeRpaCg5SZXNvdXJjZXNFbnRyeRILCgNrZXkYASABKAkSNwoFdmFsdWUYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlUmVzb3VyY2VNYXA6AjgBIrEBChBVc2FnZVJlc291cmNlTWFwEkQKBnVzYWdlcxgBIAMoCzI0LmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VSZXNvdXJjZU1hcC5Vc2FnZXNFbnRyeRpXCgtVc2FnZXNFbnRyeRILCgNrZXkYASABKAkSNwoFdmFsdWUYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRGVmYXVsdExpc3Q6AjgBIkYKEFVzYWdlRGVmYXVsdExpc3QSMgoEbGlzdBgBIAMoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0ImkKDFVzYWdlRGVmYXVsdBIQCghxdWFudGl0eRgBIAEoCRIQCghwcmlvcml0eRgCIAEoBRI1CgdmaWx0ZXJzGAMgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZUZpbHRlcnMiRQoMVXNhZ2VGaWx0ZXJzEjUKB3Byb2plY3QYASABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlciK3AQoQUHJvZHVjdGlvbkZpbHRlchIKCgJpZBgBIAEoCRI7CgR0eXBlGAIgASgOMi0uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qcm9kdWN0aW9uRmlsdGVyLlR5cGUSDQoFdmFsdWUYAyABKAkSDwoHaW5jbHVkZRgEIAEoCCI6CgRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASCAoEUkVQTxABEgsKB1BST0pFQ1QQAhIKCgZCUkFOQ0gQAyKRAwoJVGFnUG9saWN5EgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDwoHbWVzc2FnZRgDIAEoCRI9Cg9yZXNvdXJjZV9maWx0ZXIYBCABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI7Cg1icmFuY2hfZmlsdGVyGAUgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISPAoOcHJvamVjdF9maWx0ZXIYBiABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI1Cgp0YWdfZmlsdGVyGAcgASgLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXISQgoMcmVxdWlyZW1lbnRzGAggAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3lSZXF1aXJlbWVudBISCgpwcl9jb21tZW50GAkgASgIEhAKCGJsb2NrX3ByGAogASgIIuwBChRUYWdQb2xpY3lSZXF1aXJlbWVudBILCgNrZXkYASABKAkSPwoEdHlwZRgCIAEoDjIxLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVGFnUG9saWN5UmVxdWlyZW1lbnQuVHlwZRITCgt2YWx1ZV9yZWdleBgDIAEoCRIPCgdtZXNzYWdlGAQgASgJEhYKDmFsbG93ZWRfdmFsdWVzGAUgAygJEhEKCW1hbmRhdG9yeRgGIAEoCCI1CgRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASBwoDQU5ZEAESCAoETElTVBACEgkKBVJFR0VYEAMiMAoMU3RyaW5nRmlsdGVyEg8KB2luY2x1ZGUYASADKAkSDwoHZXhjbHVkZRgCIAMoCSLtAQoJTWFwRmlsdGVyEj8KB2luY2x1ZGUYASADKAsyLi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlci5JbmNsdWRlRW50cnkSPwoHZXhjbHVkZRgCIAMoCzIuLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyLkV4Y2x1ZGVFbnRyeRouCgxJbmNsdWRlRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARouCgxFeGNsdWRlRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASLVAgoURmlub3BzUG9saWN5U2V0dGluZ3MSCgoCaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEg8KB21lc3NhZ2UYBCABKAkSPAoOcHJvamVjdF9maWx0ZXIYBSABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI7Cg1icmFuY2hfZmlsdGVyGAYgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISNQoKdGFnX2ZpbHRlchgHIAEoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyEhAKCHNldHRpbmdzGAggASgJEhIKCnByX2NvbW1lbnQYCSABKAgSEAoIYmxvY2tfcHIYCiABKAgSGgoSb25seV9uZXdfcmVzb3VyY2VzGAsgASgIQuQBChpjb20uaW5mcmFjb3N0LnBhcnNlci5ldmVudEISUnVucGFyYW1ldGVyc1Byb3RvUAFaOGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2V2ZW50ogIDSVBFqgIWSW5mcmFjb3N0LlBhcnNlci5FdmVudMoCFkluZnJhY29zdFxQYXJzZXJcRXZlbnTiAiJJbmZyYWNvc3RcUGFyc2VyXEV2ZW50XEdQQk1ldGFkYXRh6gIYSW5mcmFjb3N0OjpQYXJzZXI6OkV2ZW50YgZwcm90bzM");
+export declare const file_infracost_parser_event_runparameters: GenFile;
 
 /**
  * @generated from message infracost.parser.event.RunParameters
  */
-export type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
+export declare type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
   /**
    * @generated from field: infracost.parser.event.BaseScope scope = 1;
    */
@@ -46,13 +44,12 @@ export type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
  * Describes the message infracost.parser.event.RunParameters.
  * Use `create(RunParametersSchema)` to create a new message.
  */
-export const RunParametersSchema: GenMessage<RunParameters> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 0);
+export declare const RunParametersSchema: GenMessage<RunParameters>;
 
 /**
  * @generated from message infracost.parser.event.BaseScope
  */
-export type BaseScope = Message<"infracost.parser.event.BaseScope"> & {
+export declare type BaseScope = Message<"infracost.parser.event.BaseScope"> & {
   /**
    * @generated from field: string repo_name = 1;
    */
@@ -73,13 +70,12 @@ export type BaseScope = Message<"infracost.parser.event.BaseScope"> & {
  * Describes the message infracost.parser.event.BaseScope.
  * Use `create(BaseScopeSchema)` to create a new message.
  */
-export const BaseScopeSchema: GenMessage<BaseScope> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 1);
+export declare const BaseScopeSchema: GenMessage<BaseScope>;
 
 /**
  * @generated from message infracost.parser.event.UsageDefaults
  */
-export type UsageDefaults = Message<"infracost.parser.event.UsageDefaults"> & {
+export declare type UsageDefaults = Message<"infracost.parser.event.UsageDefaults"> & {
   /**
    * Key is resource_type
    *
@@ -92,13 +88,12 @@ export type UsageDefaults = Message<"infracost.parser.event.UsageDefaults"> & {
  * Describes the message infracost.parser.event.UsageDefaults.
  * Use `create(UsageDefaultsSchema)` to create a new message.
  */
-export const UsageDefaultsSchema: GenMessage<UsageDefaults> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 2);
+export declare const UsageDefaultsSchema: GenMessage<UsageDefaults>;
 
 /**
  * @generated from message infracost.parser.event.UsageResourceMap
  */
-export type UsageResourceMap = Message<"infracost.parser.event.UsageResourceMap"> & {
+export declare type UsageResourceMap = Message<"infracost.parser.event.UsageResourceMap"> & {
   /**
    * Key is usage_key
    *
@@ -111,13 +106,12 @@ export type UsageResourceMap = Message<"infracost.parser.event.UsageResourceMap"
  * Describes the message infracost.parser.event.UsageResourceMap.
  * Use `create(UsageResourceMapSchema)` to create a new message.
  */
-export const UsageResourceMapSchema: GenMessage<UsageResourceMap> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 3);
+export declare const UsageResourceMapSchema: GenMessage<UsageResourceMap>;
 
 /**
  * @generated from message infracost.parser.event.UsageDefaultList
  */
-export type UsageDefaultList = Message<"infracost.parser.event.UsageDefaultList"> & {
+export declare type UsageDefaultList = Message<"infracost.parser.event.UsageDefaultList"> & {
   /**
    * @generated from field: repeated infracost.parser.event.UsageDefault list = 1;
    */
@@ -128,13 +122,12 @@ export type UsageDefaultList = Message<"infracost.parser.event.UsageDefaultList"
  * Describes the message infracost.parser.event.UsageDefaultList.
  * Use `create(UsageDefaultListSchema)` to create a new message.
  */
-export const UsageDefaultListSchema: GenMessage<UsageDefaultList> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 4);
+export declare const UsageDefaultListSchema: GenMessage<UsageDefaultList>;
 
 /**
  * @generated from message infracost.parser.event.UsageDefault
  */
-export type UsageDefault = Message<"infracost.parser.event.UsageDefault"> & {
+export declare type UsageDefault = Message<"infracost.parser.event.UsageDefault"> & {
   /**
    * @generated from field: string quantity = 1;
    */
@@ -155,13 +148,12 @@ export type UsageDefault = Message<"infracost.parser.event.UsageDefault"> & {
  * Describes the message infracost.parser.event.UsageDefault.
  * Use `create(UsageDefaultSchema)` to create a new message.
  */
-export const UsageDefaultSchema: GenMessage<UsageDefault> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 5);
+export declare const UsageDefaultSchema: GenMessage<UsageDefault>;
 
 /**
  * @generated from message infracost.parser.event.UsageFilters
  */
-export type UsageFilters = Message<"infracost.parser.event.UsageFilters"> & {
+export declare type UsageFilters = Message<"infracost.parser.event.UsageFilters"> & {
   /**
    * @generated from field: infracost.parser.event.StringFilter project = 1;
    */
@@ -172,8 +164,7 @@ export type UsageFilters = Message<"infracost.parser.event.UsageFilters"> & {
  * Describes the message infracost.parser.event.UsageFilters.
  * Use `create(UsageFiltersSchema)` to create a new message.
  */
-export const UsageFiltersSchema: GenMessage<UsageFilters> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 6);
+export declare const UsageFiltersSchema: GenMessage<UsageFilters>;
 
 /**
  * Filter represents a unified-input filter with a type and a value pattern
@@ -183,7 +174,7 @@ export const UsageFiltersSchema: GenMessage<UsageFilters> = /*@__PURE__*/
  *
  * @generated from message infracost.parser.event.ProductionFilter
  */
-export type ProductionFilter = Message<"infracost.parser.event.ProductionFilter"> & {
+export declare type ProductionFilter = Message<"infracost.parser.event.ProductionFilter"> & {
   /**
    * @generated from field: string id = 1;
    */
@@ -209,8 +200,7 @@ export type ProductionFilter = Message<"infracost.parser.event.ProductionFilter"
  * Describes the message infracost.parser.event.ProductionFilter.
  * Use `create(ProductionFilterSchema)` to create a new message.
  */
-export const ProductionFilterSchema: GenMessage<ProductionFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 7);
+export declare const ProductionFilterSchema: GenMessage<ProductionFilter>;
 
 /**
  * Type represents the filter type (e.g., repo/project/branch) and aliases the proto enum.
@@ -242,13 +232,12 @@ export enum ProductionFilter_Type {
 /**
  * Describes the enum infracost.parser.event.ProductionFilter.Type.
  */
-export const ProductionFilter_TypeSchema: GenEnum<ProductionFilter_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 7, 0);
+export declare const ProductionFilter_TypeSchema: GenEnum<ProductionFilter_Type>;
 
 /**
  * @generated from message infracost.parser.event.TagPolicy
  */
-export type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
+export declare type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
   /**
    * @generated from field: string id = 1;
    */
@@ -304,13 +293,12 @@ export type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
  * Describes the message infracost.parser.event.TagPolicy.
  * Use `create(TagPolicySchema)` to create a new message.
  */
-export const TagPolicySchema: GenMessage<TagPolicy> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 8);
+export declare const TagPolicySchema: GenMessage<TagPolicy>;
 
 /**
  * @generated from message infracost.parser.event.TagPolicyRequirement
  */
-export type TagPolicyRequirement = Message<"infracost.parser.event.TagPolicyRequirement"> & {
+export declare type TagPolicyRequirement = Message<"infracost.parser.event.TagPolicyRequirement"> & {
   /**
    * @generated from field: string key = 1;
    */
@@ -346,8 +334,7 @@ export type TagPolicyRequirement = Message<"infracost.parser.event.TagPolicyRequ
  * Describes the message infracost.parser.event.TagPolicyRequirement.
  * Use `create(TagPolicyRequirementSchema)` to create a new message.
  */
-export const TagPolicyRequirementSchema: GenMessage<TagPolicyRequirement> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 9);
+export declare const TagPolicyRequirementSchema: GenMessage<TagPolicyRequirement>;
 
 /**
  * @generated from enum infracost.parser.event.TagPolicyRequirement.Type
@@ -377,13 +364,12 @@ export enum TagPolicyRequirement_Type {
 /**
  * Describes the enum infracost.parser.event.TagPolicyRequirement.Type.
  */
-export const TagPolicyRequirement_TypeSchema: GenEnum<TagPolicyRequirement_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 9, 0);
+export declare const TagPolicyRequirement_TypeSchema: GenEnum<TagPolicyRequirement_Type>;
 
 /**
  * @generated from message infracost.parser.event.StringFilter
  */
-export type StringFilter = Message<"infracost.parser.event.StringFilter"> & {
+export declare type StringFilter = Message<"infracost.parser.event.StringFilter"> & {
   /**
    * @generated from field: repeated string include = 1;
    */
@@ -399,13 +385,12 @@ export type StringFilter = Message<"infracost.parser.event.StringFilter"> & {
  * Describes the message infracost.parser.event.StringFilter.
  * Use `create(StringFilterSchema)` to create a new message.
  */
-export const StringFilterSchema: GenMessage<StringFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 10);
+export declare const StringFilterSchema: GenMessage<StringFilter>;
 
 /**
  * @generated from message infracost.parser.event.MapFilter
  */
-export type MapFilter = Message<"infracost.parser.event.MapFilter"> & {
+export declare type MapFilter = Message<"infracost.parser.event.MapFilter"> & {
   /**
    * @generated from field: map<string, string> include = 1;
    */
@@ -421,13 +406,12 @@ export type MapFilter = Message<"infracost.parser.event.MapFilter"> & {
  * Describes the message infracost.parser.event.MapFilter.
  * Use `create(MapFilterSchema)` to create a new message.
  */
-export const MapFilterSchema: GenMessage<MapFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 11);
+export declare const MapFilterSchema: GenMessage<MapFilter>;
 
 /**
  * @generated from message infracost.parser.event.FinopsPolicySettings
  */
-export type FinopsPolicySettings = Message<"infracost.parser.event.FinopsPolicySettings"> & {
+export declare type FinopsPolicySettings = Message<"infracost.parser.event.FinopsPolicySettings"> & {
   /**
    * @generated from field: string id = 1;
    */
@@ -490,6 +474,5 @@ export type FinopsPolicySettings = Message<"infracost.parser.event.FinopsPolicyS
  * Describes the message infracost.parser.event.FinopsPolicySettings.
  * Use `create(FinopsPolicySettingsSchema)` to create a new message.
  */
-export const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 12);
+export declare const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings>;
 

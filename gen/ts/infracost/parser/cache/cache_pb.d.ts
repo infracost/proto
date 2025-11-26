@@ -3,27 +3,21 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { Result } from "../cloudformation/result_pb.js";
-import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
-import type { Diagnostic } from "../diagnostic_pb.js";
-import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
-import type { ModuleResult } from "../terraform/module_pb.js";
-import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
 import type { Message } from "@bufbuild/protobuf";
+import type { ModuleResult } from "../terraform/module_pb.js";
+import type { Diagnostic } from "../diagnostic_pb.js";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Result } from "../cloudformation/result_pb.js";
 
 /**
  * Describes the file infracost/parser/cache/cache.proto.
  */
-export const file_infracost_parser_cache_cache: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2NhY2hlL2NhY2hlLnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmNhY2hlIpECChBUZXJyYWZvcm1Qcm9qZWN0EjgKBnJlc3VsdBgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSEgoKdXNhZ2VfZmlsZRgEIAEoDBIWCg5wcm9qZWN0X2NvbmZpZxgFIAEoDBIVCg1pc190ZXJyYWdydW50GAYgASgIEh8KF3RlcnJhZm9ybV9tb2R1bGVfc3VmZml4GAcgASgJIqcBCghNZXRhZGF0YRILCgNrZXkYASABKAkSLgoGZmxhdm9yGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3ISFgoOcnVubmVyX3ZlcnNpb24YAyABKAkSFgoOcGFyc2VyX3ZlcnNpb24YBCABKAkSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi6gMKDUJyYW5jaFN1bW1hcnkSDgoGYnJhbmNoGAEgASgJEkwKDXNoYV90b19pZF9tYXAYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkJyYW5jaFN1bW1hcnkuU2hhVG9JZE1hcEVudHJ5El8KF3NoYV90b19wcm9qZWN0X25hbWVfbWFwGAMgAygLMj4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5CcmFuY2hTdW1tYXJ5LlNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRJUChFzaGFfdG9fZmxhdm9yX21hcBgEIAMoCzI5LmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0ZsYXZvck1hcEVudHJ5GjEKD1NoYVRvSWRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGjoKGFNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGlUKE1NoYVRvRmxhdm9yTWFwRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3I6AjgBIk8KEkVuY3J5cHRpb25FbnZlbG9wZRIVCg1lbmNyeXB0ZWRfZGVrGAEgASgMEgoKAml2GAIgASgMEhYKDmVuY3J5cHRlZF9kYXRhGAMgASgJIusBChVDbG91ZEZvcm1hdGlvblByb2plY3QSNwoGcmVzdWx0GAEgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHQSMgoIbWV0YWRhdGEYAiABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLk1ldGFkYXRhEisKBWRpYWdzGAMgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEhIKCnVzYWdlX2ZpbGUYBCABKAwSFgoOcHJvamVjdF9jb25maWcYBSABKAxKBAgGEAdSBmlzX2NkaypRCgZGbGF2b3ISFgoSRkxBVk9SX1VOU1BFQ0lGSUVEEAASFAoQRkxBVk9SX1RFUlJBRk9STRABEhkKFUZMQVZPUl9DTE9VREZPUk1BVElPThACQtwBChpjb20uaW5mcmFjb3N0LnBhcnNlci5jYWNoZUIKQ2FjaGVQcm90b1ABWjhnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9jYWNoZaICA0lQQ6oCFkluZnJhY29zdC5QYXJzZXIuQ2FjaGXKAhZJbmZyYWNvc3RcUGFyc2VyXENhY2hl4gIiSW5mcmFjb3N0XFBhcnNlclxDYWNoZVxHUEJNZXRhZGF0YeoCGEluZnJhY29zdDo6UGFyc2VyOjpDYWNoZWIGcHJvdG8z", [file_google_protobuf_timestamp, file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module]);
+export declare const file_infracost_parser_cache_cache: GenFile;
 
 /**
  * @generated from message infracost.parser.cache.TerraformProject
  */
-export type TerraformProject = Message<"infracost.parser.cache.TerraformProject"> & {
+export declare type TerraformProject = Message<"infracost.parser.cache.TerraformProject"> & {
   /**
    * @generated from field: infracost.parser.terraform.ModuleResult result = 1;
    */
@@ -68,13 +62,12 @@ export type TerraformProject = Message<"infracost.parser.cache.TerraformProject"
  * Describes the message infracost.parser.cache.TerraformProject.
  * Use `create(TerraformProjectSchema)` to create a new message.
  */
-export const TerraformProjectSchema: GenMessage<TerraformProject> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 0);
+export declare const TerraformProjectSchema: GenMessage<TerraformProject>;
 
 /**
  * @generated from message infracost.parser.cache.Metadata
  */
-export type Metadata = Message<"infracost.parser.cache.Metadata"> & {
+export declare type Metadata = Message<"infracost.parser.cache.Metadata"> & {
   /**
    * @generated from field: string key = 1;
    */
@@ -105,15 +98,14 @@ export type Metadata = Message<"infracost.parser.cache.Metadata"> & {
  * Describes the message infracost.parser.cache.Metadata.
  * Use `create(MetadataSchema)` to create a new message.
  */
-export const MetadataSchema: GenMessage<Metadata> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 1);
+export declare const MetadataSchema: GenMessage<Metadata>;
 
 /**
  * BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
  *
  * @generated from message infracost.parser.cache.BranchSummary
  */
-export type BranchSummary = Message<"infracost.parser.cache.BranchSummary"> & {
+export declare type BranchSummary = Message<"infracost.parser.cache.BranchSummary"> & {
   /**
    * @generated from field: string branch = 1;
    */
@@ -139,13 +131,12 @@ export type BranchSummary = Message<"infracost.parser.cache.BranchSummary"> & {
  * Describes the message infracost.parser.cache.BranchSummary.
  * Use `create(BranchSummarySchema)` to create a new message.
  */
-export const BranchSummarySchema: GenMessage<BranchSummary> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 2);
+export declare const BranchSummarySchema: GenMessage<BranchSummary>;
 
 /**
  * @generated from message infracost.parser.cache.EncryptionEnvelope
  */
-export type EncryptionEnvelope = Message<"infracost.parser.cache.EncryptionEnvelope"> & {
+export declare type EncryptionEnvelope = Message<"infracost.parser.cache.EncryptionEnvelope"> & {
   /**
    * @generated from field: bytes encrypted_dek = 1;
    */
@@ -168,13 +159,12 @@ export type EncryptionEnvelope = Message<"infracost.parser.cache.EncryptionEnvel
  * Describes the message infracost.parser.cache.EncryptionEnvelope.
  * Use `create(EncryptionEnvelopeSchema)` to create a new message.
  */
-export const EncryptionEnvelopeSchema: GenMessage<EncryptionEnvelope> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 3);
+export declare const EncryptionEnvelopeSchema: GenMessage<EncryptionEnvelope>;
 
 /**
  * @generated from message infracost.parser.cache.CloudFormationProject
  */
-export type CloudFormationProject = Message<"infracost.parser.cache.CloudFormationProject"> & {
+export declare type CloudFormationProject = Message<"infracost.parser.cache.CloudFormationProject"> & {
   /**
    * @generated from field: infracost.parser.cloudformation.Result result = 1;
    */
@@ -209,8 +199,7 @@ export type CloudFormationProject = Message<"infracost.parser.cache.CloudFormati
  * Describes the message infracost.parser.cache.CloudFormationProject.
  * Use `create(CloudFormationProjectSchema)` to create a new message.
  */
-export const CloudFormationProjectSchema: GenMessage<CloudFormationProject> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 4);
+export declare const CloudFormationProjectSchema: GenMessage<CloudFormationProject>;
 
 /**
  * @generated from enum infracost.parser.cache.Flavor
@@ -235,6 +224,5 @@ export enum Flavor {
 /**
  * Describes the enum infracost.parser.cache.Flavor.
  */
-export const FlavorSchema: GenEnum<Flavor> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_cache_cache, 0);
+export declare const FlavorSchema: GenEnum<Flavor>;
 
