@@ -1036,6 +1036,7 @@ type JobConfiguration struct {
 	UseS3ResultsIngestion        bool                   `protobuf:"varint,12,opt,name=use_s3_results_ingestion,json=useS3ResultsIngestion,proto3" json:"use_s3_results_ingestion,omitempty"`
 	WaitForMetricsDuringShutdown bool                   `protobuf:"varint,13,opt,name=wait_for_metrics_during_shutdown,json=waitForMetricsDuringShutdown,proto3" json:"wait_for_metrics_during_shutdown,omitempty"`
 	Cache                        *Cache                 `protobuf:"bytes,14,opt,name=cache,proto3" json:"cache,omitempty"`
+	TlsCaCertFile                string                 `protobuf:"bytes,15,opt,name=tls_ca_cert_file,json=tlsCaCertFile,proto3" json:"tls_ca_cert_file,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -1166,6 +1167,13 @@ func (x *JobConfiguration) GetCache() *Cache {
 		return x.Cache
 	}
 	return nil
+}
+
+func (x *JobConfiguration) GetTlsCaCertFile() string {
+	if x != nil {
+		return x.TlsCaCertFile
+	}
+	return ""
 }
 
 type InfracostServices struct {
@@ -1507,7 +1515,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x11usage_api_enabled\x18\x02 \x01(\bR\x0fusageApiEnabled\x12!\n" +
 	"\fbuild_script\x18\x03 \x01(\tR\vbuildScript\x12C\n" +
 	"\x1ecustom_property_mapping_script\x18\x04 \x01(\tR\x1bcustomPropertyMappingScript\x12I\n" +
-	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\"\x94\x05\n" +
+	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\"\xbd\x05\n" +
 	"\x10JobConfiguration\x12\x1b\n" +
 	"\tlog_level\x18\x01 \x01(\tR\blogLevel\x12\x1f\n" +
 	"\vprompt_path\x18\x02 \x01(\tR\n" +
@@ -1525,7 +1533,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x0fsparse_checkout\x18\v \x01(\bR\x0esparseCheckout\x127\n" +
 	"\x18use_s3_results_ingestion\x18\f \x01(\bR\x15useS3ResultsIngestion\x12F\n" +
 	" wait_for_metrics_during_shutdown\x18\r \x01(\bR\x1cwaitForMetricsDuringShutdown\x123\n" +
-	"\x05cache\x18\x0e \x01(\v2\x1d.infracost.parser.event.CacheR\x05cache\"\xe9\x03\n" +
+	"\x05cache\x18\x0e \x01(\v2\x1d.infracost.parser.event.CacheR\x05cache\x12'\n" +
+	"\x10tls_ca_cert_file\x18\x0f \x01(\tR\rtlsCaCertFile\"\xe9\x03\n" +
 	"\x11InfracostServices\x12=\n" +
 	"\n" +
 	"auth_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\tauthToken\x12%\n" +

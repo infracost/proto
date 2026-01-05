@@ -591,6 +591,11 @@ export declare type JobConfiguration = Message<"infracost.parser.event.JobConfig
    * @generated from field: infracost.parser.event.Cache cache = 14;
    */
   cache?: Cache;
+
+  /**
+   * @generated from field: string tls_ca_cert_file = 15;
+   */
+  tlsCaCertFile: string;
 };
 
 /**
