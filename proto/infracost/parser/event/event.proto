@@ -140,6 +140,7 @@ message JobConfiguration {
   bool use_s3_results_ingestion = 12;
   bool wait_for_metrics_during_shutdown = 13;
   Cache cache = 14;
+  string tls_ca_cert_file = 15;
 }
 
 message InfracostServices {
