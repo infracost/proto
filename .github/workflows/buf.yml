@@ -34,6 +34,12 @@ jobs:
         run: |
           buf breaking --against '.git#branch=origin/main'
 
+      - name: Lint
+        run: buf lint
+
+      - name: Format check
+        run: buf format --diff --exit-code
+
       - name: Generate
         run: make generate
 
