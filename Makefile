@@ -29,5 +29,9 @@ verify-go:
 	go build ./gen/go/...
 
 .PHONY: verify-ts
-verify-ts:
+verify-ts: tsc-install
 	find gen/ts -name '*.ts' -exec npx -y tsc --noEmit --skipLibCheck {} +
+
+.PHONY: tsc-install
+tsc-install:
+	npm install
