@@ -20,7 +20,8 @@
     "gen/ts/**/*.d.ts"
   ],
   "dependencies": {
-    "@bufbuild/protobuf": "^2.10.1"
+    "@bufbuild/protobuf": "^2.10.1",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.10.1"

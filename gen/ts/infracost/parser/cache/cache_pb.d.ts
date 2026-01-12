@@ -56,6 +56,11 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
    * @generated from field: string terraform_module_suffix = 7;
    */
   terraformModuleSuffix: string;
+
+  /**
+   * @generated from field: repeated string dependency_paths = 8;
+   */
+  dependencyPaths: string[];
 };
 
 /**
@@ -193,6 +198,11 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
    * @generated from field: bytes project_config = 5;
    */
   projectConfig: Uint8Array;
+
+  /**
+   * @generated from field: repeated string dependency_paths = 7;
+   */
+  dependencyPaths: string[];
 };
 
 /**
