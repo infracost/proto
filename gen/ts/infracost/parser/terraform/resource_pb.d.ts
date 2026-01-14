@@ -97,6 +97,11 @@ export declare type Resource = Message<"infracost.parser.terraform.Resource"> & 
    * @generated from field: infracost.parser.CallStack call_stack = 16;
    */
   callStack?: CallStack;
+
+  /**
+   * @generated from field: bool debug = 17;
+   */
+  debug: boolean;
 };
 
 /**

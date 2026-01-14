@@ -24,6 +24,7 @@ message Resource {
   bool supports_default_tags = 14;
   bool free = 15;
   parser.CallStack call_stack = 16;
+  bool debug = 17;
 }
 
 message TagData {
