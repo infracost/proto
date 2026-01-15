@@ -62,6 +62,11 @@ export declare type ModuleResult = Message<"infracost.parser.terraform.ModuleRes
    * @generated from field: repeated infracost.parser.terraform.Output outputs = 9;
    */
   outputs: Output[];
+
+  /**
+   * @generated from field: repeated string dependency_paths = 10;
+   */
+  dependencyPaths: string[];
 };
 
 /**

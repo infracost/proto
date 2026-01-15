@@ -13,6 +13,7 @@ message Result {
   map<string, bool> conditions = 3;
   map<string, Resource> resources = 4;
   map<string, Value> outputs = 5;
+  repeated string dependency_paths = 6;
 }
 
 message NestedMapBranch {

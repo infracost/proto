@@ -23,14 +23,15 @@ const (
 )
 
 type Result struct {
-	state         protoimpl.MessageState      `protogen:"open.v1"`
-	Parameters    map[string]*Value           `protobuf:"bytes,1,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Mappings      map[string]*NestedMapBranch `protobuf:"bytes,2,rep,name=mappings,proto3" json:"mappings,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Conditions    map[string]bool             `protobuf:"bytes,3,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	Resources     map[string]*Resource        `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Outputs       map[string]*Value           `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState      `protogen:"open.v1"`
+	Parameters      map[string]*Value           `protobuf:"bytes,1,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Mappings        map[string]*NestedMapBranch `protobuf:"bytes,2,rep,name=mappings,proto3" json:"mappings,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Conditions      map[string]bool             `protobuf:"bytes,3,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	Resources       map[string]*Resource        `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Outputs         map[string]*Value           `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DependencyPaths []string                    `protobuf:"bytes,6,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Result) Reset() {
@@ -94,6 +95,13 @@ func (x *Result) GetResources() map[string]*Resource {
 func (x *Result) GetOutputs() map[string]*Value {
 	if x != nil {
 		return x.Outputs
+	}
+	return nil
+}
+
+func (x *Result) GetDependencyPaths() []string {
+	if x != nil {
+		return x.DependencyPaths
 	}
 	return nil
 }
@@ -490,7 +498,7 @@ var File_infracost_parser_cloudformation_result_proto protoreflect.FileDescripto
 
 const file_infracost_parser_cloudformation_result_proto_rawDesc = "" +
 	"\n" +
-	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a\x1einfracost/parser/address.proto\x1a+infracost/parser/cloudformation/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\x95\a\n" +
+	",infracost/parser/cloudformation/result.proto\x12\x1finfracost.parser.cloudformation\x1a\x1einfracost/parser/address.proto\x1a+infracost/parser/cloudformation/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xc0\a\n" +
 	"\x06Result\x12W\n" +
 	"\n" +
 	"parameters\x18\x01 \x03(\v27.infracost.parser.cloudformation.Result.ParametersEntryR\n" +
@@ -500,7 +508,8 @@ const file_infracost_parser_cloudformation_result_proto_rawDesc = "" +
 	"conditions\x18\x03 \x03(\v27.infracost.parser.cloudformation.Result.ConditionsEntryR\n" +
 	"conditions\x12T\n" +
 	"\tresources\x18\x04 \x03(\v26.infracost.parser.cloudformation.Result.ResourcesEntryR\tresources\x12N\n" +
-	"\aoutputs\x18\x05 \x03(\v24.infracost.parser.cloudformation.Result.OutputsEntryR\aoutputs\x1ae\n" +
+	"\aoutputs\x18\x05 \x03(\v24.infracost.parser.cloudformation.Result.OutputsEntryR\aoutputs\x12)\n" +
+	"\x10dependency_paths\x18\x06 \x03(\tR\x0fdependencyPaths\x1ae\n" +
 	"\x0fParametersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
 	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cloudformation.ValueR\x05value:\x028\x01\x1am\n" +
