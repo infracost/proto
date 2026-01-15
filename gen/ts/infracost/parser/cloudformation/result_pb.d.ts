@@ -42,6 +42,11 @@ export declare type Result = Message<"infracost.parser.cloudformation.Result"> &
    * @generated from field: map<string, infracost.parser.cloudformation.Value> outputs = 5;
    */
   outputs: { [key: string]: Value };
+
+  /**
+   * @generated from field: repeated string dependency_paths = 6;
+   */
+  dependencyPaths: string[];
 };
 
 /**

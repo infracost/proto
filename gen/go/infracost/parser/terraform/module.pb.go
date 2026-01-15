@@ -34,6 +34,7 @@ type ModuleResult struct {
 	Version         string                       `protobuf:"bytes,7,opt,name=version,proto3" json:"version,omitempty"`
 	Resources       []*Resource                  `protobuf:"bytes,8,rep,name=resources,proto3" json:"resources,omitempty"`
 	Outputs         []*Output                    `protobuf:"bytes,9,rep,name=outputs,proto3" json:"outputs,omitempty"`
+	DependencyPaths []string                     `protobuf:"bytes,10,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -127,6 +128,13 @@ func (x *ModuleResult) GetResources() []*Resource {
 func (x *ModuleResult) GetOutputs() []*Output {
 	if x != nil {
 		return x.Outputs
+	}
+	return nil
+}
+
+func (x *ModuleResult) GetDependencyPaths() []string {
+	if x != nil {
+		return x.DependencyPaths
 	}
 	return nil
 }
@@ -255,7 +263,7 @@ var File_infracost_parser_terraform_module_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_module_proto_rawDesc = "" +
 	"\n" +
-	"'infracost/parser/terraform/module.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a/infracost/parser/terraform/modules/loader.proto\x1a)infracost/parser/terraform/resource.proto\"\xbb\x06\n" +
+	"'infracost/parser/terraform/module.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a/infracost/parser/terraform/modules/loader.proto\x1a)infracost/parser/terraform/resource.proto\"\xe6\x06\n" +
 	"\fModuleResult\x12O\n" +
 	"\amodules\x18\x01 \x03(\v25.infracost.parser.terraform.ModuleResult.ModulesEntryR\amodules\x12@\n" +
 	"\fsource_range\x18\x02 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12)\n" +
@@ -265,7 +273,9 @@ const file_infracost_parser_terraform_module_proto_rawDesc = "" +
 	"\tload_data\x18\x06 \x01(\v20.infracost.parser.terraform.modules.LoadedModuleH\x01R\bloadData\x88\x01\x01\x12\x18\n" +
 	"\aversion\x18\a \x01(\tR\aversion\x12B\n" +
 	"\tresources\x18\b \x03(\v2$.infracost.parser.terraform.ResourceR\tresources\x12<\n" +
-	"\aoutputs\x18\t \x03(\v2\".infracost.parser.terraform.OutputR\aoutputs\x1ah\n" +
+	"\aoutputs\x18\t \x03(\v2\".infracost.parser.terraform.OutputR\aoutputs\x12)\n" +
+	"\x10dependency_paths\x18\n" +
+	" \x03(\tR\x0fdependencyPaths\x1ah\n" +
 	"\fModulesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12B\n" +
 	"\x05value\x18\x02 \x01(\v2,.infracost.parser.terraform.ModuleResultListR\x05value:\x028\x01\x1ah\n" +

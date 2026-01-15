@@ -17,6 +17,7 @@ message ModuleResult {
   string version = 7;
   repeated Resource resources = 8;
   repeated Output outputs = 9;
+  repeated string dependency_paths = 10;
 }
 
 message ModuleResultList {
