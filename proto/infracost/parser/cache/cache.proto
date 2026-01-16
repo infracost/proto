@@ -15,6 +15,8 @@ message TerraformProject {
   bytes project_config = 5; // raw yaml of config file
   bool is_terragrunt = 6;
   string terraform_module_suffix = 7;
+  reserved 8;
+  reserved "dependency_paths";
 }
 
 message Metadata {
