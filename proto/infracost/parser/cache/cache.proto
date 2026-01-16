@@ -15,7 +15,6 @@ message TerraformProject {
   bytes project_config = 5; // raw yaml of config file
   bool is_terragrunt = 6;
   string terraform_module_suffix = 7;
-  repeated string dependency_paths = 8;
 }
 
 message Metadata {
@@ -54,5 +53,4 @@ message CloudFormationProject {
   bytes project_config = 5; // raw yaml of config file
   reserved 6; // not used
   reserved "is_cdk"; // not used
-  repeated string dependency_paths = 7;
 }
