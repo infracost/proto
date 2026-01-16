@@ -451,7 +451,7 @@ var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\xe9\x02\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\x81\x03\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
@@ -460,7 +460,7 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
 	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12#\n" +
 	"\ris_terragrunt\x18\x06 \x01(\bR\fisTerragrunt\x126\n" +
-	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\"\xdd\x01\n" +
+	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffixJ\x04\b\b\x10\tR\x10dependency_paths\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
 	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12%\n" +
@@ -486,14 +486,14 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x9e\x02\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xb6\x02\n" +
 	"\x15CloudFormationProject\x12?\n" +
 	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
 	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12\x1d\n" +
 	"\n" +
 	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
-	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfigJ\x04\b\x06\x10\aR\x06is_cdk*Q\n" +
+	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfigJ\x04\b\x06\x10\aJ\x04\b\a\x10\bR\x06is_cdkR\x10dependency_paths*Q\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FLAVOR_TERRAFORM\x10\x01\x12\x19\n" +
