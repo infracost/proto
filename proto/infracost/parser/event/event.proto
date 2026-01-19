@@ -122,6 +122,7 @@ message JobBehavior {
   string build_script = 3;
   string custom_property_mapping_script = 4;
   FeatureFlags feature_flags = 5;
+  bool dry_run = 6;
 }
 
 // How it gets executed
