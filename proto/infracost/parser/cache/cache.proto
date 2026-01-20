@@ -33,12 +33,17 @@ enum Flavor {
   FLAVOR_CLOUDFORMATION = 2;
 }
 
+message DependencyPaths {
+  repeated string paths = 1;
+}
+
 // BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
 message BranchSummary {
   string branch = 1;
   map<string, string> sha_to_id_map = 2;
   map<string, string> sha_to_project_name_map = 3;
   map<string, Flavor> sha_to_flavor_map = 4;
+  map<string, DependencyPaths> sha_to_dependency_paths_map = 5;
 }
 
 message EncryptionEnvelope {
