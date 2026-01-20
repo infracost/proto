@@ -242,20 +242,65 @@ func (x *Metadata) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type DependencyPaths struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Paths         []string               `protobuf:"bytes,1,rep,name=paths,proto3" json:"paths,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DependencyPaths) Reset() {
+	*x = DependencyPaths{}
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DependencyPaths) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DependencyPaths) ProtoMessage() {}
+
+func (x *DependencyPaths) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DependencyPaths.ProtoReflect.Descriptor instead.
+func (*DependencyPaths) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DependencyPaths) GetPaths() []string {
+	if x != nil {
+		return x.Paths
+	}
+	return nil
+}
+
 // BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
 type BranchSummary struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Branch              string                 `protobuf:"bytes,1,opt,name=branch,proto3" json:"branch,omitempty"`
-	ShaToIdMap          map[string]string      `protobuf:"bytes,2,rep,name=sha_to_id_map,json=shaToIdMap,proto3" json:"sha_to_id_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ShaToProjectNameMap map[string]string      `protobuf:"bytes,3,rep,name=sha_to_project_name_map,json=shaToProjectNameMap,proto3" json:"sha_to_project_name_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ShaToFlavorMap      map[string]Flavor      `protobuf:"bytes,4,rep,name=sha_to_flavor_map,json=shaToFlavorMap,proto3" json:"sha_to_flavor_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=infracost.parser.cache.Flavor"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                   protoimpl.MessageState      `protogen:"open.v1"`
+	Branch                  string                      `protobuf:"bytes,1,opt,name=branch,proto3" json:"branch,omitempty"`
+	ShaToIdMap              map[string]string           `protobuf:"bytes,2,rep,name=sha_to_id_map,json=shaToIdMap,proto3" json:"sha_to_id_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ShaToProjectNameMap     map[string]string           `protobuf:"bytes,3,rep,name=sha_to_project_name_map,json=shaToProjectNameMap,proto3" json:"sha_to_project_name_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ShaToFlavorMap          map[string]Flavor           `protobuf:"bytes,4,rep,name=sha_to_flavor_map,json=shaToFlavorMap,proto3" json:"sha_to_flavor_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=infracost.parser.cache.Flavor"`
+	ShaToDependencyPathsMap map[string]*DependencyPaths `protobuf:"bytes,5,rep,name=sha_to_dependency_paths_map,json=shaToDependencyPathsMap,proto3" json:"sha_to_dependency_paths_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BranchSummary) Reset() {
 	*x = BranchSummary{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[2]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +312,7 @@ func (x *BranchSummary) String() string {
 func (*BranchSummary) ProtoMessage() {}
 
 func (x *BranchSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[2]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -280,7 +325,7 @@ func (x *BranchSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BranchSummary.ProtoReflect.Descriptor instead.
 func (*BranchSummary) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *BranchSummary) GetBranch() string {
@@ -311,6 +356,13 @@ func (x *BranchSummary) GetShaToFlavorMap() map[string]Flavor {
 	return nil
 }
 
+func (x *BranchSummary) GetShaToDependencyPathsMap() map[string]*DependencyPaths {
+	if x != nil {
+		return x.ShaToDependencyPathsMap
+	}
+	return nil
+}
+
 type EncryptionEnvelope struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EncryptedDek  []byte                 `protobuf:"bytes,1,opt,name=encrypted_dek,json=encryptedDek,proto3" json:"encrypted_dek,omitempty"`
@@ -322,7 +374,7 @@ type EncryptionEnvelope struct {
 
 func (x *EncryptionEnvelope) Reset() {
 	*x = EncryptionEnvelope{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[3]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -334,7 +386,7 @@ func (x *EncryptionEnvelope) String() string {
 func (*EncryptionEnvelope) ProtoMessage() {}
 
 func (x *EncryptionEnvelope) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[3]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -347,7 +399,7 @@ func (x *EncryptionEnvelope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EncryptionEnvelope.ProtoReflect.Descriptor instead.
 func (*EncryptionEnvelope) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *EncryptionEnvelope) GetEncryptedDek() []byte {
@@ -384,7 +436,7 @@ type CloudFormationProject struct {
 
 func (x *CloudFormationProject) Reset() {
 	*x = CloudFormationProject{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[4]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -396,7 +448,7 @@ func (x *CloudFormationProject) String() string {
 func (*CloudFormationProject) ProtoMessage() {}
 
 func (x *CloudFormationProject) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[4]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -409,7 +461,7 @@ func (x *CloudFormationProject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloudFormationProject.ProtoReflect.Descriptor instead.
 func (*CloudFormationProject) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CloudFormationProject) GetResult() *cloudformation.Result {
@@ -467,13 +519,16 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x0erunner_version\x18\x03 \x01(\tR\rrunnerVersion\x12%\n" +
 	"\x0eparser_version\x18\x04 \x01(\tR\rparserVersion\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xc7\x04\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"'\n" +
+	"\x0fDependencyPaths\x12\x14\n" +
+	"\x05paths\x18\x01 \x03(\tR\x05paths\"\xbf\x06\n" +
 	"\rBranchSummary\x12\x16\n" +
 	"\x06branch\x18\x01 \x01(\tR\x06branch\x12X\n" +
 	"\rsha_to_id_map\x18\x02 \x03(\v25.infracost.parser.cache.BranchSummary.ShaToIdMapEntryR\n" +
 	"shaToIdMap\x12t\n" +
 	"\x17sha_to_project_name_map\x18\x03 \x03(\v2>.infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntryR\x13shaToProjectNameMap\x12d\n" +
-	"\x11sha_to_flavor_map\x18\x04 \x03(\v29.infracost.parser.cache.BranchSummary.ShaToFlavorMapEntryR\x0eshaToFlavorMap\x1a=\n" +
+	"\x11sha_to_flavor_map\x18\x04 \x03(\v29.infracost.parser.cache.BranchSummary.ShaToFlavorMapEntryR\x0eshaToFlavorMap\x12\x80\x01\n" +
+	"\x1bsha_to_dependency_paths_map\x18\x05 \x03(\v2B.infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntryR\x17shaToDependencyPathsMap\x1a=\n" +
 	"\x0fShaToIdMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aF\n" +
@@ -482,7 +537,10 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aa\n" +
 	"\x13ShaToFlavorMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x124\n" +
-	"\x05value\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x05value:\x028\x01\"p\n" +
+	"\x05value\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x05value:\x028\x01\x1as\n" +
+	"\x1cShaToDependencyPathsMapEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12=\n" +
+	"\x05value\x18\x02 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x05value:\x028\x01\"p\n" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
@@ -514,40 +572,44 @@ func file_infracost_parser_cache_cache_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_cache_cache_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_infracost_parser_cache_cache_proto_goTypes = []any{
 	(Flavor)(0),                    // 0: infracost.parser.cache.Flavor
 	(*TerraformProject)(nil),       // 1: infracost.parser.cache.TerraformProject
 	(*Metadata)(nil),               // 2: infracost.parser.cache.Metadata
-	(*BranchSummary)(nil),          // 3: infracost.parser.cache.BranchSummary
-	(*EncryptionEnvelope)(nil),     // 4: infracost.parser.cache.EncryptionEnvelope
-	(*CloudFormationProject)(nil),  // 5: infracost.parser.cache.CloudFormationProject
-	nil,                            // 6: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	nil,                            // 7: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	nil,                            // 8: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	(*terraform.ModuleResult)(nil), // 9: infracost.parser.terraform.ModuleResult
-	(*parser.Diagnostic)(nil),      // 10: infracost.parser.Diagnostic
-	(*timestamppb.Timestamp)(nil),  // 11: google.protobuf.Timestamp
-	(*cloudformation.Result)(nil),  // 12: infracost.parser.cloudformation.Result
+	(*DependencyPaths)(nil),        // 3: infracost.parser.cache.DependencyPaths
+	(*BranchSummary)(nil),          // 4: infracost.parser.cache.BranchSummary
+	(*EncryptionEnvelope)(nil),     // 5: infracost.parser.cache.EncryptionEnvelope
+	(*CloudFormationProject)(nil),  // 6: infracost.parser.cache.CloudFormationProject
+	nil,                            // 7: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	nil,                            // 8: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	nil,                            // 9: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	nil,                            // 10: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
+	(*terraform.ModuleResult)(nil), // 11: infracost.parser.terraform.ModuleResult
+	(*parser.Diagnostic)(nil),      // 12: infracost.parser.Diagnostic
+	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
+	(*cloudformation.Result)(nil),  // 14: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
-	9,  // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
+	11, // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
 	2,  // 1: infracost.parser.cache.TerraformProject.metadata:type_name -> infracost.parser.cache.Metadata
-	10, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
+	12, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
 	0,  // 3: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.Flavor
-	11, // 4: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 5: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	7,  // 6: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	8,  // 7: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	12, // 8: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
-	2,  // 9: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
-	10, // 10: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
-	0,  // 11: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	13, // 4: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
+	7,  // 5: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	8,  // 6: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	9,  // 7: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	10, // 8: infracost.parser.cache.BranchSummary.sha_to_dependency_paths_map:type_name -> infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
+	14, // 9: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
+	2,  // 10: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
+	12, // 11: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
+	0,  // 12: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
+	3,  // 13: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry.value:type_name -> infracost.parser.cache.DependencyPaths
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_cache_cache_proto_init() }
@@ -561,7 +623,7 @@ func file_infracost_parser_cache_cache_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_cache_cache_proto_rawDesc), len(file_infracost_parser_cache_cache_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

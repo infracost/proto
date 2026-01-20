@@ -101,6 +101,22 @@ export declare type Metadata = Message<"infracost.parser.cache.Metadata"> & {
 export declare const MetadataSchema: GenMessage<Metadata>;
 
 /**
+ * @generated from message infracost.parser.cache.DependencyPaths
+ */
+export declare type DependencyPaths = Message<"infracost.parser.cache.DependencyPaths"> & {
+  /**
+   * @generated from field: repeated string paths = 1;
+   */
+  paths: string[];
+};
+
+/**
+ * Describes the message infracost.parser.cache.DependencyPaths.
+ * Use `create(DependencyPathsSchema)` to create a new message.
+ */
+export declare const DependencyPathsSchema: GenMessage<DependencyPaths>;
+
+/**
  * BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
  *
  * @generated from message infracost.parser.cache.BranchSummary
@@ -125,6 +141,11 @@ export declare type BranchSummary = Message<"infracost.parser.cache.BranchSummar
    * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4;
    */
   shaToFlavorMap: { [key: string]: Flavor };
+
+  /**
+   * @generated from field: map<string, infracost.parser.cache.DependencyPaths> sha_to_dependency_paths_map = 5;
+   */
+  shaToDependencyPathsMap: { [key: string]: DependencyPaths };
 };
 
 /**
