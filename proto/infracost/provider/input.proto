@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+import "infracost/parser/cloudformation/result.proto";
+import "infracost/parser/terraform/module.proto";
+
+message Input {
+    // The output of a parser, such as a Terraform module result, or a CloudFormation result
+    ParseResult parse_result = 1;
+    // Absolute path of the project/template being scanned
+    // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
+    string absolute_path = 2; // path to project
+    // Specifies customer-defined (and default) usage data
+    // This comes from zero or more of the cloud db, and/or a customer's committed usage file
+    UsageData usage_data = 3;
+    // Specifies which policies need to be run, and any custom settings for each.
+    PolicyConfiguration policy_config = 4; // which policies are enable and their settings
+    // Specifies which guard rails need to be applied
+    GuardRailsConfiguration guard_rails_config = 5;
+}
+
+message ParseResult {
+    oneof value {
+      // Terraform module result
+      infracost.parser.terraform.ModuleResult terraform = 1;
+      // CloudFormation template result
+      infracost.parser.cloudformation.Result cloudformation = 2;
+    }
+}
+
+message PolicyConfiguration {
+    // FinOps policy configuration (note: security policies are currently a subset of finops policies)
+    FinOpsPolicyConfiguration finops = 1;
+    // Tagging policy configuration
+    TaggingPolicyConfiguration tagging = 2;
+}
+
+message FinOpsPolicyConfiguration {
+    // TODO: !!!
+}
+
+message TaggingPolicyConfiguration {
+    // TODO: !!!
+}
+
+message GuardRailsConfiguration {
+    // TODO: comment
+    // placeholder
+}
+
+message UsageData {
+    // TODO: UsageData
+    // TODO: UsageFile
+    // TODO: why do we need both???
+}

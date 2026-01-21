@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+// Rat encodes a *big.Rat from Go stdlib
+// This ensures we can encode rational numbers precisely,
+// which is especially useful for financials.
+// To decode:
+//   num := new(big.Int).SetBytes(input.Numerator)
+//   denom := new(big.Int).SetBytes(input.Denominator)
+//   rat := new(big.Rat).SetFrac(num, denom)
+message Rat {
+  bytes numerator = 1;
+  bytes denominator = 2;
+}

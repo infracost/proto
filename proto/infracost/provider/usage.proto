@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+// TODO: !!!
+
+message UsageSchema {
+    []*UsageItem
+}
+
+message UsageItem{
+  string key = 1;
+  string description = 2;
+}
+
+message UsageMap{
+
+}
+
+message UsageData{
+
+}
