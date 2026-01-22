@@ -3,82 +3,84 @@ syntax = "proto3";
 package infracost.provider;
 
 import "infracost/provider/rational.proto";
-import "infracost/provider/usage.proto";
 
 // TODO: add comment above each field
 
 message Output {
-    // Normalised list of resources, made IaC-agnostic.
-    repeated Resource resources = 1;
-    // Details of passes/failures for each configured finops policy
-    FinopsPolicyResults finops = 2;
-    // Details of passes/failures for each configured tagging policy
-    TaggingPolicyResults tagging = 3;
-    // Details of passes/failures for each configured guardrail
-    GuardRailsResults guard_rails_results = 4;
+  // Normalised list of resources, made IaC-agnostic.
+  repeated Resource resources = 1;
+  // Details of passes/failures for each configured finops policy
+  FinopsPolicyResults finops = 2;
+  // Details of passes/failures for each configured tagging policy
+  TaggingPolicyResults tagging = 3;
+  // Details of passes/failures for each configured guardrail
+  GuardRailsResults guard_rails_results = 4;
 }
 
 message Resource {
-    // Unique resource id - this is supplied by the relevant parser
-    string id = 1;
-    // TODO: need to figure out if we need this...
-    Metadata metadata = 2; // ???
-    // The resource type as supplied by the parser e.g. aws_instance or AWS::EC2::Instance
-    string resource_type = 3; // tf or cfn resource type
-    // TODO: ???
-    string provider_link = 4;
-    // TODO: ???
-    string skip_message = 5;
-    // TODO: resource name - usually the address of the resource?
-    string name = 6;
-    // If explicitly supported by Infracost
-    bool is_supported = 7;
-    // If the resource has no associated costs
-	bool is_free = 8;
-	// If the provider of the resource is supported
-	bool is_provider_supported = 9;
-	// The resource costs - totals and individual cost components - including environmental metrics
-    ResourceCosts costs = 10;
-    // Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
-	repeated Resource child_resources = 11;
+  // Unique resource id - this is supplied by the relevant parser
+  string id = 1;
+  // TODO: need to figure out if we need this...
+  ResourceMetadata metadata = 2; // ???
+  // The resource type as supplied by the parser e.g. aws_instance or AWS::EC2::Instance
+  string resource_type = 3; // tf or cfn resource type
+  // TODO: ???
+  string provider_link = 4;
+  // TODO: ???
+  string skip_message = 5;
+  // TODO: resource name - usually the address of the resource?
+  string name = 6;
+  // If explicitly supported by Infracost
+  bool is_supported = 7;
+  // If the resource has no associated costs
+  bool is_free = 8;
+  // If the provider of the resource is supported
+  bool is_provider_supported = 9;
+  // The resource costs - totals and individual cost components - including environmental metrics
+  ResourceCosts costs = 10;
+  // Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
+  repeated Resource child_resources = 11;
+}
 
+message ResourceMetadata {
+  // TODO: ???
 }
 
 message Tags {
-    // Default tags
-    repeated Tag default_tags = 1;
-    // Resource-level tags
-    // TODO: do these include default values?
-    repeated Tag tags = 2;
-    // If the provider supports default tags here (so we can differentiate between this and there being no defaults)
-    bool default_tags_supported = 3;
-    // List of missing (undefined) variables that result in us not knowing all tag keys
-    // We use this so we can avoid report missing tags if we're unsure if the tags are really missing, as one or more tags exists with an unknown key.
-    repeated string missing_vars_causing_unknown_tag_keys = 4;
-    // List of missing (undefined) variables that result in us not knowing all default tag keys
-    repeated string missing_vars_causing_unknown_default_tag_keys = 5;
-    // Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
-    TagPropagation propagation = 6;
+  // Default tags
+  repeated Tag default_tags = 1;
+  // Resource-level tags
+  // TODO: do these include default values?
+  repeated Tag tags = 2;
+  // If the provider supports default tags here (so we can differentiate between this and there being no defaults)
+  bool default_tags_supported = 3;
+  // List of missing (undefined) variables that result in us not knowing all tag keys
+  // We use this so we can avoid report missing tags if we're unsure if the tags are really missing, as one or more tags exists with an unknown key.
+  repeated string missing_vars_causing_unknown_tag_keys = 4;
+  // List of missing (undefined) variables that result in us not knowing all default tag keys
+  repeated string missing_vars_causing_unknown_default_tag_keys = 5;
+  // Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
+  TagPropagation propagation = 6;
 }
 
 message TagPropagation {
-    // TODO: !!!
-    To                    string             `json:"to"`
-	From                  *string            `json:"from,omitempty"`
-	Tags                  *map[string]string `json:"tags,omitempty"`
-	Attribute             string             `json:"attribute"`
-	HasRequiredAttributes bool               `json:"hasRequiredAttributes,omitempty"`
+  // TODO: !!!
+  //    To                    string             `json:"to"`
+  // From                  *string            `json:"from,omitempty"`
+  // Tags                  *map[string]string `json:"tags,omitempty"`
+  // Attribute             string             `json:"attribute"`
+  // HasRequiredAttributes bool               `json:"hasRequiredAttributes,omitempty"`
 }
 
 message ResourceCosts {
-    // Total hourly cost of the resource
-    // TODO: can we remove this and calc from monthly?
-    infracost.provider.Rat hourly_base = 1;
-    // Total monthly cost of the resource
-    infracost.provider.Rat monthly_base = 2;
-    infracost.provider.Rat monthly_usage = 3;
-    EnvironmentalMetrics environmental_metrics = 4;
-    repeated CostComponent components = 5;
+  // Total hourly cost of the resource
+  // TODO: can we remove this and calc from monthly?
+  infracost.provider.Rat hourly_base = 1;
+  // Total monthly cost of the resource
+  infracost.provider.Rat monthly_base = 2;
+  infracost.provider.Rat monthly_usage = 3;
+  EnvironmentalMetrics environmental_metrics = 4;
+  repeated CostComponent components = 5;
 }
 
 message CostComponent {
@@ -103,8 +105,8 @@ message CostComponent {
 }
 
 message PeriodPrice {
-   infracost.provider.Rat price = 7;
-   Period period = 6;
+  infracost.provider.Rat price = 7;
+  Period period = 6;
 }
 
 enum Period {
@@ -112,14 +114,14 @@ enum Period {
   HOUR = 1;
 }
 
-message ResourceEnvironmentalMetrics {
-    PricePerPeriod carbon_grams_co2e = 1;
-    PricePerPeriod water_liters = 2;
+message EnvironmentalMetrics {
+  PeriodPrice carbon_grams_co2e = 1;
+  PeriodPrice water_liters = 2;
 }
 
 message Tag {
-    string key = 1;
-    string value = 2;
+  string key = 1;
+  string value = 2;
 }
 
 message FinopsPolicyResults {
@@ -136,18 +138,17 @@ message FinopsPolicyResults {
 }
 
 message FinopsPassingResource {
-    // TODO: !!!
+  // TODO: !!!
 }
 
-
 message FinopsFailingResource {
-    // TODO: !!!
+  // TODO: !!!
 }
 
 message TaggingPolicyResults {
- // TODO: !!!
+  // TODO: !!!
 }
 
 message GuardRailsResults {
-    // placeholder
+  // placeholder
 }

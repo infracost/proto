@@ -5,18 +5,14 @@ package infracost.provider;
 // TODO: !!!
 
 message UsageSchema {
-    []*UsageItem
+  // []*UsageItem
 }
 
-message UsageItem{
+message UsageItem {
   string key = 1;
   string description = 2;
 }
 
-message UsageMap{
+message UsageMap {}
 
-}
-
-message UsageData{
-
-}
+message UsageData {}
