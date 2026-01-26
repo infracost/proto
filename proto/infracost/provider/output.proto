@@ -10,40 +10,62 @@ message Output {
   // Normalised list of resources, made IaC-agnostic.
   repeated Resource resources = 1;
   // Details of passes/failures for each configured finops policy
-  FinopsPolicyResults finops = 2;
+  repeated FinopsPolicyResult finops_results = 2;
   // Details of passes/failures for each configured tagging policy
-  TaggingPolicyResults tagging = 3;
-  // Details of passes/failures for each configured guardrail
-  GuardRailsResults guard_rails_results = 4;
+  repeated TaggingPolicyResult tagging_results = 3;
+  // NOTE: Eventually we should add details of passes/failures for each configured guardrail
+  reserved 4;
 }
 
 message Resource {
   // Unique resource id - this is supplied by the relevant parser
   string id = 1;
-  // TODO: need to figure out if we need this...
-  ResourceMetadata metadata = 2; // ???
   // The resource type as supplied by the parser e.g. aws_instance or AWS::EC2::Instance
-  string resource_type = 3; // tf or cfn resource type
-  // TODO: ???
-  string provider_link = 4;
-  // TODO: ???
-  string skip_message = 5;
+  string resource_type = 2; // tf or cfn resource type
   // TODO: resource name - usually the address of the resource?
-  string name = 6;
+  string name = 3;
+
+  // region if applicable, e.g. eu-west2
+  string region = 4;
+
+  ResourceMetadata metadata = 5; // ???
+
+  // TODO: ??? link to where the provider was defined?
+  string provider_link = 6;
   // If explicitly supported by Infracost
   bool is_supported = 7;
   // If the resource has no associated costs
   bool is_free = 8;
   // If the provider of the resource is supported
   bool is_provider_supported = 9;
+  // if defaults tags are supported for this resource
+  bool supports_default_tags = 10;
+
+  bool is_new = 11;
   // The resource costs - totals and individual cost components - including environmental metrics
-  ResourceCosts costs = 10;
+  ResourceCosts costs = 12;
+  // Resource-level tags
+  map<string, string> tags = 13;
+  map<string, string> default_tags = 14;
   // Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
-  repeated Resource child_resources = 11;
+  repeated Resource child_resources = 15;
 }
 
 message ResourceMetadata {
-  // TODO: ???
+  string basic_checksum = 1;
+  string property_checksum = 2;
+  string default_tags_checksum = 3;
+  string filename = 4;
+  int64 start_line = 5;
+  int64 end_line = 6;
+  repeated ModuleCall module_calls = 7;
+}
+
+message ModuleCall {
+  string definition_name = 1; // i.e. block name
+  string filename = 2;
+  int64 start_line = 3;
+  int64 end_line = 4;
 }
 
 message Tags {
@@ -73,14 +95,7 @@ message TagPropagation {
 }
 
 message ResourceCosts {
-  // Total hourly cost of the resource
-  // TODO: can we remove this and calc from monthly?
-  infracost.provider.Rat hourly_base = 1;
-  // Total monthly cost of the resource
-  infracost.provider.Rat monthly_base = 2;
-  infracost.provider.Rat monthly_usage = 3;
-  EnvironmentalMetrics environmental_metrics = 4;
-  repeated CostComponent components = 5;
+  repeated CostComponent components = 1;
 }
 
 message CostComponent {
@@ -98,8 +113,8 @@ message CostComponent {
   PeriodPrice period_price = 6;
   // This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
   infracost.provider.Rat quantity = 7;
-  // The factor to multiply the `period_price` by to arrive at a discounted price (currently only used for Google Compute sustained use discounts)
-  infracost.provider.Rat discount_factor = 8;
+  // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+  infracost.provider.Rat discount_rate = 8;
   // Information on how fast your infrastructure is destroying the planet
   EnvironmentalMetrics environmental_metrics = 9;
 }
@@ -115,8 +130,9 @@ enum Period {
 }
 
 message EnvironmentalMetrics {
-  PeriodPrice carbon_grams_co2e = 1;
-  PeriodPrice water_liters = 2;
+  Period period = 1;
+  infracost.provider.Rat carbon_grams_co2e = 2;
+  infracost.provider.Rat water_liters = 3;
 }
 
 message Tag {
@@ -124,31 +140,67 @@ message Tag {
   string value = 2;
 }
 
-message FinopsPolicyResults {
+message FinopsPolicyResult {
   string policy_id = 1;
   string policy_name = 2;
   string policy_slug = 3;
   string policy_message = 4;
-  repeated string applicable_resources = 5; // addresses of all applicable resources
-  repeated FinopsPassingResource passing_resources = 6;
-  repeated FinopsFailingResource failing_resources = 7;
-  bool block_pull_request = 8;
-  bool include_in_pull_request_comment = 9;
-  bool only_applies_to_new_resources = 10;
+  repeated string passing_resource_ids = 5;
+  repeated FinopsPolicyFailingResource failing_resources = 6;
+  bool block_pull_request = 7;
+  bool include_in_pull_request_comment = 8;
+  bool only_applies_to_new_resources = 9;
 }
 
-message FinopsPassingResource {
-  // TODO: !!!
+message FinopsPolicyFailingResource {
+  string id = 1;
+  repeated FinopsResourceIssue issues = 15;
 }
 
-message FinopsFailingResource {
-  // TODO: !!!
+message FinopsResourceIssue {
+  infracost.provider.Rat monthly_savings = 1;
+  infracost.provider.Rat monthly_carbon_savings_grams_co2e = 2;
+  infracost.provider.Rat monthly_water_savings_litres = 3;
+  string address = 4;
+  string attribute = 5;
+  string description = 6;
+  optional string savings_details = 7;
 }
 
-message TaggingPolicyResults {
-  // TODO: !!!
+message TaggingPolicyResult {
+  string policy_id = 1;
+  string policy_name = 2;
+  string policy_message = 3;
+  repeated string passing_resource_ids = 4;
+  repeated TaggingPolicyFailingResource failing_resources = 5;
+  bool block_pull_request = 6;
+  bool include_in_pull_request_comment = 7;
 }
 
-message GuardRailsResults {
-  // placeholder
+message TaggingPolicyFailingResource {
+  string id = 1;
+  repeated InvalidTag invalid_tags = 2;
+  repeated string missing_mandatory_tags = 3;
+  repeated TagPropagationProblem propagation_problems = 4;
+  bool default_tags_did_not_propagate = 5;
+}
+
+message TagPropagationProblem {
+  string attribute = 1;
+  string from = 2;
+  string to = 3;
+  repeated string valid_sources = 4;
+  repeated string affected_tags = 5;
+}
+
+message InvalidTag {
+  string key = 1;
+  string value = 2;
+  string message = 3;
+  repeated string valid_values = 4;
+  bool valid_values_truncated = 5;
+  bool from_default_tags = 6;
+  bool missing_mandatory = 7;
+  optional string valid_regex = 8;
+  optional string suggestion = 9;
 }

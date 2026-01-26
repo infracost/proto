@@ -3,6 +3,7 @@ syntax = "proto3";
 package infracost.provider;
 
 import "infracost/parser/cloudformation/result.proto";
+import "infracost/parser/event/runparameters.proto";
 import "infracost/parser/terraform/module.proto";
 import "infracost/provider/usage.proto";
 
@@ -24,15 +25,39 @@ message Input {
   repeated string previous_resource_ids = 4;
 
   // TODO: comment!
-  infracost.provider.UsageData usage_data = 5;
+  infracost.provider.Usage usage = 5;
 
   // Specifies which policies need to be run, and any custom settings for each.
   PolicyConfiguration policy_config = 6;
 
-  // Specifies which guard rails need to be applied
-  GuardRailsConfiguration guard_rails_config = 7;
+  // NOTE: this space is reserved for guard rails configuration
+  reserved 7;
 
-  // Information about the project that can be used to match policy filters etc.
+  // Features
+  Features features = 8;
+
+  Settings settings = 9;
+
+  Infracost infracost = 10;
+}
+
+message Settings {
+  string currency = 1;
+  bool use_disk_caches = 2;
+}
+
+message Infracost {
+  string api_key = 1;
+  string pricing_api_endpoint = 2;
+  string trace_id = 3;
+}
+
+message Features {
+  bool enable_price_lookups = 1;
+  bool enable_recommendations = 2;
+  bool enable_finops_policies = 3;
+  bool enable_tagging_policies = 4;
+  bool enable_environmental_metrics = 5;
 }
 
 message ParseResult {
@@ -64,16 +89,11 @@ message PolicyConfiguration {
 }
 
 message FinOpsPolicyConfiguration {
-  // TODO: !!!
   // If none are supplied, all available (default) policies should be run.
+  repeated infracost.parser.event.FinopsPolicySettings policies = 1;
 }
 
 message TaggingPolicyConfiguration {
-  // TODO: !!!
   // If none are supplied, all available (default) policies should be run.
-}
-
-message GuardRailsConfiguration {
-  // TODO: comment
-  // placeholder
+  repeated infracost.parser.event.TagPolicy policies = 1;
 }
