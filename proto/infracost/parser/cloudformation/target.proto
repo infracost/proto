@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package infracost.parser.cloudformation;
+
+message Target {
+  string template_path = 1;
+  uint64 flags = 2;
+  Options options = 3;
+}
+
+message Options {
+  map<string, string> input_parameters = 1;
+  string region = 2;
+}

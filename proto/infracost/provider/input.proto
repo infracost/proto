@@ -2,14 +2,13 @@ syntax = "proto3";
 
 package infracost.provider;
 
-import "infracost/parser/cloudformation/result.proto";
 import "infracost/parser/event/runparameters.proto";
-import "infracost/parser/terraform/module.proto";
+import "infracost/parser/messages/message.proto";
 import "infracost/provider/usage.proto";
 
 message Input {
   // The output of a parser, such as a Terraform module result, or a CloudFormation result
-  ParseResult parse_result = 1;
+  infracost.parser.messages.ParseResponse parse_result = 1;
 
   // Absolute path of the project/template being scanned
   // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
@@ -58,15 +57,6 @@ message Features {
   bool enable_finops_policies = 3;
   bool enable_tagging_policies = 4;
   bool enable_environmental_metrics = 5;
-}
-
-message ParseResult {
-  oneof value {
-    // Terraform module result
-    infracost.parser.terraform.ModuleResult terraform = 1;
-    // CloudFormation template result
-    infracost.parser.cloudformation.Result cloudformation = 2;
-  }
 }
 
 // Extra information about the project (formerly known as Scope in the runner)

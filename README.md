@@ -40,3 +40,16 @@ If your IDE shows broken imports for proto files:
 ```
 
 **IntelliJ/GoLand**: Right-click `proto/` → Mark Directory as → Protobuf Include Path
+
+**Zed**: Install the `protobuf` extension and add to your settings:
+```json
+{
+  "lsp": {
+    "buf": {
+      "initialization_options": {
+        "protoPaths": ["proto"]
+      }
+    }
+  }
+}
+```
