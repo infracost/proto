@@ -4,15 +4,17 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Rat } from "./rational_pb.js";
-import { file_infracost_provider_rational } from "./rational_pb.js";
+import type { CallStack } from "../parser/stack_pb.js";
+import { file_infracost_parser_stack } from "../parser/stack_pb.js";
+import type { Rat } from "../rational/rational_pb.js";
+import { file_infracost_rational_rational } from "../rational/rational_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/provider/output.proto.
  */
 export const file_infracost_provider_output: GenFile = /*@__PURE__*/
-  fileDesc("Ch9pbmZyYWNvc3QvcHJvdmlkZXIvb3V0cHV0LnByb3RvEhJpbmZyYWNvc3QucHJvdmlkZXIiwQEKBk91dHB1dBIvCglyZXNvdXJjZXMYASADKAsyHC5pbmZyYWNvc3QucHJvdmlkZXIuUmVzb3VyY2USPgoOZmlub3BzX3Jlc3VsdHMYAiADKAsyJi5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5UmVzdWx0EkAKD3RhZ2dpbmdfcmVzdWx0cxgDIAMoCzInLmluZnJhY29zdC5wcm92aWRlci5UYWdnaW5nUG9saWN5UmVzdWx0SgQIBBAFItQECghSZXNvdXJjZRIKCgJpZBgBIAEoCRIVCg1yZXNvdXJjZV90eXBlGAIgASgJEgwKBG5hbWUYAyABKAkSDgoGcmVnaW9uGAQgASgJEjYKCG1ldGFkYXRhGAUgASgLMiQuaW5mcmFjb3N0LnByb3ZpZGVyLlJlc291cmNlTWV0YWRhdGESFQoNcHJvdmlkZXJfbGluaxgGIAEoCRIUCgxpc19zdXBwb3J0ZWQYByABKAgSDwoHaXNfZnJlZRgIIAEoCBIdChVpc19wcm92aWRlcl9zdXBwb3J0ZWQYCSABKAgSHQoVc3VwcG9ydHNfZGVmYXVsdF90YWdzGAogASgIEg4KBmlzX25ldxgLIAEoCBIwCgVjb3N0cxgMIAEoCzIhLmluZnJhY29zdC5wcm92aWRlci5SZXNvdXJjZUNvc3RzEjQKBHRhZ3MYDSADKAsyJi5pbmZyYWNvc3QucHJvdmlkZXIuUmVzb3VyY2UuVGFnc0VudHJ5EkMKDGRlZmF1bHRfdGFncxgOIAMoCzItLmluZnJhY29zdC5wcm92aWRlci5SZXNvdXJjZS5EZWZhdWx0VGFnc0VudHJ5EjUKD2NoaWxkX3Jlc291cmNlcxgPIAMoCzIcLmluZnJhY29zdC5wcm92aWRlci5SZXNvdXJjZRorCglUYWdzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEi0gEKEFJlc291cmNlTWV0YWRhdGESFgoOYmFzaWNfY2hlY2tzdW0YASABKAkSGQoRcHJvcGVydHlfY2hlY2tzdW0YAiABKAkSHQoVZGVmYXVsdF90YWdzX2NoZWNrc3VtGAMgASgJEhAKCGZpbGVuYW1lGAQgASgJEhIKCnN0YXJ0X2xpbmUYBSABKAMSEAoIZW5kX2xpbmUYBiABKAMSNAoMbW9kdWxlX2NhbGxzGAcgAygLMh4uaW5mcmFjb3N0LnByb3ZpZGVyLk1vZHVsZUNhbGwiXQoKTW9kdWxlQ2FsbBIXCg9kZWZpbml0aW9uX25hbWUYASABKAkSEAoIZmlsZW5hbWUYAiABKAkSEgoKc3RhcnRfbGluZRgDIAEoAxIQCghlbmRfbGluZRgEIAEoAyKbAgoEVGFncxItCgxkZWZhdWx0X3RhZ3MYASADKAsyFy5pbmZyYWNvc3QucHJvdmlkZXIuVGFnEiUKBHRhZ3MYAiADKAsyFy5pbmZyYWNvc3QucHJvdmlkZXIuVGFnEh4KFmRlZmF1bHRfdGFnc19zdXBwb3J0ZWQYAyABKAgSLQolbWlzc2luZ192YXJzX2NhdXNpbmdfdW5rbm93bl90YWdfa2V5cxgEIAMoCRI1Ci1taXNzaW5nX3ZhcnNfY2F1c2luZ191bmtub3duX2RlZmF1bHRfdGFnX2tleXMYBSADKAkSNwoLcHJvcGFnYXRpb24YBiABKAsyIi5pbmZyYWNvc3QucHJvdmlkZXIuVGFnUHJvcGFnYXRpb24iEAoOVGFnUHJvcGFnYXRpb24iRgoNUmVzb3VyY2VDb3N0cxI1Cgpjb21wb25lbnRzGAEgAygLMiEuaW5mcmFjb3N0LnByb3ZpZGVyLkNvc3RDb21wb25lbnQi0QIKDUNvc3RDb21wb25lbnQSDAoEbmFtZRgBIAEoCRIMCgR1bml0GAIgASgJEhMKC3VzYWdlX2Jhc2VkGAMgASgIEhcKD3ByaWNlX25vdF9mb3VuZBgEIAEoCBIbChNwcmljZV93YXNfaGFyZGNvZGVkGAUgASgIEjUKDHBlcmlvZF9wcmljZRgGIAEoCzIfLmluZnJhY29zdC5wcm92aWRlci5QZXJpb2RQcmljZRIpCghxdWFudGl0eRgHIAEoCzIXLmluZnJhY29zdC5wcm92aWRlci5SYXQSLgoNZGlzY291bnRfcmF0ZRgIIAEoCzIXLmluZnJhY29zdC5wcm92aWRlci5SYXQSRwoVZW52aXJvbm1lbnRhbF9tZXRyaWNzGAkgASgLMiguaW5mcmFjb3N0LnByb3ZpZGVyLkVudmlyb25tZW50YWxNZXRyaWNzImEKC1BlcmlvZFByaWNlEiYKBXByaWNlGAcgASgLMhcuaW5mcmFjb3N0LnByb3ZpZGVyLlJhdBIqCgZwZXJpb2QYBiABKA4yGi5pbmZyYWNvc3QucHJvdmlkZXIuUGVyaW9kIqUBChRFbnZpcm9ubWVudGFsTWV0cmljcxIqCgZwZXJpb2QYASABKA4yGi5pbmZyYWNvc3QucHJvdmlkZXIuUGVyaW9kEjIKEWNhcmJvbl9ncmFtc19jbzJlGAIgASgLMhcuaW5mcmFjb3N0LnByb3ZpZGVyLlJhdBItCgx3YXRlcl9saXRlcnMYAyABKAsyFy5pbmZyYWNvc3QucHJvdmlkZXIuUmF0IiEKA1RhZxILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAkivwIKEkZpbm9wc1BvbGljeVJlc3VsdBIRCglwb2xpY3lfaWQYASABKAkSEwoLcG9saWN5X25hbWUYAiABKAkSEwoLcG9saWN5X3NsdWcYAyABKAkSFgoOcG9saWN5X21lc3NhZ2UYBCABKAkSHAoUcGFzc2luZ19yZXNvdXJjZV9pZHMYBSADKAkSSgoRZmFpbGluZ19yZXNvdXJjZXMYBiADKAsyLy5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5RmFpbGluZ1Jlc291cmNlEhoKEmJsb2NrX3B1bGxfcmVxdWVzdBgHIAEoCBInCh9pbmNsdWRlX2luX3B1bGxfcmVxdWVzdF9jb21tZW50GAggASgIEiUKHW9ubHlfYXBwbGllc190b19uZXdfcmVzb3VyY2VzGAkgASgIImIKG0Zpbm9wc1BvbGljeUZhaWxpbmdSZXNvdXJjZRIKCgJpZBgBIAEoCRI3CgZpc3N1ZXMYDyADKAsyJy5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUmVzb3VyY2VJc3N1ZSK1AgoTRmlub3BzUmVzb3VyY2VJc3N1ZRIwCg9tb250aGx5X3NhdmluZ3MYASABKAsyFy5pbmZyYWNvc3QucHJvdmlkZXIuUmF0EkIKIW1vbnRobHlfY2FyYm9uX3NhdmluZ3NfZ3JhbXNfY28yZRgCIAEoCzIXLmluZnJhY29zdC5wcm92aWRlci5SYXQSPQocbW9udGhseV93YXRlcl9zYXZpbmdzX2xpdHJlcxgDIAEoCzIXLmluZnJhY29zdC5wcm92aWRlci5SYXQSDwoHYWRkcmVzcxgEIAEoCRIRCglhdHRyaWJ1dGUYBSABKAkSEwoLZGVzY3JpcHRpb24YBiABKAkSHAoPc2F2aW5nc19kZXRhaWxzGAcgASgJSACIAQFCEgoQX3NhdmluZ3NfZGV0YWlscyKFAgoTVGFnZ2luZ1BvbGljeVJlc3VsdBIRCglwb2xpY3lfaWQYASABKAkSEwoLcG9saWN5X25hbWUYAiABKAkSFgoOcG9saWN5X21lc3NhZ2UYAyABKAkSHAoUcGFzc2luZ19yZXNvdXJjZV9pZHMYBCADKAkSSwoRZmFpbGluZ19yZXNvdXJjZXMYBSADKAsyMC5pbmZyYWNvc3QucHJvdmlkZXIuVGFnZ2luZ1BvbGljeUZhaWxpbmdSZXNvdXJjZRIaChJibG9ja19wdWxsX3JlcXVlc3QYBiABKAgSJwofaW5jbHVkZV9pbl9wdWxsX3JlcXVlc3RfY29tbWVudBgHIAEoCCLxAQocVGFnZ2luZ1BvbGljeUZhaWxpbmdSZXNvdXJjZRIKCgJpZBgBIAEoCRI0CgxpbnZhbGlkX3RhZ3MYAiADKAsyHi5pbmZyYWNvc3QucHJvdmlkZXIuSW52YWxpZFRhZxIeChZtaXNzaW5nX21hbmRhdG9yeV90YWdzGAMgAygJEkcKFHByb3BhZ2F0aW9uX3Byb2JsZW1zGAQgAygLMikuaW5mcmFjb3N0LnByb3ZpZGVyLlRhZ1Byb3BhZ2F0aW9uUHJvYmxlbRImCh5kZWZhdWx0X3RhZ3NfZGlkX25vdF9wcm9wYWdhdGUYBSABKAgicgoVVGFnUHJvcGFnYXRpb25Qcm9ibGVtEhEKCWF0dHJpYnV0ZRgBIAEoCRIMCgRmcm9tGAIgASgJEgoKAnRvGAMgASgJEhUKDXZhbGlkX3NvdXJjZXMYBCADKAkSFQoNYWZmZWN0ZWRfdGFncxgFIAMoCSL3AQoKSW52YWxpZFRhZxILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAkSDwoHbWVzc2FnZRgDIAEoCRIUCgx2YWxpZF92YWx1ZXMYBCADKAkSHgoWdmFsaWRfdmFsdWVzX3RydW5jYXRlZBgFIAEoCBIZChFmcm9tX2RlZmF1bHRfdGFncxgGIAEoCBIZChFtaXNzaW5nX21hbmRhdG9yeRgHIAEoCBIYCgt2YWxpZF9yZWdleBgIIAEoCUgAiAEBEhcKCnN1Z2dlc3Rpb24YCSABKAlIAYgBAUIOCgxfdmFsaWRfcmVnZXhCDQoLX3N1Z2dlc3Rpb24qHQoGUGVyaW9kEgkKBU1PTlRIEAASCAoESE9VUhABQsQBChZjb20uaW5mcmFjb3N0LnByb3ZpZGVyQgtPdXRwdXRQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z", [file_infracost_provider_rational]);
+  fileDesc("Ch9pbmZyYWNvc3QvcHJvdmlkZXIvb3V0cHV0LnByb3RvEhJpbmZyYWNvc3QucHJvdmlkZXIieQoGT3V0cHV0Ei8KCXJlc291cmNlcxgBIAMoCzIcLmluZnJhY29zdC5wcm92aWRlci5SZXNvdXJjZRI+Cg5maW5vcHNfcmVzdWx0cxgCIAMoCzImLmluZnJhY29zdC5wcm92aWRlci5GaW5vcHNQb2xpY3lSZXN1bHQirwMKCFJlc291cmNlEgoKAmlkGAEgASgJEgwKBHR5cGUYAiABKAkSDAoEbmFtZRgDIAEoCRIOCgZyZWdpb24YBCABKAkSNgoIbWV0YWRhdGEYBSABKAsyJC5pbmZyYWNvc3QucHJvdmlkZXIuUmVzb3VyY2VNZXRhZGF0YRIVCg1wcm92aWRlcl9saW5rGAYgASgJEhQKDGlzX3N1cHBvcnRlZBgHIAEoCBIPCgdpc19mcmVlGAggASgIEh0KFWlzX3Byb3ZpZGVyX3N1cHBvcnRlZBgJIAEoCBIOCgZpc19uZXcYCiABKAgSMAoFY29zdHMYCyABKAsyIS5pbmZyYWNvc3QucHJvdmlkZXIuUmVzb3VyY2VDb3N0cxIsCgd0YWdnaW5nGAwgASgLMhsuaW5mcmFjb3N0LnByb3ZpZGVyLlRhZ2dpbmcSNQoPY2hpbGRfcmVzb3VyY2VzGA0gAygLMhwuaW5mcmFjb3N0LnByb3ZpZGVyLlJlc291cmNlEi8KCmNhbGxfc3RhY2sYDiABKAsyGy5pbmZyYWNvc3QucGFyc2VyLkNhbGxTdGFjayLSAQoQUmVzb3VyY2VNZXRhZGF0YRIWCg5iYXNpY19jaGVja3N1bRgBIAEoCRIZChFwcm9wZXJ0eV9jaGVja3N1bRgCIAEoCRIdChVkZWZhdWx0X3RhZ3NfY2hlY2tzdW0YAyABKAkSEAoIZmlsZW5hbWUYBCABKAkSEgoKc3RhcnRfbGluZRgFIAEoAxIQCghlbmRfbGluZRgGIAEoAxI0Cgxtb2R1bGVfY2FsbHMYByADKAsyHi5pbmZyYWNvc3QucHJvdmlkZXIuTW9kdWxlQ2FsbCJdCgpNb2R1bGVDYWxsEhcKD2RlZmluaXRpb25fbmFtZRgBIAEoCRIQCghmaWxlbmFtZRgCIAEoCRISCgpzdGFydF9saW5lGAMgASgDEhAKCGVuZF9saW5lGAQgASgDIq8BCgdUYWdnaW5nEiUKBHRhZ3MYASADKAsyFy5pbmZyYWNvc3QucHJvdmlkZXIuVGFnEhUKDXN1cHBvcnRzX3RhZ3MYAiABKAgSHQoVc3VwcG9ydHNfZGVmYXVsdF90YWdzGAMgASgIEkcKFHByb3BhZ2F0aW9uX3Byb2JsZW1zGAQgAygLMikuaW5mcmFjb3N0LnByb3ZpZGVyLlRhZ1Byb3BhZ2F0aW9uUHJvYmxlbSJrCgNUYWcSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJEhIKCmlzX2RlZmF1bHQYAyABKAgSGAoQaXNfa2V5X3N5bnRoZXRpYxgEIAEoCBIaChJpc192YWx1ZV9zeW50aGV0aWMYBSABKAgihAEKFVRhZ1Byb3BhZ2F0aW9uUHJvYmxlbRIUCgxhY3R1YWxfdmFsdWUYASABKAkSFAoMdmFsaWRfdmFsdWVzGAIgAygJEhEKCWF0dHJpYnV0ZRgDIAEoCRIVCg10YWdfcmVjaXBpZW50GAQgASgJEhUKDWFmZmVjdGVkX3RhZ3MYBSADKAkiRgoNUmVzb3VyY2VDb3N0cxI1Cgpjb21wb25lbnRzGAEgAygLMiEuaW5mcmFjb3N0LnByb3ZpZGVyLkNvc3RDb21wb25lbnQi0QIKDUNvc3RDb21wb25lbnQSDAoEbmFtZRgBIAEoCRIMCgR1bml0GAIgASgJEhMKC3VzYWdlX2Jhc2VkGAMgASgIEhcKD3ByaWNlX25vdF9mb3VuZBgEIAEoCBIbChNwcmljZV93YXNfaGFyZGNvZGVkGAUgASgIEjUKDHBlcmlvZF9wcmljZRgGIAEoCzIfLmluZnJhY29zdC5wcm92aWRlci5QZXJpb2RQcmljZRIpCghxdWFudGl0eRgHIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQSLgoNZGlzY291bnRfcmF0ZRgIIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQSRwoVZW52aXJvbm1lbnRhbF9tZXRyaWNzGAkgASgLMiguaW5mcmFjb3N0LnByb3ZpZGVyLkVudmlyb25tZW50YWxNZXRyaWNzImEKC1BlcmlvZFByaWNlEiYKBXByaWNlGAEgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdBIqCgZwZXJpb2QYAiABKA4yGi5pbmZyYWNvc3QucHJvdmlkZXIuUGVyaW9kIqUBChRFbnZpcm9ubWVudGFsTWV0cmljcxIqCgZwZXJpb2QYASABKA4yGi5pbmZyYWNvc3QucHJvdmlkZXIuUGVyaW9kEjIKEWNhcmJvbl9ncmFtc19jbzJlGAIgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdBItCgx3YXRlcl9saXRlcnMYAyABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ir8CChJGaW5vcHNQb2xpY3lSZXN1bHQSEQoJcG9saWN5X2lkGAEgASgJEhMKC3BvbGljeV9uYW1lGAIgASgJEhMKC3BvbGljeV9zbHVnGAMgASgJEhYKDnBvbGljeV9tZXNzYWdlGAQgASgJEhwKFHBhc3NpbmdfcmVzb3VyY2VfaWRzGAUgAygJEkoKEWZhaWxpbmdfcmVzb3VyY2VzGAYgAygLMi8uaW5mcmFjb3N0LnByb3ZpZGVyLkZpbm9wc1BvbGljeUZhaWxpbmdSZXNvdXJjZRIaChJibG9ja19wdWxsX3JlcXVlc3QYByABKAgSJwofaW5jbHVkZV9pbl9wdWxsX3JlcXVlc3RfY29tbWVudBgIIAEoCBIlCh1vbmx5X2FwcGxpZXNfdG9fbmV3X3Jlc291cmNlcxgJIAEoCCJiChtGaW5vcHNQb2xpY3lGYWlsaW5nUmVzb3VyY2USCgoCaWQYASABKAkSNwoGaXNzdWVzGAIgAygLMicuaW5mcmFjb3N0LnByb3ZpZGVyLkZpbm9wc1Jlc291cmNlSXNzdWUiugMKE0Zpbm9wc1Jlc291cmNlSXNzdWUSMAoPbW9udGhseV9zYXZpbmdzGAEgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdBJCCiFtb250aGx5X2NhcmJvbl9zYXZpbmdzX2dyYW1zX2NvMmUYAiABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ej0KHG1vbnRobHlfd2F0ZXJfc2F2aW5nc19saXRyZXMYAyABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Eg8KB2FkZHJlc3MYBCABKAkSEQoJYXR0cmlidXRlGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJEhwKD3NhdmluZ3NfZGV0YWlscxgHIAEoCUgAiAEBEkEKFWJlZm9yZV9maXhfYnJlYWtkb3ducxgIIAMoCzIiLmluZnJhY29zdC5wcm92aWRlci5Jc3N1ZUJyZWFrZG93bhJAChRhZnRlcl9maXhfYnJlYWtkb3ducxgJIAMoCzIiLmluZnJhY29zdC5wcm92aWRlci5Jc3N1ZUJyZWFrZG93bkISChBfc2F2aW5nc19kZXRhaWxzIrIBCg5Jc3N1ZUJyZWFrZG93bhIVCg1yZXNvdXJjZV9uYW1lGAEgASgJEg4KBnJlZ2lvbhgCIAEoCRI/Cg9jb3N0X2NvbXBvbmVudHMYAyADKAsyJi5pbmZyYWNvc3QucHJvdmlkZXIuSXNzdWVDb3N0Q29tcG9uZW50EjgKDHN1YnJlc291cmNlcxgEIAMoCzIiLmluZnJhY29zdC5wcm92aWRlci5Jc3N1ZUJyZWFrZG93biLXAQoSSXNzdWVDb3N0Q29tcG9uZW50EgwKBG5hbWUYASABKAkSDAoEdW5pdBgCIAEoCRITCgt1c2FnZV9iYXNlZBgDIAEoCBI1CgxwZXJpb2RfcHJpY2UYBCABKAsyHy5pbmZyYWNvc3QucHJvdmlkZXIuUGVyaW9kUHJpY2USKQoIcXVhbnRpdHkYBSABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ei4KDWRpc2NvdW50X3JhdGUYBiABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0IvcBCgpJbnZhbGlkVGFnEgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCRIPCgdtZXNzYWdlGAMgASgJEhQKDHZhbGlkX3ZhbHVlcxgEIAMoCRIeChZ2YWxpZF92YWx1ZXNfdHJ1bmNhdGVkGAUgASgIEhkKEWZyb21fZGVmYXVsdF90YWdzGAYgASgIEhkKEW1pc3NpbmdfbWFuZGF0b3J5GAcgASgIEhgKC3ZhbGlkX3JlZ2V4GAggASgJSACIAQESFwoKc3VnZ2VzdGlvbhgJIAEoCUgBiAEBQg4KDF92YWxpZF9yZWdleEINCgtfc3VnZ2VzdGlvbiodCgZQZXJpb2QSCQoFTU9OVEgQABIICgRIT1VSEAFCxAEKFmNvbS5pbmZyYWNvc3QucHJvdmlkZXJCC091dHB1dFByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcHJvdmlkZXKiAgNJUFiqAhJJbmZyYWNvc3QuUHJvdmlkZXLKAhJJbmZyYWNvc3RcUHJvdmlkZXLiAh5JbmZyYWNvc3RcUHJvdmlkZXJcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlByb3ZpZGVyYgZwcm90bzM", [file_infracost_parser_stack, file_infracost_rational_rational]);
 
 /**
  * @generated from message infracost.provider.Output
@@ -31,13 +33,6 @@ export type Output = Message<"infracost.provider.Output"> & {
    * @generated from field: repeated infracost.provider.FinopsPolicyResult finops_results = 2;
    */
   finopsResults: FinopsPolicyResult[];
-
-  /**
-   * Details of passes/failures for each configured tagging policy
-   *
-   * @generated from field: repeated infracost.provider.TaggingPolicyResult tagging_results = 3;
-   */
-  taggingResults: TaggingPolicyResult[];
 };
 
 /**
@@ -63,12 +58,12 @@ export type Resource = Message<"infracost.provider.Resource"> & {
    *
    * tf or cfn resource type
    *
-   * @generated from field: string resource_type = 2;
+   * @generated from field: string type = 2;
    */
-  resourceType: string;
+  type: string;
 
   /**
-   * TODO: resource name - usually the address of the resource?
+   * a unique resource name, usually populated with the full address of the resource
    *
    * @generated from field: string name = 3;
    */
@@ -82,14 +77,14 @@ export type Resource = Message<"infracost.provider.Resource"> & {
   region: string;
 
   /**
-   * ???
+   * filename, line numbers, checksums
    *
    * @generated from field: infracost.provider.ResourceMetadata metadata = 5;
    */
   metadata?: ResourceMetadata;
 
   /**
-   * TODO: ??? link to where the provider was defined?
+   * string describing where the provider is defined for this resource
    *
    * @generated from field: string provider_link = 6;
    */
@@ -117,42 +112,39 @@ export type Resource = Message<"infracost.provider.Resource"> & {
   isProviderSupported: boolean;
 
   /**
-   * if defaults tags are supported for this resource
+   * if the resource was added for this run (if known)
    *
-   * @generated from field: bool supports_default_tags = 10;
-   */
-  supportsDefaultTags: boolean;
-
-  /**
-   * @generated from field: bool is_new = 11;
+   * @generated from field: bool is_new = 10;
    */
   isNew: boolean;
 
   /**
    * The resource costs - totals and individual cost components - including environmental metrics
    *
-   * @generated from field: infracost.provider.ResourceCosts costs = 12;
+   * @generated from field: infracost.provider.ResourceCosts costs = 11;
    */
   costs?: ResourceCosts;
 
   /**
    * Resource-level tags
    *
-   * @generated from field: map<string, string> tags = 13;
+   * @generated from field: infracost.provider.Tagging tagging = 12;
    */
-  tags: { [key: string]: string };
-
-  /**
-   * @generated from field: map<string, string> default_tags = 14;
-   */
-  defaultTags: { [key: string]: string };
+  tagging?: Tagging;
 
   /**
    * Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
    *
-   * @generated from field: repeated infracost.provider.Resource child_resources = 15;
+   * @generated from field: repeated infracost.provider.Resource child_resources = 13;
    */
   childResources: Resource[];
+
+  /**
+   * the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
+   *
+   * @generated from field: infracost.parser.CallStack call_stack = 14;
+   */
+  callStack?: CallStack;
 };
 
 /**
@@ -167,6 +159,8 @@ export const ResourceSchema: GenMessage<Resource> = /*@__PURE__*/
  */
 export type ResourceMetadata = Message<"infracost.provider.ResourceMetadata"> & {
   /**
+   * TODO: docs!
+   *
    * @generated from field: string basic_checksum = 1;
    */
   basicChecksum: string;
@@ -214,6 +208,8 @@ export const ResourceMetadataSchema: GenMessage<ResourceMetadata> = /*@__PURE__*
  */
 export type ModuleCall = Message<"infracost.provider.ModuleCall"> & {
   /**
+   * the name of the thing that defined this module, e.g. "module.x" in terraform
+   *
    * i.e. block name
    *
    * @generated from field: string definition_name = 1;
@@ -221,11 +217,15 @@ export type ModuleCall = Message<"infracost.provider.ModuleCall"> & {
   definitionName: string;
 
   /**
+   * filename where this module was called
+   *
    * @generated from field: string filename = 2;
    */
   filename: string;
 
   /**
+   * line numbers where this module was called
+   *
    * @generated from field: int64 start_line = 3;
    */
   startLine: bigint;
@@ -244,86 +244,146 @@ export const ModuleCallSchema: GenMessage<ModuleCall> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 3);
 
 /**
- * @generated from message infracost.provider.Tags
+ * @generated from message infracost.provider.Tagging
  */
-export type Tags = Message<"infracost.provider.Tags"> & {
+export type Tagging = Message<"infracost.provider.Tagging"> & {
   /**
-   * Default tags
+   * tag values
    *
-   * @generated from field: repeated infracost.provider.Tag default_tags = 1;
-   */
-  defaultTags: Tag[];
-
-  /**
-   * Resource-level tags
-   * TODO: do these include default values?
-   *
-   * @generated from field: repeated infracost.provider.Tag tags = 2;
+   * @generated from field: repeated infracost.provider.Tag tags = 1;
    */
   tags: Tag[];
 
   /**
+   * if this resource supports tags at all
+   *
+   * @generated from field: bool supports_tags = 2;
+   */
+  supportsTags: boolean;
+
+  /**
    * If the provider supports default tags here (so we can differentiate between this and there being no defaults)
    *
-   * @generated from field: bool default_tags_supported = 3;
+   * @generated from field: bool supports_default_tags = 3;
    */
-  defaultTagsSupported: boolean;
-
-  /**
-   * List of missing (undefined) variables that result in us not knowing all tag keys
-   * We use this so we can avoid report missing tags if we're unsure if the tags are really missing, as one or more tags exists with an unknown key.
-   *
-   * @generated from field: repeated string missing_vars_causing_unknown_tag_keys = 4;
-   */
-  missingVarsCausingUnknownTagKeys: string[];
-
-  /**
-   * List of missing (undefined) variables that result in us not knowing all default tag keys
-   *
-   * @generated from field: repeated string missing_vars_causing_unknown_default_tag_keys = 5;
-   */
-  missingVarsCausingUnknownDefaultTagKeys: string[];
+  supportsDefaultTags: boolean;
 
   /**
    * Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
    *
-   * @generated from field: infracost.provider.TagPropagation propagation = 6;
+   * @generated from field: repeated infracost.provider.TagPropagationProblem propagation_problems = 4;
    */
-  propagation?: TagPropagation;
+  propagationProblems: TagPropagationProblem[];
 };
 
 /**
- * Describes the message infracost.provider.Tags.
- * Use `create(TagsSchema)` to create a new message.
+ * Describes the message infracost.provider.Tagging.
+ * Use `create(TaggingSchema)` to create a new message.
  */
-export const TagsSchema: GenMessage<Tags> = /*@__PURE__*/
+export const TaggingSchema: GenMessage<Tagging> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 4);
 
 /**
- * TODO: !!!
- *    To                    string             `json:"to"`
- * From                  *string            `json:"from,omitempty"`
- * Tags                  *map[string]string `json:"tags,omitempty"`
- * Attribute             string             `json:"attribute"`
- * HasRequiredAttributes bool               `json:"hasRequiredAttributes,omitempty"`
- *
- * @generated from message infracost.provider.TagPropagation
+ * @generated from message infracost.provider.Tag
  */
-export type TagPropagation = Message<"infracost.provider.TagPropagation"> & {
+export type Tag = Message<"infracost.provider.Tag"> & {
+  /**
+   * tag key (name)
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * tag value
+   *
+   * @generated from field: string value = 2;
+   */
+  value: string;
+
+  /**
+   * whether this is a default tag
+   *
+   * @generated from field: bool is_default = 3;
+   */
+  isDefault: boolean;
+
+  /**
+   * whether the key was synthetically generated (e.g. we made up a value because the real one was not defined)
+   *
+   * @generated from field: bool is_key_synthetic = 4;
+   */
+  isKeySynthetic: boolean;
+
+  /**
+   * whether the value was synthetically generated (e.g. we made up a value because the real one was not defined)
+   *
+   * @generated from field: bool is_value_synthetic = 5;
+   */
+  isValueSynthetic: boolean;
 };
 
 /**
- * Describes the message infracost.provider.TagPropagation.
- * Use `create(TagPropagationSchema)` to create a new message.
+ * Describes the message infracost.provider.Tag.
+ * Use `create(TagSchema)` to create a new message.
  */
-export const TagPropagationSchema: GenMessage<TagPropagation> = /*@__PURE__*/
+export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 5);
+
+/**
+ * @generated from message infracost.provider.TagPropagationProblem
+ */
+export type TagPropagationProblem = Message<"infracost.provider.TagPropagationProblem"> & {
+  /**
+   * actual discovered value for the attribute (formerly known as "From" for some reason)
+   *
+   * @generated from field: string actual_value = 1;
+   */
+  actualValue: string;
+
+  /**
+   * valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+   *
+   * @generated from field: repeated string valid_values = 2;
+   */
+  validValues: string[];
+
+  /**
+   * the attribute which dictates whether propagation is enabled
+   *
+   * @generated from field: string attribute = 3;
+   */
+  attribute: string;
+
+  /**
+   * a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+   *
+   * @generated from field: string tag_recipient = 4;
+   */
+  tagRecipient: string;
+
+  /**
+   * tag keys which are affected by this propagation problem
+   *
+   * @generated from field: repeated string affected_tags = 5;
+   */
+  affectedTags: string[];
+};
+
+/**
+ * Describes the message infracost.provider.TagPropagationProblem.
+ * Use `create(TagPropagationProblemSchema)` to create a new message.
+ */
+export const TagPropagationProblemSchema: GenMessage<TagPropagationProblem> = /*@__PURE__*/
+  messageDesc(file_infracost_provider_output, 6);
 
 /**
  * @generated from message infracost.provider.ResourceCosts
  */
 export type ResourceCosts = Message<"infracost.provider.ResourceCosts"> & {
   /**
+   * a list of cost line items directly associated with this resource
+   *
    * @generated from field: repeated infracost.provider.CostComponent components = 1;
    */
   components: CostComponent[];
@@ -334,7 +394,7 @@ export type ResourceCosts = Message<"infracost.provider.ResourceCosts"> & {
  * Use `create(ResourceCostsSchema)` to create a new message.
  */
 export const ResourceCostsSchema: GenMessage<ResourceCosts> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 6);
+  messageDesc(file_infracost_provider_output, 7);
 
 /**
  * @generated from message infracost.provider.CostComponent
@@ -385,14 +445,14 @@ export type CostComponent = Message<"infracost.provider.CostComponent"> & {
   /**
    * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
    *
-   * @generated from field: infracost.provider.Rat quantity = 7;
+   * @generated from field: infracost.rational.Rat quantity = 7;
    */
   quantity?: Rat;
 
   /**
    * The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
    *
-   * @generated from field: infracost.provider.Rat discount_rate = 8;
+   * @generated from field: infracost.rational.Rat discount_rate = 8;
    */
   discountRate?: Rat;
 
@@ -409,19 +469,23 @@ export type CostComponent = Message<"infracost.provider.CostComponent"> & {
  * Use `create(CostComponentSchema)` to create a new message.
  */
 export const CostComponentSchema: GenMessage<CostComponent> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 7);
+  messageDesc(file_infracost_provider_output, 8);
 
 /**
  * @generated from message infracost.provider.PeriodPrice
  */
 export type PeriodPrice = Message<"infracost.provider.PeriodPrice"> & {
   /**
-   * @generated from field: infracost.provider.Rat price = 7;
+   * the raw price as arational number
+   *
+   * @generated from field: infracost.rational.Rat price = 1;
    */
   price?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Period period = 6;
+   * this is the period to which the price applies (i.e. monthly or hourly)
+   *
+   * @generated from field: infracost.provider.Period period = 2;
    */
   period: Period;
 };
@@ -431,24 +495,30 @@ export type PeriodPrice = Message<"infracost.provider.PeriodPrice"> & {
  * Use `create(PeriodPriceSchema)` to create a new message.
  */
 export const PeriodPriceSchema: GenMessage<PeriodPrice> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 8);
+  messageDesc(file_infracost_provider_output, 9);
 
 /**
  * @generated from message infracost.provider.EnvironmentalMetrics
  */
 export type EnvironmentalMetrics = Message<"infracost.provider.EnvironmentalMetrics"> & {
   /**
+   * the period to which the metrics apply (i.e. monthly or hourly)
+   *
    * @generated from field: infracost.provider.Period period = 1;
    */
   period: Period;
 
   /**
-   * @generated from field: infracost.provider.Rat carbon_grams_co2e = 2;
+   * carbon emissions in grams CO2e
+   *
+   * @generated from field: infracost.rational.Rat carbon_grams_co2e = 2;
    */
   carbonGramsCo2e?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat water_liters = 3;
+   * water usage in liters
+   *
+   * @generated from field: infracost.rational.Rat water_liters = 3;
    */
   waterLiters?: Rat;
 };
@@ -458,28 +528,6 @@ export type EnvironmentalMetrics = Message<"infracost.provider.EnvironmentalMetr
  * Use `create(EnvironmentalMetricsSchema)` to create a new message.
  */
 export const EnvironmentalMetricsSchema: GenMessage<EnvironmentalMetrics> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 9);
-
-/**
- * @generated from message infracost.provider.Tag
- */
-export type Tag = Message<"infracost.provider.Tag"> & {
-  /**
-   * @generated from field: string key = 1;
-   */
-  key: string;
-
-  /**
-   * @generated from field: string value = 2;
-   */
-  value: string;
-};
-
-/**
- * Describes the message infracost.provider.Tag.
- * Use `create(TagSchema)` to create a new message.
- */
-export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 10);
 
 /**
@@ -487,46 +535,64 @@ export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
  */
 export type FinopsPolicyResult = Message<"infracost.provider.FinopsPolicyResult"> & {
   /**
+   * Unique policy ID (UUID v4, from dashboard API)
+   *
    * @generated from field: string policy_id = 1;
    */
   policyId: string;
 
   /**
+   * Human-readable policy name
+   *
    * @generated from field: string policy_name = 2;
    */
   policyName: string;
 
   /**
+   * Human-readable policy slug, used to identify specific policy code in provider plugins
+   *
    * @generated from field: string policy_slug = 3;
    */
   policySlug: string;
 
   /**
+   * Message describing the policy result
+   *
    * @generated from field: string policy_message = 4;
    */
   policyMessage: string;
 
   /**
+   * Resource IDs that passed this policy
+   *
    * @generated from field: repeated string passing_resource_ids = 5;
    */
   passingResourceIds: string[];
 
   /**
+   * Resources that failed this policy, along with details of the individual issues
+   *
    * @generated from field: repeated infracost.provider.FinopsPolicyFailingResource failing_resources = 6;
    */
   failingResources: FinopsPolicyFailingResource[];
 
   /**
+   * should this failure cause the pull request to be blocked (if PR blocking is enabled at a higher level)
+   *
    * @generated from field: bool block_pull_request = 7;
    */
   blockPullRequest: boolean;
 
   /**
+   * should this policy result be included in the pull request comment
+   *
    * @generated from field: bool include_in_pull_request_comment = 8;
    */
   includeInPullRequestComment: boolean;
 
   /**
+   * does this policy only apply to new resources
+   *
    * @generated from field: bool only_applies_to_new_resources = 9;
    */
   onlyAppliesToNewResources: boolean;
@@ -544,12 +610,16 @@ export const FinopsPolicyResultSchema: GenMessage<FinopsPolicyResult> = /*@__PUR
  */
 export type FinopsPolicyFailingResource = Message<"infracost.provider.FinopsPolicyFailingResource"> & {
   /**
+   * Unique resource ID (can be matched against the Resource.id field to identify a full resource)
+   *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
-   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 15;
+   * Details of the individual issues for this resource
+   *
+   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 2;
    */
   issues: FinopsResourceIssue[];
 };
@@ -566,39 +636,65 @@ export const FinopsPolicyFailingResourceSchema: GenMessage<FinopsPolicyFailingRe
  */
 export type FinopsResourceIssue = Message<"infracost.provider.FinopsResourceIssue"> & {
   /**
-   * @generated from field: infracost.provider.Rat monthly_savings = 1;
+   * monthly financial savings (in configured currency) that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_savings = 1;
    */
   monthlySavings?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat monthly_carbon_savings_grams_co2e = 2;
+   * monthly carbon savings in grams CO2e that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_carbon_savings_grams_co2e = 2;
    */
   monthlyCarbonSavingsGramsCo2e?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat monthly_water_savings_litres = 3;
+   * monthly water savings in litres that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_water_savings_litres = 3;
    */
   monthlyWaterSavingsLitres?: Rat;
 
   /**
+   * human-readable address where the issue originates
+   *
    * @generated from field: string address = 4;
    */
   address: string;
 
   /**
+   * attribute of the resource where the issue originates
+   *
    * @generated from field: string attribute = 5;
    */
   attribute: string;
 
   /**
+   * detailed description of the issue
+   *
    * @generated from field: string description = 6;
    */
   description: string;
 
   /**
+   * extra details pertaining to the financial savings
+   *
    * @generated from field: optional string savings_details = 7;
    */
   savingsDetails?: string;
+
+  /**
+   * breakdowns of costs before and after fixing the issue
+   *
+   * @generated from field: repeated infracost.provider.IssueBreakdown before_fix_breakdowns = 8;
+   */
+  beforeFixBreakdowns: IssueBreakdown[];
+
+  /**
+   * @generated from field: repeated infracost.provider.IssueBreakdown after_fix_breakdowns = 9;
+   */
+  afterFixBreakdowns: IssueBreakdown[];
 };
 
 /**
@@ -609,171 +705,162 @@ export const FinopsResourceIssueSchema: GenMessage<FinopsResourceIssue> = /*@__P
   messageDesc(file_infracost_provider_output, 13);
 
 /**
- * @generated from message infracost.provider.TaggingPolicyResult
+ * @generated from message infracost.provider.IssueBreakdown
  */
-export type TaggingPolicyResult = Message<"infracost.provider.TaggingPolicyResult"> & {
+export type IssueBreakdown = Message<"infracost.provider.IssueBreakdown"> & {
   /**
-   * @generated from field: string policy_id = 1;
+   * name of the resource or subresource
+   *
+   * @generated from field: string resource_name = 1;
    */
-  policyId: string;
+  resourceName: string;
 
   /**
-   * @generated from field: string policy_name = 2;
+   * region of the resource or subresource
+   *
+   * @generated from field: string region = 2;
    */
-  policyName: string;
+  region: string;
 
   /**
-   * @generated from field: string policy_message = 3;
+   * cost components for this resource or subresource
+   *
+   * @generated from field: repeated infracost.provider.IssueCostComponent cost_components = 3;
    */
-  policyMessage: string;
+  costComponents: IssueCostComponent[];
 
   /**
-   * @generated from field: repeated string passing_resource_ids = 4;
+   * nested subresources
+   *
+   * @generated from field: repeated infracost.provider.IssueBreakdown subresources = 4;
    */
-  passingResourceIds: string[];
-
-  /**
-   * @generated from field: repeated infracost.provider.TaggingPolicyFailingResource failing_resources = 5;
-   */
-  failingResources: TaggingPolicyFailingResource[];
-
-  /**
-   * @generated from field: bool block_pull_request = 6;
-   */
-  blockPullRequest: boolean;
-
-  /**
-   * @generated from field: bool include_in_pull_request_comment = 7;
-   */
-  includeInPullRequestComment: boolean;
+  subresources: IssueBreakdown[];
 };
 
 /**
- * Describes the message infracost.provider.TaggingPolicyResult.
- * Use `create(TaggingPolicyResultSchema)` to create a new message.
+ * Describes the message infracost.provider.IssueBreakdown.
+ * Use `create(IssueBreakdownSchema)` to create a new message.
  */
-export const TaggingPolicyResultSchema: GenMessage<TaggingPolicyResult> = /*@__PURE__*/
+export const IssueBreakdownSchema: GenMessage<IssueBreakdown> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 14);
 
 /**
- * @generated from message infracost.provider.TaggingPolicyFailingResource
+ * @generated from message infracost.provider.IssueCostComponent
  */
-export type TaggingPolicyFailingResource = Message<"infracost.provider.TaggingPolicyFailingResource"> & {
+export type IssueCostComponent = Message<"infracost.provider.IssueCostComponent"> & {
   /**
-   * @generated from field: string id = 1;
+   * name of the cost component e.g. "compute cost"
+   *
+   * @generated from field: string name = 1;
    */
-  id: string;
+  name: string;
 
   /**
-   * @generated from field: repeated infracost.provider.InvalidTag invalid_tags = 2;
+   * unit the cost is measured in e.g. "hours", "GB", "vCPU/seconds"
+   *
+   * @generated from field: string unit = 2;
    */
-  invalidTags: InvalidTag[];
+  unit: string;
 
   /**
-   * @generated from field: repeated string missing_mandatory_tags = 3;
+   * Whether the `period_price` is based on usage data
+   *
+   * @generated from field: bool usage_based = 3;
    */
-  missingMandatoryTags: string[];
+  usageBased: boolean;
 
   /**
-   * @generated from field: repeated infracost.provider.TagPropagationProblem propagation_problems = 4;
+   * The price, pre-discount, of each `unit` (per price period)
+   *
+   * @generated from field: infracost.provider.PeriodPrice period_price = 4;
    */
-  propagationProblems: TagPropagationProblem[];
+  periodPrice?: PeriodPrice;
 
   /**
-   * @generated from field: bool default_tags_did_not_propagate = 5;
+   * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+   *
+   * @generated from field: infracost.rational.Rat quantity = 5;
    */
-  defaultTagsDidNotPropagate: boolean;
+  quantity?: Rat;
+
+  /**
+   * The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+   *
+   * @generated from field: infracost.rational.Rat discount_rate = 6;
+   */
+  discountRate?: Rat;
 };
 
 /**
- * Describes the message infracost.provider.TaggingPolicyFailingResource.
- * Use `create(TaggingPolicyFailingResourceSchema)` to create a new message.
+ * Describes the message infracost.provider.IssueCostComponent.
+ * Use `create(IssueCostComponentSchema)` to create a new message.
  */
-export const TaggingPolicyFailingResourceSchema: GenMessage<TaggingPolicyFailingResource> = /*@__PURE__*/
+export const IssueCostComponentSchema: GenMessage<IssueCostComponent> = /*@__PURE__*/
   messageDesc(file_infracost_provider_output, 15);
-
-/**
- * @generated from message infracost.provider.TagPropagationProblem
- */
-export type TagPropagationProblem = Message<"infracost.provider.TagPropagationProblem"> & {
-  /**
-   * @generated from field: string attribute = 1;
-   */
-  attribute: string;
-
-  /**
-   * @generated from field: string from = 2;
-   */
-  from: string;
-
-  /**
-   * @generated from field: string to = 3;
-   */
-  to: string;
-
-  /**
-   * @generated from field: repeated string valid_sources = 4;
-   */
-  validSources: string[];
-
-  /**
-   * @generated from field: repeated string affected_tags = 5;
-   */
-  affectedTags: string[];
-};
-
-/**
- * Describes the message infracost.provider.TagPropagationProblem.
- * Use `create(TagPropagationProblemSchema)` to create a new message.
- */
-export const TagPropagationProblemSchema: GenMessage<TagPropagationProblem> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 16);
 
 /**
  * @generated from message infracost.provider.InvalidTag
  */
 export type InvalidTag = Message<"infracost.provider.InvalidTag"> & {
   /**
+   * tag key (name)
+   *
    * @generated from field: string key = 1;
    */
   key: string;
 
   /**
+   * tag value
+   *
    * @generated from field: string value = 2;
    */
   value: string;
 
   /**
+   * message describing why the tag is invalid
+   *
    * @generated from field: string message = 3;
    */
   message: string;
 
   /**
+   * valid values for the tag
+   *
    * @generated from field: repeated string valid_values = 4;
    */
   validValues: string[];
 
   /**
+   * whether the valid values list was truncated (sometimes there are ~100k!)
+   *
    * @generated from field: bool valid_values_truncated = 5;
    */
   validValuesTruncated: boolean;
 
   /**
+   * whether this tag came from default tags
+   *
    * @generated from field: bool from_default_tags = 6;
    */
   fromDefaultTags: boolean;
 
   /**
+   * whether this tag is missing but mandatory
+   *
    * @generated from field: bool missing_mandatory = 7;
    */
   missingMandatory: boolean;
 
   /**
+   * when the value must match a regex, the regex pattern
+   *
    * @generated from field: optional string valid_regex = 8;
    */
   validRegex?: string;
 
   /**
+   * suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+   *
    * @generated from field: optional string suggestion = 9;
    */
   suggestion?: string;
@@ -784,7 +871,7 @@ export type InvalidTag = Message<"infracost.provider.InvalidTag"> & {
  * Use `create(InvalidTagSchema)` to create a new message.
  */
 export const InvalidTagSchema: GenMessage<InvalidTag> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_output, 17);
+  messageDesc(file_infracost_provider_output, 16);
 
 /**
  * @generated from enum infracost.provider.Period

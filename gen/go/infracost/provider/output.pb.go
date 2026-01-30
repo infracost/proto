@@ -7,6 +7,8 @@
 package provider
 
 import (
+	parser "github.com/infracost/proto/gen/go/infracost/parser"
+	rational "github.com/infracost/proto/gen/go/infracost/rational"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -73,10 +75,8 @@ type Output struct {
 	Resources []*Resource `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
 	// Details of passes/failures for each configured finops policy
 	FinopsResults []*FinopsPolicyResult `protobuf:"bytes,2,rep,name=finops_results,json=finopsResults,proto3" json:"finops_results,omitempty"`
-	// Details of passes/failures for each configured tagging policy
-	TaggingResults []*TaggingPolicyResult `protobuf:"bytes,3,rep,name=tagging_results,json=taggingResults,proto3" json:"tagging_results,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Output) Reset() {
@@ -123,25 +123,19 @@ func (x *Output) GetFinopsResults() []*FinopsPolicyResult {
 	return nil
 }
 
-func (x *Output) GetTaggingResults() []*TaggingPolicyResult {
-	if x != nil {
-		return x.TaggingResults
-	}
-	return nil
-}
-
 type Resource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique resource id - this is supplied by the relevant parser
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The resource type as supplied by the parser e.g. aws_instance or AWS::EC2::Instance
-	ResourceType string `protobuf:"bytes,2,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"` // tf or cfn resource type
-	// TODO: resource name - usually the address of the resource?
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // tf or cfn resource type
+	// a unique resource name, usually populated with the full address of the resource
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// region if applicable, e.g. eu-west2
-	Region   string            `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
-	Metadata *ResourceMetadata `protobuf:"bytes,5,opt,name=metadata,proto3" json:"metadata,omitempty"` // ???
-	// TODO: ??? link to where the provider was defined?
+	Region string `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
+	// filename, line numbers, checksums
+	Metadata *ResourceMetadata `protobuf:"bytes,5,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// string describing where the provider is defined for this resource
 	ProviderLink string `protobuf:"bytes,6,opt,name=provider_link,json=providerLink,proto3" json:"provider_link,omitempty"`
 	// If explicitly supported by Infracost
 	IsSupported bool `protobuf:"varint,7,opt,name=is_supported,json=isSupported,proto3" json:"is_supported,omitempty"`
@@ -149,18 +143,18 @@ type Resource struct {
 	IsFree bool `protobuf:"varint,8,opt,name=is_free,json=isFree,proto3" json:"is_free,omitempty"`
 	// If the provider of the resource is supported
 	IsProviderSupported bool `protobuf:"varint,9,opt,name=is_provider_supported,json=isProviderSupported,proto3" json:"is_provider_supported,omitempty"`
-	// if defaults tags are supported for this resource
-	SupportsDefaultTags bool `protobuf:"varint,10,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
-	IsNew               bool `protobuf:"varint,11,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	// if the resource was added for this run (if known)
+	IsNew bool `protobuf:"varint,10,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
 	// The resource costs - totals and individual cost components - including environmental metrics
-	Costs *ResourceCosts `protobuf:"bytes,12,opt,name=costs,proto3" json:"costs,omitempty"`
+	Costs *ResourceCosts `protobuf:"bytes,11,opt,name=costs,proto3" json:"costs,omitempty"`
 	// Resource-level tags
-	Tags        map[string]string `protobuf:"bytes,13,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	DefaultTags map[string]string `protobuf:"bytes,14,rep,name=default_tags,json=defaultTags,proto3" json:"default_tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Tagging *Tagging `protobuf:"bytes,12,opt,name=tagging,proto3" json:"tagging,omitempty"`
 	// Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
-	ChildResources []*Resource `protobuf:"bytes,15,rep,name=child_resources,json=childResources,proto3" json:"child_resources,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	ChildResources []*Resource `protobuf:"bytes,13,rep,name=child_resources,json=childResources,proto3" json:"child_resources,omitempty"`
+	// the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
+	CallStack     *parser.CallStack `protobuf:"bytes,14,opt,name=call_stack,json=callStack,proto3" json:"call_stack,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Resource) Reset() {
@@ -200,9 +194,9 @@ func (x *Resource) GetId() string {
 	return ""
 }
 
-func (x *Resource) GetResourceType() string {
+func (x *Resource) GetType() string {
 	if x != nil {
-		return x.ResourceType
+		return x.Type
 	}
 	return ""
 }
@@ -256,13 +250,6 @@ func (x *Resource) GetIsProviderSupported() bool {
 	return false
 }
 
-func (x *Resource) GetSupportsDefaultTags() bool {
-	if x != nil {
-		return x.SupportsDefaultTags
-	}
-	return false
-}
-
 func (x *Resource) GetIsNew() bool {
 	if x != nil {
 		return x.IsNew
@@ -277,16 +264,9 @@ func (x *Resource) GetCosts() *ResourceCosts {
 	return nil
 }
 
-func (x *Resource) GetTags() map[string]string {
+func (x *Resource) GetTagging() *Tagging {
 	if x != nil {
-		return x.Tags
-	}
-	return nil
-}
-
-func (x *Resource) GetDefaultTags() map[string]string {
-	if x != nil {
-		return x.DefaultTags
+		return x.Tagging
 	}
 	return nil
 }
@@ -298,15 +278,23 @@ func (x *Resource) GetChildResources() []*Resource {
 	return nil
 }
 
+func (x *Resource) GetCallStack() *parser.CallStack {
+	if x != nil {
+		return x.CallStack
+	}
+	return nil
+}
+
 type ResourceMetadata struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	BasicChecksum       string                 `protobuf:"bytes,1,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
-	PropertyChecksum    string                 `protobuf:"bytes,2,opt,name=property_checksum,json=propertyChecksum,proto3" json:"property_checksum,omitempty"`
-	DefaultTagsChecksum string                 `protobuf:"bytes,3,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
-	Filename            string                 `protobuf:"bytes,4,opt,name=filename,proto3" json:"filename,omitempty"`
-	StartLine           int64                  `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
-	EndLine             int64                  `protobuf:"varint,6,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
-	ModuleCalls         []*ModuleCall          `protobuf:"bytes,7,rep,name=module_calls,json=moduleCalls,proto3" json:"module_calls,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TODO: docs!
+	BasicChecksum       string        `protobuf:"bytes,1,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
+	PropertyChecksum    string        `protobuf:"bytes,2,opt,name=property_checksum,json=propertyChecksum,proto3" json:"property_checksum,omitempty"`
+	DefaultTagsChecksum string        `protobuf:"bytes,3,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
+	Filename            string        `protobuf:"bytes,4,opt,name=filename,proto3" json:"filename,omitempty"`
+	StartLine           int64         `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
+	EndLine             int64         `protobuf:"varint,6,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
+	ModuleCalls         []*ModuleCall `protobuf:"bytes,7,rep,name=module_calls,json=moduleCalls,proto3" json:"module_calls,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -391,13 +379,16 @@ func (x *ResourceMetadata) GetModuleCalls() []*ModuleCall {
 }
 
 type ModuleCall struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	DefinitionName string                 `protobuf:"bytes,1,opt,name=definition_name,json=definitionName,proto3" json:"definition_name,omitempty"` // i.e. block name
-	Filename       string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
-	StartLine      int64                  `protobuf:"varint,3,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
-	EndLine        int64                  `protobuf:"varint,4,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// the name of the thing that defined this module, e.g. "module.x" in terraform
+	DefinitionName string `protobuf:"bytes,1,opt,name=definition_name,json=definitionName,proto3" json:"definition_name,omitempty"` // i.e. block name
+	// filename where this module was called
+	Filename string `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	// line numbers where this module was called
+	StartLine     int64 `protobuf:"varint,3,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
+	EndLine       int64 `protobuf:"varint,4,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ModuleCall) Reset() {
@@ -458,40 +449,34 @@ func (x *ModuleCall) GetEndLine() int64 {
 	return 0
 }
 
-type Tags struct {
+type Tagging struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Default tags
-	DefaultTags []*Tag `protobuf:"bytes,1,rep,name=default_tags,json=defaultTags,proto3" json:"default_tags,omitempty"`
-	// Resource-level tags
-	// TODO: do these include default values?
-	Tags []*Tag `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+	// tag values
+	Tags []*Tag `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
+	// if this resource supports tags at all
+	SupportsTags bool `protobuf:"varint,2,opt,name=supports_tags,json=supportsTags,proto3" json:"supports_tags,omitempty"`
 	// If the provider supports default tags here (so we can differentiate between this and there being no defaults)
-	DefaultTagsSupported bool `protobuf:"varint,3,opt,name=default_tags_supported,json=defaultTagsSupported,proto3" json:"default_tags_supported,omitempty"`
-	// List of missing (undefined) variables that result in us not knowing all tag keys
-	// We use this so we can avoid report missing tags if we're unsure if the tags are really missing, as one or more tags exists with an unknown key.
-	MissingVarsCausingUnknownTagKeys []string `protobuf:"bytes,4,rep,name=missing_vars_causing_unknown_tag_keys,json=missingVarsCausingUnknownTagKeys,proto3" json:"missing_vars_causing_unknown_tag_keys,omitempty"`
-	// List of missing (undefined) variables that result in us not knowing all default tag keys
-	MissingVarsCausingUnknownDefaultTagKeys []string `protobuf:"bytes,5,rep,name=missing_vars_causing_unknown_default_tag_keys,json=missingVarsCausingUnknownDefaultTagKeys,proto3" json:"missing_vars_causing_unknown_default_tag_keys,omitempty"`
+	SupportsDefaultTags bool `protobuf:"varint,3,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
 	// Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
-	Propagation   *TagPropagation `protobuf:"bytes,6,opt,name=propagation,proto3" json:"propagation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PropagationProblems []*TagPropagationProblem `protobuf:"bytes,4,rep,name=propagation_problems,json=propagationProblems,proto3" json:"propagation_problems,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *Tags) Reset() {
-	*x = Tags{}
+func (x *Tagging) Reset() {
+	*x = Tagging{}
 	mi := &file_infracost_provider_output_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Tags) String() string {
+func (x *Tagging) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Tags) ProtoMessage() {}
+func (*Tagging) ProtoMessage() {}
 
-func (x *Tags) ProtoReflect() protoreflect.Message {
+func (x *Tagging) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_provider_output_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -503,73 +488,69 @@ func (x *Tags) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Tags.ProtoReflect.Descriptor instead.
-func (*Tags) Descriptor() ([]byte, []int) {
+// Deprecated: Use Tagging.ProtoReflect.Descriptor instead.
+func (*Tagging) Descriptor() ([]byte, []int) {
 	return file_infracost_provider_output_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Tags) GetDefaultTags() []*Tag {
-	if x != nil {
-		return x.DefaultTags
-	}
-	return nil
-}
-
-func (x *Tags) GetTags() []*Tag {
+func (x *Tagging) GetTags() []*Tag {
 	if x != nil {
 		return x.Tags
 	}
 	return nil
 }
 
-func (x *Tags) GetDefaultTagsSupported() bool {
+func (x *Tagging) GetSupportsTags() bool {
 	if x != nil {
-		return x.DefaultTagsSupported
+		return x.SupportsTags
 	}
 	return false
 }
 
-func (x *Tags) GetMissingVarsCausingUnknownTagKeys() []string {
+func (x *Tagging) GetSupportsDefaultTags() bool {
 	if x != nil {
-		return x.MissingVarsCausingUnknownTagKeys
+		return x.SupportsDefaultTags
+	}
+	return false
+}
+
+func (x *Tagging) GetPropagationProblems() []*TagPropagationProblem {
+	if x != nil {
+		return x.PropagationProblems
 	}
 	return nil
 }
 
-func (x *Tags) GetMissingVarsCausingUnknownDefaultTagKeys() []string {
-	if x != nil {
-		return x.MissingVarsCausingUnknownDefaultTagKeys
-	}
-	return nil
+type Tag struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// tag key (name)
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// tag value
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	// whether this is a default tag
+	IsDefault bool `protobuf:"varint,3,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
+	// whether the key was synthetically generated (e.g. we made up a value because the real one was not defined)
+	IsKeySynthetic bool `protobuf:"varint,4,opt,name=is_key_synthetic,json=isKeySynthetic,proto3" json:"is_key_synthetic,omitempty"`
+	// whether the value was synthetically generated (e.g. we made up a value because the real one was not defined)
+	IsValueSynthetic bool `protobuf:"varint,5,opt,name=is_value_synthetic,json=isValueSynthetic,proto3" json:"is_value_synthetic,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
-func (x *Tags) GetPropagation() *TagPropagation {
-	if x != nil {
-		return x.Propagation
-	}
-	return nil
-}
-
-type TagPropagation struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TagPropagation) Reset() {
-	*x = TagPropagation{}
+func (x *Tag) Reset() {
+	*x = Tag{}
 	mi := &file_infracost_provider_output_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagPropagation) String() string {
+func (x *Tag) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagPropagation) ProtoMessage() {}
+func (*Tag) ProtoMessage() {}
 
-func (x *TagPropagation) ProtoReflect() protoreflect.Message {
+func (x *Tag) ProtoReflect() protoreflect.Message {
 	mi := &file_infracost_provider_output_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -581,21 +562,138 @@ func (x *TagPropagation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagPropagation.ProtoReflect.Descriptor instead.
-func (*TagPropagation) Descriptor() ([]byte, []int) {
+// Deprecated: Use Tag.ProtoReflect.Descriptor instead.
+func (*Tag) Descriptor() ([]byte, []int) {
 	return file_infracost_provider_output_proto_rawDescGZIP(), []int{5}
 }
 
+func (x *Tag) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *Tag) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *Tag) GetIsDefault() bool {
+	if x != nil {
+		return x.IsDefault
+	}
+	return false
+}
+
+func (x *Tag) GetIsKeySynthetic() bool {
+	if x != nil {
+		return x.IsKeySynthetic
+	}
+	return false
+}
+
+func (x *Tag) GetIsValueSynthetic() bool {
+	if x != nil {
+		return x.IsValueSynthetic
+	}
+	return false
+}
+
+type TagPropagationProblem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// actual discovered value for the attribute (formerly known as "From" for some reason)
+	ActualValue string `protobuf:"bytes,1,opt,name=actual_value,json=actualValue,proto3" json:"actual_value,omitempty"`
+	// valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+	ValidValues []string `protobuf:"bytes,2,rep,name=valid_values,json=validValues,proto3" json:"valid_values,omitempty"`
+	// the attribute which dictates whether propagation is enabled
+	Attribute string `protobuf:"bytes,3,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	// a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+	TagRecipient string `protobuf:"bytes,4,opt,name=tag_recipient,json=tagRecipient,proto3" json:"tag_recipient,omitempty"`
+	// tag keys which are affected by this propagation problem
+	AffectedTags  []string `protobuf:"bytes,5,rep,name=affected_tags,json=affectedTags,proto3" json:"affected_tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagPropagationProblem) Reset() {
+	*x = TagPropagationProblem{}
+	mi := &file_infracost_provider_output_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagPropagationProblem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagPropagationProblem) ProtoMessage() {}
+
+func (x *TagPropagationProblem) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_output_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagPropagationProblem.ProtoReflect.Descriptor instead.
+func (*TagPropagationProblem) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TagPropagationProblem) GetActualValue() string {
+	if x != nil {
+		return x.ActualValue
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetValidValues() []string {
+	if x != nil {
+		return x.ValidValues
+	}
+	return nil
+}
+
+func (x *TagPropagationProblem) GetAttribute() string {
+	if x != nil {
+		return x.Attribute
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetTagRecipient() string {
+	if x != nil {
+		return x.TagRecipient
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetAffectedTags() []string {
+	if x != nil {
+		return x.AffectedTags
+	}
+	return nil
+}
+
 type ResourceCosts struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Components    []*CostComponent       `protobuf:"bytes,1,rep,name=components,proto3" json:"components,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// a list of cost line items directly associated with this resource
+	Components    []*CostComponent `protobuf:"bytes,1,rep,name=components,proto3" json:"components,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ResourceCosts) Reset() {
 	*x = ResourceCosts{}
-	mi := &file_infracost_provider_output_proto_msgTypes[6]
+	mi := &file_infracost_provider_output_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +705,7 @@ func (x *ResourceCosts) String() string {
 func (*ResourceCosts) ProtoMessage() {}
 
 func (x *ResourceCosts) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[6]
+	mi := &file_infracost_provider_output_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +718,7 @@ func (x *ResourceCosts) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceCosts.ProtoReflect.Descriptor instead.
 func (*ResourceCosts) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{6}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ResourceCosts) GetComponents() []*CostComponent {
@@ -645,9 +743,9 @@ type CostComponent struct {
 	// The price, pre-discount, of each `unit` (per price period)
 	PeriodPrice *PeriodPrice `protobuf:"bytes,6,opt,name=period_price,json=periodPrice,proto3" json:"period_price,omitempty"`
 	// This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
-	Quantity *Rat `protobuf:"bytes,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity *rational.Rat `protobuf:"bytes,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
-	DiscountRate *Rat `protobuf:"bytes,8,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
+	DiscountRate *rational.Rat `protobuf:"bytes,8,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
 	// Information on how fast your infrastructure is destroying the planet
 	EnvironmentalMetrics *EnvironmentalMetrics `protobuf:"bytes,9,opt,name=environmental_metrics,json=environmentalMetrics,proto3" json:"environmental_metrics,omitempty"`
 	unknownFields        protoimpl.UnknownFields
@@ -656,7 +754,7 @@ type CostComponent struct {
 
 func (x *CostComponent) Reset() {
 	*x = CostComponent{}
-	mi := &file_infracost_provider_output_proto_msgTypes[7]
+	mi := &file_infracost_provider_output_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -668,7 +766,7 @@ func (x *CostComponent) String() string {
 func (*CostComponent) ProtoMessage() {}
 
 func (x *CostComponent) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[7]
+	mi := &file_infracost_provider_output_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -681,7 +779,7 @@ func (x *CostComponent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CostComponent.ProtoReflect.Descriptor instead.
 func (*CostComponent) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{7}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CostComponent) GetName() string {
@@ -726,14 +824,14 @@ func (x *CostComponent) GetPeriodPrice() *PeriodPrice {
 	return nil
 }
 
-func (x *CostComponent) GetQuantity() *Rat {
+func (x *CostComponent) GetQuantity() *rational.Rat {
 	if x != nil {
 		return x.Quantity
 	}
 	return nil
 }
 
-func (x *CostComponent) GetDiscountRate() *Rat {
+func (x *CostComponent) GetDiscountRate() *rational.Rat {
 	if x != nil {
 		return x.DiscountRate
 	}
@@ -748,16 +846,18 @@ func (x *CostComponent) GetEnvironmentalMetrics() *EnvironmentalMetrics {
 }
 
 type PeriodPrice struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Price         *Rat                   `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`
-	Period        Period                 `protobuf:"varint,6,opt,name=period,proto3,enum=infracost.provider.Period" json:"period,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// the raw price as arational number
+	Price *rational.Rat `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`
+	// this is the period to which the price applies (i.e. monthly or hourly)
+	Period        Period `protobuf:"varint,2,opt,name=period,proto3,enum=infracost.provider.Period" json:"period,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PeriodPrice) Reset() {
 	*x = PeriodPrice{}
-	mi := &file_infracost_provider_output_proto_msgTypes[8]
+	mi := &file_infracost_provider_output_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -769,7 +869,7 @@ func (x *PeriodPrice) String() string {
 func (*PeriodPrice) ProtoMessage() {}
 
 func (x *PeriodPrice) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[8]
+	mi := &file_infracost_provider_output_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -782,10 +882,10 @@ func (x *PeriodPrice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PeriodPrice.ProtoReflect.Descriptor instead.
 func (*PeriodPrice) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{8}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *PeriodPrice) GetPrice() *Rat {
+func (x *PeriodPrice) GetPrice() *rational.Rat {
 	if x != nil {
 		return x.Price
 	}
@@ -800,17 +900,20 @@ func (x *PeriodPrice) GetPeriod() Period {
 }
 
 type EnvironmentalMetrics struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Period          Period                 `protobuf:"varint,1,opt,name=period,proto3,enum=infracost.provider.Period" json:"period,omitempty"`
-	CarbonGramsCo2E *Rat                   `protobuf:"bytes,2,opt,name=carbon_grams_co2e,json=carbonGramsCo2e,proto3" json:"carbon_grams_co2e,omitempty"`
-	WaterLiters     *Rat                   `protobuf:"bytes,3,opt,name=water_liters,json=waterLiters,proto3" json:"water_liters,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// the period to which the metrics apply (i.e. monthly or hourly)
+	Period Period `protobuf:"varint,1,opt,name=period,proto3,enum=infracost.provider.Period" json:"period,omitempty"`
+	// carbon emissions in grams CO2e
+	CarbonGramsCo2E *rational.Rat `protobuf:"bytes,2,opt,name=carbon_grams_co2e,json=carbonGramsCo2e,proto3" json:"carbon_grams_co2e,omitempty"`
+	// water usage in liters
+	WaterLiters   *rational.Rat `protobuf:"bytes,3,opt,name=water_liters,json=waterLiters,proto3" json:"water_liters,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *EnvironmentalMetrics) Reset() {
 	*x = EnvironmentalMetrics{}
-	mi := &file_infracost_provider_output_proto_msgTypes[9]
+	mi := &file_infracost_provider_output_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -822,7 +925,7 @@ func (x *EnvironmentalMetrics) String() string {
 func (*EnvironmentalMetrics) ProtoMessage() {}
 
 func (x *EnvironmentalMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[9]
+	mi := &file_infracost_provider_output_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -835,7 +938,7 @@ func (x *EnvironmentalMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnvironmentalMetrics.ProtoReflect.Descriptor instead.
 func (*EnvironmentalMetrics) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{9}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *EnvironmentalMetrics) GetPeriod() Period {
@@ -845,85 +948,42 @@ func (x *EnvironmentalMetrics) GetPeriod() Period {
 	return Period_MONTH
 }
 
-func (x *EnvironmentalMetrics) GetCarbonGramsCo2E() *Rat {
+func (x *EnvironmentalMetrics) GetCarbonGramsCo2E() *rational.Rat {
 	if x != nil {
 		return x.CarbonGramsCo2E
 	}
 	return nil
 }
 
-func (x *EnvironmentalMetrics) GetWaterLiters() *Rat {
+func (x *EnvironmentalMetrics) GetWaterLiters() *rational.Rat {
 	if x != nil {
 		return x.WaterLiters
 	}
 	return nil
 }
 
-type Tag struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Tag) Reset() {
-	*x = Tag{}
-	mi := &file_infracost_provider_output_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Tag) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Tag) ProtoMessage() {}
-
-func (x *Tag) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Tag.ProtoReflect.Descriptor instead.
-func (*Tag) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *Tag) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *Tag) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
 type FinopsPolicyResult struct {
-	state                       protoimpl.MessageState         `protogen:"open.v1"`
-	PolicyId                    string                         `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
-	PolicyName                  string                         `protobuf:"bytes,2,opt,name=policy_name,json=policyName,proto3" json:"policy_name,omitempty"`
-	PolicySlug                  string                         `protobuf:"bytes,3,opt,name=policy_slug,json=policySlug,proto3" json:"policy_slug,omitempty"`
-	PolicyMessage               string                         `protobuf:"bytes,4,opt,name=policy_message,json=policyMessage,proto3" json:"policy_message,omitempty"`
-	PassingResourceIds          []string                       `protobuf:"bytes,5,rep,name=passing_resource_ids,json=passingResourceIds,proto3" json:"passing_resource_ids,omitempty"`
-	FailingResources            []*FinopsPolicyFailingResource `protobuf:"bytes,6,rep,name=failing_resources,json=failingResources,proto3" json:"failing_resources,omitempty"`
-	BlockPullRequest            bool                           `protobuf:"varint,7,opt,name=block_pull_request,json=blockPullRequest,proto3" json:"block_pull_request,omitempty"`
-	IncludeInPullRequestComment bool                           `protobuf:"varint,8,opt,name=include_in_pull_request_comment,json=includeInPullRequestComment,proto3" json:"include_in_pull_request_comment,omitempty"`
-	OnlyAppliesToNewResources   bool                           `protobuf:"varint,9,opt,name=only_applies_to_new_resources,json=onlyAppliesToNewResources,proto3" json:"only_applies_to_new_resources,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique policy ID (UUID v4, from dashboard API)
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Human-readable policy name
+	PolicyName string `protobuf:"bytes,2,opt,name=policy_name,json=policyName,proto3" json:"policy_name,omitempty"`
+	// Human-readable policy slug, used to identify specific policy code in provider plugins
+	PolicySlug string `protobuf:"bytes,3,opt,name=policy_slug,json=policySlug,proto3" json:"policy_slug,omitempty"`
+	// Message describing the policy result
+	PolicyMessage string `protobuf:"bytes,4,opt,name=policy_message,json=policyMessage,proto3" json:"policy_message,omitempty"`
+	// Resource IDs that passed this policy
+	PassingResourceIds []string `protobuf:"bytes,5,rep,name=passing_resource_ids,json=passingResourceIds,proto3" json:"passing_resource_ids,omitempty"`
+	// Resources that failed this policy, along with details of the individual issues
+	FailingResources []*FinopsPolicyFailingResource `protobuf:"bytes,6,rep,name=failing_resources,json=failingResources,proto3" json:"failing_resources,omitempty"`
+	// should this failure cause the pull request to be blocked (if PR blocking is enabled at a higher level)
+	BlockPullRequest bool `protobuf:"varint,7,opt,name=block_pull_request,json=blockPullRequest,proto3" json:"block_pull_request,omitempty"`
+	// should this policy result be included in the pull request comment
+	IncludeInPullRequestComment bool `protobuf:"varint,8,opt,name=include_in_pull_request_comment,json=includeInPullRequestComment,proto3" json:"include_in_pull_request_comment,omitempty"`
+	// does this policy only apply to new resources
+	OnlyAppliesToNewResources bool `protobuf:"varint,9,opt,name=only_applies_to_new_resources,json=onlyAppliesToNewResources,proto3" json:"only_applies_to_new_resources,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *FinopsPolicyResult) Reset() {
@@ -1020,9 +1080,11 @@ func (x *FinopsPolicyResult) GetOnlyAppliesToNewResources() bool {
 }
 
 type FinopsPolicyFailingResource struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Issues        []*FinopsResourceIssue `protobuf:"bytes,15,rep,name=issues,proto3" json:"issues,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique resource ID (can be matched against the Resource.id field to identify a full resource)
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Details of the individual issues for this resource
+	Issues        []*FinopsResourceIssue `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1072,16 +1134,26 @@ func (x *FinopsPolicyFailingResource) GetIssues() []*FinopsResourceIssue {
 }
 
 type FinopsResourceIssue struct {
-	state                         protoimpl.MessageState `protogen:"open.v1"`
-	MonthlySavings                *Rat                   `protobuf:"bytes,1,opt,name=monthly_savings,json=monthlySavings,proto3" json:"monthly_savings,omitempty"`
-	MonthlyCarbonSavingsGramsCo2E *Rat                   `protobuf:"bytes,2,opt,name=monthly_carbon_savings_grams_co2e,json=monthlyCarbonSavingsGramsCo2e,proto3" json:"monthly_carbon_savings_grams_co2e,omitempty"`
-	MonthlyWaterSavingsLitres     *Rat                   `protobuf:"bytes,3,opt,name=monthly_water_savings_litres,json=monthlyWaterSavingsLitres,proto3" json:"monthly_water_savings_litres,omitempty"`
-	Address                       string                 `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
-	Attribute                     string                 `protobuf:"bytes,5,opt,name=attribute,proto3" json:"attribute,omitempty"`
-	Description                   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	SavingsDetails                *string                `protobuf:"bytes,7,opt,name=savings_details,json=savingsDetails,proto3,oneof" json:"savings_details,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// monthly financial savings (in configured currency) that could be realized by fixing this issue
+	MonthlySavings *rational.Rat `protobuf:"bytes,1,opt,name=monthly_savings,json=monthlySavings,proto3" json:"monthly_savings,omitempty"`
+	// monthly carbon savings in grams CO2e that could be realized by fixing this issue
+	MonthlyCarbonSavingsGramsCo2E *rational.Rat `protobuf:"bytes,2,opt,name=monthly_carbon_savings_grams_co2e,json=monthlyCarbonSavingsGramsCo2e,proto3" json:"monthly_carbon_savings_grams_co2e,omitempty"`
+	// monthly water savings in litres that could be realized by fixing this issue
+	MonthlyWaterSavingsLitres *rational.Rat `protobuf:"bytes,3,opt,name=monthly_water_savings_litres,json=monthlyWaterSavingsLitres,proto3" json:"monthly_water_savings_litres,omitempty"`
+	// human-readable address where the issue originates
+	Address string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	// attribute of the resource where the issue originates
+	Attribute string `protobuf:"bytes,5,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	// detailed description of the issue
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	// extra details pertaining to the financial savings
+	SavingsDetails *string `protobuf:"bytes,7,opt,name=savings_details,json=savingsDetails,proto3,oneof" json:"savings_details,omitempty"`
+	// breakdowns of costs before and after fixing the issue
+	BeforeFixBreakdowns []*IssueBreakdown `protobuf:"bytes,8,rep,name=before_fix_breakdowns,json=beforeFixBreakdowns,proto3" json:"before_fix_breakdowns,omitempty"`
+	AfterFixBreakdowns  []*IssueBreakdown `protobuf:"bytes,9,rep,name=after_fix_breakdowns,json=afterFixBreakdowns,proto3" json:"after_fix_breakdowns,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *FinopsResourceIssue) Reset() {
@@ -1114,21 +1186,21 @@ func (*FinopsResourceIssue) Descriptor() ([]byte, []int) {
 	return file_infracost_provider_output_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *FinopsResourceIssue) GetMonthlySavings() *Rat {
+func (x *FinopsResourceIssue) GetMonthlySavings() *rational.Rat {
 	if x != nil {
 		return x.MonthlySavings
 	}
 	return nil
 }
 
-func (x *FinopsResourceIssue) GetMonthlyCarbonSavingsGramsCo2E() *Rat {
+func (x *FinopsResourceIssue) GetMonthlyCarbonSavingsGramsCo2E() *rational.Rat {
 	if x != nil {
 		return x.MonthlyCarbonSavingsGramsCo2E
 	}
 	return nil
 }
 
-func (x *FinopsResourceIssue) GetMonthlyWaterSavingsLitres() *Rat {
+func (x *FinopsResourceIssue) GetMonthlyWaterSavingsLitres() *rational.Rat {
 	if x != nil {
 		return x.MonthlyWaterSavingsLitres
 	}
@@ -1163,200 +1235,49 @@ func (x *FinopsResourceIssue) GetSavingsDetails() string {
 	return ""
 }
 
-type TaggingPolicyResult struct {
-	state                       protoimpl.MessageState          `protogen:"open.v1"`
-	PolicyId                    string                          `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
-	PolicyName                  string                          `protobuf:"bytes,2,opt,name=policy_name,json=policyName,proto3" json:"policy_name,omitempty"`
-	PolicyMessage               string                          `protobuf:"bytes,3,opt,name=policy_message,json=policyMessage,proto3" json:"policy_message,omitempty"`
-	PassingResourceIds          []string                        `protobuf:"bytes,4,rep,name=passing_resource_ids,json=passingResourceIds,proto3" json:"passing_resource_ids,omitempty"`
-	FailingResources            []*TaggingPolicyFailingResource `protobuf:"bytes,5,rep,name=failing_resources,json=failingResources,proto3" json:"failing_resources,omitempty"`
-	BlockPullRequest            bool                            `protobuf:"varint,6,opt,name=block_pull_request,json=blockPullRequest,proto3" json:"block_pull_request,omitempty"`
-	IncludeInPullRequestComment bool                            `protobuf:"varint,7,opt,name=include_in_pull_request_comment,json=includeInPullRequestComment,proto3" json:"include_in_pull_request_comment,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
-}
-
-func (x *TaggingPolicyResult) Reset() {
-	*x = TaggingPolicyResult{}
-	mi := &file_infracost_provider_output_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TaggingPolicyResult) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TaggingPolicyResult) ProtoMessage() {}
-
-func (x *TaggingPolicyResult) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[14]
+func (x *FinopsResourceIssue) GetBeforeFixBreakdowns() []*IssueBreakdown {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TaggingPolicyResult.ProtoReflect.Descriptor instead.
-func (*TaggingPolicyResult) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *TaggingPolicyResult) GetPolicyId() string {
-	if x != nil {
-		return x.PolicyId
-	}
-	return ""
-}
-
-func (x *TaggingPolicyResult) GetPolicyName() string {
-	if x != nil {
-		return x.PolicyName
-	}
-	return ""
-}
-
-func (x *TaggingPolicyResult) GetPolicyMessage() string {
-	if x != nil {
-		return x.PolicyMessage
-	}
-	return ""
-}
-
-func (x *TaggingPolicyResult) GetPassingResourceIds() []string {
-	if x != nil {
-		return x.PassingResourceIds
+		return x.BeforeFixBreakdowns
 	}
 	return nil
 }
 
-func (x *TaggingPolicyResult) GetFailingResources() []*TaggingPolicyFailingResource {
+func (x *FinopsResourceIssue) GetAfterFixBreakdowns() []*IssueBreakdown {
 	if x != nil {
-		return x.FailingResources
+		return x.AfterFixBreakdowns
 	}
 	return nil
 }
 
-func (x *TaggingPolicyResult) GetBlockPullRequest() bool {
-	if x != nil {
-		return x.BlockPullRequest
-	}
-	return false
-}
-
-func (x *TaggingPolicyResult) GetIncludeInPullRequestComment() bool {
-	if x != nil {
-		return x.IncludeInPullRequestComment
-	}
-	return false
-}
-
-type TaggingPolicyFailingResource struct {
-	state                      protoimpl.MessageState   `protogen:"open.v1"`
-	Id                         string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	InvalidTags                []*InvalidTag            `protobuf:"bytes,2,rep,name=invalid_tags,json=invalidTags,proto3" json:"invalid_tags,omitempty"`
-	MissingMandatoryTags       []string                 `protobuf:"bytes,3,rep,name=missing_mandatory_tags,json=missingMandatoryTags,proto3" json:"missing_mandatory_tags,omitempty"`
-	PropagationProblems        []*TagPropagationProblem `protobuf:"bytes,4,rep,name=propagation_problems,json=propagationProblems,proto3" json:"propagation_problems,omitempty"`
-	DefaultTagsDidNotPropagate bool                     `protobuf:"varint,5,opt,name=default_tags_did_not_propagate,json=defaultTagsDidNotPropagate,proto3" json:"default_tags_did_not_propagate,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *TaggingPolicyFailingResource) Reset() {
-	*x = TaggingPolicyFailingResource{}
-	mi := &file_infracost_provider_output_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TaggingPolicyFailingResource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TaggingPolicyFailingResource) ProtoMessage() {}
-
-func (x *TaggingPolicyFailingResource) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TaggingPolicyFailingResource.ProtoReflect.Descriptor instead.
-func (*TaggingPolicyFailingResource) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *TaggingPolicyFailingResource) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *TaggingPolicyFailingResource) GetInvalidTags() []*InvalidTag {
-	if x != nil {
-		return x.InvalidTags
-	}
-	return nil
-}
-
-func (x *TaggingPolicyFailingResource) GetMissingMandatoryTags() []string {
-	if x != nil {
-		return x.MissingMandatoryTags
-	}
-	return nil
-}
-
-func (x *TaggingPolicyFailingResource) GetPropagationProblems() []*TagPropagationProblem {
-	if x != nil {
-		return x.PropagationProblems
-	}
-	return nil
-}
-
-func (x *TaggingPolicyFailingResource) GetDefaultTagsDidNotPropagate() bool {
-	if x != nil {
-		return x.DefaultTagsDidNotPropagate
-	}
-	return false
-}
-
-type TagPropagationProblem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Attribute     string                 `protobuf:"bytes,1,opt,name=attribute,proto3" json:"attribute,omitempty"`
-	From          string                 `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`
-	To            string                 `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
-	ValidSources  []string               `protobuf:"bytes,4,rep,name=valid_sources,json=validSources,proto3" json:"valid_sources,omitempty"`
-	AffectedTags  []string               `protobuf:"bytes,5,rep,name=affected_tags,json=affectedTags,proto3" json:"affected_tags,omitempty"`
+type IssueBreakdown struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// name of the resource or subresource
+	ResourceName string `protobuf:"bytes,1,opt,name=resource_name,json=resourceName,proto3" json:"resource_name,omitempty"`
+	// region of the resource or subresource
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// cost components for this resource or subresource
+	CostComponents []*IssueCostComponent `protobuf:"bytes,3,rep,name=cost_components,json=costComponents,proto3" json:"cost_components,omitempty"`
+	// nested subresources
+	Subresources  []*IssueBreakdown `protobuf:"bytes,4,rep,name=subresources,proto3" json:"subresources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *TagPropagationProblem) Reset() {
-	*x = TagPropagationProblem{}
-	mi := &file_infracost_provider_output_proto_msgTypes[16]
+func (x *IssueBreakdown) Reset() {
+	*x = IssueBreakdown{}
+	mi := &file_infracost_provider_output_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagPropagationProblem) String() string {
+func (x *IssueBreakdown) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagPropagationProblem) ProtoMessage() {}
+func (*IssueBreakdown) ProtoMessage() {}
 
-func (x *TagPropagationProblem) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[16]
+func (x *IssueBreakdown) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_output_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1367,64 +1288,156 @@ func (x *TagPropagationProblem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagPropagationProblem.ProtoReflect.Descriptor instead.
-func (*TagPropagationProblem) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use IssueBreakdown.ProtoReflect.Descriptor instead.
+func (*IssueBreakdown) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *TagPropagationProblem) GetAttribute() string {
+func (x *IssueBreakdown) GetResourceName() string {
 	if x != nil {
-		return x.Attribute
+		return x.ResourceName
 	}
 	return ""
 }
 
-func (x *TagPropagationProblem) GetFrom() string {
+func (x *IssueBreakdown) GetRegion() string {
 	if x != nil {
-		return x.From
+		return x.Region
 	}
 	return ""
 }
 
-func (x *TagPropagationProblem) GetTo() string {
+func (x *IssueBreakdown) GetCostComponents() []*IssueCostComponent {
 	if x != nil {
-		return x.To
-	}
-	return ""
-}
-
-func (x *TagPropagationProblem) GetValidSources() []string {
-	if x != nil {
-		return x.ValidSources
+		return x.CostComponents
 	}
 	return nil
 }
 
-func (x *TagPropagationProblem) GetAffectedTags() []string {
+func (x *IssueBreakdown) GetSubresources() []*IssueBreakdown {
 	if x != nil {
-		return x.AffectedTags
+		return x.Subresources
+	}
+	return nil
+}
+
+type IssueCostComponent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// name of the cost component e.g. "compute cost"
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// unit the cost is measured in e.g. "hours", "GB", "vCPU/seconds"
+	Unit string `protobuf:"bytes,2,opt,name=unit,proto3" json:"unit,omitempty"`
+	// Whether the `period_price` is based on usage data
+	UsageBased bool `protobuf:"varint,3,opt,name=usage_based,json=usageBased,proto3" json:"usage_based,omitempty"`
+	// The price, pre-discount, of each `unit` (per price period)
+	PeriodPrice *PeriodPrice `protobuf:"bytes,4,opt,name=period_price,json=periodPrice,proto3" json:"period_price,omitempty"`
+	// This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+	Quantity *rational.Rat `protobuf:"bytes,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	// The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+	DiscountRate  *rational.Rat `protobuf:"bytes,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IssueCostComponent) Reset() {
+	*x = IssueCostComponent{}
+	mi := &file_infracost_provider_output_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IssueCostComponent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IssueCostComponent) ProtoMessage() {}
+
+func (x *IssueCostComponent) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_output_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IssueCostComponent.ProtoReflect.Descriptor instead.
+func (*IssueCostComponent) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *IssueCostComponent) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *IssueCostComponent) GetUnit() string {
+	if x != nil {
+		return x.Unit
+	}
+	return ""
+}
+
+func (x *IssueCostComponent) GetUsageBased() bool {
+	if x != nil {
+		return x.UsageBased
+	}
+	return false
+}
+
+func (x *IssueCostComponent) GetPeriodPrice() *PeriodPrice {
+	if x != nil {
+		return x.PeriodPrice
+	}
+	return nil
+}
+
+func (x *IssueCostComponent) GetQuantity() *rational.Rat {
+	if x != nil {
+		return x.Quantity
+	}
+	return nil
+}
+
+func (x *IssueCostComponent) GetDiscountRate() *rational.Rat {
+	if x != nil {
+		return x.DiscountRate
 	}
 	return nil
 }
 
 type InvalidTag struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	Key                  string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value                string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Message              string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	ValidValues          []string               `protobuf:"bytes,4,rep,name=valid_values,json=validValues,proto3" json:"valid_values,omitempty"`
-	ValidValuesTruncated bool                   `protobuf:"varint,5,opt,name=valid_values_truncated,json=validValuesTruncated,proto3" json:"valid_values_truncated,omitempty"`
-	FromDefaultTags      bool                   `protobuf:"varint,6,opt,name=from_default_tags,json=fromDefaultTags,proto3" json:"from_default_tags,omitempty"`
-	MissingMandatory     bool                   `protobuf:"varint,7,opt,name=missing_mandatory,json=missingMandatory,proto3" json:"missing_mandatory,omitempty"`
-	ValidRegex           *string                `protobuf:"bytes,8,opt,name=valid_regex,json=validRegex,proto3,oneof" json:"valid_regex,omitempty"`
-	Suggestion           *string                `protobuf:"bytes,9,opt,name=suggestion,proto3,oneof" json:"suggestion,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// tag key (name)
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// tag value
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	// message describing why the tag is invalid
+	Message string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	// valid values for the tag
+	ValidValues []string `protobuf:"bytes,4,rep,name=valid_values,json=validValues,proto3" json:"valid_values,omitempty"`
+	// whether the valid values list was truncated (sometimes there are ~100k!)
+	ValidValuesTruncated bool `protobuf:"varint,5,opt,name=valid_values_truncated,json=validValuesTruncated,proto3" json:"valid_values_truncated,omitempty"`
+	// whether this tag came from default tags
+	FromDefaultTags bool `protobuf:"varint,6,opt,name=from_default_tags,json=fromDefaultTags,proto3" json:"from_default_tags,omitempty"`
+	// whether this tag is missing but mandatory
+	MissingMandatory bool `protobuf:"varint,7,opt,name=missing_mandatory,json=missingMandatory,proto3" json:"missing_mandatory,omitempty"`
+	// when the value must match a regex, the regex pattern
+	ValidRegex *string `protobuf:"bytes,8,opt,name=valid_regex,json=validRegex,proto3,oneof" json:"valid_regex,omitempty"`
+	// suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+	Suggestion    *string `protobuf:"bytes,9,opt,name=suggestion,proto3,oneof" json:"suggestion,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InvalidTag) Reset() {
 	*x = InvalidTag{}
-	mi := &file_infracost_provider_output_proto_msgTypes[17]
+	mi := &file_infracost_provider_output_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1436,7 +1449,7 @@ func (x *InvalidTag) String() string {
 func (*InvalidTag) ProtoMessage() {}
 
 func (x *InvalidTag) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_output_proto_msgTypes[17]
+	mi := &file_infracost_provider_output_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1449,7 +1462,7 @@ func (x *InvalidTag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvalidTag.ProtoReflect.Descriptor instead.
 func (*InvalidTag) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{17}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *InvalidTag) GetKey() string {
@@ -1519,34 +1532,27 @@ var File_infracost_provider_output_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_output_proto_rawDesc = "" +
 	"\n" +
-	"\x1finfracost/provider/output.proto\x12\x12infracost.provider\x1a!infracost/provider/rational.proto\"\xeb\x01\n" +
+	"\x1finfracost/provider/output.proto\x12\x12infracost.provider\x1a\x1cinfracost/parser/stack.proto\x1a!infracost/rational/rational.proto\"\x93\x01\n" +
 	"\x06Output\x12:\n" +
 	"\tresources\x18\x01 \x03(\v2\x1c.infracost.provider.ResourceR\tresources\x12M\n" +
-	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\x12P\n" +
-	"\x0ftagging_results\x18\x03 \x03(\v2'.infracost.provider.TaggingPolicyResultR\x0etaggingResultsJ\x04\b\x04\x10\x05\"\x94\x06\n" +
+	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\"\xbb\x04\n" +
 	"\bResource\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12#\n" +
-	"\rresource_type\x18\x02 \x01(\tR\fresourceType\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x16\n" +
 	"\x06region\x18\x04 \x01(\tR\x06region\x12@\n" +
 	"\bmetadata\x18\x05 \x01(\v2$.infracost.provider.ResourceMetadataR\bmetadata\x12#\n" +
 	"\rprovider_link\x18\x06 \x01(\tR\fproviderLink\x12!\n" +
 	"\fis_supported\x18\a \x01(\bR\visSupported\x12\x17\n" +
 	"\ais_free\x18\b \x01(\bR\x06isFree\x122\n" +
-	"\x15is_provider_supported\x18\t \x01(\bR\x13isProviderSupported\x122\n" +
-	"\x15supports_default_tags\x18\n" +
-	" \x01(\bR\x13supportsDefaultTags\x12\x15\n" +
-	"\x06is_new\x18\v \x01(\bR\x05isNew\x127\n" +
-	"\x05costs\x18\f \x01(\v2!.infracost.provider.ResourceCostsR\x05costs\x12:\n" +
-	"\x04tags\x18\r \x03(\v2&.infracost.provider.Resource.TagsEntryR\x04tags\x12P\n" +
-	"\fdefault_tags\x18\x0e \x03(\v2-.infracost.provider.Resource.DefaultTagsEntryR\vdefaultTags\x12E\n" +
-	"\x0fchild_resources\x18\x0f \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x1a7\n" +
-	"\tTagsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a>\n" +
-	"\x10DefaultTagsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb3\x02\n" +
+	"\x15is_provider_supported\x18\t \x01(\bR\x13isProviderSupported\x12\x15\n" +
+	"\x06is_new\x18\n" +
+	" \x01(\bR\x05isNew\x127\n" +
+	"\x05costs\x18\v \x01(\v2!.infracost.provider.ResourceCostsR\x05costs\x125\n" +
+	"\atagging\x18\f \x01(\v2\x1b.infracost.provider.TaggingR\atagging\x12E\n" +
+	"\x0fchild_resources\x18\r \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x12:\n" +
+	"\n" +
+	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xb3\x02\n" +
 	"\x10ResourceMetadata\x12%\n" +
 	"\x0ebasic_checksum\x18\x01 \x01(\tR\rbasicChecksum\x12+\n" +
 	"\x11property_checksum\x18\x02 \x01(\tR\x10propertyChecksum\x122\n" +
@@ -1562,15 +1568,25 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x1d\n" +
 	"\n" +
 	"start_line\x18\x03 \x01(\x03R\tstartLine\x12\x19\n" +
-	"\bend_line\x18\x04 \x01(\x03R\aendLine\"\x9c\x03\n" +
-	"\x04Tags\x12:\n" +
-	"\fdefault_tags\x18\x01 \x03(\v2\x17.infracost.provider.TagR\vdefaultTags\x12+\n" +
-	"\x04tags\x18\x02 \x03(\v2\x17.infracost.provider.TagR\x04tags\x124\n" +
-	"\x16default_tags_supported\x18\x03 \x01(\bR\x14defaultTagsSupported\x12O\n" +
-	"%missing_vars_causing_unknown_tag_keys\x18\x04 \x03(\tR missingVarsCausingUnknownTagKeys\x12^\n" +
-	"-missing_vars_causing_unknown_default_tag_keys\x18\x05 \x03(\tR'missingVarsCausingUnknownDefaultTagKeys\x12D\n" +
-	"\vpropagation\x18\x06 \x01(\v2\".infracost.provider.TagPropagationR\vpropagation\"\x10\n" +
-	"\x0eTagPropagation\"R\n" +
+	"\bend_line\x18\x04 \x01(\x03R\aendLine\"\xed\x01\n" +
+	"\aTagging\x12+\n" +
+	"\x04tags\x18\x01 \x03(\v2\x17.infracost.provider.TagR\x04tags\x12#\n" +
+	"\rsupports_tags\x18\x02 \x01(\bR\fsupportsTags\x122\n" +
+	"\x15supports_default_tags\x18\x03 \x01(\bR\x13supportsDefaultTags\x12\\\n" +
+	"\x14propagation_problems\x18\x04 \x03(\v2).infracost.provider.TagPropagationProblemR\x13propagationProblems\"\xa4\x01\n" +
+	"\x03Tag\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\x12\x1d\n" +
+	"\n" +
+	"is_default\x18\x03 \x01(\bR\tisDefault\x12(\n" +
+	"\x10is_key_synthetic\x18\x04 \x01(\bR\x0eisKeySynthetic\x12,\n" +
+	"\x12is_value_synthetic\x18\x05 \x01(\bR\x10isValueSynthetic\"\xc5\x01\n" +
+	"\x15TagPropagationProblem\x12!\n" +
+	"\factual_value\x18\x01 \x01(\tR\vactualValue\x12!\n" +
+	"\fvalid_values\x18\x02 \x03(\tR\vvalidValues\x12\x1c\n" +
+	"\tattribute\x18\x03 \x01(\tR\tattribute\x12#\n" +
+	"\rtag_recipient\x18\x04 \x01(\tR\ftagRecipient\x12#\n" +
+	"\raffected_tags\x18\x05 \x03(\tR\faffectedTags\"R\n" +
 	"\rResourceCosts\x12A\n" +
 	"\n" +
 	"components\x18\x01 \x03(\v2!.infracost.provider.CostComponentR\n" +
@@ -1583,19 +1599,16 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x0fprice_not_found\x18\x04 \x01(\bR\rpriceNotFound\x12.\n" +
 	"\x13price_was_hardcoded\x18\x05 \x01(\bR\x11priceWasHardcoded\x12B\n" +
 	"\fperiod_price\x18\x06 \x01(\v2\x1f.infracost.provider.PeriodPriceR\vperiodPrice\x123\n" +
-	"\bquantity\x18\a \x01(\v2\x17.infracost.provider.RatR\bquantity\x12<\n" +
-	"\rdiscount_rate\x18\b \x01(\v2\x17.infracost.provider.RatR\fdiscountRate\x12]\n" +
+	"\bquantity\x18\a \x01(\v2\x17.infracost.rational.RatR\bquantity\x12<\n" +
+	"\rdiscount_rate\x18\b \x01(\v2\x17.infracost.rational.RatR\fdiscountRate\x12]\n" +
 	"\x15environmental_metrics\x18\t \x01(\v2(.infracost.provider.EnvironmentalMetricsR\x14environmentalMetrics\"p\n" +
 	"\vPeriodPrice\x12-\n" +
-	"\x05price\x18\a \x01(\v2\x17.infracost.provider.RatR\x05price\x122\n" +
-	"\x06period\x18\x06 \x01(\x0e2\x1a.infracost.provider.PeriodR\x06period\"\xcb\x01\n" +
+	"\x05price\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x05price\x122\n" +
+	"\x06period\x18\x02 \x01(\x0e2\x1a.infracost.provider.PeriodR\x06period\"\xcb\x01\n" +
 	"\x14EnvironmentalMetrics\x122\n" +
 	"\x06period\x18\x01 \x01(\x0e2\x1a.infracost.provider.PeriodR\x06period\x12C\n" +
-	"\x11carbon_grams_co2e\x18\x02 \x01(\v2\x17.infracost.provider.RatR\x0fcarbonGramsCo2e\x12:\n" +
-	"\fwater_liters\x18\x03 \x01(\v2\x17.infracost.provider.RatR\vwaterLiters\"-\n" +
-	"\x03Tag\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xe0\x03\n" +
+	"\x11carbon_grams_co2e\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x0fcarbonGramsCo2e\x12:\n" +
+	"\fwater_liters\x18\x03 \x01(\v2\x17.infracost.rational.RatR\vwaterLiters\"\xe0\x03\n" +
 	"\x12FinopsPolicyResult\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12\x1f\n" +
 	"\vpolicy_name\x18\x02 \x01(\tR\n" +
@@ -1610,37 +1623,31 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x1donly_applies_to_new_resources\x18\t \x01(\bR\x19onlyAppliesToNewResources\"n\n" +
 	"\x1bFinopsPolicyFailingResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12?\n" +
-	"\x06issues\x18\x0f \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\"\xb0\x03\n" +
+	"\x06issues\x18\x02 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\"\xde\x04\n" +
 	"\x13FinopsResourceIssue\x12@\n" +
-	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.provider.RatR\x0emonthlySavings\x12a\n" +
-	"!monthly_carbon_savings_grams_co2e\x18\x02 \x01(\v2\x17.infracost.provider.RatR\x1dmonthlyCarbonSavingsGramsCo2e\x12X\n" +
-	"\x1cmonthly_water_savings_litres\x18\x03 \x01(\v2\x17.infracost.provider.RatR\x19monthlyWaterSavingsLitres\x12\x18\n" +
+	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x0emonthlySavings\x12a\n" +
+	"!monthly_carbon_savings_grams_co2e\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x1dmonthlyCarbonSavingsGramsCo2e\x12X\n" +
+	"\x1cmonthly_water_savings_litres\x18\x03 \x01(\v2\x17.infracost.rational.RatR\x19monthlyWaterSavingsLitres\x12\x18\n" +
 	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x1c\n" +
 	"\tattribute\x18\x05 \x01(\tR\tattribute\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12,\n" +
-	"\x0fsavings_details\x18\a \x01(\tH\x00R\x0esavingsDetails\x88\x01\x01B\x12\n" +
-	"\x10_savings_details\"\xff\x02\n" +
-	"\x13TaggingPolicyResult\x12\x1b\n" +
-	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12\x1f\n" +
-	"\vpolicy_name\x18\x02 \x01(\tR\n" +
-	"policyName\x12%\n" +
-	"\x0epolicy_message\x18\x03 \x01(\tR\rpolicyMessage\x120\n" +
-	"\x14passing_resource_ids\x18\x04 \x03(\tR\x12passingResourceIds\x12]\n" +
-	"\x11failing_resources\x18\x05 \x03(\v20.infracost.provider.TaggingPolicyFailingResourceR\x10failingResources\x12,\n" +
-	"\x12block_pull_request\x18\x06 \x01(\bR\x10blockPullRequest\x12D\n" +
-	"\x1finclude_in_pull_request_comment\x18\a \x01(\bR\x1bincludeInPullRequestComment\"\xc9\x02\n" +
-	"\x1cTaggingPolicyFailingResource\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12A\n" +
-	"\finvalid_tags\x18\x02 \x03(\v2\x1e.infracost.provider.InvalidTagR\vinvalidTags\x124\n" +
-	"\x16missing_mandatory_tags\x18\x03 \x03(\tR\x14missingMandatoryTags\x12\\\n" +
-	"\x14propagation_problems\x18\x04 \x03(\v2).infracost.provider.TagPropagationProblemR\x13propagationProblems\x12B\n" +
-	"\x1edefault_tags_did_not_propagate\x18\x05 \x01(\bR\x1adefaultTagsDidNotPropagate\"\xa3\x01\n" +
-	"\x15TagPropagationProblem\x12\x1c\n" +
-	"\tattribute\x18\x01 \x01(\tR\tattribute\x12\x12\n" +
-	"\x04from\x18\x02 \x01(\tR\x04from\x12\x0e\n" +
-	"\x02to\x18\x03 \x01(\tR\x02to\x12#\n" +
-	"\rvalid_sources\x18\x04 \x03(\tR\fvalidSources\x12#\n" +
-	"\raffected_tags\x18\x05 \x03(\tR\faffectedTags\"\xea\x02\n" +
+	"\x0fsavings_details\x18\a \x01(\tH\x00R\x0esavingsDetails\x88\x01\x01\x12V\n" +
+	"\x15before_fix_breakdowns\x18\b \x03(\v2\".infracost.provider.IssueBreakdownR\x13beforeFixBreakdowns\x12T\n" +
+	"\x14after_fix_breakdowns\x18\t \x03(\v2\".infracost.provider.IssueBreakdownR\x12afterFixBreakdownsB\x12\n" +
+	"\x10_savings_details\"\xe6\x01\n" +
+	"\x0eIssueBreakdown\x12#\n" +
+	"\rresource_name\x18\x01 \x01(\tR\fresourceName\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12O\n" +
+	"\x0fcost_components\x18\x03 \x03(\v2&.infracost.provider.IssueCostComponentR\x0ecostComponents\x12F\n" +
+	"\fsubresources\x18\x04 \x03(\v2\".infracost.provider.IssueBreakdownR\fsubresources\"\x94\x02\n" +
+	"\x12IssueCostComponent\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04unit\x18\x02 \x01(\tR\x04unit\x12\x1f\n" +
+	"\vusage_based\x18\x03 \x01(\bR\n" +
+	"usageBased\x12B\n" +
+	"\fperiod_price\x18\x04 \x01(\v2\x1f.infracost.provider.PeriodPriceR\vperiodPrice\x123\n" +
+	"\bquantity\x18\x05 \x01(\v2\x17.infracost.rational.RatR\bquantity\x12<\n" +
+	"\rdiscount_rate\x18\x06 \x01(\v2\x17.infracost.rational.RatR\fdiscountRate\"\xea\x02\n" +
 	"\n" +
 	"InvalidTag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1675,67 +1682,67 @@ func file_infracost_provider_output_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_provider_output_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_provider_output_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_infracost_provider_output_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_infracost_provider_output_proto_goTypes = []any{
-	(Period)(0),                          // 0: infracost.provider.Period
-	(*Output)(nil),                       // 1: infracost.provider.Output
-	(*Resource)(nil),                     // 2: infracost.provider.Resource
-	(*ResourceMetadata)(nil),             // 3: infracost.provider.ResourceMetadata
-	(*ModuleCall)(nil),                   // 4: infracost.provider.ModuleCall
-	(*Tags)(nil),                         // 5: infracost.provider.Tags
-	(*TagPropagation)(nil),               // 6: infracost.provider.TagPropagation
-	(*ResourceCosts)(nil),                // 7: infracost.provider.ResourceCosts
-	(*CostComponent)(nil),                // 8: infracost.provider.CostComponent
-	(*PeriodPrice)(nil),                  // 9: infracost.provider.PeriodPrice
-	(*EnvironmentalMetrics)(nil),         // 10: infracost.provider.EnvironmentalMetrics
-	(*Tag)(nil),                          // 11: infracost.provider.Tag
-	(*FinopsPolicyResult)(nil),           // 12: infracost.provider.FinopsPolicyResult
-	(*FinopsPolicyFailingResource)(nil),  // 13: infracost.provider.FinopsPolicyFailingResource
-	(*FinopsResourceIssue)(nil),          // 14: infracost.provider.FinopsResourceIssue
-	(*TaggingPolicyResult)(nil),          // 15: infracost.provider.TaggingPolicyResult
-	(*TaggingPolicyFailingResource)(nil), // 16: infracost.provider.TaggingPolicyFailingResource
-	(*TagPropagationProblem)(nil),        // 17: infracost.provider.TagPropagationProblem
-	(*InvalidTag)(nil),                   // 18: infracost.provider.InvalidTag
-	nil,                                  // 19: infracost.provider.Resource.TagsEntry
-	nil,                                  // 20: infracost.provider.Resource.DefaultTagsEntry
-	(*Rat)(nil),                          // 21: infracost.provider.Rat
+	(Period)(0),                         // 0: infracost.provider.Period
+	(*Output)(nil),                      // 1: infracost.provider.Output
+	(*Resource)(nil),                    // 2: infracost.provider.Resource
+	(*ResourceMetadata)(nil),            // 3: infracost.provider.ResourceMetadata
+	(*ModuleCall)(nil),                  // 4: infracost.provider.ModuleCall
+	(*Tagging)(nil),                     // 5: infracost.provider.Tagging
+	(*Tag)(nil),                         // 6: infracost.provider.Tag
+	(*TagPropagationProblem)(nil),       // 7: infracost.provider.TagPropagationProblem
+	(*ResourceCosts)(nil),               // 8: infracost.provider.ResourceCosts
+	(*CostComponent)(nil),               // 9: infracost.provider.CostComponent
+	(*PeriodPrice)(nil),                 // 10: infracost.provider.PeriodPrice
+	(*EnvironmentalMetrics)(nil),        // 11: infracost.provider.EnvironmentalMetrics
+	(*FinopsPolicyResult)(nil),          // 12: infracost.provider.FinopsPolicyResult
+	(*FinopsPolicyFailingResource)(nil), // 13: infracost.provider.FinopsPolicyFailingResource
+	(*FinopsResourceIssue)(nil),         // 14: infracost.provider.FinopsResourceIssue
+	(*IssueBreakdown)(nil),              // 15: infracost.provider.IssueBreakdown
+	(*IssueCostComponent)(nil),          // 16: infracost.provider.IssueCostComponent
+	(*InvalidTag)(nil),                  // 17: infracost.provider.InvalidTag
+	(*parser.CallStack)(nil),            // 18: infracost.parser.CallStack
+	(*rational.Rat)(nil),                // 19: infracost.rational.Rat
 }
 var file_infracost_provider_output_proto_depIdxs = []int32{
 	2,  // 0: infracost.provider.Output.resources:type_name -> infracost.provider.Resource
 	12, // 1: infracost.provider.Output.finops_results:type_name -> infracost.provider.FinopsPolicyResult
-	15, // 2: infracost.provider.Output.tagging_results:type_name -> infracost.provider.TaggingPolicyResult
-	3,  // 3: infracost.provider.Resource.metadata:type_name -> infracost.provider.ResourceMetadata
-	7,  // 4: infracost.provider.Resource.costs:type_name -> infracost.provider.ResourceCosts
-	19, // 5: infracost.provider.Resource.tags:type_name -> infracost.provider.Resource.TagsEntry
-	20, // 6: infracost.provider.Resource.default_tags:type_name -> infracost.provider.Resource.DefaultTagsEntry
-	2,  // 7: infracost.provider.Resource.child_resources:type_name -> infracost.provider.Resource
-	4,  // 8: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
-	11, // 9: infracost.provider.Tags.default_tags:type_name -> infracost.provider.Tag
-	11, // 10: infracost.provider.Tags.tags:type_name -> infracost.provider.Tag
-	6,  // 11: infracost.provider.Tags.propagation:type_name -> infracost.provider.TagPropagation
-	8,  // 12: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
-	9,  // 13: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
-	21, // 14: infracost.provider.CostComponent.quantity:type_name -> infracost.provider.Rat
-	21, // 15: infracost.provider.CostComponent.discount_rate:type_name -> infracost.provider.Rat
-	10, // 16: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
-	21, // 17: infracost.provider.PeriodPrice.price:type_name -> infracost.provider.Rat
-	0,  // 18: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
-	0,  // 19: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
-	21, // 20: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.provider.Rat
-	21, // 21: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.provider.Rat
-	13, // 22: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
-	14, // 23: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
-	21, // 24: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.provider.Rat
-	21, // 25: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.provider.Rat
-	21, // 26: infracost.provider.FinopsResourceIssue.monthly_water_savings_litres:type_name -> infracost.provider.Rat
-	16, // 27: infracost.provider.TaggingPolicyResult.failing_resources:type_name -> infracost.provider.TaggingPolicyFailingResource
-	18, // 28: infracost.provider.TaggingPolicyFailingResource.invalid_tags:type_name -> infracost.provider.InvalidTag
-	17, // 29: infracost.provider.TaggingPolicyFailingResource.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	3,  // 2: infracost.provider.Resource.metadata:type_name -> infracost.provider.ResourceMetadata
+	8,  // 3: infracost.provider.Resource.costs:type_name -> infracost.provider.ResourceCosts
+	5,  // 4: infracost.provider.Resource.tagging:type_name -> infracost.provider.Tagging
+	2,  // 5: infracost.provider.Resource.child_resources:type_name -> infracost.provider.Resource
+	18, // 6: infracost.provider.Resource.call_stack:type_name -> infracost.parser.CallStack
+	4,  // 7: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
+	6,  // 8: infracost.provider.Tagging.tags:type_name -> infracost.provider.Tag
+	7,  // 9: infracost.provider.Tagging.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
+	9,  // 10: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
+	10, // 11: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	19, // 12: infracost.provider.CostComponent.quantity:type_name -> infracost.rational.Rat
+	19, // 13: infracost.provider.CostComponent.discount_rate:type_name -> infracost.rational.Rat
+	11, // 14: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
+	19, // 15: infracost.provider.PeriodPrice.price:type_name -> infracost.rational.Rat
+	0,  // 16: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
+	0,  // 17: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
+	19, // 18: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
+	19, // 19: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
+	13, // 20: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
+	14, // 21: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
+	19, // 22: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
+	19, // 23: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
+	19, // 24: infracost.provider.FinopsResourceIssue.monthly_water_savings_litres:type_name -> infracost.rational.Rat
+	15, // 25: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	15, // 26: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	16, // 27: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent
+	15, // 28: infracost.provider.IssueBreakdown.subresources:type_name -> infracost.provider.IssueBreakdown
+	10, // 29: infracost.provider.IssueCostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	19, // 30: infracost.provider.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
+	19, // 31: infracost.provider.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_output_proto_init() }
@@ -1743,16 +1750,15 @@ func file_infracost_provider_output_proto_init() {
 	if File_infracost_provider_output_proto != nil {
 		return
 	}
-	file_infracost_provider_rational_proto_init()
 	file_infracost_provider_output_proto_msgTypes[13].OneofWrappers = []any{}
-	file_infracost_provider_output_proto_msgTypes[17].OneofWrappers = []any{}
+	file_infracost_provider_output_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_output_proto_rawDesc), len(file_infracost_provider_output_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

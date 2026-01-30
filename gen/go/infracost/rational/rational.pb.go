@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        (unknown)
-// source: infracost/provider/rational.proto
+// source: infracost/rational/rational.proto
 
-package provider
+package rational
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -29,6 +29,8 @@ const (
 //	num := new(big.Int).SetBytes(input.Numerator)
 //	denom := new(big.Int).SetBytes(input.Denominator)
 //	rat := new(big.Rat).SetFrac(num, denom)
+//
+// or use our own "rat" package that wraps this logic.
 type Rat struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Numerator     []byte                 `protobuf:"bytes,1,opt,name=numerator,proto3" json:"numerator,omitempty"`
@@ -39,7 +41,7 @@ type Rat struct {
 
 func (x *Rat) Reset() {
 	*x = Rat{}
-	mi := &file_infracost_provider_rational_proto_msgTypes[0]
+	mi := &file_infracost_rational_rational_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51,7 +53,7 @@ func (x *Rat) String() string {
 func (*Rat) ProtoMessage() {}
 
 func (x *Rat) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_rational_proto_msgTypes[0]
+	mi := &file_infracost_rational_rational_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +66,7 @@ func (x *Rat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Rat.ProtoReflect.Descriptor instead.
 func (*Rat) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_rational_proto_rawDescGZIP(), []int{0}
+	return file_infracost_rational_rational_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Rat) GetNumerator() []byte {
@@ -81,33 +83,33 @@ func (x *Rat) GetDenominator() []byte {
 	return nil
 }
 
-var File_infracost_provider_rational_proto protoreflect.FileDescriptor
+var File_infracost_rational_rational_proto protoreflect.FileDescriptor
 
-const file_infracost_provider_rational_proto_rawDesc = "" +
+const file_infracost_rational_rational_proto_rawDesc = "" +
 	"\n" +
-	"!infracost/provider/rational.proto\x12\x12infracost.provider\"E\n" +
+	"!infracost/rational/rational.proto\x12\x12infracost.rational\"E\n" +
 	"\x03Rat\x12\x1c\n" +
 	"\tnumerator\x18\x01 \x01(\fR\tnumerator\x12 \n" +
 	"\vdenominator\x18\x02 \x01(\fR\vdenominatorB\xc6\x01\n" +
-	"\x16com.infracost.providerB\rRationalProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
+	"\x16com.infracost.rationalB\rRationalProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/rational\xa2\x02\x03IRX\xaa\x02\x12Infracost.Rational\xca\x02\x12Infracost\\Rational\xe2\x02\x1eInfracost\\Rational\\GPBMetadata\xea\x02\x13Infracost::Rationalb\x06proto3"
 
 var (
-	file_infracost_provider_rational_proto_rawDescOnce sync.Once
-	file_infracost_provider_rational_proto_rawDescData []byte
+	file_infracost_rational_rational_proto_rawDescOnce sync.Once
+	file_infracost_rational_rational_proto_rawDescData []byte
 )
 
-func file_infracost_provider_rational_proto_rawDescGZIP() []byte {
-	file_infracost_provider_rational_proto_rawDescOnce.Do(func() {
-		file_infracost_provider_rational_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_infracost_provider_rational_proto_rawDesc), len(file_infracost_provider_rational_proto_rawDesc)))
+func file_infracost_rational_rational_proto_rawDescGZIP() []byte {
+	file_infracost_rational_rational_proto_rawDescOnce.Do(func() {
+		file_infracost_rational_rational_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_infracost_rational_rational_proto_rawDesc), len(file_infracost_rational_rational_proto_rawDesc)))
 	})
-	return file_infracost_provider_rational_proto_rawDescData
+	return file_infracost_rational_rational_proto_rawDescData
 }
 
-var file_infracost_provider_rational_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_infracost_provider_rational_proto_goTypes = []any{
-	(*Rat)(nil), // 0: infracost.provider.Rat
+var file_infracost_rational_rational_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_infracost_rational_rational_proto_goTypes = []any{
+	(*Rat)(nil), // 0: infracost.rational.Rat
 }
-var file_infracost_provider_rational_proto_depIdxs = []int32{
+var file_infracost_rational_rational_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -115,26 +117,26 @@ var file_infracost_provider_rational_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_infracost_provider_rational_proto_init() }
-func file_infracost_provider_rational_proto_init() {
-	if File_infracost_provider_rational_proto != nil {
+func init() { file_infracost_rational_rational_proto_init() }
+func file_infracost_rational_rational_proto_init() {
+	if File_infracost_rational_rational_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_rational_proto_rawDesc), len(file_infracost_provider_rational_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_rational_rational_proto_rawDesc), len(file_infracost_rational_rational_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_infracost_provider_rational_proto_goTypes,
-		DependencyIndexes: file_infracost_provider_rational_proto_depIdxs,
-		MessageInfos:      file_infracost_provider_rational_proto_msgTypes,
+		GoTypes:           file_infracost_rational_rational_proto_goTypes,
+		DependencyIndexes: file_infracost_rational_rational_proto_depIdxs,
+		MessageInfos:      file_infracost_rational_rational_proto_msgTypes,
 	}.Build()
-	File_infracost_provider_rational_proto = out.File
-	file_infracost_provider_rational_proto_goTypes = nil
-	file_infracost_provider_rational_proto_depIdxs = nil
+	File_infracost_rational_rational_proto = out.File
+	file_infracost_rational_rational_proto_goTypes = nil
+	file_infracost_rational_rational_proto_depIdxs = nil
 }

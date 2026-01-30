@@ -4,43 +4,27 @@
 
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
-import { file_infracost_parser_cloudformation_target } from "../cloudformation/target_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
-import { file_infracost_parser_terraform_target } from "../terraform/target_pb.js";
-import { file_infracost_parser_terragrunt_target } from "../terragrunt/target_pb.js";
+import { file_infracost_parser_terragrunt_module } from "../terragrunt/module_pb.js";
 
 /**
  * Describes the file infracost/parser/messages/message.proto.
  */
 export const file_infracost_parser_messages_message = /*@__PURE__*/
-  fileDesc("CidpbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzL21lc3NhZ2UucHJvdG8SGWluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMiegoMUGFyc2VSZXF1ZXN0EhYKDnJlcG9fZGlyZWN0b3J5GAEgASgJEhMKC3dvcmtpbmdfZGlyGAIgASgJEj0KBnRhcmdldBgDIAEoCzItLmluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUiggEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSPgoGcmVzdWx0GAIgASgLMi4uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlUmVzdWx0ItsBChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgKIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEjkKCnRlcnJhZ3J1bnQYCyABKAsyIy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZ3J1bnQuUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YDCABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQvABCh1jb20uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlc0IMTWVzc2FnZVByb3RvUAFaO2dpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzogIDSVBNqgIZSW5mcmFjb3N0LlBhcnNlci5NZXNzYWdlc8oCGUluZnJhY29zdFxQYXJzZXJcTWVzc2FnZXPiAiVJbmZyYWNvc3RcUGFyc2VyXE1lc3NhZ2VzXEdQQk1ldGFkYXRh6gIbSW5mcmFjb3N0OjpQYXJzZXI6Ok1lc3NhZ2VzYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
-
-/**
- * Describes the message infracost.parser.messages.ParseRequest.
- * Use `create(ParseRequestSchema)` to create a new message.
- */
-export const ParseRequestSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 0);
-
-/**
- * Describes the message infracost.parser.messages.ParseRequestTarget.
- * Use `create(ParseRequestTargetSchema)` to create a new message.
- */
-export const ParseRequestTargetSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 1);
+  fileDesc("CidpbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzL21lc3NhZ2UucHJvdG8SGWluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMiggEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSPgoGcmVzdWx0GAIgASgLMi4uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlUmVzdWx0ItsBChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgKIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEjkKCnRlcnJhZ3J1bnQYCyABKAsyIy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZ3J1bnQuUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YDCABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQvABCh1jb20uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlc0IMTWVzc2FnZVByb3RvUAFaO2dpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzogIDSVBNqgIZSW5mcmFjb3N0LlBhcnNlci5NZXNzYWdlc8oCGUluZnJhY29zdFxQYXJzZXJcTWVzc2FnZXPiAiVJbmZyYWNvc3RcUGFyc2VyXE1lc3NhZ2VzXEdQQk1ldGFkYXRh6gIbSW5mcmFjb3N0OjpQYXJzZXI6Ok1lc3NhZ2VzYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terragrunt_module]);
 
 /**
  * Describes the message infracost.parser.messages.ParseResponse.
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 2);
+  messageDesc(file_infracost_parser_messages_message, 0);
 
 /**
  * Describes the message infracost.parser.messages.ParseResponseResult.
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export const ParseResponseResultSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 3);
+  messageDesc(file_infracost_parser_messages_message, 1);
 

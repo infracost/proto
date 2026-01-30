@@ -4,93 +4,15 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Target } from "../terraform/target_pb.js";
-import type { Result, Target as Target$1 } from "../terragrunt/target_pb.js";
-import type { Target as Target$2 } from "../cloudformation/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
+import type { Result } from "../terragrunt/module_pb.js";
 import type { Result as Result$1 } from "../cloudformation/result_pb.js";
 
 /**
  * Describes the file infracost/parser/messages/message.proto.
  */
 export declare const file_infracost_parser_messages_message: GenFile;
-
-/**
- * ParseRequest is the unified request for all parser types.
- *
- * @generated from message infracost.parser.messages.ParseRequest
- */
-export declare type ParseRequest = Message<"infracost.parser.messages.ParseRequest"> & {
-  /**
-   * The root path of the repository to be parsed
-   *
-   * @generated from field: string repo_directory = 1;
-   */
-  repoDirectory: string;
-
-  /**
-   * The working directory of the project in the repository being processed
-   *
-   * @generated from field: string working_dir = 2;
-   */
-  workingDir: string;
-
-  /**
-   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
-   *
-   * @generated from field: infracost.parser.messages.ParseRequestTarget target = 3;
-   */
-  target?: ParseRequestTarget;
-};
-
-/**
- * Describes the message infracost.parser.messages.ParseRequest.
- * Use `create(ParseRequestSchema)` to create a new message.
- */
-export declare const ParseRequestSchema: GenMessage<ParseRequest>;
-
-/**
- * ParseRequestTarget is the unified target for all parser types.
- *
- * @generated from message infracost.parser.messages.ParseRequestTarget
- */
-export declare type ParseRequestTarget = Message<"infracost.parser.messages.ParseRequestTarget"> & {
-  /**
-   * @generated from oneof infracost.parser.messages.ParseRequestTarget.value
-   */
-  value: {
-    /**
-     * The target type for Terraform files
-     *
-     * @generated from field: infracost.parser.terraform.Target terraform = 10;
-     */
-    value: Target;
-    case: "terraform";
-  } | {
-    /**
-     * The target type for Terragrunt files
-     *
-     * @generated from field: infracost.parser.terragrunt.Target terragrunt = 11;
-     */
-    value: Target$1;
-    case: "terragrunt";
-  } | {
-    /**
-     * The target type for CloudFormation files
-     *
-     * @generated from field: infracost.parser.cloudformation.Target cloudformation = 12;
-     */
-    value: Target$2;
-    case: "cloudformation";
-  } | { case: undefined; value?: undefined };
-};
-
-/**
- * Describes the message infracost.parser.messages.ParseRequestTarget.
- * Use `create(ParseRequestTargetSchema)` to create a new message.
- */
-export declare const ParseRequestTargetSchema: GenMessage<ParseRequestTarget>;
 
 /**
  * ParseResponse is the unified response for all parser types.

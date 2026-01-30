@@ -4,7 +4,8 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Rat } from "./rational_pb.js";
+import type { CallStack } from "../parser/stack_pb.js";
+import type { Rat } from "../rational/rational_pb.js";
 
 /**
  * Describes the file infracost/provider/output.proto.
@@ -28,13 +29,6 @@ export declare type Output = Message<"infracost.provider.Output"> & {
    * @generated from field: repeated infracost.provider.FinopsPolicyResult finops_results = 2;
    */
   finopsResults: FinopsPolicyResult[];
-
-  /**
-   * Details of passes/failures for each configured tagging policy
-   *
-   * @generated from field: repeated infracost.provider.TaggingPolicyResult tagging_results = 3;
-   */
-  taggingResults: TaggingPolicyResult[];
 };
 
 /**
@@ -59,12 +53,12 @@ export declare type Resource = Message<"infracost.provider.Resource"> & {
    *
    * tf or cfn resource type
    *
-   * @generated from field: string resource_type = 2;
+   * @generated from field: string type = 2;
    */
-  resourceType: string;
+  type: string;
 
   /**
-   * TODO: resource name - usually the address of the resource?
+   * a unique resource name, usually populated with the full address of the resource
    *
    * @generated from field: string name = 3;
    */
@@ -78,14 +72,14 @@ export declare type Resource = Message<"infracost.provider.Resource"> & {
   region: string;
 
   /**
-   * ???
+   * filename, line numbers, checksums
    *
    * @generated from field: infracost.provider.ResourceMetadata metadata = 5;
    */
   metadata?: ResourceMetadata;
 
   /**
-   * TODO: ??? link to where the provider was defined?
+   * string describing where the provider is defined for this resource
    *
    * @generated from field: string provider_link = 6;
    */
@@ -113,42 +107,39 @@ export declare type Resource = Message<"infracost.provider.Resource"> & {
   isProviderSupported: boolean;
 
   /**
-   * if defaults tags are supported for this resource
+   * if the resource was added for this run (if known)
    *
-   * @generated from field: bool supports_default_tags = 10;
-   */
-  supportsDefaultTags: boolean;
-
-  /**
-   * @generated from field: bool is_new = 11;
+   * @generated from field: bool is_new = 10;
    */
   isNew: boolean;
 
   /**
    * The resource costs - totals and individual cost components - including environmental metrics
    *
-   * @generated from field: infracost.provider.ResourceCosts costs = 12;
+   * @generated from field: infracost.provider.ResourceCosts costs = 11;
    */
   costs?: ResourceCosts;
 
   /**
    * Resource-level tags
    *
-   * @generated from field: map<string, string> tags = 13;
+   * @generated from field: infracost.provider.Tagging tagging = 12;
    */
-  tags: { [key: string]: string };
-
-  /**
-   * @generated from field: map<string, string> default_tags = 14;
-   */
-  defaultTags: { [key: string]: string };
+  tagging?: Tagging;
 
   /**
    * Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
    *
-   * @generated from field: repeated infracost.provider.Resource child_resources = 15;
+   * @generated from field: repeated infracost.provider.Resource child_resources = 13;
    */
   childResources: Resource[];
+
+  /**
+   * the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
+   *
+   * @generated from field: infracost.parser.CallStack call_stack = 14;
+   */
+  callStack?: CallStack;
 };
 
 /**
@@ -162,6 +153,8 @@ export declare const ResourceSchema: GenMessage<Resource>;
  */
 export declare type ResourceMetadata = Message<"infracost.provider.ResourceMetadata"> & {
   /**
+   * TODO: docs!
+   *
    * @generated from field: string basic_checksum = 1;
    */
   basicChecksum: string;
@@ -208,6 +201,8 @@ export declare const ResourceMetadataSchema: GenMessage<ResourceMetadata>;
  */
 export declare type ModuleCall = Message<"infracost.provider.ModuleCall"> & {
   /**
+   * the name of the thing that defined this module, e.g. "module.x" in terraform
+   *
    * i.e. block name
    *
    * @generated from field: string definition_name = 1;
@@ -215,11 +210,15 @@ export declare type ModuleCall = Message<"infracost.provider.ModuleCall"> & {
   definitionName: string;
 
   /**
+   * filename where this module was called
+   *
    * @generated from field: string filename = 2;
    */
   filename: string;
 
   /**
+   * line numbers where this module was called
+   *
    * @generated from field: int64 start_line = 3;
    */
   startLine: bigint;
@@ -237,84 +236,143 @@ export declare type ModuleCall = Message<"infracost.provider.ModuleCall"> & {
 export declare const ModuleCallSchema: GenMessage<ModuleCall>;
 
 /**
- * @generated from message infracost.provider.Tags
+ * @generated from message infracost.provider.Tagging
  */
-export declare type Tags = Message<"infracost.provider.Tags"> & {
+export declare type Tagging = Message<"infracost.provider.Tagging"> & {
   /**
-   * Default tags
+   * tag values
    *
-   * @generated from field: repeated infracost.provider.Tag default_tags = 1;
-   */
-  defaultTags: Tag[];
-
-  /**
-   * Resource-level tags
-   * TODO: do these include default values?
-   *
-   * @generated from field: repeated infracost.provider.Tag tags = 2;
+   * @generated from field: repeated infracost.provider.Tag tags = 1;
    */
   tags: Tag[];
 
   /**
+   * if this resource supports tags at all
+   *
+   * @generated from field: bool supports_tags = 2;
+   */
+  supportsTags: boolean;
+
+  /**
    * If the provider supports default tags here (so we can differentiate between this and there being no defaults)
    *
-   * @generated from field: bool default_tags_supported = 3;
+   * @generated from field: bool supports_default_tags = 3;
    */
-  defaultTagsSupported: boolean;
-
-  /**
-   * List of missing (undefined) variables that result in us not knowing all tag keys
-   * We use this so we can avoid report missing tags if we're unsure if the tags are really missing, as one or more tags exists with an unknown key.
-   *
-   * @generated from field: repeated string missing_vars_causing_unknown_tag_keys = 4;
-   */
-  missingVarsCausingUnknownTagKeys: string[];
-
-  /**
-   * List of missing (undefined) variables that result in us not knowing all default tag keys
-   *
-   * @generated from field: repeated string missing_vars_causing_unknown_default_tag_keys = 5;
-   */
-  missingVarsCausingUnknownDefaultTagKeys: string[];
+  supportsDefaultTags: boolean;
 
   /**
    * Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
    *
-   * @generated from field: infracost.provider.TagPropagation propagation = 6;
+   * @generated from field: repeated infracost.provider.TagPropagationProblem propagation_problems = 4;
    */
-  propagation?: TagPropagation;
+  propagationProblems: TagPropagationProblem[];
 };
 
 /**
- * Describes the message infracost.provider.Tags.
- * Use `create(TagsSchema)` to create a new message.
+ * Describes the message infracost.provider.Tagging.
+ * Use `create(TaggingSchema)` to create a new message.
  */
-export declare const TagsSchema: GenMessage<Tags>;
+export declare const TaggingSchema: GenMessage<Tagging>;
 
 /**
- * TODO: !!!
- *    To                    string             `json:"to"`
- * From                  *string            `json:"from,omitempty"`
- * Tags                  *map[string]string `json:"tags,omitempty"`
- * Attribute             string             `json:"attribute"`
- * HasRequiredAttributes bool               `json:"hasRequiredAttributes,omitempty"`
- *
- * @generated from message infracost.provider.TagPropagation
+ * @generated from message infracost.provider.Tag
  */
-export declare type TagPropagation = Message<"infracost.provider.TagPropagation"> & {
+export declare type Tag = Message<"infracost.provider.Tag"> & {
+  /**
+   * tag key (name)
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * tag value
+   *
+   * @generated from field: string value = 2;
+   */
+  value: string;
+
+  /**
+   * whether this is a default tag
+   *
+   * @generated from field: bool is_default = 3;
+   */
+  isDefault: boolean;
+
+  /**
+   * whether the key was synthetically generated (e.g. we made up a value because the real one was not defined)
+   *
+   * @generated from field: bool is_key_synthetic = 4;
+   */
+  isKeySynthetic: boolean;
+
+  /**
+   * whether the value was synthetically generated (e.g. we made up a value because the real one was not defined)
+   *
+   * @generated from field: bool is_value_synthetic = 5;
+   */
+  isValueSynthetic: boolean;
 };
 
 /**
- * Describes the message infracost.provider.TagPropagation.
- * Use `create(TagPropagationSchema)` to create a new message.
+ * Describes the message infracost.provider.Tag.
+ * Use `create(TagSchema)` to create a new message.
  */
-export declare const TagPropagationSchema: GenMessage<TagPropagation>;
+export declare const TagSchema: GenMessage<Tag>;
+
+/**
+ * @generated from message infracost.provider.TagPropagationProblem
+ */
+export declare type TagPropagationProblem = Message<"infracost.provider.TagPropagationProblem"> & {
+  /**
+   * actual discovered value for the attribute (formerly known as "From" for some reason)
+   *
+   * @generated from field: string actual_value = 1;
+   */
+  actualValue: string;
+
+  /**
+   * valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+   *
+   * @generated from field: repeated string valid_values = 2;
+   */
+  validValues: string[];
+
+  /**
+   * the attribute which dictates whether propagation is enabled
+   *
+   * @generated from field: string attribute = 3;
+   */
+  attribute: string;
+
+  /**
+   * a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+   *
+   * @generated from field: string tag_recipient = 4;
+   */
+  tagRecipient: string;
+
+  /**
+   * tag keys which are affected by this propagation problem
+   *
+   * @generated from field: repeated string affected_tags = 5;
+   */
+  affectedTags: string[];
+};
+
+/**
+ * Describes the message infracost.provider.TagPropagationProblem.
+ * Use `create(TagPropagationProblemSchema)` to create a new message.
+ */
+export declare const TagPropagationProblemSchema: GenMessage<TagPropagationProblem>;
 
 /**
  * @generated from message infracost.provider.ResourceCosts
  */
 export declare type ResourceCosts = Message<"infracost.provider.ResourceCosts"> & {
   /**
+   * a list of cost line items directly associated with this resource
+   *
    * @generated from field: repeated infracost.provider.CostComponent components = 1;
    */
   components: CostComponent[];
@@ -375,14 +433,14 @@ export declare type CostComponent = Message<"infracost.provider.CostComponent"> 
   /**
    * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
    *
-   * @generated from field: infracost.provider.Rat quantity = 7;
+   * @generated from field: infracost.rational.Rat quantity = 7;
    */
   quantity?: Rat;
 
   /**
    * The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
    *
-   * @generated from field: infracost.provider.Rat discount_rate = 8;
+   * @generated from field: infracost.rational.Rat discount_rate = 8;
    */
   discountRate?: Rat;
 
@@ -405,12 +463,16 @@ export declare const CostComponentSchema: GenMessage<CostComponent>;
  */
 export declare type PeriodPrice = Message<"infracost.provider.PeriodPrice"> & {
   /**
-   * @generated from field: infracost.provider.Rat price = 7;
+   * the raw price as arational number
+   *
+   * @generated from field: infracost.rational.Rat price = 1;
    */
   price?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Period period = 6;
+   * this is the period to which the price applies (i.e. monthly or hourly)
+   *
+   * @generated from field: infracost.provider.Period period = 2;
    */
   period: Period;
 };
@@ -426,17 +488,23 @@ export declare const PeriodPriceSchema: GenMessage<PeriodPrice>;
  */
 export declare type EnvironmentalMetrics = Message<"infracost.provider.EnvironmentalMetrics"> & {
   /**
+   * the period to which the metrics apply (i.e. monthly or hourly)
+   *
    * @generated from field: infracost.provider.Period period = 1;
    */
   period: Period;
 
   /**
-   * @generated from field: infracost.provider.Rat carbon_grams_co2e = 2;
+   * carbon emissions in grams CO2e
+   *
+   * @generated from field: infracost.rational.Rat carbon_grams_co2e = 2;
    */
   carbonGramsCo2e?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat water_liters = 3;
+   * water usage in liters
+   *
+   * @generated from field: infracost.rational.Rat water_liters = 3;
    */
   waterLiters?: Rat;
 };
@@ -448,71 +516,68 @@ export declare type EnvironmentalMetrics = Message<"infracost.provider.Environme
 export declare const EnvironmentalMetricsSchema: GenMessage<EnvironmentalMetrics>;
 
 /**
- * @generated from message infracost.provider.Tag
- */
-export declare type Tag = Message<"infracost.provider.Tag"> & {
-  /**
-   * @generated from field: string key = 1;
-   */
-  key: string;
-
-  /**
-   * @generated from field: string value = 2;
-   */
-  value: string;
-};
-
-/**
- * Describes the message infracost.provider.Tag.
- * Use `create(TagSchema)` to create a new message.
- */
-export declare const TagSchema: GenMessage<Tag>;
-
-/**
  * @generated from message infracost.provider.FinopsPolicyResult
  */
 export declare type FinopsPolicyResult = Message<"infracost.provider.FinopsPolicyResult"> & {
   /**
+   * Unique policy ID (UUID v4, from dashboard API)
+   *
    * @generated from field: string policy_id = 1;
    */
   policyId: string;
 
   /**
+   * Human-readable policy name
+   *
    * @generated from field: string policy_name = 2;
    */
   policyName: string;
 
   /**
+   * Human-readable policy slug, used to identify specific policy code in provider plugins
+   *
    * @generated from field: string policy_slug = 3;
    */
   policySlug: string;
 
   /**
+   * Message describing the policy result
+   *
    * @generated from field: string policy_message = 4;
    */
   policyMessage: string;
 
   /**
+   * Resource IDs that passed this policy
+   *
    * @generated from field: repeated string passing_resource_ids = 5;
    */
   passingResourceIds: string[];
 
   /**
+   * Resources that failed this policy, along with details of the individual issues
+   *
    * @generated from field: repeated infracost.provider.FinopsPolicyFailingResource failing_resources = 6;
    */
   failingResources: FinopsPolicyFailingResource[];
 
   /**
+   * should this failure cause the pull request to be blocked (if PR blocking is enabled at a higher level)
+   *
    * @generated from field: bool block_pull_request = 7;
    */
   blockPullRequest: boolean;
 
   /**
+   * should this policy result be included in the pull request comment
+   *
    * @generated from field: bool include_in_pull_request_comment = 8;
    */
   includeInPullRequestComment: boolean;
 
   /**
+   * does this policy only apply to new resources
+   *
    * @generated from field: bool only_applies_to_new_resources = 9;
    */
   onlyAppliesToNewResources: boolean;
@@ -529,12 +594,16 @@ export declare const FinopsPolicyResultSchema: GenMessage<FinopsPolicyResult>;
  */
 export declare type FinopsPolicyFailingResource = Message<"infracost.provider.FinopsPolicyFailingResource"> & {
   /**
+   * Unique resource ID (can be matched against the Resource.id field to identify a full resource)
+   *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
-   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 15;
+   * Details of the individual issues for this resource
+   *
+   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 2;
    */
   issues: FinopsResourceIssue[];
 };
@@ -550,39 +619,65 @@ export declare const FinopsPolicyFailingResourceSchema: GenMessage<FinopsPolicyF
  */
 export declare type FinopsResourceIssue = Message<"infracost.provider.FinopsResourceIssue"> & {
   /**
-   * @generated from field: infracost.provider.Rat monthly_savings = 1;
+   * monthly financial savings (in configured currency) that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_savings = 1;
    */
   monthlySavings?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat monthly_carbon_savings_grams_co2e = 2;
+   * monthly carbon savings in grams CO2e that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_carbon_savings_grams_co2e = 2;
    */
   monthlyCarbonSavingsGramsCo2e?: Rat;
 
   /**
-   * @generated from field: infracost.provider.Rat monthly_water_savings_litres = 3;
+   * monthly water savings in litres that could be realized by fixing this issue
+   *
+   * @generated from field: infracost.rational.Rat monthly_water_savings_litres = 3;
    */
   monthlyWaterSavingsLitres?: Rat;
 
   /**
+   * human-readable address where the issue originates
+   *
    * @generated from field: string address = 4;
    */
   address: string;
 
   /**
+   * attribute of the resource where the issue originates
+   *
    * @generated from field: string attribute = 5;
    */
   attribute: string;
 
   /**
+   * detailed description of the issue
+   *
    * @generated from field: string description = 6;
    */
   description: string;
 
   /**
+   * extra details pertaining to the financial savings
+   *
    * @generated from field: optional string savings_details = 7;
    */
   savingsDetails?: string;
+
+  /**
+   * breakdowns of costs before and after fixing the issue
+   *
+   * @generated from field: repeated infracost.provider.IssueBreakdown before_fix_breakdowns = 8;
+   */
+  beforeFixBreakdowns: IssueBreakdown[];
+
+  /**
+   * @generated from field: repeated infracost.provider.IssueBreakdown after_fix_breakdowns = 9;
+   */
+  afterFixBreakdowns: IssueBreakdown[];
 };
 
 /**
@@ -592,168 +687,160 @@ export declare type FinopsResourceIssue = Message<"infracost.provider.FinopsReso
 export declare const FinopsResourceIssueSchema: GenMessage<FinopsResourceIssue>;
 
 /**
- * @generated from message infracost.provider.TaggingPolicyResult
+ * @generated from message infracost.provider.IssueBreakdown
  */
-export declare type TaggingPolicyResult = Message<"infracost.provider.TaggingPolicyResult"> & {
+export declare type IssueBreakdown = Message<"infracost.provider.IssueBreakdown"> & {
   /**
-   * @generated from field: string policy_id = 1;
+   * name of the resource or subresource
+   *
+   * @generated from field: string resource_name = 1;
    */
-  policyId: string;
+  resourceName: string;
 
   /**
-   * @generated from field: string policy_name = 2;
+   * region of the resource or subresource
+   *
+   * @generated from field: string region = 2;
    */
-  policyName: string;
+  region: string;
 
   /**
-   * @generated from field: string policy_message = 3;
+   * cost components for this resource or subresource
+   *
+   * @generated from field: repeated infracost.provider.IssueCostComponent cost_components = 3;
    */
-  policyMessage: string;
+  costComponents: IssueCostComponent[];
 
   /**
-   * @generated from field: repeated string passing_resource_ids = 4;
+   * nested subresources
+   *
+   * @generated from field: repeated infracost.provider.IssueBreakdown subresources = 4;
    */
-  passingResourceIds: string[];
-
-  /**
-   * @generated from field: repeated infracost.provider.TaggingPolicyFailingResource failing_resources = 5;
-   */
-  failingResources: TaggingPolicyFailingResource[];
-
-  /**
-   * @generated from field: bool block_pull_request = 6;
-   */
-  blockPullRequest: boolean;
-
-  /**
-   * @generated from field: bool include_in_pull_request_comment = 7;
-   */
-  includeInPullRequestComment: boolean;
+  subresources: IssueBreakdown[];
 };
 
 /**
- * Describes the message infracost.provider.TaggingPolicyResult.
- * Use `create(TaggingPolicyResultSchema)` to create a new message.
+ * Describes the message infracost.provider.IssueBreakdown.
+ * Use `create(IssueBreakdownSchema)` to create a new message.
  */
-export declare const TaggingPolicyResultSchema: GenMessage<TaggingPolicyResult>;
+export declare const IssueBreakdownSchema: GenMessage<IssueBreakdown>;
 
 /**
- * @generated from message infracost.provider.TaggingPolicyFailingResource
+ * @generated from message infracost.provider.IssueCostComponent
  */
-export declare type TaggingPolicyFailingResource = Message<"infracost.provider.TaggingPolicyFailingResource"> & {
+export declare type IssueCostComponent = Message<"infracost.provider.IssueCostComponent"> & {
   /**
-   * @generated from field: string id = 1;
+   * name of the cost component e.g. "compute cost"
+   *
+   * @generated from field: string name = 1;
    */
-  id: string;
+  name: string;
 
   /**
-   * @generated from field: repeated infracost.provider.InvalidTag invalid_tags = 2;
+   * unit the cost is measured in e.g. "hours", "GB", "vCPU/seconds"
+   *
+   * @generated from field: string unit = 2;
    */
-  invalidTags: InvalidTag[];
+  unit: string;
 
   /**
-   * @generated from field: repeated string missing_mandatory_tags = 3;
+   * Whether the `period_price` is based on usage data
+   *
+   * @generated from field: bool usage_based = 3;
    */
-  missingMandatoryTags: string[];
+  usageBased: boolean;
 
   /**
-   * @generated from field: repeated infracost.provider.TagPropagationProblem propagation_problems = 4;
+   * The price, pre-discount, of each `unit` (per price period)
+   *
+   * @generated from field: infracost.provider.PeriodPrice period_price = 4;
    */
-  propagationProblems: TagPropagationProblem[];
+  periodPrice?: PeriodPrice;
 
   /**
-   * @generated from field: bool default_tags_did_not_propagate = 5;
+   * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+   *
+   * @generated from field: infracost.rational.Rat quantity = 5;
    */
-  defaultTagsDidNotPropagate: boolean;
+  quantity?: Rat;
+
+  /**
+   * The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+   *
+   * @generated from field: infracost.rational.Rat discount_rate = 6;
+   */
+  discountRate?: Rat;
 };
 
 /**
- * Describes the message infracost.provider.TaggingPolicyFailingResource.
- * Use `create(TaggingPolicyFailingResourceSchema)` to create a new message.
+ * Describes the message infracost.provider.IssueCostComponent.
+ * Use `create(IssueCostComponentSchema)` to create a new message.
  */
-export declare const TaggingPolicyFailingResourceSchema: GenMessage<TaggingPolicyFailingResource>;
-
-/**
- * @generated from message infracost.provider.TagPropagationProblem
- */
-export declare type TagPropagationProblem = Message<"infracost.provider.TagPropagationProblem"> & {
-  /**
-   * @generated from field: string attribute = 1;
-   */
-  attribute: string;
-
-  /**
-   * @generated from field: string from = 2;
-   */
-  from: string;
-
-  /**
-   * @generated from field: string to = 3;
-   */
-  to: string;
-
-  /**
-   * @generated from field: repeated string valid_sources = 4;
-   */
-  validSources: string[];
-
-  /**
-   * @generated from field: repeated string affected_tags = 5;
-   */
-  affectedTags: string[];
-};
-
-/**
- * Describes the message infracost.provider.TagPropagationProblem.
- * Use `create(TagPropagationProblemSchema)` to create a new message.
- */
-export declare const TagPropagationProblemSchema: GenMessage<TagPropagationProblem>;
+export declare const IssueCostComponentSchema: GenMessage<IssueCostComponent>;
 
 /**
  * @generated from message infracost.provider.InvalidTag
  */
 export declare type InvalidTag = Message<"infracost.provider.InvalidTag"> & {
   /**
+   * tag key (name)
+   *
    * @generated from field: string key = 1;
    */
   key: string;
 
   /**
+   * tag value
+   *
    * @generated from field: string value = 2;
    */
   value: string;
 
   /**
+   * message describing why the tag is invalid
+   *
    * @generated from field: string message = 3;
    */
   message: string;
 
   /**
+   * valid values for the tag
+   *
    * @generated from field: repeated string valid_values = 4;
    */
   validValues: string[];
 
   /**
+   * whether the valid values list was truncated (sometimes there are ~100k!)
+   *
    * @generated from field: bool valid_values_truncated = 5;
    */
   validValuesTruncated: boolean;
 
   /**
+   * whether this tag came from default tags
+   *
    * @generated from field: bool from_default_tags = 6;
    */
   fromDefaultTags: boolean;
 
   /**
+   * whether this tag is missing but mandatory
+   *
    * @generated from field: bool missing_mandatory = 7;
    */
   missingMandatory: boolean;
 
   /**
+   * when the value must match a regex, the regex pattern
+   *
    * @generated from field: optional string valid_regex = 8;
    */
   validRegex?: string;
 
   /**
+   * suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+   *
    * @generated from field: optional string suggestion = 9;
    */
   suggestion?: string;

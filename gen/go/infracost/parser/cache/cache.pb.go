@@ -10,6 +10,7 @@ import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
 	cloudformation "github.com/infracost/proto/gen/go/infracost/parser/cloudformation"
 	terraform "github.com/infracost/proto/gen/go/infracost/parser/terraform"
+	usage "github.com/infracost/proto/gen/go/infracost/usage"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -79,10 +80,10 @@ type TerraformProject struct {
 	Result                *terraform.ModuleResult `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	Metadata              *Metadata               `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Diags                 []*parser.Diagnostic    `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
-	UsageFile             []byte                  `protobuf:"bytes,4,opt,name=usage_file,json=usageFile,proto3" json:"usage_file,omitempty"`             // raw yaml of usage file
 	ProjectConfig         []byte                  `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
 	IsTerragrunt          bool                    `protobuf:"varint,6,opt,name=is_terragrunt,json=isTerragrunt,proto3" json:"is_terragrunt,omitempty"`
 	TerraformModuleSuffix string                  `protobuf:"bytes,7,opt,name=terraform_module_suffix,json=terraformModuleSuffix,proto3" json:"terraform_module_suffix,omitempty"`
+	Usage                 *usage.Usage            `protobuf:"bytes,9,opt,name=usage,proto3" json:"usage,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -138,13 +139,6 @@ func (x *TerraformProject) GetDiags() []*parser.Diagnostic {
 	return nil
 }
 
-func (x *TerraformProject) GetUsageFile() []byte {
-	if x != nil {
-		return x.UsageFile
-	}
-	return nil
-}
-
 func (x *TerraformProject) GetProjectConfig() []byte {
 	if x != nil {
 		return x.ProjectConfig
@@ -164,6 +158,13 @@ func (x *TerraformProject) GetTerraformModuleSuffix() string {
 		return x.TerraformModuleSuffix
 	}
 	return ""
+}
+
+func (x *TerraformProject) GetUsage() *usage.Usage {
+	if x != nil {
+		return x.Usage
+	}
+	return nil
 }
 
 type Metadata struct {
@@ -428,8 +429,8 @@ type CloudFormationProject struct {
 	Result        *cloudformation.Result `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	Metadata      *Metadata              `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Diags         []*parser.Diagnostic   `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
-	UsageFile     []byte                 `protobuf:"bytes,4,opt,name=usage_file,json=usageFile,proto3" json:"usage_file,omitempty"`             // raw yaml of usage file
 	ProjectConfig []byte                 `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
+	Usage         *usage.Usage           `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -485,16 +486,16 @@ func (x *CloudFormationProject) GetDiags() []*parser.Diagnostic {
 	return nil
 }
 
-func (x *CloudFormationProject) GetUsageFile() []byte {
+func (x *CloudFormationProject) GetProjectConfig() []byte {
 	if x != nil {
-		return x.UsageFile
+		return x.ProjectConfig
 	}
 	return nil
 }
 
-func (x *CloudFormationProject) GetProjectConfig() []byte {
+func (x *CloudFormationProject) GetUsage() *usage.Usage {
 	if x != nil {
-		return x.ProjectConfig
+		return x.Usage
 	}
 	return nil
 }
@@ -503,16 +504,16 @@ var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\x81\x03\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xa2\x03\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
-	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12\x1d\n" +
-	"\n" +
-	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
+	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12%\n" +
 	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12#\n" +
 	"\ris_terragrunt\x18\x06 \x01(\bR\fisTerragrunt\x126\n" +
-	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffixJ\x04\b\b\x10\tR\x10dependency_paths\"\xdd\x01\n" +
+	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\x12,\n" +
+	"\x05usage\x18\t \x01(\v2\x16.infracost.usage.UsageR\x05usageJ\x04\b\x04\x10\x05J\x04\b\b\x10\tR\n" +
+	"usage_fileR\x10dependency_paths\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
 	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12%\n" +
@@ -544,14 +545,14 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xb6\x02\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xd7\x02\n" +
 	"\x15CloudFormationProject\x12?\n" +
 	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
-	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12\x1d\n" +
-	"\n" +
-	"usage_file\x18\x04 \x01(\fR\tusageFile\x12%\n" +
-	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfigJ\x04\b\x06\x10\aJ\x04\b\a\x10\bR\x06is_cdkR\x10dependency_paths*Q\n" +
+	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12%\n" +
+	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12,\n" +
+	"\x05usage\x18\b \x01(\v2\x16.infracost.usage.UsageR\x05usageJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
+	"usage_fileR\x06is_cdkR\x10dependency_paths*Q\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FLAVOR_TERRAFORM\x10\x01\x12\x19\n" +
@@ -587,29 +588,32 @@ var file_infracost_parser_cache_cache_proto_goTypes = []any{
 	nil,                            // 10: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
 	(*terraform.ModuleResult)(nil), // 11: infracost.parser.terraform.ModuleResult
 	(*parser.Diagnostic)(nil),      // 12: infracost.parser.Diagnostic
-	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
-	(*cloudformation.Result)(nil),  // 14: infracost.parser.cloudformation.Result
+	(*usage.Usage)(nil),            // 13: infracost.usage.Usage
+	(*timestamppb.Timestamp)(nil),  // 14: google.protobuf.Timestamp
+	(*cloudformation.Result)(nil),  // 15: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	11, // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
 	2,  // 1: infracost.parser.cache.TerraformProject.metadata:type_name -> infracost.parser.cache.Metadata
 	12, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
-	0,  // 3: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.Flavor
-	13, // 4: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
-	7,  // 5: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	8,  // 6: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	9,  // 7: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	10, // 8: infracost.parser.cache.BranchSummary.sha_to_dependency_paths_map:type_name -> infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
-	14, // 9: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
-	2,  // 10: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
-	12, // 11: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
-	0,  // 12: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
-	3,  // 13: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry.value:type_name -> infracost.parser.cache.DependencyPaths
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	13, // 3: infracost.parser.cache.TerraformProject.usage:type_name -> infracost.usage.Usage
+	0,  // 4: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.Flavor
+	14, // 5: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
+	7,  // 6: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	8,  // 7: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	9,  // 8: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	10, // 9: infracost.parser.cache.BranchSummary.sha_to_dependency_paths_map:type_name -> infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
+	15, // 10: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
+	2,  // 11: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
+	12, // 12: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
+	13, // 13: infracost.parser.cache.CloudFormationProject.usage:type_name -> infracost.usage.Usage
+	0,  // 14: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
+	3,  // 15: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry.value:type_name -> infracost.parser.cache.DependencyPaths
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_cache_cache_proto_init() }

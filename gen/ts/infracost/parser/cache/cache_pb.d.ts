@@ -6,6 +6,7 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2"
 import type { Message } from "@bufbuild/protobuf";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
+import type { Usage } from "../../usage/usage_pb.js";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Result } from "../cloudformation/result_pb.js";
 
@@ -34,13 +35,6 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
   diags: Diagnostic[];
 
   /**
-   * raw yaml of usage file
-   *
-   * @generated from field: bytes usage_file = 4;
-   */
-  usageFile: Uint8Array;
-
-  /**
    * raw yaml of config file
    *
    * @generated from field: bytes project_config = 5;
@@ -56,6 +50,11 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
    * @generated from field: string terraform_module_suffix = 7;
    */
   terraformModuleSuffix: string;
+
+  /**
+   * @generated from field: infracost.usage.Usage usage = 9;
+   */
+  usage?: Usage;
 };
 
 /**
@@ -202,18 +201,16 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
   diags: Diagnostic[];
 
   /**
-   * raw yaml of usage file
-   *
-   * @generated from field: bytes usage_file = 4;
-   */
-  usageFile: Uint8Array;
-
-  /**
    * raw yaml of config file
    *
    * @generated from field: bytes project_config = 5;
    */
   projectConfig: Uint8Array;
+
+  /**
+   * @generated from field: infracost.usage.Usage usage = 8;
+   */
+  usage?: Usage;
 };
 
 /**

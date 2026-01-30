@@ -25,172 +25,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ParseRequest is the unified request for all parser types.
-type ParseRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The root path of the repository to be parsed
-	RepoDirectory string `protobuf:"bytes,1,opt,name=repo_directory,json=repoDirectory,proto3" json:"repo_directory,omitempty"`
-	// The working directory of the project in the repository being processed
-	WorkingDir string `protobuf:"bytes,2,opt,name=working_dir,json=workingDir,proto3" json:"working_dir,omitempty"`
-	// The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
-	Target        *ParseRequestTarget `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ParseRequest) Reset() {
-	*x = ParseRequest{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ParseRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ParseRequest) ProtoMessage() {}
-
-func (x *ParseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ParseRequest.ProtoReflect.Descriptor instead.
-func (*ParseRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ParseRequest) GetRepoDirectory() string {
-	if x != nil {
-		return x.RepoDirectory
-	}
-	return ""
-}
-
-func (x *ParseRequest) GetWorkingDir() string {
-	if x != nil {
-		return x.WorkingDir
-	}
-	return ""
-}
-
-func (x *ParseRequest) GetTarget() *ParseRequestTarget {
-	if x != nil {
-		return x.Target
-	}
-	return nil
-}
-
-// ParseRequestTarget is the unified target for all parser types.
-type ParseRequestTarget struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Value:
-	//
-	//	*ParseRequestTarget_Terraform
-	//	*ParseRequestTarget_Terragrunt
-	//	*ParseRequestTarget_Cloudformation
-	Value         isParseRequestTarget_Value `protobuf_oneof:"value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ParseRequestTarget) Reset() {
-	*x = ParseRequestTarget{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ParseRequestTarget) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ParseRequestTarget) ProtoMessage() {}
-
-func (x *ParseRequestTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ParseRequestTarget.ProtoReflect.Descriptor instead.
-func (*ParseRequestTarget) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ParseRequestTarget) GetValue() isParseRequestTarget_Value {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
-func (x *ParseRequestTarget) GetTerraform() *terraform.Target {
-	if x != nil {
-		if x, ok := x.Value.(*ParseRequestTarget_Terraform); ok {
-			return x.Terraform
-		}
-	}
-	return nil
-}
-
-func (x *ParseRequestTarget) GetTerragrunt() *terragrunt.Target {
-	if x != nil {
-		if x, ok := x.Value.(*ParseRequestTarget_Terragrunt); ok {
-			return x.Terragrunt
-		}
-	}
-	return nil
-}
-
-func (x *ParseRequestTarget) GetCloudformation() *cloudformation.Target {
-	if x != nil {
-		if x, ok := x.Value.(*ParseRequestTarget_Cloudformation); ok {
-			return x.Cloudformation
-		}
-	}
-	return nil
-}
-
-type isParseRequestTarget_Value interface {
-	isParseRequestTarget_Value()
-}
-
-type ParseRequestTarget_Terraform struct {
-	// The target type for Terraform files
-	Terraform *terraform.Target `protobuf:"bytes,10,opt,name=terraform,proto3,oneof"`
-}
-
-type ParseRequestTarget_Terragrunt struct {
-	// The target type for Terragrunt files
-	Terragrunt *terragrunt.Target `protobuf:"bytes,11,opt,name=terragrunt,proto3,oneof"`
-}
-
-type ParseRequestTarget_Cloudformation struct {
-	// The target type for CloudFormation files
-	Cloudformation *cloudformation.Target `protobuf:"bytes,12,opt,name=cloudformation,proto3,oneof"`
-}
-
-func (*ParseRequestTarget_Terraform) isParseRequestTarget_Value() {}
-
-func (*ParseRequestTarget_Terragrunt) isParseRequestTarget_Value() {}
-
-func (*ParseRequestTarget_Cloudformation) isParseRequestTarget_Value() {}
-
 // ParseResponse is the unified response for all parser types.
 type ParseResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -204,7 +38,7 @@ type ParseResponse struct {
 
 func (x *ParseResponse) Reset() {
 	*x = ParseResponse{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[2]
+	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +50,7 @@ func (x *ParseResponse) String() string {
 func (*ParseResponse) ProtoMessage() {}
 
 func (x *ParseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[2]
+	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +63,7 @@ func (x *ParseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
 func (*ParseResponse) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ParseResponse) GetDiagnostics() []*parser.Diagnostic {
@@ -261,7 +95,7 @@ type ParseResponseResult struct {
 
 func (x *ParseResponseResult) Reset() {
 	*x = ParseResponseResult{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[3]
+	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -273,7 +107,7 @@ func (x *ParseResponseResult) String() string {
 func (*ParseResponseResult) ProtoMessage() {}
 
 func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[3]
+	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -286,7 +120,7 @@ func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponseResult.ProtoReflect.Descriptor instead.
 func (*ParseResponseResult) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ParseResponseResult) GetValue() isParseResponseResult_Value {
@@ -349,20 +183,7 @@ var File_infracost_parser_messages_message_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_messages_message_proto_rawDesc = "" +
 	"\n" +
-	"'infracost/parser/messages/message.proto\x12\x19infracost.parser.messages\x1a,infracost/parser/cloudformation/result.proto\x1a,infracost/parser/cloudformation/target.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\x1a(infracost/parser/terragrunt/target.proto\"\x9d\x01\n" +
-	"\fParseRequest\x12%\n" +
-	"\x0erepo_directory\x18\x01 \x01(\tR\rrepoDirectory\x12\x1f\n" +
-	"\vworking_dir\x18\x02 \x01(\tR\n" +
-	"workingDir\x12E\n" +
-	"\x06target\x18\x03 \x01(\v2-.infracost.parser.messages.ParseRequestTargetR\x06target\"\xfb\x01\n" +
-	"\x12ParseRequestTarget\x12B\n" +
-	"\tterraform\x18\n" +
-	" \x01(\v2\".infracost.parser.terraform.TargetH\x00R\tterraform\x12E\n" +
-	"\n" +
-	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.TargetH\x00R\n" +
-	"terragrunt\x12Q\n" +
-	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.TargetH\x00R\x0ecloudformationB\a\n" +
-	"\x05value\"\x97\x01\n" +
+	"'infracost/parser/messages/message.proto\x12\x19infracost.parser.messages\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a(infracost/parser/terragrunt/module.proto\"\x97\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12F\n" +
 	"\x06result\x18\x02 \x01(\v2..infracost.parser.messages.ParseResponseResultR\x06result\"\x82\x02\n" +
@@ -388,35 +209,26 @@ func file_infracost_parser_messages_message_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_messages_message_proto_rawDescData
 }
 
-var file_infracost_parser_messages_message_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_infracost_parser_messages_message_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_infracost_parser_messages_message_proto_goTypes = []any{
-	(*ParseRequest)(nil),           // 0: infracost.parser.messages.ParseRequest
-	(*ParseRequestTarget)(nil),     // 1: infracost.parser.messages.ParseRequestTarget
-	(*ParseResponse)(nil),          // 2: infracost.parser.messages.ParseResponse
-	(*ParseResponseResult)(nil),    // 3: infracost.parser.messages.ParseResponseResult
-	(*terraform.Target)(nil),       // 4: infracost.parser.terraform.Target
-	(*terragrunt.Target)(nil),      // 5: infracost.parser.terragrunt.Target
-	(*cloudformation.Target)(nil),  // 6: infracost.parser.cloudformation.Target
-	(*parser.Diagnostic)(nil),      // 7: infracost.parser.Diagnostic
-	(*terraform.ModuleResult)(nil), // 8: infracost.parser.terraform.ModuleResult
-	(*terragrunt.Result)(nil),      // 9: infracost.parser.terragrunt.Result
-	(*cloudformation.Result)(nil),  // 10: infracost.parser.cloudformation.Result
+	(*ParseResponse)(nil),          // 0: infracost.parser.messages.ParseResponse
+	(*ParseResponseResult)(nil),    // 1: infracost.parser.messages.ParseResponseResult
+	(*parser.Diagnostic)(nil),      // 2: infracost.parser.Diagnostic
+	(*terraform.ModuleResult)(nil), // 3: infracost.parser.terraform.ModuleResult
+	(*terragrunt.Result)(nil),      // 4: infracost.parser.terragrunt.Result
+	(*cloudformation.Result)(nil),  // 5: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_messages_message_proto_depIdxs = []int32{
-	1,  // 0: infracost.parser.messages.ParseRequest.target:type_name -> infracost.parser.messages.ParseRequestTarget
-	4,  // 1: infracost.parser.messages.ParseRequestTarget.terraform:type_name -> infracost.parser.terraform.Target
-	5,  // 2: infracost.parser.messages.ParseRequestTarget.terragrunt:type_name -> infracost.parser.terragrunt.Target
-	6,  // 3: infracost.parser.messages.ParseRequestTarget.cloudformation:type_name -> infracost.parser.cloudformation.Target
-	7,  // 4: infracost.parser.messages.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	3,  // 5: infracost.parser.messages.ParseResponse.result:type_name -> infracost.parser.messages.ParseResponseResult
-	8,  // 6: infracost.parser.messages.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	9,  // 7: infracost.parser.messages.ParseResponseResult.terragrunt:type_name -> infracost.parser.terragrunt.Result
-	10, // 8: infracost.parser.messages.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	2, // 0: infracost.parser.messages.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	1, // 1: infracost.parser.messages.ParseResponse.result:type_name -> infracost.parser.messages.ParseResponseResult
+	3, // 2: infracost.parser.messages.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
+	4, // 3: infracost.parser.messages.ParseResponseResult.terragrunt:type_name -> infracost.parser.terragrunt.Result
+	5, // 4: infracost.parser.messages.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_messages_message_proto_init() }
@@ -425,11 +237,6 @@ func file_infracost_parser_messages_message_proto_init() {
 		return
 	}
 	file_infracost_parser_messages_message_proto_msgTypes[1].OneofWrappers = []any{
-		(*ParseRequestTarget_Terraform)(nil),
-		(*ParseRequestTarget_Terragrunt)(nil),
-		(*ParseRequestTarget_Cloudformation)(nil),
-	}
-	file_infracost_parser_messages_message_proto_msgTypes[3].OneofWrappers = []any{
 		(*ParseResponseResult_Terraform)(nil),
 		(*ParseResponseResult_Terragrunt)(nil),
 		(*ParseResponseResult_Cloudformation)(nil),
@@ -440,7 +247,7 @@ func file_infracost_parser_messages_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_messages_message_proto_rawDesc), len(file_infracost_parser_messages_message_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

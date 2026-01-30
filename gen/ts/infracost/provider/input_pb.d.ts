@@ -5,8 +5,8 @@
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { ParseResponse } from "../parser/messages/message_pb.js";
-import type { Usage } from "./usage_pb.js";
-import type { FinopsPolicySettings, TagPolicy } from "../parser/event/runparameters_pb.js";
+import type { Usage } from "../usage/usage_pb.js";
+import type { FinopsPolicySettings } from "../parser/event/runparameters_pb.js";
 
 /**
  * Describes the file infracost/provider/input.proto.
@@ -43,41 +43,45 @@ export declare type Input = Message<"infracost.provider.Input"> & {
   projectInfo?: ProjectInfo;
 
   /**
-   * Resource IDs that have been seen on a previous run (if relevant), which helps us figure
+   * Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
    * out if a resource is to be considered "new" or not.
    * This is mainly so we can ignore policies that only want to so consider "new" resources
    *
-   * @generated from field: repeated string previous_resource_ids = 4;
+   * @generated from field: repeated string previous_resource_addresses = 4;
    */
-  previousResourceIds: string[];
+  previousResourceAddresses: string[];
 
   /**
-   * TODO: comment!
+   * usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
    *
-   * @generated from field: infracost.provider.Usage usage = 5;
+   * @generated from field: infracost.usage.Usage usage = 5;
    */
   usage?: Usage;
 
   /**
    * Specifies which policies need to be run, and any custom settings for each.
    *
-   * @generated from field: infracost.provider.PolicyConfiguration policy_config = 6;
+   * @generated from field: infracost.provider.FinopsPolicyConfiguration finops_policy_config = 6;
    */
-  policyConfig?: PolicyConfiguration;
+  finopsPolicyConfig?: FinopsPolicyConfiguration;
 
   /**
-   * Features
+   * Feature falgs
    *
    * @generated from field: infracost.provider.Features features = 8;
    */
   features?: Features;
 
   /**
+   * settings that affect the provider behaviour e.g. currency, disk cache usage
+   *
    * @generated from field: infracost.provider.Settings settings = 9;
    */
   settings?: Settings;
 
   /**
+   * infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+   *
    * @generated from field: infracost.provider.Infracost infracost = 10;
    */
   infracost?: Infracost;
@@ -94,11 +98,15 @@ export declare const InputSchema: GenMessage<Input>;
  */
 export declare type Settings = Message<"infracost.provider.Settings"> & {
   /**
+   * currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
+   *
    * @generated from field: string currency = 1;
    */
   currency: string;
 
   /**
+   * whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+   *
    * @generated from field: bool use_disk_caches = 2;
    */
   useDiskCaches: boolean;
@@ -115,16 +123,22 @@ export declare const SettingsSchema: GenMessage<Settings>;
  */
 export declare type Infracost = Message<"infracost.provider.Infracost"> & {
   /**
+   * infracost api key to access pricing data + recommendations
+   *
    * @generated from field: string api_key = 1;
    */
   apiKey: string;
 
   /**
+   * pricing api endpoint to use for price lookups + recommendations
+   *
    * @generated from field: string pricing_api_endpoint = 2;
    */
   pricingApiEndpoint: string;
 
   /**
+   * trace id for correlating requests - mainly for internal use/debugging
+   *
    * @generated from field: string trace_id = 3;
    */
   traceId: string;
@@ -141,27 +155,30 @@ export declare const InfracostSchema: GenMessage<Infracost>;
  */
 export declare type Features = Message<"infracost.provider.Features"> & {
   /**
+   * Enable price lookups
+   *
    * @generated from field: bool enable_price_lookups = 1;
    */
   enablePriceLookups: boolean;
 
   /**
+   * Enable recommendations
+   *
    * @generated from field: bool enable_recommendations = 2;
    */
   enableRecommendations: boolean;
 
   /**
+   * Enable finops policy evaluations
+   *
    * @generated from field: bool enable_finops_policies = 3;
    */
   enableFinopsPolicies: boolean;
 
   /**
-   * @generated from field: bool enable_tagging_policies = 4;
-   */
-  enableTaggingPolicies: boolean;
-
-  /**
-   * @generated from field: bool enable_environmental_metrics = 5;
+   * Enable environmental metrics lookups
+   *
+   * @generated from field: bool enable_environmental_metrics = 4;
    */
   enableEnvironmentalMetrics: boolean;
 };
@@ -214,36 +231,11 @@ export declare type ProjectInfo = Message<"infracost.provider.ProjectInfo"> & {
 export declare const ProjectInfoSchema: GenMessage<ProjectInfo>;
 
 /**
- * @generated from message infracost.provider.PolicyConfiguration
+ * @generated from message infracost.provider.FinopsPolicyConfiguration
  */
-export declare type PolicyConfiguration = Message<"infracost.provider.PolicyConfiguration"> & {
+export declare type FinopsPolicyConfiguration = Message<"infracost.provider.FinopsPolicyConfiguration"> & {
   /**
-   * FinOps policy configuration (note: security policies are currently a subset of finops policies)
-   *
-   * @generated from field: infracost.provider.FinOpsPolicyConfiguration finops = 1;
-   */
-  finops?: FinOpsPolicyConfiguration;
-
-  /**
-   * Tagging policy configuration
-   *
-   * @generated from field: infracost.provider.TaggingPolicyConfiguration tagging = 2;
-   */
-  tagging?: TaggingPolicyConfiguration;
-};
-
-/**
- * Describes the message infracost.provider.PolicyConfiguration.
- * Use `create(PolicyConfigurationSchema)` to create a new message.
- */
-export declare const PolicyConfigurationSchema: GenMessage<PolicyConfiguration>;
-
-/**
- * @generated from message infracost.provider.FinOpsPolicyConfiguration
- */
-export declare type FinOpsPolicyConfiguration = Message<"infracost.provider.FinOpsPolicyConfiguration"> & {
-  /**
-   * If none are supplied, all available (default) policies should be run.
+   * Finops policies to evaluate (matched by slug) - if none are supplied, all available (default) policies should be run.
    *
    * @generated from field: repeated infracost.parser.event.FinopsPolicySettings policies = 1;
    */
@@ -251,26 +243,8 @@ export declare type FinOpsPolicyConfiguration = Message<"infracost.provider.FinO
 };
 
 /**
- * Describes the message infracost.provider.FinOpsPolicyConfiguration.
- * Use `create(FinOpsPolicyConfigurationSchema)` to create a new message.
+ * Describes the message infracost.provider.FinopsPolicyConfiguration.
+ * Use `create(FinopsPolicyConfigurationSchema)` to create a new message.
  */
-export declare const FinOpsPolicyConfigurationSchema: GenMessage<FinOpsPolicyConfiguration>;
-
-/**
- * @generated from message infracost.provider.TaggingPolicyConfiguration
- */
-export declare type TaggingPolicyConfiguration = Message<"infracost.provider.TaggingPolicyConfiguration"> & {
-  /**
-   * If none are supplied, all available (default) policies should be run.
-   *
-   * @generated from field: repeated infracost.parser.event.TagPolicy policies = 1;
-   */
-  policies: TagPolicy[];
-};
-
-/**
- * Describes the message infracost.provider.TaggingPolicyConfiguration.
- * Use `create(TaggingPolicyConfigurationSchema)` to create a new message.
- */
-export declare const TaggingPolicyConfigurationSchema: GenMessage<TaggingPolicyConfiguration>;
+export declare const FinopsPolicyConfigurationSchema: GenMessage<FinopsPolicyConfiguration>;
 

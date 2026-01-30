@@ -4,7 +4,7 @@ package infracost.provider;
 
 import "infracost/parser/event/runparameters.proto";
 import "infracost/parser/messages/message.proto";
-import "infracost/provider/usage.proto";
+import "infracost/usage/usage.proto";
 
 message Input {
   // The output of a parser, such as a Terraform module result, or a CloudFormation result
@@ -18,45 +18,52 @@ message Input {
   // This comes from zero or more of the cloud db, and/or a customer's committed usage file
   ProjectInfo project_info = 3;
 
-  // Resource IDs that have been seen on a previous run (if relevant), which helps us figure
+  // Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
   // out if a resource is to be considered "new" or not.
   // This is mainly so we can ignore policies that only want to so consider "new" resources
-  repeated string previous_resource_ids = 4;
+  repeated string previous_resource_addresses = 4;
 
-  // TODO: comment!
-  infracost.provider.Usage usage = 5;
+  // usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
+  infracost.usage.Usage usage = 5;
 
   // Specifies which policies need to be run, and any custom settings for each.
-  PolicyConfiguration policy_config = 6;
+  FinopsPolicyConfiguration finops_policy_config = 6;
 
-  // NOTE: this space is reserved for guard rails configuration
-  reserved 7;
-
-  // Features
+  // Feature falgs
   Features features = 8;
 
+  // settings that affect the provider behaviour e.g. currency, disk cache usage
   Settings settings = 9;
 
+  // infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
   Infracost infracost = 10;
 }
 
 message Settings {
+  // currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
   string currency = 1;
+  // whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
   bool use_disk_caches = 2;
 }
 
 message Infracost {
+  // infracost api key to access pricing data + recommendations
   string api_key = 1;
+  // pricing api endpoint to use for price lookups + recommendations
   string pricing_api_endpoint = 2;
+  // trace id for correlating requests - mainly for internal use/debugging
   string trace_id = 3;
 }
 
 message Features {
+  // Enable price lookups
   bool enable_price_lookups = 1;
+  // Enable recommendations
   bool enable_recommendations = 2;
+  // Enable finops policy evaluations
   bool enable_finops_policies = 3;
-  bool enable_tagging_policies = 4;
-  bool enable_environmental_metrics = 5;
+  // Enable environmental metrics lookups
+  bool enable_environmental_metrics = 4;
 }
 
 // Extra information about the project (formerly known as Scope in the runner)
@@ -71,19 +78,7 @@ message ProjectInfo {
   bool is_production = 4;
 }
 
-message PolicyConfiguration {
-  // FinOps policy configuration (note: security policies are currently a subset of finops policies)
-  FinOpsPolicyConfiguration finops = 1;
-  // Tagging policy configuration
-  TaggingPolicyConfiguration tagging = 2;
-}
-
-message FinOpsPolicyConfiguration {
-  // If none are supplied, all available (default) policies should be run.
+message FinopsPolicyConfiguration {
+  // Finops policies to evaluate (matched by slug) - if none are supplied, all available (default) policies should be run.
   repeated infracost.parser.event.FinopsPolicySettings policies = 1;
-}
-
-message TaggingPolicyConfiguration {
-  // If none are supplied, all available (default) policies should be run.
-  repeated infracost.parser.event.TagPolicy policies = 1;
 }

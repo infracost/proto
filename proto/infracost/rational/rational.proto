@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package infracost.provider;
+package infracost.rational;
 
 // Rat encodes a *big.Rat from Go stdlib
 // This ensures we can encode rational numbers precisely,
@@ -9,6 +9,7 @@ package infracost.provider;
 //   num := new(big.Int).SetBytes(input.Numerator)
 //   denom := new(big.Int).SetBytes(input.Denominator)
 //   rat := new(big.Rat).SetFrac(num, denom)
+// or use our own "rat" package that wraps this logic.
 message Rat {
   bytes numerator = 1;
   bytes denominator = 2;

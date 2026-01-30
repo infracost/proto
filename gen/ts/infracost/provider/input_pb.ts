@@ -4,19 +4,19 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { FinopsPolicySettings, TagPolicy } from "../parser/event/runparameters_pb.js";
+import type { FinopsPolicySettings } from "../parser/event/runparameters_pb.js";
 import { file_infracost_parser_event_runparameters } from "../parser/event/runparameters_pb.js";
 import type { ParseResponse } from "../parser/messages/message_pb.js";
 import { file_infracost_parser_messages_message } from "../parser/messages/message_pb.js";
-import type { Usage } from "./usage_pb.js";
-import { file_infracost_provider_usage } from "./usage_pb.js";
+import type { Usage } from "../usage/usage_pb.js";
+import { file_infracost_usage_usage } from "../usage/usage_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/provider/input.proto.
  */
 export const file_infracost_provider_input: GenFile = /*@__PURE__*/
-  fileDesc("Ch5pbmZyYWNvc3QvcHJvdmlkZXIvaW5wdXQucHJvdG8SEmluZnJhY29zdC5wcm92aWRlciK2AwoFSW5wdXQSPgoMcGFyc2VfcmVzdWx0GAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlEhUKDWFic29sdXRlX3BhdGgYAiABKAkSNQoMcHJvamVjdF9pbmZvGAMgASgLMh8uaW5mcmFjb3N0LnByb3ZpZGVyLlByb2plY3RJbmZvEh0KFXByZXZpb3VzX3Jlc291cmNlX2lkcxgEIAMoCRIoCgV1c2FnZRgFIAEoCzIZLmluZnJhY29zdC5wcm92aWRlci5Vc2FnZRI+Cg1wb2xpY3lfY29uZmlnGAYgASgLMicuaW5mcmFjb3N0LnByb3ZpZGVyLlBvbGljeUNvbmZpZ3VyYXRpb24SLgoIZmVhdHVyZXMYCCABKAsyHC5pbmZyYWNvc3QucHJvdmlkZXIuRmVhdHVyZXMSLgoIc2V0dGluZ3MYCSABKAsyHC5pbmZyYWNvc3QucHJvdmlkZXIuU2V0dGluZ3MSMAoJaW5mcmFjb3N0GAogASgLMh0uaW5mcmFjb3N0LnByb3ZpZGVyLkluZnJhY29zdEoECAcQCCI1CghTZXR0aW5ncxIQCghjdXJyZW5jeRgBIAEoCRIXCg91c2VfZGlza19jYWNoZXMYAiABKAgiTAoJSW5mcmFjb3N0Eg8KB2FwaV9rZXkYASABKAkSHAoUcHJpY2luZ19hcGlfZW5kcG9pbnQYAiABKAkSEAoIdHJhY2VfaWQYAyABKAkirwEKCEZlYXR1cmVzEhwKFGVuYWJsZV9wcmljZV9sb29rdXBzGAEgASgIEh4KFmVuYWJsZV9yZWNvbW1lbmRhdGlvbnMYAiABKAgSHgoWZW5hYmxlX2Zpbm9wc19wb2xpY2llcxgDIAEoCBIfChdlbmFibGVfdGFnZ2luZ19wb2xpY2llcxgEIAEoCBIkChxlbmFibGVfZW52aXJvbm1lbnRhbF9tZXRyaWNzGAUgASgIIloKC1Byb2plY3RJbmZvEgwKBG5hbWUYASABKAkSEwoLYnJhbmNoX25hbWUYAiABKAkSEQoJd29ya3NwYWNlGAMgASgJEhUKDWlzX3Byb2R1Y3Rpb24YBCABKAgilQEKE1BvbGljeUNvbmZpZ3VyYXRpb24SPQoGZmlub3BzGAEgASgLMi0uaW5mcmFjb3N0LnByb3ZpZGVyLkZpbk9wc1BvbGljeUNvbmZpZ3VyYXRpb24SPwoHdGFnZ2luZxgCIAEoCzIuLmluZnJhY29zdC5wcm92aWRlci5UYWdnaW5nUG9saWN5Q29uZmlndXJhdGlvbiJbChlGaW5PcHNQb2xpY3lDb25maWd1cmF0aW9uEj4KCHBvbGljaWVzGAEgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncyJRChpUYWdnaW5nUG9saWN5Q29uZmlndXJhdGlvbhIzCghwb2xpY2llcxgBIAMoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVGFnUG9saWN5QsMBChZjb20uaW5mcmFjb3N0LnByb3ZpZGVyQgpJbnB1dFByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcHJvdmlkZXKiAgNJUFiqAhJJbmZyYWNvc3QuUHJvdmlkZXLKAhJJbmZyYWNvc3RcUHJvdmlkZXLiAh5JbmZyYWNvc3RcUHJvdmlkZXJcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlByb3ZpZGVyYgZwcm90bzM", [file_infracost_parser_event_runparameters, file_infracost_parser_messages_message, file_infracost_provider_usage]);
+  fileDesc("Ch5pbmZyYWNvc3QvcHJvdmlkZXIvaW5wdXQucHJvdG8SEmluZnJhY29zdC5wcm92aWRlciLAAwoFSW5wdXQSPgoMcGFyc2VfcmVzdWx0GAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlEhUKDWFic29sdXRlX3BhdGgYAiABKAkSNQoMcHJvamVjdF9pbmZvGAMgASgLMh8uaW5mcmFjb3N0LnByb3ZpZGVyLlByb2plY3RJbmZvEiMKG3ByZXZpb3VzX3Jlc291cmNlX2FkZHJlc3NlcxgEIAMoCRIlCgV1c2FnZRgFIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRJLChRmaW5vcHNfcG9saWN5X2NvbmZpZxgGIAEoCzItLmluZnJhY29zdC5wcm92aWRlci5GaW5vcHNQb2xpY3lDb25maWd1cmF0aW9uEi4KCGZlYXR1cmVzGAggASgLMhwuaW5mcmFjb3N0LnByb3ZpZGVyLkZlYXR1cmVzEi4KCHNldHRpbmdzGAkgASgLMhwuaW5mcmFjb3N0LnByb3ZpZGVyLlNldHRpbmdzEjAKCWluZnJhY29zdBgKIAEoCzIdLmluZnJhY29zdC5wcm92aWRlci5JbmZyYWNvc3QiNQoIU2V0dGluZ3MSEAoIY3VycmVuY3kYASABKAkSFwoPdXNlX2Rpc2tfY2FjaGVzGAIgASgIIkwKCUluZnJhY29zdBIPCgdhcGlfa2V5GAEgASgJEhwKFHByaWNpbmdfYXBpX2VuZHBvaW50GAIgASgJEhAKCHRyYWNlX2lkGAMgASgJIo4BCghGZWF0dXJlcxIcChRlbmFibGVfcHJpY2VfbG9va3VwcxgBIAEoCBIeChZlbmFibGVfcmVjb21tZW5kYXRpb25zGAIgASgIEh4KFmVuYWJsZV9maW5vcHNfcG9saWNpZXMYAyABKAgSJAocZW5hYmxlX2Vudmlyb25tZW50YWxfbWV0cmljcxgEIAEoCCJaCgtQcm9qZWN0SW5mbxIMCgRuYW1lGAEgASgJEhMKC2JyYW5jaF9uYW1lGAIgASgJEhEKCXdvcmtzcGFjZRgDIAEoCRIVCg1pc19wcm9kdWN0aW9uGAQgASgIIlsKGUZpbm9wc1BvbGljeUNvbmZpZ3VyYXRpb24SPgoIcG9saWNpZXMYASADKAsyLC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkZpbm9wc1BvbGljeVNldHRpbmdzQsMBChZjb20uaW5mcmFjb3N0LnByb3ZpZGVyQgpJbnB1dFByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcHJvdmlkZXKiAgNJUFiqAhJJbmZyYWNvc3QuUHJvdmlkZXLKAhJJbmZyYWNvc3RcUHJvdmlkZXLiAh5JbmZyYWNvc3RcUHJvdmlkZXJcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlByb3ZpZGVyYgZwcm90bzM", [file_infracost_parser_event_runparameters, file_infracost_parser_messages_message, file_infracost_usage_usage]);
 
 /**
  * @generated from message infracost.provider.Input
@@ -48,41 +48,45 @@ export type Input = Message<"infracost.provider.Input"> & {
   projectInfo?: ProjectInfo;
 
   /**
-   * Resource IDs that have been seen on a previous run (if relevant), which helps us figure
+   * Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
    * out if a resource is to be considered "new" or not.
    * This is mainly so we can ignore policies that only want to so consider "new" resources
    *
-   * @generated from field: repeated string previous_resource_ids = 4;
+   * @generated from field: repeated string previous_resource_addresses = 4;
    */
-  previousResourceIds: string[];
+  previousResourceAddresses: string[];
 
   /**
-   * TODO: comment!
+   * usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
    *
-   * @generated from field: infracost.provider.Usage usage = 5;
+   * @generated from field: infracost.usage.Usage usage = 5;
    */
   usage?: Usage;
 
   /**
    * Specifies which policies need to be run, and any custom settings for each.
    *
-   * @generated from field: infracost.provider.PolicyConfiguration policy_config = 6;
+   * @generated from field: infracost.provider.FinopsPolicyConfiguration finops_policy_config = 6;
    */
-  policyConfig?: PolicyConfiguration;
+  finopsPolicyConfig?: FinopsPolicyConfiguration;
 
   /**
-   * Features
+   * Feature falgs
    *
    * @generated from field: infracost.provider.Features features = 8;
    */
   features?: Features;
 
   /**
+   * settings that affect the provider behaviour e.g. currency, disk cache usage
+   *
    * @generated from field: infracost.provider.Settings settings = 9;
    */
   settings?: Settings;
 
   /**
+   * infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+   *
    * @generated from field: infracost.provider.Infracost infracost = 10;
    */
   infracost?: Infracost;
@@ -100,11 +104,15 @@ export const InputSchema: GenMessage<Input> = /*@__PURE__*/
  */
 export type Settings = Message<"infracost.provider.Settings"> & {
   /**
+   * currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
+   *
    * @generated from field: string currency = 1;
    */
   currency: string;
 
   /**
+   * whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+   *
    * @generated from field: bool use_disk_caches = 2;
    */
   useDiskCaches: boolean;
@@ -122,16 +130,22 @@ export const SettingsSchema: GenMessage<Settings> = /*@__PURE__*/
  */
 export type Infracost = Message<"infracost.provider.Infracost"> & {
   /**
+   * infracost api key to access pricing data + recommendations
+   *
    * @generated from field: string api_key = 1;
    */
   apiKey: string;
 
   /**
+   * pricing api endpoint to use for price lookups + recommendations
+   *
    * @generated from field: string pricing_api_endpoint = 2;
    */
   pricingApiEndpoint: string;
 
   /**
+   * trace id for correlating requests - mainly for internal use/debugging
+   *
    * @generated from field: string trace_id = 3;
    */
   traceId: string;
@@ -149,27 +163,30 @@ export const InfracostSchema: GenMessage<Infracost> = /*@__PURE__*/
  */
 export type Features = Message<"infracost.provider.Features"> & {
   /**
+   * Enable price lookups
+   *
    * @generated from field: bool enable_price_lookups = 1;
    */
   enablePriceLookups: boolean;
 
   /**
+   * Enable recommendations
+   *
    * @generated from field: bool enable_recommendations = 2;
    */
   enableRecommendations: boolean;
 
   /**
+   * Enable finops policy evaluations
+   *
    * @generated from field: bool enable_finops_policies = 3;
    */
   enableFinopsPolicies: boolean;
 
   /**
-   * @generated from field: bool enable_tagging_policies = 4;
-   */
-  enableTaggingPolicies: boolean;
-
-  /**
-   * @generated from field: bool enable_environmental_metrics = 5;
+   * Enable environmental metrics lookups
+   *
+   * @generated from field: bool enable_environmental_metrics = 4;
    */
   enableEnvironmentalMetrics: boolean;
 };
@@ -224,37 +241,11 @@ export const ProjectInfoSchema: GenMessage<ProjectInfo> = /*@__PURE__*/
   messageDesc(file_infracost_provider_input, 4);
 
 /**
- * @generated from message infracost.provider.PolicyConfiguration
+ * @generated from message infracost.provider.FinopsPolicyConfiguration
  */
-export type PolicyConfiguration = Message<"infracost.provider.PolicyConfiguration"> & {
+export type FinopsPolicyConfiguration = Message<"infracost.provider.FinopsPolicyConfiguration"> & {
   /**
-   * FinOps policy configuration (note: security policies are currently a subset of finops policies)
-   *
-   * @generated from field: infracost.provider.FinOpsPolicyConfiguration finops = 1;
-   */
-  finops?: FinOpsPolicyConfiguration;
-
-  /**
-   * Tagging policy configuration
-   *
-   * @generated from field: infracost.provider.TaggingPolicyConfiguration tagging = 2;
-   */
-  tagging?: TaggingPolicyConfiguration;
-};
-
-/**
- * Describes the message infracost.provider.PolicyConfiguration.
- * Use `create(PolicyConfigurationSchema)` to create a new message.
- */
-export const PolicyConfigurationSchema: GenMessage<PolicyConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_input, 5);
-
-/**
- * @generated from message infracost.provider.FinOpsPolicyConfiguration
- */
-export type FinOpsPolicyConfiguration = Message<"infracost.provider.FinOpsPolicyConfiguration"> & {
-  /**
-   * If none are supplied, all available (default) policies should be run.
+   * Finops policies to evaluate (matched by slug) - if none are supplied, all available (default) policies should be run.
    *
    * @generated from field: repeated infracost.parser.event.FinopsPolicySettings policies = 1;
    */
@@ -262,28 +253,9 @@ export type FinOpsPolicyConfiguration = Message<"infracost.provider.FinOpsPolicy
 };
 
 /**
- * Describes the message infracost.provider.FinOpsPolicyConfiguration.
- * Use `create(FinOpsPolicyConfigurationSchema)` to create a new message.
+ * Describes the message infracost.provider.FinopsPolicyConfiguration.
+ * Use `create(FinopsPolicyConfigurationSchema)` to create a new message.
  */
-export const FinOpsPolicyConfigurationSchema: GenMessage<FinOpsPolicyConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_input, 6);
-
-/**
- * @generated from message infracost.provider.TaggingPolicyConfiguration
- */
-export type TaggingPolicyConfiguration = Message<"infracost.provider.TaggingPolicyConfiguration"> & {
-  /**
-   * If none are supplied, all available (default) policies should be run.
-   *
-   * @generated from field: repeated infracost.parser.event.TagPolicy policies = 1;
-   */
-  policies: TagPolicy[];
-};
-
-/**
- * Describes the message infracost.provider.TaggingPolicyConfiguration.
- * Use `create(TaggingPolicyConfigurationSchema)` to create a new message.
- */
-export const TaggingPolicyConfigurationSchema: GenMessage<TaggingPolicyConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_provider_input, 7);
+export const FinopsPolicyConfigurationSchema: GenMessage<FinopsPolicyConfiguration> = /*@__PURE__*/
+  messageDesc(file_infracost_provider_input, 5);
 

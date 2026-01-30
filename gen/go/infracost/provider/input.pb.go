@@ -9,6 +9,7 @@ package provider
 import (
 	event "github.com/infracost/proto/gen/go/infracost/parser/event"
 	messages "github.com/infracost/proto/gen/go/infracost/parser/messages"
+	usage "github.com/infracost/proto/gen/go/infracost/usage"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -33,17 +34,19 @@ type Input struct {
 	// Specifies customer-defined (and default) usage data
 	// This comes from zero or more of the cloud db, and/or a customer's committed usage file
 	ProjectInfo *ProjectInfo `protobuf:"bytes,3,opt,name=project_info,json=projectInfo,proto3" json:"project_info,omitempty"`
-	// Resource IDs that have been seen on a previous run (if relevant), which helps us figure
+	// Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
 	// out if a resource is to be considered "new" or not.
 	// This is mainly so we can ignore policies that only want to so consider "new" resources
-	PreviousResourceIds []string `protobuf:"bytes,4,rep,name=previous_resource_ids,json=previousResourceIds,proto3" json:"previous_resource_ids,omitempty"`
-	// TODO: comment!
-	Usage *Usage `protobuf:"bytes,5,opt,name=usage,proto3" json:"usage,omitempty"`
+	PreviousResourceAddresses []string `protobuf:"bytes,4,rep,name=previous_resource_addresses,json=previousResourceAddresses,proto3" json:"previous_resource_addresses,omitempty"`
+	// usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
+	Usage *usage.Usage `protobuf:"bytes,5,opt,name=usage,proto3" json:"usage,omitempty"`
 	// Specifies which policies need to be run, and any custom settings for each.
-	PolicyConfig *PolicyConfiguration `protobuf:"bytes,6,opt,name=policy_config,json=policyConfig,proto3" json:"policy_config,omitempty"`
-	// Features
-	Features      *Features  `protobuf:"bytes,8,opt,name=features,proto3" json:"features,omitempty"`
-	Settings      *Settings  `protobuf:"bytes,9,opt,name=settings,proto3" json:"settings,omitempty"`
+	FinopsPolicyConfig *FinopsPolicyConfiguration `protobuf:"bytes,6,opt,name=finops_policy_config,json=finopsPolicyConfig,proto3" json:"finops_policy_config,omitempty"`
+	// Feature falgs
+	Features *Features `protobuf:"bytes,8,opt,name=features,proto3" json:"features,omitempty"`
+	// settings that affect the provider behaviour e.g. currency, disk cache usage
+	Settings *Settings `protobuf:"bytes,9,opt,name=settings,proto3" json:"settings,omitempty"`
+	// infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
 	Infracost     *Infracost `protobuf:"bytes,10,opt,name=infracost,proto3" json:"infracost,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -100,23 +103,23 @@ func (x *Input) GetProjectInfo() *ProjectInfo {
 	return nil
 }
 
-func (x *Input) GetPreviousResourceIds() []string {
+func (x *Input) GetPreviousResourceAddresses() []string {
 	if x != nil {
-		return x.PreviousResourceIds
+		return x.PreviousResourceAddresses
 	}
 	return nil
 }
 
-func (x *Input) GetUsage() *Usage {
+func (x *Input) GetUsage() *usage.Usage {
 	if x != nil {
 		return x.Usage
 	}
 	return nil
 }
 
-func (x *Input) GetPolicyConfig() *PolicyConfiguration {
+func (x *Input) GetFinopsPolicyConfig() *FinopsPolicyConfiguration {
 	if x != nil {
-		return x.PolicyConfig
+		return x.FinopsPolicyConfig
 	}
 	return nil
 }
@@ -143,9 +146,11 @@ func (x *Input) GetInfracost() *Infracost {
 }
 
 type Settings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	UseDiskCaches bool                   `protobuf:"varint,2,opt,name=use_disk_caches,json=useDiskCaches,proto3" json:"use_disk_caches,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
+	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+	UseDiskCaches bool `protobuf:"varint,2,opt,name=use_disk_caches,json=useDiskCaches,proto3" json:"use_disk_caches,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -195,12 +200,15 @@ func (x *Settings) GetUseDiskCaches() bool {
 }
 
 type Infracost struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	ApiKey             string                 `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	PricingApiEndpoint string                 `protobuf:"bytes,2,opt,name=pricing_api_endpoint,json=pricingApiEndpoint,proto3" json:"pricing_api_endpoint,omitempty"`
-	TraceId            string                 `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// infracost api key to access pricing data + recommendations
+	ApiKey string `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	// pricing api endpoint to use for price lookups + recommendations
+	PricingApiEndpoint string `protobuf:"bytes,2,opt,name=pricing_api_endpoint,json=pricingApiEndpoint,proto3" json:"pricing_api_endpoint,omitempty"`
+	// trace id for correlating requests - mainly for internal use/debugging
+	TraceId       string `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Infracost) Reset() {
@@ -255,12 +263,15 @@ func (x *Infracost) GetTraceId() string {
 }
 
 type Features struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	EnablePriceLookups         bool                   `protobuf:"varint,1,opt,name=enable_price_lookups,json=enablePriceLookups,proto3" json:"enable_price_lookups,omitempty"`
-	EnableRecommendations      bool                   `protobuf:"varint,2,opt,name=enable_recommendations,json=enableRecommendations,proto3" json:"enable_recommendations,omitempty"`
-	EnableFinopsPolicies       bool                   `protobuf:"varint,3,opt,name=enable_finops_policies,json=enableFinopsPolicies,proto3" json:"enable_finops_policies,omitempty"`
-	EnableTaggingPolicies      bool                   `protobuf:"varint,4,opt,name=enable_tagging_policies,json=enableTaggingPolicies,proto3" json:"enable_tagging_policies,omitempty"`
-	EnableEnvironmentalMetrics bool                   `protobuf:"varint,5,opt,name=enable_environmental_metrics,json=enableEnvironmentalMetrics,proto3" json:"enable_environmental_metrics,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable price lookups
+	EnablePriceLookups bool `protobuf:"varint,1,opt,name=enable_price_lookups,json=enablePriceLookups,proto3" json:"enable_price_lookups,omitempty"`
+	// Enable recommendations
+	EnableRecommendations bool `protobuf:"varint,2,opt,name=enable_recommendations,json=enableRecommendations,proto3" json:"enable_recommendations,omitempty"`
+	// Enable finops policy evaluations
+	EnableFinopsPolicies bool `protobuf:"varint,3,opt,name=enable_finops_policies,json=enableFinopsPolicies,proto3" json:"enable_finops_policies,omitempty"`
+	// Enable environmental metrics lookups
+	EnableEnvironmentalMetrics bool `protobuf:"varint,4,opt,name=enable_environmental_metrics,json=enableEnvironmentalMetrics,proto3" json:"enable_environmental_metrics,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -312,13 +323,6 @@ func (x *Features) GetEnableRecommendations() bool {
 func (x *Features) GetEnableFinopsPolicies() bool {
 	if x != nil {
 		return x.EnableFinopsPolicies
-	}
-	return false
-}
-
-func (x *Features) GetEnableTaggingPolicies() bool {
-	if x != nil {
-		return x.EnableTaggingPolicies
 	}
 	return false
 }
@@ -403,83 +407,29 @@ func (x *ProjectInfo) GetIsProduction() bool {
 	return false
 }
 
-type PolicyConfiguration struct {
+type FinopsPolicyConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// FinOps policy configuration (note: security policies are currently a subset of finops policies)
-	Finops *FinOpsPolicyConfiguration `protobuf:"bytes,1,opt,name=finops,proto3" json:"finops,omitempty"`
-	// Tagging policy configuration
-	Tagging       *TaggingPolicyConfiguration `protobuf:"bytes,2,opt,name=tagging,proto3" json:"tagging,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PolicyConfiguration) Reset() {
-	*x = PolicyConfiguration{}
-	mi := &file_infracost_provider_input_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PolicyConfiguration) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PolicyConfiguration) ProtoMessage() {}
-
-func (x *PolicyConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_input_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PolicyConfiguration.ProtoReflect.Descriptor instead.
-func (*PolicyConfiguration) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_input_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *PolicyConfiguration) GetFinops() *FinOpsPolicyConfiguration {
-	if x != nil {
-		return x.Finops
-	}
-	return nil
-}
-
-func (x *PolicyConfiguration) GetTagging() *TaggingPolicyConfiguration {
-	if x != nil {
-		return x.Tagging
-	}
-	return nil
-}
-
-type FinOpsPolicyConfiguration struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// If none are supplied, all available (default) policies should be run.
+	// Finops policies to evaluate (matched by slug) - if none are supplied, all available (default) policies should be run.
 	Policies      []*event.FinopsPolicySettings `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FinOpsPolicyConfiguration) Reset() {
-	*x = FinOpsPolicyConfiguration{}
-	mi := &file_infracost_provider_input_proto_msgTypes[6]
+func (x *FinopsPolicyConfiguration) Reset() {
+	*x = FinopsPolicyConfiguration{}
+	mi := &file_infracost_provider_input_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FinOpsPolicyConfiguration) String() string {
+func (x *FinopsPolicyConfiguration) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FinOpsPolicyConfiguration) ProtoMessage() {}
+func (*FinopsPolicyConfiguration) ProtoMessage() {}
 
-func (x *FinOpsPolicyConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_input_proto_msgTypes[6]
+func (x *FinopsPolicyConfiguration) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_input_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,57 +440,12 @@ func (x *FinOpsPolicyConfiguration) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FinOpsPolicyConfiguration.ProtoReflect.Descriptor instead.
-func (*FinOpsPolicyConfiguration) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_input_proto_rawDescGZIP(), []int{6}
+// Deprecated: Use FinopsPolicyConfiguration.ProtoReflect.Descriptor instead.
+func (*FinopsPolicyConfiguration) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_input_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *FinOpsPolicyConfiguration) GetPolicies() []*event.FinopsPolicySettings {
-	if x != nil {
-		return x.Policies
-	}
-	return nil
-}
-
-type TaggingPolicyConfiguration struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// If none are supplied, all available (default) policies should be run.
-	Policies      []*event.TagPolicy `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TaggingPolicyConfiguration) Reset() {
-	*x = TaggingPolicyConfiguration{}
-	mi := &file_infracost_provider_input_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TaggingPolicyConfiguration) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TaggingPolicyConfiguration) ProtoMessage() {}
-
-func (x *TaggingPolicyConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_input_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TaggingPolicyConfiguration.ProtoReflect.Descriptor instead.
-func (*TaggingPolicyConfiguration) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_input_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *TaggingPolicyConfiguration) GetPolicies() []*event.TagPolicy {
+func (x *FinopsPolicyConfiguration) GetPolicies() []*event.FinopsPolicySettings {
 	if x != nil {
 		return x.Policies
 	}
@@ -551,44 +456,38 @@ var File_infracost_provider_input_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_input_proto_rawDesc = "" +
 	"\n" +
-	"\x1einfracost/provider/input.proto\x12\x12infracost.provider\x1a*infracost/parser/event/runparameters.proto\x1a'infracost/parser/messages/message.proto\x1a\x1einfracost/provider/usage.proto\"\xa7\x04\n" +
+	"\x1einfracost/provider/input.proto\x12\x12infracost.provider\x1a*infracost/parser/event/runparameters.proto\x1a'infracost/parser/messages/message.proto\x1a\x1binfracost/usage/usage.proto\"\xbd\x04\n" +
 	"\x05Input\x12K\n" +
 	"\fparse_result\x18\x01 \x01(\v2(.infracost.parser.messages.ParseResponseR\vparseResult\x12#\n" +
 	"\rabsolute_path\x18\x02 \x01(\tR\fabsolutePath\x12B\n" +
-	"\fproject_info\x18\x03 \x01(\v2\x1f.infracost.provider.ProjectInfoR\vprojectInfo\x122\n" +
-	"\x15previous_resource_ids\x18\x04 \x03(\tR\x13previousResourceIds\x12/\n" +
-	"\x05usage\x18\x05 \x01(\v2\x19.infracost.provider.UsageR\x05usage\x12L\n" +
-	"\rpolicy_config\x18\x06 \x01(\v2'.infracost.provider.PolicyConfigurationR\fpolicyConfig\x128\n" +
+	"\fproject_info\x18\x03 \x01(\v2\x1f.infracost.provider.ProjectInfoR\vprojectInfo\x12>\n" +
+	"\x1bprevious_resource_addresses\x18\x04 \x03(\tR\x19previousResourceAddresses\x12,\n" +
+	"\x05usage\x18\x05 \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12_\n" +
+	"\x14finops_policy_config\x18\x06 \x01(\v2-.infracost.provider.FinopsPolicyConfigurationR\x12finopsPolicyConfig\x128\n" +
 	"\bfeatures\x18\b \x01(\v2\x1c.infracost.provider.FeaturesR\bfeatures\x128\n" +
 	"\bsettings\x18\t \x01(\v2\x1c.infracost.provider.SettingsR\bsettings\x12;\n" +
 	"\tinfracost\x18\n" +
-	" \x01(\v2\x1d.infracost.provider.InfracostR\tinfracostJ\x04\b\a\x10\b\"N\n" +
+	" \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\"N\n" +
 	"\bSettings\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12&\n" +
 	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"q\n" +
 	"\tInfracost\x12\x17\n" +
 	"\aapi_key\x18\x01 \x01(\tR\x06apiKey\x120\n" +
 	"\x14pricing_api_endpoint\x18\x02 \x01(\tR\x12pricingApiEndpoint\x12\x19\n" +
-	"\btrace_id\x18\x03 \x01(\tR\atraceId\"\xa3\x02\n" +
+	"\btrace_id\x18\x03 \x01(\tR\atraceId\"\xeb\x01\n" +
 	"\bFeatures\x120\n" +
 	"\x14enable_price_lookups\x18\x01 \x01(\bR\x12enablePriceLookups\x125\n" +
 	"\x16enable_recommendations\x18\x02 \x01(\bR\x15enableRecommendations\x124\n" +
-	"\x16enable_finops_policies\x18\x03 \x01(\bR\x14enableFinopsPolicies\x126\n" +
-	"\x17enable_tagging_policies\x18\x04 \x01(\bR\x15enableTaggingPolicies\x12@\n" +
-	"\x1cenable_environmental_metrics\x18\x05 \x01(\bR\x1aenableEnvironmentalMetrics\"\x85\x01\n" +
+	"\x16enable_finops_policies\x18\x03 \x01(\bR\x14enableFinopsPolicies\x12@\n" +
+	"\x1cenable_environmental_metrics\x18\x04 \x01(\bR\x1aenableEnvironmentalMetrics\"\x85\x01\n" +
 	"\vProjectInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1f\n" +
 	"\vbranch_name\x18\x02 \x01(\tR\n" +
 	"branchName\x12\x1c\n" +
 	"\tworkspace\x18\x03 \x01(\tR\tworkspace\x12#\n" +
-	"\ris_production\x18\x04 \x01(\bR\fisProduction\"\xa6\x01\n" +
-	"\x13PolicyConfiguration\x12E\n" +
-	"\x06finops\x18\x01 \x01(\v2-.infracost.provider.FinOpsPolicyConfigurationR\x06finops\x12H\n" +
-	"\atagging\x18\x02 \x01(\v2..infracost.provider.TaggingPolicyConfigurationR\atagging\"e\n" +
-	"\x19FinOpsPolicyConfiguration\x12H\n" +
-	"\bpolicies\x18\x01 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\bpolicies\"[\n" +
-	"\x1aTaggingPolicyConfiguration\x12=\n" +
-	"\bpolicies\x18\x01 \x03(\v2!.infracost.parser.event.TagPolicyR\bpoliciesB\xc3\x01\n" +
+	"\ris_production\x18\x04 \x01(\bR\fisProduction\"e\n" +
+	"\x19FinopsPolicyConfiguration\x12H\n" +
+	"\bpolicies\x18\x01 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\bpoliciesB\xc3\x01\n" +
 	"\x16com.infracost.providerB\n" +
 	"InputProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
@@ -604,38 +503,32 @@ func file_infracost_provider_input_proto_rawDescGZIP() []byte {
 	return file_infracost_provider_input_proto_rawDescData
 }
 
-var file_infracost_provider_input_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_infracost_provider_input_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_infracost_provider_input_proto_goTypes = []any{
 	(*Input)(nil),                      // 0: infracost.provider.Input
 	(*Settings)(nil),                   // 1: infracost.provider.Settings
 	(*Infracost)(nil),                  // 2: infracost.provider.Infracost
 	(*Features)(nil),                   // 3: infracost.provider.Features
 	(*ProjectInfo)(nil),                // 4: infracost.provider.ProjectInfo
-	(*PolicyConfiguration)(nil),        // 5: infracost.provider.PolicyConfiguration
-	(*FinOpsPolicyConfiguration)(nil),  // 6: infracost.provider.FinOpsPolicyConfiguration
-	(*TaggingPolicyConfiguration)(nil), // 7: infracost.provider.TaggingPolicyConfiguration
-	(*messages.ParseResponse)(nil),     // 8: infracost.parser.messages.ParseResponse
-	(*Usage)(nil),                      // 9: infracost.provider.Usage
-	(*event.FinopsPolicySettings)(nil), // 10: infracost.parser.event.FinopsPolicySettings
-	(*event.TagPolicy)(nil),            // 11: infracost.parser.event.TagPolicy
+	(*FinopsPolicyConfiguration)(nil),  // 5: infracost.provider.FinopsPolicyConfiguration
+	(*messages.ParseResponse)(nil),     // 6: infracost.parser.messages.ParseResponse
+	(*usage.Usage)(nil),                // 7: infracost.usage.Usage
+	(*event.FinopsPolicySettings)(nil), // 8: infracost.parser.event.FinopsPolicySettings
 }
 var file_infracost_provider_input_proto_depIdxs = []int32{
-	8,  // 0: infracost.provider.Input.parse_result:type_name -> infracost.parser.messages.ParseResponse
-	4,  // 1: infracost.provider.Input.project_info:type_name -> infracost.provider.ProjectInfo
-	9,  // 2: infracost.provider.Input.usage:type_name -> infracost.provider.Usage
-	5,  // 3: infracost.provider.Input.policy_config:type_name -> infracost.provider.PolicyConfiguration
-	3,  // 4: infracost.provider.Input.features:type_name -> infracost.provider.Features
-	1,  // 5: infracost.provider.Input.settings:type_name -> infracost.provider.Settings
-	2,  // 6: infracost.provider.Input.infracost:type_name -> infracost.provider.Infracost
-	6,  // 7: infracost.provider.PolicyConfiguration.finops:type_name -> infracost.provider.FinOpsPolicyConfiguration
-	7,  // 8: infracost.provider.PolicyConfiguration.tagging:type_name -> infracost.provider.TaggingPolicyConfiguration
-	10, // 9: infracost.provider.FinOpsPolicyConfiguration.policies:type_name -> infracost.parser.event.FinopsPolicySettings
-	11, // 10: infracost.provider.TaggingPolicyConfiguration.policies:type_name -> infracost.parser.event.TagPolicy
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	6, // 0: infracost.provider.Input.parse_result:type_name -> infracost.parser.messages.ParseResponse
+	4, // 1: infracost.provider.Input.project_info:type_name -> infracost.provider.ProjectInfo
+	7, // 2: infracost.provider.Input.usage:type_name -> infracost.usage.Usage
+	5, // 3: infracost.provider.Input.finops_policy_config:type_name -> infracost.provider.FinopsPolicyConfiguration
+	3, // 4: infracost.provider.Input.features:type_name -> infracost.provider.Features
+	1, // 5: infracost.provider.Input.settings:type_name -> infracost.provider.Settings
+	2, // 6: infracost.provider.Input.infracost:type_name -> infracost.provider.Infracost
+	8, // 7: infracost.provider.FinopsPolicyConfiguration.policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_input_proto_init() }
@@ -643,14 +536,13 @@ func file_infracost_provider_input_proto_init() {
 	if File_infracost_provider_input_proto != nil {
 		return
 	}
-	file_infracost_provider_usage_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_input_proto_rawDesc), len(file_infracost_provider_input_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

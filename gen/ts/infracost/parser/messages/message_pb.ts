@@ -6,101 +6,19 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Result as Result$1 } from "../cloudformation/result_pb.js";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
-import type { Target as Target$2 } from "../cloudformation/target_pb.js";
-import { file_infracost_parser_cloudformation_target } from "../cloudformation/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
-import type { Target } from "../terraform/target_pb.js";
-import { file_infracost_parser_terraform_target } from "../terraform/target_pb.js";
-import type { Result, Target as Target$1 } from "../terragrunt/target_pb.js";
-import { file_infracost_parser_terragrunt_target } from "../terragrunt/target_pb.js";
+import type { Result } from "../terragrunt/module_pb.js";
+import { file_infracost_parser_terragrunt_module } from "../terragrunt/module_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/messages/message.proto.
  */
 export const file_infracost_parser_messages_message: GenFile = /*@__PURE__*/
-  fileDesc("CidpbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzL21lc3NhZ2UucHJvdG8SGWluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMiegoMUGFyc2VSZXF1ZXN0EhYKDnJlcG9fZGlyZWN0b3J5GAEgASgJEhMKC3dvcmtpbmdfZGlyGAIgASgJEj0KBnRhcmdldBgDIAEoCzItLmluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUiggEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSPgoGcmVzdWx0GAIgASgLMi4uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlUmVzdWx0ItsBChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgKIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEjkKCnRlcnJhZ3J1bnQYCyABKAsyIy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZ3J1bnQuUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YDCABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQvABCh1jb20uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlc0IMTWVzc2FnZVByb3RvUAFaO2dpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzogIDSVBNqgIZSW5mcmFjb3N0LlBhcnNlci5NZXNzYWdlc8oCGUluZnJhY29zdFxQYXJzZXJcTWVzc2FnZXPiAiVJbmZyYWNvc3RcUGFyc2VyXE1lc3NhZ2VzXEdQQk1ldGFkYXRh6gIbSW5mcmFjb3N0OjpQYXJzZXI6Ok1lc3NhZ2VzYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
-
-/**
- * ParseRequest is the unified request for all parser types.
- *
- * @generated from message infracost.parser.messages.ParseRequest
- */
-export type ParseRequest = Message<"infracost.parser.messages.ParseRequest"> & {
-  /**
-   * The root path of the repository to be parsed
-   *
-   * @generated from field: string repo_directory = 1;
-   */
-  repoDirectory: string;
-
-  /**
-   * The working directory of the project in the repository being processed
-   *
-   * @generated from field: string working_dir = 2;
-   */
-  workingDir: string;
-
-  /**
-   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
-   *
-   * @generated from field: infracost.parser.messages.ParseRequestTarget target = 3;
-   */
-  target?: ParseRequestTarget;
-};
-
-/**
- * Describes the message infracost.parser.messages.ParseRequest.
- * Use `create(ParseRequestSchema)` to create a new message.
- */
-export const ParseRequestSchema: GenMessage<ParseRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 0);
-
-/**
- * ParseRequestTarget is the unified target for all parser types.
- *
- * @generated from message infracost.parser.messages.ParseRequestTarget
- */
-export type ParseRequestTarget = Message<"infracost.parser.messages.ParseRequestTarget"> & {
-  /**
-   * @generated from oneof infracost.parser.messages.ParseRequestTarget.value
-   */
-  value: {
-    /**
-     * The target type for Terraform files
-     *
-     * @generated from field: infracost.parser.terraform.Target terraform = 10;
-     */
-    value: Target;
-    case: "terraform";
-  } | {
-    /**
-     * The target type for Terragrunt files
-     *
-     * @generated from field: infracost.parser.terragrunt.Target terragrunt = 11;
-     */
-    value: Target$1;
-    case: "terragrunt";
-  } | {
-    /**
-     * The target type for CloudFormation files
-     *
-     * @generated from field: infracost.parser.cloudformation.Target cloudformation = 12;
-     */
-    value: Target$2;
-    case: "cloudformation";
-  } | { case: undefined; value?: undefined };
-};
-
-/**
- * Describes the message infracost.parser.messages.ParseRequestTarget.
- * Use `create(ParseRequestTargetSchema)` to create a new message.
- */
-export const ParseRequestTargetSchema: GenMessage<ParseRequestTarget> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 1);
+  fileDesc("CidpbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzL21lc3NhZ2UucHJvdG8SGWluZnJhY29zdC5wYXJzZXIubWVzc2FnZXMiggEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSPgoGcmVzdWx0GAIgASgLMi4uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlcy5QYXJzZVJlc3BvbnNlUmVzdWx0ItsBChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgKIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEjkKCnRlcnJhZ3J1bnQYCyABKAsyIy5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZ3J1bnQuUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YDCABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQvABCh1jb20uaW5mcmFjb3N0LnBhcnNlci5tZXNzYWdlc0IMTWVzc2FnZVByb3RvUAFaO2dpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL21lc3NhZ2VzogIDSVBNqgIZSW5mcmFjb3N0LlBhcnNlci5NZXNzYWdlc8oCGUluZnJhY29zdFxQYXJzZXJcTWVzc2FnZXPiAiVJbmZyYWNvc3RcUGFyc2VyXE1lc3NhZ2VzXEdQQk1ldGFkYXRh6gIbSW5mcmFjb3N0OjpQYXJzZXI6Ok1lc3NhZ2VzYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terragrunt_module]);
 
 /**
  * ParseResponse is the unified response for all parser types.
@@ -128,7 +46,7 @@ export type ParseResponse = Message<"infracost.parser.messages.ParseResponse"> &
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 2);
+  messageDesc(file_infracost_parser_messages_message, 0);
 
 /**
  * ParseResponseResult is the unified result for all parser types.
@@ -165,5 +83,5 @@ export type ParseResponseResult = Message<"infracost.parser.messages.ParseRespon
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export const ParseResponseResultSchema: GenMessage<ParseResponseResult> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_messages_message, 3);
+  messageDesc(file_infracost_parser_messages_message, 1);
 

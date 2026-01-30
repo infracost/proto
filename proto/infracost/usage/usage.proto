@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package infracost.usage;
+
+import "infracost/rational/rational.proto";
+
+// this represents infracost usage data
+// usage data can exist in two formats:
+// 1. by_resource_type: a map of resource type to usage items
+// 2. by_address: a map of resource address patterns to usage items - these can contain terraform-style [*] wildcards
+// this structure reflects that of infracost usage config files. we source usage data fro mthese files, as well as fro mthe dashboard api.
+// see an example usage file here: https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml
+message Usage {
+  // usage data by resource type (e.g. aws_instance)
+  map<string, UsageItemMap> by_resource_type = 1;
+  // usage data by resource address (e.g. module.foo.aws_instance.bar[*])
+  map<string, UsageItemMap> by_address = 2;
+}
+
+message UsageItemMap {
+  // an (optionally) recursive map of usage item keys to usage values
+  map<string, UsageValue> items = 1;
+}
+
+// usage values can be any of the below types. see the link above for more details.
+message UsageValue {
+  oneof value {
+    infracost.rational.Rat number = 1;
+    string string = 2;
+    bool bool = 3;
+    UsageItemMap children = 4;
+  }
+}
