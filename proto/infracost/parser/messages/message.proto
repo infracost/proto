@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package infracost.parser.messages;
+
+import "infracost/parser/cloudformation/result.proto";
+import "infracost/parser/diagnostic.proto";
+import "infracost/parser/terraform/module.proto";
+import "infracost/parser/terragrunt/module.proto";
+
+// ParseResponse is the unified response for all parser types.
+message ParseResponse {
+  // The diagnostics generated during parsing
+  repeated Diagnostic diagnostics = 1;
+  // The result of parsing the target, is one of cloudformation, terraform, terragrunt
+  ParseResponseResult result = 2;
+}
+
+// ParseResponseResult is the unified result for all parser types.
+message ParseResponseResult {
+  oneof value {
+    terraform.ModuleResult terraform = 10;
+    terragrunt.Result terragrunt = 11;
+    cloudformation.Result cloudformation = 12;
+  }
+}
