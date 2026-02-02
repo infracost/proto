@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { ParseResponse } from "../parser/messages/message_pb.js";
+import type { ParseResponse } from "../parser/api/service_pb.js";
 import type { Usage } from "../usage/usage_pb.js";
 import type { FinopsPolicySettings } from "../parser/event/runparameters_pb.js";
 
@@ -20,7 +20,7 @@ export declare type Input = Message<"infracost.provider.Input"> & {
   /**
    * The output of a parser, such as a Terraform module result, or a CloudFormation result
    *
-   * @generated from field: infracost.parser.messages.ParseResponse parse_result = 1;
+   * @generated from field: infracost.parser.api.ParseResponse parse_result = 1;
    */
   parseResult?: ParseResponse;
 

@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package infracost.provider;
 
+import "infracost/parser/api/service.proto";
 import "infracost/parser/event/runparameters.proto";
-import "infracost/parser/messages/message.proto";
 import "infracost/usage/usage.proto";
 
 message Input {
   // The output of a parser, such as a Terraform module result, or a CloudFormation result
-  infracost.parser.messages.ParseResponse parse_result = 1;
+  infracost.parser.api.ParseResponse parse_result = 1;
 
   // Absolute path of the project/template being scanned
   // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file

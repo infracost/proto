@@ -7,8 +7,8 @@
 package provider
 
 import (
+	api "github.com/infracost/proto/gen/go/infracost/parser/api"
 	event "github.com/infracost/proto/gen/go/infracost/parser/event"
-	messages "github.com/infracost/proto/gen/go/infracost/parser/messages"
 	usage "github.com/infracost/proto/gen/go/infracost/usage"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -27,7 +27,7 @@ const (
 type Input struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The output of a parser, such as a Terraform module result, or a CloudFormation result
-	ParseResult *messages.ParseResponse `protobuf:"bytes,1,opt,name=parse_result,json=parseResult,proto3" json:"parse_result,omitempty"`
+	ParseResult *api.ParseResponse `protobuf:"bytes,1,opt,name=parse_result,json=parseResult,proto3" json:"parse_result,omitempty"`
 	// Absolute path of the project/template being scanned
 	// For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
 	AbsolutePath string `protobuf:"bytes,2,opt,name=absolute_path,json=absolutePath,proto3" json:"absolute_path,omitempty"` // path to project
@@ -82,7 +82,7 @@ func (*Input) Descriptor() ([]byte, []int) {
 	return file_infracost_provider_input_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Input) GetParseResult() *messages.ParseResponse {
+func (x *Input) GetParseResult() *api.ParseResponse {
 	if x != nil {
 		return x.ParseResult
 	}
@@ -456,9 +456,9 @@ var File_infracost_provider_input_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_input_proto_rawDesc = "" +
 	"\n" +
-	"\x1einfracost/provider/input.proto\x12\x12infracost.provider\x1a*infracost/parser/event/runparameters.proto\x1a'infracost/parser/messages/message.proto\x1a\x1binfracost/usage/usage.proto\"\xbd\x04\n" +
-	"\x05Input\x12K\n" +
-	"\fparse_result\x18\x01 \x01(\v2(.infracost.parser.messages.ParseResponseR\vparseResult\x12#\n" +
+	"\x1einfracost/provider/input.proto\x12\x12infracost.provider\x1a\"infracost/parser/api/service.proto\x1a*infracost/parser/event/runparameters.proto\x1a\x1binfracost/usage/usage.proto\"\xb8\x04\n" +
+	"\x05Input\x12F\n" +
+	"\fparse_result\x18\x01 \x01(\v2#.infracost.parser.api.ParseResponseR\vparseResult\x12#\n" +
 	"\rabsolute_path\x18\x02 \x01(\tR\fabsolutePath\x12B\n" +
 	"\fproject_info\x18\x03 \x01(\v2\x1f.infracost.provider.ProjectInfoR\vprojectInfo\x12>\n" +
 	"\x1bprevious_resource_addresses\x18\x04 \x03(\tR\x19previousResourceAddresses\x12,\n" +
@@ -511,12 +511,12 @@ var file_infracost_provider_input_proto_goTypes = []any{
 	(*Features)(nil),                   // 3: infracost.provider.Features
 	(*ProjectInfo)(nil),                // 4: infracost.provider.ProjectInfo
 	(*FinopsPolicyConfiguration)(nil),  // 5: infracost.provider.FinopsPolicyConfiguration
-	(*messages.ParseResponse)(nil),     // 6: infracost.parser.messages.ParseResponse
+	(*api.ParseResponse)(nil),          // 6: infracost.parser.api.ParseResponse
 	(*usage.Usage)(nil),                // 7: infracost.usage.Usage
 	(*event.FinopsPolicySettings)(nil), // 8: infracost.parser.event.FinopsPolicySettings
 }
 var file_infracost_provider_input_proto_depIdxs = []int32{
-	6, // 0: infracost.provider.Input.parse_result:type_name -> infracost.parser.messages.ParseResponse
+	6, // 0: infracost.provider.Input.parse_result:type_name -> infracost.parser.api.ParseResponse
 	4, // 1: infracost.provider.Input.project_info:type_name -> infracost.provider.ProjectInfo
 	7, // 2: infracost.provider.Input.usage:type_name -> infracost.usage.Usage
 	5, // 3: infracost.provider.Input.finops_policy_config:type_name -> infracost.provider.FinopsPolicyConfiguration

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package infracost.parser.messages;
+package infracost.parser.api;
 
 import "infracost/parser/cloudformation/result.proto";
 import "infracost/parser/diagnostic.proto";

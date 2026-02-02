@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        (unknown)
-// source: infracost/parser/messages/message.proto
+// source: infracost/parser/api/service.proto
 
-package messages
+package api
 
 import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
@@ -38,7 +38,7 @@ type ParseResponse struct {
 
 func (x *ParseResponse) Reset() {
 	*x = ParseResponse{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50,7 +50,7 @@ func (x *ParseResponse) String() string {
 func (*ParseResponse) ProtoMessage() {}
 
 func (x *ParseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[0]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +63,7 @@ func (x *ParseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
 func (*ParseResponse) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{0}
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ParseResponse) GetDiagnostics() []*parser.Diagnostic {
@@ -95,7 +95,7 @@ type ParseResponseResult struct {
 
 func (x *ParseResponseResult) Reset() {
 	*x = ParseResponseResult{}
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -107,7 +107,7 @@ func (x *ParseResponseResult) String() string {
 func (*ParseResponseResult) ProtoMessage() {}
 
 func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_messages_message_proto_msgTypes[1]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -120,7 +120,7 @@ func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponseResult.ProtoReflect.Descriptor instead.
 func (*ParseResponseResult) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_messages_message_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ParseResponseResult) GetValue() isParseResponseResult_Value {
@@ -179,14 +179,14 @@ func (*ParseResponseResult_Terragrunt) isParseResponseResult_Value() {}
 
 func (*ParseResponseResult_Cloudformation) isParseResponseResult_Value() {}
 
-var File_infracost_parser_messages_message_proto protoreflect.FileDescriptor
+var File_infracost_parser_api_service_proto protoreflect.FileDescriptor
 
-const file_infracost_parser_messages_message_proto_rawDesc = "" +
+const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\n" +
-	"'infracost/parser/messages/message.proto\x12\x19infracost.parser.messages\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a(infracost/parser/terragrunt/module.proto\"\x97\x01\n" +
+	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a(infracost/parser/terragrunt/module.proto\"\x92\x01\n" +
 	"\rParseResponse\x12>\n" +
-	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12F\n" +
-	"\x06result\x18\x02 \x01(\v2..infracost.parser.messages.ParseResponseResultR\x06result\"\x82\x02\n" +
+	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
+	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\"\x82\x02\n" +
 	"\x13ParseResponseResult\x12H\n" +
 	"\tterraform\x18\n" +
 	" \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12E\n" +
@@ -194,36 +194,36 @@ const file_infracost_parser_messages_message_proto_rawDesc = "" +
 	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.ResultH\x00R\n" +
 	"terragrunt\x12Q\n" +
 	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
-	"\x05valueB\xf0\x01\n" +
-	"\x1dcom.infracost.parser.messagesB\fMessageProtoP\x01Z;github.com/infracost/proto/gen/go/infracost/parser/messages\xa2\x02\x03IPM\xaa\x02\x19Infracost.Parser.Messages\xca\x02\x19Infracost\\Parser\\Messages\xe2\x02%Infracost\\Parser\\Messages\\GPBMetadata\xea\x02\x1bInfracost::Parser::Messagesb\x06proto3"
+	"\x05valueB\xd2\x01\n" +
+	"\x18com.infracost.parser.apiB\fServiceProtoP\x01Z6github.com/infracost/proto/gen/go/infracost/parser/api\xa2\x02\x03IPA\xaa\x02\x14Infracost.Parser.Api\xca\x02\x14Infracost\\Parser\\Api\xe2\x02 Infracost\\Parser\\Api\\GPBMetadata\xea\x02\x16Infracost::Parser::Apib\x06proto3"
 
 var (
-	file_infracost_parser_messages_message_proto_rawDescOnce sync.Once
-	file_infracost_parser_messages_message_proto_rawDescData []byte
+	file_infracost_parser_api_service_proto_rawDescOnce sync.Once
+	file_infracost_parser_api_service_proto_rawDescData []byte
 )
 
-func file_infracost_parser_messages_message_proto_rawDescGZIP() []byte {
-	file_infracost_parser_messages_message_proto_rawDescOnce.Do(func() {
-		file_infracost_parser_messages_message_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_infracost_parser_messages_message_proto_rawDesc), len(file_infracost_parser_messages_message_proto_rawDesc)))
+func file_infracost_parser_api_service_proto_rawDescGZIP() []byte {
+	file_infracost_parser_api_service_proto_rawDescOnce.Do(func() {
+		file_infracost_parser_api_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_infracost_parser_api_service_proto_rawDesc), len(file_infracost_parser_api_service_proto_rawDesc)))
 	})
-	return file_infracost_parser_messages_message_proto_rawDescData
+	return file_infracost_parser_api_service_proto_rawDescData
 }
 
-var file_infracost_parser_messages_message_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_infracost_parser_messages_message_proto_goTypes = []any{
-	(*ParseResponse)(nil),          // 0: infracost.parser.messages.ParseResponse
-	(*ParseResponseResult)(nil),    // 1: infracost.parser.messages.ParseResponseResult
+var file_infracost_parser_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_infracost_parser_api_service_proto_goTypes = []any{
+	(*ParseResponse)(nil),          // 0: infracost.parser.api.ParseResponse
+	(*ParseResponseResult)(nil),    // 1: infracost.parser.api.ParseResponseResult
 	(*parser.Diagnostic)(nil),      // 2: infracost.parser.Diagnostic
 	(*terraform.ModuleResult)(nil), // 3: infracost.parser.terraform.ModuleResult
 	(*terragrunt.Result)(nil),      // 4: infracost.parser.terragrunt.Result
 	(*cloudformation.Result)(nil),  // 5: infracost.parser.cloudformation.Result
 }
-var file_infracost_parser_messages_message_proto_depIdxs = []int32{
-	2, // 0: infracost.parser.messages.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	1, // 1: infracost.parser.messages.ParseResponse.result:type_name -> infracost.parser.messages.ParseResponseResult
-	3, // 2: infracost.parser.messages.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	4, // 3: infracost.parser.messages.ParseResponseResult.terragrunt:type_name -> infracost.parser.terragrunt.Result
-	5, // 4: infracost.parser.messages.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+var file_infracost_parser_api_service_proto_depIdxs = []int32{
+	2, // 0: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	1, // 1: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
+	3, // 2: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
+	4, // 3: infracost.parser.api.ParseResponseResult.terragrunt:type_name -> infracost.parser.terragrunt.Result
+	5, // 4: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name
@@ -231,12 +231,12 @@ var file_infracost_parser_messages_message_proto_depIdxs = []int32{
 	0, // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_infracost_parser_messages_message_proto_init() }
-func file_infracost_parser_messages_message_proto_init() {
-	if File_infracost_parser_messages_message_proto != nil {
+func init() { file_infracost_parser_api_service_proto_init() }
+func file_infracost_parser_api_service_proto_init() {
+	if File_infracost_parser_api_service_proto != nil {
 		return
 	}
-	file_infracost_parser_messages_message_proto_msgTypes[1].OneofWrappers = []any{
+	file_infracost_parser_api_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*ParseResponseResult_Terraform)(nil),
 		(*ParseResponseResult_Terragrunt)(nil),
 		(*ParseResponseResult_Cloudformation)(nil),
@@ -245,17 +245,17 @@ func file_infracost_parser_messages_message_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_messages_message_proto_rawDesc), len(file_infracost_parser_messages_message_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_api_service_proto_rawDesc), len(file_infracost_parser_api_service_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_infracost_parser_messages_message_proto_goTypes,
-		DependencyIndexes: file_infracost_parser_messages_message_proto_depIdxs,
-		MessageInfos:      file_infracost_parser_messages_message_proto_msgTypes,
+		GoTypes:           file_infracost_parser_api_service_proto_goTypes,
+		DependencyIndexes: file_infracost_parser_api_service_proto_depIdxs,
+		MessageInfos:      file_infracost_parser_api_service_proto_msgTypes,
 	}.Build()
-	File_infracost_parser_messages_message_proto = out.File
-	file_infracost_parser_messages_message_proto_goTypes = nil
-	file_infracost_parser_messages_message_proto_depIdxs = nil
+	File_infracost_parser_api_service_proto = out.File
+	file_infracost_parser_api_service_proto_goTypes = nil
+	file_infracost_parser_api_service_proto_depIdxs = nil
 }
