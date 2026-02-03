@@ -294,10 +294,11 @@ type ResourceMetadata struct {
 	EndLine   int64 `protobuf:"varint,6,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
 	// module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
 	ModuleCalls []*ModuleCall `protobuf:"bytes,7,rep,name=module_calls,json=moduleCalls,proto3" json:"module_calls,omitempty"`
-	// checksums of the resource
-	// TODO: need to better define these!
-	BasicChecksum       string `protobuf:"bytes,1,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
-	PropertyChecksum    string `protobuf:"bytes,2,opt,name=property_checksum,json=propertyChecksum,proto3" json:"property_checksum,omitempty"`
+	// basic checksum identifying the unique resource (address etc.), not its children or contents
+	BasicChecksum string `protobuf:"bytes,1,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
+	// deep checksum identifying the resource including its children and contents
+	DeepChecksum string `protobuf:"bytes,2,opt,name=deep_checksum,json=deepChecksum,proto3" json:"deep_checksum,omitempty"`
+	// checksum of default tag values applied to this resource
 	DefaultTagsChecksum string `protobuf:"bytes,3,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -368,9 +369,9 @@ func (x *ResourceMetadata) GetBasicChecksum() string {
 	return ""
 }
 
-func (x *ResourceMetadata) GetPropertyChecksum() string {
+func (x *ResourceMetadata) GetDeepChecksum() string {
 	if x != nil {
-		return x.PropertyChecksum
+		return x.DeepChecksum
 	}
 	return ""
 }
@@ -1556,15 +1557,15 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\atagging\x18\f \x01(\v2\x1b.infracost.provider.TaggingR\atagging\x12E\n" +
 	"\x0fchild_resources\x18\r \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x12:\n" +
 	"\n" +
-	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xb3\x02\n" +
+	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xab\x02\n" +
 	"\x10ResourceMetadata\x12\x1a\n" +
 	"\bfilename\x18\x04 \x01(\tR\bfilename\x12\x1d\n" +
 	"\n" +
 	"start_line\x18\x05 \x01(\x03R\tstartLine\x12\x19\n" +
 	"\bend_line\x18\x06 \x01(\x03R\aendLine\x12A\n" +
 	"\fmodule_calls\x18\a \x03(\v2\x1e.infracost.provider.ModuleCallR\vmoduleCalls\x12%\n" +
-	"\x0ebasic_checksum\x18\x01 \x01(\tR\rbasicChecksum\x12+\n" +
-	"\x11property_checksum\x18\x02 \x01(\tR\x10propertyChecksum\x122\n" +
+	"\x0ebasic_checksum\x18\x01 \x01(\tR\rbasicChecksum\x12#\n" +
+	"\rdeep_checksum\x18\x02 \x01(\tR\fdeepChecksum\x122\n" +
 	"\x15default_tags_checksum\x18\x03 \x01(\tR\x13defaultTagsChecksum\"\x8b\x01\n" +
 	"\n" +
 	"ModuleCall\x12'\n" +

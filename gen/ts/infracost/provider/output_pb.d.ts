@@ -179,19 +179,22 @@ export declare type ResourceMetadata = Message<"infracost.provider.ResourceMetad
   moduleCalls: ModuleCall[];
 
   /**
-   * checksums of the resource
-   * TODO: need to better define these!
+   * basic checksum identifying the unique resource (address etc.), not its children or contents
    *
    * @generated from field: string basic_checksum = 1;
    */
   basicChecksum: string;
 
   /**
-   * @generated from field: string property_checksum = 2;
+   * deep checksum identifying the resource including its children and contents
+   *
+   * @generated from field: string deep_checksum = 2;
    */
-  propertyChecksum: string;
+  deepChecksum: string;
 
   /**
+   * checksum of default tag values applied to this resource
+   *
    * @generated from field: string default_tags_checksum = 3;
    */
   defaultTagsChecksum: string;
