@@ -81,19 +81,22 @@ func (ResourceAction) EnumDescriptor() ([]byte, []int) {
 type Period int32
 
 const (
-	Period_MONTH Period = 0
-	Period_HOUR  Period = 1
+	Period_PERIOD_UNSPECIFIED Period = 0
+	Period_MONTH              Period = 1
+	Period_HOUR               Period = 2
 )
 
 // Enum value maps for Period.
 var (
 	Period_name = map[int32]string{
-		0: "MONTH",
-		1: "HOUR",
+		0: "PERIOD_UNSPECIFIED",
+		1: "MONTH",
+		2: "HOUR",
 	}
 	Period_value = map[string]int32{
-		"MONTH": 0,
-		"HOUR":  1,
+		"PERIOD_UNSPECIFIED": 0,
+		"MONTH":              1,
+		"HOUR":               2,
 	}
 )
 
@@ -956,7 +959,7 @@ func (x *PeriodPrice) GetPeriod() Period {
 	if x != nil {
 		return x.Period
 	}
-	return Period_MONTH
+	return Period_PERIOD_UNSPECIFIED
 }
 
 type EnvironmentalMetrics struct {
@@ -1005,7 +1008,7 @@ func (x *EnvironmentalMetrics) GetPeriod() Period {
 	if x != nil {
 		return x.Period
 	}
-	return Period_MONTH
+	return Period_PERIOD_UNSPECIFIED
 }
 
 func (x *EnvironmentalMetrics) GetCarbonGramsCo2E() *rational.Rat {
@@ -1742,10 +1745,11 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\n" +
 	"\x06MODIFY\x10\x03\x12\n" +
 	"\n" +
-	"\x06DELETE\x10\x04*\x1d\n" +
-	"\x06Period\x12\t\n" +
-	"\x05MONTH\x10\x00\x12\b\n" +
-	"\x04HOUR\x10\x01B\xc4\x01\n" +
+	"\x06DELETE\x10\x04*5\n" +
+	"\x06Period\x12\x16\n" +
+	"\x12PERIOD_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05MONTH\x10\x01\x12\b\n" +
+	"\x04HOUR\x10\x02B\xc4\x01\n" +
 	"\x16com.infracost.providerB\vOutputProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
 var (

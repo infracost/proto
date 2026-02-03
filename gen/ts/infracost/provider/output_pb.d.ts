@@ -909,14 +909,19 @@ export declare const ResourceActionSchema: GenEnum<ResourceAction>;
  */
 export enum Period {
   /**
-   * @generated from enum value: MONTH = 0;
+   * @generated from enum value: PERIOD_UNSPECIFIED = 0;
    */
-  MONTH = 0,
+  PERIOD_UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: HOUR = 1;
+   * @generated from enum value: MONTH = 1;
    */
-  HOUR = 1,
+  MONTH = 1,
+
+  /**
+   * @generated from enum value: HOUR = 2;
+   */
+  HOUR = 2,
 }
 
 /**

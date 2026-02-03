@@ -148,8 +148,9 @@ message PeriodPrice {
 }
 
 enum Period {
-  MONTH = 0;
-  HOUR = 1;
+  PERIOD_UNSPECIFIED = 0;
+  MONTH = 1;
+  HOUR = 2;
 }
 
 message EnvironmentalMetrics {
