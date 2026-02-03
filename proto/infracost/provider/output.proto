@@ -44,7 +44,7 @@ message Resource {
 }
 
 enum ResourceAction {
-  UNKNOWN = 0;
+  RESOURCE_ACTION_UNSPECIFIED = 0;
   NOOP = 1;
   CREATE = 2;
   MODIFY = 3;

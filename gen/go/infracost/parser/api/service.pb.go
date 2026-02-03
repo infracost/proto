@@ -29,7 +29,7 @@ type ParseResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The diagnostics generated during parsing
 	Diagnostics []*parser.Diagnostic `protobuf:"bytes,1,rep,name=diagnostics,proto3" json:"diagnostics,omitempty"`
-	// The result of parsing the target, is one of cloudformation, terraform, terragrunt
+	// The result of parsing the target, is one of cloudformation, terraform
 	Result        *ParseResponseResult `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

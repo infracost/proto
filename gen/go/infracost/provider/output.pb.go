@@ -26,28 +26,28 @@ const (
 type ResourceAction int32
 
 const (
-	ResourceAction_UNKNOWN ResourceAction = 0
-	ResourceAction_NOOP    ResourceAction = 1
-	ResourceAction_CREATE  ResourceAction = 2
-	ResourceAction_MODIFY  ResourceAction = 3
-	ResourceAction_DELETE  ResourceAction = 4
+	ResourceAction_RESOURCE_ACTION_UNSPECIFIED ResourceAction = 0
+	ResourceAction_NOOP                        ResourceAction = 1
+	ResourceAction_CREATE                      ResourceAction = 2
+	ResourceAction_MODIFY                      ResourceAction = 3
+	ResourceAction_DELETE                      ResourceAction = 4
 )
 
 // Enum value maps for ResourceAction.
 var (
 	ResourceAction_name = map[int32]string{
-		0: "UNKNOWN",
+		0: "RESOURCE_ACTION_UNSPECIFIED",
 		1: "NOOP",
 		2: "CREATE",
 		3: "MODIFY",
 		4: "DELETE",
 	}
 	ResourceAction_value = map[string]int32{
-		"UNKNOWN": 0,
-		"NOOP":    1,
-		"CREATE":  2,
-		"MODIFY":  3,
-		"DELETE":  4,
+		"RESOURCE_ACTION_UNSPECIFIED": 0,
+		"NOOP":                        1,
+		"CREATE":                      2,
+		"MODIFY":                      3,
+		"DELETE":                      4,
 	}
 )
 
@@ -312,7 +312,7 @@ func (x *Resource) GetAction() ResourceAction {
 	if x != nil {
 		return x.Action
 	}
-	return ResourceAction_UNKNOWN
+	return ResourceAction_RESOURCE_ACTION_UNSPECIFIED
 }
 
 func (x *Resource) GetCosts() *ResourceCosts {
@@ -1736,9 +1736,9 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"suggestion\x18\t \x01(\tH\x01R\n" +
 	"suggestion\x88\x01\x01B\x0e\n" +
 	"\f_valid_regexB\r\n" +
-	"\v_suggestion*K\n" +
-	"\x0eResourceAction\x12\v\n" +
-	"\aUNKNOWN\x10\x00\x12\b\n" +
+	"\v_suggestion*_\n" +
+	"\x0eResourceAction\x12\x1f\n" +
+	"\x1bRESOURCE_ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04NOOP\x10\x01\x12\n" +
 	"\n" +
 	"\x06CREATE\x10\x02\x12\n" +

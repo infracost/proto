@@ -10,7 +10,7 @@ import "infracost/parser/terraform/module.proto";
 message ParseResponse {
   // The diagnostics generated during parsing
   repeated Diagnostic diagnostics = 1;
-  // The result of parsing the target, is one of cloudformation, terraform, terragrunt
+  // The result of parsing the target, is one of cloudformation, terraform
   ParseResponseResult result = 2;
 }
 

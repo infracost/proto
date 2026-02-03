@@ -32,7 +32,7 @@ export type ParseResponse = Message<"infracost.parser.api.ParseResponse"> & {
   diagnostics: Diagnostic[];
 
   /**
-   * The result of parsing the target, is one of cloudformation, terraform, terragrunt
+   * The result of parsing the target, is one of cloudformation, terraform
    *
    * @generated from field: infracost.parser.api.ParseResponseResult result = 2;
    */

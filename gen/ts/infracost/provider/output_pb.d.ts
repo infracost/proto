@@ -874,9 +874,9 @@ export declare const InvalidTagSchema: GenMessage<InvalidTag>;
  */
 export enum ResourceAction {
   /**
-   * @generated from enum value: UNKNOWN = 0;
+   * @generated from enum value: RESOURCE_ACTION_UNSPECIFIED = 0;
    */
-  UNKNOWN = 0,
+  RESOURCE_ACTION_UNSPECIFIED = 0,
 
   /**
    * @generated from enum value: NOOP = 1;
