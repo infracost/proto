@@ -5,8 +5,6 @@ package infracost.provider;
 import "infracost/parser/stack.proto";
 import "infracost/rational/rational.proto";
 
-// TODO: add comment above each field
-
 message Output {
   // Normalised list of resources, made IaC-agnostic.
   repeated Resource resources = 1;
@@ -53,10 +51,11 @@ message ResourceMetadata {
   int64 end_line = 6;
   // module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
   repeated ModuleCall module_calls = 7;
-  // checksums of the resource
-  // TODO: need to better define these!
+  // basic checksum identifying the unique resource (address etc.), not its children or contents
   string basic_checksum = 1;
-  string property_checksum = 2;
+  // deep checksum identifying the resource including its children and contents
+  string deep_checksum = 2;
+  // checksum of default tag values applied to this resource
   string default_tags_checksum = 3;
 }
 
