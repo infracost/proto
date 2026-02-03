@@ -23,6 +23,61 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ResourceAction int32
+
+const (
+	ResourceAction_UNKNOWN ResourceAction = 0
+	ResourceAction_NOOP    ResourceAction = 1
+	ResourceAction_CREATE  ResourceAction = 2
+	ResourceAction_MODIFY  ResourceAction = 3
+	ResourceAction_DELETE  ResourceAction = 4
+)
+
+// Enum value maps for ResourceAction.
+var (
+	ResourceAction_name = map[int32]string{
+		0: "UNKNOWN",
+		1: "NOOP",
+		2: "CREATE",
+		3: "MODIFY",
+		4: "DELETE",
+	}
+	ResourceAction_value = map[string]int32{
+		"UNKNOWN": 0,
+		"NOOP":    1,
+		"CREATE":  2,
+		"MODIFY":  3,
+		"DELETE":  4,
+	}
+)
+
+func (x ResourceAction) Enum() *ResourceAction {
+	p := new(ResourceAction)
+	*p = x
+	return p
+}
+
+func (x ResourceAction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ResourceAction) Descriptor() protoreflect.EnumDescriptor {
+	return file_infracost_provider_output_proto_enumTypes[0].Descriptor()
+}
+
+func (ResourceAction) Type() protoreflect.EnumType {
+	return &file_infracost_provider_output_proto_enumTypes[0]
+}
+
+func (x ResourceAction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ResourceAction.Descriptor instead.
+func (ResourceAction) EnumDescriptor() ([]byte, []int) {
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{0}
+}
+
 type Period int32
 
 const (
@@ -53,11 +108,11 @@ func (x Period) String() string {
 }
 
 func (Period) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_provider_output_proto_enumTypes[0].Descriptor()
+	return file_infracost_provider_output_proto_enumTypes[1].Descriptor()
 }
 
 func (Period) Type() protoreflect.EnumType {
-	return &file_infracost_provider_output_proto_enumTypes[0]
+	return &file_infracost_provider_output_proto_enumTypes[1]
 }
 
 func (x Period) Number() protoreflect.EnumNumber {
@@ -66,7 +121,7 @@ func (x Period) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Period.Descriptor instead.
 func (Period) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_provider_output_proto_rawDescGZIP(), []int{0}
+	return file_infracost_provider_output_proto_rawDescGZIP(), []int{1}
 }
 
 type Output struct {
@@ -143,8 +198,8 @@ type Resource struct {
 	IsFree bool `protobuf:"varint,8,opt,name=is_free,json=isFree,proto3" json:"is_free,omitempty"`
 	// If the provider of the resource is supported
 	IsProviderSupported bool `protobuf:"varint,9,opt,name=is_provider_supported,json=isProviderSupported,proto3" json:"is_provider_supported,omitempty"`
-	// if the resource was added for this run (if known)
-	IsNew bool `protobuf:"varint,10,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	// if the resource was added/modified/deleted/unchanged for this run
+	Action ResourceAction `protobuf:"varint,10,opt,name=action,proto3,enum=infracost.provider.ResourceAction" json:"action,omitempty"`
 	// The resource costs - individual cost components - including environmental metrics
 	Costs *ResourceCosts `protobuf:"bytes,11,opt,name=costs,proto3" json:"costs,omitempty"`
 	// Resource-level tags
@@ -250,11 +305,11 @@ func (x *Resource) GetIsProviderSupported() bool {
 	return false
 }
 
-func (x *Resource) GetIsNew() bool {
+func (x *Resource) GetAction() ResourceAction {
 	if x != nil {
-		return x.IsNew
+		return x.Action
 	}
-	return false
+	return ResourceAction_UNKNOWN
 }
 
 func (x *Resource) GetCosts() *ResourceCosts {
@@ -1549,7 +1604,7 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x1finfracost/provider/output.proto\x12\x12infracost.provider\x1a\x1cinfracost/parser/stack.proto\x1a!infracost/rational/rational.proto\"\x93\x01\n" +
 	"\x06Output\x12:\n" +
 	"\tresources\x18\x01 \x03(\v2\x1c.infracost.provider.ResourceR\tresources\x12M\n" +
-	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\"\xbb\x04\n" +
+	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\"\xe0\x04\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
@@ -1559,9 +1614,9 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\rprovider_link\x18\x06 \x01(\tR\fproviderLink\x12!\n" +
 	"\fis_supported\x18\a \x01(\bR\visSupported\x12\x17\n" +
 	"\ais_free\x18\b \x01(\bR\x06isFree\x122\n" +
-	"\x15is_provider_supported\x18\t \x01(\bR\x13isProviderSupported\x12\x15\n" +
-	"\x06is_new\x18\n" +
-	" \x01(\bR\x05isNew\x127\n" +
+	"\x15is_provider_supported\x18\t \x01(\bR\x13isProviderSupported\x12:\n" +
+	"\x06action\x18\n" +
+	" \x01(\x0e2\".infracost.provider.ResourceActionR\x06action\x127\n" +
 	"\x05costs\x18\v \x01(\v2!.infracost.provider.ResourceCostsR\x05costs\x125\n" +
 	"\atagging\x18\f \x01(\v2\x1b.infracost.provider.TaggingR\atagging\x12E\n" +
 	"\x0fchild_resources\x18\r \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x12:\n" +
@@ -1678,7 +1733,16 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"suggestion\x18\t \x01(\tH\x01R\n" +
 	"suggestion\x88\x01\x01B\x0e\n" +
 	"\f_valid_regexB\r\n" +
-	"\v_suggestion*\x1d\n" +
+	"\v_suggestion*K\n" +
+	"\x0eResourceAction\x12\v\n" +
+	"\aUNKNOWN\x10\x00\x12\b\n" +
+	"\x04NOOP\x10\x01\x12\n" +
+	"\n" +
+	"\x06CREATE\x10\x02\x12\n" +
+	"\n" +
+	"\x06MODIFY\x10\x03\x12\n" +
+	"\n" +
+	"\x06DELETE\x10\x04*\x1d\n" +
 	"\x06Period\x12\t\n" +
 	"\x05MONTH\x10\x00\x12\b\n" +
 	"\x04HOUR\x10\x01B\xc4\x01\n" +
@@ -1696,68 +1760,70 @@ func file_infracost_provider_output_proto_rawDescGZIP() []byte {
 	return file_infracost_provider_output_proto_rawDescData
 }
 
-var file_infracost_provider_output_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_infracost_provider_output_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_infracost_provider_output_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_infracost_provider_output_proto_goTypes = []any{
-	(Period)(0),                         // 0: infracost.provider.Period
-	(*Output)(nil),                      // 1: infracost.provider.Output
-	(*Resource)(nil),                    // 2: infracost.provider.Resource
-	(*ResourceMetadata)(nil),            // 3: infracost.provider.ResourceMetadata
-	(*ModuleCall)(nil),                  // 4: infracost.provider.ModuleCall
-	(*Tagging)(nil),                     // 5: infracost.provider.Tagging
-	(*Tag)(nil),                         // 6: infracost.provider.Tag
-	(*TagPropagationProblem)(nil),       // 7: infracost.provider.TagPropagationProblem
-	(*ResourceCosts)(nil),               // 8: infracost.provider.ResourceCosts
-	(*CostComponent)(nil),               // 9: infracost.provider.CostComponent
-	(*PeriodPrice)(nil),                 // 10: infracost.provider.PeriodPrice
-	(*EnvironmentalMetrics)(nil),        // 11: infracost.provider.EnvironmentalMetrics
-	(*FinopsPolicyResult)(nil),          // 12: infracost.provider.FinopsPolicyResult
-	(*FinopsPolicyFailingResource)(nil), // 13: infracost.provider.FinopsPolicyFailingResource
-	(*FinopsResourceIssue)(nil),         // 14: infracost.provider.FinopsResourceIssue
-	(*IssueBreakdown)(nil),              // 15: infracost.provider.IssueBreakdown
-	(*IssueCostComponent)(nil),          // 16: infracost.provider.IssueCostComponent
-	(*InvalidTag)(nil),                  // 17: infracost.provider.InvalidTag
-	(*parser.CallStack)(nil),            // 18: infracost.parser.CallStack
-	(*rational.Rat)(nil),                // 19: infracost.rational.Rat
+	(ResourceAction)(0),                 // 0: infracost.provider.ResourceAction
+	(Period)(0),                         // 1: infracost.provider.Period
+	(*Output)(nil),                      // 2: infracost.provider.Output
+	(*Resource)(nil),                    // 3: infracost.provider.Resource
+	(*ResourceMetadata)(nil),            // 4: infracost.provider.ResourceMetadata
+	(*ModuleCall)(nil),                  // 5: infracost.provider.ModuleCall
+	(*Tagging)(nil),                     // 6: infracost.provider.Tagging
+	(*Tag)(nil),                         // 7: infracost.provider.Tag
+	(*TagPropagationProblem)(nil),       // 8: infracost.provider.TagPropagationProblem
+	(*ResourceCosts)(nil),               // 9: infracost.provider.ResourceCosts
+	(*CostComponent)(nil),               // 10: infracost.provider.CostComponent
+	(*PeriodPrice)(nil),                 // 11: infracost.provider.PeriodPrice
+	(*EnvironmentalMetrics)(nil),        // 12: infracost.provider.EnvironmentalMetrics
+	(*FinopsPolicyResult)(nil),          // 13: infracost.provider.FinopsPolicyResult
+	(*FinopsPolicyFailingResource)(nil), // 14: infracost.provider.FinopsPolicyFailingResource
+	(*FinopsResourceIssue)(nil),         // 15: infracost.provider.FinopsResourceIssue
+	(*IssueBreakdown)(nil),              // 16: infracost.provider.IssueBreakdown
+	(*IssueCostComponent)(nil),          // 17: infracost.provider.IssueCostComponent
+	(*InvalidTag)(nil),                  // 18: infracost.provider.InvalidTag
+	(*parser.CallStack)(nil),            // 19: infracost.parser.CallStack
+	(*rational.Rat)(nil),                // 20: infracost.rational.Rat
 }
 var file_infracost_provider_output_proto_depIdxs = []int32{
-	2,  // 0: infracost.provider.Output.resources:type_name -> infracost.provider.Resource
-	12, // 1: infracost.provider.Output.finops_results:type_name -> infracost.provider.FinopsPolicyResult
-	3,  // 2: infracost.provider.Resource.metadata:type_name -> infracost.provider.ResourceMetadata
-	8,  // 3: infracost.provider.Resource.costs:type_name -> infracost.provider.ResourceCosts
-	5,  // 4: infracost.provider.Resource.tagging:type_name -> infracost.provider.Tagging
-	2,  // 5: infracost.provider.Resource.child_resources:type_name -> infracost.provider.Resource
-	18, // 6: infracost.provider.Resource.call_stack:type_name -> infracost.parser.CallStack
-	4,  // 7: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
-	6,  // 8: infracost.provider.Tagging.tags:type_name -> infracost.provider.Tag
-	7,  // 9: infracost.provider.Tagging.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
-	9,  // 10: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
-	10, // 11: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
-	19, // 12: infracost.provider.CostComponent.quantity:type_name -> infracost.rational.Rat
-	19, // 13: infracost.provider.CostComponent.discount_rate:type_name -> infracost.rational.Rat
-	11, // 14: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
-	19, // 15: infracost.provider.PeriodPrice.price:type_name -> infracost.rational.Rat
-	0,  // 16: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
-	0,  // 17: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
-	19, // 18: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
-	19, // 19: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
-	13, // 20: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
-	14, // 21: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
-	19, // 22: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
-	19, // 23: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
-	19, // 24: infracost.provider.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
-	15, // 25: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
-	15, // 26: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
-	16, // 27: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent
-	15, // 28: infracost.provider.IssueBreakdown.subresources:type_name -> infracost.provider.IssueBreakdown
-	10, // 29: infracost.provider.IssueCostComponent.period_price:type_name -> infracost.provider.PeriodPrice
-	19, // 30: infracost.provider.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
-	19, // 31: infracost.provider.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	3,  // 0: infracost.provider.Output.resources:type_name -> infracost.provider.Resource
+	13, // 1: infracost.provider.Output.finops_results:type_name -> infracost.provider.FinopsPolicyResult
+	4,  // 2: infracost.provider.Resource.metadata:type_name -> infracost.provider.ResourceMetadata
+	0,  // 3: infracost.provider.Resource.action:type_name -> infracost.provider.ResourceAction
+	9,  // 4: infracost.provider.Resource.costs:type_name -> infracost.provider.ResourceCosts
+	6,  // 5: infracost.provider.Resource.tagging:type_name -> infracost.provider.Tagging
+	3,  // 6: infracost.provider.Resource.child_resources:type_name -> infracost.provider.Resource
+	19, // 7: infracost.provider.Resource.call_stack:type_name -> infracost.parser.CallStack
+	5,  // 8: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
+	7,  // 9: infracost.provider.Tagging.tags:type_name -> infracost.provider.Tag
+	8,  // 10: infracost.provider.Tagging.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
+	10, // 11: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
+	11, // 12: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	20, // 13: infracost.provider.CostComponent.quantity:type_name -> infracost.rational.Rat
+	20, // 14: infracost.provider.CostComponent.discount_rate:type_name -> infracost.rational.Rat
+	12, // 15: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
+	20, // 16: infracost.provider.PeriodPrice.price:type_name -> infracost.rational.Rat
+	1,  // 17: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
+	1,  // 18: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
+	20, // 19: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
+	20, // 20: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
+	14, // 21: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
+	15, // 22: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
+	20, // 23: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
+	20, // 24: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
+	20, // 25: infracost.provider.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
+	16, // 26: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	16, // 27: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	17, // 28: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent
+	16, // 29: infracost.provider.IssueBreakdown.subresources:type_name -> infracost.provider.IssueBreakdown
+	11, // 30: infracost.provider.IssueCostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	20, // 31: infracost.provider.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
+	20, // 32: infracost.provider.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_output_proto_init() }
@@ -1772,7 +1838,7 @@ func file_infracost_provider_output_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_output_proto_rawDesc), len(file_infracost_provider_output_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,

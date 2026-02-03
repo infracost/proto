@@ -107,11 +107,11 @@ export declare type Resource = Message<"infracost.provider.Resource"> & {
   isProviderSupported: boolean;
 
   /**
-   * if the resource was added for this run (if known)
+   * if the resource was added/modified/deleted/unchanged for this run
    *
-   * @generated from field: bool is_new = 10;
+   * @generated from field: infracost.provider.ResourceAction action = 10;
    */
-  isNew: boolean;
+  action: ResourceAction;
 
   /**
    * The resource costs - individual cost components - including environmental metrics
@@ -868,6 +868,41 @@ export declare type InvalidTag = Message<"infracost.provider.InvalidTag"> & {
  * Use `create(InvalidTagSchema)` to create a new message.
  */
 export declare const InvalidTagSchema: GenMessage<InvalidTag>;
+
+/**
+ * @generated from enum infracost.provider.ResourceAction
+ */
+export enum ResourceAction {
+  /**
+   * @generated from enum value: UNKNOWN = 0;
+   */
+  UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: NOOP = 1;
+   */
+  NOOP = 1,
+
+  /**
+   * @generated from enum value: CREATE = 2;
+   */
+  CREATE = 2,
+
+  /**
+   * @generated from enum value: MODIFY = 3;
+   */
+  MODIFY = 3,
+
+  /**
+   * @generated from enum value: DELETE = 4;
+   */
+  DELETE = 4,
+}
+
+/**
+ * Describes the enum infracost.provider.ResourceAction.
+ */
+export declare const ResourceActionSchema: GenEnum<ResourceAction>;
 
 /**
  * @generated from enum infracost.provider.Period

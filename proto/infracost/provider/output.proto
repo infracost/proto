@@ -31,8 +31,8 @@ message Resource {
   bool is_free = 8;
   // If the provider of the resource is supported
   bool is_provider_supported = 9;
-  // if the resource was added for this run (if known)
-  bool is_new = 10;
+  // if the resource was added/modified/deleted/unchanged for this run
+  ResourceAction action = 10;
   // The resource costs - individual cost components - including environmental metrics
   ResourceCosts costs = 11;
   // Resource-level tags
@@ -41,6 +41,14 @@ message Resource {
   repeated Resource child_resources = 13;
   // the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
   parser.CallStack call_stack = 14;
+}
+
+enum ResourceAction {
+  UNKNOWN = 0;
+  NOOP = 1;
+  CREATE = 2;
+  MODIFY = 3;
+  DELETE = 4;
 }
 
 message ResourceMetadata {
