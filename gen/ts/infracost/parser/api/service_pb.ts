@@ -141,12 +141,16 @@ export type ParseResponseResult = Message<"infracost.parser.api.ParseResponseRes
    */
   value: {
     /**
+     * The result type for Terraform files
+     *
      * @generated from field: infracost.parser.terraform.ModuleResult terraform = 1;
      */
     value: ModuleResult;
     case: "terraform";
   } | {
     /**
+     * The result type for CloudFormation files
+     *
      * @generated from field: infracost.parser.cloudformation.Result cloudformation = 2;
      */
     value: Result;
@@ -162,15 +166,21 @@ export const ParseResponseResultSchema: GenMessage<ParseResponseResult> = /*@__P
   messageDesc(file_infracost_parser_api_service, 3);
 
 /**
+ * InitializeRequest is the request for the Initialize RPC.
+ *
  * @generated from message infracost.parser.api.InitializeRequest
  */
 export type InitializeRequest = Message<"infracost.parser.api.InitializeRequest"> & {
   /**
+   * The supported resources for Terraform from providers
+   *
    * @generated from field: infracost.parser.api.SupportedResources terraform_supported_resources = 1;
    */
   terraformSupportedResources?: SupportedResources;
 
   /**
+   * The supported resources for CloudFormation from providers
+   *
    * @generated from field: infracost.parser.api.SupportedResources cloudformation_supported_resources = 2;
    */
   cloudformationSupportedResources?: SupportedResources;
@@ -184,6 +194,8 @@ export const InitializeRequestSchema: GenMessage<InitializeRequest> = /*@__PURE_
   messageDesc(file_infracost_parser_api_service, 4);
 
 /**
+ * InitializeResponse is the response for the Initialize RPC.
+ *
  * @generated from message infracost.parser.api.InitializeResponse
  */
 export type InitializeResponse = Message<"infracost.parser.api.InitializeResponse"> & {
@@ -201,6 +213,8 @@ export const InitializeResponseSchema: GenMessage<InitializeResponse> = /*@__PUR
   messageDesc(file_infracost_parser_api_service, 5);
 
 /**
+ * SupportedResources lists the resource types supported by a parser.
+ *
  * @generated from message infracost.parser.api.SupportedResources
  */
 export type SupportedResources = Message<"infracost.parser.api.SupportedResources"> & {

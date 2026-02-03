@@ -34,7 +34,7 @@ type GenericOptions struct {
 	TemporaryDirectory string `protobuf:"bytes,4,opt,name=temporary_directory,json=temporaryDirectory,proto3" json:"temporary_directory,omitempty"`
 	// The directory to use for caching
 	CacheDirectory string `protobuf:"bytes,5,opt,name=cache_directory,json=cacheDirectory,proto3" json:"cache_directory,omitempty"`
-	// The credential sets to use for authentication
+	// The working directory for the parser
 	WorkingDirectory string `protobuf:"bytes,6,opt,name=working_directory,json=workingDirectory,proto3" json:"working_directory,omitempty"`
 	// The credential sets to use for authentication
 	CredentialSets []*CredentialSet `protobuf:"bytes,7,rep,name=credential_sets,json=credentialSets,proto3" json:"credential_sets,omitempty"`

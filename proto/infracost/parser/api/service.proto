@@ -50,20 +50,27 @@ message ParseResponse {
 // ParseResponseResult is the unified result for all parser types.
 message ParseResponseResult {
   oneof value {
+    // The result type for Terraform files
     terraform.ModuleResult terraform = 1;
+    // The result type for CloudFormation files
     cloudformation.Result cloudformation = 2;
   }
 }
 
+// InitializeRequest is the request for the Initialize RPC.
 message InitializeRequest {
+  // The supported resources for Terraform from providers
   SupportedResources terraform_supported_resources = 1;
+  // The supported resources for CloudFormation from providers
   SupportedResources cloudformation_supported_resources = 2;
 }
 
+// InitializeResponse is the response for the Initialize RPC.
 message InitializeResponse {
   bool success = 1;
 }
 
+// SupportedResources lists the resource types supported by a parser.
 message SupportedResources {
   repeated string resource_types = 1;
 }

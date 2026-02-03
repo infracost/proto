@@ -88,9 +88,9 @@ type Options struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Generic options that aren't specific to Terraform
 	Generic *options.GenericOptions `protobuf:"bytes,1,opt,name=generic,proto3" json:"generic,omitempty"`
-	// Map of module addresses to source paths TODO: Is this correct ????????????????
+	// Map of module addresses to source paths
 	SourceMap map[string]string `protobuf:"bytes,2,rep,name=source_map,json=sourceMap,proto3" json:"source_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Map of module addresses to regex source paths TODO: Is this correct ????????????????
+	// Map of module addresses to regex source paths
 	RegexSourceMap map[string]string `protobuf:"bytes,3,rep,name=regex_source_map,json=regexSourceMap,proto3" json:"regex_source_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Map of environment variables to their values
 	Env map[string]string `protobuf:"bytes,4,rep,name=env,proto3" json:"env,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`

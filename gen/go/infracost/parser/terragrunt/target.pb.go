@@ -9,6 +9,7 @@ package terragrunt
 import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
 	hcl "github.com/infracost/proto/gen/go/infracost/parser/hcl"
+	options "github.com/infracost/proto/gen/go/infracost/parser/options"
 	terraform "github.com/infracost/proto/gen/go/infracost/parser/terraform"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -25,9 +26,11 @@ const (
 )
 
 type Target struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Directory     string                 `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
-	Options       *Options               `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The directory containing the Terragrunt configuration
+	Directory string `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
+	// Options for parsing the Terragrunt configuration
+	Options       *Options `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -77,8 +80,11 @@ func (x *Target) GetOptions() *Options {
 }
 
 type Options struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TerraformOptions *terraform.Options     `protobuf:"bytes,1,opt,name=terraform_options,json=terraformOptions,proto3" json:"terraform_options,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Generic options that aren't specific to Terragrunt
+	Generic *options.GenericOptions `protobuf:"bytes,1,opt,name=generic,proto3" json:"generic,omitempty"`
+	// Terraform-specific options to use when parsing
+	TerraformOptions *terraform.Options `protobuf:"bytes,2,opt,name=terraform_options,json=terraformOptions,proto3" json:"terraform_options,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -113,6 +119,13 @@ func (*Options) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_terragrunt_target_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *Options) GetGeneric() *options.GenericOptions {
+	if x != nil {
+		return x.Generic
+	}
+	return nil
+}
+
 func (x *Options) GetTerraformOptions() *terraform.Options {
 	if x != nil {
 		return x.TerraformOptions
@@ -121,14 +134,19 @@ func (x *Options) GetTerraformOptions() *terraform.Options {
 }
 
 type Result struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	Inputs          map[string]*hcl.Value   `protobuf:"bytes,1,rep,name=inputs,proto3" json:"inputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Map of input variables passed to the Terragrunt configuration
+	Inputs map[string]*hcl.Value `protobuf:"bytes,1,rep,name=inputs,proto3" json:"inputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// The parsed Terraform module result
 	TerraformModule *terraform.ModuleResult `protobuf:"bytes,2,opt,name=terraform_module,json=terraformModule,proto3" json:"terraform_module,omitempty"`
-	Address         *parser.Address         `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Locals          []*Local                `protobuf:"bytes,4,rep,name=locals,proto3" json:"locals,omitempty"`
-	Dependencies    []*Dependency           `protobuf:"bytes,5,rep,name=dependencies,proto3" json:"dependencies,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The address of the Terragrunt configuration
+	Address *parser.Address `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	// Local values defined in the Terragrunt configuration
+	Locals []*Local `protobuf:"bytes,4,rep,name=locals,proto3" json:"locals,omitempty"`
+	// Dependencies of this Terragrunt configuration
+	Dependencies  []*Dependency `protobuf:"bytes,5,rep,name=dependencies,proto3" json:"dependencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Result) Reset() {
@@ -197,9 +215,11 @@ func (x *Result) GetDependencies() []*Dependency {
 }
 
 type Local struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value         *hcl.Value             `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the local value
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The value of the local
+	Value         *hcl.Value `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -249,10 +269,13 @@ func (x *Local) GetValue() *hcl.Value {
 }
 
 type Dependency struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ConfigPath    string                 `protobuf:"bytes,2,opt,name=config_path,json=configPath,proto3" json:"config_path,omitempty"`
-	Outputs       map[string]*hcl.Value  `protobuf:"bytes,3,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the dependency
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The path to the dependency's configuration
+	ConfigPath string `protobuf:"bytes,2,opt,name=config_path,json=configPath,proto3" json:"config_path,omitempty"`
+	// Map of outputs from the dependency
+	Outputs       map[string]*hcl.Value `protobuf:"bytes,3,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -312,12 +335,13 @@ var File_infracost_parser_terragrunt_target_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terragrunt_target_proto_rawDesc = "" +
 	"\n" +
-	"(infracost/parser/terragrunt/target.proto\x12\x1binfracost.parser.terragrunt\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\"f\n" +
+	"(infracost/parser/terragrunt/target.proto\x12\x1binfracost.parser.terragrunt\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a&infracost/parser/options/options.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\"f\n" +
 	"\x06Target\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12>\n" +
-	"\aoptions\x18\x02 \x01(\v2$.infracost.parser.terragrunt.OptionsR\aoptions\"[\n" +
-	"\aOptions\x12P\n" +
-	"\x11terraform_options\x18\x01 \x01(\v2#.infracost.parser.terraform.OptionsR\x10terraformOptions\"\xbc\x03\n" +
+	"\aoptions\x18\x02 \x01(\v2$.infracost.parser.terragrunt.OptionsR\aoptions\"\x9f\x01\n" +
+	"\aOptions\x12B\n" +
+	"\ageneric\x18\x01 \x01(\v2(.infracost.parser.options.GenericOptionsR\ageneric\x12P\n" +
+	"\x11terraform_options\x18\x02 \x01(\v2#.infracost.parser.terraform.OptionsR\x10terraformOptions\"\xbc\x03\n" +
 	"\x06Result\x12G\n" +
 	"\x06inputs\x18\x01 \x03(\v2/.infracost.parser.terragrunt.Result.InputsEntryR\x06inputs\x12S\n" +
 	"\x10terraform_module\x18\x02 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x0fterraformModule\x123\n" +
@@ -362,28 +386,30 @@ var file_infracost_parser_terragrunt_target_proto_goTypes = []any{
 	(*Dependency)(nil),             // 4: infracost.parser.terragrunt.Dependency
 	nil,                            // 5: infracost.parser.terragrunt.Result.InputsEntry
 	nil,                            // 6: infracost.parser.terragrunt.Dependency.OutputsEntry
-	(*terraform.Options)(nil),      // 7: infracost.parser.terraform.Options
-	(*terraform.ModuleResult)(nil), // 8: infracost.parser.terraform.ModuleResult
-	(*parser.Address)(nil),         // 9: infracost.parser.Address
-	(*hcl.Value)(nil),              // 10: infracost.parser.hcl.Value
+	(*options.GenericOptions)(nil), // 7: infracost.parser.options.GenericOptions
+	(*terraform.Options)(nil),      // 8: infracost.parser.terraform.Options
+	(*terraform.ModuleResult)(nil), // 9: infracost.parser.terraform.ModuleResult
+	(*parser.Address)(nil),         // 10: infracost.parser.Address
+	(*hcl.Value)(nil),              // 11: infracost.parser.hcl.Value
 }
 var file_infracost_parser_terragrunt_target_proto_depIdxs = []int32{
 	1,  // 0: infracost.parser.terragrunt.Target.options:type_name -> infracost.parser.terragrunt.Options
-	7,  // 1: infracost.parser.terragrunt.Options.terraform_options:type_name -> infracost.parser.terraform.Options
-	5,  // 2: infracost.parser.terragrunt.Result.inputs:type_name -> infracost.parser.terragrunt.Result.InputsEntry
-	8,  // 3: infracost.parser.terragrunt.Result.terraform_module:type_name -> infracost.parser.terraform.ModuleResult
-	9,  // 4: infracost.parser.terragrunt.Result.address:type_name -> infracost.parser.Address
-	3,  // 5: infracost.parser.terragrunt.Result.locals:type_name -> infracost.parser.terragrunt.Local
-	4,  // 6: infracost.parser.terragrunt.Result.dependencies:type_name -> infracost.parser.terragrunt.Dependency
-	10, // 7: infracost.parser.terragrunt.Local.value:type_name -> infracost.parser.hcl.Value
-	6,  // 8: infracost.parser.terragrunt.Dependency.outputs:type_name -> infracost.parser.terragrunt.Dependency.OutputsEntry
-	10, // 9: infracost.parser.terragrunt.Result.InputsEntry.value:type_name -> infracost.parser.hcl.Value
-	10, // 10: infracost.parser.terragrunt.Dependency.OutputsEntry.value:type_name -> infracost.parser.hcl.Value
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	7,  // 1: infracost.parser.terragrunt.Options.generic:type_name -> infracost.parser.options.GenericOptions
+	8,  // 2: infracost.parser.terragrunt.Options.terraform_options:type_name -> infracost.parser.terraform.Options
+	5,  // 3: infracost.parser.terragrunt.Result.inputs:type_name -> infracost.parser.terragrunt.Result.InputsEntry
+	9,  // 4: infracost.parser.terragrunt.Result.terraform_module:type_name -> infracost.parser.terraform.ModuleResult
+	10, // 5: infracost.parser.terragrunt.Result.address:type_name -> infracost.parser.Address
+	3,  // 6: infracost.parser.terragrunt.Result.locals:type_name -> infracost.parser.terragrunt.Local
+	4,  // 7: infracost.parser.terragrunt.Result.dependencies:type_name -> infracost.parser.terragrunt.Dependency
+	11, // 8: infracost.parser.terragrunt.Local.value:type_name -> infracost.parser.hcl.Value
+	6,  // 9: infracost.parser.terragrunt.Dependency.outputs:type_name -> infracost.parser.terragrunt.Dependency.OutputsEntry
+	11, // 10: infracost.parser.terragrunt.Result.InputsEntry.value:type_name -> infracost.parser.hcl.Value
+	11, // 11: infracost.parser.terragrunt.Dependency.OutputsEntry.value:type_name -> infracost.parser.hcl.Value
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_terragrunt_target_proto_init() }

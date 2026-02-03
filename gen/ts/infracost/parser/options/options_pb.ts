@@ -53,7 +53,7 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
   cacheDirectory: string;
 
   /**
-   * The credential sets to use for authentication
+   * The working directory for the parser
    *
    * @generated from field: string working_directory = 6;
    */

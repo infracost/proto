@@ -51,14 +51,14 @@ export declare type Options = Message<"infracost.parser.terraform.Options"> & {
   generic?: GenericOptions;
 
   /**
-   * Map of module addresses to source paths TODO: Is this correct ????????????????
+   * Map of module addresses to source paths
    *
    * @generated from field: map<string, string> source_map = 2;
    */
   sourceMap: { [key: string]: string };
 
   /**
-   * Map of module addresses to regex source paths TODO: Is this correct ????????????????
+   * Map of module addresses to regex source paths
    *
    * @generated from field: map<string, string> regex_source_map = 3;
    */

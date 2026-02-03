@@ -4,6 +4,7 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { GenericOptions } from "../options/options_pb.js";
 import type { Options as Options$1 } from "../terraform/target_pb.js";
 import type { Value } from "../hcl/value_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
@@ -19,11 +20,15 @@ export declare const file_infracost_parser_terragrunt_target: GenFile;
  */
 export declare type Target = Message<"infracost.parser.terragrunt.Target"> & {
   /**
+   * The directory containing the Terragrunt configuration
+   *
    * @generated from field: string directory = 1;
    */
   directory: string;
 
   /**
+   * Options for parsing the Terragrunt configuration
+   *
    * @generated from field: infracost.parser.terragrunt.Options options = 2;
    */
   options?: Options;
@@ -40,7 +45,16 @@ export declare const TargetSchema: GenMessage<Target>;
  */
 export declare type Options = Message<"infracost.parser.terragrunt.Options"> & {
   /**
-   * @generated from field: infracost.parser.terraform.Options terraform_options = 1;
+   * Generic options that aren't specific to Terragrunt
+   *
+   * @generated from field: infracost.parser.options.GenericOptions generic = 1;
+   */
+  generic?: GenericOptions;
+
+  /**
+   * Terraform-specific options to use when parsing
+   *
+   * @generated from field: infracost.parser.terraform.Options terraform_options = 2;
    */
   terraformOptions?: Options$1;
 };
@@ -56,26 +70,36 @@ export declare const OptionsSchema: GenMessage<Options>;
  */
 export declare type Result = Message<"infracost.parser.terragrunt.Result"> & {
   /**
+   * Map of input variables passed to the Terragrunt configuration
+   *
    * @generated from field: map<string, infracost.parser.hcl.Value> inputs = 1;
    */
   inputs: { [key: string]: Value };
 
   /**
+   * The parsed Terraform module result
+   *
    * @generated from field: infracost.parser.terraform.ModuleResult terraform_module = 2;
    */
   terraformModule?: ModuleResult;
 
   /**
+   * The address of the Terragrunt configuration
+   *
    * @generated from field: infracost.parser.Address address = 3;
    */
   address?: Address;
 
   /**
+   * Local values defined in the Terragrunt configuration
+   *
    * @generated from field: repeated infracost.parser.terragrunt.Local locals = 4;
    */
   locals: Local[];
 
   /**
+   * Dependencies of this Terragrunt configuration
+   *
    * @generated from field: repeated infracost.parser.terragrunt.Dependency dependencies = 5;
    */
   dependencies: Dependency[];
@@ -92,11 +116,15 @@ export declare const ResultSchema: GenMessage<Result>;
  */
 export declare type Local = Message<"infracost.parser.terragrunt.Local"> & {
   /**
+   * The name of the local value
+   *
    * @generated from field: string name = 1;
    */
   name: string;
 
   /**
+   * The value of the local
+   *
    * @generated from field: infracost.parser.hcl.Value value = 2;
    */
   value?: Value;
@@ -113,16 +141,22 @@ export declare const LocalSchema: GenMessage<Local>;
  */
 export declare type Dependency = Message<"infracost.parser.terragrunt.Dependency"> & {
   /**
+   * The name of the dependency
+   *
    * @generated from field: string name = 1;
    */
   name: string;
 
   /**
+   * The path to the dependency's configuration
+   *
    * @generated from field: string config_path = 2;
    */
   configPath: string;
 
   /**
+   * Map of outputs from the dependency
+   *
    * @generated from field: map<string, infracost.parser.hcl.Value> outputs = 3;
    */
   outputs: { [key: string]: Value };

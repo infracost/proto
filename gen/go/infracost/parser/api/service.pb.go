@@ -318,10 +318,12 @@ type isParseResponseResult_Value interface {
 }
 
 type ParseResponseResult_Terraform struct {
+	// The result type for Terraform files
 	Terraform *terraform.ModuleResult `protobuf:"bytes,1,opt,name=terraform,proto3,oneof"`
 }
 
 type ParseResponseResult_Cloudformation struct {
+	// The result type for CloudFormation files
 	Cloudformation *cloudformation.Result `protobuf:"bytes,2,opt,name=cloudformation,proto3,oneof"`
 }
 
@@ -329,10 +331,13 @@ func (*ParseResponseResult_Terraform) isParseResponseResult_Value() {}
 
 func (*ParseResponseResult_Cloudformation) isParseResponseResult_Value() {}
 
+// InitializeRequest is the request for the Initialize RPC.
 type InitializeRequest struct {
-	state                            protoimpl.MessageState `protogen:"open.v1"`
-	TerraformSupportedResources      *SupportedResources    `protobuf:"bytes,1,opt,name=terraform_supported_resources,json=terraformSupportedResources,proto3" json:"terraform_supported_resources,omitempty"`
-	CloudformationSupportedResources *SupportedResources    `protobuf:"bytes,2,opt,name=cloudformation_supported_resources,json=cloudformationSupportedResources,proto3" json:"cloudformation_supported_resources,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The supported resources for Terraform from providers
+	TerraformSupportedResources *SupportedResources `protobuf:"bytes,1,opt,name=terraform_supported_resources,json=terraformSupportedResources,proto3" json:"terraform_supported_resources,omitempty"`
+	// The supported resources for CloudFormation from providers
+	CloudformationSupportedResources *SupportedResources `protobuf:"bytes,2,opt,name=cloudformation_supported_resources,json=cloudformationSupportedResources,proto3" json:"cloudformation_supported_resources,omitempty"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -381,6 +386,7 @@ func (x *InitializeRequest) GetCloudformationSupportedResources() *SupportedReso
 	return nil
 }
 
+// InitializeResponse is the response for the Initialize RPC.
 type InitializeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -425,6 +431,7 @@ func (x *InitializeResponse) GetSuccess() bool {
 	return false
 }
 
+// SupportedResources lists the resource types supported by a parser.
 type SupportedResources struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ResourceTypes []string               `protobuf:"bytes,1,rep,name=resource_types,json=resourceTypes,proto3" json:"resource_types,omitempty"`

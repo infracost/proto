@@ -15,9 +15,9 @@ message Target {
 message Options {
   // Generic options that aren't specific to Terraform
   options.GenericOptions generic = 1;
-  // Map of module addresses to source paths TODO: Is this correct ????????????????
+  // Map of module addresses to source paths
   map<string, string> source_map = 2;
-  // Map of module addresses to regex source paths TODO: Is this correct ????????????????
+  // Map of module addresses to regex source paths
   map<string, string> regex_source_map = 3;
   // Map of environment variables to their values
   map<string, string> env = 4;

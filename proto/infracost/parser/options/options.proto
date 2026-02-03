@@ -14,7 +14,7 @@ message GenericOptions {
   string temporary_directory = 4;
   // The directory to use for caching
   string cache_directory = 5;
-  // The credential sets to use for authentication
+  // The working directory for the parser
   string working_directory = 6;
   // The credential sets to use for authentication
   repeated CredentialSet credential_sets = 7;
