@@ -66,23 +66,23 @@ export declare type Input = Message<"infracost.provider.Input"> & {
   finopsPolicyConfig?: FinopsPolicyConfiguration;
 
   /**
-   * Feature falgs
+   * Feature flags
    *
-   * @generated from field: infracost.provider.Features features = 8;
+   * @generated from field: infracost.provider.Features features = 7;
    */
   features?: Features;
 
   /**
    * settings that affect the provider behaviour e.g. currency, disk cache usage
    *
-   * @generated from field: infracost.provider.Settings settings = 9;
+   * @generated from field: infracost.provider.Settings settings = 8;
    */
   settings?: Settings;
 
   /**
-   * infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+   * infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
    *
-   * @generated from field: infracost.provider.Infracost infracost = 10;
+   * @generated from field: infracost.provider.Infracost infracost = 9;
    */
   infracost?: Infracost;
 };
@@ -105,7 +105,7 @@ export declare type Settings = Message<"infracost.provider.Settings"> & {
   currency: string;
 
   /**
-   * whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+   * whether to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
    *
    * @generated from field: bool use_disk_caches = 2;
    */
@@ -196,7 +196,7 @@ export declare const FeaturesSchema: GenMessage<Features>;
  */
 export declare type ProjectInfo = Message<"infracost.provider.ProjectInfo"> & {
   /**
-   * Project name as it apepars in the config file
+   * Project name as it appears in the config file
    *
    * @generated from field: string name = 1;
    */

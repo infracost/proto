@@ -42,12 +42,12 @@ type Input struct {
 	Usage *usage.Usage `protobuf:"bytes,5,opt,name=usage,proto3" json:"usage,omitempty"`
 	// Specifies which policies need to be run, and any custom settings for each.
 	FinopsPolicyConfig *FinopsPolicyConfiguration `protobuf:"bytes,6,opt,name=finops_policy_config,json=finopsPolicyConfig,proto3" json:"finops_policy_config,omitempty"`
-	// Feature falgs
-	Features *Features `protobuf:"bytes,8,opt,name=features,proto3" json:"features,omitempty"`
+	// Feature flags
+	Features *Features `protobuf:"bytes,7,opt,name=features,proto3" json:"features,omitempty"`
 	// settings that affect the provider behaviour e.g. currency, disk cache usage
-	Settings *Settings `protobuf:"bytes,9,opt,name=settings,proto3" json:"settings,omitempty"`
-	// infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
-	Infracost     *Infracost `protobuf:"bytes,10,opt,name=infracost,proto3" json:"infracost,omitempty"`
+	Settings *Settings `protobuf:"bytes,8,opt,name=settings,proto3" json:"settings,omitempty"`
+	// infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+	Infracost     *Infracost `protobuf:"bytes,9,opt,name=infracost,proto3" json:"infracost,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -149,7 +149,7 @@ type Settings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
 	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	// whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+	// whether to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
 	UseDiskCaches bool `protobuf:"varint,2,opt,name=use_disk_caches,json=useDiskCaches,proto3" json:"use_disk_caches,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -337,7 +337,7 @@ func (x *Features) GetEnableEnvironmentalMetrics() bool {
 // Extra information about the project (formerly known as Scope in the runner)
 type ProjectInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Project name as it apepars in the config file
+	// Project name as it appears in the config file
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Git branch name being scanned, if applicable
 	BranchName string `protobuf:"bytes,2,opt,name=branch_name,json=branchName,proto3" json:"branch_name,omitempty"`
@@ -464,10 +464,9 @@ const file_infracost_provider_input_proto_rawDesc = "" +
 	"\x1bprevious_resource_addresses\x18\x04 \x03(\tR\x19previousResourceAddresses\x12,\n" +
 	"\x05usage\x18\x05 \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12_\n" +
 	"\x14finops_policy_config\x18\x06 \x01(\v2-.infracost.provider.FinopsPolicyConfigurationR\x12finopsPolicyConfig\x128\n" +
-	"\bfeatures\x18\b \x01(\v2\x1c.infracost.provider.FeaturesR\bfeatures\x128\n" +
-	"\bsettings\x18\t \x01(\v2\x1c.infracost.provider.SettingsR\bsettings\x12;\n" +
-	"\tinfracost\x18\n" +
-	" \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\"N\n" +
+	"\bfeatures\x18\a \x01(\v2\x1c.infracost.provider.FeaturesR\bfeatures\x128\n" +
+	"\bsettings\x18\b \x01(\v2\x1c.infracost.provider.SettingsR\bsettings\x12;\n" +
+	"\tinfracost\x18\t \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\"N\n" +
 	"\bSettings\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12&\n" +
 	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"q\n" +

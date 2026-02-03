@@ -29,20 +29,20 @@ message Input {
   // Specifies which policies need to be run, and any custom settings for each.
   FinopsPolicyConfiguration finops_policy_config = 6;
 
-  // Feature falgs
-  Features features = 8;
+  // Feature flags
+  Features features = 7;
 
   // settings that affect the provider behaviour e.g. currency, disk cache usage
-  Settings settings = 9;
+  Settings settings = 8;
 
-  // infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
-  Infracost infracost = 10;
+  // infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+  Infracost infracost = 9;
 }
 
 message Settings {
   // currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
   string currency = 1;
-  // whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+  // whether to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
   bool use_disk_caches = 2;
 }
 
@@ -68,7 +68,7 @@ message Features {
 
 // Extra information about the project (formerly known as Scope in the runner)
 message ProjectInfo {
-  // Project name as it apepars in the config file
+  // Project name as it appears in the config file
   string name = 1;
   // Git branch name being scanned, if applicable
   string branch_name = 2;

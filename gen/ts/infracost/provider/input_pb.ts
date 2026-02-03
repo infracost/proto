@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/provider/input.proto.
  */
 export const file_infracost_provider_input: GenFile = /*@__PURE__*/
-  fileDesc("Ch5pbmZyYWNvc3QvcHJvdmlkZXIvaW5wdXQucHJvdG8SEmluZnJhY29zdC5wcm92aWRlciK7AwoFSW5wdXQSOQoMcGFyc2VfcmVzdWx0GAEgASgLMiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZRIVCg1hYnNvbHV0ZV9wYXRoGAIgASgJEjUKDHByb2plY3RfaW5mbxgDIAEoCzIfLmluZnJhY29zdC5wcm92aWRlci5Qcm9qZWN0SW5mbxIjChtwcmV2aW91c19yZXNvdXJjZV9hZGRyZXNzZXMYBCADKAkSJQoFdXNhZ2UYBSABKAsyFi5pbmZyYWNvc3QudXNhZ2UuVXNhZ2USSwoUZmlub3BzX3BvbGljeV9jb25maWcYBiABKAsyLS5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5Q29uZmlndXJhdGlvbhIuCghmZWF0dXJlcxgIIAEoCzIcLmluZnJhY29zdC5wcm92aWRlci5GZWF0dXJlcxIuCghzZXR0aW5ncxgJIAEoCzIcLmluZnJhY29zdC5wcm92aWRlci5TZXR0aW5ncxIwCglpbmZyYWNvc3QYCiABKAsyHS5pbmZyYWNvc3QucHJvdmlkZXIuSW5mcmFjb3N0IjUKCFNldHRpbmdzEhAKCGN1cnJlbmN5GAEgASgJEhcKD3VzZV9kaXNrX2NhY2hlcxgCIAEoCCJMCglJbmZyYWNvc3QSDwoHYXBpX2tleRgBIAEoCRIcChRwcmljaW5nX2FwaV9lbmRwb2ludBgCIAEoCRIQCgh0cmFjZV9pZBgDIAEoCSKOAQoIRmVhdHVyZXMSHAoUZW5hYmxlX3ByaWNlX2xvb2t1cHMYASABKAgSHgoWZW5hYmxlX3JlY29tbWVuZGF0aW9ucxgCIAEoCBIeChZlbmFibGVfZmlub3BzX3BvbGljaWVzGAMgASgIEiQKHGVuYWJsZV9lbnZpcm9ubWVudGFsX21ldHJpY3MYBCABKAgiWgoLUHJvamVjdEluZm8SDAoEbmFtZRgBIAEoCRITCgticmFuY2hfbmFtZRgCIAEoCRIRCgl3b3Jrc3BhY2UYAyABKAkSFQoNaXNfcHJvZHVjdGlvbhgEIAEoCCJbChlGaW5vcHNQb2xpY3lDb25maWd1cmF0aW9uEj4KCHBvbGljaWVzGAEgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5nc0LDAQoWY29tLmluZnJhY29zdC5wcm92aWRlckIKSW5wdXRQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z", [file_infracost_parser_api_service, file_infracost_parser_event_runparameters, file_infracost_usage_usage]);
+  fileDesc("Ch5pbmZyYWNvc3QvcHJvdmlkZXIvaW5wdXQucHJvdG8SEmluZnJhY29zdC5wcm92aWRlciK7AwoFSW5wdXQSOQoMcGFyc2VfcmVzdWx0GAEgASgLMiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZRIVCg1hYnNvbHV0ZV9wYXRoGAIgASgJEjUKDHByb2plY3RfaW5mbxgDIAEoCzIfLmluZnJhY29zdC5wcm92aWRlci5Qcm9qZWN0SW5mbxIjChtwcmV2aW91c19yZXNvdXJjZV9hZGRyZXNzZXMYBCADKAkSJQoFdXNhZ2UYBSABKAsyFi5pbmZyYWNvc3QudXNhZ2UuVXNhZ2USSwoUZmlub3BzX3BvbGljeV9jb25maWcYBiABKAsyLS5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5Q29uZmlndXJhdGlvbhIuCghmZWF0dXJlcxgHIAEoCzIcLmluZnJhY29zdC5wcm92aWRlci5GZWF0dXJlcxIuCghzZXR0aW5ncxgIIAEoCzIcLmluZnJhY29zdC5wcm92aWRlci5TZXR0aW5ncxIwCglpbmZyYWNvc3QYCSABKAsyHS5pbmZyYWNvc3QucHJvdmlkZXIuSW5mcmFjb3N0IjUKCFNldHRpbmdzEhAKCGN1cnJlbmN5GAEgASgJEhcKD3VzZV9kaXNrX2NhY2hlcxgCIAEoCCJMCglJbmZyYWNvc3QSDwoHYXBpX2tleRgBIAEoCRIcChRwcmljaW5nX2FwaV9lbmRwb2ludBgCIAEoCRIQCgh0cmFjZV9pZBgDIAEoCSKOAQoIRmVhdHVyZXMSHAoUZW5hYmxlX3ByaWNlX2xvb2t1cHMYASABKAgSHgoWZW5hYmxlX3JlY29tbWVuZGF0aW9ucxgCIAEoCBIeChZlbmFibGVfZmlub3BzX3BvbGljaWVzGAMgASgIEiQKHGVuYWJsZV9lbnZpcm9ubWVudGFsX21ldHJpY3MYBCABKAgiWgoLUHJvamVjdEluZm8SDAoEbmFtZRgBIAEoCRITCgticmFuY2hfbmFtZRgCIAEoCRIRCgl3b3Jrc3BhY2UYAyABKAkSFQoNaXNfcHJvZHVjdGlvbhgEIAEoCCJbChlGaW5vcHNQb2xpY3lDb25maWd1cmF0aW9uEj4KCHBvbGljaWVzGAEgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5nc0LDAQoWY29tLmluZnJhY29zdC5wcm92aWRlckIKSW5wdXRQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z", [file_infracost_parser_api_service, file_infracost_parser_event_runparameters, file_infracost_usage_usage]);
 
 /**
  * @generated from message infracost.provider.Input
@@ -71,23 +71,23 @@ export type Input = Message<"infracost.provider.Input"> & {
   finopsPolicyConfig?: FinopsPolicyConfiguration;
 
   /**
-   * Feature falgs
+   * Feature flags
    *
-   * @generated from field: infracost.provider.Features features = 8;
+   * @generated from field: infracost.provider.Features features = 7;
    */
   features?: Features;
 
   /**
    * settings that affect the provider behaviour e.g. currency, disk cache usage
    *
-   * @generated from field: infracost.provider.Settings settings = 9;
+   * @generated from field: infracost.provider.Settings settings = 8;
    */
   settings?: Settings;
 
   /**
-   * infracost-spoecific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+   * infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
    *
-   * @generated from field: infracost.provider.Infracost infracost = 10;
+   * @generated from field: infracost.provider.Infracost infracost = 9;
    */
   infracost?: Infracost;
 };
@@ -111,7 +111,7 @@ export type Settings = Message<"infracost.provider.Settings"> & {
   currency: string;
 
   /**
-   * whetehr to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+   * whether to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
    *
    * @generated from field: bool use_disk_caches = 2;
    */
@@ -205,7 +205,7 @@ export const FeaturesSchema: GenMessage<Features> = /*@__PURE__*/
  */
 export type ProjectInfo = Message<"infracost.provider.ProjectInfo"> & {
   /**
-   * Project name as it apepars in the config file
+   * Project name as it appears in the config file
    *
    * @generated from field: string name = 1;
    */
