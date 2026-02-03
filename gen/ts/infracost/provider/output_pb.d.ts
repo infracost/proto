@@ -611,9 +611,16 @@ export declare type FinopsPolicyFailingResource = Message<"infracost.provider.Fi
   id: string;
 
   /**
+   * the full address to the cause of the failure
+   *
+   * @generated from field: string cause_address = 2;
+   */
+  causeAddress: string;
+
+  /**
    * Details of the individual issues for this resource
    *
-   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 2;
+   * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 3;
    */
   issues: FinopsResourceIssue[];
 };

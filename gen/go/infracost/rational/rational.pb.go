@@ -35,6 +35,7 @@ type Rat struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Numerator     []byte                 `protobuf:"bytes,1,opt,name=numerator,proto3" json:"numerator,omitempty"`
 	Denominator   []byte                 `protobuf:"bytes,2,opt,name=denominator,proto3" json:"denominator,omitempty"`
+	Negative      bool                   `protobuf:"varint,3,opt,name=negative,proto3" json:"negative,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -83,14 +84,22 @@ func (x *Rat) GetDenominator() []byte {
 	return nil
 }
 
+func (x *Rat) GetNegative() bool {
+	if x != nil {
+		return x.Negative
+	}
+	return false
+}
+
 var File_infracost_rational_rational_proto protoreflect.FileDescriptor
 
 const file_infracost_rational_rational_proto_rawDesc = "" +
 	"\n" +
-	"!infracost/rational/rational.proto\x12\x12infracost.rational\"E\n" +
+	"!infracost/rational/rational.proto\x12\x12infracost.rational\"a\n" +
 	"\x03Rat\x12\x1c\n" +
 	"\tnumerator\x18\x01 \x01(\fR\tnumerator\x12 \n" +
-	"\vdenominator\x18\x02 \x01(\fR\vdenominatorB\xc6\x01\n" +
+	"\vdenominator\x18\x02 \x01(\fR\vdenominator\x12\x1a\n" +
+	"\bnegative\x18\x03 \x01(\bR\bnegativeB\xc6\x01\n" +
 	"\x16com.infracost.rationalB\rRationalProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/rational\xa2\x02\x03IRX\xaa\x02\x12Infracost.Rational\xca\x02\x12Infracost\\Rational\xe2\x02\x1eInfracost\\Rational\\GPBMetadata\xea\x02\x13Infracost::Rationalb\x06proto3"
 
 var (

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/rational/rational.proto.
  */
 export const file_infracost_rational_rational: GenFile = /*@__PURE__*/
-  fileDesc("CiFpbmZyYWNvc3QvcmF0aW9uYWwvcmF0aW9uYWwucHJvdG8SEmluZnJhY29zdC5yYXRpb25hbCItCgNSYXQSEQoJbnVtZXJhdG9yGAEgASgMEhMKC2Rlbm9taW5hdG9yGAIgASgMQsYBChZjb20uaW5mcmFjb3N0LnJhdGlvbmFsQg1SYXRpb25hbFByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcmF0aW9uYWyiAgNJUliqAhJJbmZyYWNvc3QuUmF0aW9uYWzKAhJJbmZyYWNvc3RcUmF0aW9uYWziAh5JbmZyYWNvc3RcUmF0aW9uYWxcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlJhdGlvbmFsYgZwcm90bzM");
+  fileDesc("CiFpbmZyYWNvc3QvcmF0aW9uYWwvcmF0aW9uYWwucHJvdG8SEmluZnJhY29zdC5yYXRpb25hbCI/CgNSYXQSEQoJbnVtZXJhdG9yGAEgASgMEhMKC2Rlbm9taW5hdG9yGAIgASgMEhAKCG5lZ2F0aXZlGAMgASgIQsYBChZjb20uaW5mcmFjb3N0LnJhdGlvbmFsQg1SYXRpb25hbFByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcmF0aW9uYWyiAgNJUliqAhJJbmZyYWNvc3QuUmF0aW9uYWzKAhJJbmZyYWNvc3RcUmF0aW9uYWziAh5JbmZyYWNvc3RcUmF0aW9uYWxcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlJhdGlvbmFsYgZwcm90bzM");
 
 /**
  * Rat encodes a *big.Rat from Go stdlib
@@ -34,6 +34,11 @@ export type Rat = Message<"infracost.rational.Rat"> & {
    * @generated from field: bytes denominator = 2;
    */
   denominator: Uint8Array;
+
+  /**
+   * @generated from field: bool negative = 3;
+   */
+  negative: boolean;
 };
 
 /**

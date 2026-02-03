@@ -32,6 +32,11 @@ export declare type Rat = Message<"infracost.rational.Rat"> & {
    * @generated from field: bytes denominator = 2;
    */
   denominator: Uint8Array;
+
+  /**
+   * @generated from field: bool negative = 3;
+   */
+  negative: boolean;
 };
 
 /**

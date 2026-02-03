@@ -177,8 +177,10 @@ message FinopsPolicyResult {
 message FinopsPolicyFailingResource {
   // Unique resource ID (can be matched against the Resource.id field to identify a full resource)
   string id = 1;
+  // the full address to the cause of the failure
+  string cause_address = 2;
   // Details of the individual issues for this resource
-  repeated FinopsResourceIssue issues = 2;
+  repeated FinopsResourceIssue issues = 3;
 }
 
 message FinopsResourceIssue {

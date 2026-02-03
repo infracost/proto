@@ -1088,8 +1088,10 @@ type FinopsPolicyFailingResource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique resource ID (can be matched against the Resource.id field to identify a full resource)
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// the full address to the cause of the failure
+	CauseAddress string `protobuf:"bytes,2,opt,name=cause_address,json=causeAddress,proto3" json:"cause_address,omitempty"`
 	// Details of the individual issues for this resource
-	Issues        []*FinopsResourceIssue `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
+	Issues        []*FinopsResourceIssue `protobuf:"bytes,3,rep,name=issues,proto3" json:"issues,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1127,6 +1129,13 @@ func (*FinopsPolicyFailingResource) Descriptor() ([]byte, []int) {
 func (x *FinopsPolicyFailingResource) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *FinopsPolicyFailingResource) GetCauseAddress() string {
+	if x != nil {
+		return x.CauseAddress
 	}
 	return ""
 }
@@ -1625,10 +1634,11 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x11failing_resources\x18\x06 \x03(\v2/.infracost.provider.FinopsPolicyFailingResourceR\x10failingResources\x12,\n" +
 	"\x12block_pull_request\x18\a \x01(\bR\x10blockPullRequest\x12D\n" +
 	"\x1finclude_in_pull_request_comment\x18\b \x01(\bR\x1bincludeInPullRequestComment\x12@\n" +
-	"\x1donly_applies_to_new_resources\x18\t \x01(\bR\x19onlyAppliesToNewResources\"n\n" +
+	"\x1donly_applies_to_new_resources\x18\t \x01(\bR\x19onlyAppliesToNewResources\"\x93\x01\n" +
 	"\x1bFinopsPolicyFailingResource\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12?\n" +
-	"\x06issues\x18\x02 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\"\xde\x04\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12#\n" +
+	"\rcause_address\x18\x02 \x01(\tR\fcauseAddress\x12?\n" +
+	"\x06issues\x18\x03 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\"\xde\x04\n" +
 	"\x13FinopsResourceIssue\x12@\n" +
 	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x0emonthlySavings\x12a\n" +
 	"!monthly_carbon_savings_grams_co2e\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x1dmonthlyCarbonSavingsGramsCo2e\x12X\n" +

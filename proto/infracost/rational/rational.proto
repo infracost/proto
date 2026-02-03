@@ -13,4 +13,5 @@ package infracost.rational;
 message Rat {
   bytes numerator = 1;
   bytes denominator = 2;
+  bool negative = 3;
 }
