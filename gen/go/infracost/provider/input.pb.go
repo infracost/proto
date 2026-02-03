@@ -36,7 +36,7 @@ type Input struct {
 	ProjectInfo *ProjectInfo `protobuf:"bytes,3,opt,name=project_info,json=projectInfo,proto3" json:"project_info,omitempty"`
 	// Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
 	// out if a resource is to be considered "new" or not.
-	// This is mainly so we can ignore policies that only want to so consider "new" resources
+	// This is mainly so we can ignore policies that only want to consider "new" resources
 	PreviousResourceAddresses []string `protobuf:"bytes,4,rep,name=previous_resource_addresses,json=previousResourceAddresses,proto3" json:"previous_resource_addresses,omitempty"`
 	// usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
 	Usage *usage.Usage `protobuf:"bytes,5,opt,name=usage,proto3" json:"usage,omitempty"`

@@ -45,18 +45,18 @@ message Resource {
 
 message ResourceMetadata {
   // the path to the file (relative to the repository) where the resource is defined
-  string filename = 4;
+  string filename = 1;
   // line numbers where the resource is defined
-  int64 start_line = 5;
-  int64 end_line = 6;
+  int64 start_line = 2;
+  int64 end_line = 3;
   // module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
-  repeated ModuleCall module_calls = 7;
+  repeated ModuleCall module_calls = 4;
   // basic checksum identifying the unique resource (address etc.), not its children or contents
-  string basic_checksum = 1;
+  string basic_checksum = 5;
   // deep checksum identifying the resource including its children and contents
-  string deep_checksum = 2;
+  string deep_checksum = 6;
   // checksum of default tag values applied to this resource
-  string default_tags_checksum = 3;
+  string default_tags_checksum = 7;
 }
 
 message ModuleCall {
@@ -76,7 +76,7 @@ message Tagging {
   bool supports_tags = 2;
   // If the provider supports default tags here (so we can differentiate between this and there being no defaults)
   bool supports_default_tags = 3;
-  // Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
+  // Propagation data. This tells us if the tags are propagated from one resource to another, and whether this is configured properly.
   repeated TagPropagationProblem propagation_problems = 4;
 }
 
@@ -114,7 +114,7 @@ message ResourceCosts {
 message CostComponent {
   // Display name for cost component, but also contains some attributes e.g. Compute (t3.small, on-demand)
   string name = 1;
-  // The `quantity` refers to the number of these, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
+  // The `quantity` refers to the number of these `unit`s, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
   string unit = 2;
   // Whether the `period_price` is based on usage data
   bool usage_based = 3;

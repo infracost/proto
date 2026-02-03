@@ -45,7 +45,7 @@ export declare type Input = Message<"infracost.provider.Input"> & {
   /**
    * Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
    * out if a resource is to be considered "new" or not.
-   * This is mainly so we can ignore policies that only want to so consider "new" resources
+   * This is mainly so we can ignore policies that only want to consider "new" resources
    *
    * @generated from field: repeated string previous_resource_addresses = 4;
    */

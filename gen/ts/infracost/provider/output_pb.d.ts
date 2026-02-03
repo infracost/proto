@@ -155,47 +155,47 @@ export declare type ResourceMetadata = Message<"infracost.provider.ResourceMetad
   /**
    * the path to the file (relative to the repository) where the resource is defined
    *
-   * @generated from field: string filename = 4;
+   * @generated from field: string filename = 1;
    */
   filename: string;
 
   /**
    * line numbers where the resource is defined
    *
-   * @generated from field: int64 start_line = 5;
+   * @generated from field: int64 start_line = 2;
    */
   startLine: bigint;
 
   /**
-   * @generated from field: int64 end_line = 6;
+   * @generated from field: int64 end_line = 3;
    */
   endLine: bigint;
 
   /**
    * module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
    *
-   * @generated from field: repeated infracost.provider.ModuleCall module_calls = 7;
+   * @generated from field: repeated infracost.provider.ModuleCall module_calls = 4;
    */
   moduleCalls: ModuleCall[];
 
   /**
    * basic checksum identifying the unique resource (address etc.), not its children or contents
    *
-   * @generated from field: string basic_checksum = 1;
+   * @generated from field: string basic_checksum = 5;
    */
   basicChecksum: string;
 
   /**
    * deep checksum identifying the resource including its children and contents
    *
-   * @generated from field: string deep_checksum = 2;
+   * @generated from field: string deep_checksum = 6;
    */
   deepChecksum: string;
 
   /**
    * checksum of default tag values applied to this resource
    *
-   * @generated from field: string default_tags_checksum = 3;
+   * @generated from field: string default_tags_checksum = 7;
    */
   defaultTagsChecksum: string;
 };
@@ -271,7 +271,7 @@ export declare type Tagging = Message<"infracost.provider.Tagging"> & {
   supportsDefaultTags: boolean;
 
   /**
-   * Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
+   * Propagation data. This tells us if the tags are propagated from one resource to another, and whether this is configured properly.
    *
    * @generated from field: repeated infracost.provider.TagPropagationProblem propagation_problems = 4;
    */
@@ -406,7 +406,7 @@ export declare type CostComponent = Message<"infracost.provider.CostComponent"> 
   name: string;
 
   /**
-   * The `quantity` refers to the number of these, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
+   * The `quantity` refers to the number of these `unit`s, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
    *
    * @generated from field: string unit = 2;
    */

@@ -288,18 +288,18 @@ func (x *Resource) GetCallStack() *parser.CallStack {
 type ResourceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// the path to the file (relative to the repository) where the resource is defined
-	Filename string `protobuf:"bytes,4,opt,name=filename,proto3" json:"filename,omitempty"`
+	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
 	// line numbers where the resource is defined
-	StartLine int64 `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
-	EndLine   int64 `protobuf:"varint,6,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
+	StartLine int64 `protobuf:"varint,2,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
+	EndLine   int64 `protobuf:"varint,3,opt,name=end_line,json=endLine,proto3" json:"end_line,omitempty"`
 	// module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
-	ModuleCalls []*ModuleCall `protobuf:"bytes,7,rep,name=module_calls,json=moduleCalls,proto3" json:"module_calls,omitempty"`
+	ModuleCalls []*ModuleCall `protobuf:"bytes,4,rep,name=module_calls,json=moduleCalls,proto3" json:"module_calls,omitempty"`
 	// basic checksum identifying the unique resource (address etc.), not its children or contents
-	BasicChecksum string `protobuf:"bytes,1,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
+	BasicChecksum string `protobuf:"bytes,5,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
 	// deep checksum identifying the resource including its children and contents
-	DeepChecksum string `protobuf:"bytes,2,opt,name=deep_checksum,json=deepChecksum,proto3" json:"deep_checksum,omitempty"`
+	DeepChecksum string `protobuf:"bytes,6,opt,name=deep_checksum,json=deepChecksum,proto3" json:"deep_checksum,omitempty"`
 	// checksum of default tag values applied to this resource
-	DefaultTagsChecksum string `protobuf:"bytes,3,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
+	DefaultTagsChecksum string `protobuf:"bytes,7,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -462,7 +462,7 @@ type Tagging struct {
 	SupportsTags bool `protobuf:"varint,2,opt,name=supports_tags,json=supportsTags,proto3" json:"supports_tags,omitempty"`
 	// If the provider supports default tags here (so we can differentiate between this and there being no defaults)
 	SupportsDefaultTags bool `protobuf:"varint,3,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
-	// Propagation data. This tells us if if the tags are propagated from one resource to another, and whether this is configured properly.
+	// Propagation data. This tells us if the tags are propagated from one resource to another, and whether this is configured properly.
 	PropagationProblems []*TagPropagationProblem `protobuf:"bytes,4,rep,name=propagation_problems,json=propagationProblems,proto3" json:"propagation_problems,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -737,7 +737,7 @@ type CostComponent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Display name for cost component, but also contains some attributes e.g. Compute (t3.small, on-demand)
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The `quantity` refers to the number of these, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
+	// The `quantity` refers to the number of these `unit`s, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
 	Unit string `protobuf:"bytes,2,opt,name=unit,proto3" json:"unit,omitempty"`
 	// Whether the `period_price` is based on usage data
 	UsageBased bool `protobuf:"varint,3,opt,name=usage_based,json=usageBased,proto3" json:"usage_based,omitempty"`
@@ -1559,14 +1559,14 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\n" +
 	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xab\x02\n" +
 	"\x10ResourceMetadata\x12\x1a\n" +
-	"\bfilename\x18\x04 \x01(\tR\bfilename\x12\x1d\n" +
+	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1d\n" +
 	"\n" +
-	"start_line\x18\x05 \x01(\x03R\tstartLine\x12\x19\n" +
-	"\bend_line\x18\x06 \x01(\x03R\aendLine\x12A\n" +
-	"\fmodule_calls\x18\a \x03(\v2\x1e.infracost.provider.ModuleCallR\vmoduleCalls\x12%\n" +
-	"\x0ebasic_checksum\x18\x01 \x01(\tR\rbasicChecksum\x12#\n" +
-	"\rdeep_checksum\x18\x02 \x01(\tR\fdeepChecksum\x122\n" +
-	"\x15default_tags_checksum\x18\x03 \x01(\tR\x13defaultTagsChecksum\"\x8b\x01\n" +
+	"start_line\x18\x02 \x01(\x03R\tstartLine\x12\x19\n" +
+	"\bend_line\x18\x03 \x01(\x03R\aendLine\x12A\n" +
+	"\fmodule_calls\x18\x04 \x03(\v2\x1e.infracost.provider.ModuleCallR\vmoduleCalls\x12%\n" +
+	"\x0ebasic_checksum\x18\x05 \x01(\tR\rbasicChecksum\x12#\n" +
+	"\rdeep_checksum\x18\x06 \x01(\tR\fdeepChecksum\x122\n" +
+	"\x15default_tags_checksum\x18\a \x01(\tR\x13defaultTagsChecksum\"\x8b\x01\n" +
 	"\n" +
 	"ModuleCall\x12'\n" +
 	"\x0fdefinition_name\x18\x01 \x01(\tR\x0edefinitionName\x12\x1a\n" +
