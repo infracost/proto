@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package infracost.parser.options;
+
+message GenericOptions {
+  // Identity/Naming
+  // The project name to use for the output
+  string project_name = 1;
+  // The environment name to use for the output
+  string environment_name = 2;
+  // The root directory of the repository being processed
+  string repo_directory = 3;
+  // The temporary directory that is being worked in
+  string temporary_directory = 4;
+  // The directory to use for caching
+  string cache_directory = 5;
+  // The credential sets to use for authentication
+  string working_directory = 6;
+  // The credential sets to use for authentication
+  repeated CredentialSet credential_sets = 7;
+  // AWS credentials to use for S3 caching
+  AwsCredentials aws_credentials = 8;
+  // Module address to include debug in the output for. include_dumps extends debug information provided
+  Debug debug = 9;
+  // Whether to use sparse checkout when cloning repositories
+  bool sparse_checkout = 10;
+  // Proxy router configuration
+  ProxyRouter proxy_router = 11;
+  // Remote module cache configuration
+  RemoteModuleCacheConfig remote_module_cache_config = 12;
+}
+
+message Debug {
+  // The address of the resource to track debug info for
+  string address = 1;
+  // Whether to include the debug dumps in the output
+  bool include_dumps = 2;
+}
+
+message CredentialSet {
+  // The access token for authentication
+  string token = 1;
+  // The host for the authentication server
+  string host = 2;
+}
+
+message RemoteModuleCacheConfig {
+  // The region for the cache
+  string region = 1;
+  // The name of the bucket for the cache
+  string bucket_name = 2;
+  // The prefix for the cache files
+  string prefix = 3;
+  // Whether the cache is private
+  bool is_private = 4;
+}
+
+message AwsCredentials {
+  // The AWS access key ID
+  string access_key_id = 1;
+  // The AWS secret access key
+  string secret_access_key = 2;
+  // The AWS session token
+  string access_token = 3;
+  // The AWS region
+  string region = 4;
+}
+
+message ProxyRouter {
+  map<string, string> routes = 1;
+}

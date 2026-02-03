@@ -3,14 +3,47 @@ syntax = "proto3";
 package infracost.parser.api;
 
 import "infracost/parser/cloudformation/result.proto";
+import "infracost/parser/cloudformation/target.proto";
 import "infracost/parser/diagnostic.proto";
 import "infracost/parser/terraform/module.proto";
+import "infracost/parser/terraform/target.proto";
+import "infracost/parser/terragrunt/target.proto";
+
+// The ParserService provides a gRPC API for parsing infrastructure as code files.
+service ParserService {
+  // Initialize initializes the parser with supported resources.
+  rpc Initialize(InitializeRequest) returns (InitializeResponse);
+  // Parse takes a ParseRequest message and returns a ParseResponse message.
+  rpc Parse(ParseRequest) returns (ParseResponse);
+}
+
+// ParseRequest is the unified request for all parser types.
+message ParseRequest {
+  // The root path of the repository to be parsed
+  string repo_directory = 1;
+  // The working directory of the project in the repository being processed
+  string working_directory = 2;
+  // The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+  ParseRequestTarget target = 3;
+}
+
+// ParseRequestTarget is the unified target for all parser types.
+message ParseRequestTarget {
+  oneof value {
+    // The target type for Terraform files
+    terraform.Target terraform = 10;
+    // The target type for Terragrunt files
+    terragrunt.Target terragrunt = 11;
+    // The target type for CloudFormation files
+    cloudformation.Target cloudformation = 12;
+  }
+}
 
 // ParseResponse is the unified response for all parser types.
 message ParseResponse {
   // The diagnostics generated during parsing
   repeated Diagnostic diagnostics = 1;
-  // The result of parsing the target, is one of cloudformation, terraform
+  // The result of parsing the target, is one of cloudformation, terraform, terragrunt
   ParseResponseResult result = 2;
 }
 
@@ -20,4 +53,17 @@ message ParseResponseResult {
     terraform.ModuleResult terraform = 1;
     cloudformation.Result cloudformation = 2;
   }
+}
+
+message InitializeRequest {
+  SupportedResources terraform_supported_resources = 1;
+  SupportedResources cloudformation_supported_resources = 2;
+}
+
+message InitializeResponse {
+  bool success = 1;
+}
+
+message SupportedResources {
+  repeated string resource_types = 1;
 }

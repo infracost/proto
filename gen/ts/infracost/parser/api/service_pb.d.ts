@@ -2,8 +2,11 @@
 // @generated from file infracost/parser/api/service.proto (package infracost.parser.api, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { Target } from "../terraform/target_pb.js";
+import type { Target as Target$1 } from "../terragrunt/target_pb.js";
+import type { Target as Target$2 } from "../cloudformation/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import type { Result } from "../cloudformation/result_pb.js";
@@ -12,6 +15,82 @@ import type { Result } from "../cloudformation/result_pb.js";
  * Describes the file infracost/parser/api/service.proto.
  */
 export declare const file_infracost_parser_api_service: GenFile;
+
+/**
+ * ParseRequest is the unified request for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseRequest
+ */
+export declare type ParseRequest = Message<"infracost.parser.api.ParseRequest"> & {
+  /**
+   * The root path of the repository to be parsed
+   *
+   * @generated from field: string repo_directory = 1;
+   */
+  repoDirectory: string;
+
+  /**
+   * The working directory of the project in the repository being processed
+   *
+   * @generated from field: string working_directory = 2;
+   */
+  workingDirectory: string;
+
+  /**
+   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+   *
+   * @generated from field: infracost.parser.api.ParseRequestTarget target = 3;
+   */
+  target?: ParseRequestTarget;
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseRequest.
+ * Use `create(ParseRequestSchema)` to create a new message.
+ */
+export declare const ParseRequestSchema: GenMessage<ParseRequest>;
+
+/**
+ * ParseRequestTarget is the unified target for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseRequestTarget
+ */
+export declare type ParseRequestTarget = Message<"infracost.parser.api.ParseRequestTarget"> & {
+  /**
+   * @generated from oneof infracost.parser.api.ParseRequestTarget.value
+   */
+  value: {
+    /**
+     * The target type for Terraform files
+     *
+     * @generated from field: infracost.parser.terraform.Target terraform = 10;
+     */
+    value: Target;
+    case: "terraform";
+  } | {
+    /**
+     * The target type for Terragrunt files
+     *
+     * @generated from field: infracost.parser.terragrunt.Target terragrunt = 11;
+     */
+    value: Target$1;
+    case: "terragrunt";
+  } | {
+    /**
+     * The target type for CloudFormation files
+     *
+     * @generated from field: infracost.parser.cloudformation.Target cloudformation = 12;
+     */
+    value: Target$2;
+    case: "cloudformation";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseRequestTarget.
+ * Use `create(ParseRequestTargetSchema)` to create a new message.
+ */
+export declare const ParseRequestTargetSchema: GenMessage<ParseRequestTarget>;
 
 /**
  * ParseResponse is the unified response for all parser types.
@@ -27,7 +106,7 @@ export declare type ParseResponse = Message<"infracost.parser.api.ParseResponse"
   diagnostics: Diagnostic[];
 
   /**
-   * The result of parsing the target, is one of cloudformation, terraform
+   * The result of parsing the target, is one of cloudformation, terraform, terragrunt
    *
    * @generated from field: infracost.parser.api.ParseResponseResult result = 2;
    */
@@ -69,4 +148,85 @@ export declare type ParseResponseResult = Message<"infracost.parser.api.ParseRes
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export declare const ParseResponseResultSchema: GenMessage<ParseResponseResult>;
+
+/**
+ * @generated from message infracost.parser.api.InitializeRequest
+ */
+export declare type InitializeRequest = Message<"infracost.parser.api.InitializeRequest"> & {
+  /**
+   * @generated from field: infracost.parser.api.SupportedResources terraform_supported_resources = 1;
+   */
+  terraformSupportedResources?: SupportedResources;
+
+  /**
+   * @generated from field: infracost.parser.api.SupportedResources cloudformation_supported_resources = 2;
+   */
+  cloudformationSupportedResources?: SupportedResources;
+};
+
+/**
+ * Describes the message infracost.parser.api.InitializeRequest.
+ * Use `create(InitializeRequestSchema)` to create a new message.
+ */
+export declare const InitializeRequestSchema: GenMessage<InitializeRequest>;
+
+/**
+ * @generated from message infracost.parser.api.InitializeResponse
+ */
+export declare type InitializeResponse = Message<"infracost.parser.api.InitializeResponse"> & {
+  /**
+   * @generated from field: bool success = 1;
+   */
+  success: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.api.InitializeResponse.
+ * Use `create(InitializeResponseSchema)` to create a new message.
+ */
+export declare const InitializeResponseSchema: GenMessage<InitializeResponse>;
+
+/**
+ * @generated from message infracost.parser.api.SupportedResources
+ */
+export declare type SupportedResources = Message<"infracost.parser.api.SupportedResources"> & {
+  /**
+   * @generated from field: repeated string resource_types = 1;
+   */
+  resourceTypes: string[];
+};
+
+/**
+ * Describes the message infracost.parser.api.SupportedResources.
+ * Use `create(SupportedResourcesSchema)` to create a new message.
+ */
+export declare const SupportedResourcesSchema: GenMessage<SupportedResources>;
+
+/**
+ * The ParserService provides a gRPC API for parsing infrastructure as code files.
+ *
+ * @generated from service infracost.parser.api.ParserService
+ */
+export declare const ParserService: GenService<{
+  /**
+   * Initialize initializes the parser with supported resources.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Initialize
+   */
+  initialize: {
+    methodKind: "unary";
+    input: typeof InitializeRequestSchema;
+    output: typeof InitializeResponseSchema;
+  },
+  /**
+   * Parse takes a ParseRequest message and returns a ParseResponse message.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Parse
+   */
+  parse: {
+    methodKind: "unary";
+    input: typeof ParseRequestSchema;
+    output: typeof ParseResponseSchema;
+  },
+}>;
 

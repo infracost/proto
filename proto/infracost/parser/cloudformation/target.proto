@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package infracost.parser.cloudformation;
+
+import "infracost/parser/options/options.proto";
+
+message Target {
+  string template_path = 1;
+  uint64 flags = 2;
+  Options options = 3;
+}
+
+message Options {
+  // Generic options that aren't specific to CloudFormation
+  options.GenericOptions generic = 1;
+  // The map of input params to the CFN pass
+  map<string, string> input_parameters = 2;
+  // The AWS context to use when parsing the CloudFormation template
+  AwsContext aws_context = 3;
+}
+
+message AwsContext {
+  // The AWS region being operated in
+  string region = 1;
+  // The AWS account ID being used
+  string account_id = 2;
+  // The AWS CloudFormation stack ID
+  string stack_id = 3;
+  // The AWS CloudFormation stack name
+  string stack_name = 4;
+}

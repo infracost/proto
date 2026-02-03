@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package infracost.parser.terragrunt;
+
+import "infracost/parser/address.proto";
+import "infracost/parser/hcl/value.proto";
+import "infracost/parser/terraform/module.proto";
+import "infracost/parser/terraform/target.proto";
+
+message Target {
+  string directory = 1;
+  Options options = 2;
+}
+
+message Options {
+  terraform.Options terraform_options = 1;
+}
+
+message Result {
+  map<string, hcl.Value> inputs = 1;
+  terraform.ModuleResult terraform_module = 2;
+  parser.Address address = 3;
+  repeated Local locals = 4;
+  repeated Dependency dependencies = 5;
+}
+
+message Local {
+  string name = 1;
+  hcl.Value value = 2;
+}
+
+message Dependency {
+  string name = 1;
+  string config_path = 2;
+  map<string, hcl.Value> outputs = 3;
+}

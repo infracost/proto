@@ -2,28 +2,74 @@
 // @generated from file infracost/parser/api/service.proto (package infracost.parser.api, syntax proto3)
 /* eslint-disable */
 
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
+import { file_infracost_parser_cloudformation_target } from "../cloudformation/target_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
+import { file_infracost_parser_terraform_target } from "../terraform/target_pb.js";
+import { file_infracost_parser_terragrunt_target } from "../terragrunt/target_pb.js";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ9Cg1QYXJzZVJlc3BvbnNlEjEKC2RpYWdub3N0aWNzGAEgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEjkKBnJlc3VsdBgCIAEoCzIpLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlUmVzcG9uc2VSZXN1bHQioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUifQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIlChJJbml0aWFsaXplUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCIsChJTdXBwb3J0ZWRSZXNvdXJjZXMSFgoOcmVzb3VyY2VfdHlwZXMYASADKAkywgEKDVBhcnNlclNlcnZpY2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZULSAQoYY29tLmluZnJhY29zdC5wYXJzZXIuYXBpQgxTZXJ2aWNlUHJvdG9QAVo2Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvYXBpogIDSVBBqgIUSW5mcmFjb3N0LlBhcnNlci5BcGnKAhRJbmZyYWNvc3RcUGFyc2VyXEFwaeICIEluZnJhY29zdFxQYXJzZXJcQXBpXEdQQk1ldGFkYXRh6gIWSW5mcmFjb3N0OjpQYXJzZXI6OkFwaWIGcHJvdG8z", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
+
+/**
+ * Describes the message infracost.parser.api.ParseRequest.
+ * Use `create(ParseRequestSchema)` to create a new message.
+ */
+export const ParseRequestSchema = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 0);
+
+/**
+ * Describes the message infracost.parser.api.ParseRequestTarget.
+ * Use `create(ParseRequestTargetSchema)` to create a new message.
+ */
+export const ParseRequestTargetSchema = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 1);
 
 /**
  * Describes the message infracost.parser.api.ParseResponse.
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 0);
+  messageDesc(file_infracost_parser_api_service, 2);
 
 /**
  * Describes the message infracost.parser.api.ParseResponseResult.
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export const ParseResponseResultSchema = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 1);
+  messageDesc(file_infracost_parser_api_service, 3);
+
+/**
+ * Describes the message infracost.parser.api.InitializeRequest.
+ * Use `create(InitializeRequestSchema)` to create a new message.
+ */
+export const InitializeRequestSchema = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 4);
+
+/**
+ * Describes the message infracost.parser.api.InitializeResponse.
+ * Use `create(InitializeResponseSchema)` to create a new message.
+ */
+export const InitializeResponseSchema = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 5);
+
+/**
+ * Describes the message infracost.parser.api.SupportedResources.
+ * Use `create(SupportedResourcesSchema)` to create a new message.
+ */
+export const SupportedResourcesSchema = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 6);
+
+/**
+ * The ParserService provides a gRPC API for parsing infrastructure as code files.
+ *
+ * @generated from service infracost.parser.api.ParserService
+ */
+export const ParserService = /*@__PURE__*/
+  serviceDesc(file_infracost_parser_api_service, 0);
 
