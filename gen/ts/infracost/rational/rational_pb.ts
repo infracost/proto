@@ -16,11 +16,7 @@ export const file_infracost_rational_rational: GenFile = /*@__PURE__*/
  * Rat encodes a *big.Rat from Go stdlib
  * This ensures we can encode rational numbers precisely,
  * which is especially useful for financials.
- * To decode:
- *   num := new(big.Int).SetBytes(input.Numerator)
- *   denom := new(big.Int).SetBytes(input.Denominator)
- *   rat := new(big.Rat).SetFrac(num, denom)
- * or use our own "rat" package that wraps this logic.
+ * To decode, use our own "rat" package that wraps this logic.
  *
  * @generated from message infracost.rational.Rat
  */

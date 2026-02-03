@@ -24,13 +24,7 @@ const (
 // Rat encodes a *big.Rat from Go stdlib
 // This ensures we can encode rational numbers precisely,
 // which is especially useful for financials.
-// To decode:
-//
-//	num := new(big.Int).SetBytes(input.Numerator)
-//	denom := new(big.Int).SetBytes(input.Denominator)
-//	rat := new(big.Rat).SetFrac(num, denom)
-//
-// or use our own "rat" package that wraps this logic.
+// To decode, use our own "rat" package that wraps this logic.
 type Rat struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Numerator     []byte                 `protobuf:"bytes,1,opt,name=numerator,proto3" json:"numerator,omitempty"`
