@@ -747,7 +747,7 @@ type CostComponent struct {
 	PriceWasHardcoded bool `protobuf:"varint,5,opt,name=price_was_hardcoded,json=priceWasHardcoded,proto3" json:"price_was_hardcoded,omitempty"`
 	// The price, pre-discount, of each `unit` (per price period)
 	PeriodPrice *PeriodPrice `protobuf:"bytes,6,opt,name=period_price,json=periodPrice,proto3" json:"period_price,omitempty"`
-	// This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+	// This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
 	Quantity *rational.Rat `protobuf:"bytes,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
 	DiscountRate *rational.Rat `protobuf:"bytes,8,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
@@ -1336,7 +1336,7 @@ type IssueCostComponent struct {
 	UsageBased bool `protobuf:"varint,3,opt,name=usage_based,json=usageBased,proto3" json:"usage_based,omitempty"`
 	// The price, pre-discount, of each `unit` (per price period)
 	PeriodPrice *PeriodPrice `protobuf:"bytes,4,opt,name=period_price,json=periodPrice,proto3" json:"period_price,omitempty"`
-	// This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+	// This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
 	Quantity *rational.Rat `protobuf:"bytes,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
 	DiscountRate  *rational.Rat `protobuf:"bytes,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`

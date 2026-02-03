@@ -72,22 +72,22 @@ export declare type UsageValue = Message<"infracost.usage.UsageValue"> & {
    */
   value: {
     /**
-     * @generated from field: infracost.rational.Rat number = 1;
+     * @generated from field: infracost.rational.Rat number_value = 1;
      */
     value: Rat;
-    case: "number";
+    case: "numberValue";
   } | {
     /**
-     * @generated from field: string string = 2;
+     * @generated from field: string string_value = 2;
      */
     value: string;
-    case: "string";
+    case: "stringValue";
   } | {
     /**
-     * @generated from field: bool bool = 3;
+     * @generated from field: bool bool_value = 3;
      */
     value: boolean;
-    case: "bool";
+    case: "boolValue";
   } | {
     /**
      * @generated from field: infracost.usage.UsageItemMap children = 4;

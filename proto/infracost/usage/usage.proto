@@ -25,9 +25,9 @@ message UsageItemMap {
 // usage values can be any of the below types. see the link above for more details.
 message UsageValue {
   oneof value {
-    infracost.rational.Rat number = 1;
-    string string = 2;
-    bool bool = 3;
+    infracost.rational.Rat number_value = 1;
+    string string_value = 2;
+    bool bool_value = 3;
     UsageItemMap children = 4;
   }
 }

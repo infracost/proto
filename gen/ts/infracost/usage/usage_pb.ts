@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/usage/usage.proto.
  */
 export const file_infracost_usage_usage: GenFile = /*@__PURE__*/
-  fileDesc("ChtpbmZyYWNvc3QvdXNhZ2UvdXNhZ2UucHJvdG8SD2luZnJhY29zdC51c2FnZSKvAgoFVXNhZ2USRAoQYnlfcmVzb3VyY2VfdHlwZRgBIAMoCzIqLmluZnJhY29zdC51c2FnZS5Vc2FnZS5CeVJlc291cmNlVHlwZUVudHJ5EjkKCmJ5X2FkZHJlc3MYAiADKAsyJS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2UuQnlBZGRyZXNzRW50cnkaVAoTQnlSZXNvdXJjZVR5cGVFbnRyeRILCgNrZXkYASABKAkSLAoFdmFsdWUYAiABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwOgI4ARpPCg5CeUFkZHJlc3NFbnRyeRILCgNrZXkYASABKAkSLAoFdmFsdWUYAiABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwOgI4ASKSAQoMVXNhZ2VJdGVtTWFwEjcKBWl0ZW1zGAEgAygLMiguaW5mcmFjb3N0LnVzYWdlLlVzYWdlSXRlbU1hcC5JdGVtc0VudHJ5GkkKCkl0ZW1zRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsuaW5mcmFjb3N0LnVzYWdlLlVzYWdlVmFsdWU6AjgBIpUBCgpVc2FnZVZhbHVlEikKBm51bWJlchgBIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIABIQCgZzdHJpbmcYAiABKAlIABIOCgRib29sGAMgASgISAASMQoIY2hpbGRyZW4YBCABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwSABCBwoFdmFsdWVCsQEKE2NvbS5pbmZyYWNvc3QudXNhZ2VCClVzYWdlUHJvdG9QAVoxZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC91c2FnZaICA0lVWKoCD0luZnJhY29zdC5Vc2FnZcoCD0luZnJhY29zdFxVc2FnZeICG0luZnJhY29zdFxVc2FnZVxHUEJNZXRhZGF0YeoCEEluZnJhY29zdDo6VXNhZ2ViBnByb3RvMw", [file_infracost_rational_rational]);
+  fileDesc("ChtpbmZyYWNvc3QvdXNhZ2UvdXNhZ2UucHJvdG8SD2luZnJhY29zdC51c2FnZSKvAgoFVXNhZ2USRAoQYnlfcmVzb3VyY2VfdHlwZRgBIAMoCzIqLmluZnJhY29zdC51c2FnZS5Vc2FnZS5CeVJlc291cmNlVHlwZUVudHJ5EjkKCmJ5X2FkZHJlc3MYAiADKAsyJS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2UuQnlBZGRyZXNzRW50cnkaVAoTQnlSZXNvdXJjZVR5cGVFbnRyeRILCgNrZXkYASABKAkSLAoFdmFsdWUYAiABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwOgI4ARpPCg5CeUFkZHJlc3NFbnRyeRILCgNrZXkYASABKAkSLAoFdmFsdWUYAiABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwOgI4ASKSAQoMVXNhZ2VJdGVtTWFwEjcKBWl0ZW1zGAEgAygLMiguaW5mcmFjb3N0LnVzYWdlLlVzYWdlSXRlbU1hcC5JdGVtc0VudHJ5GkkKCkl0ZW1zRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsuaW5mcmFjb3N0LnVzYWdlLlVzYWdlVmFsdWU6AjgBIqcBCgpVc2FnZVZhbHVlEi8KDG51bWJlcl92YWx1ZRgBIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIABIWCgxzdHJpbmdfdmFsdWUYAiABKAlIABIUCgpib29sX3ZhbHVlGAMgASgISAASMQoIY2hpbGRyZW4YBCABKAsyHS5pbmZyYWNvc3QudXNhZ2UuVXNhZ2VJdGVtTWFwSABCBwoFdmFsdWVCsQEKE2NvbS5pbmZyYWNvc3QudXNhZ2VCClVzYWdlUHJvdG9QAVoxZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC91c2FnZaICA0lVWKoCD0luZnJhY29zdC5Vc2FnZcoCD0luZnJhY29zdFxVc2FnZeICG0luZnJhY29zdFxVc2FnZVxHUEJNZXRhZGF0YeoCEEluZnJhY29zdDo6VXNhZ2ViBnByb3RvMw", [file_infracost_rational_rational]);
 
 /**
  * this represents infracost usage data
@@ -77,22 +77,22 @@ export type UsageValue = Message<"infracost.usage.UsageValue"> & {
    */
   value: {
     /**
-     * @generated from field: infracost.rational.Rat number = 1;
+     * @generated from field: infracost.rational.Rat number_value = 1;
      */
     value: Rat;
-    case: "number";
+    case: "numberValue";
   } | {
     /**
-     * @generated from field: string string = 2;
+     * @generated from field: string string_value = 2;
      */
     value: string;
-    case: "string";
+    case: "stringValue";
   } | {
     /**
-     * @generated from field: bool bool = 3;
+     * @generated from field: bool bool_value = 3;
      */
     value: boolean;
-    case: "bool";
+    case: "boolValue";
   } | {
     /**
      * @generated from field: infracost.usage.UsageItemMap children = 4;

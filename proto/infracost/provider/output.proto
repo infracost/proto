@@ -124,7 +124,7 @@ message CostComponent {
   bool price_was_hardcoded = 5;
   // The price, pre-discount, of each `unit` (per price period)
   PeriodPrice period_price = 6;
-  // This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+  // This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
   infracost.rational.Rat quantity = 7;
   // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
   infracost.rational.Rat discount_rate = 8;
@@ -221,7 +221,7 @@ message IssueCostComponent {
   bool usage_based = 3;
   // The price, pre-discount, of each `unit` (per price period)
   PeriodPrice period_price = 4;
-  // This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+  // This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
   infracost.rational.Rat quantity = 5;
   // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
   infracost.rational.Rat discount_rate = 6;

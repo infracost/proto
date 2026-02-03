@@ -453,7 +453,7 @@ export type CostComponent = Message<"infracost.provider.CostComponent"> & {
   periodPrice?: PeriodPrice;
 
   /**
-   * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+   * This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
    *
    * @generated from field: infracost.rational.Rat quantity = 7;
    */
@@ -787,7 +787,7 @@ export type IssueCostComponent = Message<"infracost.provider.IssueCostComponent"
   periodPrice?: PeriodPrice;
 
   /**
-   * This is the number we need to multiple `period_price` by to arrive at a pre-discounted cost
+   * This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
    *
    * @generated from field: infracost.rational.Rat quantity = 5;
    */

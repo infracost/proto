@@ -132,9 +132,9 @@ type UsageValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*UsageValue_Number
-	//	*UsageValue_String_
-	//	*UsageValue_Bool
+	//	*UsageValue_NumberValue
+	//	*UsageValue_StringValue
+	//	*UsageValue_BoolValue
 	//	*UsageValue_Children
 	Value         isUsageValue_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
@@ -178,28 +178,28 @@ func (x *UsageValue) GetValue() isUsageValue_Value {
 	return nil
 }
 
-func (x *UsageValue) GetNumber() *rational.Rat {
+func (x *UsageValue) GetNumberValue() *rational.Rat {
 	if x != nil {
-		if x, ok := x.Value.(*UsageValue_Number); ok {
-			return x.Number
+		if x, ok := x.Value.(*UsageValue_NumberValue); ok {
+			return x.NumberValue
 		}
 	}
 	return nil
 }
 
-func (x *UsageValue) GetString_() string {
+func (x *UsageValue) GetStringValue() string {
 	if x != nil {
-		if x, ok := x.Value.(*UsageValue_String_); ok {
-			return x.String_
+		if x, ok := x.Value.(*UsageValue_StringValue); ok {
+			return x.StringValue
 		}
 	}
 	return ""
 }
 
-func (x *UsageValue) GetBool() bool {
+func (x *UsageValue) GetBoolValue() bool {
 	if x != nil {
-		if x, ok := x.Value.(*UsageValue_Bool); ok {
-			return x.Bool
+		if x, ok := x.Value.(*UsageValue_BoolValue); ok {
+			return x.BoolValue
 		}
 	}
 	return false
@@ -218,27 +218,27 @@ type isUsageValue_Value interface {
 	isUsageValue_Value()
 }
 
-type UsageValue_Number struct {
-	Number *rational.Rat `protobuf:"bytes,1,opt,name=number,proto3,oneof"`
+type UsageValue_NumberValue struct {
+	NumberValue *rational.Rat `protobuf:"bytes,1,opt,name=number_value,json=numberValue,proto3,oneof"`
 }
 
-type UsageValue_String_ struct {
-	String_ string `protobuf:"bytes,2,opt,name=string,proto3,oneof"`
+type UsageValue_StringValue struct {
+	StringValue string `protobuf:"bytes,2,opt,name=string_value,json=stringValue,proto3,oneof"`
 }
 
-type UsageValue_Bool struct {
-	Bool bool `protobuf:"varint,3,opt,name=bool,proto3,oneof"`
+type UsageValue_BoolValue struct {
+	BoolValue bool `protobuf:"varint,3,opt,name=bool_value,json=boolValue,proto3,oneof"`
 }
 
 type UsageValue_Children struct {
 	Children *UsageItemMap `protobuf:"bytes,4,opt,name=children,proto3,oneof"`
 }
 
-func (*UsageValue_Number) isUsageValue_Value() {}
+func (*UsageValue_NumberValue) isUsageValue_Value() {}
 
-func (*UsageValue_String_) isUsageValue_Value() {}
+func (*UsageValue_StringValue) isUsageValue_Value() {}
 
-func (*UsageValue_Bool) isUsageValue_Value() {}
+func (*UsageValue_BoolValue) isUsageValue_Value() {}
 
 func (*UsageValue_Children) isUsageValue_Value() {}
 
@@ -262,12 +262,13 @@ const file_infracost_usage_usage_proto_rawDesc = "" +
 	"\n" +
 	"ItemsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.infracost.usage.UsageValueR\x05value:\x028\x01\"\xb5\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.infracost.usage.UsageValueR\x05value:\x028\x01\"\xd6\x01\n" +
 	"\n" +
-	"UsageValue\x121\n" +
-	"\x06number\x18\x01 \x01(\v2\x17.infracost.rational.RatH\x00R\x06number\x12\x18\n" +
-	"\x06string\x18\x02 \x01(\tH\x00R\x06string\x12\x14\n" +
-	"\x04bool\x18\x03 \x01(\bH\x00R\x04bool\x12;\n" +
+	"UsageValue\x12<\n" +
+	"\fnumber_value\x18\x01 \x01(\v2\x17.infracost.rational.RatH\x00R\vnumberValue\x12#\n" +
+	"\fstring_value\x18\x02 \x01(\tH\x00R\vstringValue\x12\x1f\n" +
+	"\n" +
+	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12;\n" +
 	"\bchildren\x18\x04 \x01(\v2\x1d.infracost.usage.UsageItemMapH\x00R\bchildrenB\a\n" +
 	"\x05valueB\xb1\x01\n" +
 	"\x13com.infracost.usageB\n" +
@@ -299,7 +300,7 @@ var file_infracost_usage_usage_proto_depIdxs = []int32{
 	3, // 0: infracost.usage.Usage.by_resource_type:type_name -> infracost.usage.Usage.ByResourceTypeEntry
 	4, // 1: infracost.usage.Usage.by_address:type_name -> infracost.usage.Usage.ByAddressEntry
 	5, // 2: infracost.usage.UsageItemMap.items:type_name -> infracost.usage.UsageItemMap.ItemsEntry
-	6, // 3: infracost.usage.UsageValue.number:type_name -> infracost.rational.Rat
+	6, // 3: infracost.usage.UsageValue.number_value:type_name -> infracost.rational.Rat
 	1, // 4: infracost.usage.UsageValue.children:type_name -> infracost.usage.UsageItemMap
 	1, // 5: infracost.usage.Usage.ByResourceTypeEntry.value:type_name -> infracost.usage.UsageItemMap
 	1, // 6: infracost.usage.Usage.ByAddressEntry.value:type_name -> infracost.usage.UsageItemMap
@@ -317,9 +318,9 @@ func file_infracost_usage_usage_proto_init() {
 		return
 	}
 	file_infracost_usage_usage_proto_msgTypes[2].OneofWrappers = []any{
-		(*UsageValue_Number)(nil),
-		(*UsageValue_String_)(nil),
-		(*UsageValue_Bool)(nil),
+		(*UsageValue_NumberValue)(nil),
+		(*UsageValue_StringValue)(nil),
+		(*UsageValue_BoolValue)(nil),
 		(*UsageValue_Children)(nil),
 	}
 	type x struct{}
