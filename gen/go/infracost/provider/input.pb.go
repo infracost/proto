@@ -40,6 +40,7 @@ type Input struct {
 	// usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
 	Usage *usage.Usage `protobuf:"bytes,5,opt,name=usage,proto3" json:"usage,omitempty"`
 	// Specifies which policies need to be run, and any custom settings for each.
+	// Only relevant if features.enable_finops_policies is true.
 	FinopsPolicyConfig *FinopsPolicyConfiguration `protobuf:"bytes,6,opt,name=finops_policy_config,json=finopsPolicyConfig,proto3" json:"finops_policy_config,omitempty"`
 	// Feature flags
 	Features *Features `protobuf:"bytes,7,opt,name=features,proto3" json:"features,omitempty"`

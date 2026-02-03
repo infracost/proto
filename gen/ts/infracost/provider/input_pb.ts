@@ -64,6 +64,7 @@ export type Input = Message<"infracost.provider.Input"> & {
 
   /**
    * Specifies which policies need to be run, and any custom settings for each.
+   * Only relevant if features.enable_finops_policies is true.
    *
    * @generated from field: infracost.provider.FinopsPolicyConfiguration finops_policy_config = 6;
    */
