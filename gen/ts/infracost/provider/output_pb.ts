@@ -119,7 +119,7 @@ export type Resource = Message<"infracost.provider.Resource"> & {
   isNew: boolean;
 
   /**
-   * The resource costs - totals and individual cost components - including environmental metrics
+   * The resource costs - individual cost components - including environmental metrics
    *
    * @generated from field: infracost.provider.ResourceCosts costs = 11;
    */

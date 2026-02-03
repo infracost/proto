@@ -145,7 +145,7 @@ type Resource struct {
 	IsProviderSupported bool `protobuf:"varint,9,opt,name=is_provider_supported,json=isProviderSupported,proto3" json:"is_provider_supported,omitempty"`
 	// if the resource was added for this run (if known)
 	IsNew bool `protobuf:"varint,10,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
-	// The resource costs - totals and individual cost components - including environmental metrics
+	// The resource costs - individual cost components - including environmental metrics
 	Costs *ResourceCosts `protobuf:"bytes,11,opt,name=costs,proto3" json:"costs,omitempty"`
 	// Resource-level tags
 	Tagging *Tagging `protobuf:"bytes,12,opt,name=tagging,proto3" json:"tagging,omitempty"`
