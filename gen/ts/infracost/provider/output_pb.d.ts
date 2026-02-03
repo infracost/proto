@@ -650,11 +650,11 @@ export declare type FinopsResourceIssue = Message<"infracost.provider.FinopsReso
   monthlyCarbonSavingsGramsCo2e?: Rat;
 
   /**
-   * monthly water savings in litres that could be realized by fixing this issue
+   * monthly water savings in liters that could be realized by fixing this issue
    *
-   * @generated from field: infracost.rational.Rat monthly_water_savings_litres = 3;
+   * @generated from field: infracost.rational.Rat monthly_water_savings_liters = 3;
    */
-  monthlyWaterSavingsLitres?: Rat;
+  monthlyWaterSavingsLiters?: Rat;
 
   /**
    * human-readable address where the issue originates

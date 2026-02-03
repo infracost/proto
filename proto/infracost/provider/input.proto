@@ -14,7 +14,6 @@ message Input {
   // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
   string absolute_path = 2; // path to project
 
-  // Specifies customer-defined (and default) usage data
   // This comes from zero or more of the cloud db, and/or a customer's committed usage file
   ProjectInfo project_info = 3;
 

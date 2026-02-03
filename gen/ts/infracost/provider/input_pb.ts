@@ -40,7 +40,6 @@ export type Input = Message<"infracost.provider.Input"> & {
   absolutePath: string;
 
   /**
-   * Specifies customer-defined (and default) usage data
    * This comes from zero or more of the cloud db, and/or a customer's committed usage file
    *
    * @generated from field: infracost.provider.ProjectInfo project_info = 3;

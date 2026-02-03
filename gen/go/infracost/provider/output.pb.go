@@ -1153,8 +1153,8 @@ type FinopsResourceIssue struct {
 	MonthlySavings *rational.Rat `protobuf:"bytes,1,opt,name=monthly_savings,json=monthlySavings,proto3" json:"monthly_savings,omitempty"`
 	// monthly carbon savings in grams CO2e that could be realized by fixing this issue
 	MonthlyCarbonSavingsGramsCo2E *rational.Rat `protobuf:"bytes,2,opt,name=monthly_carbon_savings_grams_co2e,json=monthlyCarbonSavingsGramsCo2e,proto3" json:"monthly_carbon_savings_grams_co2e,omitempty"`
-	// monthly water savings in litres that could be realized by fixing this issue
-	MonthlyWaterSavingsLitres *rational.Rat `protobuf:"bytes,3,opt,name=monthly_water_savings_litres,json=monthlyWaterSavingsLitres,proto3" json:"monthly_water_savings_litres,omitempty"`
+	// monthly water savings in liters that could be realized by fixing this issue
+	MonthlyWaterSavingsLiters *rational.Rat `protobuf:"bytes,3,opt,name=monthly_water_savings_liters,json=monthlyWaterSavingsLiters,proto3" json:"monthly_water_savings_liters,omitempty"`
 	// human-readable address where the issue originates
 	Address string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
 	// attribute of the resource where the issue originates
@@ -1214,9 +1214,9 @@ func (x *FinopsResourceIssue) GetMonthlyCarbonSavingsGramsCo2E() *rational.Rat {
 	return nil
 }
 
-func (x *FinopsResourceIssue) GetMonthlyWaterSavingsLitres() *rational.Rat {
+func (x *FinopsResourceIssue) GetMonthlyWaterSavingsLiters() *rational.Rat {
 	if x != nil {
-		return x.MonthlyWaterSavingsLitres
+		return x.MonthlyWaterSavingsLiters
 	}
 	return nil
 }
@@ -1642,7 +1642,7 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x13FinopsResourceIssue\x12@\n" +
 	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x0emonthlySavings\x12a\n" +
 	"!monthly_carbon_savings_grams_co2e\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x1dmonthlyCarbonSavingsGramsCo2e\x12X\n" +
-	"\x1cmonthly_water_savings_litres\x18\x03 \x01(\v2\x17.infracost.rational.RatR\x19monthlyWaterSavingsLitres\x12\x18\n" +
+	"\x1cmonthly_water_savings_liters\x18\x03 \x01(\v2\x17.infracost.rational.RatR\x19monthlyWaterSavingsLiters\x12\x18\n" +
 	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x1c\n" +
 	"\tattribute\x18\x05 \x01(\tR\tattribute\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12,\n" +
@@ -1745,7 +1745,7 @@ var file_infracost_provider_output_proto_depIdxs = []int32{
 	14, // 21: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
 	19, // 22: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
 	19, // 23: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
-	19, // 24: infracost.provider.FinopsResourceIssue.monthly_water_savings_litres:type_name -> infracost.rational.Rat
+	19, // 24: infracost.provider.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
 	15, // 25: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
 	15, // 26: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
 	16, // 27: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent

@@ -33,7 +33,7 @@ message Resource {
   bool is_provider_supported = 9;
   // if the resource was added for this run (if known)
   bool is_new = 10;
-  // The resource costs - totals and individual cost components - including environmental metrics
+  // The resource costs - individual cost components - including environmental metrics
   ResourceCosts costs = 11;
   // Resource-level tags
   Tagging tagging = 12;
@@ -188,8 +188,8 @@ message FinopsResourceIssue {
   infracost.rational.Rat monthly_savings = 1;
   // monthly carbon savings in grams CO2e that could be realized by fixing this issue
   infracost.rational.Rat monthly_carbon_savings_grams_co2e = 2;
-  // monthly water savings in litres that could be realized by fixing this issue
-  infracost.rational.Rat monthly_water_savings_litres = 3;
+  // monthly water savings in liters that could be realized by fixing this issue
+  infracost.rational.Rat monthly_water_savings_liters = 3;
   // human-readable address where the issue originates
   string address = 4;
   // attribute of the resource where the issue originates

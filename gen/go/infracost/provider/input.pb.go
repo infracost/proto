@@ -31,7 +31,6 @@ type Input struct {
 	// Absolute path of the project/template being scanned
 	// For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
 	AbsolutePath string `protobuf:"bytes,2,opt,name=absolute_path,json=absolutePath,proto3" json:"absolute_path,omitempty"` // path to project
-	// Specifies customer-defined (and default) usage data
 	// This comes from zero or more of the cloud db, and/or a customer's committed usage file
 	ProjectInfo *ProjectInfo `protobuf:"bytes,3,opt,name=project_info,json=projectInfo,proto3" json:"project_info,omitempty"`
 	// Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
