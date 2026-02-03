@@ -26,6 +26,7 @@ message Input {
   infracost.usage.Usage usage = 5;
 
   // Specifies which policies need to be run, and any custom settings for each.
+  // Only relevant if features.enable_finops_policies is true.
   FinopsPolicyConfiguration finops_policy_config = 6;
 
   // Feature flags
