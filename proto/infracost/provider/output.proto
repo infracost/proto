@@ -133,7 +133,7 @@ message CostComponent {
 }
 
 message PeriodPrice {
-  // the raw price as arational number
+  // the raw price as a rational number
   infracost.rational.Rat price = 1;
   // this is the period to which the price applies (i.e. monthly or hourly)
   Period period = 2;
@@ -244,6 +244,6 @@ message InvalidTag {
   bool missing_mandatory = 7;
   // when the value must match a regex, the regex pattern
   optional string valid_regex = 8;
-  // suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+  // suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
   optional string suggestion = 9;
 }

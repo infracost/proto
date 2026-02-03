@@ -16,7 +16,7 @@ export declare const file_infracost_usage_usage: GenFile;
  * usage data can exist in two formats:
  * 1. by_resource_type: a map of resource type to usage items
  * 2. by_address: a map of resource address patterns to usage items - these can contain terraform-style [*] wildcards
- * this structure reflects that of infracost usage config files. we source usage data fro mthese files, as well as fro mthe dashboard api.
+ * this structure reflects that of infracost usage config files. we source usage data from these files, as well as from the dashboard api.
  * see an example usage file here: https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml
  *
  * @generated from message infracost.usage.Usage

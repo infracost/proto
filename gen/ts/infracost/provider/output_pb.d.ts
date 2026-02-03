@@ -473,7 +473,7 @@ export declare const CostComponentSchema: GenMessage<CostComponent>;
  */
 export declare type PeriodPrice = Message<"infracost.provider.PeriodPrice"> & {
   /**
-   * the raw price as arational number
+   * the raw price as a rational number
    *
    * @generated from field: infracost.rational.Rat price = 1;
    */
@@ -849,7 +849,7 @@ export declare type InvalidTag = Message<"infracost.provider.InvalidTag"> & {
   validRegex?: string;
 
   /**
-   * suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+   * suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
    *
    * @generated from field: optional string suggestion = 9;
    */

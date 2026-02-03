@@ -852,7 +852,7 @@ func (x *CostComponent) GetEnvironmentalMetrics() *EnvironmentalMetrics {
 
 type PeriodPrice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// the raw price as arational number
+	// the raw price as a rational number
 	Price *rational.Rat `protobuf:"bytes,1,opt,name=price,proto3" json:"price,omitempty"`
 	// this is the period to which the price applies (i.e. monthly or hourly)
 	Period        Period `protobuf:"varint,2,opt,name=period,proto3,enum=infracost.provider.Period" json:"period,omitempty"`
@@ -1434,7 +1434,7 @@ type InvalidTag struct {
 	MissingMandatory bool `protobuf:"varint,7,opt,name=missing_mandatory,json=missingMandatory,proto3" json:"missing_mandatory,omitempty"`
 	// when the value must match a regex, the regex pattern
 	ValidRegex *string `protobuf:"bytes,8,opt,name=valid_regex,json=validRegex,proto3,oneof" json:"valid_regex,omitempty"`
-	// suggestion for a valid value, soi we can suggest "did you mean 'Production', not 'prdcutoin'?"
+	// suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
 	Suggestion    *string `protobuf:"bytes,9,opt,name=suggestion,proto3,oneof" json:"suggestion,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
