@@ -6,8 +6,7 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
-import type { Result } from "../terragrunt/module_pb.js";
-import type { Result as Result$1 } from "../cloudformation/result_pb.js";
+import type { Result } from "../cloudformation/result_pb.js";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
@@ -52,21 +51,15 @@ export declare type ParseResponseResult = Message<"infracost.parser.api.ParseRes
    */
   value: {
     /**
-     * @generated from field: infracost.parser.terraform.ModuleResult terraform = 10;
+     * @generated from field: infracost.parser.terraform.ModuleResult terraform = 1;
      */
     value: ModuleResult;
     case: "terraform";
   } | {
     /**
-     * @generated from field: infracost.parser.terragrunt.Result terragrunt = 11;
+     * @generated from field: infracost.parser.cloudformation.Result cloudformation = 2;
      */
     value: Result;
-    case: "terragrunt";
-  } | {
-    /**
-     * @generated from field: infracost.parser.cloudformation.Result cloudformation = 12;
-     */
-    value: Result$1;
     case: "cloudformation";
   } | { case: undefined; value?: undefined };
 };

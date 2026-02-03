@@ -4,21 +4,19 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Result as Result$1 } from "../cloudformation/result_pb.js";
+import type { Result } from "../cloudformation/result_pb.js";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
-import type { Result } from "../terragrunt/module_pb.js";
-import { file_infracost_parser_terragrunt_module } from "../terragrunt/module_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ9Cg1QYXJzZVJlc3BvbnNlEjEKC2RpYWdub3N0aWNzGAEgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEjkKBnJlc3VsdBgCIAEoCzIpLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlUmVzcG9uc2VSZXN1bHQi2wEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAogASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5SZXN1bHRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uUmVzdWx0SABCBwoFdmFsdWVC0gEKGGNvbS5pbmZyYWNvc3QucGFyc2VyLmFwaUIMU2VydmljZVByb3RvUAFaNmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2FwaaICA0lQQaoCFEluZnJhY29zdC5QYXJzZXIuQXBpygIUSW5mcmFjb3N0XFBhcnNlclxBcGniAiBJbmZyYWNvc3RcUGFyc2VyXEFwaVxHUEJNZXRhZGF0YeoCFkluZnJhY29zdDo6UGFyc2VyOjpBcGliBnByb3RvMw", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terragrunt_module]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ9Cg1QYXJzZVJlc3BvbnNlEjEKC2RpYWdub3N0aWNzGAEgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEjkKBnJlc3VsdBgCIAEoCzIpLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlUmVzcG9uc2VSZXN1bHQioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module]);
 
 /**
  * ParseResponse is the unified response for all parser types.
@@ -59,21 +57,15 @@ export type ParseResponseResult = Message<"infracost.parser.api.ParseResponseRes
    */
   value: {
     /**
-     * @generated from field: infracost.parser.terraform.ModuleResult terraform = 10;
+     * @generated from field: infracost.parser.terraform.ModuleResult terraform = 1;
      */
     value: ModuleResult;
     case: "terraform";
   } | {
     /**
-     * @generated from field: infracost.parser.terragrunt.Result terragrunt = 11;
+     * @generated from field: infracost.parser.cloudformation.Result cloudformation = 2;
      */
     value: Result;
-    case: "terragrunt";
-  } | {
-    /**
-     * @generated from field: infracost.parser.cloudformation.Result cloudformation = 12;
-     */
-    value: Result$1;
     case: "cloudformation";
   } | { case: undefined; value?: undefined };
 };

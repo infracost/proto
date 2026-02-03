@@ -10,7 +10,6 @@ import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
 	cloudformation "github.com/infracost/proto/gen/go/infracost/parser/cloudformation"
 	terraform "github.com/infracost/proto/gen/go/infracost/parser/terraform"
-	terragrunt "github.com/infracost/proto/gen/go/infracost/parser/terragrunt"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -86,7 +85,6 @@ type ParseResponseResult struct {
 	// Types that are valid to be assigned to Value:
 	//
 	//	*ParseResponseResult_Terraform
-	//	*ParseResponseResult_Terragrunt
 	//	*ParseResponseResult_Cloudformation
 	Value         isParseResponseResult_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
@@ -139,15 +137,6 @@ func (x *ParseResponseResult) GetTerraform() *terraform.ModuleResult {
 	return nil
 }
 
-func (x *ParseResponseResult) GetTerragrunt() *terragrunt.Result {
-	if x != nil {
-		if x, ok := x.Value.(*ParseResponseResult_Terragrunt); ok {
-			return x.Terragrunt
-		}
-	}
-	return nil
-}
-
 func (x *ParseResponseResult) GetCloudformation() *cloudformation.Result {
 	if x != nil {
 		if x, ok := x.Value.(*ParseResponseResult_Cloudformation); ok {
@@ -162,20 +151,14 @@ type isParseResponseResult_Value interface {
 }
 
 type ParseResponseResult_Terraform struct {
-	Terraform *terraform.ModuleResult `protobuf:"bytes,10,opt,name=terraform,proto3,oneof"`
-}
-
-type ParseResponseResult_Terragrunt struct {
-	Terragrunt *terragrunt.Result `protobuf:"bytes,11,opt,name=terragrunt,proto3,oneof"`
+	Terraform *terraform.ModuleResult `protobuf:"bytes,1,opt,name=terraform,proto3,oneof"`
 }
 
 type ParseResponseResult_Cloudformation struct {
-	Cloudformation *cloudformation.Result `protobuf:"bytes,12,opt,name=cloudformation,proto3,oneof"`
+	Cloudformation *cloudformation.Result `protobuf:"bytes,2,opt,name=cloudformation,proto3,oneof"`
 }
 
 func (*ParseResponseResult_Terraform) isParseResponseResult_Value() {}
-
-func (*ParseResponseResult_Terragrunt) isParseResponseResult_Value() {}
 
 func (*ParseResponseResult_Cloudformation) isParseResponseResult_Value() {}
 
@@ -183,17 +166,13 @@ var File_infracost_parser_api_service_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a(infracost/parser/terragrunt/module.proto\"\x92\x01\n" +
+	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\x92\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
-	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\"\x82\x02\n" +
+	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\"\xbb\x01\n" +
 	"\x13ParseResponseResult\x12H\n" +
-	"\tterraform\x18\n" +
-	" \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12E\n" +
-	"\n" +
-	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.ResultH\x00R\n" +
-	"terragrunt\x12Q\n" +
-	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
+	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12Q\n" +
+	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
 	"\x05valueB\xd2\x01\n" +
 	"\x18com.infracost.parser.apiB\fServiceProtoP\x01Z6github.com/infracost/proto/gen/go/infracost/parser/api\xa2\x02\x03IPA\xaa\x02\x14Infracost.Parser.Api\xca\x02\x14Infracost\\Parser\\Api\xe2\x02 Infracost\\Parser\\Api\\GPBMetadata\xea\x02\x16Infracost::Parser::Apib\x06proto3"
 
@@ -215,20 +194,18 @@ var file_infracost_parser_api_service_proto_goTypes = []any{
 	(*ParseResponseResult)(nil),    // 1: infracost.parser.api.ParseResponseResult
 	(*parser.Diagnostic)(nil),      // 2: infracost.parser.Diagnostic
 	(*terraform.ModuleResult)(nil), // 3: infracost.parser.terraform.ModuleResult
-	(*terragrunt.Result)(nil),      // 4: infracost.parser.terragrunt.Result
-	(*cloudformation.Result)(nil),  // 5: infracost.parser.cloudformation.Result
+	(*cloudformation.Result)(nil),  // 4: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_api_service_proto_depIdxs = []int32{
 	2, // 0: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
 	1, // 1: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
 	3, // 2: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	4, // 3: infracost.parser.api.ParseResponseResult.terragrunt:type_name -> infracost.parser.terragrunt.Result
-	5, // 4: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4, // 3: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_api_service_proto_init() }
@@ -238,7 +215,6 @@ func file_infracost_parser_api_service_proto_init() {
 	}
 	file_infracost_parser_api_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*ParseResponseResult_Terraform)(nil),
-		(*ParseResponseResult_Terragrunt)(nil),
 		(*ParseResponseResult_Cloudformation)(nil),
 	}
 	type x struct{}
