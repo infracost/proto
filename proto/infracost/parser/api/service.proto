@@ -45,6 +45,8 @@ message ParseResponse {
   repeated Diagnostic diagnostics = 1;
   // The result of parsing the target, is one of cloudformation, terraform, terragrunt
   ParseResponseResult result = 2;
+  //  The dependencies when asked for by the runner
+  repeated Dependency dependencies = 3;
 }
 
 // ParseResponseResult is the unified result for all parser types.
@@ -76,4 +78,30 @@ message SupportedResources {
 // SupportedResource represents a single supported resource type.
 message SupportedResource {
   string resource_type = 1;
+}
+
+// Dependency represents a code location that contributes to a resource or module.
+message Dependency {
+  // The path to the file containing the dependency
+  string file_path = 1;
+  // The starting line number of the dependency definition
+  int64 line_start = 2;
+  // The ending line number of the dependency definition
+  int64 line_end = 3;
+  // The definition of the module that the dependency is within
+  string module_definition = 4;
+  // True if the dependency is within a remote module
+  bool is_remote_module = 5;
+  // True if the dependency value is defined outside of the source code, whether that
+  // is in a passed in terraform variable, a missing/synthesized variable etc.
+  bool is_not_locally_defined = 6;
+  // A raw code snippet that approximates a missing code snippet, i.e. when is_not_locally_defined is true
+  string external_snippet = 7;
+  // True if this dependency is synthetic
+  bool is_synthetic = 8;
+  // True if this dependency is generated Terraform from terragrunt.
+  // These files are temporary and cannot be modified directly.
+  bool is_terragrunt_generated = 9;
+  // The depth of the dependency
+  int32 depth = 10;
 }

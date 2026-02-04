@@ -22,7 +22,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUifQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIUChJJbml0aWFsaXplUmVzcG9uc2UiVQoSU3VwcG9ydGVkUmVzb3VyY2VzEj8KDnJlc291cmNlX3R5cGVzGAEgAygLMicuaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2UiKgoRU3VwcG9ydGVkUmVzb3VyY2USFQoNcmVzb3VyY2VfdHlwZRgBIAEoCTLCAQoNUGFyc2VyU2VydmljZRJfCgpJbml0aWFsaXplEicuaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlcXVlc3QaKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5Jbml0aWFsaXplUmVzcG9uc2USUAoFUGFyc2USIi5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlcXVlc3QaIy5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUitQEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSOQoGcmVzdWx0GAIgASgLMikuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZVJlc3VsdBI2CgxkZXBlbmRlbmNpZXMYAyADKAsyIC5pbmZyYWNvc3QucGFyc2VyLmFwaS5EZXBlbmRlbmN5IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIUChJJbml0aWFsaXplUmVzcG9uc2UiVQoSU3VwcG9ydGVkUmVzb3VyY2VzEj8KDnJlc291cmNlX3R5cGVzGAEgAygLMicuaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2UiKgoRU3VwcG9ydGVkUmVzb3VyY2USFQoNcmVzb3VyY2VfdHlwZRgBIAEoCSL6AQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh4KFmlzX25vdF9sb2NhbGx5X2RlZmluZWQYBiABKAgSGAoQZXh0ZXJuYWxfc25pcHBldBgHIAEoCRIUCgxpc19zeW50aGV0aWMYCCABKAgSHwoXaXNfdGVycmFncnVudF9nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUywgEKDVBhcnNlclNlcnZpY2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZULSAQoYY29tLmluZnJhY29zdC5wYXJzZXIuYXBpQgxTZXJ2aWNlUHJvdG9QAVo2Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvYXBpogIDSVBBqgIUSW5mcmFjb3N0LlBhcnNlci5BcGnKAhRJbmZyYWNvc3RcUGFyc2VyXEFwaeICIEluZnJhY29zdFxQYXJzZXJcQXBpXEdQQk1ldGFkYXRh6gIWSW5mcmFjb3N0OjpQYXJzZXI6OkFwaWIGcHJvdG8z", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -121,6 +121,13 @@ export type ParseResponse = Message<"infracost.parser.api.ParseResponse"> & {
    * @generated from field: infracost.parser.api.ParseResponseResult result = 2;
    */
   result?: ParseResponseResult;
+
+  /**
+   *  The dependencies when asked for by the runner
+   *
+   * @generated from field: repeated infracost.parser.api.Dependency dependencies = 3;
+   */
+  dependencies: Dependency[];
 };
 
 /**
@@ -245,6 +252,92 @@ export type SupportedResource = Message<"infracost.parser.api.SupportedResource"
  */
 export const SupportedResourceSchema: GenMessage<SupportedResource> = /*@__PURE__*/
   messageDesc(file_infracost_parser_api_service, 7);
+
+/**
+ * Dependency represents a code location that contributes to a resource or module.
+ *
+ * @generated from message infracost.parser.api.Dependency
+ */
+export type Dependency = Message<"infracost.parser.api.Dependency"> & {
+  /**
+   * The path to the file containing the dependency
+   *
+   * @generated from field: string file_path = 1;
+   */
+  filePath: string;
+
+  /**
+   * The starting line number of the dependency definition
+   *
+   * @generated from field: int64 line_start = 2;
+   */
+  lineStart: bigint;
+
+  /**
+   * The ending line number of the dependency definition
+   *
+   * @generated from field: int64 line_end = 3;
+   */
+  lineEnd: bigint;
+
+  /**
+   * The definition of the module that the dependency is within
+   *
+   * @generated from field: string module_definition = 4;
+   */
+  moduleDefinition: string;
+
+  /**
+   * True if the dependency is within a remote module
+   *
+   * @generated from field: bool is_remote_module = 5;
+   */
+  isRemoteModule: boolean;
+
+  /**
+   * True if the dependency value is defined outside of the source code, whether that
+   * is in a passed in terraform variable, a missing/synthesized variable etc.
+   *
+   * @generated from field: bool is_not_locally_defined = 6;
+   */
+  isNotLocallyDefined: boolean;
+
+  /**
+   * A raw code snippet that approximates a missing code snippet, i.e. when is_not_locally_defined is true
+   *
+   * @generated from field: string external_snippet = 7;
+   */
+  externalSnippet: string;
+
+  /**
+   * True if this dependency is synthetic
+   *
+   * @generated from field: bool is_synthetic = 8;
+   */
+  isSynthetic: boolean;
+
+  /**
+   * True if this dependency is generated Terraform from terragrunt.
+   * These files are temporary and cannot be modified directly.
+   *
+   * @generated from field: bool is_terragrunt_generated = 9;
+   */
+  isTerragruntGenerated: boolean;
+
+  /**
+   * The depth of the dependency
+   *
+   * @generated from field: int32 depth = 10;
+   */
+  depth: number;
+};
+
+/**
+ * Describes the message infracost.parser.api.Dependency.
+ * Use `create(DependencySchema)` to create a new message.
+ */
+export const DependencySchema: GenMessage<Dependency> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 8);
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.

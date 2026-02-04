@@ -111,6 +111,13 @@ export declare type ParseResponse = Message<"infracost.parser.api.ParseResponse"
    * @generated from field: infracost.parser.api.ParseResponseResult result = 2;
    */
   result?: ParseResponseResult;
+
+  /**
+   *  The dependencies when asked for by the runner
+   *
+   * @generated from field: repeated infracost.parser.api.Dependency dependencies = 3;
+   */
+  dependencies: Dependency[];
 };
 
 /**
@@ -229,6 +236,91 @@ export declare type SupportedResource = Message<"infracost.parser.api.SupportedR
  * Use `create(SupportedResourceSchema)` to create a new message.
  */
 export declare const SupportedResourceSchema: GenMessage<SupportedResource>;
+
+/**
+ * Dependency represents a code location that contributes to a resource or module.
+ *
+ * @generated from message infracost.parser.api.Dependency
+ */
+export declare type Dependency = Message<"infracost.parser.api.Dependency"> & {
+  /**
+   * The path to the file containing the dependency
+   *
+   * @generated from field: string file_path = 1;
+   */
+  filePath: string;
+
+  /**
+   * The starting line number of the dependency definition
+   *
+   * @generated from field: int64 line_start = 2;
+   */
+  lineStart: bigint;
+
+  /**
+   * The ending line number of the dependency definition
+   *
+   * @generated from field: int64 line_end = 3;
+   */
+  lineEnd: bigint;
+
+  /**
+   * The definition of the module that the dependency is within
+   *
+   * @generated from field: string module_definition = 4;
+   */
+  moduleDefinition: string;
+
+  /**
+   * True if the dependency is within a remote module
+   *
+   * @generated from field: bool is_remote_module = 5;
+   */
+  isRemoteModule: boolean;
+
+  /**
+   * True if the dependency value is defined outside of the source code, whether that
+   * is in a passed in terraform variable, a missing/synthesized variable etc.
+   *
+   * @generated from field: bool is_not_locally_defined = 6;
+   */
+  isNotLocallyDefined: boolean;
+
+  /**
+   * A raw code snippet that approximates a missing code snippet, i.e. when is_not_locally_defined is true
+   *
+   * @generated from field: string external_snippet = 7;
+   */
+  externalSnippet: string;
+
+  /**
+   * True if this dependency is synthetic
+   *
+   * @generated from field: bool is_synthetic = 8;
+   */
+  isSynthetic: boolean;
+
+  /**
+   * True if this dependency is generated Terraform from terragrunt.
+   * These files are temporary and cannot be modified directly.
+   *
+   * @generated from field: bool is_terragrunt_generated = 9;
+   */
+  isTerragruntGenerated: boolean;
+
+  /**
+   * The depth of the dependency
+   *
+   * @generated from field: int32 depth = 10;
+   */
+  depth: number;
+};
+
+/**
+ * Describes the message infracost.parser.api.Dependency.
+ * Use `create(DependencySchema)` to create a new message.
+ */
+export declare const DependencySchema: GenMessage<Dependency>;
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.

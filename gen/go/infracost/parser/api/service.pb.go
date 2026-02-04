@@ -197,7 +197,9 @@ type ParseResponse struct {
 	// The diagnostics generated during parsing
 	Diagnostics []*parser.Diagnostic `protobuf:"bytes,1,rep,name=diagnostics,proto3" json:"diagnostics,omitempty"`
 	// The result of parsing the target, is one of cloudformation, terraform, terragrunt
-	Result        *ParseResponseResult `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
+	Result *ParseResponseResult `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
+	// The dependencies when asked for by the runner
+	Dependencies  []*Dependency `protobuf:"bytes,3,rep,name=dependencies,proto3" json:"dependencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,6 +244,13 @@ func (x *ParseResponse) GetDiagnostics() []*parser.Diagnostic {
 func (x *ParseResponse) GetResult() *ParseResponseResult {
 	if x != nil {
 		return x.Result
+	}
+	return nil
+}
+
+func (x *ParseResponse) GetDependencies() []*Dependency {
+	if x != nil {
+		return x.Dependencies
 	}
 	return nil
 }
@@ -513,6 +522,135 @@ func (x *SupportedResource) GetResourceType() string {
 	return ""
 }
 
+// Dependency represents a code location that contributes to a resource or module.
+type Dependency struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The path to the file containing the dependency
+	FilePath string `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	// The starting line number of the dependency definition
+	LineStart int64 `protobuf:"varint,2,opt,name=line_start,json=lineStart,proto3" json:"line_start,omitempty"`
+	// The ending line number of the dependency definition
+	LineEnd int64 `protobuf:"varint,3,opt,name=line_end,json=lineEnd,proto3" json:"line_end,omitempty"`
+	// The definition of the module that the dependency is within
+	ModuleDefinition string `protobuf:"bytes,4,opt,name=module_definition,json=moduleDefinition,proto3" json:"module_definition,omitempty"`
+	// True if the dependency is within a remote module
+	IsRemoteModule bool `protobuf:"varint,5,opt,name=is_remote_module,json=isRemoteModule,proto3" json:"is_remote_module,omitempty"`
+	// True if the dependency value is defined outside of the source code, whether that
+	// is in a passed in terraform variable, a missing/synthesized variable etc.
+	IsNotLocallyDefined bool `protobuf:"varint,6,opt,name=is_not_locally_defined,json=isNotLocallyDefined,proto3" json:"is_not_locally_defined,omitempty"`
+	// A raw code snippet that approximates a missing code snippet, i.e. when is_not_locally_defined is true
+	ExternalSnippet string `protobuf:"bytes,7,opt,name=external_snippet,json=externalSnippet,proto3" json:"external_snippet,omitempty"`
+	// True if this dependency is synthetic
+	IsSynthetic bool `protobuf:"varint,8,opt,name=is_synthetic,json=isSynthetic,proto3" json:"is_synthetic,omitempty"`
+	// True if this dependency is generated Terraform from terragrunt.
+	// These files are temporary and cannot be modified directly.
+	IsTerragruntGenerated bool `protobuf:"varint,9,opt,name=is_terragrunt_generated,json=isTerragruntGenerated,proto3" json:"is_terragrunt_generated,omitempty"`
+	// The depth of the dependency
+	Depth         int32 `protobuf:"varint,10,opt,name=depth,proto3" json:"depth,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dependency) Reset() {
+	*x = Dependency{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dependency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dependency) ProtoMessage() {}
+
+func (x *Dependency) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dependency.ProtoReflect.Descriptor instead.
+func (*Dependency) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Dependency) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *Dependency) GetLineStart() int64 {
+	if x != nil {
+		return x.LineStart
+	}
+	return 0
+}
+
+func (x *Dependency) GetLineEnd() int64 {
+	if x != nil {
+		return x.LineEnd
+	}
+	return 0
+}
+
+func (x *Dependency) GetModuleDefinition() string {
+	if x != nil {
+		return x.ModuleDefinition
+	}
+	return ""
+}
+
+func (x *Dependency) GetIsRemoteModule() bool {
+	if x != nil {
+		return x.IsRemoteModule
+	}
+	return false
+}
+
+func (x *Dependency) GetIsNotLocallyDefined() bool {
+	if x != nil {
+		return x.IsNotLocallyDefined
+	}
+	return false
+}
+
+func (x *Dependency) GetExternalSnippet() string {
+	if x != nil {
+		return x.ExternalSnippet
+	}
+	return ""
+}
+
+func (x *Dependency) GetIsSynthetic() bool {
+	if x != nil {
+		return x.IsSynthetic
+	}
+	return false
+}
+
+func (x *Dependency) GetIsTerragruntGenerated() bool {
+	if x != nil {
+		return x.IsTerragruntGenerated
+	}
+	return false
+}
+
+func (x *Dependency) GetDepth() int32 {
+	if x != nil {
+		return x.Depth
+	}
+	return 0
+}
+
 var File_infracost_parser_api_service_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_api_service_proto_rawDesc = "" +
@@ -529,10 +667,11 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.TargetH\x00R\n" +
 	"terragrunt\x12Q\n" +
 	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.TargetH\x00R\x0ecloudformationB\a\n" +
-	"\x05value\"\x92\x01\n" +
+	"\x05value\"\xd8\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
-	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\"\xbb\x01\n" +
+	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\x12D\n" +
+	"\fdependencies\x18\x03 \x03(\v2 .infracost.parser.api.DependencyR\fdependencies\"\xbb\x01\n" +
 	"\x13ParseResponseResult\x12H\n" +
 	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12Q\n" +
 	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
@@ -544,7 +683,21 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\x12SupportedResources\x12N\n" +
 	"\x0eresource_types\x18\x01 \x03(\v2'.infracost.parser.api.SupportedResourceR\rresourceTypes\"8\n" +
 	"\x11SupportedResource\x12#\n" +
-	"\rresource_type\x18\x01 \x01(\tR\fresourceType2\xc2\x01\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType\"\x8b\x03\n" +
+	"\n" +
+	"Dependency\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x1d\n" +
+	"\n" +
+	"line_start\x18\x02 \x01(\x03R\tlineStart\x12\x19\n" +
+	"\bline_end\x18\x03 \x01(\x03R\alineEnd\x12+\n" +
+	"\x11module_definition\x18\x04 \x01(\tR\x10moduleDefinition\x12(\n" +
+	"\x10is_remote_module\x18\x05 \x01(\bR\x0eisRemoteModule\x123\n" +
+	"\x16is_not_locally_defined\x18\x06 \x01(\bR\x13isNotLocallyDefined\x12)\n" +
+	"\x10external_snippet\x18\a \x01(\tR\x0fexternalSnippet\x12!\n" +
+	"\fis_synthetic\x18\b \x01(\bR\visSynthetic\x126\n" +
+	"\x17is_terragrunt_generated\x18\t \x01(\bR\x15isTerragruntGenerated\x12\x14\n" +
+	"\x05depth\x18\n" +
+	" \x01(\x05R\x05depth2\xc2\x01\n" +
 	"\rParserService\x12_\n" +
 	"\n" +
 	"Initialize\x12'.infracost.parser.api.InitializeRequest\x1a(.infracost.parser.api.InitializeResponse\x12P\n" +
@@ -563,7 +716,7 @@ func file_infracost_parser_api_service_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_api_service_proto_rawDescData
 }
 
-var file_infracost_parser_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_infracost_parser_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_infracost_parser_api_service_proto_goTypes = []any{
 	(*ParseRequest)(nil),           // 0: infracost.parser.api.ParseRequest
 	(*ParseRequestTarget)(nil),     // 1: infracost.parser.api.ParseRequestTarget
@@ -573,34 +726,36 @@ var file_infracost_parser_api_service_proto_goTypes = []any{
 	(*InitializeResponse)(nil),     // 5: infracost.parser.api.InitializeResponse
 	(*SupportedResources)(nil),     // 6: infracost.parser.api.SupportedResources
 	(*SupportedResource)(nil),      // 7: infracost.parser.api.SupportedResource
-	(*terraform.Target)(nil),       // 8: infracost.parser.terraform.Target
-	(*terragrunt.Target)(nil),      // 9: infracost.parser.terragrunt.Target
-	(*cloudformation.Target)(nil),  // 10: infracost.parser.cloudformation.Target
-	(*parser.Diagnostic)(nil),      // 11: infracost.parser.Diagnostic
-	(*terraform.ModuleResult)(nil), // 12: infracost.parser.terraform.ModuleResult
-	(*cloudformation.Result)(nil),  // 13: infracost.parser.cloudformation.Result
+	(*Dependency)(nil),             // 8: infracost.parser.api.Dependency
+	(*terraform.Target)(nil),       // 9: infracost.parser.terraform.Target
+	(*terragrunt.Target)(nil),      // 10: infracost.parser.terragrunt.Target
+	(*cloudformation.Target)(nil),  // 11: infracost.parser.cloudformation.Target
+	(*parser.Diagnostic)(nil),      // 12: infracost.parser.Diagnostic
+	(*terraform.ModuleResult)(nil), // 13: infracost.parser.terraform.ModuleResult
+	(*cloudformation.Result)(nil),  // 14: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_api_service_proto_depIdxs = []int32{
 	1,  // 0: infracost.parser.api.ParseRequest.target:type_name -> infracost.parser.api.ParseRequestTarget
-	8,  // 1: infracost.parser.api.ParseRequestTarget.terraform:type_name -> infracost.parser.terraform.Target
-	9,  // 2: infracost.parser.api.ParseRequestTarget.terragrunt:type_name -> infracost.parser.terragrunt.Target
-	10, // 3: infracost.parser.api.ParseRequestTarget.cloudformation:type_name -> infracost.parser.cloudformation.Target
-	11, // 4: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	9,  // 1: infracost.parser.api.ParseRequestTarget.terraform:type_name -> infracost.parser.terraform.Target
+	10, // 2: infracost.parser.api.ParseRequestTarget.terragrunt:type_name -> infracost.parser.terragrunt.Target
+	11, // 3: infracost.parser.api.ParseRequestTarget.cloudformation:type_name -> infracost.parser.cloudformation.Target
+	12, // 4: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
 	3,  // 5: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
-	12, // 6: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	13, // 7: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
-	6,  // 8: infracost.parser.api.InitializeRequest.terraform_supported_resources:type_name -> infracost.parser.api.SupportedResources
-	6,  // 9: infracost.parser.api.InitializeRequest.cloudformation_supported_resources:type_name -> infracost.parser.api.SupportedResources
-	7,  // 10: infracost.parser.api.SupportedResources.resource_types:type_name -> infracost.parser.api.SupportedResource
-	4,  // 11: infracost.parser.api.ParserService.Initialize:input_type -> infracost.parser.api.InitializeRequest
-	0,  // 12: infracost.parser.api.ParserService.Parse:input_type -> infracost.parser.api.ParseRequest
-	5,  // 13: infracost.parser.api.ParserService.Initialize:output_type -> infracost.parser.api.InitializeResponse
-	2,  // 14: infracost.parser.api.ParserService.Parse:output_type -> infracost.parser.api.ParseResponse
-	13, // [13:15] is the sub-list for method output_type
-	11, // [11:13] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	8,  // 6: infracost.parser.api.ParseResponse.dependencies:type_name -> infracost.parser.api.Dependency
+	13, // 7: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
+	14, // 8: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+	6,  // 9: infracost.parser.api.InitializeRequest.terraform_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	6,  // 10: infracost.parser.api.InitializeRequest.cloudformation_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	7,  // 11: infracost.parser.api.SupportedResources.resource_types:type_name -> infracost.parser.api.SupportedResource
+	4,  // 12: infracost.parser.api.ParserService.Initialize:input_type -> infracost.parser.api.InitializeRequest
+	0,  // 13: infracost.parser.api.ParserService.Parse:input_type -> infracost.parser.api.ParseRequest
+	5,  // 14: infracost.parser.api.ParserService.Initialize:output_type -> infracost.parser.api.InitializeResponse
+	2,  // 15: infracost.parser.api.ParserService.Parse:output_type -> infracost.parser.api.ParseResponse
+	14, // [14:16] is the sub-list for method output_type
+	12, // [12:14] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_api_service_proto_init() }
@@ -623,7 +778,7 @@ func file_infracost_parser_api_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_api_service_proto_rawDesc), len(file_infracost_parser_api_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
