@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package infracost.parser.terraform;
+
+import "infracost/parser/hcl/value.proto";
+import "infracost/parser/options/options.proto";
+import "infracost/parser/terraform/modules/loader.proto";
+
+message Target {
+  string directory = 1;
+  modules.LoadedModule loaded_module = 2;
+  Options options = 3;
+}
+
+message Options {
+  // Generic options that aren't specific to Terraform
+  options.GenericOptions generic = 1;
+  // Map of module addresses to source paths
+  map<string, string> source_map = 2;
+  // Map of module addresses to regex source paths
+  map<string, string> regex_source_map = 3;
+  // Map of environment variables to their values
+  map<string, string> env = 4;
+  // Map of variables to their values
+  map<string, hcl.Value> vars = 5;
+  // Map of default tags to their values
+  repeated DefaultTag default_tags = 6;
+  // Map of remote vars to their values
+  map<string, RemoteVariable> remote_vars = 7;
+  // The workspace for the project
+  string workspace = 8;
+  // A list of Terraform Var files
+  repeated string tf_vars_files = 9;
+  // Should we force using local module paths instead of downloading them
+  bool force_local_module_paths = 10;
+}
+
+message RemoteVariable {
+  // Value as a string
+  string value = 1;
+  // Is this an HCL expression
+  bool is_hcl = 2;
+}
+
+message DefaultTag {
+  // A key representing a tag
+  hcl.Value key = 1;
+  // A value representing a tag
+  hcl.Value value = 2;
+}

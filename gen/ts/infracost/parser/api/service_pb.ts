@@ -2,21 +2,105 @@
 // @generated from file infracost/parser/api/service.proto (package infracost.parser.api, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Result } from "../cloudformation/result_pb.js";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
+import type { Target as Target$2 } from "../cloudformation/target_pb.js";
+import { file_infracost_parser_cloudformation_target } from "../cloudformation/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
+import type { Target } from "../terraform/target_pb.js";
+import { file_infracost_parser_terraform_target } from "../terraform/target_pb.js";
+import type { Target as Target$1 } from "../terragrunt/target_pb.js";
+import { file_infracost_parser_terragrunt_target } from "../terragrunt/target_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ9Cg1QYXJzZVJlc3BvbnNlEjEKC2RpYWdub3N0aWNzGAEgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEjkKBnJlc3VsdBgCIAEoCzIpLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlUmVzcG9uc2VSZXN1bHQioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUifQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIUChJJbml0aWFsaXplUmVzcG9uc2UiVQoSU3VwcG9ydGVkUmVzb3VyY2VzEj8KDnJlc291cmNlX3R5cGVzGAEgAygLMicuaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2UiKgoRU3VwcG9ydGVkUmVzb3VyY2USFQoNcmVzb3VyY2VfdHlwZRgBIAEoCTLCAQoNUGFyc2VyU2VydmljZRJfCgpJbml0aWFsaXplEicuaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlcXVlc3QaKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5Jbml0aWFsaXplUmVzcG9uc2USUAoFUGFyc2USIi5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlcXVlc3QaIy5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
+
+/**
+ * ParseRequest is the unified request for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseRequest
+ */
+export type ParseRequest = Message<"infracost.parser.api.ParseRequest"> & {
+  /**
+   * The absolute root path of the repository to be parsed
+   *
+   * @generated from field: string repo_directory = 1;
+   */
+  repoDirectory: string;
+
+  /**
+   * The absolute working directory of the project in the repository being processed
+   *
+   * @generated from field: string working_directory = 2;
+   */
+  workingDirectory: string;
+
+  /**
+   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+   *
+   * @generated from field: infracost.parser.api.ParseRequestTarget target = 3;
+   */
+  target?: ParseRequestTarget;
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseRequest.
+ * Use `create(ParseRequestSchema)` to create a new message.
+ */
+export const ParseRequestSchema: GenMessage<ParseRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 0);
+
+/**
+ * ParseRequestTarget is the unified target for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseRequestTarget
+ */
+export type ParseRequestTarget = Message<"infracost.parser.api.ParseRequestTarget"> & {
+  /**
+   * @generated from oneof infracost.parser.api.ParseRequestTarget.value
+   */
+  value: {
+    /**
+     * The target type for Terraform files
+     *
+     * @generated from field: infracost.parser.terraform.Target terraform = 10;
+     */
+    value: Target;
+    case: "terraform";
+  } | {
+    /**
+     * The target type for Terragrunt files
+     *
+     * @generated from field: infracost.parser.terragrunt.Target terragrunt = 11;
+     */
+    value: Target$1;
+    case: "terragrunt";
+  } | {
+    /**
+     * The target type for CloudFormation files
+     *
+     * @generated from field: infracost.parser.cloudformation.Target cloudformation = 12;
+     */
+    value: Target$2;
+    case: "cloudformation";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseRequestTarget.
+ * Use `create(ParseRequestTargetSchema)` to create a new message.
+ */
+export const ParseRequestTargetSchema: GenMessage<ParseRequestTarget> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 1);
 
 /**
  * ParseResponse is the unified response for all parser types.
@@ -32,7 +116,7 @@ export type ParseResponse = Message<"infracost.parser.api.ParseResponse"> & {
   diagnostics: Diagnostic[];
 
   /**
-   * The result of parsing the target, is one of cloudformation, terraform
+   * The result of parsing the target, is one of cloudformation, terraform, terragrunt
    *
    * @generated from field: infracost.parser.api.ParseResponseResult result = 2;
    */
@@ -44,7 +128,7 @@ export type ParseResponse = Message<"infracost.parser.api.ParseResponse"> & {
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 0);
+  messageDesc(file_infracost_parser_api_service, 2);
 
 /**
  * ParseResponseResult is the unified result for all parser types.
@@ -57,12 +141,16 @@ export type ParseResponseResult = Message<"infracost.parser.api.ParseResponseRes
    */
   value: {
     /**
+     * The result type for Terraform files
+     *
      * @generated from field: infracost.parser.terraform.ModuleResult terraform = 1;
      */
     value: ModuleResult;
     case: "terraform";
   } | {
     /**
+     * The result type for CloudFormation files
+     *
      * @generated from field: infracost.parser.cloudformation.Result cloudformation = 2;
      */
     value: Result;
@@ -75,5 +163,115 @@ export type ParseResponseResult = Message<"infracost.parser.api.ParseResponseRes
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export const ParseResponseResultSchema: GenMessage<ParseResponseResult> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 1);
+  messageDesc(file_infracost_parser_api_service, 3);
+
+/**
+ * InitializeRequest is the request for the Initialize RPC.
+ *
+ * @generated from message infracost.parser.api.InitializeRequest
+ */
+export type InitializeRequest = Message<"infracost.parser.api.InitializeRequest"> & {
+  /**
+   * The supported resources for Terraform from providers
+   *
+   * @generated from field: infracost.parser.api.SupportedResources terraform_supported_resources = 1;
+   */
+  terraformSupportedResources?: SupportedResources;
+
+  /**
+   * The supported resources for CloudFormation from providers
+   *
+   * @generated from field: infracost.parser.api.SupportedResources cloudformation_supported_resources = 2;
+   */
+  cloudformationSupportedResources?: SupportedResources;
+};
+
+/**
+ * Describes the message infracost.parser.api.InitializeRequest.
+ * Use `create(InitializeRequestSchema)` to create a new message.
+ */
+export const InitializeRequestSchema: GenMessage<InitializeRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 4);
+
+/**
+ * InitializeResponse is the response for the Initialize RPC.
+ *
+ * @generated from message infracost.parser.api.InitializeResponse
+ */
+export type InitializeResponse = Message<"infracost.parser.api.InitializeResponse"> & {
+};
+
+/**
+ * Describes the message infracost.parser.api.InitializeResponse.
+ * Use `create(InitializeResponseSchema)` to create a new message.
+ */
+export const InitializeResponseSchema: GenMessage<InitializeResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 5);
+
+/**
+ * SupportedResources lists the resource types supported by a parser.
+ *
+ * @generated from message infracost.parser.api.SupportedResources
+ */
+export type SupportedResources = Message<"infracost.parser.api.SupportedResources"> & {
+  /**
+   * @generated from field: repeated infracost.parser.api.SupportedResource resource_types = 1;
+   */
+  resourceTypes: SupportedResource[];
+};
+
+/**
+ * Describes the message infracost.parser.api.SupportedResources.
+ * Use `create(SupportedResourcesSchema)` to create a new message.
+ */
+export const SupportedResourcesSchema: GenMessage<SupportedResources> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 6);
+
+/**
+ * SupportedResource represents a single supported resource type.
+ *
+ * @generated from message infracost.parser.api.SupportedResource
+ */
+export type SupportedResource = Message<"infracost.parser.api.SupportedResource"> & {
+  /**
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+};
+
+/**
+ * Describes the message infracost.parser.api.SupportedResource.
+ * Use `create(SupportedResourceSchema)` to create a new message.
+ */
+export const SupportedResourceSchema: GenMessage<SupportedResource> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 7);
+
+/**
+ * The ParserService provides a gRPC API for parsing infrastructure as code files.
+ *
+ * @generated from service infracost.parser.api.ParserService
+ */
+export const ParserService: GenService<{
+  /**
+   * Initialize initializes the parser with supported resources.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Initialize
+   */
+  initialize: {
+    methodKind: "unary";
+    input: typeof InitializeRequestSchema;
+    output: typeof InitializeResponseSchema;
+  },
+  /**
+   * Parse takes a ParseRequest message and returns a ParseResponse message.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Parse
+   */
+  parse: {
+    methodKind: "unary";
+    input: typeof ParseRequestSchema;
+    output: typeof ParseResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_infracost_parser_api_service, 0);
 

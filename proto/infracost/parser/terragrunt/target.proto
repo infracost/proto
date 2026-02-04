@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package infracost.parser.terragrunt;
+
+import "infracost/parser/address.proto";
+import "infracost/parser/hcl/value.proto";
+import "infracost/parser/options/options.proto";
+import "infracost/parser/terraform/module.proto";
+import "infracost/parser/terraform/target.proto";
+
+message Target {
+  // The directory containing the Terragrunt configuration
+  string directory = 1;
+  // Options for parsing the Terragrunt configuration
+  Options options = 2;
+}
+
+message Options {
+  // Generic options that aren't specific to Terragrunt
+  options.GenericOptions generic = 1;
+  // Terraform-specific options to use when parsing
+  terraform.Options terraform_options = 2;
+}
+
+message Result {
+  // Map of input variables passed to the Terragrunt configuration
+  map<string, hcl.Value> inputs = 1;
+  // The parsed Terraform module result
+  terraform.ModuleResult terraform_module = 2;
+  // The address of the Terragrunt configuration
+  parser.Address address = 3;
+  // Local values defined in the Terragrunt configuration
+  repeated Local locals = 4;
+  // Dependencies of this Terragrunt configuration
+  repeated Dependency dependencies = 5;
+}
+
+message Local {
+  // The name of the local value
+  string name = 1;
+  // The value of the local
+  hcl.Value value = 2;
+}
+
+message Dependency {
+  // The name of the dependency
+  string name = 1;
+  // The path to the dependency's configuration
+  string config_path = 2;
+  // Map of outputs from the dependency
+  map<string, hcl.Value> outputs = 3;
+}

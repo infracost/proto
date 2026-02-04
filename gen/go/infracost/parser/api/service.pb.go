@@ -10,6 +10,7 @@ import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
 	cloudformation "github.com/infracost/proto/gen/go/infracost/parser/cloudformation"
 	terraform "github.com/infracost/proto/gen/go/infracost/parser/terraform"
+	terragrunt "github.com/infracost/proto/gen/go/infracost/parser/terragrunt"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -24,12 +25,178 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ParseRequest is the unified request for all parser types.
+type ParseRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The absolute root path of the repository to be parsed
+	RepoDirectory string `protobuf:"bytes,1,opt,name=repo_directory,json=repoDirectory,proto3" json:"repo_directory,omitempty"`
+	// The absolute working directory of the project in the repository being processed
+	WorkingDirectory string `protobuf:"bytes,2,opt,name=working_directory,json=workingDirectory,proto3" json:"working_directory,omitempty"`
+	// The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+	Target        *ParseRequestTarget `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseRequest) Reset() {
+	*x = ParseRequest{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseRequest) ProtoMessage() {}
+
+func (x *ParseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseRequest.ProtoReflect.Descriptor instead.
+func (*ParseRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ParseRequest) GetRepoDirectory() string {
+	if x != nil {
+		return x.RepoDirectory
+	}
+	return ""
+}
+
+func (x *ParseRequest) GetWorkingDirectory() string {
+	if x != nil {
+		return x.WorkingDirectory
+	}
+	return ""
+}
+
+func (x *ParseRequest) GetTarget() *ParseRequestTarget {
+	if x != nil {
+		return x.Target
+	}
+	return nil
+}
+
+// ParseRequestTarget is the unified target for all parser types.
+type ParseRequestTarget struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*ParseRequestTarget_Terraform
+	//	*ParseRequestTarget_Terragrunt
+	//	*ParseRequestTarget_Cloudformation
+	Value         isParseRequestTarget_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseRequestTarget) Reset() {
+	*x = ParseRequestTarget{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseRequestTarget) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseRequestTarget) ProtoMessage() {}
+
+func (x *ParseRequestTarget) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseRequestTarget.ProtoReflect.Descriptor instead.
+func (*ParseRequestTarget) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ParseRequestTarget) GetValue() isParseRequestTarget_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *ParseRequestTarget) GetTerraform() *terraform.Target {
+	if x != nil {
+		if x, ok := x.Value.(*ParseRequestTarget_Terraform); ok {
+			return x.Terraform
+		}
+	}
+	return nil
+}
+
+func (x *ParseRequestTarget) GetTerragrunt() *terragrunt.Target {
+	if x != nil {
+		if x, ok := x.Value.(*ParseRequestTarget_Terragrunt); ok {
+			return x.Terragrunt
+		}
+	}
+	return nil
+}
+
+func (x *ParseRequestTarget) GetCloudformation() *cloudformation.Target {
+	if x != nil {
+		if x, ok := x.Value.(*ParseRequestTarget_Cloudformation); ok {
+			return x.Cloudformation
+		}
+	}
+	return nil
+}
+
+type isParseRequestTarget_Value interface {
+	isParseRequestTarget_Value()
+}
+
+type ParseRequestTarget_Terraform struct {
+	// The target type for Terraform files
+	Terraform *terraform.Target `protobuf:"bytes,10,opt,name=terraform,proto3,oneof"`
+}
+
+type ParseRequestTarget_Terragrunt struct {
+	// The target type for Terragrunt files
+	Terragrunt *terragrunt.Target `protobuf:"bytes,11,opt,name=terragrunt,proto3,oneof"`
+}
+
+type ParseRequestTarget_Cloudformation struct {
+	// The target type for CloudFormation files
+	Cloudformation *cloudformation.Target `protobuf:"bytes,12,opt,name=cloudformation,proto3,oneof"`
+}
+
+func (*ParseRequestTarget_Terraform) isParseRequestTarget_Value() {}
+
+func (*ParseRequestTarget_Terragrunt) isParseRequestTarget_Value() {}
+
+func (*ParseRequestTarget_Cloudformation) isParseRequestTarget_Value() {}
+
 // ParseResponse is the unified response for all parser types.
 type ParseResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The diagnostics generated during parsing
 	Diagnostics []*parser.Diagnostic `protobuf:"bytes,1,rep,name=diagnostics,proto3" json:"diagnostics,omitempty"`
-	// The result of parsing the target, is one of cloudformation, terraform
+	// The result of parsing the target, is one of cloudformation, terraform, terragrunt
 	Result        *ParseResponseResult `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -37,7 +204,7 @@ type ParseResponse struct {
 
 func (x *ParseResponse) Reset() {
 	*x = ParseResponse{}
-	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49,7 +216,7 @@ func (x *ParseResponse) String() string {
 func (*ParseResponse) ProtoMessage() {}
 
 func (x *ParseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_api_service_proto_msgTypes[0]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +229,7 @@ func (x *ParseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
 func (*ParseResponse) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{0}
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ParseResponse) GetDiagnostics() []*parser.Diagnostic {
@@ -93,7 +260,7 @@ type ParseResponseResult struct {
 
 func (x *ParseResponseResult) Reset() {
 	*x = ParseResponseResult{}
-	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -105,7 +272,7 @@ func (x *ParseResponseResult) String() string {
 func (*ParseResponseResult) ProtoMessage() {}
 
 func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_api_service_proto_msgTypes[1]
+	mi := &file_infracost_parser_api_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -118,7 +285,7 @@ func (x *ParseResponseResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponseResult.ProtoReflect.Descriptor instead.
 func (*ParseResponseResult) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ParseResponseResult) GetValue() isParseResponseResult_Value {
@@ -151,10 +318,12 @@ type isParseResponseResult_Value interface {
 }
 
 type ParseResponseResult_Terraform struct {
+	// The result type for Terraform files
 	Terraform *terraform.ModuleResult `protobuf:"bytes,1,opt,name=terraform,proto3,oneof"`
 }
 
 type ParseResponseResult_Cloudformation struct {
+	// The result type for CloudFormation files
 	Cloudformation *cloudformation.Result `protobuf:"bytes,2,opt,name=cloudformation,proto3,oneof"`
 }
 
@@ -162,18 +331,224 @@ func (*ParseResponseResult_Terraform) isParseResponseResult_Value() {}
 
 func (*ParseResponseResult_Cloudformation) isParseResponseResult_Value() {}
 
+// InitializeRequest is the request for the Initialize RPC.
+type InitializeRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The supported resources for Terraform from providers
+	TerraformSupportedResources *SupportedResources `protobuf:"bytes,1,opt,name=terraform_supported_resources,json=terraformSupportedResources,proto3" json:"terraform_supported_resources,omitempty"`
+	// The supported resources for CloudFormation from providers
+	CloudformationSupportedResources *SupportedResources `protobuf:"bytes,2,opt,name=cloudformation_supported_resources,json=cloudformationSupportedResources,proto3" json:"cloudformation_supported_resources,omitempty"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
+}
+
+func (x *InitializeRequest) Reset() {
+	*x = InitializeRequest{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitializeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitializeRequest) ProtoMessage() {}
+
+func (x *InitializeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitializeRequest.ProtoReflect.Descriptor instead.
+func (*InitializeRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *InitializeRequest) GetTerraformSupportedResources() *SupportedResources {
+	if x != nil {
+		return x.TerraformSupportedResources
+	}
+	return nil
+}
+
+func (x *InitializeRequest) GetCloudformationSupportedResources() *SupportedResources {
+	if x != nil {
+		return x.CloudformationSupportedResources
+	}
+	return nil
+}
+
+// InitializeResponse is the response for the Initialize RPC.
+type InitializeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitializeResponse) Reset() {
+	*x = InitializeResponse{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitializeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitializeResponse) ProtoMessage() {}
+
+func (x *InitializeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitializeResponse.ProtoReflect.Descriptor instead.
+func (*InitializeResponse) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{5}
+}
+
+// SupportedResources lists the resource types supported by a parser.
+type SupportedResources struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ResourceTypes []*SupportedResource   `protobuf:"bytes,1,rep,name=resource_types,json=resourceTypes,proto3" json:"resource_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupportedResources) Reset() {
+	*x = SupportedResources{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupportedResources) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupportedResources) ProtoMessage() {}
+
+func (x *SupportedResources) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupportedResources.ProtoReflect.Descriptor instead.
+func (*SupportedResources) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SupportedResources) GetResourceTypes() []*SupportedResource {
+	if x != nil {
+		return x.ResourceTypes
+	}
+	return nil
+}
+
+// SupportedResource represents a single supported resource type.
+type SupportedResource struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ResourceType  string                 `protobuf:"bytes,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupportedResource) Reset() {
+	*x = SupportedResource{}
+	mi := &file_infracost_parser_api_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupportedResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupportedResource) ProtoMessage() {}
+
+func (x *SupportedResource) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_api_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupportedResource.ProtoReflect.Descriptor instead.
+func (*SupportedResource) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_api_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SupportedResource) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
 var File_infracost_parser_api_service_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\"\x92\x01\n" +
+	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a,infracost/parser/cloudformation/target.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\x1a(infracost/parser/terragrunt/target.proto\"\xa4\x01\n" +
+	"\fParseRequest\x12%\n" +
+	"\x0erepo_directory\x18\x01 \x01(\tR\rrepoDirectory\x12+\n" +
+	"\x11working_directory\x18\x02 \x01(\tR\x10workingDirectory\x12@\n" +
+	"\x06target\x18\x03 \x01(\v2(.infracost.parser.api.ParseRequestTargetR\x06target\"\xfb\x01\n" +
+	"\x12ParseRequestTarget\x12B\n" +
+	"\tterraform\x18\n" +
+	" \x01(\v2\".infracost.parser.terraform.TargetH\x00R\tterraform\x12E\n" +
+	"\n" +
+	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.TargetH\x00R\n" +
+	"terragrunt\x12Q\n" +
+	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.TargetH\x00R\x0ecloudformationB\a\n" +
+	"\x05value\"\x92\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
 	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\"\xbb\x01\n" +
 	"\x13ParseResponseResult\x12H\n" +
 	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12Q\n" +
 	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
-	"\x05valueB\xd2\x01\n" +
+	"\x05value\"\xf9\x01\n" +
+	"\x11InitializeRequest\x12l\n" +
+	"\x1dterraform_supported_resources\x18\x01 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x1bterraformSupportedResources\x12v\n" +
+	"\"cloudformation_supported_resources\x18\x02 \x01(\v2(.infracost.parser.api.SupportedResourcesR cloudformationSupportedResources\"\x14\n" +
+	"\x12InitializeResponse\"d\n" +
+	"\x12SupportedResources\x12N\n" +
+	"\x0eresource_types\x18\x01 \x03(\v2'.infracost.parser.api.SupportedResourceR\rresourceTypes\"8\n" +
+	"\x11SupportedResource\x12#\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType2\xc2\x01\n" +
+	"\rParserService\x12_\n" +
+	"\n" +
+	"Initialize\x12'.infracost.parser.api.InitializeRequest\x1a(.infracost.parser.api.InitializeResponse\x12P\n" +
+	"\x05Parse\x12\".infracost.parser.api.ParseRequest\x1a#.infracost.parser.api.ParseResponseB\xd2\x01\n" +
 	"\x18com.infracost.parser.apiB\fServiceProtoP\x01Z6github.com/infracost/proto/gen/go/infracost/parser/api\xa2\x02\x03IPA\xaa\x02\x14Infracost.Parser.Api\xca\x02\x14Infracost\\Parser\\Api\xe2\x02 Infracost\\Parser\\Api\\GPBMetadata\xea\x02\x16Infracost::Parser::Apib\x06proto3"
 
 var (
@@ -188,24 +563,44 @@ func file_infracost_parser_api_service_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_api_service_proto_rawDescData
 }
 
-var file_infracost_parser_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_infracost_parser_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_infracost_parser_api_service_proto_goTypes = []any{
-	(*ParseResponse)(nil),          // 0: infracost.parser.api.ParseResponse
-	(*ParseResponseResult)(nil),    // 1: infracost.parser.api.ParseResponseResult
-	(*parser.Diagnostic)(nil),      // 2: infracost.parser.Diagnostic
-	(*terraform.ModuleResult)(nil), // 3: infracost.parser.terraform.ModuleResult
-	(*cloudformation.Result)(nil),  // 4: infracost.parser.cloudformation.Result
+	(*ParseRequest)(nil),           // 0: infracost.parser.api.ParseRequest
+	(*ParseRequestTarget)(nil),     // 1: infracost.parser.api.ParseRequestTarget
+	(*ParseResponse)(nil),          // 2: infracost.parser.api.ParseResponse
+	(*ParseResponseResult)(nil),    // 3: infracost.parser.api.ParseResponseResult
+	(*InitializeRequest)(nil),      // 4: infracost.parser.api.InitializeRequest
+	(*InitializeResponse)(nil),     // 5: infracost.parser.api.InitializeResponse
+	(*SupportedResources)(nil),     // 6: infracost.parser.api.SupportedResources
+	(*SupportedResource)(nil),      // 7: infracost.parser.api.SupportedResource
+	(*terraform.Target)(nil),       // 8: infracost.parser.terraform.Target
+	(*terragrunt.Target)(nil),      // 9: infracost.parser.terragrunt.Target
+	(*cloudformation.Target)(nil),  // 10: infracost.parser.cloudformation.Target
+	(*parser.Diagnostic)(nil),      // 11: infracost.parser.Diagnostic
+	(*terraform.ModuleResult)(nil), // 12: infracost.parser.terraform.ModuleResult
+	(*cloudformation.Result)(nil),  // 13: infracost.parser.cloudformation.Result
 }
 var file_infracost_parser_api_service_proto_depIdxs = []int32{
-	2, // 0: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	1, // 1: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
-	3, // 2: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	4, // 3: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	1,  // 0: infracost.parser.api.ParseRequest.target:type_name -> infracost.parser.api.ParseRequestTarget
+	8,  // 1: infracost.parser.api.ParseRequestTarget.terraform:type_name -> infracost.parser.terraform.Target
+	9,  // 2: infracost.parser.api.ParseRequestTarget.terragrunt:type_name -> infracost.parser.terragrunt.Target
+	10, // 3: infracost.parser.api.ParseRequestTarget.cloudformation:type_name -> infracost.parser.cloudformation.Target
+	11, // 4: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	3,  // 5: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
+	12, // 6: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
+	13, // 7: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+	6,  // 8: infracost.parser.api.InitializeRequest.terraform_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	6,  // 9: infracost.parser.api.InitializeRequest.cloudformation_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	7,  // 10: infracost.parser.api.SupportedResources.resource_types:type_name -> infracost.parser.api.SupportedResource
+	4,  // 11: infracost.parser.api.ParserService.Initialize:input_type -> infracost.parser.api.InitializeRequest
+	0,  // 12: infracost.parser.api.ParserService.Parse:input_type -> infracost.parser.api.ParseRequest
+	5,  // 13: infracost.parser.api.ParserService.Initialize:output_type -> infracost.parser.api.InitializeResponse
+	2,  // 14: infracost.parser.api.ParserService.Parse:output_type -> infracost.parser.api.ParseResponse
+	13, // [13:15] is the sub-list for method output_type
+	11, // [11:13] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_api_service_proto_init() }
@@ -214,6 +609,11 @@ func file_infracost_parser_api_service_proto_init() {
 		return
 	}
 	file_infracost_parser_api_service_proto_msgTypes[1].OneofWrappers = []any{
+		(*ParseRequestTarget_Terraform)(nil),
+		(*ParseRequestTarget_Terragrunt)(nil),
+		(*ParseRequestTarget_Cloudformation)(nil),
+	}
+	file_infracost_parser_api_service_proto_msgTypes[3].OneofWrappers = []any{
 		(*ParseResponseResult_Terraform)(nil),
 		(*ParseResponseResult_Cloudformation)(nil),
 	}
@@ -223,9 +623,9 @@ func file_infracost_parser_api_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_api_service_proto_rawDesc), len(file_infracost_parser_api_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   8,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_infracost_parser_api_service_proto_goTypes,
 		DependencyIndexes: file_infracost_parser_api_service_proto_depIdxs,

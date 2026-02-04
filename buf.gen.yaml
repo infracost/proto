@@ -9,6 +9,10 @@ plugins:
     out: gen/go
     opt:
       - paths=source_relative
+  - remote: buf.build/grpc/go:v1.5.1
+    out: gen/go
+    opt:
+      - paths=source_relative
   - remote: buf.build/bufbuild/es:v2.10.1
     include_imports: true
     out: gen/ts
