@@ -21,6 +21,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CredentialType int32
+
+const (
+	// Unspecified credential type
+	CredentialType_CREDENTIAL_TYPE_UNSPECIFIED CredentialType = 0
+	// Token-based authentication
+	CredentialType_TOKEN CredentialType = 1
+	// Terraform Cloud
+	CredentialType_TERRAFORM_CLOUD CredentialType = 2
+)
+
+// Enum value maps for CredentialType.
+var (
+	CredentialType_name = map[int32]string{
+		0: "CREDENTIAL_TYPE_UNSPECIFIED",
+		1: "TOKEN",
+		2: "TERRAFORM_CLOUD",
+	}
+	CredentialType_value = map[string]int32{
+		"CREDENTIAL_TYPE_UNSPECIFIED": 0,
+		"TOKEN":                       1,
+		"TERRAFORM_CLOUD":             2,
+	}
+)
+
+func (x CredentialType) Enum() *CredentialType {
+	p := new(CredentialType)
+	*p = x
+	return p
+}
+
+func (x CredentialType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CredentialType) Descriptor() protoreflect.EnumDescriptor {
+	return file_infracost_parser_options_options_proto_enumTypes[0].Descriptor()
+}
+
+func (CredentialType) Type() protoreflect.EnumType {
+	return &file_infracost_parser_options_options_proto_enumTypes[0]
+}
+
+func (x CredentialType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CredentialType.Descriptor instead.
+func (CredentialType) EnumDescriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{0}
+}
+
 type GenericOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identity/Naming
@@ -225,7 +277,9 @@ type CredentialSet struct {
 	// The access token for authentication
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	// The host for the authentication server
-	Host          string `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
+	Host string `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
+	// The type of credential
+	Type          CredentialType `protobuf:"varint,3,opt,name=type,proto3,enum=infracost.parser.options.CredentialType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -272,6 +326,13 @@ func (x *CredentialSet) GetHost() string {
 		return x.Host
 	}
 	return ""
+}
+
+func (x *CredentialSet) GetType() CredentialType {
+	if x != nil {
+		return x.Type
+	}
+	return CredentialType_CREDENTIAL_TYPE_UNSPECIFIED
 }
 
 type RemoteModuleCacheConfig struct {
@@ -483,10 +544,11 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\"J\n" +
 	"\x05Debug\x12\x1c\n" +
 	"\taddresses\x18\x01 \x03(\tR\taddresses\x12#\n" +
-	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"9\n" +
+	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"w\n" +
 	"\rCredentialSet\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x12\n" +
-	"\x04host\x18\x02 \x01(\tR\x04host\"\x89\x01\n" +
+	"\x04host\x18\x02 \x01(\tR\x04host\x12<\n" +
+	"\x04type\x18\x03 \x01(\x0e2(.infracost.parser.options.CredentialTypeR\x04type\"\x89\x01\n" +
 	"\x17RemoteModuleCacheConfig\x12\x16\n" +
 	"\x06region\x18\x01 \x01(\tR\x06region\x12\x1f\n" +
 	"\vbucket_name\x18\x02 \x01(\tR\n" +
@@ -503,7 +565,11 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x06routes\x18\x01 \x03(\v21.infracost.parser.options.ProxyRouter.RoutesEntryR\x06routes\x1a9\n" +
 	"\vRoutesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\xea\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*Q\n" +
+	"\x0eCredentialType\x12\x1f\n" +
+	"\x1bCREDENTIAL_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05TOKEN\x10\x01\x12\x13\n" +
+	"\x0fTERRAFORM_CLOUD\x10\x02B\xea\x01\n" +
 	"\x1ccom.infracost.parser.optionsB\fOptionsProtoP\x01Z:github.com/infracost/proto/gen/go/infracost/parser/options\xa2\x02\x03IPO\xaa\x02\x18Infracost.Parser.Options\xca\x02\x18Infracost\\Parser\\Options\xe2\x02$Infracost\\Parser\\Options\\GPBMetadata\xea\x02\x1aInfracost::Parser::Optionsb\x06proto3"
 
 var (
@@ -518,28 +584,31 @@ func file_infracost_parser_options_options_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_options_options_proto_rawDescData
 }
 
+var file_infracost_parser_options_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_infracost_parser_options_options_proto_goTypes = []any{
-	(*GenericOptions)(nil),          // 0: infracost.parser.options.GenericOptions
-	(*Debug)(nil),                   // 1: infracost.parser.options.Debug
-	(*CredentialSet)(nil),           // 2: infracost.parser.options.CredentialSet
-	(*RemoteModuleCacheConfig)(nil), // 3: infracost.parser.options.RemoteModuleCacheConfig
-	(*AwsCredentials)(nil),          // 4: infracost.parser.options.AwsCredentials
-	(*ProxyRouter)(nil),             // 5: infracost.parser.options.ProxyRouter
-	nil,                             // 6: infracost.parser.options.ProxyRouter.RoutesEntry
+	(CredentialType)(0),             // 0: infracost.parser.options.CredentialType
+	(*GenericOptions)(nil),          // 1: infracost.parser.options.GenericOptions
+	(*Debug)(nil),                   // 2: infracost.parser.options.Debug
+	(*CredentialSet)(nil),           // 3: infracost.parser.options.CredentialSet
+	(*RemoteModuleCacheConfig)(nil), // 4: infracost.parser.options.RemoteModuleCacheConfig
+	(*AwsCredentials)(nil),          // 5: infracost.parser.options.AwsCredentials
+	(*ProxyRouter)(nil),             // 6: infracost.parser.options.ProxyRouter
+	nil,                             // 7: infracost.parser.options.ProxyRouter.RoutesEntry
 }
 var file_infracost_parser_options_options_proto_depIdxs = []int32{
-	2, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
-	4, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
-	1, // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
-	5, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
-	3, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
-	6, // 5: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	3, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
+	5, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
+	2, // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
+	6, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
+	4, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
+	0, // 5: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
+	7, // 6: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_options_options_proto_init() }
@@ -552,13 +621,14 @@ func file_infracost_parser_options_options_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_options_options_proto_rawDesc), len(file_infracost_parser_options_options_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_infracost_parser_options_options_proto_goTypes,
 		DependencyIndexes: file_infracost_parser_options_options_proto_depIdxs,
+		EnumInfos:         file_infracost_parser_options_options_proto_enumTypes,
 		MessageInfos:      file_infracost_parser_options_options_proto_msgTypes,
 	}.Build()
 	File_infracost_parser_options_options_proto = out.File

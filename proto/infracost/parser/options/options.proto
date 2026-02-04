@@ -37,11 +37,22 @@ message Debug {
   bool include_dumps = 2;
 }
 
+enum CredentialType {
+  // Unspecified credential type
+  CREDENTIAL_TYPE_UNSPECIFIED = 0;
+  // Token-based authentication
+  TOKEN = 1;
+  // Terraform Cloud
+  TERRAFORM_CLOUD = 2;
+}
+
 message CredentialSet {
   // The access token for authentication
   string token = 1;
   // The host for the authentication server
   string host = 2;
+  // The type of credential
+  CredentialType type = 3;
 }
 
 message RemoteModuleCacheConfig {
