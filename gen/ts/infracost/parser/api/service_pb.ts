@@ -22,7 +22,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUifQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIlChJJbml0aWFsaXplUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCIsChJTdXBwb3J0ZWRSZXNvdXJjZXMSFgoOcmVzb3VyY2VfdHlwZXMYASADKAkywgEKDVBhcnNlclNlcnZpY2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZULSAQoYY29tLmluZnJhY29zdC5wYXJzZXIuYXBpQgxTZXJ2aWNlUHJvdG9QAVo2Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvYXBpogIDSVBBqgIUSW5mcmFjb3N0LlBhcnNlci5BcGnKAhRJbmZyYWNvc3RcUGFyc2VyXEFwaeICIEluZnJhY29zdFxQYXJzZXJcQXBpXEdQQk1ldGFkYXRh6gIWSW5mcmFjb3N0OjpQYXJzZXI6OkFwaWIGcHJvdG8z", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUifQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0IqABChNQYXJzZVJlc3BvbnNlUmVzdWx0Ej0KCXRlcnJhZm9ybRgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdEgAEkEKDmNsb3VkZm9ybWF0aW9uGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHRIAEIHCgV2YWx1ZSK6AQoRSW5pdGlhbGl6ZVJlcXVlc3QSTwoddGVycmFmb3JtX3N1cHBvcnRlZF9yZXNvdXJjZXMYASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSVAoiY2xvdWRmb3JtYXRpb25fc3VwcG9ydGVkX3Jlc291cmNlcxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcyIUChJJbml0aWFsaXplUmVzcG9uc2UiVQoSU3VwcG9ydGVkUmVzb3VyY2VzEj8KDnJlc291cmNlX3R5cGVzGAEgAygLMicuaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2UiKgoRU3VwcG9ydGVkUmVzb3VyY2USFQoNcmVzb3VyY2VfdHlwZRgBIAEoCTLCAQoNUGFyc2VyU2VydmljZRJfCgpJbml0aWFsaXplEicuaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlcXVlc3QaKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5Jbml0aWFsaXplUmVzcG9uc2USUAoFUGFyc2USIi5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlcXVlc3QaIy5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -31,14 +31,14 @@ export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
  */
 export type ParseRequest = Message<"infracost.parser.api.ParseRequest"> & {
   /**
-   * The root path of the repository to be parsed
+   * The absolute root path of the repository to be parsed
    *
    * @generated from field: string repo_directory = 1;
    */
   repoDirectory: string;
 
   /**
-   * The working directory of the project in the repository being processed
+   * The absolute working directory of the project in the repository being processed
    *
    * @generated from field: string working_directory = 2;
    */
@@ -199,10 +199,6 @@ export const InitializeRequestSchema: GenMessage<InitializeRequest> = /*@__PURE_
  * @generated from message infracost.parser.api.InitializeResponse
  */
 export type InitializeResponse = Message<"infracost.parser.api.InitializeResponse"> & {
-  /**
-   * @generated from field: bool success = 1;
-   */
-  success: boolean;
 };
 
 /**
@@ -219,9 +215,9 @@ export const InitializeResponseSchema: GenMessage<InitializeResponse> = /*@__PUR
  */
 export type SupportedResources = Message<"infracost.parser.api.SupportedResources"> & {
   /**
-   * @generated from field: repeated string resource_types = 1;
+   * @generated from field: repeated infracost.parser.api.SupportedResource resource_types = 1;
    */
-  resourceTypes: string[];
+  resourceTypes: SupportedResource[];
 };
 
 /**
@@ -230,6 +226,25 @@ export type SupportedResources = Message<"infracost.parser.api.SupportedResource
  */
 export const SupportedResourcesSchema: GenMessage<SupportedResources> = /*@__PURE__*/
   messageDesc(file_infracost_parser_api_service, 6);
+
+/**
+ * SupportedResource represents a single supported resource type.
+ *
+ * @generated from message infracost.parser.api.SupportedResource
+ */
+export type SupportedResource = Message<"infracost.parser.api.SupportedResource"> & {
+  /**
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+};
+
+/**
+ * Describes the message infracost.parser.api.SupportedResource.
+ * Use `create(SupportedResourceSchema)` to create a new message.
+ */
+export const SupportedResourceSchema: GenMessage<SupportedResource> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 7);
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.

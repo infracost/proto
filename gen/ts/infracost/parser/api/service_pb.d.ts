@@ -23,14 +23,14 @@ export declare const file_infracost_parser_api_service: GenFile;
  */
 export declare type ParseRequest = Message<"infracost.parser.api.ParseRequest"> & {
   /**
-   * The root path of the repository to be parsed
+   * The absolute root path of the repository to be parsed
    *
    * @generated from field: string repo_directory = 1;
    */
   repoDirectory: string;
 
   /**
-   * The working directory of the project in the repository being processed
+   * The absolute working directory of the project in the repository being processed
    *
    * @generated from field: string working_directory = 2;
    */
@@ -186,10 +186,6 @@ export declare const InitializeRequestSchema: GenMessage<InitializeRequest>;
  * @generated from message infracost.parser.api.InitializeResponse
  */
 export declare type InitializeResponse = Message<"infracost.parser.api.InitializeResponse"> & {
-  /**
-   * @generated from field: bool success = 1;
-   */
-  success: boolean;
 };
 
 /**
@@ -205,9 +201,9 @@ export declare const InitializeResponseSchema: GenMessage<InitializeResponse>;
  */
 export declare type SupportedResources = Message<"infracost.parser.api.SupportedResources"> & {
   /**
-   * @generated from field: repeated string resource_types = 1;
+   * @generated from field: repeated infracost.parser.api.SupportedResource resource_types = 1;
    */
-  resourceTypes: string[];
+  resourceTypes: SupportedResource[];
 };
 
 /**
@@ -215,6 +211,24 @@ export declare type SupportedResources = Message<"infracost.parser.api.Supported
  * Use `create(SupportedResourcesSchema)` to create a new message.
  */
 export declare const SupportedResourcesSchema: GenMessage<SupportedResources>;
+
+/**
+ * SupportedResource represents a single supported resource type.
+ *
+ * @generated from message infracost.parser.api.SupportedResource
+ */
+export declare type SupportedResource = Message<"infracost.parser.api.SupportedResource"> & {
+  /**
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+};
+
+/**
+ * Describes the message infracost.parser.api.SupportedResource.
+ * Use `create(SupportedResourceSchema)` to create a new message.
+ */
+export declare const SupportedResourceSchema: GenMessage<SupportedResource>;
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.

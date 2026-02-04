@@ -19,9 +19,9 @@ service ParserService {
 
 // ParseRequest is the unified request for all parser types.
 message ParseRequest {
-  // The root path of the repository to be parsed
+  // The absolute root path of the repository to be parsed
   string repo_directory = 1;
-  // The working directory of the project in the repository being processed
+  // The absolute working directory of the project in the repository being processed
   string working_directory = 2;
   // The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
   ParseRequestTarget target = 3;
@@ -66,11 +66,14 @@ message InitializeRequest {
 }
 
 // InitializeResponse is the response for the Initialize RPC.
-message InitializeResponse {
-  bool success = 1;
-}
+message InitializeResponse {}
 
 // SupportedResources lists the resource types supported by a parser.
 message SupportedResources {
-  repeated string resource_types = 1;
+  repeated SupportedResource resource_types = 1;
+}
+
+// SupportedResource represents a single supported resource type.
+message SupportedResource {
+  string resource_type = 1;
 }

@@ -111,11 +111,11 @@ export declare const GenericOptionsSchema: GenMessage<GenericOptions>;
  */
 export declare type Debug = Message<"infracost.parser.options.Debug"> & {
   /**
-   * The address of the resource to track debug info for
+   * The addresses of the resource to track debug info for
    *
-   * @generated from field: string address = 1;
+   * @generated from field: repeated string addresses = 1;
    */
-  address: string;
+  addresses: string[];
 
   /**
    * Whether to include the debug dumps in the output

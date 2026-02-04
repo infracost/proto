@@ -31,8 +31,8 @@ message GenericOptions {
 }
 
 message Debug {
-  // The address of the resource to track debug info for
-  string address = 1;
+  // The addresses of the resource to track debug info for
+  repeated string addresses = 1;
   // Whether to include the debug dumps in the output
   bool include_dumps = 2;
 }

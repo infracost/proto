@@ -168,8 +168,8 @@ func (x *GenericOptions) GetRemoteModuleCacheConfig() *RemoteModuleCacheConfig {
 
 type Debug struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The address of the resource to track debug info for
-	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// The addresses of the resource to track debug info for
+	Addresses []string `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
 	// Whether to include the debug dumps in the output
 	IncludeDumps  bool `protobuf:"varint,2,opt,name=include_dumps,json=includeDumps,proto3" json:"include_dumps,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -206,11 +206,11 @@ func (*Debug) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Debug) GetAddress() string {
+func (x *Debug) GetAddresses() []string {
 	if x != nil {
-		return x.Address
+		return x.Addresses
 	}
-	return ""
+	return nil
 }
 
 func (x *Debug) GetIncludeDumps() bool {
@@ -480,9 +480,9 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x0fsparse_checkout\x18\n" +
 	" \x01(\bR\x0esparseCheckout\x12H\n" +
 	"\fproxy_router\x18\v \x01(\v2%.infracost.parser.options.ProxyRouterR\vproxyRouter\x12n\n" +
-	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\"F\n" +
-	"\x05Debug\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\tR\aaddress\x12#\n" +
+	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\"J\n" +
+	"\x05Debug\x12\x1c\n" +
+	"\taddresses\x18\x01 \x03(\tR\taddresses\x12#\n" +
 	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"9\n" +
 	"\rCredentialSet\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x12\n" +
