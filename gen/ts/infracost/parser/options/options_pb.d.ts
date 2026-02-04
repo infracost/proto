@@ -2,7 +2,7 @@
 // @generated from file infracost/parser/options/options.proto (package infracost.parser.options, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -98,6 +98,13 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: infracost.parser.options.RemoteModuleCacheConfig remote_module_cache_config = 12;
    */
   remoteModuleCacheConfig?: RemoteModuleCacheConfig;
+
+  /**
+   * Include dependencies to return back in the breakdown
+   *
+   * @generated from field: bool include_dependencies = 13;
+   */
+  includeDependencies: boolean;
 };
 
 /**
@@ -148,6 +155,13 @@ export declare type CredentialSet = Message<"infracost.parser.options.Credential
    * @generated from field: string host = 2;
    */
   host: string;
+
+  /**
+   * The type of credential
+   *
+   * @generated from field: infracost.parser.options.CredentialType type = 3;
+   */
+  type: CredentialType;
 };
 
 /**
@@ -249,4 +263,35 @@ export declare type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export declare const ProxyRouterSchema: GenMessage<ProxyRouter>;
+
+/**
+ * @generated from enum infracost.parser.options.CredentialType
+ */
+export enum CredentialType {
+  /**
+   * Unspecified credential type
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_UNSPECIFIED = 0;
+   */
+  CREDENTIAL_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * Token-based authentication
+   *
+   * @generated from enum value: TOKEN = 1;
+   */
+  TOKEN = 1,
+
+  /**
+   * TFC
+   *
+   * @generated from enum value: TFC = 2;
+   */
+  TFC = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.options.CredentialType.
+ */
+export declare const CredentialTypeSchema: GenEnum<CredentialType>;
 

@@ -28,6 +28,8 @@ message GenericOptions {
   ProxyRouter proxy_router = 11;
   // Remote module cache configuration
   RemoteModuleCacheConfig remote_module_cache_config = 12;
+  // Include dependencies to return back in the breakdown
+  bool include_dependencies = 13;
 }
 
 message Debug {
@@ -37,11 +39,22 @@ message Debug {
   bool include_dumps = 2;
 }
 
+enum CredentialType {
+  // Unspecified credential type
+  CREDENTIAL_TYPE_UNSPECIFIED = 0;
+  // Token-based authentication
+  TOKEN = 1;
+  // TFC
+  TFC = 2;
+}
+
 message CredentialSet {
   // The access token for authentication
   string token = 1;
   // The host for the authentication server
   string host = 2;
+  // The type of credential
+  CredentialType type = 3;
 }
 
 message RemoteModuleCacheConfig {

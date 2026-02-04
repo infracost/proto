@@ -112,6 +112,13 @@ export declare type Options = Message<"infracost.parser.terraform.Options"> & {
    * @generated from field: bool force_local_module_paths = 10;
    */
   forceLocalModulePaths: boolean;
+
+  /**
+   * TFC configuration
+   *
+   * @generated from field: infracost.parser.terraform.TFCConfiguration tfc_configuration = 11;
+   */
+  tfcConfiguration?: TFCConfiguration;
 };
 
 /**
@@ -169,4 +176,36 @@ export declare type DefaultTag = Message<"infracost.parser.terraform.DefaultTag"
  * Use `create(DefaultTagSchema)` to create a new message.
  */
 export declare const DefaultTagSchema: GenMessage<DefaultTag>;
+
+/**
+ * @generated from message infracost.parser.terraform.TFCConfiguration
+ */
+export declare type TFCConfiguration = Message<"infracost.parser.terraform.TFCConfiguration"> & {
+  /**
+   * The organization name
+   *
+   * @generated from field: string organization = 1;
+   */
+  organization: string;
+
+  /**
+   * The workspace name
+   *
+   * @generated from field: string workspace = 2;
+   */
+  workspace: string;
+
+  /**
+   * The hostname of the TFC instance
+   *
+   * @generated from field: string hostname = 3;
+   */
+  hostname: string;
+};
+
+/**
+ * Describes the message infracost.parser.terraform.TFCConfiguration.
+ * Use `create(TFCConfigurationSchema)` to create a new message.
+ */
+export declare const TFCConfigurationSchema: GenMessage<TFCConfiguration>;
 

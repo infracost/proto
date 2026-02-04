@@ -33,6 +33,8 @@ message Options {
   repeated string tf_vars_files = 9;
   // Should we force using local module paths instead of downloading them
   bool force_local_module_paths = 10;
+  // TFC configuration
+  TFCConfiguration tfc_configuration = 11;
 }
 
 message RemoteVariable {
@@ -47,4 +49,13 @@ message DefaultTag {
   hcl.Value key = 1;
   // A value representing a tag
   hcl.Value value = 2;
+}
+
+message TFCConfiguration {
+  // The organization name
+  string organization = 1;
+  // The workspace name
+  string workspace = 2;
+  // The hostname of the TFC instance
+  string hostname = 3;
 }

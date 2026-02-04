@@ -106,8 +106,10 @@ type Options struct {
 	TfVarsFiles []string `protobuf:"bytes,9,rep,name=tf_vars_files,json=tfVarsFiles,proto3" json:"tf_vars_files,omitempty"`
 	// Should we force using local module paths instead of downloading them
 	ForceLocalModulePaths bool `protobuf:"varint,10,opt,name=force_local_module_paths,json=forceLocalModulePaths,proto3" json:"force_local_module_paths,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// TFC configuration
+	TfcConfiguration *TFCConfiguration `protobuf:"bytes,11,opt,name=tfc_configuration,json=tfcConfiguration,proto3" json:"tfc_configuration,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Options) Reset() {
@@ -208,6 +210,13 @@ func (x *Options) GetForceLocalModulePaths() bool {
 		return x.ForceLocalModulePaths
 	}
 	return false
+}
+
+func (x *Options) GetTfcConfiguration() *TFCConfiguration {
+	if x != nil {
+		return x.TfcConfiguration
+	}
+	return nil
 }
 
 type RemoteVariable struct {
@@ -318,6 +327,69 @@ func (x *DefaultTag) GetValue() *hcl.Value {
 	return nil
 }
 
+type TFCConfiguration struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The organization name
+	Organization string `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+	// The workspace name
+	Workspace string `protobuf:"bytes,2,opt,name=workspace,proto3" json:"workspace,omitempty"`
+	// The hostname of the TFC instance
+	Hostname      string `protobuf:"bytes,3,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TFCConfiguration) Reset() {
+	*x = TFCConfiguration{}
+	mi := &file_infracost_parser_terraform_target_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TFCConfiguration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TFCConfiguration) ProtoMessage() {}
+
+func (x *TFCConfiguration) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_terraform_target_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TFCConfiguration.ProtoReflect.Descriptor instead.
+func (*TFCConfiguration) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_terraform_target_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TFCConfiguration) GetOrganization() string {
+	if x != nil {
+		return x.Organization
+	}
+	return ""
+}
+
+func (x *TFCConfiguration) GetWorkspace() string {
+	if x != nil {
+		return x.Workspace
+	}
+	return ""
+}
+
+func (x *TFCConfiguration) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
 var File_infracost_parser_terraform_target_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_target_proto_rawDesc = "" +
@@ -326,7 +398,7 @@ const file_infracost_parser_terraform_target_proto_rawDesc = "" +
 	"\x06Target\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12U\n" +
 	"\rloaded_module\x18\x02 \x01(\v20.infracost.parser.terraform.modules.LoadedModuleR\floadedModule\x12=\n" +
-	"\aoptions\x18\x03 \x01(\v2#.infracost.parser.terraform.OptionsR\aoptions\"\x9c\b\n" +
+	"\aoptions\x18\x03 \x01(\v2#.infracost.parser.terraform.OptionsR\aoptions\"\xf7\b\n" +
 	"\aOptions\x12B\n" +
 	"\ageneric\x18\x01 \x01(\v2(.infracost.parser.options.GenericOptionsR\ageneric\x12Q\n" +
 	"\n" +
@@ -340,7 +412,8 @@ const file_infracost_parser_terraform_target_proto_rawDesc = "" +
 	"\tworkspace\x18\b \x01(\tR\tworkspace\x12\"\n" +
 	"\rtf_vars_files\x18\t \x03(\tR\vtfVarsFiles\x127\n" +
 	"\x18force_local_module_paths\x18\n" +
-	" \x01(\bR\x15forceLocalModulePaths\x1a<\n" +
+	" \x01(\bR\x15forceLocalModulePaths\x12Y\n" +
+	"\x11tfc_configuration\x18\v \x01(\v2,.infracost.parser.terraform.TFCConfigurationR\x10tfcConfiguration\x1a<\n" +
 	"\x0eSourceMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aA\n" +
@@ -362,7 +435,11 @@ const file_infracost_parser_terraform_target_proto_rawDesc = "" +
 	"\n" +
 	"DefaultTag\x12-\n" +
 	"\x03key\x18\x01 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x05valueB\xf5\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x05value\"p\n" +
+	"\x10TFCConfiguration\x12\"\n" +
+	"\forganization\x18\x01 \x01(\tR\forganization\x12\x1c\n" +
+	"\tworkspace\x18\x02 \x01(\tR\tworkspace\x12\x1a\n" +
+	"\bhostname\x18\x03 \x01(\tR\bhostnameB\xf5\x01\n" +
 	"\x1ecom.infracost.parser.terraformB\vTargetProtoP\x01Z<github.com/infracost/proto/gen/go/infracost/parser/terraform\xa2\x02\x03IPT\xaa\x02\x1aInfracost.Parser.Terraform\xca\x02\x1aInfracost\\Parser\\Terraform\xe2\x02&Infracost\\Parser\\Terraform\\GPBMetadata\xea\x02\x1cInfracost::Parser::Terraformb\x06proto3"
 
 var (
@@ -377,40 +454,42 @@ func file_infracost_parser_terraform_target_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_terraform_target_proto_rawDescData
 }
 
-var file_infracost_parser_terraform_target_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_infracost_parser_terraform_target_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_infracost_parser_terraform_target_proto_goTypes = []any{
 	(*Target)(nil),                 // 0: infracost.parser.terraform.Target
 	(*Options)(nil),                // 1: infracost.parser.terraform.Options
 	(*RemoteVariable)(nil),         // 2: infracost.parser.terraform.RemoteVariable
 	(*DefaultTag)(nil),             // 3: infracost.parser.terraform.DefaultTag
-	nil,                            // 4: infracost.parser.terraform.Options.SourceMapEntry
-	nil,                            // 5: infracost.parser.terraform.Options.RegexSourceMapEntry
-	nil,                            // 6: infracost.parser.terraform.Options.EnvEntry
-	nil,                            // 7: infracost.parser.terraform.Options.VarsEntry
-	nil,                            // 8: infracost.parser.terraform.Options.RemoteVarsEntry
-	(*modules.LoadedModule)(nil),   // 9: infracost.parser.terraform.modules.LoadedModule
-	(*options.GenericOptions)(nil), // 10: infracost.parser.options.GenericOptions
-	(*hcl.Value)(nil),              // 11: infracost.parser.hcl.Value
+	(*TFCConfiguration)(nil),       // 4: infracost.parser.terraform.TFCConfiguration
+	nil,                            // 5: infracost.parser.terraform.Options.SourceMapEntry
+	nil,                            // 6: infracost.parser.terraform.Options.RegexSourceMapEntry
+	nil,                            // 7: infracost.parser.terraform.Options.EnvEntry
+	nil,                            // 8: infracost.parser.terraform.Options.VarsEntry
+	nil,                            // 9: infracost.parser.terraform.Options.RemoteVarsEntry
+	(*modules.LoadedModule)(nil),   // 10: infracost.parser.terraform.modules.LoadedModule
+	(*options.GenericOptions)(nil), // 11: infracost.parser.options.GenericOptions
+	(*hcl.Value)(nil),              // 12: infracost.parser.hcl.Value
 }
 var file_infracost_parser_terraform_target_proto_depIdxs = []int32{
-	9,  // 0: infracost.parser.terraform.Target.loaded_module:type_name -> infracost.parser.terraform.modules.LoadedModule
+	10, // 0: infracost.parser.terraform.Target.loaded_module:type_name -> infracost.parser.terraform.modules.LoadedModule
 	1,  // 1: infracost.parser.terraform.Target.options:type_name -> infracost.parser.terraform.Options
-	10, // 2: infracost.parser.terraform.Options.generic:type_name -> infracost.parser.options.GenericOptions
-	4,  // 3: infracost.parser.terraform.Options.source_map:type_name -> infracost.parser.terraform.Options.SourceMapEntry
-	5,  // 4: infracost.parser.terraform.Options.regex_source_map:type_name -> infracost.parser.terraform.Options.RegexSourceMapEntry
-	6,  // 5: infracost.parser.terraform.Options.env:type_name -> infracost.parser.terraform.Options.EnvEntry
-	7,  // 6: infracost.parser.terraform.Options.vars:type_name -> infracost.parser.terraform.Options.VarsEntry
+	11, // 2: infracost.parser.terraform.Options.generic:type_name -> infracost.parser.options.GenericOptions
+	5,  // 3: infracost.parser.terraform.Options.source_map:type_name -> infracost.parser.terraform.Options.SourceMapEntry
+	6,  // 4: infracost.parser.terraform.Options.regex_source_map:type_name -> infracost.parser.terraform.Options.RegexSourceMapEntry
+	7,  // 5: infracost.parser.terraform.Options.env:type_name -> infracost.parser.terraform.Options.EnvEntry
+	8,  // 6: infracost.parser.terraform.Options.vars:type_name -> infracost.parser.terraform.Options.VarsEntry
 	3,  // 7: infracost.parser.terraform.Options.default_tags:type_name -> infracost.parser.terraform.DefaultTag
-	8,  // 8: infracost.parser.terraform.Options.remote_vars:type_name -> infracost.parser.terraform.Options.RemoteVarsEntry
-	11, // 9: infracost.parser.terraform.DefaultTag.key:type_name -> infracost.parser.hcl.Value
-	11, // 10: infracost.parser.terraform.DefaultTag.value:type_name -> infracost.parser.hcl.Value
-	11, // 11: infracost.parser.terraform.Options.VarsEntry.value:type_name -> infracost.parser.hcl.Value
-	2,  // 12: infracost.parser.terraform.Options.RemoteVarsEntry.value:type_name -> infracost.parser.terraform.RemoteVariable
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	9,  // 8: infracost.parser.terraform.Options.remote_vars:type_name -> infracost.parser.terraform.Options.RemoteVarsEntry
+	4,  // 9: infracost.parser.terraform.Options.tfc_configuration:type_name -> infracost.parser.terraform.TFCConfiguration
+	12, // 10: infracost.parser.terraform.DefaultTag.key:type_name -> infracost.parser.hcl.Value
+	12, // 11: infracost.parser.terraform.DefaultTag.value:type_name -> infracost.parser.hcl.Value
+	12, // 12: infracost.parser.terraform.Options.VarsEntry.value:type_name -> infracost.parser.hcl.Value
+	2,  // 13: infracost.parser.terraform.Options.RemoteVarsEntry.value:type_name -> infracost.parser.terraform.RemoteVariable
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_terraform_target_proto_init() }
@@ -424,7 +503,7 @@ func file_infracost_parser_terraform_target_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_terraform_target_proto_rawDesc), len(file_infracost_parser_terraform_target_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
