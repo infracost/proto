@@ -2,7 +2,7 @@
 // @generated from file infracost/parser/options/options.proto (package infracost.parser.options, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -148,6 +148,13 @@ export declare type CredentialSet = Message<"infracost.parser.options.Credential
    * @generated from field: string host = 2;
    */
   host: string;
+
+  /**
+   * The type of credential
+   *
+   * @generated from field: infracost.parser.options.CredentialType type = 3;
+   */
+  type: CredentialType;
 };
 
 /**
@@ -249,4 +256,35 @@ export declare type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export declare const ProxyRouterSchema: GenMessage<ProxyRouter>;
+
+/**
+ * @generated from enum infracost.parser.options.CredentialType
+ */
+export enum CredentialType {
+  /**
+   * Unspecified credential type
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_UNSPECIFIED = 0;
+   */
+  CREDENTIAL_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * Token-based authentication
+   *
+   * @generated from enum value: TOKEN = 1;
+   */
+  TOKEN = 1,
+
+  /**
+   * Terraform Cloud
+   *
+   * @generated from enum value: TERRAFORM_CLOUD = 2;
+   */
+  TERRAFORM_CLOUD = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.options.CredentialType.
+ */
+export declare const CredentialTypeSchema: GenEnum<CredentialType>;
 
