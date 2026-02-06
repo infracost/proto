@@ -69,8 +69,8 @@ message Dependency {
   string external_snippet = 7;
   // True if the dependency was synthesized (not from actual source)
   bool is_synthetic = 8;
-  // True if this is generated Terraform from terragrunt (temporary files)
-  bool is_terragrunt_generated = 9;
+  // True if this is generated (temporary files)
+  bool is_generated = 9;
   // The recursion depth at which this dependency was found
   int32 depth = 10;
 }

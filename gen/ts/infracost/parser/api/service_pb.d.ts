@@ -191,11 +191,11 @@ export declare type Dependency = Message<"infracost.parser.api.Dependency"> & {
   isSynthetic: boolean;
 
   /**
-   * True if this is generated Terraform from terragrunt (temporary files)
+   * True if this is generated (temporary files)
    *
-   * @generated from field: bool is_terragrunt_generated = 9;
+   * @generated from field: bool is_generated = 9;
    */
-  isTerragruntGenerated: boolean;
+  isGenerated: boolean;
 
   /**
    * The recursion depth at which this dependency was found

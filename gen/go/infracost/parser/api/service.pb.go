@@ -276,8 +276,8 @@ type Dependency struct {
 	ExternalSnippet string `protobuf:"bytes,7,opt,name=external_snippet,json=externalSnippet,proto3" json:"external_snippet,omitempty"`
 	// True if the dependency was synthesized (not from actual source)
 	IsSynthetic bool `protobuf:"varint,8,opt,name=is_synthetic,json=isSynthetic,proto3" json:"is_synthetic,omitempty"`
-	// True if this is generated Terraform from terragrunt (temporary files)
-	IsTerragruntGenerated bool `protobuf:"varint,9,opt,name=is_terragrunt_generated,json=isTerragruntGenerated,proto3" json:"is_terragrunt_generated,omitempty"`
+	// True if this is generated (temporary files)
+	IsGenerated bool `protobuf:"varint,9,opt,name=is_generated,json=isGenerated,proto3" json:"is_generated,omitempty"`
 	// The recursion depth at which this dependency was found
 	Depth         int32 `protobuf:"varint,10,opt,name=depth,proto3" json:"depth,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -370,9 +370,9 @@ func (x *Dependency) GetIsSynthetic() bool {
 	return false
 }
 
-func (x *Dependency) GetIsTerragruntGenerated() bool {
+func (x *Dependency) GetIsGenerated() bool {
 	if x != nil {
-		return x.IsTerragruntGenerated
+		return x.IsGenerated
 	}
 	return false
 }
@@ -671,7 +671,7 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
 	"\x06result\x18\x02 \x01(\v2).infracost.parser.api.ParseResponseResultR\x06result\x12D\n" +
-	"\fdependencies\x18\x03 \x03(\v2 .infracost.parser.api.DependencyR\fdependencies\"\x8a\x03\n" +
+	"\fdependencies\x18\x03 \x03(\v2 .infracost.parser.api.DependencyR\fdependencies\"\xf5\x02\n" +
 	"\n" +
 	"Dependency\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x1d\n" +
@@ -682,8 +682,8 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\x10is_remote_module\x18\x05 \x01(\bR\x0eisRemoteModule\x122\n" +
 	"\x15is_externally_defined\x18\x06 \x01(\bR\x13isExternallyDefined\x12)\n" +
 	"\x10external_snippet\x18\a \x01(\tR\x0fexternalSnippet\x12!\n" +
-	"\fis_synthetic\x18\b \x01(\bR\visSynthetic\x126\n" +
-	"\x17is_terragrunt_generated\x18\t \x01(\bR\x15isTerragruntGenerated\x12\x14\n" +
+	"\fis_synthetic\x18\b \x01(\bR\visSynthetic\x12!\n" +
+	"\fis_generated\x18\t \x01(\bR\visGenerated\x12\x14\n" +
 	"\x05depth\x18\n" +
 	" \x01(\x05R\x05depth\"\xbb\x01\n" +
 	"\x13ParseResponseResult\x12H\n" +
