@@ -100,8 +100,10 @@ type GenericOptions struct {
 	ProxyRouter *ProxyRouter `protobuf:"bytes,11,opt,name=proxy_router,json=proxyRouter,proto3" json:"proxy_router,omitempty"`
 	// Remote module cache configuration
 	RemoteModuleCacheConfig *RemoteModuleCacheConfig `protobuf:"bytes,12,opt,name=remote_module_cache_config,json=remoteModuleCacheConfig,proto3" json:"remote_module_cache_config,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// Optional request to extract dependencies for a specific resource during parsing
+	DependencyRequest *DependencyRequest `protobuf:"bytes,13,opt,name=dependency_request,json=dependencyRequest,proto3,oneof" json:"dependency_request,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -218,6 +220,87 @@ func (x *GenericOptions) GetRemoteModuleCacheConfig() *RemoteModuleCacheConfig {
 	return nil
 }
 
+func (x *GenericOptions) GetDependencyRequest() *DependencyRequest {
+	if x != nil {
+		return x.DependencyRequest
+	}
+	return nil
+}
+
+// DependencyRequest specifies parameters for extracting resource dependencies during parsing.
+// When set, the parser will use internal hooks to extract dependencies while the graph is available.
+type DependencyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The project name to filter to (only process modules matching this project)
+	ProjectName string `protobuf:"bytes,1,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
+	// The resource address to get dependencies for (e.g., "module.vpc.aws_instance.web")
+	ResourceAddress string `protobuf:"bytes,2,opt,name=resource_address,json=resourceAddress,proto3" json:"resource_address,omitempty"`
+	// Whether to include code snippets from remote modules
+	UseRemoteModuleSnippets bool `protobuf:"varint,3,opt,name=use_remote_module_snippets,json=useRemoteModuleSnippets,proto3" json:"use_remote_module_snippets,omitempty"`
+	// The working directory for path normalization
+	WorkingDirectory string `protobuf:"bytes,4,opt,name=working_directory,json=workingDirectory,proto3" json:"working_directory,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *DependencyRequest) Reset() {
+	*x = DependencyRequest{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DependencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DependencyRequest) ProtoMessage() {}
+
+func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DependencyRequest.ProtoReflect.Descriptor instead.
+func (*DependencyRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DependencyRequest) GetProjectName() string {
+	if x != nil {
+		return x.ProjectName
+	}
+	return ""
+}
+
+func (x *DependencyRequest) GetResourceAddress() string {
+	if x != nil {
+		return x.ResourceAddress
+	}
+	return ""
+}
+
+func (x *DependencyRequest) GetUseRemoteModuleSnippets() bool {
+	if x != nil {
+		return x.UseRemoteModuleSnippets
+	}
+	return false
+}
+
+func (x *DependencyRequest) GetWorkingDirectory() string {
+	if x != nil {
+		return x.WorkingDirectory
+	}
+	return ""
+}
+
 type Debug struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The addresses of the resource to track debug info for
@@ -230,7 +313,7 @@ type Debug struct {
 
 func (x *Debug) Reset() {
 	*x = Debug{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -242,7 +325,7 @@ func (x *Debug) String() string {
 func (*Debug) ProtoMessage() {}
 
 func (x *Debug) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -255,7 +338,7 @@ func (x *Debug) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Debug.ProtoReflect.Descriptor instead.
 func (*Debug) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Debug) GetAddresses() []string {
@@ -286,7 +369,7 @@ type CredentialSet struct {
 
 func (x *CredentialSet) Reset() {
 	*x = CredentialSet{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -298,7 +381,7 @@ func (x *CredentialSet) String() string {
 func (*CredentialSet) ProtoMessage() {}
 
 func (x *CredentialSet) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,7 +394,7 @@ func (x *CredentialSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CredentialSet.ProtoReflect.Descriptor instead.
 func (*CredentialSet) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CredentialSet) GetToken() string {
@@ -351,7 +434,7 @@ type RemoteModuleCacheConfig struct {
 
 func (x *RemoteModuleCacheConfig) Reset() {
 	*x = RemoteModuleCacheConfig{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +446,7 @@ func (x *RemoteModuleCacheConfig) String() string {
 func (*RemoteModuleCacheConfig) ProtoMessage() {}
 
 func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,7 +459,7 @@ func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoteModuleCacheConfig.ProtoReflect.Descriptor instead.
 func (*RemoteModuleCacheConfig) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RemoteModuleCacheConfig) GetRegion() string {
@@ -423,7 +506,7 @@ type AwsCredentials struct {
 
 func (x *AwsCredentials) Reset() {
 	*x = AwsCredentials{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +518,7 @@ func (x *AwsCredentials) String() string {
 func (*AwsCredentials) ProtoMessage() {}
 
 func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +531,7 @@ func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AwsCredentials.ProtoReflect.Descriptor instead.
 func (*AwsCredentials) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AwsCredentials) GetAccessKeyId() string {
@@ -488,7 +571,7 @@ type ProxyRouter struct {
 
 func (x *ProxyRouter) Reset() {
 	*x = ProxyRouter{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -500,7 +583,7 @@ func (x *ProxyRouter) String() string {
 func (*ProxyRouter) ProtoMessage() {}
 
 func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -513,7 +596,7 @@ func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProxyRouter.ProtoReflect.Descriptor instead.
 func (*ProxyRouter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ProxyRouter) GetRoutes() map[string]string {
@@ -527,7 +610,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xcb\x05\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xc3\x06\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -541,7 +624,14 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x0fsparse_checkout\x18\n" +
 	" \x01(\bR\x0esparseCheckout\x12H\n" +
 	"\fproxy_router\x18\v \x01(\v2%.infracost.parser.options.ProxyRouterR\vproxyRouter\x12n\n" +
-	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\"J\n" +
+	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\x12_\n" +
+	"\x12dependency_request\x18\r \x01(\v2+.infracost.parser.options.DependencyRequestH\x00R\x11dependencyRequest\x88\x01\x01B\x15\n" +
+	"\x13_dependency_request\"\xcb\x01\n" +
+	"\x11DependencyRequest\x12!\n" +
+	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
+	"\x10resource_address\x18\x02 \x01(\tR\x0fresourceAddress\x12;\n" +
+	"\x1ause_remote_module_snippets\x18\x03 \x01(\bR\x17useRemoteModuleSnippets\x12+\n" +
+	"\x11working_directory\x18\x04 \x01(\tR\x10workingDirectory\"J\n" +
 	"\x05Debug\x12\x1c\n" +
 	"\taddresses\x18\x01 \x03(\tR\taddresses\x12#\n" +
 	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"w\n" +
@@ -585,30 +675,32 @@ func file_infracost_parser_options_options_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_options_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_infracost_parser_options_options_proto_goTypes = []any{
 	(CredentialType)(0),             // 0: infracost.parser.options.CredentialType
 	(*GenericOptions)(nil),          // 1: infracost.parser.options.GenericOptions
-	(*Debug)(nil),                   // 2: infracost.parser.options.Debug
-	(*CredentialSet)(nil),           // 3: infracost.parser.options.CredentialSet
-	(*RemoteModuleCacheConfig)(nil), // 4: infracost.parser.options.RemoteModuleCacheConfig
-	(*AwsCredentials)(nil),          // 5: infracost.parser.options.AwsCredentials
-	(*ProxyRouter)(nil),             // 6: infracost.parser.options.ProxyRouter
-	nil,                             // 7: infracost.parser.options.ProxyRouter.RoutesEntry
+	(*DependencyRequest)(nil),       // 2: infracost.parser.options.DependencyRequest
+	(*Debug)(nil),                   // 3: infracost.parser.options.Debug
+	(*CredentialSet)(nil),           // 4: infracost.parser.options.CredentialSet
+	(*RemoteModuleCacheConfig)(nil), // 5: infracost.parser.options.RemoteModuleCacheConfig
+	(*AwsCredentials)(nil),          // 6: infracost.parser.options.AwsCredentials
+	(*ProxyRouter)(nil),             // 7: infracost.parser.options.ProxyRouter
+	nil,                             // 8: infracost.parser.options.ProxyRouter.RoutesEntry
 }
 var file_infracost_parser_options_options_proto_depIdxs = []int32{
-	3, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
-	5, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
-	2, // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
-	6, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
-	4, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
-	0, // 5: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
-	7, // 6: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	4, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
+	6, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
+	3, // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
+	7, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
+	5, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
+	2, // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
+	0, // 6: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
+	8, // 7: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_options_options_proto_init() }
@@ -616,13 +708,14 @@ func file_infracost_parser_options_options_proto_init() {
 	if File_infracost_parser_options_options_proto != nil {
 		return
 	}
+	file_infracost_parser_options_options_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_options_options_proto_rawDesc), len(file_infracost_parser_options_options_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

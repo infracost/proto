@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/options/options.proto.
  */
 export const file_infracost_parser_options_options: GenFile = /*@__PURE__*/
-  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIosECg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZyIxCgVEZWJ1ZxIRCglhZGRyZXNzZXMYASADKAkSFQoNaW5jbHVkZV9kdW1wcxgCIAEoCCJkCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZSJiChdSZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxIOCgZyZWdpb24YASABKAkSEwoLYnVja2V0X25hbWUYAiABKAkSDgoGcHJlZml4GAMgASgJEhIKCmlzX3ByaXZhdGUYBCABKAgiaAoOQXdzQ3JlZGVudGlhbHMSFQoNYWNjZXNzX2tleV9pZBgBIAEoCRIZChFzZWNyZXRfYWNjZXNzX2tleRgCIAEoCRIUCgxhY2Nlc3NfdG9rZW4YAyABKAkSDgoGcmVnaW9uGAQgASgJIn8KC1Byb3h5Um91dGVyEkEKBnJvdXRlcxgBIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlci5Sb3V0ZXNFbnRyeRotCgtSb3V0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKlEKDkNyZWRlbnRpYWxUeXBlEh8KG0NSRURFTlRJQUxfVFlQRV9VTlNQRUNJRklFRBAAEgkKBVRPS0VOEAESEwoPVEVSUkFGT1JNX0NMT1VEEAJC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
+  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIvAECg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBAUIVChNfZGVwZW5kZW5jeV9yZXF1ZXN0IoIBChFEZXBlbmRlbmN5UmVxdWVzdBIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQcmVzb3VyY2VfYWRkcmVzcxgCIAEoCRIiChp1c2VfcmVtb3RlX21vZHVsZV9zbmlwcGV0cxgDIAEoCBIZChF3b3JraW5nX2RpcmVjdG9yeRgEIAEoCSIxCgVEZWJ1ZxIRCglhZGRyZXNzZXMYASADKAkSFQoNaW5jbHVkZV9kdW1wcxgCIAEoCCJkCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZSJiChdSZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxIOCgZyZWdpb24YASABKAkSEwoLYnVja2V0X25hbWUYAiABKAkSDgoGcHJlZml4GAMgASgJEhIKCmlzX3ByaXZhdGUYBCABKAgiaAoOQXdzQ3JlZGVudGlhbHMSFQoNYWNjZXNzX2tleV9pZBgBIAEoCRIZChFzZWNyZXRfYWNjZXNzX2tleRgCIAEoCRIUCgxhY2Nlc3NfdG9rZW4YAyABKAkSDgoGcmVnaW9uGAQgASgJIn8KC1Byb3h5Um91dGVyEkEKBnJvdXRlcxgBIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlci5Sb3V0ZXNFbnRyeRotCgtSb3V0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKlEKDkNyZWRlbnRpYWxUeXBlEh8KG0NSRURFTlRJQUxfVFlQRV9VTlNQRUNJRklFRBAAEgkKBVRPS0VOEAESEwoPVEVSUkFGT1JNX0NMT1VEEAJC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
 
 /**
  * @generated from message infracost.parser.options.GenericOptions
@@ -100,6 +100,13 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
    * @generated from field: infracost.parser.options.RemoteModuleCacheConfig remote_module_cache_config = 12;
    */
   remoteModuleCacheConfig?: RemoteModuleCacheConfig;
+
+  /**
+   * Optional request to extract dependencies for a specific resource during parsing
+   *
+   * @generated from field: optional infracost.parser.options.DependencyRequest dependency_request = 13;
+   */
+  dependencyRequest?: DependencyRequest;
 };
 
 /**
@@ -108,6 +115,49 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
  */
 export const GenericOptionsSchema: GenMessage<GenericOptions> = /*@__PURE__*/
   messageDesc(file_infracost_parser_options_options, 0);
+
+/**
+ * DependencyRequest specifies parameters for extracting resource dependencies during parsing.
+ * When set, the parser will use internal hooks to extract dependencies while the graph is available.
+ *
+ * @generated from message infracost.parser.options.DependencyRequest
+ */
+export type DependencyRequest = Message<"infracost.parser.options.DependencyRequest"> & {
+  /**
+   * The project name to filter to (only process modules matching this project)
+   *
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * The resource address to get dependencies for (e.g., "module.vpc.aws_instance.web")
+   *
+   * @generated from field: string resource_address = 2;
+   */
+  resourceAddress: string;
+
+  /**
+   * Whether to include code snippets from remote modules
+   *
+   * @generated from field: bool use_remote_module_snippets = 3;
+   */
+  useRemoteModuleSnippets: boolean;
+
+  /**
+   * The working directory for path normalization
+   *
+   * @generated from field: string working_directory = 4;
+   */
+  workingDirectory: string;
+};
+
+/**
+ * Describes the message infracost.parser.options.DependencyRequest.
+ * Use `create(DependencyRequestSchema)` to create a new message.
+ */
+export const DependencyRequestSchema: GenMessage<DependencyRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 1);
 
 /**
  * @generated from message infracost.parser.options.Debug
@@ -133,7 +183,7 @@ export type Debug = Message<"infracost.parser.options.Debug"> & {
  * Use `create(DebugSchema)` to create a new message.
  */
 export const DebugSchema: GenMessage<Debug> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 1);
+  messageDesc(file_infracost_parser_options_options, 2);
 
 /**
  * @generated from message infracost.parser.options.CredentialSet
@@ -166,7 +216,7 @@ export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & 
  * Use `create(CredentialSetSchema)` to create a new message.
  */
 export const CredentialSetSchema: GenMessage<CredentialSet> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 2);
+  messageDesc(file_infracost_parser_options_options, 3);
 
 /**
  * @generated from message infracost.parser.options.RemoteModuleCacheConfig
@@ -206,7 +256,7 @@ export type RemoteModuleCacheConfig = Message<"infracost.parser.options.RemoteMo
  * Use `create(RemoteModuleCacheConfigSchema)` to create a new message.
  */
 export const RemoteModuleCacheConfigSchema: GenMessage<RemoteModuleCacheConfig> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 3);
+  messageDesc(file_infracost_parser_options_options, 4);
 
 /**
  * @generated from message infracost.parser.options.AwsCredentials
@@ -246,7 +296,7 @@ export type AwsCredentials = Message<"infracost.parser.options.AwsCredentials"> 
  * Use `create(AwsCredentialsSchema)` to create a new message.
  */
 export const AwsCredentialsSchema: GenMessage<AwsCredentials> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 4);
+  messageDesc(file_infracost_parser_options_options, 5);
 
 /**
  * @generated from message infracost.parser.options.ProxyRouter
@@ -263,7 +313,7 @@ export type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"> & {
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export const ProxyRouterSchema: GenMessage<ProxyRouter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 5);
+  messageDesc(file_infracost_parser_options_options, 6);
 
 /**
  * @generated from enum infracost.parser.options.CredentialType

@@ -98,6 +98,13 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: infracost.parser.options.RemoteModuleCacheConfig remote_module_cache_config = 12;
    */
   remoteModuleCacheConfig?: RemoteModuleCacheConfig;
+
+  /**
+   * Optional request to extract dependencies for a specific resource during parsing
+   *
+   * @generated from field: optional infracost.parser.options.DependencyRequest dependency_request = 13;
+   */
+  dependencyRequest?: DependencyRequest;
 };
 
 /**
@@ -105,6 +112,48 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
  * Use `create(GenericOptionsSchema)` to create a new message.
  */
 export declare const GenericOptionsSchema: GenMessage<GenericOptions>;
+
+/**
+ * DependencyRequest specifies parameters for extracting resource dependencies during parsing.
+ * When set, the parser will use internal hooks to extract dependencies while the graph is available.
+ *
+ * @generated from message infracost.parser.options.DependencyRequest
+ */
+export declare type DependencyRequest = Message<"infracost.parser.options.DependencyRequest"> & {
+  /**
+   * The project name to filter to (only process modules matching this project)
+   *
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * The resource address to get dependencies for (e.g., "module.vpc.aws_instance.web")
+   *
+   * @generated from field: string resource_address = 2;
+   */
+  resourceAddress: string;
+
+  /**
+   * Whether to include code snippets from remote modules
+   *
+   * @generated from field: bool use_remote_module_snippets = 3;
+   */
+  useRemoteModuleSnippets: boolean;
+
+  /**
+   * The working directory for path normalization
+   *
+   * @generated from field: string working_directory = 4;
+   */
+  workingDirectory: string;
+};
+
+/**
+ * Describes the message infracost.parser.options.DependencyRequest.
+ * Use `create(DependencyRequestSchema)` to create a new message.
+ */
+export declare const DependencyRequestSchema: GenMessage<DependencyRequest>;
 
 /**
  * @generated from message infracost.parser.options.Debug
