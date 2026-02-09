@@ -45,6 +45,34 @@ message ParseResponse {
   repeated Diagnostic diagnostics = 1;
   // The result of parsing the target, is one of cloudformation, terraform, terragrunt
   ParseResponseResult result = 2;
+  // Dependencies extracted during parsing (if DependencyRequest was provided in options)
+  repeated Dependency dependencies = 3;
+}
+
+// Dependency represents a code dependency for a Terraform resource.
+// This includes file location, module context, and content for non-local dependencies.
+message Dependency {
+  // The path to the file containing the dependency
+  string file_path = 1;
+  // The starting line number of the dependency definition
+  int64 line_start = 2;
+  // The ending line number of the dependency definition
+  int64 line_end = 3;
+  // The definition of the module that contains this dependency
+  string module_definition = 4;
+  // True if the dependency is within a remote module
+  bool is_remote_module = 5;
+  // True if the dependency value is defined outside of the source code
+  // (e.g., passed in terraform variable, synthesized variable)
+  bool is_externally_defined = 6;
+  // A raw code snippet for dependencies not locally defined
+  string external_snippet = 7;
+  // True if the dependency was synthesized (not from actual source)
+  bool is_synthetic = 8;
+  // True if this is generated (temporary files)
+  bool is_generated = 9;
+  // The recursion depth at which this dependency was found
+  int32 depth = 10;
 }
 
 // ParseResponseResult is the unified result for all parser types.
