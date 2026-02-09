@@ -65,6 +65,8 @@ message ResourceMetadata {
   string deep_checksum = 6;
   // checksum of default tag values applied to this resource
   string default_tags_checksum = 7;
+  // checksum of the attribute value(s) - could be replaced with the deep_checksum in future, but needed for dashboard atm
+  string attribute_value_checksum = 8;
 }
 
 message ModuleCall {
