@@ -508,6 +508,11 @@ export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> 
    * @generated from field: infracost.parser.event.FeatureFlags feature_flags = 5;
    */
   featureFlags?: FeatureFlags;
+
+  /**
+   * @generated from field: bool force_run = 6;
+   */
+  forceRun: boolean;
 };
 
 /**
