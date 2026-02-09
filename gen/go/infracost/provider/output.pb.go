@@ -358,8 +358,10 @@ type ResourceMetadata struct {
 	DeepChecksum string `protobuf:"bytes,6,opt,name=deep_checksum,json=deepChecksum,proto3" json:"deep_checksum,omitempty"`
 	// checksum of default tag values applied to this resource
 	DefaultTagsChecksum string `protobuf:"bytes,7,opt,name=default_tags_checksum,json=defaultTagsChecksum,proto3" json:"default_tags_checksum,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// checksum of the attribute value(s) - could be replaced with the deep_checksum in future, but needed for dashboard atm
+	AttributeValueChecksum string `protobuf:"bytes,8,opt,name=attribute_value_checksum,json=attributeValueChecksum,proto3" json:"attribute_value_checksum,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ResourceMetadata) Reset() {
@@ -437,6 +439,13 @@ func (x *ResourceMetadata) GetDeepChecksum() string {
 func (x *ResourceMetadata) GetDefaultTagsChecksum() string {
 	if x != nil {
 		return x.DefaultTagsChecksum
+	}
+	return ""
+}
+
+func (x *ResourceMetadata) GetAttributeValueChecksum() string {
+	if x != nil {
+		return x.AttributeValueChecksum
 	}
 	return ""
 }
@@ -1624,7 +1633,7 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\atagging\x18\f \x01(\v2\x1b.infracost.provider.TaggingR\atagging\x12E\n" +
 	"\x0fchild_resources\x18\r \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x12:\n" +
 	"\n" +
-	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xab\x02\n" +
+	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xe5\x02\n" +
 	"\x10ResourceMetadata\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1d\n" +
 	"\n" +
@@ -1633,7 +1642,8 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\fmodule_calls\x18\x04 \x03(\v2\x1e.infracost.provider.ModuleCallR\vmoduleCalls\x12%\n" +
 	"\x0ebasic_checksum\x18\x05 \x01(\tR\rbasicChecksum\x12#\n" +
 	"\rdeep_checksum\x18\x06 \x01(\tR\fdeepChecksum\x122\n" +
-	"\x15default_tags_checksum\x18\a \x01(\tR\x13defaultTagsChecksum\"\x8b\x01\n" +
+	"\x15default_tags_checksum\x18\a \x01(\tR\x13defaultTagsChecksum\x128\n" +
+	"\x18attribute_value_checksum\x18\b \x01(\tR\x16attributeValueChecksum\"\x8b\x01\n" +
 	"\n" +
 	"ModuleCall\x12'\n" +
 	"\x0fdefinition_name\x18\x01 \x01(\tR\x0edefinitionName\x12\x1a\n" +

@@ -198,6 +198,13 @@ export declare type ResourceMetadata = Message<"infracost.provider.ResourceMetad
    * @generated from field: string default_tags_checksum = 7;
    */
   defaultTagsChecksum: string;
+
+  /**
+   * checksum of the attribute value(s) - could be replaced with the deep_checksum in future, but needed for dashboard atm
+   *
+   * @generated from field: string attribute_value_checksum = 8;
+   */
+  attributeValueChecksum: string;
 };
 
 /**
