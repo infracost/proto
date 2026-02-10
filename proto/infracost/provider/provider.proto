@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+// Provider provides the canonical list of providers that have an Infracost provider plugin.
+enum Provider {
+  PROVIDER_UNSPECIFIED = 0;
+  PROVIDER_AWS = 1;
+  PROVIDER_AZURERM = 2;
+  PROVIDER_GOOGLE = 3;
+}
