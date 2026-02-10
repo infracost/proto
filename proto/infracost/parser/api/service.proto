@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package infracost.parser.api;
+
+import "infracost/parser/cloudformation/result.proto";
+import "infracost/parser/cloudformation/target.proto";
+import "infracost/parser/diagnostic.proto";
+import "infracost/parser/terraform/module.proto";
+import "infracost/parser/terraform/target.proto";
+import "infracost/parser/terragrunt/target.proto";
+
+// The ParserService provides a gRPC API for parsing infrastructure as code files.
+service ParserService {
+  // Initialize initializes the parser with supported resources.
+  rpc Initialize(InitializeRequest) returns (InitializeResponse);
+  // Parse takes a ParseRequest message and returns a ParseResponse message.
+  rpc Parse(ParseRequest) returns (ParseResponse);
+}
+
+// ParseRequest is the unified request for all parser types.
+message ParseRequest {
+  // The absolute root path of the repository to be parsed
+  string repo_directory = 1;
+  // The absolute working directory of the project in the repository being processed
+  string working_directory = 2;
+  // The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+  ParseRequestTarget target = 3;
+}
+
+// ParseRequestTarget is the unified target for all parser types.
+message ParseRequestTarget {
+  oneof value {
+    // The target type for Terraform files
+    terraform.Target terraform = 10;
+    // The target type for Terragrunt files
+    terragrunt.Target terragrunt = 11;
+    // The target type for CloudFormation files
+    cloudformation.Target cloudformation = 12;
+  }
+}
+
+// ParseResponse is the unified response for all parser types.
+message ParseResponse {
+  // The diagnostics generated during parsing
+  repeated Diagnostic diagnostics = 1;
+  // The result of parsing the target, is one of cloudformation, terraform, terragrunt
+  ParseResponseResult result = 2;
+  // Dependencies extracted during parsing (if DependencyRequest was provided in options)
+  repeated Dependency dependencies = 3;
+}
+
+// Dependency represents a code dependency for a Terraform resource.
+// This includes file location, module context, and content for non-local dependencies.
+message Dependency {
+  // The path to the file containing the dependency
+  string file_path = 1;
+  // The starting line number of the dependency definition
+  int64 line_start = 2;
+  // The ending line number of the dependency definition
+  int64 line_end = 3;
+  // The definition of the module that contains this dependency
+  string module_definition = 4;
+  // True if the dependency is within a remote module
+  bool is_remote_module = 5;
+  // True if the dependency value is defined outside of the source code
+  // (e.g., passed in terraform variable, synthesized variable)
+  bool is_externally_defined = 6;
+  // A raw code snippet for dependencies not locally defined
+  string external_snippet = 7;
+  // True if the dependency was synthesized (not from actual source)
+  bool is_synthetic = 8;
+  // True if this is generated (temporary files)
+  bool is_generated = 9;
+  // The recursion depth at which this dependency was found
+  int32 depth = 10;
+}
+
+// ParseResponseResult is the unified result for all parser types.
+message ParseResponseResult {
+  oneof value {
+    // The result type for Terraform files
+    terraform.ModuleResult terraform = 1;
+    // The result type for CloudFormation files
+    cloudformation.Result cloudformation = 2;
+  }
+}
+
+// InitializeRequest is the request for the Initialize RPC.
+message InitializeRequest {
+  // The supported resources for Terraform from providers
+  SupportedResources terraform_supported_resources = 1;
+  // The supported resources for CloudFormation from providers
+  SupportedResources cloudformation_supported_resources = 2;
+}
+
+// InitializeResponse is the response for the Initialize RPC.
+message InitializeResponse {}
+
+// SupportedResources lists the resource types supported by a parser.
+message SupportedResources {
+  repeated SupportedResource resource_types = 1;
+}
+
+// SupportedResource represents a single supported resource type.
+message SupportedResource {
+  string resource_type = 1;
+}
