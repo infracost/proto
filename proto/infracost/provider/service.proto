@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+import "infracost/provider/input.proto";
+import "infracost/provider/output.proto";
+
+service ProviderService {
+  rpc Process(ProcessRequest) returns (ProcessResponse);
+}
+
+message ProcessRequest {
+  Input input = 1;
+}
+
+message ProcessResponse {
+  Output output = 2;
+}
