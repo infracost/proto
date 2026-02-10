@@ -950,6 +950,7 @@ type JobBehavior struct {
 	BuildScript                 string                 `protobuf:"bytes,3,opt,name=build_script,json=buildScript,proto3" json:"build_script,omitempty"`
 	CustomPropertyMappingScript string                 `protobuf:"bytes,4,opt,name=custom_property_mapping_script,json=customPropertyMappingScript,proto3" json:"custom_property_mapping_script,omitempty"`
 	FeatureFlags                *FeatureFlags          `protobuf:"bytes,5,opt,name=feature_flags,json=featureFlags,proto3" json:"feature_flags,omitempty"`
+	ForceRun                    bool                   `protobuf:"varint,6,opt,name=force_run,json=forceRun,proto3" json:"force_run,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -1017,6 +1018,13 @@ func (x *JobBehavior) GetFeatureFlags() *FeatureFlags {
 		return x.FeatureFlags
 	}
 	return nil
+}
+
+func (x *JobBehavior) GetForceRun() bool {
+	if x != nil {
+		return x.ForceRun
+	}
+	return false
 }
 
 // How it gets executed
@@ -1508,14 +1516,15 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\x81\x01\n" +
 	"\fFeatureFlags\x124\n" +
 	"\x16enable_cloud_formation\x18\x01 \x01(\bR\x14enableCloudFormation\x12;\n" +
-	"\x1aenable_cloud_formation_cdk\x18\x02 \x01(\bR\x17enableCloudFormationCdk\"\x8b\x02\n" +
+	"\x1aenable_cloud_formation_cdk\x18\x02 \x01(\bR\x17enableCloudFormationCdk\"\xa8\x02\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
 	"\x11usage_api_enabled\x18\x02 \x01(\bR\x0fusageApiEnabled\x12!\n" +
 	"\fbuild_script\x18\x03 \x01(\tR\vbuildScript\x12C\n" +
 	"\x1ecustom_property_mapping_script\x18\x04 \x01(\tR\x1bcustomPropertyMappingScript\x12I\n" +
-	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\"\xbd\x05\n" +
+	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\x12\x1b\n" +
+	"\tforce_run\x18\x06 \x01(\bR\bforceRun\"\xbd\x05\n" +
 	"\x10JobConfiguration\x12\x1b\n" +
 	"\tlog_level\x18\x01 \x01(\tR\blogLevel\x12\x1f\n" +
 	"\vprompt_path\x18\x02 \x01(\tR\n" +
