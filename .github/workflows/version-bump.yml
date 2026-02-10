@@ -6,16 +6,25 @@ on:
       - 'v*'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   bump-version:
     runs-on: ubuntu-latest
     steps:
+      - uses: infracost/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.INFRACOST_CI_APP_ID }}
+          private-key: ${{ secrets.INFRACOST_CI_APP_PRIVATE_KEY }}
+          owner: infracost
+          repositories: proto
+
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Extract version from tag
         id: version
@@ -28,6 +37,8 @@ jobs:
       - name: Bump package.json version
         run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version
 
+        # use the token to commit and push the changes
+        # the token from the app only has write permissions on the proto repo
       - name: Commit, push, and re-tag
         run: |
           git config user.name "github-actions[bot]"
