@@ -35,13 +35,6 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
   diags: Diagnostic[];
 
   /**
-   * raw yaml of config file
-   *
-   * @generated from field: bytes project_config = 5;
-   */
-  projectConfig: Uint8Array;
-
-  /**
    * @generated from field: bool is_terragrunt = 6;
    */
   isTerragrunt: boolean;
@@ -55,6 +48,26 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
    * @generated from field: infracost.usage.Usage usage = 9;
    */
   usage?: Usage;
+
+  /**
+   * @generated from field: string project_type = 10;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 11;
+   */
+  configSha: string;
+
+  /**
+   * @generated from field: string path = 12;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string workspace = 13;
+   */
+  workspace: string;
 };
 
 /**
@@ -201,16 +214,24 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
   diags: Diagnostic[];
 
   /**
-   * raw yaml of config file
-   *
-   * @generated from field: bytes project_config = 5;
-   */
-  projectConfig: Uint8Array;
-
-  /**
    * @generated from field: infracost.usage.Usage usage = 8;
    */
   usage?: Usage;
+
+  /**
+   * @generated from field: string project_type = 9;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 10;
+   */
+  configSha: string;
+
+  /**
+   * @generated from field: string path = 11;
+   */
+  path: string;
 };
 
 /**

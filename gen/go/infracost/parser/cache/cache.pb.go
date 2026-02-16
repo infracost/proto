@@ -80,10 +80,13 @@ type TerraformProject struct {
 	Result                *terraform.ModuleResult `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	Metadata              *Metadata               `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Diags                 []*parser.Diagnostic    `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
-	ProjectConfig         []byte                  `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
 	IsTerragrunt          bool                    `protobuf:"varint,6,opt,name=is_terragrunt,json=isTerragrunt,proto3" json:"is_terragrunt,omitempty"`
 	TerraformModuleSuffix string                  `protobuf:"bytes,7,opt,name=terraform_module_suffix,json=terraformModuleSuffix,proto3" json:"terraform_module_suffix,omitempty"`
 	Usage                 *usage.Usage            `protobuf:"bytes,9,opt,name=usage,proto3" json:"usage,omitempty"`
+	ProjectType           string                  `protobuf:"bytes,10,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
+	ConfigSha             string                  `protobuf:"bytes,11,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	Path                  string                  `protobuf:"bytes,12,opt,name=path,proto3" json:"path,omitempty"`
+	Workspace             string                  `protobuf:"bytes,13,opt,name=workspace,proto3" json:"workspace,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -139,13 +142,6 @@ func (x *TerraformProject) GetDiags() []*parser.Diagnostic {
 	return nil
 }
 
-func (x *TerraformProject) GetProjectConfig() []byte {
-	if x != nil {
-		return x.ProjectConfig
-	}
-	return nil
-}
-
 func (x *TerraformProject) GetIsTerragrunt() bool {
 	if x != nil {
 		return x.IsTerragrunt
@@ -165,6 +161,34 @@ func (x *TerraformProject) GetUsage() *usage.Usage {
 		return x.Usage
 	}
 	return nil
+}
+
+func (x *TerraformProject) GetProjectType() string {
+	if x != nil {
+		return x.ProjectType
+	}
+	return ""
+}
+
+func (x *TerraformProject) GetConfigSha() string {
+	if x != nil {
+		return x.ConfigSha
+	}
+	return ""
+}
+
+func (x *TerraformProject) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *TerraformProject) GetWorkspace() string {
+	if x != nil {
+		return x.Workspace
+	}
+	return ""
 }
 
 type Metadata struct {
@@ -429,8 +453,10 @@ type CloudFormationProject struct {
 	Result        *cloudformation.Result `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	Metadata      *Metadata              `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Diags         []*parser.Diagnostic   `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
-	ProjectConfig []byte                 `protobuf:"bytes,5,opt,name=project_config,json=projectConfig,proto3" json:"project_config,omitempty"` // raw yaml of config file
 	Usage         *usage.Usage           `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
+	ProjectType   string                 `protobuf:"bytes,9,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
+	ConfigSha     string                 `protobuf:"bytes,10,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	Path          string                 `protobuf:"bytes,11,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -486,13 +512,6 @@ func (x *CloudFormationProject) GetDiags() []*parser.Diagnostic {
 	return nil
 }
 
-func (x *CloudFormationProject) GetProjectConfig() []byte {
-	if x != nil {
-		return x.ProjectConfig
-	}
-	return nil
-}
-
 func (x *CloudFormationProject) GetUsage() *usage.Usage {
 	if x != nil {
 		return x.Usage
@@ -500,20 +519,46 @@ func (x *CloudFormationProject) GetUsage() *usage.Usage {
 	return nil
 }
 
+func (x *CloudFormationProject) GetProjectType() string {
+	if x != nil {
+		return x.ProjectType
+	}
+	return ""
+}
+
+func (x *CloudFormationProject) GetConfigSha() string {
+	if x != nil {
+		return x.ConfigSha
+	}
+	return ""
+}
+
+func (x *CloudFormationProject) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xa2\x03\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\x85\x04\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
-	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12%\n" +
-	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12#\n" +
+	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12#\n" +
 	"\ris_terragrunt\x18\x06 \x01(\bR\fisTerragrunt\x126\n" +
 	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\x12,\n" +
-	"\x05usage\x18\t \x01(\v2\x16.infracost.usage.UsageR\x05usageJ\x04\b\x04\x10\x05J\x04\b\b\x10\tR\n" +
-	"usage_fileR\x10dependency_paths\"\xdd\x01\n" +
+	"\x05usage\x18\t \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12!\n" +
+	"\fproject_type\x18\n" +
+	" \x01(\tR\vprojectType\x12\x1d\n" +
+	"\n" +
+	"config_sha\x18\v \x01(\tR\tconfigSha\x12\x12\n" +
+	"\x04path\x18\f \x01(\tR\x04path\x12\x1c\n" +
+	"\tworkspace\x18\r \x01(\tR\tworkspaceJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
+	"usage_fileR\x0eproject_configR\x10dependency_paths\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
 	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12%\n" +
@@ -545,14 +590,18 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xd7\x02\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x9c\x03\n" +
 	"\x15CloudFormationProject\x12?\n" +
 	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
-	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12%\n" +
-	"\x0eproject_config\x18\x05 \x01(\fR\rprojectConfig\x12,\n" +
-	"\x05usage\x18\b \x01(\v2\x16.infracost.usage.UsageR\x05usageJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
-	"usage_fileR\x06is_cdkR\x10dependency_paths*Q\n" +
+	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12,\n" +
+	"\x05usage\x18\b \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12!\n" +
+	"\fproject_type\x18\t \x01(\tR\vprojectType\x12\x1d\n" +
+	"\n" +
+	"config_sha\x18\n" +
+	" \x01(\tR\tconfigSha\x12\x12\n" +
+	"\x04path\x18\v \x01(\tR\x04pathJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
+	"usage_fileR\x0eproject_configR\x06is_cdkR\x10dependency_paths*Q\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FLAVOR_TERRAFORM\x10\x01\x12\x19\n" +
