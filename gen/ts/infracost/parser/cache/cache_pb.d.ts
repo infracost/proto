@@ -50,7 +50,12 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
   usage?: Usage;
 
   /**
-   * @generated from field: string config_sha = 10;
+   * @generated from field: string project_type = 10;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 11;
    */
   configSha: string;
 };
@@ -204,7 +209,12 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
   usage?: Usage;
 
   /**
-   * @generated from field: string config_sha = 9;
+   * @generated from field: string project_type = 9;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 10;
    */
   configSha: string;
 };
