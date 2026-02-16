@@ -23,6 +23,7 @@ message TerraformProject {
   infracost.usage.Usage usage = 9;
   string project_type = 10;
   string config_sha = 11;
+  string path = 12;
 }
 
 message Metadata {
@@ -73,4 +74,5 @@ message CloudFormationProject {
   infracost.usage.Usage usage = 8;
   string project_type = 9;
   string config_sha = 10;
+  string path = 11;
 }

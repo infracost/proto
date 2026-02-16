@@ -85,6 +85,7 @@ type TerraformProject struct {
 	Usage                 *usage.Usage            `protobuf:"bytes,9,opt,name=usage,proto3" json:"usage,omitempty"`
 	ProjectType           string                  `protobuf:"bytes,10,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
 	ConfigSha             string                  `protobuf:"bytes,11,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	Path                  string                  `protobuf:"bytes,12,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -171,6 +172,13 @@ func (x *TerraformProject) GetProjectType() string {
 func (x *TerraformProject) GetConfigSha() string {
 	if x != nil {
 		return x.ConfigSha
+	}
+	return ""
+}
+
+func (x *TerraformProject) GetPath() string {
+	if x != nil {
+		return x.Path
 	}
 	return ""
 }
@@ -440,6 +448,7 @@ type CloudFormationProject struct {
 	Usage         *usage.Usage           `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
 	ProjectType   string                 `protobuf:"bytes,9,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
 	ConfigSha     string                 `protobuf:"bytes,10,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	Path          string                 `protobuf:"bytes,11,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -516,11 +525,18 @@ func (x *CloudFormationProject) GetConfigSha() string {
 	return ""
 }
 
+func (x *CloudFormationProject) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xd3\x03\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xe7\x03\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
@@ -531,7 +547,8 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\fproject_type\x18\n" +
 	" \x01(\tR\vprojectType\x12\x1d\n" +
 	"\n" +
-	"config_sha\x18\v \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
+	"config_sha\x18\v \x01(\tR\tconfigSha\x12\x12\n" +
+	"\x04path\x18\f \x01(\tR\x04pathJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
 	"usage_fileR\x0eproject_configR\x10dependency_paths\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
@@ -564,7 +581,7 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x88\x03\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x9c\x03\n" +
 	"\x15CloudFormationProject\x12?\n" +
 	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
@@ -573,7 +590,8 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\fproject_type\x18\t \x01(\tR\vprojectType\x12\x1d\n" +
 	"\n" +
 	"config_sha\x18\n" +
-	" \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
+	" \x01(\tR\tconfigSha\x12\x12\n" +
+	"\x04path\x18\v \x01(\tR\x04pathJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
 	"usage_fileR\x0eproject_configR\x06is_cdkR\x10dependency_paths*Q\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
