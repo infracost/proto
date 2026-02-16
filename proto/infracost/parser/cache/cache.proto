@@ -24,6 +24,7 @@ message TerraformProject {
   string project_type = 10;
   string config_sha = 11;
   string path = 12;
+  string workspace = 13;
 }
 
 message Metadata {

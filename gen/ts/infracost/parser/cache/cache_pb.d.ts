@@ -63,6 +63,11 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
    * @generated from field: string path = 12;
    */
   path: string;
+
+  /**
+   * @generated from field: string workspace = 13;
+   */
+  workspace: string;
 };
 
 /**
