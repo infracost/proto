@@ -55,12 +55,7 @@ export declare type TerraformProject = Message<"infracost.parser.cache.Terraform
   projectType: string;
 
   /**
-   * @generated from field: string breakdown_sha = 11;
-   */
-  breakdownSha: string;
-
-  /**
-   * @generated from field: string config_sha = 12;
+   * @generated from field: string config_sha = 11;
    */
   configSha: string;
 };
@@ -219,12 +214,7 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
   projectType: string;
 
   /**
-   * @generated from field: string breakdown_sha = 10;
-   */
-  breakdownSha: string;
-
-  /**
-   * @generated from field: string config_sha = 11;
+   * @generated from field: string config_sha = 10;
    */
   configSha: string;
 };

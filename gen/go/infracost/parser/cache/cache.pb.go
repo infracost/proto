@@ -84,8 +84,7 @@ type TerraformProject struct {
 	TerraformModuleSuffix string                  `protobuf:"bytes,7,opt,name=terraform_module_suffix,json=terraformModuleSuffix,proto3" json:"terraform_module_suffix,omitempty"`
 	Usage                 *usage.Usage            `protobuf:"bytes,9,opt,name=usage,proto3" json:"usage,omitempty"`
 	ProjectType           string                  `protobuf:"bytes,10,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
-	BreakdownSha          string                  `protobuf:"bytes,11,opt,name=breakdown_sha,json=breakdownSha,proto3" json:"breakdown_sha,omitempty"`
-	ConfigSha             string                  `protobuf:"bytes,12,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	ConfigSha             string                  `protobuf:"bytes,11,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -165,13 +164,6 @@ func (x *TerraformProject) GetUsage() *usage.Usage {
 func (x *TerraformProject) GetProjectType() string {
 	if x != nil {
 		return x.ProjectType
-	}
-	return ""
-}
-
-func (x *TerraformProject) GetBreakdownSha() string {
-	if x != nil {
-		return x.BreakdownSha
 	}
 	return ""
 }
@@ -447,8 +439,7 @@ type CloudFormationProject struct {
 	Diags         []*parser.Diagnostic   `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
 	Usage         *usage.Usage           `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
 	ProjectType   string                 `protobuf:"bytes,9,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
-	BreakdownSha  string                 `protobuf:"bytes,10,opt,name=breakdown_sha,json=breakdownSha,proto3" json:"breakdown_sha,omitempty"`
-	ConfigSha     string                 `protobuf:"bytes,11,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
+	ConfigSha     string                 `protobuf:"bytes,10,opt,name=config_sha,json=configSha,proto3" json:"config_sha,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -518,13 +509,6 @@ func (x *CloudFormationProject) GetProjectType() string {
 	return ""
 }
 
-func (x *CloudFormationProject) GetBreakdownSha() string {
-	if x != nil {
-		return x.BreakdownSha
-	}
-	return ""
-}
-
 func (x *CloudFormationProject) GetConfigSha() string {
 	if x != nil {
 		return x.ConfigSha
@@ -536,7 +520,7 @@ var File_infracost_parser_cache_cache_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xf8\x03\n" +
+	"\"infracost/parser/cache/cache.proto\x12\x16infracost.parser.cache\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,infracost/parser/cloudformation/result.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a\x1binfracost/usage/usage.proto\"\xd3\x03\n" +
 	"\x10TerraformProject\x12@\n" +
 	"\x06result\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
@@ -545,10 +529,9 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x17terraform_module_suffix\x18\a \x01(\tR\x15terraformModuleSuffix\x12,\n" +
 	"\x05usage\x18\t \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12!\n" +
 	"\fproject_type\x18\n" +
-	" \x01(\tR\vprojectType\x12#\n" +
-	"\rbreakdown_sha\x18\v \x01(\tR\fbreakdownSha\x12\x1d\n" +
+	" \x01(\tR\vprojectType\x12\x1d\n" +
 	"\n" +
-	"config_sha\x18\f \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
+	"config_sha\x18\v \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
 	"usage_fileR\x0eproject_configR\x10dependency_paths\"\xdd\x01\n" +
 	"\bMetadata\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
@@ -581,17 +564,16 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
-	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\xad\x03\n" +
+	"\x0eencrypted_data\x18\x03 \x01(\tR\rencryptedData\"\x88\x03\n" +
 	"\x15CloudFormationProject\x12?\n" +
 	"\x06result\x18\x01 \x01(\v2'.infracost.parser.cloudformation.ResultR\x06result\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
 	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12,\n" +
 	"\x05usage\x18\b \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12!\n" +
-	"\fproject_type\x18\t \x01(\tR\vprojectType\x12#\n" +
-	"\rbreakdown_sha\x18\n" +
-	" \x01(\tR\fbreakdownSha\x12\x1d\n" +
+	"\fproject_type\x18\t \x01(\tR\vprojectType\x12\x1d\n" +
 	"\n" +
-	"config_sha\x18\v \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
+	"config_sha\x18\n" +
+	" \x01(\tR\tconfigShaJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
 	"usage_fileR\x0eproject_configR\x06is_cdkR\x10dependency_paths*Q\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
