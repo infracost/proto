@@ -21,8 +21,7 @@ message TerraformProject {
   reserved 8; // not used
   reserved "dependency_paths"; // not used
   infracost.usage.Usage usage = 9;
-  string project_type = 10;
-  string config_sha = 11;
+  string config_sha = 10;
 }
 
 message Metadata {
@@ -71,6 +70,5 @@ message CloudFormationProject {
   reserved 7; // not used
   reserved "dependency_paths"; // not used
   infracost.usage.Usage usage = 8;
-  string project_type = 9;
-  string config_sha = 10;
+  string config_sha = 9;
 }
