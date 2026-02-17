@@ -601,6 +601,11 @@ export declare type JobConfiguration = Message<"infracost.parser.event.JobConfig
    * @generated from field: string tls_ca_cert_file = 15;
    */
   tlsCaCertFile: string;
+
+  /**
+   * @generated from field: bool dry_run = 16;
+   */
+  dryRun: boolean;
 };
 
 /**

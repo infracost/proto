@@ -1045,6 +1045,7 @@ type JobConfiguration struct {
 	WaitForMetricsDuringShutdown bool                   `protobuf:"varint,13,opt,name=wait_for_metrics_during_shutdown,json=waitForMetricsDuringShutdown,proto3" json:"wait_for_metrics_during_shutdown,omitempty"`
 	Cache                        *Cache                 `protobuf:"bytes,14,opt,name=cache,proto3" json:"cache,omitempty"`
 	TlsCaCertFile                string                 `protobuf:"bytes,15,opt,name=tls_ca_cert_file,json=tlsCaCertFile,proto3" json:"tls_ca_cert_file,omitempty"`
+	DryRun                       bool                   `protobuf:"varint,16,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -1182,6 +1183,13 @@ func (x *JobConfiguration) GetTlsCaCertFile() string {
 		return x.TlsCaCertFile
 	}
 	return ""
+}
+
+func (x *JobConfiguration) GetDryRun() bool {
+	if x != nil {
+		return x.DryRun
+	}
+	return false
 }
 
 type InfracostServices struct {
@@ -1524,7 +1532,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\fbuild_script\x18\x03 \x01(\tR\vbuildScript\x12C\n" +
 	"\x1ecustom_property_mapping_script\x18\x04 \x01(\tR\x1bcustomPropertyMappingScript\x12I\n" +
 	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\x12\x1b\n" +
-	"\tforce_run\x18\x06 \x01(\bR\bforceRun\"\xbd\x05\n" +
+	"\tforce_run\x18\x06 \x01(\bR\bforceRun\"\xd6\x05\n" +
 	"\x10JobConfiguration\x12\x1b\n" +
 	"\tlog_level\x18\x01 \x01(\tR\blogLevel\x12\x1f\n" +
 	"\vprompt_path\x18\x02 \x01(\tR\n" +
@@ -1543,7 +1551,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x18use_s3_results_ingestion\x18\f \x01(\bR\x15useS3ResultsIngestion\x12F\n" +
 	" wait_for_metrics_during_shutdown\x18\r \x01(\bR\x1cwaitForMetricsDuringShutdown\x123\n" +
 	"\x05cache\x18\x0e \x01(\v2\x1d.infracost.parser.event.CacheR\x05cache\x12'\n" +
-	"\x10tls_ca_cert_file\x18\x0f \x01(\tR\rtlsCaCertFile\"\xe9\x03\n" +
+	"\x10tls_ca_cert_file\x18\x0f \x01(\tR\rtlsCaCertFile\x12\x17\n" +
+	"\adry_run\x18\x10 \x01(\bR\x06dryRun\"\xe9\x03\n" +
 	"\x11InfracostServices\x12=\n" +
 	"\n" +
 	"auth_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\tauthToken\x12%\n" +
