@@ -142,6 +142,13 @@ export declare type Infracost = Message<"infracost.provider.Infracost"> & {
    * @generated from field: string trace_id = 3;
    */
   traceId: string;
+
+  /**
+   * optional org id provided by the CLI that is fact checked in the pricing api
+   *
+   * @generated from field: optional string org_id = 4;
+   */
+  orgId?: string;
 };
 
 /**

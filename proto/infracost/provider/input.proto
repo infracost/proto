@@ -53,6 +53,8 @@ message Infracost {
   string pricing_api_endpoint = 2;
   // trace id for correlating requests - mainly for internal use/debugging
   string trace_id = 3;
+  // optional org id provided by the CLI that is fact checked in the pricing api
+  optional string org_id = 4;
 }
 
 message Features {
