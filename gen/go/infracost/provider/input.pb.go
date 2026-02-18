@@ -206,7 +206,9 @@ type Infracost struct {
 	// pricing api endpoint to use for price lookups + recommendations
 	PricingApiEndpoint string `protobuf:"bytes,2,opt,name=pricing_api_endpoint,json=pricingApiEndpoint,proto3" json:"pricing_api_endpoint,omitempty"`
 	// trace id for correlating requests - mainly for internal use/debugging
-	TraceId       string `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	TraceId string `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	// optional org id provided by the CLI that is fact checked in the pricing api
+	OrgId         *string `protobuf:"bytes,4,opt,name=org_id,json=orgId,proto3,oneof" json:"org_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -258,6 +260,13 @@ func (x *Infracost) GetPricingApiEndpoint() string {
 func (x *Infracost) GetTraceId() string {
 	if x != nil {
 		return x.TraceId
+	}
+	return ""
+}
+
+func (x *Infracost) GetOrgId() string {
+	if x != nil && x.OrgId != nil {
+		return *x.OrgId
 	}
 	return ""
 }
@@ -469,11 +478,13 @@ const file_infracost_provider_input_proto_rawDesc = "" +
 	"\tinfracost\x18\t \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\"N\n" +
 	"\bSettings\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12&\n" +
-	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"q\n" +
+	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"\x98\x01\n" +
 	"\tInfracost\x12\x17\n" +
 	"\aapi_key\x18\x01 \x01(\tR\x06apiKey\x120\n" +
 	"\x14pricing_api_endpoint\x18\x02 \x01(\tR\x12pricingApiEndpoint\x12\x19\n" +
-	"\btrace_id\x18\x03 \x01(\tR\atraceId\"\xeb\x01\n" +
+	"\btrace_id\x18\x03 \x01(\tR\atraceId\x12\x1a\n" +
+	"\x06org_id\x18\x04 \x01(\tH\x00R\x05orgId\x88\x01\x01B\t\n" +
+	"\a_org_id\"\xeb\x01\n" +
 	"\bFeatures\x120\n" +
 	"\x14enable_price_lookups\x18\x01 \x01(\bR\x12enablePriceLookups\x125\n" +
 	"\x16enable_recommendations\x18\x02 \x01(\bR\x15enableRecommendations\x124\n" +
@@ -535,6 +546,7 @@ func file_infracost_provider_input_proto_init() {
 	if File_infracost_provider_input_proto != nil {
 		return
 	}
+	file_infracost_provider_input_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
