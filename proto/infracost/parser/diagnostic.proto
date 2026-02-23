@@ -72,4 +72,12 @@ enum DiagnosticType {
   DIAGNOSTIC_TYPE_SYNTHETIC_CLOUDFORMATION_TEMPLATE_URL = 27;
   // cloudformation transform failed
   DIAGNOSTIC_TYPE_FAILED_CLOUDFORMATION_TRANSFORM = 28;
+  // loader option missing or invalid
+  DIAGNOSTIC_TYPE_LOADER_OPTION_ERROR = 29;
+  // input target missing or invalid
+  DIAGNOSTIC_TYPE_INPUT_TARGET_ERROR = 30;
+  // input target options missing or invalid
+  DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR = 31;
+  // building loader options failure
+  DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR = 32;
 }
