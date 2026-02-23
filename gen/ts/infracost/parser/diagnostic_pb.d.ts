@@ -265,6 +265,34 @@ export enum DiagnosticType {
    * @generated from enum value: DIAGNOSTIC_TYPE_FAILED_CLOUDFORMATION_TRANSFORM = 28;
    */
   FAILED_CLOUDFORMATION_TRANSFORM = 28,
+
+  /**
+   * loader option missing or invalid
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_LOADER_OPTION_ERROR = 29;
+   */
+  LOADER_OPTION_ERROR = 29,
+
+  /**
+   * input target missing or invalid
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_INPUT_TARGET_ERROR = 30;
+   */
+  INPUT_TARGET_ERROR = 30,
+
+  /**
+   * input target options missing or invalid
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR = 31;
+   */
+  INPUT_TARGET_OPTIONS_ERROR = 31,
+
+  /**
+   * building loader options failure
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR = 32;
+   */
+  BUILDING_LOADER_OPTIONS_ERROR = 32,
 }
 
 /**
