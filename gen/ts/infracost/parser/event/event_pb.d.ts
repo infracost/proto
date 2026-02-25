@@ -461,15 +461,6 @@ export declare const AzureReposSchema: GenMessage<AzureRepos>;
  * @generated from message infracost.parser.event.FeatureFlags
  */
 export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"> & {
-  /**
-   * @generated from field: bool enable_cloud_formation = 1;
-   */
-  enableCloudFormation: boolean;
-
-  /**
-   * @generated from field: bool enable_cloud_formation_cdk = 2;
-   */
-  enableCloudFormationCdk: boolean;
 };
 
 /**
