@@ -891,11 +891,9 @@ func (x *AzureRepos) GetBaseUrl() string {
 }
 
 type FeatureFlags struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	EnableCloudFormation    bool                   `protobuf:"varint,1,opt,name=enable_cloud_formation,json=enableCloudFormation,proto3" json:"enable_cloud_formation,omitempty"`
-	EnableCloudFormationCdk bool                   `protobuf:"varint,2,opt,name=enable_cloud_formation_cdk,json=enableCloudFormationCdk,proto3" json:"enable_cloud_formation_cdk,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FeatureFlags) Reset() {
@@ -926,20 +924,6 @@ func (x *FeatureFlags) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FeatureFlags.ProtoReflect.Descriptor instead.
 func (*FeatureFlags) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *FeatureFlags) GetEnableCloudFormation() bool {
-	if x != nil {
-		return x.EnableCloudFormation
-	}
-	return false
-}
-
-func (x *FeatureFlags) GetEnableCloudFormationCdk() bool {
-	if x != nil {
-		return x.EnableCloudFormationCdk
-	}
-	return false
 }
 
 // What gets executed
@@ -1521,10 +1505,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\n" +
 	"AzureRepos\x12A\n" +
 	"\faccess_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\vaccessToken\x12\x19\n" +
-	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\x81\x01\n" +
-	"\fFeatureFlags\x124\n" +
-	"\x16enable_cloud_formation\x18\x01 \x01(\bR\x14enableCloudFormation\x12;\n" +
-	"\x1aenable_cloud_formation_cdk\x18\x02 \x01(\bR\x17enableCloudFormationCdk\"\xa8\x02\n" +
+	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"N\n" +
+	"\fFeatureFlagsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xa8\x02\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +

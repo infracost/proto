@@ -111,8 +111,8 @@ message AzureRepos {
 }
 
 message FeatureFlags {
-  bool enable_cloud_formation = 1;
-  bool enable_cloud_formation_cdk = 2;
+  reserved 1, 2;
+  reserved "enable_cloud_formation", "enable_cloud_formation_cdk";
 }
 
 // What gets executed
