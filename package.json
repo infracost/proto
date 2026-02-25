@@ -1,6 +1,6 @@
 {
   "name": "@infracost/proto",
-  "version": "0.3.14",
+  "version": "1.19.0",
   "description": "Infracost protobuf definitions",
   "license": "Apache-2.0",
   "repository": {
