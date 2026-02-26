@@ -91,6 +91,9 @@ message InitializeRequest {
   SupportedResources terraform_supported_resources = 1;
   // The supported resources for CloudFormation from providers
   SupportedResources cloudformation_supported_resources = 2;
+  // Whether to disable the GraphCache. This supports the LSP which needs
+  // fast responses from the parser without getting cached values on save
+  bool disable_graph_cache = 3;
 }
 
 // InitializeResponse is the response for the Initialize RPC.

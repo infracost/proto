@@ -476,8 +476,11 @@ type InitializeRequest struct {
 	TerraformSupportedResources *SupportedResources `protobuf:"bytes,1,opt,name=terraform_supported_resources,json=terraformSupportedResources,proto3" json:"terraform_supported_resources,omitempty"`
 	// The supported resources for CloudFormation from providers
 	CloudformationSupportedResources *SupportedResources `protobuf:"bytes,2,opt,name=cloudformation_supported_resources,json=cloudformationSupportedResources,proto3" json:"cloudformation_supported_resources,omitempty"`
-	unknownFields                    protoimpl.UnknownFields
-	sizeCache                        protoimpl.SizeCache
+	// Whether to disable the GraphCache. This supports the LSP which needs
+	// fast responses from the parser without getting cached values on save
+	DisableGraphCache bool `protobuf:"varint,3,opt,name=disable_graph_cache,json=disableGraphCache,proto3" json:"disable_graph_cache,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *InitializeRequest) Reset() {
@@ -522,6 +525,13 @@ func (x *InitializeRequest) GetCloudformationSupportedResources() *SupportedReso
 		return x.CloudformationSupportedResources
 	}
 	return nil
+}
+
+func (x *InitializeRequest) GetDisableGraphCache() bool {
+	if x != nil {
+		return x.DisableGraphCache
+	}
+	return false
 }
 
 // InitializeResponse is the response for the Initialize RPC.
@@ -689,10 +699,11 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\x13ParseResponseResult\x12H\n" +
 	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12Q\n" +
 	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
-	"\x05value\"\xf9\x01\n" +
+	"\x05value\"\xa9\x02\n" +
 	"\x11InitializeRequest\x12l\n" +
 	"\x1dterraform_supported_resources\x18\x01 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x1bterraformSupportedResources\x12v\n" +
-	"\"cloudformation_supported_resources\x18\x02 \x01(\v2(.infracost.parser.api.SupportedResourcesR cloudformationSupportedResources\"\x14\n" +
+	"\"cloudformation_supported_resources\x18\x02 \x01(\v2(.infracost.parser.api.SupportedResourcesR cloudformationSupportedResources\x12.\n" +
+	"\x13disable_graph_cache\x18\x03 \x01(\bR\x11disableGraphCache\"\x14\n" +
 	"\x12InitializeResponse\"d\n" +
 	"\x12SupportedResources\x12N\n" +
 	"\x0eresource_types\x18\x01 \x03(\v2'.infracost.parser.api.SupportedResourceR\rresourceTypes\"8\n" +

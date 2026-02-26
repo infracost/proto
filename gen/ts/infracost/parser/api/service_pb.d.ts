@@ -264,6 +264,14 @@ export declare type InitializeRequest = Message<"infracost.parser.api.Initialize
    * @generated from field: infracost.parser.api.SupportedResources cloudformation_supported_resources = 2;
    */
   cloudformationSupportedResources?: SupportedResources;
+
+  /**
+   * Whether to disable the GraphCache. This supports the LSP which needs
+   * fast responses from the parser without getting cached values on save
+   *
+   * @generated from field: bool disable_graph_cache = 3;
+   */
+  disableGraphCache: boolean;
 };
 
 /**
