@@ -10,7 +10,7 @@ import { file_infracost_provider_output } from "./output_pb.js";
  * Describes the file infracost/provider/service.proto.
  */
 export const file_infracost_provider_service = /*@__PURE__*/
-  fileDesc("CiBpbmZyYWNvc3QvcHJvdmlkZXIvc2VydmljZS5wcm90bxISaW5mcmFjb3N0LnByb3ZpZGVyIjoKDlByb2Nlc3NSZXF1ZXN0EigKBWlucHV0GAEgASgLMhkuaW5mcmFjb3N0LnByb3ZpZGVyLklucHV0Ij0KD1Byb2Nlc3NSZXNwb25zZRIqCgZvdXRwdXQYAiABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0MmUKD1Byb3ZpZGVyU2VydmljZRJSCgdQcm9jZXNzEiIuaW5mcmFjb3N0LnByb3ZpZGVyLlByb2Nlc3NSZXF1ZXN0GiMuaW5mcmFjb3N0LnByb3ZpZGVyLlByb2Nlc3NSZXNwb25zZULFAQoWY29tLmluZnJhY29zdC5wcm92aWRlckIMU2VydmljZVByb3RvUAFaNGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcHJvdmlkZXKiAgNJUFiqAhJJbmZyYWNvc3QuUHJvdmlkZXLKAhJJbmZyYWNvc3RcUHJvdmlkZXLiAh5JbmZyYWNvc3RcUHJvdmlkZXJcR1BCTWV0YWRhdGHqAhNJbmZyYWNvc3Q6OlByb3ZpZGVyYgZwcm90bzM", [file_infracost_provider_input, file_infracost_provider_output]);
+  fileDesc("CiBpbmZyYWNvc3QvcHJvdmlkZXIvc2VydmljZS5wcm90bxISaW5mcmFjb3N0LnByb3ZpZGVyIjoKDlByb2Nlc3NSZXF1ZXN0EigKBWlucHV0GAEgASgLMhkuaW5mcmFjb3N0LnByb3ZpZGVyLklucHV0Ij0KD1Byb2Nlc3NSZXNwb25zZRIqCgZvdXRwdXQYAiABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IhsKGUxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QiUAoaTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2USMgoIcG9saWNpZXMYASADKAsyIC5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5ImoKDEZpbm9wc1BvbGljeRIMCgRzbHVnGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFZ3JvdXAYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSGgoSb25seV9uZXdfcmVzb3VyY2VzGAUgASgIMtoBCg9Qcm92aWRlclNlcnZpY2USUgoHUHJvY2VzcxIiLmluZnJhY29zdC5wcm92aWRlci5Qcm9jZXNzUmVxdWVzdBojLmluZnJhY29zdC5wcm92aWRlci5Qcm9jZXNzUmVzcG9uc2UScwoSTGlzdEZpbm9wc1BvbGljaWVzEi0uaW5mcmFjb3N0LnByb3ZpZGVyLkxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QaLi5pbmZyYWNvc3QucHJvdmlkZXIuTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2VCxQEKFmNvbS5pbmZyYWNvc3QucHJvdmlkZXJCDFNlcnZpY2VQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z", [file_infracost_provider_input, file_infracost_provider_output]);
 
 /**
  * Describes the message infracost.provider.ProcessRequest.
@@ -25,6 +25,27 @@ export const ProcessRequestSchema = /*@__PURE__*/
  */
 export const ProcessResponseSchema = /*@__PURE__*/
   messageDesc(file_infracost_provider_service, 1);
+
+/**
+ * Describes the message infracost.provider.ListFinopsPoliciesRequest.
+ * Use `create(ListFinopsPoliciesRequestSchema)` to create a new message.
+ */
+export const ListFinopsPoliciesRequestSchema = /*@__PURE__*/
+  messageDesc(file_infracost_provider_service, 2);
+
+/**
+ * Describes the message infracost.provider.ListFinopsPoliciesResponse.
+ * Use `create(ListFinopsPoliciesResponseSchema)` to create a new message.
+ */
+export const ListFinopsPoliciesResponseSchema = /*@__PURE__*/
+  messageDesc(file_infracost_provider_service, 3);
+
+/**
+ * Describes the message infracost.provider.FinopsPolicy.
+ * Use `create(FinopsPolicySchema)` to create a new message.
+ */
+export const FinopsPolicySchema = /*@__PURE__*/
+  messageDesc(file_infracost_provider_service, 4);
 
 /**
  * @generated from service infracost.provider.ProviderService
