@@ -45,6 +45,70 @@ export declare type ProcessResponse = Message<"infracost.provider.ProcessRespons
 export declare const ProcessResponseSchema: GenMessage<ProcessResponse>;
 
 /**
+ * @generated from message infracost.provider.ListFinopsPoliciesRequest
+ */
+export declare type ListFinopsPoliciesRequest = Message<"infracost.provider.ListFinopsPoliciesRequest"> & {
+};
+
+/**
+ * Describes the message infracost.provider.ListFinopsPoliciesRequest.
+ * Use `create(ListFinopsPoliciesRequestSchema)` to create a new message.
+ */
+export declare const ListFinopsPoliciesRequestSchema: GenMessage<ListFinopsPoliciesRequest>;
+
+/**
+ * @generated from message infracost.provider.ListFinopsPoliciesResponse
+ */
+export declare type ListFinopsPoliciesResponse = Message<"infracost.provider.ListFinopsPoliciesResponse"> & {
+  /**
+   * @generated from field: repeated infracost.provider.FinopsPolicy policies = 1;
+   */
+  policies: FinopsPolicy[];
+};
+
+/**
+ * Describes the message infracost.provider.ListFinopsPoliciesResponse.
+ * Use `create(ListFinopsPoliciesResponseSchema)` to create a new message.
+ */
+export declare const ListFinopsPoliciesResponseSchema: GenMessage<ListFinopsPoliciesResponse>;
+
+/**
+ * @generated from message infracost.provider.FinopsPolicy
+ */
+export declare type FinopsPolicy = Message<"infracost.provider.FinopsPolicy"> & {
+  /**
+   * @generated from field: string slug = 1;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string group = 3;
+   */
+  group: string;
+
+  /**
+   * @generated from field: string description = 4;
+   */
+  description: string;
+
+  /**
+   * @generated from field: bool only_new_resources = 5;
+   */
+  onlyNewResources: boolean;
+};
+
+/**
+ * Describes the message infracost.provider.FinopsPolicy.
+ * Use `create(FinopsPolicySchema)` to create a new message.
+ */
+export declare const FinopsPolicySchema: GenMessage<FinopsPolicy>;
+
+/**
  * @generated from service infracost.provider.ProviderService
  */
 export declare const ProviderService: GenService<{
@@ -55,6 +119,14 @@ export declare const ProviderService: GenService<{
     methodKind: "unary";
     input: typeof ProcessRequestSchema;
     output: typeof ProcessResponseSchema;
+  },
+  /**
+   * @generated from rpc infracost.provider.ProviderService.ListFinopsPolicies
+   */
+  listFinopsPolicies: {
+    methodKind: "unary";
+    input: typeof ListFinopsPoliciesRequestSchema;
+    output: typeof ListFinopsPoliciesResponseSchema;
   },
 }>;
 
