@@ -71,7 +71,7 @@ func (x ProductionFilter_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ProductionFilter_Type.Descriptor instead.
 func (ProductionFilter_Type) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9, 0}
 }
 
 type TagPolicyRequirement_Type int32
@@ -123,7 +123,7 @@ func (x TagPolicyRequirement_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TagPolicyRequirement_Type.Descriptor instead.
 func (TagPolicyRequirement_Type) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{11, 0}
 }
 
 type RunParameters struct {
@@ -133,6 +133,7 @@ type RunParameters struct {
 	ProductionFilters []*ProductionFilter     `protobuf:"bytes,3,rep,name=production_filters,json=productionFilters,proto3" json:"production_filters,omitempty"`
 	TagPolicies       []*TagPolicy            `protobuf:"bytes,4,rep,name=tag_policies,json=tagPolicies,proto3" json:"tag_policies,omitempty"`
 	FinopsPolicies    []*FinopsPolicySettings `protobuf:"bytes,5,rep,name=finops_policies,json=finopsPolicies,proto3" json:"finops_policies,omitempty"`
+	CloudUsageData    *CloudUsageData         `protobuf:"bytes,6,opt,name=cloud_usage_data,json=cloudUsageData,proto3" json:"cloud_usage_data,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -202,6 +203,109 @@ func (x *RunParameters) GetFinopsPolicies() []*FinopsPolicySettings {
 	return nil
 }
 
+func (x *RunParameters) GetCloudUsageData() *CloudUsageData {
+	if x != nil {
+		return x.CloudUsageData
+	}
+	return nil
+}
+
+// CloudUsageData contains actual cloud-measured usage data keyed by resource address.
+// This is separate from UsageDefaults which are per-resource-type estimates.
+// Cloud usage data takes priority over type-level defaults when both exist.
+type CloudUsageData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Key is the Terraform resource address (e.g. "aws_s3_bucket.my_bucket")
+	Resources     map[string]*ResourceCloudUsage `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloudUsageData) Reset() {
+	*x = CloudUsageData{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloudUsageData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloudUsageData) ProtoMessage() {}
+
+func (x *CloudUsageData) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloudUsageData.ProtoReflect.Descriptor instead.
+func (*CloudUsageData) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CloudUsageData) GetResources() map[string]*ResourceCloudUsage {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+// ResourceCloudUsage holds cloud-measured usage attributes for a single resource.
+// Attribute values are string-encoded to support various numeric and string types.
+type ResourceCloudUsage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Key is attribute name (e.g. "storage_gb", "object_count", "effective_storage_rate_per_gb",
+	// "cold_data_percent"). Values are string-encoded.
+	Attributes    map[string]string `protobuf:"bytes,1,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceCloudUsage) Reset() {
+	*x = ResourceCloudUsage{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceCloudUsage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceCloudUsage) ProtoMessage() {}
+
+func (x *ResourceCloudUsage) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceCloudUsage.ProtoReflect.Descriptor instead.
+func (*ResourceCloudUsage) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ResourceCloudUsage) GetAttributes() map[string]string {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
 type BaseScope struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RepoName      string                 `protobuf:"bytes,1,opt,name=repo_name,json=repoName,proto3" json:"repo_name,omitempty"`
@@ -213,7 +317,7 @@ type BaseScope struct {
 
 func (x *BaseScope) Reset() {
 	*x = BaseScope{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -225,7 +329,7 @@ func (x *BaseScope) String() string {
 func (*BaseScope) ProtoMessage() {}
 
 func (x *BaseScope) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -238,7 +342,7 @@ func (x *BaseScope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseScope.ProtoReflect.Descriptor instead.
 func (*BaseScope) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *BaseScope) GetRepoName() string {
@@ -272,7 +376,7 @@ type UsageDefaults struct {
 
 func (x *UsageDefaults) Reset() {
 	*x = UsageDefaults{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -284,7 +388,7 @@ func (x *UsageDefaults) String() string {
 func (*UsageDefaults) ProtoMessage() {}
 
 func (x *UsageDefaults) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -297,7 +401,7 @@ func (x *UsageDefaults) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefaults.ProtoReflect.Descriptor instead.
 func (*UsageDefaults) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UsageDefaults) GetResources() map[string]*UsageResourceMap {
@@ -317,7 +421,7 @@ type UsageResourceMap struct {
 
 func (x *UsageResourceMap) Reset() {
 	*x = UsageResourceMap{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -329,7 +433,7 @@ func (x *UsageResourceMap) String() string {
 func (*UsageResourceMap) ProtoMessage() {}
 
 func (x *UsageResourceMap) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -342,7 +446,7 @@ func (x *UsageResourceMap) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageResourceMap.ProtoReflect.Descriptor instead.
 func (*UsageResourceMap) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UsageResourceMap) GetUsages() map[string]*UsageDefaultList {
@@ -361,7 +465,7 @@ type UsageDefaultList struct {
 
 func (x *UsageDefaultList) Reset() {
 	*x = UsageDefaultList{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -373,7 +477,7 @@ func (x *UsageDefaultList) String() string {
 func (*UsageDefaultList) ProtoMessage() {}
 
 func (x *UsageDefaultList) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,7 +490,7 @@ func (x *UsageDefaultList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefaultList.ProtoReflect.Descriptor instead.
 func (*UsageDefaultList) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UsageDefaultList) GetList() []*UsageDefault {
@@ -407,7 +511,7 @@ type UsageDefault struct {
 
 func (x *UsageDefault) Reset() {
 	*x = UsageDefault{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -419,7 +523,7 @@ func (x *UsageDefault) String() string {
 func (*UsageDefault) ProtoMessage() {}
 
 func (x *UsageDefault) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -432,7 +536,7 @@ func (x *UsageDefault) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefault.ProtoReflect.Descriptor instead.
 func (*UsageDefault) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UsageDefault) GetQuantity() string {
@@ -465,7 +569,7 @@ type UsageFilters struct {
 
 func (x *UsageFilters) Reset() {
 	*x = UsageFilters{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -477,7 +581,7 @@ func (x *UsageFilters) String() string {
 func (*UsageFilters) ProtoMessage() {}
 
 func (x *UsageFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,7 +594,7 @@ func (x *UsageFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageFilters.ProtoReflect.Descriptor instead.
 func (*UsageFilters) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UsageFilters) GetProject() *StringFilter {
@@ -516,7 +620,7 @@ type ProductionFilter struct {
 
 func (x *ProductionFilter) Reset() {
 	*x = ProductionFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +632,7 @@ func (x *ProductionFilter) String() string {
 func (*ProductionFilter) ProtoMessage() {}
 
 func (x *ProductionFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +645,7 @@ func (x *ProductionFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductionFilter.ProtoReflect.Descriptor instead.
 func (*ProductionFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ProductionFilter) GetId() string {
@@ -590,7 +694,7 @@ type TagPolicy struct {
 
 func (x *TagPolicy) Reset() {
 	*x = TagPolicy{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -602,7 +706,7 @@ func (x *TagPolicy) String() string {
 func (*TagPolicy) ProtoMessage() {}
 
 func (x *TagPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -615,7 +719,7 @@ func (x *TagPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagPolicy.ProtoReflect.Descriptor instead.
 func (*TagPolicy) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{8}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *TagPolicy) GetId() string {
@@ -702,7 +806,7 @@ type TagPolicyRequirement struct {
 
 func (x *TagPolicyRequirement) Reset() {
 	*x = TagPolicyRequirement{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -714,7 +818,7 @@ func (x *TagPolicyRequirement) String() string {
 func (*TagPolicyRequirement) ProtoMessage() {}
 
 func (x *TagPolicyRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -727,7 +831,7 @@ func (x *TagPolicyRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagPolicyRequirement.ProtoReflect.Descriptor instead.
 func (*TagPolicyRequirement) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TagPolicyRequirement) GetKey() string {
@@ -782,7 +886,7 @@ type StringFilter struct {
 
 func (x *StringFilter) Reset() {
 	*x = StringFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -794,7 +898,7 @@ func (x *StringFilter) String() string {
 func (*StringFilter) ProtoMessage() {}
 
 func (x *StringFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -807,7 +911,7 @@ func (x *StringFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringFilter.ProtoReflect.Descriptor instead.
 func (*StringFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{10}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StringFilter) GetInclude() []string {
@@ -834,7 +938,7 @@ type MapFilter struct {
 
 func (x *MapFilter) Reset() {
 	*x = MapFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -846,7 +950,7 @@ func (x *MapFilter) String() string {
 func (*MapFilter) ProtoMessage() {}
 
 func (x *MapFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -859,7 +963,7 @@ func (x *MapFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MapFilter.ProtoReflect.Descriptor instead.
 func (*MapFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{11}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *MapFilter) GetInclude() map[string]string {
@@ -895,7 +999,7 @@ type FinopsPolicySettings struct {
 
 func (x *FinopsPolicySettings) Reset() {
 	*x = FinopsPolicySettings{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -907,7 +1011,7 @@ func (x *FinopsPolicySettings) String() string {
 func (*FinopsPolicySettings) ProtoMessage() {}
 
 func (x *FinopsPolicySettings) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -920,7 +1024,7 @@ func (x *FinopsPolicySettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FinopsPolicySettings.ProtoReflect.Descriptor instead.
 func (*FinopsPolicySettings) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *FinopsPolicySettings) GetId() string {
@@ -1004,13 +1108,26 @@ var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\"\x8c\x03\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\"\xde\x03\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
 	"\x12production_filters\x18\x03 \x03(\v2(.infracost.parser.event.ProductionFilterR\x11productionFilters\x12D\n" +
 	"\ftag_policies\x18\x04 \x03(\v2!.infracost.parser.event.TagPolicyR\vtagPolicies\x12U\n" +
-	"\x0ffinops_policies\x18\x05 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\x0efinopsPolicies\"d\n" +
+	"\x0ffinops_policies\x18\x05 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\x0efinopsPolicies\x12P\n" +
+	"\x10cloud_usage_data\x18\x06 \x01(\v2&.infracost.parser.event.CloudUsageDataR\x0ecloudUsageData\"\xcf\x01\n" +
+	"\x0eCloudUsageData\x12S\n" +
+	"\tresources\x18\x01 \x03(\v25.infracost.parser.event.CloudUsageData.ResourcesEntryR\tresources\x1ah\n" +
+	"\x0eResourcesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12@\n" +
+	"\x05value\x18\x02 \x01(\v2*.infracost.parser.event.ResourceCloudUsageR\x05value:\x028\x01\"\xaf\x01\n" +
+	"\x12ResourceCloudUsage\x12Z\n" +
+	"\n" +
+	"attributes\x18\x01 \x03(\v2:.infracost.parser.event.ResourceCloudUsage.AttributesEntryR\n" +
+	"attributes\x1a=\n" +
+	"\x0fAttributesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"d\n" +
 	"\tBaseScope\x12\x1b\n" +
 	"\trepo_name\x18\x01 \x01(\tR\brepoName\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x1f\n" +
@@ -1114,58 +1231,66 @@ func file_infracost_parser_event_runparameters_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_infracost_parser_event_runparameters_proto_goTypes = []any{
 	(ProductionFilter_Type)(0),     // 0: infracost.parser.event.ProductionFilter.Type
 	(TagPolicyRequirement_Type)(0), // 1: infracost.parser.event.TagPolicyRequirement.Type
 	(*RunParameters)(nil),          // 2: infracost.parser.event.RunParameters
-	(*BaseScope)(nil),              // 3: infracost.parser.event.BaseScope
-	(*UsageDefaults)(nil),          // 4: infracost.parser.event.UsageDefaults
-	(*UsageResourceMap)(nil),       // 5: infracost.parser.event.UsageResourceMap
-	(*UsageDefaultList)(nil),       // 6: infracost.parser.event.UsageDefaultList
-	(*UsageDefault)(nil),           // 7: infracost.parser.event.UsageDefault
-	(*UsageFilters)(nil),           // 8: infracost.parser.event.UsageFilters
-	(*ProductionFilter)(nil),       // 9: infracost.parser.event.ProductionFilter
-	(*TagPolicy)(nil),              // 10: infracost.parser.event.TagPolicy
-	(*TagPolicyRequirement)(nil),   // 11: infracost.parser.event.TagPolicyRequirement
-	(*StringFilter)(nil),           // 12: infracost.parser.event.StringFilter
-	(*MapFilter)(nil),              // 13: infracost.parser.event.MapFilter
-	(*FinopsPolicySettings)(nil),   // 14: infracost.parser.event.FinopsPolicySettings
-	nil,                            // 15: infracost.parser.event.UsageDefaults.ResourcesEntry
-	nil,                            // 16: infracost.parser.event.UsageResourceMap.UsagesEntry
-	nil,                            // 17: infracost.parser.event.MapFilter.IncludeEntry
-	nil,                            // 18: infracost.parser.event.MapFilter.ExcludeEntry
+	(*CloudUsageData)(nil),         // 3: infracost.parser.event.CloudUsageData
+	(*ResourceCloudUsage)(nil),     // 4: infracost.parser.event.ResourceCloudUsage
+	(*BaseScope)(nil),              // 5: infracost.parser.event.BaseScope
+	(*UsageDefaults)(nil),          // 6: infracost.parser.event.UsageDefaults
+	(*UsageResourceMap)(nil),       // 7: infracost.parser.event.UsageResourceMap
+	(*UsageDefaultList)(nil),       // 8: infracost.parser.event.UsageDefaultList
+	(*UsageDefault)(nil),           // 9: infracost.parser.event.UsageDefault
+	(*UsageFilters)(nil),           // 10: infracost.parser.event.UsageFilters
+	(*ProductionFilter)(nil),       // 11: infracost.parser.event.ProductionFilter
+	(*TagPolicy)(nil),              // 12: infracost.parser.event.TagPolicy
+	(*TagPolicyRequirement)(nil),   // 13: infracost.parser.event.TagPolicyRequirement
+	(*StringFilter)(nil),           // 14: infracost.parser.event.StringFilter
+	(*MapFilter)(nil),              // 15: infracost.parser.event.MapFilter
+	(*FinopsPolicySettings)(nil),   // 16: infracost.parser.event.FinopsPolicySettings
+	nil,                            // 17: infracost.parser.event.CloudUsageData.ResourcesEntry
+	nil,                            // 18: infracost.parser.event.ResourceCloudUsage.AttributesEntry
+	nil,                            // 19: infracost.parser.event.UsageDefaults.ResourcesEntry
+	nil,                            // 20: infracost.parser.event.UsageResourceMap.UsagesEntry
+	nil,                            // 21: infracost.parser.event.MapFilter.IncludeEntry
+	nil,                            // 22: infracost.parser.event.MapFilter.ExcludeEntry
 }
 var file_infracost_parser_event_runparameters_proto_depIdxs = []int32{
-	3,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
-	4,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
-	9,  // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
-	10, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
-	14, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
-	15, // 5: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
-	16, // 6: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
-	7,  // 7: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
-	8,  // 8: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
-	12, // 9: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
-	0,  // 10: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
-	12, // 11: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 12: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 13: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 14: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
-	11, // 15: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
-	1,  // 16: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
-	17, // 17: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
-	18, // 18: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
-	12, // 19: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 20: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 21: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
-	5,  // 22: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
-	6,  // 23: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	5,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
+	6,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
+	11, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
+	12, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
+	16, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	3,  // 5: infracost.parser.event.RunParameters.cloud_usage_data:type_name -> infracost.parser.event.CloudUsageData
+	17, // 6: infracost.parser.event.CloudUsageData.resources:type_name -> infracost.parser.event.CloudUsageData.ResourcesEntry
+	18, // 7: infracost.parser.event.ResourceCloudUsage.attributes:type_name -> infracost.parser.event.ResourceCloudUsage.AttributesEntry
+	19, // 8: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
+	20, // 9: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
+	9,  // 10: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
+	10, // 11: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
+	14, // 12: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
+	0,  // 13: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
+	14, // 14: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 15: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 16: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
+	15, // 17: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
+	13, // 18: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
+	1,  // 19: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
+	21, // 20: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
+	22, // 21: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
+	14, // 22: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 23: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
+	15, // 24: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
+	4,  // 25: infracost.parser.event.CloudUsageData.ResourcesEntry.value:type_name -> infracost.parser.event.ResourceCloudUsage
+	7,  // 26: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
+	8,  // 27: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_runparameters_proto_init() }
@@ -1179,7 +1304,7 @@ func file_infracost_parser_event_runparameters_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_event_runparameters_proto_rawDesc), len(file_infracost_parser_event_runparameters_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   17,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

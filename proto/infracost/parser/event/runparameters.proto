@@ -8,6 +8,23 @@ message RunParameters {
   repeated ProductionFilter production_filters = 3;
   repeated TagPolicy tag_policies = 4;
   repeated FinopsPolicySettings finops_policies = 5;
+  CloudUsageData cloud_usage_data = 6;
+}
+
+// CloudUsageData contains actual cloud-measured usage data keyed by resource address.
+// This is separate from UsageDefaults which are per-resource-type estimates.
+// Cloud usage data takes priority over type-level defaults when both exist.
+message CloudUsageData {
+  // Key is the Terraform resource address (e.g. "aws_s3_bucket.my_bucket")
+  map<string, ResourceCloudUsage> resources = 1;
+}
+
+// ResourceCloudUsage holds cloud-measured usage attributes for a single resource.
+// Attribute values are string-encoded to support various numeric and string types.
+message ResourceCloudUsage {
+  // Key is attribute name (e.g. "storage_gb", "object_count", "effective_storage_rate_per_gb",
+  // "cold_data_percent"). Values are string-encoded.
+  map<string, string> attributes = 1;
 }
 
 message BaseScope {

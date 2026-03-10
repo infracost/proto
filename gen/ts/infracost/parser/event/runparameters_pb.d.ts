@@ -38,6 +38,11 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.FinopsPolicySettings finops_policies = 5;
    */
   finopsPolicies: FinopsPolicySettings[];
+
+  /**
+   * @generated from field: infracost.parser.event.CloudUsageData cloud_usage_data = 6;
+   */
+  cloudUsageData?: CloudUsageData;
 };
 
 /**
@@ -45,6 +50,50 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * CloudUsageData contains actual cloud-measured usage data keyed by resource address.
+ * This is separate from UsageDefaults which are per-resource-type estimates.
+ * Cloud usage data takes priority over type-level defaults when both exist.
+ *
+ * @generated from message infracost.parser.event.CloudUsageData
+ */
+export declare type CloudUsageData = Message<"infracost.parser.event.CloudUsageData"> & {
+  /**
+   * Key is the Terraform resource address (e.g. "aws_s3_bucket.my_bucket")
+   *
+   * @generated from field: map<string, infracost.parser.event.ResourceCloudUsage> resources = 1;
+   */
+  resources: { [key: string]: ResourceCloudUsage };
+};
+
+/**
+ * Describes the message infracost.parser.event.CloudUsageData.
+ * Use `create(CloudUsageDataSchema)` to create a new message.
+ */
+export declare const CloudUsageDataSchema: GenMessage<CloudUsageData>;
+
+/**
+ * ResourceCloudUsage holds cloud-measured usage attributes for a single resource.
+ * Attribute values are string-encoded to support various numeric and string types.
+ *
+ * @generated from message infracost.parser.event.ResourceCloudUsage
+ */
+export declare type ResourceCloudUsage = Message<"infracost.parser.event.ResourceCloudUsage"> & {
+  /**
+   * Key is attribute name (e.g. "storage_gb", "object_count", "effective_storage_rate_per_gb",
+   * "cold_data_percent"). Values are string-encoded.
+   *
+   * @generated from field: map<string, string> attributes = 1;
+   */
+  attributes: { [key: string]: string };
+};
+
+/**
+ * Describes the message infracost.parser.event.ResourceCloudUsage.
+ * Use `create(ResourceCloudUsageSchema)` to create a new message.
+ */
+export declare const ResourceCloudUsageSchema: GenMessage<ResourceCloudUsage>;
 
 /**
  * @generated from message infracost.parser.event.BaseScope
