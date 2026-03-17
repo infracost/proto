@@ -113,6 +113,7 @@ message AzureRepos {
 message FeatureFlags {
   reserved 1, 2;
   reserved "enable_cloud_formation", "enable_cloud_formation_cdk";
+  bool enable_cisco_stacks = 3;
 }
 
 // What gets executed

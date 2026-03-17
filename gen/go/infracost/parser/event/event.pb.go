@@ -891,9 +891,10 @@ func (x *AzureRepos) GetBaseUrl() string {
 }
 
 type FeatureFlags struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	EnableCiscoStacks bool                   `protobuf:"varint,3,opt,name=enable_cisco_stacks,json=enableCiscoStacks,proto3" json:"enable_cisco_stacks,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *FeatureFlags) Reset() {
@@ -924,6 +925,13 @@ func (x *FeatureFlags) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FeatureFlags.ProtoReflect.Descriptor instead.
 func (*FeatureFlags) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FeatureFlags) GetEnableCiscoStacks() bool {
+	if x != nil {
+		return x.EnableCiscoStacks
+	}
+	return false
 }
 
 // What gets executed
@@ -1505,8 +1513,9 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\n" +
 	"AzureRepos\x12A\n" +
 	"\faccess_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\vaccessToken\x12\x19\n" +
-	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"N\n" +
-	"\fFeatureFlagsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xa8\x02\n" +
+	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"~\n" +
+	"\fFeatureFlags\x12.\n" +
+	"\x13enable_cisco_stacks\x18\x03 \x01(\bR\x11enableCiscoStacksJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xa8\x02\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
