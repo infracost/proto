@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { Rat } from "../../rational/rational_pb.js";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
@@ -38,6 +39,11 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.FinopsPolicySettings finops_policies = 5;
    */
   finopsPolicies: FinopsPolicySettings[];
+
+  /**
+   * @generated from field: repeated infracost.parser.event.Guardrail guardrails = 6;
+   */
+  guardrails: Guardrail[];
 };
 
 /**
@@ -475,4 +481,99 @@ export declare type FinopsPolicySettings = Message<"infracost.parser.event.Finop
  * Use `create(FinopsPolicySettingsSchema)` to create a new message.
  */
 export declare const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings>;
+
+/**
+ * @generated from message infracost.parser.event.Guardrail
+ */
+export declare type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: infracost.parser.event.Guardrail.Scope scope = 3;
+   */
+  scope: Guardrail_Scope;
+
+  /**
+   * Project filter for PROJECT-scoped guardrails. The CLI must filter
+   * projects against this when evaluating thresholds.
+   *
+   * @generated from field: infracost.parser.event.StringFilter project_filter = 4;
+   */
+  projectFilter?: StringFilter;
+
+  /**
+   * Thresholds use AND logic: all configured thresholds must be exceeded
+   * for the guardrail to trigger.
+   *
+   * @generated from field: optional infracost.rational.Rat increase_threshold = 5;
+   */
+  increaseThreshold?: Rat;
+
+  /**
+   * @generated from field: optional infracost.rational.Rat increase_percent_threshold = 6;
+   */
+  increasePercentThreshold?: Rat;
+
+  /**
+   * Total threshold uses crossing logic: only triggers when cost crosses
+   * from at-or-below to above the threshold.
+   *
+   * @generated from field: optional infracost.rational.Rat total_threshold = 7;
+   */
+  totalThreshold?: Rat;
+
+  /**
+   * @generated from field: bool pr_comment = 8;
+   */
+  prComment: boolean;
+
+  /**
+   * @generated from field: bool block_pr = 9;
+   */
+  blockPr: boolean;
+
+  /**
+   * @generated from field: string message = 10;
+   */
+  message: string;
+};
+
+/**
+ * Describes the message infracost.parser.event.Guardrail.
+ * Use `create(GuardrailSchema)` to create a new message.
+ */
+export declare const GuardrailSchema: GenMessage<Guardrail>;
+
+/**
+ * @generated from enum infracost.parser.event.Guardrail.Scope
+ */
+export enum Guardrail_Scope {
+  /**
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: REPO = 1;
+   */
+  REPO = 1,
+
+  /**
+   * @generated from enum value: PROJECT = 2;
+   */
+  PROJECT = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.event.Guardrail.Scope.
+ */
+export declare const Guardrail_ScopeSchema: GenEnum<Guardrail_Scope>;
 

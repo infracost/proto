@@ -4,13 +4,15 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Rat } from "../../rational/rational_pb.js";
+import { file_infracost_rational_rational } from "../../rational/rational_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
  */
 export const file_infracost_parser_event_runparameters: GenFile = /*@__PURE__*/
-  fileDesc("CippbmZyYWNvc3QvcGFyc2VyL2V2ZW50L3J1bnBhcmFtZXRlcnMucHJvdG8SFmluZnJhY29zdC5wYXJzZXIuZXZlbnQixgIKDVJ1blBhcmFtZXRlcnMSMAoFc2NvcGUYASABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJhc2VTY29wZRI9Cg51c2FnZV9kZWZhdWx0cxgCIAEoCzIlLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cxJEChJwcm9kdWN0aW9uX2ZpbHRlcnMYAyADKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXISNwoMdGFnX3BvbGljaWVzGAQgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3kSRQoPZmlub3BzX3BvbGljaWVzGAUgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncyJFCglCYXNlU2NvcGUSEQoJcmVwb19uYW1lGAEgASgJEhAKCHJlcG9fdXJsGAIgASgJEhMKC2JyYW5jaF9uYW1lGAMgASgJIrQBCg1Vc2FnZURlZmF1bHRzEkcKCXJlc291cmNlcxgBIAMoCzI0LmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cy5SZXNvdXJjZXNFbnRyeRpaCg5SZXNvdXJjZXNFbnRyeRILCgNrZXkYASABKAkSNwoFdmFsdWUYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlUmVzb3VyY2VNYXA6AjgBIrEBChBVc2FnZVJlc291cmNlTWFwEkQKBnVzYWdlcxgBIAMoCzI0LmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VSZXNvdXJjZU1hcC5Vc2FnZXNFbnRyeRpXCgtVc2FnZXNFbnRyeRILCgNrZXkYASABKAkSNwoFdmFsdWUYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRGVmYXVsdExpc3Q6AjgBIkYKEFVzYWdlRGVmYXVsdExpc3QSMgoEbGlzdBgBIAMoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0ImkKDFVzYWdlRGVmYXVsdBIQCghxdWFudGl0eRgBIAEoCRIQCghwcmlvcml0eRgCIAEoBRI1CgdmaWx0ZXJzGAMgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZUZpbHRlcnMiRQoMVXNhZ2VGaWx0ZXJzEjUKB3Byb2plY3QYASABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlciK3AQoQUHJvZHVjdGlvbkZpbHRlchIKCgJpZBgBIAEoCRI7CgR0eXBlGAIgASgOMi0uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qcm9kdWN0aW9uRmlsdGVyLlR5cGUSDQoFdmFsdWUYAyABKAkSDwoHaW5jbHVkZRgEIAEoCCI6CgRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASCAoEUkVQTxABEgsKB1BST0pFQ1QQAhIKCgZCUkFOQ0gQAyKRAwoJVGFnUG9saWN5EgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDwoHbWVzc2FnZRgDIAEoCRI9Cg9yZXNvdXJjZV9maWx0ZXIYBCABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI7Cg1icmFuY2hfZmlsdGVyGAUgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISPAoOcHJvamVjdF9maWx0ZXIYBiABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI1Cgp0YWdfZmlsdGVyGAcgASgLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXISQgoMcmVxdWlyZW1lbnRzGAggAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3lSZXF1aXJlbWVudBISCgpwcl9jb21tZW50GAkgASgIEhAKCGJsb2NrX3ByGAogASgIIuwBChRUYWdQb2xpY3lSZXF1aXJlbWVudBILCgNrZXkYASABKAkSPwoEdHlwZRgCIAEoDjIxLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVGFnUG9saWN5UmVxdWlyZW1lbnQuVHlwZRITCgt2YWx1ZV9yZWdleBgDIAEoCRIPCgdtZXNzYWdlGAQgASgJEhYKDmFsbG93ZWRfdmFsdWVzGAUgAygJEhEKCW1hbmRhdG9yeRgGIAEoCCI1CgRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASBwoDQU5ZEAESCAoETElTVBACEgkKBVJFR0VYEAMiMAoMU3RyaW5nRmlsdGVyEg8KB2luY2x1ZGUYASADKAkSDwoHZXhjbHVkZRgCIAMoCSLtAQoJTWFwRmlsdGVyEj8KB2luY2x1ZGUYASADKAsyLi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlci5JbmNsdWRlRW50cnkSPwoHZXhjbHVkZRgCIAMoCzIuLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyLkV4Y2x1ZGVFbnRyeRouCgxJbmNsdWRlRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARouCgxFeGNsdWRlRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASLVAgoURmlub3BzUG9saWN5U2V0dGluZ3MSCgoCaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEg8KB21lc3NhZ2UYBCABKAkSPAoOcHJvamVjdF9maWx0ZXIYBSABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI7Cg1icmFuY2hfZmlsdGVyGAYgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISNQoKdGFnX2ZpbHRlchgHIAEoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyEhAKCHNldHRpbmdzGAggASgJEhIKCnByX2NvbW1lbnQYCSABKAgSEAoIYmxvY2tfcHIYCiABKAgSGgoSb25seV9uZXdfcmVzb3VyY2VzGAsgASgIQuQBChpjb20uaW5mcmFjb3N0LnBhcnNlci5ldmVudEISUnVucGFyYW1ldGVyc1Byb3RvUAFaOGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2V2ZW50ogIDSVBFqgIWSW5mcmFjb3N0LlBhcnNlci5FdmVudMoCFkluZnJhY29zdFxQYXJzZXJcRXZlbnTiAiJJbmZyYWNvc3RcUGFyc2VyXEV2ZW50XEdQQk1ldGFkYXRh6gIYSW5mcmFjb3N0OjpQYXJzZXI6OkV2ZW50YgZwcm90bzM");
+  fileDesc("CippbmZyYWNvc3QvcGFyc2VyL2V2ZW50L3J1bnBhcmFtZXRlcnMucHJvdG8SFmluZnJhY29zdC5wYXJzZXIuZXZlbnQi/QIKDVJ1blBhcmFtZXRlcnMSMAoFc2NvcGUYASABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJhc2VTY29wZRI9Cg51c2FnZV9kZWZhdWx0cxgCIAEoCzIlLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cxJEChJwcm9kdWN0aW9uX2ZpbHRlcnMYAyADKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXISNwoMdGFnX3BvbGljaWVzGAQgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3kSRQoPZmlub3BzX3BvbGljaWVzGAUgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncxI1CgpndWFyZHJhaWxzGAYgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5HdWFyZHJhaWwiRQoJQmFzZVNjb3BlEhEKCXJlcG9fbmFtZRgBIAEoCRIQCghyZXBvX3VybBgCIAEoCRITCgticmFuY2hfbmFtZRgDIAEoCSK0AQoNVXNhZ2VEZWZhdWx0cxJHCglyZXNvdXJjZXMYASADKAsyNC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRGVmYXVsdHMuUmVzb3VyY2VzRW50cnkaWgoOUmVzb3VyY2VzRW50cnkSCwoDa2V5GAEgASgJEjcKBXZhbHVlGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZVJlc291cmNlTWFwOgI4ASKxAQoQVXNhZ2VSZXNvdXJjZU1hcBJECgZ1c2FnZXMYASADKAsyNC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlUmVzb3VyY2VNYXAuVXNhZ2VzRW50cnkaVwoLVXNhZ2VzRW50cnkSCwoDa2V5GAEgASgJEjcKBXZhbHVlGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZURlZmF1bHRMaXN0OgI4ASJGChBVc2FnZURlZmF1bHRMaXN0EjIKBGxpc3QYASADKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRGVmYXVsdCJpCgxVc2FnZURlZmF1bHQSEAoIcXVhbnRpdHkYASABKAkSEAoIcHJpb3JpdHkYAiABKAUSNQoHZmlsdGVycxgDIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VGaWx0ZXJzIkUKDFVzYWdlRmlsdGVycxI1Cgdwcm9qZWN0GAEgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXIitwEKEFByb2R1Y3Rpb25GaWx0ZXISCgoCaWQYASABKAkSOwoEdHlwZRgCIAEoDjItLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuUHJvZHVjdGlvbkZpbHRlci5UeXBlEg0KBXZhbHVlGAMgASgJEg8KB2luY2x1ZGUYBCABKAgiOgoEVHlwZRIPCgtVTlNQRUNJRklFRBAAEggKBFJFUE8QARILCgdQUk9KRUNUEAISCgoGQlJBTkNIEAMikQMKCVRhZ1BvbGljeRIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEg8KB21lc3NhZ2UYAyABKAkSPQoPcmVzb3VyY2VfZmlsdGVyGAQgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISOwoNYnJhbmNoX2ZpbHRlchgFIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjwKDnByb2plY3RfZmlsdGVyGAYgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISNQoKdGFnX2ZpbHRlchgHIAEoCzIhLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyEkIKDHJlcXVpcmVtZW50cxgIIAMoCzIsLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVGFnUG9saWN5UmVxdWlyZW1lbnQSEgoKcHJfY29tbWVudBgJIAEoCBIQCghibG9ja19wchgKIAEoCCLsAQoUVGFnUG9saWN5UmVxdWlyZW1lbnQSCwoDa2V5GAEgASgJEj8KBHR5cGUYAiABKA4yMS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlRhZ1BvbGljeVJlcXVpcmVtZW50LlR5cGUSEwoLdmFsdWVfcmVnZXgYAyABKAkSDwoHbWVzc2FnZRgEIAEoCRIWCg5hbGxvd2VkX3ZhbHVlcxgFIAMoCRIRCgltYW5kYXRvcnkYBiABKAgiNQoEVHlwZRIPCgtVTlNQRUNJRklFRBAAEgcKA0FOWRABEggKBExJU1QQAhIJCgVSRUdFWBADIjAKDFN0cmluZ0ZpbHRlchIPCgdpbmNsdWRlGAEgAygJEg8KB2V4Y2x1ZGUYAiADKAki7QEKCU1hcEZpbHRlchI/CgdpbmNsdWRlGAEgAygLMi4uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXIuSW5jbHVkZUVudHJ5Ej8KB2V4Y2x1ZGUYAiADKAsyLi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlci5FeGNsdWRlRW50cnkaLgoMSW5jbHVkZUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaLgoMRXhjbHVkZUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEi1QIKFEZpbm9wc1BvbGljeVNldHRpbmdzEgoKAmlkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIPCgdtZXNzYWdlGAQgASgJEjwKDnByb2plY3RfZmlsdGVyGAUgASgLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5TdHJpbmdGaWx0ZXISOwoNYnJhbmNoX2ZpbHRlchgGIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjUKCnRhZ19maWx0ZXIYByABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlchIQCghzZXR0aW5ncxgIIAEoCRISCgpwcl9jb21tZW50GAkgASgIEhAKCGJsb2NrX3ByGAogASgIEhoKEm9ubHlfbmV3X3Jlc291cmNlcxgLIAEoCCKABAoJR3VhcmRyYWlsEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSNgoFc2NvcGUYAyABKA4yJy5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lkd1YXJkcmFpbC5TY29wZRI8Cg5wcm9qZWN0X2ZpbHRlchgEIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjgKEmluY3JlYXNlX3RocmVzaG9sZBgFIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAIgBARJAChppbmNyZWFzZV9wZXJjZW50X3RocmVzaG9sZBgGIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAYgBARI1Cg90b3RhbF90aHJlc2hvbGQYByABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0SAKIAQESEgoKcHJfY29tbWVudBgIIAEoCBIQCghibG9ja19wchgJIAEoCBIPCgdtZXNzYWdlGAogASgJIi8KBVNjb3BlEg8KC1VOU1BFQ0lGSUVEEAASCAoEUkVQTxABEgsKB1BST0pFQ1QQAkIVChNfaW5jcmVhc2VfdGhyZXNob2xkQh0KG19pbmNyZWFzZV9wZXJjZW50X3RocmVzaG9sZEISChBfdG90YWxfdGhyZXNob2xkQuQBChpjb20uaW5mcmFjb3N0LnBhcnNlci5ldmVudEISUnVucGFyYW1ldGVyc1Byb3RvUAFaOGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2V2ZW50ogIDSVBFqgIWSW5mcmFjb3N0LlBhcnNlci5FdmVudMoCFkluZnJhY29zdFxQYXJzZXJcRXZlbnTiAiJJbmZyYWNvc3RcUGFyc2VyXEV2ZW50XEdQQk1ldGFkYXRh6gIYSW5mcmFjb3N0OjpQYXJzZXI6OkV2ZW50YgZwcm90bzM", [file_infracost_rational_rational]);
 
 /**
  * @generated from message infracost.parser.event.RunParameters
@@ -40,6 +42,11 @@ export type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
    * @generated from field: repeated infracost.parser.event.FinopsPolicySettings finops_policies = 5;
    */
   finopsPolicies: FinopsPolicySettings[];
+
+  /**
+   * @generated from field: repeated infracost.parser.event.Guardrail guardrails = 6;
+   */
+  guardrails: Guardrail[];
 };
 
 /**
@@ -492,4 +499,101 @@ export type FinopsPolicySettings = Message<"infracost.parser.event.FinopsPolicyS
  */
 export const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings> = /*@__PURE__*/
   messageDesc(file_infracost_parser_event_runparameters, 12);
+
+/**
+ * @generated from message infracost.parser.event.Guardrail
+ */
+export type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: infracost.parser.event.Guardrail.Scope scope = 3;
+   */
+  scope: Guardrail_Scope;
+
+  /**
+   * Project filter for PROJECT-scoped guardrails. The CLI must filter
+   * projects against this when evaluating thresholds.
+   *
+   * @generated from field: infracost.parser.event.StringFilter project_filter = 4;
+   */
+  projectFilter?: StringFilter;
+
+  /**
+   * Thresholds use AND logic: all configured thresholds must be exceeded
+   * for the guardrail to trigger.
+   *
+   * @generated from field: optional infracost.rational.Rat increase_threshold = 5;
+   */
+  increaseThreshold?: Rat;
+
+  /**
+   * @generated from field: optional infracost.rational.Rat increase_percent_threshold = 6;
+   */
+  increasePercentThreshold?: Rat;
+
+  /**
+   * Total threshold uses crossing logic: only triggers when cost crosses
+   * from at-or-below to above the threshold.
+   *
+   * @generated from field: optional infracost.rational.Rat total_threshold = 7;
+   */
+  totalThreshold?: Rat;
+
+  /**
+   * @generated from field: bool pr_comment = 8;
+   */
+  prComment: boolean;
+
+  /**
+   * @generated from field: bool block_pr = 9;
+   */
+  blockPr: boolean;
+
+  /**
+   * @generated from field: string message = 10;
+   */
+  message: string;
+};
+
+/**
+ * Describes the message infracost.parser.event.Guardrail.
+ * Use `create(GuardrailSchema)` to create a new message.
+ */
+export const GuardrailSchema: GenMessage<Guardrail> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_event_runparameters, 13);
+
+/**
+ * @generated from enum infracost.parser.event.Guardrail.Scope
+ */
+export enum Guardrail_Scope {
+  /**
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: REPO = 1;
+   */
+  REPO = 1,
+
+  /**
+   * @generated from enum value: PROJECT = 2;
+   */
+  PROJECT = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.event.Guardrail.Scope.
+ */
+export const Guardrail_ScopeSchema: GenEnum<Guardrail_Scope> = /*@__PURE__*/
+  enumDesc(file_infracost_parser_event_runparameters, 13, 0);
 
