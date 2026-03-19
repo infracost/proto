@@ -114,6 +114,8 @@ message FeatureFlags {
   reserved 1, 2;
   reserved "enable_cloud_formation", "enable_cloud_formation_cdk";
   bool enable_cisco_stacks = 3;
+  bool enable_client_side_guardrails = 4;
+  bool enable_client_side_comments = 5;
 }
 
 // What gets executed

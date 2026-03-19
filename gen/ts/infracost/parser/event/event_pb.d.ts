@@ -465,6 +465,16 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_cisco_stacks = 3;
    */
   enableCiscoStacks: boolean;
+
+  /**
+   * @generated from field: bool enable_client_side_guardrails = 4;
+   */
+  enableClientSideGuardrails: boolean;
+
+  /**
+   * @generated from field: bool enable_client_side_comments = 5;
+   */
+  enableClientSideComments: boolean;
 };
 
 /**
