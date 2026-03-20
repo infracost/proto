@@ -7,6 +7,7 @@
 package event
 
 import (
+	rational "github.com/infracost/proto/gen/go/infracost/rational"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -126,6 +127,55 @@ func (TagPolicyRequirement_Type) EnumDescriptor() ([]byte, []int) {
 	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9, 0}
 }
 
+type Guardrail_Scope int32
+
+const (
+	Guardrail_UNSPECIFIED Guardrail_Scope = 0
+	Guardrail_REPO        Guardrail_Scope = 1
+	Guardrail_PROJECT     Guardrail_Scope = 2
+)
+
+// Enum value maps for Guardrail_Scope.
+var (
+	Guardrail_Scope_name = map[int32]string{
+		0: "UNSPECIFIED",
+		1: "REPO",
+		2: "PROJECT",
+	}
+	Guardrail_Scope_value = map[string]int32{
+		"UNSPECIFIED": 0,
+		"REPO":        1,
+		"PROJECT":     2,
+	}
+)
+
+func (x Guardrail_Scope) Enum() *Guardrail_Scope {
+	p := new(Guardrail_Scope)
+	*p = x
+	return p
+}
+
+func (x Guardrail_Scope) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Guardrail_Scope) Descriptor() protoreflect.EnumDescriptor {
+	return file_infracost_parser_event_runparameters_proto_enumTypes[2].Descriptor()
+}
+
+func (Guardrail_Scope) Type() protoreflect.EnumType {
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[2]
+}
+
+func (x Guardrail_Scope) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Guardrail_Scope.Descriptor instead.
+func (Guardrail_Scope) EnumDescriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13, 0}
+}
+
 type RunParameters struct {
 	state             protoimpl.MessageState  `protogen:"open.v1"`
 	Scope             *BaseScope              `protobuf:"bytes,1,opt,name=scope,proto3" json:"scope,omitempty"`
@@ -133,6 +183,7 @@ type RunParameters struct {
 	ProductionFilters []*ProductionFilter     `protobuf:"bytes,3,rep,name=production_filters,json=productionFilters,proto3" json:"production_filters,omitempty"`
 	TagPolicies       []*TagPolicy            `protobuf:"bytes,4,rep,name=tag_policies,json=tagPolicies,proto3" json:"tag_policies,omitempty"`
 	FinopsPolicies    []*FinopsPolicySettings `protobuf:"bytes,5,rep,name=finops_policies,json=finopsPolicies,proto3" json:"finops_policies,omitempty"`
+	Guardrails        []*Guardrail            `protobuf:"bytes,6,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -198,6 +249,13 @@ func (x *RunParameters) GetTagPolicies() []*TagPolicy {
 func (x *RunParameters) GetFinopsPolicies() []*FinopsPolicySettings {
 	if x != nil {
 		return x.FinopsPolicies
+	}
+	return nil
+}
+
+func (x *RunParameters) GetGuardrails() []*Guardrail {
+	if x != nil {
+		return x.Guardrails
 	}
 	return nil
 }
@@ -1000,17 +1058,142 @@ func (x *FinopsPolicySettings) GetOnlyNewResources() bool {
 	return false
 }
 
+type Guardrail struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name  string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Scope Guardrail_Scope        `protobuf:"varint,3,opt,name=scope,proto3,enum=infracost.parser.event.Guardrail_Scope" json:"scope,omitempty"`
+	// Project filter for PROJECT-scoped guardrails. The CLI must filter
+	// projects against this when evaluating thresholds.
+	ProjectFilter *StringFilter `protobuf:"bytes,4,opt,name=project_filter,json=projectFilter,proto3" json:"project_filter,omitempty"`
+	// Thresholds use AND logic: all configured thresholds must be exceeded
+	// for the guardrail to trigger.
+	IncreaseThreshold        *rational.Rat `protobuf:"bytes,5,opt,name=increase_threshold,json=increaseThreshold,proto3,oneof" json:"increase_threshold,omitempty"`
+	IncreasePercentThreshold *rational.Rat `protobuf:"bytes,6,opt,name=increase_percent_threshold,json=increasePercentThreshold,proto3,oneof" json:"increase_percent_threshold,omitempty"`
+	// Total threshold uses crossing logic: only triggers when cost crosses
+	// from at-or-below to above the threshold.
+	TotalThreshold *rational.Rat `protobuf:"bytes,7,opt,name=total_threshold,json=totalThreshold,proto3,oneof" json:"total_threshold,omitempty"`
+	PrComment      bool          `protobuf:"varint,8,opt,name=pr_comment,json=prComment,proto3" json:"pr_comment,omitempty"`
+	BlockPr        bool          `protobuf:"varint,9,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
+	Message        string        `protobuf:"bytes,10,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Guardrail) Reset() {
+	*x = Guardrail{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Guardrail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Guardrail) ProtoMessage() {}
+
+func (x *Guardrail) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Guardrail.ProtoReflect.Descriptor instead.
+func (*Guardrail) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *Guardrail) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Guardrail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Guardrail) GetScope() Guardrail_Scope {
+	if x != nil {
+		return x.Scope
+	}
+	return Guardrail_UNSPECIFIED
+}
+
+func (x *Guardrail) GetProjectFilter() *StringFilter {
+	if x != nil {
+		return x.ProjectFilter
+	}
+	return nil
+}
+
+func (x *Guardrail) GetIncreaseThreshold() *rational.Rat {
+	if x != nil {
+		return x.IncreaseThreshold
+	}
+	return nil
+}
+
+func (x *Guardrail) GetIncreasePercentThreshold() *rational.Rat {
+	if x != nil {
+		return x.IncreasePercentThreshold
+	}
+	return nil
+}
+
+func (x *Guardrail) GetTotalThreshold() *rational.Rat {
+	if x != nil {
+		return x.TotalThreshold
+	}
+	return nil
+}
+
+func (x *Guardrail) GetPrComment() bool {
+	if x != nil {
+		return x.PrComment
+	}
+	return false
+}
+
+func (x *Guardrail) GetBlockPr() bool {
+	if x != nil {
+		return x.BlockPr
+	}
+	return false
+}
+
+func (x *Guardrail) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\"\x8c\x03\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a!infracost/rational/rational.proto\"\xcf\x03\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
 	"\x12production_filters\x18\x03 \x03(\v2(.infracost.parser.event.ProductionFilterR\x11productionFilters\x12D\n" +
 	"\ftag_policies\x18\x04 \x03(\v2!.infracost.parser.event.TagPolicyR\vtagPolicies\x12U\n" +
-	"\x0ffinops_policies\x18\x05 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\x0efinopsPolicies\"d\n" +
+	"\x0ffinops_policies\x18\x05 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\x0efinopsPolicies\x12A\n" +
+	"\n" +
+	"guardrails\x18\x06 \x03(\v2!.infracost.parser.event.GuardrailR\n" +
+	"guardrails\"d\n" +
 	"\tBaseScope\x12\x1b\n" +
 	"\trepo_name\x18\x01 \x01(\tR\brepoName\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x1f\n" +
@@ -1098,7 +1281,27 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"pr_comment\x18\t \x01(\bR\tprComment\x12\x19\n" +
 	"\bblock_pr\x18\n" +
 	" \x01(\bR\ablockPr\x12,\n" +
-	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResourcesB\xe4\x01\n" +
+	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResources\"\xfa\x04\n" +
+	"\tGuardrail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
+	"\x05scope\x18\x03 \x01(\x0e2'.infracost.parser.event.Guardrail.ScopeR\x05scope\x12K\n" +
+	"\x0eproject_filter\x18\x04 \x01(\v2$.infracost.parser.event.StringFilterR\rprojectFilter\x12K\n" +
+	"\x12increase_threshold\x18\x05 \x01(\v2\x17.infracost.rational.RatH\x00R\x11increaseThreshold\x88\x01\x01\x12Z\n" +
+	"\x1aincrease_percent_threshold\x18\x06 \x01(\v2\x17.infracost.rational.RatH\x01R\x18increasePercentThreshold\x88\x01\x01\x12E\n" +
+	"\x0ftotal_threshold\x18\a \x01(\v2\x17.infracost.rational.RatH\x02R\x0etotalThreshold\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"pr_comment\x18\b \x01(\bR\tprComment\x12\x19\n" +
+	"\bblock_pr\x18\t \x01(\bR\ablockPr\x12\x18\n" +
+	"\amessage\x18\n" +
+	" \x01(\tR\amessage\"/\n" +
+	"\x05Scope\x12\x0f\n" +
+	"\vUNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04REPO\x10\x01\x12\v\n" +
+	"\aPROJECT\x10\x02B\x15\n" +
+	"\x13_increase_thresholdB\x1d\n" +
+	"\x1b_increase_percent_thresholdB\x12\n" +
+	"\x10_total_thresholdB\xe4\x01\n" +
 	"\x1acom.infracost.parser.eventB\x12RunparametersProtoP\x01Z8github.com/infracost/proto/gen/go/infracost/parser/event\xa2\x02\x03IPE\xaa\x02\x16Infracost.Parser.Event\xca\x02\x16Infracost\\Parser\\Event\xe2\x02\"Infracost\\Parser\\Event\\GPBMetadata\xea\x02\x18Infracost::Parser::Eventb\x06proto3"
 
 var (
@@ -1113,59 +1316,68 @@ func file_infracost_parser_event_runparameters_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_event_runparameters_proto_rawDescData
 }
 
-var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_infracost_parser_event_runparameters_proto_goTypes = []any{
 	(ProductionFilter_Type)(0),     // 0: infracost.parser.event.ProductionFilter.Type
 	(TagPolicyRequirement_Type)(0), // 1: infracost.parser.event.TagPolicyRequirement.Type
-	(*RunParameters)(nil),          // 2: infracost.parser.event.RunParameters
-	(*BaseScope)(nil),              // 3: infracost.parser.event.BaseScope
-	(*UsageDefaults)(nil),          // 4: infracost.parser.event.UsageDefaults
-	(*UsageResourceMap)(nil),       // 5: infracost.parser.event.UsageResourceMap
-	(*UsageDefaultList)(nil),       // 6: infracost.parser.event.UsageDefaultList
-	(*UsageDefault)(nil),           // 7: infracost.parser.event.UsageDefault
-	(*UsageFilters)(nil),           // 8: infracost.parser.event.UsageFilters
-	(*ProductionFilter)(nil),       // 9: infracost.parser.event.ProductionFilter
-	(*TagPolicy)(nil),              // 10: infracost.parser.event.TagPolicy
-	(*TagPolicyRequirement)(nil),   // 11: infracost.parser.event.TagPolicyRequirement
-	(*StringFilter)(nil),           // 12: infracost.parser.event.StringFilter
-	(*MapFilter)(nil),              // 13: infracost.parser.event.MapFilter
-	(*FinopsPolicySettings)(nil),   // 14: infracost.parser.event.FinopsPolicySettings
-	nil,                            // 15: infracost.parser.event.UsageDefaults.ResourcesEntry
-	nil,                            // 16: infracost.parser.event.UsageResourceMap.UsagesEntry
-	nil,                            // 17: infracost.parser.event.MapFilter.IncludeEntry
-	nil,                            // 18: infracost.parser.event.MapFilter.ExcludeEntry
+	(Guardrail_Scope)(0),           // 2: infracost.parser.event.Guardrail.Scope
+	(*RunParameters)(nil),          // 3: infracost.parser.event.RunParameters
+	(*BaseScope)(nil),              // 4: infracost.parser.event.BaseScope
+	(*UsageDefaults)(nil),          // 5: infracost.parser.event.UsageDefaults
+	(*UsageResourceMap)(nil),       // 6: infracost.parser.event.UsageResourceMap
+	(*UsageDefaultList)(nil),       // 7: infracost.parser.event.UsageDefaultList
+	(*UsageDefault)(nil),           // 8: infracost.parser.event.UsageDefault
+	(*UsageFilters)(nil),           // 9: infracost.parser.event.UsageFilters
+	(*ProductionFilter)(nil),       // 10: infracost.parser.event.ProductionFilter
+	(*TagPolicy)(nil),              // 11: infracost.parser.event.TagPolicy
+	(*TagPolicyRequirement)(nil),   // 12: infracost.parser.event.TagPolicyRequirement
+	(*StringFilter)(nil),           // 13: infracost.parser.event.StringFilter
+	(*MapFilter)(nil),              // 14: infracost.parser.event.MapFilter
+	(*FinopsPolicySettings)(nil),   // 15: infracost.parser.event.FinopsPolicySettings
+	(*Guardrail)(nil),              // 16: infracost.parser.event.Guardrail
+	nil,                            // 17: infracost.parser.event.UsageDefaults.ResourcesEntry
+	nil,                            // 18: infracost.parser.event.UsageResourceMap.UsagesEntry
+	nil,                            // 19: infracost.parser.event.MapFilter.IncludeEntry
+	nil,                            // 20: infracost.parser.event.MapFilter.ExcludeEntry
+	(*rational.Rat)(nil),           // 21: infracost.rational.Rat
 }
 var file_infracost_parser_event_runparameters_proto_depIdxs = []int32{
-	3,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
-	4,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
-	9,  // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
-	10, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
-	14, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
-	15, // 5: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
-	16, // 6: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
-	7,  // 7: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
-	8,  // 8: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
-	12, // 9: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
-	0,  // 10: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
-	12, // 11: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 12: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 13: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 14: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
-	11, // 15: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
-	1,  // 16: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
-	17, // 17: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
-	18, // 18: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
-	12, // 19: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
-	12, // 20: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 21: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
-	5,  // 22: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
-	6,  // 23: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	4,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
+	5,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
+	10, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
+	11, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
+	15, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	16, // 5: infracost.parser.event.RunParameters.guardrails:type_name -> infracost.parser.event.Guardrail
+	17, // 6: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
+	18, // 7: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
+	8,  // 8: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
+	9,  // 9: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
+	13, // 10: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
+	0,  // 11: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
+	13, // 12: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
+	13, // 13: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
+	13, // 14: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 15: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
+	12, // 16: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
+	1,  // 17: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
+	19, // 18: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
+	20, // 19: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
+	13, // 20: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
+	13, // 21: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 22: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
+	2,  // 23: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
+	13, // 24: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
+	21, // 25: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
+	21, // 26: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
+	21, // 27: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
+	6,  // 28: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
+	7,  // 29: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_runparameters_proto_init() }
@@ -1173,13 +1385,14 @@ func file_infracost_parser_event_runparameters_proto_init() {
 	if File_infracost_parser_event_runparameters_proto != nil {
 		return
 	}
+	file_infracost_parser_event_runparameters_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_event_runparameters_proto_rawDesc), len(file_infracost_parser_event_runparameters_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   17,
+			NumEnums:      3,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

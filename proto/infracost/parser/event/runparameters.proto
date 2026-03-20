@@ -2,12 +2,15 @@ syntax = "proto3";
 
 package infracost.parser.event;
 
+import "infracost/rational/rational.proto";
+
 message RunParameters {
   BaseScope scope = 1;
   UsageDefaults usage_defaults = 2;
   repeated ProductionFilter production_filters = 3;
   repeated TagPolicy tag_policies = 4;
   repeated FinopsPolicySettings finops_policies = 5;
+  repeated Guardrail guardrails = 6;
 }
 
 message BaseScope {
@@ -110,4 +113,29 @@ message FinopsPolicySettings {
   bool pr_comment = 9;
   bool block_pr = 10;
   bool only_new_resources = 11;
+}
+
+message Guardrail {
+  enum Scope {
+    UNSPECIFIED = 0;
+    REPO = 1;
+    PROJECT = 2;
+  }
+
+  string id = 1;
+  string name = 2;
+  Scope scope = 3;
+  // Project filter for PROJECT-scoped guardrails. The CLI must filter
+  // projects against this when evaluating thresholds.
+  StringFilter project_filter = 4;
+  // Thresholds use AND logic: all configured thresholds must be exceeded
+  // for the guardrail to trigger.
+  optional infracost.rational.Rat increase_threshold = 5;
+  optional infracost.rational.Rat increase_percent_threshold = 6;
+  // Total threshold uses crossing logic: only triggers when cost crosses
+  // from at-or-below to above the threshold.
+  optional infracost.rational.Rat total_threshold = 7;
+  bool pr_comment = 8;
+  bool block_pr = 9;
+  string message = 10;
 }
