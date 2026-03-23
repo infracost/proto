@@ -177,6 +177,11 @@ export declare type Resource = Message<"infracost.tree.Resource"> & {
    * @generated from field: optional infracost.tree.ValueObject attributes = 16;
    */
   attributes?: ValueObject;
+
+  /**
+   * @generated from field: repeated infracost.tree.TagPropagationProblem tag_propagation_problems = 17;
+   */
+  tagPropagationProblems: TagPropagationProblem[];
 };
 
 /**
@@ -184,6 +189,52 @@ export declare type Resource = Message<"infracost.tree.Resource"> & {
  * Use `create(ResourceSchema)` to create a new message.
  */
 export declare const ResourceSchema: GenMessage<Resource>;
+
+/**
+ * @generated from message infracost.tree.TagPropagationProblem
+ */
+export declare type TagPropagationProblem = Message<"infracost.tree.TagPropagationProblem"> & {
+  /**
+   * actual discovered value for the attribute (formerly known as "From" for some reason)
+   *
+   * @generated from field: string actual_value = 1;
+   */
+  actualValue: string;
+
+  /**
+   * valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+   *
+   * @generated from field: repeated string valid_values = 2;
+   */
+  validValues: string[];
+
+  /**
+   * the attribute which dictates whether propagation is enabled
+   *
+   * @generated from field: string attribute = 3;
+   */
+  attribute: string;
+
+  /**
+   * a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+   *
+   * @generated from field: string tag_recipient = 4;
+   */
+  tagRecipient: string;
+
+  /**
+   * tag keys which are affected by this propagation problem
+   *
+   * @generated from field: repeated string affected_tags = 5;
+   */
+  affectedTags: string[];
+};
+
+/**
+ * Describes the message infracost.tree.TagPropagationProblem.
+ * Use `create(TagPropagationProblemSchema)` to create a new message.
+ */
+export declare const TagPropagationProblemSchema: GenMessage<TagPropagationProblem>;
 
 /**
  * @generated from message infracost.tree.Definition

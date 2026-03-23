@@ -43,6 +43,20 @@ message Resource {
   bool supports_default_tags = 14;
   repeated Tag tags = 15;
   optional ValueObject attributes = 16;
+  repeated TagPropagationProblem tag_propagation_problems = 17;
+}
+
+message TagPropagationProblem {
+  // actual discovered value for the attribute (formerly known as "From" for some reason)
+  string actual_value = 1;
+  // valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+  repeated string valid_values = 2;
+  // the attribute which dictates whether propagation is enabled
+  string attribute = 3;
+  // a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+  string tag_recipient = 4;
+  // tag keys which are affected by this propagation problem
+  repeated string affected_tags = 5;
 }
 
 message Definition {
