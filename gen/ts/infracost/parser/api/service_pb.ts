@@ -208,7 +208,7 @@ export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
   messageDesc(file_infracost_parser_api_service, 4);
 
 /**
- * ParseToTreeResponse is the iac-agnostifc parser response
+ * ParseToTreeResponse is the iac-agnostic parser response
  *
  * @generated from message infracost.parser.api.ParseToTreeResponse
  */

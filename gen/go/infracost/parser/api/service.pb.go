@@ -383,7 +383,7 @@ func (x *ParseResponse) GetDependencies() []*Dependency {
 	return nil
 }
 
-// ParseToTreeResponse is the iac-agnostifc parser response
+// ParseToTreeResponse is the iac-agnostic parser response
 type ParseToTreeResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The diagnostics generated during parsing

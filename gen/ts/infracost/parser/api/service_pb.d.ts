@@ -194,7 +194,7 @@ export declare type ParseResponse = Message<"infracost.parser.api.ParseResponse"
 export declare const ParseResponseSchema: GenMessage<ParseResponse>;
 
 /**
- * ParseToTreeResponse is the iac-agnostifc parser response
+ * ParseToTreeResponse is the iac-agnostic parser response
  *
  * @generated from message infracost.parser.api.ParseToTreeResponse
  */
