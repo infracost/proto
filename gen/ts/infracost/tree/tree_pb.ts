@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/tree/tree.proto.
  */
 export const file_infracost_tree_tree: GenFile = /*@__PURE__*/
-  fileDesc("ChlpbmZyYWNvc3QvdHJlZS90cmVlLnByb3RvEg5pbmZyYWNvc3QudHJlZSLDAQoEVHJlZRI2Cglwcm92aWRlcnMYASADKAsyIy5pbmZyYWNvc3QudHJlZS5UcmVlLlByb3ZpZGVyc0VudHJ5EjcKFXVuc3VwcG9ydGVkX3Jlc291cmNlcxgCIAMoCzIYLmluZnJhY29zdC50cmVlLlJlc291cmNlGkoKDlByb3ZpZGVyc0VudHJ5EgsKA2tleRgBIAEoCRInCgV2YWx1ZRgCIAEoCzIYLmluZnJhY29zdC50cmVlLlByb3ZpZGVyOgI4ASKOAQoIUHJvdmlkZXISOAoIc2VydmljZXMYASADKAsyJi5pbmZyYWNvc3QudHJlZS5Qcm92aWRlci5TZXJ2aWNlc0VudHJ5GkgKDVNlcnZpY2VzRW50cnkSCwoDa2V5GAEgASgJEiYKBXZhbHVlGAIgASgLMhcuaW5mcmFjb3N0LnRyZWUuU2VydmljZToCOAEiYwoVUHJvdmlkZXJDb25maWd1cmF0aW9uEi0KBnNvdXJjZRgBIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USGwoTdmVyc2lvbl9jb25zdHJhaW50cxgCIAEoCSI2CgdTZXJ2aWNlEisKCXJlc291cmNlcxgBIAMoCzIYLmluZnJhY29zdC50cmVlLlJlc291cmNlIrwDCghSZXNvdXJjZRIKCgJpZBgBIAEoCRIMCgR0eXBlGAIgASgJEjMKCmRlZmluaXRpb24YAyABKAsyGi5pbmZyYWNvc3QudHJlZS5EZWZpbml0aW9uSACIAQESFgoOYmFzaWNfY2hlY2tzdW0YBCABKAkSFQoNZnVsbF9jaGVja3N1bRgFIAEoCRINCgVmbGFncxgGIAEoBBIQCghpc19kZWJ1ZxgHIAEoCBIQCghpc19jaGlsZBgIIAEoCBIUCgxpc19zdXBwb3J0ZWQYCSABKAgSDwoHaXNfZnJlZRgKIAEoCBIOCgZyZWdpb24YCyABKAkSGwoTcmVnaW9uX2lzX3N5bnRoZXRpYxgMIAEoCBIVCg1zdXBwb3J0c190YWdzGA0gASgIEh0KFXN1cHBvcnRzX2RlZmF1bHRfdGFncxgOIAEoCBIhCgR0YWdzGA8gAygLMhMuaW5mcmFjb3N0LnRyZWUuVGFnEjQKCmF0dHJpYnV0ZXMYECABKAsyGy5pbmZyYWNvc3QudHJlZS5WYWx1ZU9iamVjdEgBiAEBQg0KC19kZWZpbml0aW9uQg0KC19hdHRyaWJ1dGVzIqYDCgpEZWZpbml0aW9uEi0KBnNvdXJjZRgBIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USFQoNcmVzb3VyY2VfdHlwZRgCIAEoCRIqCgdhZGRyZXNzGAMgASgLMhkuaW5mcmFjb3N0LnBhcnNlci5BZGRyZXNzEi8KCmNhbGxfc3RhY2sYBCABKAsyGy5pbmZyYWNvc3QucGFyc2VyLkNhbGxTdGFjaxJKChZwcm92aWRlcl9jb25maWd1cmF0aW9uGAUgASgLMiUuaW5mcmFjb3N0LnRyZWUuUHJvdmlkZXJDb25maWd1cmF0aW9uSACIAQESUgoVcmF3X3N0cmluZ19hdHRyaWJ1dGVzGAYgAygLMjMuaW5mcmFjb3N0LnRyZWUuRGVmaW5pdGlvbi5SYXdTdHJpbmdBdHRyaWJ1dGVzRW50cnkaOgoYUmF3U3RyaW5nQXR0cmlidXRlc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCGQoXX3Byb3ZpZGVyX2NvbmZpZ3VyYXRpb24iYwoDVGFnEiIKA2tleRgBIAEoCzIVLmluZnJhY29zdC50cmVlLlZhbHVlEiQKBXZhbHVlGAIgASgLMhUuaW5mcmFjb3N0LnRyZWUuVmFsdWUSEgoKaXNfZGVmYXVsdBgDIAEoCCIyCglWYWx1ZUxpc3QSJQoGdmFsdWVzGAEgAygLMhUuaW5mcmFjb3N0LnRyZWUuVmFsdWUijwEKC1ZhbHVlT2JqZWN0EjkKB2VudHJpZXMYASADKAsyKC5pbmZyYWNvc3QudHJlZS5WYWx1ZU9iamVjdC5FbnRyaWVzRW50cnkaRQoMRW50cmllc0VudHJ5EgsKA2tleRgBIAEoCRIkCgV2YWx1ZRgCIAEoCzIVLmluZnJhY29zdC50cmVlLlZhbHVlOgI4ASLrAgoFVmFsdWUSDQoFZmxhZ3MYASABKAQSHgoRc291cmNlX2ZpZWxkX25hbWUYAiABKAlIAYgBARIyCgZzb3VyY2UYAyABKAsyHS5pbmZyYWNvc3QucGFyc2VyLlNvdXJjZVJhbmdlSAKIAQESFgoMc3RyaW5nX3ZhbHVlGAQgASgJSAASFAoKYm9vbF92YWx1ZRgFIAEoCEgAEhMKCWludF92YWx1ZRgGIAEoA0gAEhYKDGRvdWJsZV92YWx1ZRgHIAEoAUgAEi8KCmxpc3RfdmFsdWUYCCABKAsyGS5pbmZyYWNvc3QudHJlZS5WYWx1ZUxpc3RIABIzCgxvYmplY3RfdmFsdWUYCSABKAsyGy5pbmZyYWNvc3QudHJlZS5WYWx1ZU9iamVjdEgAEhQKCmVudW1fdmFsdWUYCiABKA1IAEIHCgV2YWx1ZUIUChJfc291cmNlX2ZpZWxkX25hbWVCCQoHX3NvdXJjZUKqAQoSY29tLmluZnJhY29zdC50cmVlQglUcmVlUHJvdG9QAVowZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC90cmVlogIDSVRYqgIOSW5mcmFjb3N0LlRyZWXKAg5JbmZyYWNvc3RcVHJlZeICGkluZnJhY29zdFxUcmVlXEdQQk1ldGFkYXRh6gIPSW5mcmFjb3N0OjpUcmVlYgZwcm90bzM", [file_infracost_parser_address, file_infracost_parser_metadata, file_infracost_parser_stack]);
+  fileDesc("ChlpbmZyYWNvc3QvdHJlZS90cmVlLnByb3RvEg5pbmZyYWNvc3QudHJlZSLDAQoEVHJlZRI2Cglwcm92aWRlcnMYASADKAsyIy5pbmZyYWNvc3QudHJlZS5UcmVlLlByb3ZpZGVyc0VudHJ5EjcKFXVuc3VwcG9ydGVkX3Jlc291cmNlcxgCIAMoCzIYLmluZnJhY29zdC50cmVlLlJlc291cmNlGkoKDlByb3ZpZGVyc0VudHJ5EgsKA2tleRgBIAEoCRInCgV2YWx1ZRgCIAEoCzIYLmluZnJhY29zdC50cmVlLlByb3ZpZGVyOgI4ASKOAQoIUHJvdmlkZXISOAoIc2VydmljZXMYASADKAsyJi5pbmZyYWNvc3QudHJlZS5Qcm92aWRlci5TZXJ2aWNlc0VudHJ5GkgKDVNlcnZpY2VzRW50cnkSCwoDa2V5GAEgASgJEiYKBXZhbHVlGAIgASgLMhcuaW5mcmFjb3N0LnRyZWUuU2VydmljZToCOAEiYwoVUHJvdmlkZXJDb25maWd1cmF0aW9uEi0KBnNvdXJjZRgBIAEoCzIdLmluZnJhY29zdC5wYXJzZXIuU291cmNlUmFuZ2USGwoTdmVyc2lvbl9jb25zdHJhaW50cxgCIAEoCSI2CgdTZXJ2aWNlEisKCXJlc291cmNlcxgBIAMoCzIYLmluZnJhY29zdC50cmVlLlJlc291cmNlIoUECghSZXNvdXJjZRIKCgJpZBgBIAEoCRIMCgR0eXBlGAIgASgJEjMKCmRlZmluaXRpb24YAyABKAsyGi5pbmZyYWNvc3QudHJlZS5EZWZpbml0aW9uSACIAQESFgoOYmFzaWNfY2hlY2tzdW0YBCABKAkSFQoNZnVsbF9jaGVja3N1bRgFIAEoCRINCgVmbGFncxgGIAEoBBIQCghpc19kZWJ1ZxgHIAEoCBIQCghpc19jaGlsZBgIIAEoCBIUCgxpc19zdXBwb3J0ZWQYCSABKAgSDwoHaXNfZnJlZRgKIAEoCBIOCgZyZWdpb24YCyABKAkSGwoTcmVnaW9uX2lzX3N5bnRoZXRpYxgMIAEoCBIVCg1zdXBwb3J0c190YWdzGA0gASgIEh0KFXN1cHBvcnRzX2RlZmF1bHRfdGFncxgOIAEoCBIhCgR0YWdzGA8gAygLMhMuaW5mcmFjb3N0LnRyZWUuVGFnEkcKGHRhZ19wcm9wYWdhdGlvbl9wcm9ibGVtcxgQIAMoCzIlLmluZnJhY29zdC50cmVlLlRhZ1Byb3BhZ2F0aW9uUHJvYmxlbRI0CgphdHRyaWJ1dGVzGBEgASgLMhsuaW5mcmFjb3N0LnRyZWUuVmFsdWVPYmplY3RIAYgBAUINCgtfZGVmaW5pdGlvbkINCgtfYXR0cmlidXRlcyKEAQoVVGFnUHJvcGFnYXRpb25Qcm9ibGVtEhQKDGFjdHVhbF92YWx1ZRgBIAEoCRIUCgx2YWxpZF92YWx1ZXMYAiADKAkSEQoJYXR0cmlidXRlGAMgASgJEhUKDXRhZ19yZWNpcGllbnQYBCABKAkSFQoNYWZmZWN0ZWRfdGFncxgFIAMoCSKmAwoKRGVmaW5pdGlvbhItCgZzb3VyY2UYASABKAsyHS5pbmZyYWNvc3QucGFyc2VyLlNvdXJjZVJhbmdlEhUKDXJlc291cmNlX3R5cGUYAiABKAkSKgoHYWRkcmVzcxgDIAEoCzIZLmluZnJhY29zdC5wYXJzZXIuQWRkcmVzcxIvCgpjYWxsX3N0YWNrGAQgASgLMhsuaW5mcmFjb3N0LnBhcnNlci5DYWxsU3RhY2sSSgoWcHJvdmlkZXJfY29uZmlndXJhdGlvbhgFIAEoCzIlLmluZnJhY29zdC50cmVlLlByb3ZpZGVyQ29uZmlndXJhdGlvbkgAiAEBElIKFXJhd19zdHJpbmdfYXR0cmlidXRlcxgGIAMoCzIzLmluZnJhY29zdC50cmVlLkRlZmluaXRpb24uUmF3U3RyaW5nQXR0cmlidXRlc0VudHJ5GjoKGFJhd1N0cmluZ0F0dHJpYnV0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhkKF19wcm92aWRlcl9jb25maWd1cmF0aW9uImMKA1RhZxIiCgNrZXkYASABKAsyFS5pbmZyYWNvc3QudHJlZS5WYWx1ZRIkCgV2YWx1ZRgCIAEoCzIVLmluZnJhY29zdC50cmVlLlZhbHVlEhIKCmlzX2RlZmF1bHQYAyABKAgiMgoJVmFsdWVMaXN0EiUKBnZhbHVlcxgBIAMoCzIVLmluZnJhY29zdC50cmVlLlZhbHVlIo8BCgtWYWx1ZU9iamVjdBI5CgdlbnRyaWVzGAEgAygLMiguaW5mcmFjb3N0LnRyZWUuVmFsdWVPYmplY3QuRW50cmllc0VudHJ5GkUKDEVudHJpZXNFbnRyeRILCgNrZXkYASABKAkSJAoFdmFsdWUYAiABKAsyFS5pbmZyYWNvc3QudHJlZS5WYWx1ZToCOAEi6wIKBVZhbHVlEg0KBWZsYWdzGAEgASgEEh4KEXNvdXJjZV9maWVsZF9uYW1lGAIgASgJSAGIAQESMgoGc291cmNlGAMgASgLMh0uaW5mcmFjb3N0LnBhcnNlci5Tb3VyY2VSYW5nZUgCiAEBEhYKDHN0cmluZ192YWx1ZRgEIAEoCUgAEhQKCmJvb2xfdmFsdWUYBSABKAhIABITCglpbnRfdmFsdWUYBiABKANIABIWCgxkb3VibGVfdmFsdWUYByABKAFIABIvCgpsaXN0X3ZhbHVlGAggASgLMhkuaW5mcmFjb3N0LnRyZWUuVmFsdWVMaXN0SAASMwoMb2JqZWN0X3ZhbHVlGAkgASgLMhsuaW5mcmFjb3N0LnRyZWUuVmFsdWVPYmplY3RIABIUCgplbnVtX3ZhbHVlGAogASgNSABCBwoFdmFsdWVCFAoSX3NvdXJjZV9maWVsZF9uYW1lQgkKB19zb3VyY2VCqgEKEmNvbS5pbmZyYWNvc3QudHJlZUIJVHJlZVByb3RvUAFaMGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvdHJlZaICA0lUWKoCDkluZnJhY29zdC5UcmVlygIOSW5mcmFjb3N0XFRyZWXiAhpJbmZyYWNvc3RcVHJlZVxHUEJNZXRhZGF0YeoCD0luZnJhY29zdDo6VHJlZWIGcHJvdG8z", [file_infracost_parser_address, file_infracost_parser_metadata, file_infracost_parser_stack]);
 
 /**
  * This is the wire-format of the `Tree` struct from go-proto. You should not attempt to work with this directly,
@@ -183,7 +183,12 @@ export type Resource = Message<"infracost.tree.Resource"> & {
   tags: Tag[];
 
   /**
-   * @generated from field: optional infracost.tree.ValueObject attributes = 16;
+   * @generated from field: repeated infracost.tree.TagPropagationProblem tag_propagation_problems = 16;
+   */
+  tagPropagationProblems: TagPropagationProblem[];
+
+  /**
+   * @generated from field: optional infracost.tree.ValueObject attributes = 17;
    */
   attributes?: ValueObject;
 };
@@ -194,6 +199,53 @@ export type Resource = Message<"infracost.tree.Resource"> & {
  */
 export const ResourceSchema: GenMessage<Resource> = /*@__PURE__*/
   messageDesc(file_infracost_tree_tree, 4);
+
+/**
+ * @generated from message infracost.tree.TagPropagationProblem
+ */
+export type TagPropagationProblem = Message<"infracost.tree.TagPropagationProblem"> & {
+  /**
+   * actual discovered value for the attribute (formerly known as "From" for some reason)
+   *
+   * @generated from field: string actual_value = 1;
+   */
+  actualValue: string;
+
+  /**
+   * valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+   *
+   * @generated from field: repeated string valid_values = 2;
+   */
+  validValues: string[];
+
+  /**
+   * the attribute which dictates whether propagation is enabled
+   *
+   * @generated from field: string attribute = 3;
+   */
+  attribute: string;
+
+  /**
+   * a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+   *
+   * @generated from field: string tag_recipient = 4;
+   */
+  tagRecipient: string;
+
+  /**
+   * tag keys which are affected by this propagation problem
+   *
+   * @generated from field: repeated string affected_tags = 5;
+   */
+  affectedTags: string[];
+};
+
+/**
+ * Describes the message infracost.tree.TagPropagationProblem.
+ * Use `create(TagPropagationProblemSchema)` to create a new message.
+ */
+export const TagPropagationProblemSchema: GenMessage<TagPropagationProblem> = /*@__PURE__*/
+  messageDesc(file_infracost_tree_tree, 5);
 
 /**
  * @generated from message infracost.tree.Definition
@@ -235,7 +287,7 @@ export type Definition = Message<"infracost.tree.Definition"> & {
  * Use `create(DefinitionSchema)` to create a new message.
  */
 export const DefinitionSchema: GenMessage<Definition> = /*@__PURE__*/
-  messageDesc(file_infracost_tree_tree, 5);
+  messageDesc(file_infracost_tree_tree, 6);
 
 /**
  * @generated from message infracost.tree.Tag
@@ -262,7 +314,7 @@ export type Tag = Message<"infracost.tree.Tag"> & {
  * Use `create(TagSchema)` to create a new message.
  */
 export const TagSchema: GenMessage<Tag> = /*@__PURE__*/
-  messageDesc(file_infracost_tree_tree, 6);
+  messageDesc(file_infracost_tree_tree, 7);
 
 /**
  * @generated from message infracost.tree.ValueList
@@ -279,7 +331,7 @@ export type ValueList = Message<"infracost.tree.ValueList"> & {
  * Use `create(ValueListSchema)` to create a new message.
  */
 export const ValueListSchema: GenMessage<ValueList> = /*@__PURE__*/
-  messageDesc(file_infracost_tree_tree, 7);
+  messageDesc(file_infracost_tree_tree, 8);
 
 /**
  * @generated from message infracost.tree.ValueObject
@@ -296,7 +348,7 @@ export type ValueObject = Message<"infracost.tree.ValueObject"> & {
  * Use `create(ValueObjectSchema)` to create a new message.
  */
 export const ValueObjectSchema: GenMessage<ValueObject> = /*@__PURE__*/
-  messageDesc(file_infracost_tree_tree, 8);
+  messageDesc(file_infracost_tree_tree, 9);
 
 /**
  * @generated from message infracost.tree.Value
@@ -376,5 +428,5 @@ export type Value = Message<"infracost.tree.Value"> & {
  * Use `create(ValueSchema)` to create a new message.
  */
 export const ValueSchema: GenMessage<Value> = /*@__PURE__*/
-  messageDesc(file_infracost_tree_tree, 9);
+  messageDesc(file_infracost_tree_tree, 10);
 

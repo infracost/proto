@@ -217,25 +217,26 @@ func (x *Service) GetResources() []*Resource {
 }
 
 type Resource struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Id                  string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`     // unique identifier within the tree
-	Type                string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // identifies type within tree service (only applicable within the tree)
-	Definition          *Definition            `protobuf:"bytes,3,opt,name=definition,proto3,oneof" json:"definition,omitempty"`
-	BasicChecksum       string                 `protobuf:"bytes,4,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
-	FullChecksum        string                 `protobuf:"bytes,5,opt,name=full_checksum,json=fullChecksum,proto3" json:"full_checksum,omitempty"`
-	Flags               uint64                 `protobuf:"varint,6,opt,name=flags,proto3" json:"flags,omitempty"`
-	IsDebug             bool                   `protobuf:"varint,7,opt,name=is_debug,json=isDebug,proto3" json:"is_debug,omitempty"`
-	IsChild             bool                   `protobuf:"varint,8,opt,name=is_child,json=isChild,proto3" json:"is_child,omitempty"`
-	IsSupported         bool                   `protobuf:"varint,9,opt,name=is_supported,json=isSupported,proto3" json:"is_supported,omitempty"`
-	IsFree              bool                   `protobuf:"varint,10,opt,name=is_free,json=isFree,proto3" json:"is_free,omitempty"`
-	Region              string                 `protobuf:"bytes,11,opt,name=region,proto3" json:"region,omitempty"`
-	RegionIsSynthetic   bool                   `protobuf:"varint,12,opt,name=region_is_synthetic,json=regionIsSynthetic,proto3" json:"region_is_synthetic,omitempty"`
-	SupportsTags        bool                   `protobuf:"varint,13,opt,name=supports_tags,json=supportsTags,proto3" json:"supports_tags,omitempty"`
-	SupportsDefaultTags bool                   `protobuf:"varint,14,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
-	Tags                []*Tag                 `protobuf:"bytes,15,rep,name=tags,proto3" json:"tags,omitempty"`
-	Attributes          *ValueObject           `protobuf:"bytes,16,opt,name=attributes,proto3,oneof" json:"attributes,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState   `protogen:"open.v1"`
+	Id                     string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`     // unique identifier within the tree
+	Type                   string                   `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // identifies type within tree service (only applicable within the tree)
+	Definition             *Definition              `protobuf:"bytes,3,opt,name=definition,proto3,oneof" json:"definition,omitempty"`
+	BasicChecksum          string                   `protobuf:"bytes,4,opt,name=basic_checksum,json=basicChecksum,proto3" json:"basic_checksum,omitempty"`
+	FullChecksum           string                   `protobuf:"bytes,5,opt,name=full_checksum,json=fullChecksum,proto3" json:"full_checksum,omitempty"`
+	Flags                  uint64                   `protobuf:"varint,6,opt,name=flags,proto3" json:"flags,omitempty"`
+	IsDebug                bool                     `protobuf:"varint,7,opt,name=is_debug,json=isDebug,proto3" json:"is_debug,omitempty"`
+	IsChild                bool                     `protobuf:"varint,8,opt,name=is_child,json=isChild,proto3" json:"is_child,omitempty"`
+	IsSupported            bool                     `protobuf:"varint,9,opt,name=is_supported,json=isSupported,proto3" json:"is_supported,omitempty"`
+	IsFree                 bool                     `protobuf:"varint,10,opt,name=is_free,json=isFree,proto3" json:"is_free,omitempty"`
+	Region                 string                   `protobuf:"bytes,11,opt,name=region,proto3" json:"region,omitempty"`
+	RegionIsSynthetic      bool                     `protobuf:"varint,12,opt,name=region_is_synthetic,json=regionIsSynthetic,proto3" json:"region_is_synthetic,omitempty"`
+	SupportsTags           bool                     `protobuf:"varint,13,opt,name=supports_tags,json=supportsTags,proto3" json:"supports_tags,omitempty"`
+	SupportsDefaultTags    bool                     `protobuf:"varint,14,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
+	Tags                   []*Tag                   `protobuf:"bytes,15,rep,name=tags,proto3" json:"tags,omitempty"`
+	TagPropagationProblems []*TagPropagationProblem `protobuf:"bytes,16,rep,name=tag_propagation_problems,json=tagPropagationProblems,proto3" json:"tag_propagation_problems,omitempty"`
+	Attributes             *ValueObject             `protobuf:"bytes,17,opt,name=attributes,proto3,oneof" json:"attributes,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Resource) Reset() {
@@ -373,9 +374,97 @@ func (x *Resource) GetTags() []*Tag {
 	return nil
 }
 
+func (x *Resource) GetTagPropagationProblems() []*TagPropagationProblem {
+	if x != nil {
+		return x.TagPropagationProblems
+	}
+	return nil
+}
+
 func (x *Resource) GetAttributes() *ValueObject {
 	if x != nil {
 		return x.Attributes
+	}
+	return nil
+}
+
+type TagPropagationProblem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// actual discovered value for the attribute (formerly known as "From" for some reason)
+	ActualValue string `protobuf:"bytes,1,opt,name=actual_value,json=actualValue,proto3" json:"actual_value,omitempty"`
+	// valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+	ValidValues []string `protobuf:"bytes,2,rep,name=valid_values,json=validValues,proto3" json:"valid_values,omitempty"`
+	// the attribute which dictates whether propagation is enabled
+	Attribute string `protobuf:"bytes,3,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	// a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+	TagRecipient string `protobuf:"bytes,4,opt,name=tag_recipient,json=tagRecipient,proto3" json:"tag_recipient,omitempty"`
+	// tag keys which are affected by this propagation problem
+	AffectedTags  []string `protobuf:"bytes,5,rep,name=affected_tags,json=affectedTags,proto3" json:"affected_tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagPropagationProblem) Reset() {
+	*x = TagPropagationProblem{}
+	mi := &file_infracost_tree_tree_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagPropagationProblem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagPropagationProblem) ProtoMessage() {}
+
+func (x *TagPropagationProblem) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_tree_tree_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagPropagationProblem.ProtoReflect.Descriptor instead.
+func (*TagPropagationProblem) Descriptor() ([]byte, []int) {
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TagPropagationProblem) GetActualValue() string {
+	if x != nil {
+		return x.ActualValue
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetValidValues() []string {
+	if x != nil {
+		return x.ValidValues
+	}
+	return nil
+}
+
+func (x *TagPropagationProblem) GetAttribute() string {
+	if x != nil {
+		return x.Attribute
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetTagRecipient() string {
+	if x != nil {
+		return x.TagRecipient
+	}
+	return ""
+}
+
+func (x *TagPropagationProblem) GetAffectedTags() []string {
+	if x != nil {
+		return x.AffectedTags
 	}
 	return nil
 }
@@ -394,7 +483,7 @@ type Definition struct {
 
 func (x *Definition) Reset() {
 	*x = Definition{}
-	mi := &file_infracost_tree_tree_proto_msgTypes[5]
+	mi := &file_infracost_tree_tree_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -406,7 +495,7 @@ func (x *Definition) String() string {
 func (*Definition) ProtoMessage() {}
 
 func (x *Definition) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_tree_tree_proto_msgTypes[5]
+	mi := &file_infracost_tree_tree_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -419,7 +508,7 @@ func (x *Definition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Definition.ProtoReflect.Descriptor instead.
 func (*Definition) Descriptor() ([]byte, []int) {
-	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{5}
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Definition) GetSource() *parser.SourceRange {
@@ -475,7 +564,7 @@ type Tag struct {
 
 func (x *Tag) Reset() {
 	*x = Tag{}
-	mi := &file_infracost_tree_tree_proto_msgTypes[6]
+	mi := &file_infracost_tree_tree_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -487,7 +576,7 @@ func (x *Tag) String() string {
 func (*Tag) ProtoMessage() {}
 
 func (x *Tag) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_tree_tree_proto_msgTypes[6]
+	mi := &file_infracost_tree_tree_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -500,7 +589,7 @@ func (x *Tag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tag.ProtoReflect.Descriptor instead.
 func (*Tag) Descriptor() ([]byte, []int) {
-	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{6}
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Tag) GetKey() *Value {
@@ -533,7 +622,7 @@ type ValueList struct {
 
 func (x *ValueList) Reset() {
 	*x = ValueList{}
-	mi := &file_infracost_tree_tree_proto_msgTypes[7]
+	mi := &file_infracost_tree_tree_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -545,7 +634,7 @@ func (x *ValueList) String() string {
 func (*ValueList) ProtoMessage() {}
 
 func (x *ValueList) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_tree_tree_proto_msgTypes[7]
+	mi := &file_infracost_tree_tree_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -558,7 +647,7 @@ func (x *ValueList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValueList.ProtoReflect.Descriptor instead.
 func (*ValueList) Descriptor() ([]byte, []int) {
-	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{7}
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ValueList) GetValues() []*Value {
@@ -577,7 +666,7 @@ type ValueObject struct {
 
 func (x *ValueObject) Reset() {
 	*x = ValueObject{}
-	mi := &file_infracost_tree_tree_proto_msgTypes[8]
+	mi := &file_infracost_tree_tree_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -589,7 +678,7 @@ func (x *ValueObject) String() string {
 func (*ValueObject) ProtoMessage() {}
 
 func (x *ValueObject) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_tree_tree_proto_msgTypes[8]
+	mi := &file_infracost_tree_tree_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,7 +691,7 @@ func (x *ValueObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValueObject.ProtoReflect.Descriptor instead.
 func (*ValueObject) Descriptor() ([]byte, []int) {
-	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{8}
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ValueObject) GetEntries() map[string]*Value {
@@ -637,7 +726,7 @@ type Value struct {
 
 func (x *Value) Reset() {
 	*x = Value{}
-	mi := &file_infracost_tree_tree_proto_msgTypes[9]
+	mi := &file_infracost_tree_tree_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -649,7 +738,7 @@ func (x *Value) String() string {
 func (*Value) ProtoMessage() {}
 
 func (x *Value) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_tree_tree_proto_msgTypes[9]
+	mi := &file_infracost_tree_tree_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -662,7 +751,7 @@ func (x *Value) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Value.ProtoReflect.Descriptor instead.
 func (*Value) Descriptor() ([]byte, []int) {
-	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{9}
+	return file_infracost_tree_tree_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Value) GetFlags() uint64 {
@@ -822,7 +911,7 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\x06source\x18\x01 \x01(\v2\x1d.infracost.parser.SourceRangeR\x06source\x12/\n" +
 	"\x13version_constraints\x18\x02 \x01(\tR\x12versionConstraints\"A\n" +
 	"\aService\x126\n" +
-	"\tresources\x18\x01 \x03(\v2\x18.infracost.tree.ResourceR\tresources\"\xed\x04\n" +
+	"\tresources\x18\x01 \x03(\v2\x18.infracost.tree.ResourceR\tresources\"\xce\x05\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12?\n" +
@@ -841,12 +930,19 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\x13region_is_synthetic\x18\f \x01(\bR\x11regionIsSynthetic\x12#\n" +
 	"\rsupports_tags\x18\r \x01(\bR\fsupportsTags\x122\n" +
 	"\x15supports_default_tags\x18\x0e \x01(\bR\x13supportsDefaultTags\x12'\n" +
-	"\x04tags\x18\x0f \x03(\v2\x13.infracost.tree.TagR\x04tags\x12@\n" +
+	"\x04tags\x18\x0f \x03(\v2\x13.infracost.tree.TagR\x04tags\x12_\n" +
+	"\x18tag_propagation_problems\x18\x10 \x03(\v2%.infracost.tree.TagPropagationProblemR\x16tagPropagationProblems\x12@\n" +
 	"\n" +
-	"attributes\x18\x10 \x01(\v2\x1b.infracost.tree.ValueObjectH\x01R\n" +
+	"attributes\x18\x11 \x01(\v2\x1b.infracost.tree.ValueObjectH\x01R\n" +
 	"attributes\x88\x01\x01B\r\n" +
 	"\v_definitionB\r\n" +
-	"\v_attributes\"\x88\x04\n" +
+	"\v_attributes\"\xc5\x01\n" +
+	"\x15TagPropagationProblem\x12!\n" +
+	"\factual_value\x18\x01 \x01(\tR\vactualValue\x12!\n" +
+	"\fvalid_values\x18\x02 \x03(\tR\vvalidValues\x12\x1c\n" +
+	"\tattribute\x18\x03 \x01(\tR\tattribute\x12#\n" +
+	"\rtag_recipient\x18\x04 \x01(\tR\ftagRecipient\x12#\n" +
+	"\raffected_tags\x18\x05 \x03(\tR\faffectedTags\"\x88\x04\n" +
 	"\n" +
 	"Definition\x125\n" +
 	"\x06source\x18\x01 \x01(\v2\x1d.infracost.parser.SourceRangeR\x06source\x12#\n" +
@@ -904,55 +1000,57 @@ func file_infracost_tree_tree_proto_rawDescGZIP() []byte {
 	return file_infracost_tree_tree_proto_rawDescData
 }
 
-var file_infracost_tree_tree_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_infracost_tree_tree_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_infracost_tree_tree_proto_goTypes = []any{
 	(*Tree)(nil),                  // 0: infracost.tree.Tree
 	(*Provider)(nil),              // 1: infracost.tree.Provider
 	(*ProviderConfiguration)(nil), // 2: infracost.tree.ProviderConfiguration
 	(*Service)(nil),               // 3: infracost.tree.Service
 	(*Resource)(nil),              // 4: infracost.tree.Resource
-	(*Definition)(nil),            // 5: infracost.tree.Definition
-	(*Tag)(nil),                   // 6: infracost.tree.Tag
-	(*ValueList)(nil),             // 7: infracost.tree.ValueList
-	(*ValueObject)(nil),           // 8: infracost.tree.ValueObject
-	(*Value)(nil),                 // 9: infracost.tree.Value
-	nil,                           // 10: infracost.tree.Tree.ProvidersEntry
-	nil,                           // 11: infracost.tree.Provider.ServicesEntry
-	nil,                           // 12: infracost.tree.Definition.RawStringAttributesEntry
-	nil,                           // 13: infracost.tree.ValueObject.EntriesEntry
-	(*parser.SourceRange)(nil),    // 14: infracost.parser.SourceRange
-	(*parser.Address)(nil),        // 15: infracost.parser.Address
-	(*parser.CallStack)(nil),      // 16: infracost.parser.CallStack
+	(*TagPropagationProblem)(nil), // 5: infracost.tree.TagPropagationProblem
+	(*Definition)(nil),            // 6: infracost.tree.Definition
+	(*Tag)(nil),                   // 7: infracost.tree.Tag
+	(*ValueList)(nil),             // 8: infracost.tree.ValueList
+	(*ValueObject)(nil),           // 9: infracost.tree.ValueObject
+	(*Value)(nil),                 // 10: infracost.tree.Value
+	nil,                           // 11: infracost.tree.Tree.ProvidersEntry
+	nil,                           // 12: infracost.tree.Provider.ServicesEntry
+	nil,                           // 13: infracost.tree.Definition.RawStringAttributesEntry
+	nil,                           // 14: infracost.tree.ValueObject.EntriesEntry
+	(*parser.SourceRange)(nil),    // 15: infracost.parser.SourceRange
+	(*parser.Address)(nil),        // 16: infracost.parser.Address
+	(*parser.CallStack)(nil),      // 17: infracost.parser.CallStack
 }
 var file_infracost_tree_tree_proto_depIdxs = []int32{
-	10, // 0: infracost.tree.Tree.providers:type_name -> infracost.tree.Tree.ProvidersEntry
+	11, // 0: infracost.tree.Tree.providers:type_name -> infracost.tree.Tree.ProvidersEntry
 	4,  // 1: infracost.tree.Tree.unsupported_resources:type_name -> infracost.tree.Resource
-	11, // 2: infracost.tree.Provider.services:type_name -> infracost.tree.Provider.ServicesEntry
-	14, // 3: infracost.tree.ProviderConfiguration.source:type_name -> infracost.parser.SourceRange
+	12, // 2: infracost.tree.Provider.services:type_name -> infracost.tree.Provider.ServicesEntry
+	15, // 3: infracost.tree.ProviderConfiguration.source:type_name -> infracost.parser.SourceRange
 	4,  // 4: infracost.tree.Service.resources:type_name -> infracost.tree.Resource
-	5,  // 5: infracost.tree.Resource.definition:type_name -> infracost.tree.Definition
-	6,  // 6: infracost.tree.Resource.tags:type_name -> infracost.tree.Tag
-	8,  // 7: infracost.tree.Resource.attributes:type_name -> infracost.tree.ValueObject
-	14, // 8: infracost.tree.Definition.source:type_name -> infracost.parser.SourceRange
-	15, // 9: infracost.tree.Definition.address:type_name -> infracost.parser.Address
-	16, // 10: infracost.tree.Definition.call_stack:type_name -> infracost.parser.CallStack
-	2,  // 11: infracost.tree.Definition.provider_configuration:type_name -> infracost.tree.ProviderConfiguration
-	12, // 12: infracost.tree.Definition.raw_string_attributes:type_name -> infracost.tree.Definition.RawStringAttributesEntry
-	9,  // 13: infracost.tree.Tag.key:type_name -> infracost.tree.Value
-	9,  // 14: infracost.tree.Tag.value:type_name -> infracost.tree.Value
-	9,  // 15: infracost.tree.ValueList.values:type_name -> infracost.tree.Value
-	13, // 16: infracost.tree.ValueObject.entries:type_name -> infracost.tree.ValueObject.EntriesEntry
-	14, // 17: infracost.tree.Value.source:type_name -> infracost.parser.SourceRange
-	7,  // 18: infracost.tree.Value.list_value:type_name -> infracost.tree.ValueList
-	8,  // 19: infracost.tree.Value.object_value:type_name -> infracost.tree.ValueObject
-	1,  // 20: infracost.tree.Tree.ProvidersEntry.value:type_name -> infracost.tree.Provider
-	3,  // 21: infracost.tree.Provider.ServicesEntry.value:type_name -> infracost.tree.Service
-	9,  // 22: infracost.tree.ValueObject.EntriesEntry.value:type_name -> infracost.tree.Value
-	23, // [23:23] is the sub-list for method output_type
-	23, // [23:23] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	6,  // 5: infracost.tree.Resource.definition:type_name -> infracost.tree.Definition
+	7,  // 6: infracost.tree.Resource.tags:type_name -> infracost.tree.Tag
+	5,  // 7: infracost.tree.Resource.tag_propagation_problems:type_name -> infracost.tree.TagPropagationProblem
+	9,  // 8: infracost.tree.Resource.attributes:type_name -> infracost.tree.ValueObject
+	15, // 9: infracost.tree.Definition.source:type_name -> infracost.parser.SourceRange
+	16, // 10: infracost.tree.Definition.address:type_name -> infracost.parser.Address
+	17, // 11: infracost.tree.Definition.call_stack:type_name -> infracost.parser.CallStack
+	2,  // 12: infracost.tree.Definition.provider_configuration:type_name -> infracost.tree.ProviderConfiguration
+	13, // 13: infracost.tree.Definition.raw_string_attributes:type_name -> infracost.tree.Definition.RawStringAttributesEntry
+	10, // 14: infracost.tree.Tag.key:type_name -> infracost.tree.Value
+	10, // 15: infracost.tree.Tag.value:type_name -> infracost.tree.Value
+	10, // 16: infracost.tree.ValueList.values:type_name -> infracost.tree.Value
+	14, // 17: infracost.tree.ValueObject.entries:type_name -> infracost.tree.ValueObject.EntriesEntry
+	15, // 18: infracost.tree.Value.source:type_name -> infracost.parser.SourceRange
+	8,  // 19: infracost.tree.Value.list_value:type_name -> infracost.tree.ValueList
+	9,  // 20: infracost.tree.Value.object_value:type_name -> infracost.tree.ValueObject
+	1,  // 21: infracost.tree.Tree.ProvidersEntry.value:type_name -> infracost.tree.Provider
+	3,  // 22: infracost.tree.Provider.ServicesEntry.value:type_name -> infracost.tree.Service
+	10, // 23: infracost.tree.ValueObject.EntriesEntry.value:type_name -> infracost.tree.Value
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_infracost_tree_tree_proto_init() }
@@ -961,8 +1059,8 @@ func file_infracost_tree_tree_proto_init() {
 		return
 	}
 	file_infracost_tree_tree_proto_msgTypes[4].OneofWrappers = []any{}
-	file_infracost_tree_tree_proto_msgTypes[5].OneofWrappers = []any{}
-	file_infracost_tree_tree_proto_msgTypes[9].OneofWrappers = []any{
+	file_infracost_tree_tree_proto_msgTypes[6].OneofWrappers = []any{}
+	file_infracost_tree_tree_proto_msgTypes[10].OneofWrappers = []any{
 		(*Value_StringValue)(nil),
 		(*Value_BoolValue)(nil),
 		(*Value_IntValue)(nil),
@@ -977,7 +1075,7 @@ func file_infracost_tree_tree_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_tree_tree_proto_rawDesc), len(file_infracost_tree_tree_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
