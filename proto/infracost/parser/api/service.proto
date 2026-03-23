@@ -71,7 +71,7 @@ message ParseResponse {
   repeated Dependency dependencies = 3;
 }
 
-// ParseToTreeResponse is the iac-agnostifc parser response
+// ParseToTreeResponse is the iac-agnostic parser response
 message ParseToTreeResponse {
   // The diagnostics generated during parsing
   repeated Diagnostic diagnostics = 1;
