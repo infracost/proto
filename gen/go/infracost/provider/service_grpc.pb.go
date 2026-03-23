@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ProviderService_Process_FullMethodName            = "/infracost.provider.ProviderService/Process"
+	ProviderService_ProcessTree_FullMethodName        = "/infracost.provider.ProviderService/ProcessTree"
 	ProviderService_ListFinopsPolicies_FullMethodName = "/infracost.provider.ProviderService/ListFinopsPolicies"
 )
 
@@ -28,6 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProviderServiceClient interface {
 	Process(ctx context.Context, in *ProcessRequest, opts ...grpc.CallOption) (*ProcessResponse, error)
+	ProcessTree(ctx context.Context, in *ProcessTreeRequest, opts ...grpc.CallOption) (*ProcessTreeResponse, error)
 	ListFinopsPolicies(ctx context.Context, in *ListFinopsPoliciesRequest, opts ...grpc.CallOption) (*ListFinopsPoliciesResponse, error)
 }
 
@@ -49,6 +51,16 @@ func (c *providerServiceClient) Process(ctx context.Context, in *ProcessRequest,
 	return out, nil
 }
 
+func (c *providerServiceClient) ProcessTree(ctx context.Context, in *ProcessTreeRequest, opts ...grpc.CallOption) (*ProcessTreeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProcessTreeResponse)
+	err := c.cc.Invoke(ctx, ProviderService_ProcessTree_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *providerServiceClient) ListFinopsPolicies(ctx context.Context, in *ListFinopsPoliciesRequest, opts ...grpc.CallOption) (*ListFinopsPoliciesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListFinopsPoliciesResponse)
@@ -64,6 +76,7 @@ func (c *providerServiceClient) ListFinopsPolicies(ctx context.Context, in *List
 // for forward compatibility.
 type ProviderServiceServer interface {
 	Process(context.Context, *ProcessRequest) (*ProcessResponse, error)
+	ProcessTree(context.Context, *ProcessTreeRequest) (*ProcessTreeResponse, error)
 	ListFinopsPolicies(context.Context, *ListFinopsPoliciesRequest) (*ListFinopsPoliciesResponse, error)
 	mustEmbedUnimplementedProviderServiceServer()
 }
@@ -77,6 +90,9 @@ type UnimplementedProviderServiceServer struct{}
 
 func (UnimplementedProviderServiceServer) Process(context.Context, *ProcessRequest) (*ProcessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Process not implemented")
+}
+func (UnimplementedProviderServiceServer) ProcessTree(context.Context, *ProcessTreeRequest) (*ProcessTreeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProcessTree not implemented")
 }
 func (UnimplementedProviderServiceServer) ListFinopsPolicies(context.Context, *ListFinopsPoliciesRequest) (*ListFinopsPoliciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFinopsPolicies not implemented")
@@ -120,6 +136,24 @@ func _ProviderService_Process_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProviderService_ProcessTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProcessTreeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).ProcessTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_ProcessTree_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).ProcessTree(ctx, req.(*ProcessTreeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProviderService_ListFinopsPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFinopsPoliciesRequest)
 	if err := dec(in); err != nil {
@@ -148,6 +182,10 @@ var ProviderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Process",
 			Handler:    _ProviderService_Process_Handler,
+		},
+		{
+			MethodName: "ProcessTree",
+			Handler:    _ProviderService_ProcessTree_Handler,
 		},
 		{
 			MethodName: "ListFinopsPolicies",

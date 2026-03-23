@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package infracost.provider;
+
+import "infracost/provider/input.proto";
+import "infracost/tree/tree.proto";
+import "infracost/usage/usage.proto";
+
+message TreeInput {
+  // The output of a parser, as a tree
+  tree.Tree tree = 1;
+
+  // Absolute path of the project/template being scanned
+  // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
+  string absolute_path = 2; // path to project
+
+  // This comes from zero or more of the cloud db, and/or a customer's committed usage file
+  ProjectInfo project_info = 3;
+
+  // Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
+  // out if a resource is to be considered "new" or not.
+  // This is mainly so we can ignore policies that only want to consider "new" resources
+  repeated string previous_resource_addresses = 4;
+
+  // usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
+  infracost.usage.Usage usage = 5;
+
+  // Specifies which policies need to be run, and any custom settings for each.
+  // Only relevant if features.enable_finops_policies is true.
+  FinopsPolicyConfiguration finops_policy_config = 6;
+
+  // Feature flags
+  Features features = 7;
+
+  // settings that affect the provider behaviour e.g. currency, disk cache usage
+  Settings settings = 8;
+
+  // infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+  Infracost infracost = 9;
+}

@@ -8,6 +8,7 @@ import type { Target } from "../terraform/target_pb.js";
 import type { Target as Target$1 } from "../terragrunt/target_pb.js";
 import type { Target as Target$2 } from "../cloudformation/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
+import type { Tree } from "../../tree/tree_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import type { Result } from "../cloudformation/result_pb.js";
 
@@ -49,6 +50,72 @@ export declare type ParseRequest = Message<"infracost.parser.api.ParseRequest"> 
  * Use `create(ParseRequestSchema)` to create a new message.
  */
 export declare const ParseRequestSchema: GenMessage<ParseRequest>;
+
+/**
+ * ParseToTreeRequest is the unified request for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseToTreeRequest
+ */
+export declare type ParseToTreeRequest = Message<"infracost.parser.api.ParseToTreeRequest"> & {
+  /**
+   * The absolute root path of the repository to be parsed
+   *
+   * @generated from field: string repo_directory = 1;
+   */
+  repoDirectory: string;
+
+  /**
+   * The absolute working directory of the project in the repository being processed
+   *
+   * @generated from field: string working_directory = 2;
+   */
+  workingDirectory: string;
+
+  /**
+   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+   *
+   * @generated from field: infracost.parser.api.ParseRequestTarget target = 3;
+   */
+  target?: ParseRequestTarget;
+
+  /**
+   * List of extra raw attribute values to include for the special terraform attribute-matching policies
+   *
+   * @generated from field: repeated infracost.parser.api.AttributeRequirement extra_attribute_values = 4;
+   */
+  extraAttributeValues: AttributeRequirement[];
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseToTreeRequest.
+ * Use `create(ParseToTreeRequestSchema)` to create a new message.
+ */
+export declare const ParseToTreeRequestSchema: GenMessage<ParseToTreeRequest>;
+
+/**
+ * @generated from message infracost.parser.api.AttributeRequirement
+ */
+export declare type AttributeRequirement = Message<"infracost.parser.api.AttributeRequirement"> & {
+  /**
+   * The resource type for which the attribute is required, e.g. "aws_instance"
+   *
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+
+  /**
+   * The list of attribute names required for the resource type, e.g. ["ami", "instance_type"]
+   *
+   * @generated from field: repeated string attributes = 2;
+   */
+  attributes: string[];
+};
+
+/**
+ * Describes the message infracost.parser.api.AttributeRequirement.
+ * Use `create(AttributeRequirementSchema)` to create a new message.
+ */
+export declare const AttributeRequirementSchema: GenMessage<AttributeRequirement>;
 
 /**
  * ParseRequestTarget is the unified target for all parser types.
@@ -125,6 +192,40 @@ export declare type ParseResponse = Message<"infracost.parser.api.ParseResponse"
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export declare const ParseResponseSchema: GenMessage<ParseResponse>;
+
+/**
+ * ParseToTreeResponse is the iac-agnostic parser response
+ *
+ * @generated from message infracost.parser.api.ParseToTreeResponse
+ */
+export declare type ParseToTreeResponse = Message<"infracost.parser.api.ParseToTreeResponse"> & {
+  /**
+   * The diagnostics generated during parsing
+   *
+   * @generated from field: repeated infracost.parser.Diagnostic diagnostics = 1;
+   */
+  diagnostics: Diagnostic[];
+
+  /**
+   * The result of parsing the target as a tree structure
+   *
+   * @generated from field: infracost.tree.Tree tree = 2;
+   */
+  tree?: Tree;
+
+  /**
+   * Dependencies extracted during parsing (if DependencyRequest was provided in options)
+   *
+   * @generated from field: repeated infracost.parser.api.Dependency dependencies = 3;
+   */
+  dependencies: Dependency[];
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseToTreeResponse.
+ * Use `create(ParseToTreeResponseSchema)` to create a new message.
+ */
+export declare const ParseToTreeResponseSchema: GenMessage<ParseToTreeResponse>;
 
 /**
  * Dependency represents a code dependency for a Terraform resource.
@@ -355,6 +456,16 @@ export declare const ParserService: GenService<{
     methodKind: "unary";
     input: typeof ParseRequestSchema;
     output: typeof ParseResponseSchema;
+  },
+  /**
+   * ParseToTree takes a ParseRequest message and returns a ParseToTreeResponse message.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.ParseToTree
+   */
+  parseToTree: {
+    methodKind: "unary";
+    input: typeof ParseToTreeRequestSchema;
+    output: typeof ParseToTreeResponseSchema;
   },
 }>;
 

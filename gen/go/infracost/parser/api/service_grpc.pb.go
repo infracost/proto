@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ParserService_Initialize_FullMethodName = "/infracost.parser.api.ParserService/Initialize"
-	ParserService_Parse_FullMethodName      = "/infracost.parser.api.ParserService/Parse"
+	ParserService_Initialize_FullMethodName  = "/infracost.parser.api.ParserService/Initialize"
+	ParserService_Parse_FullMethodName       = "/infracost.parser.api.ParserService/Parse"
+	ParserService_ParseToTree_FullMethodName = "/infracost.parser.api.ParserService/ParseToTree"
 )
 
 // ParserServiceClient is the client API for ParserService service.
@@ -33,6 +34,8 @@ type ParserServiceClient interface {
 	Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*InitializeResponse, error)
 	// Parse takes a ParseRequest message and returns a ParseResponse message.
 	Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error)
+	// ParseToTree takes a ParseRequest message and returns a ParseToTreeResponse message.
+	ParseToTree(ctx context.Context, in *ParseToTreeRequest, opts ...grpc.CallOption) (*ParseToTreeResponse, error)
 }
 
 type parserServiceClient struct {
@@ -63,6 +66,16 @@ func (c *parserServiceClient) Parse(ctx context.Context, in *ParseRequest, opts 
 	return out, nil
 }
 
+func (c *parserServiceClient) ParseToTree(ctx context.Context, in *ParseToTreeRequest, opts ...grpc.CallOption) (*ParseToTreeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ParseToTreeResponse)
+	err := c.cc.Invoke(ctx, ParserService_ParseToTree_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ParserServiceServer is the server API for ParserService service.
 // All implementations must embed UnimplementedParserServiceServer
 // for forward compatibility.
@@ -73,6 +86,8 @@ type ParserServiceServer interface {
 	Initialize(context.Context, *InitializeRequest) (*InitializeResponse, error)
 	// Parse takes a ParseRequest message and returns a ParseResponse message.
 	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
+	// ParseToTree takes a ParseRequest message and returns a ParseToTreeResponse message.
+	ParseToTree(context.Context, *ParseToTreeRequest) (*ParseToTreeResponse, error)
 	mustEmbedUnimplementedParserServiceServer()
 }
 
@@ -88,6 +103,9 @@ func (UnimplementedParserServiceServer) Initialize(context.Context, *InitializeR
 }
 func (UnimplementedParserServiceServer) Parse(context.Context, *ParseRequest) (*ParseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Parse not implemented")
+}
+func (UnimplementedParserServiceServer) ParseToTree(context.Context, *ParseToTreeRequest) (*ParseToTreeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ParseToTree not implemented")
 }
 func (UnimplementedParserServiceServer) mustEmbedUnimplementedParserServiceServer() {}
 func (UnimplementedParserServiceServer) testEmbeddedByValue()                       {}
@@ -146,6 +164,24 @@ func _ParserService_Parse_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ParserService_ParseToTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseToTreeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParserServiceServer).ParseToTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParserService_ParseToTree_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParserServiceServer).ParseToTree(ctx, req.(*ParseToTreeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ParserService_ServiceDesc is the grpc.ServiceDesc for ParserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -160,6 +196,10 @@ var ParserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Parse",
 			Handler:    _ParserService_Parse_Handler,
+		},
+		{
+			MethodName: "ParseToTree",
+			Handler:    _ParserService_ParseToTree_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

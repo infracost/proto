@@ -8,6 +8,7 @@ import "infracost/parser/diagnostic.proto";
 import "infracost/parser/terraform/module.proto";
 import "infracost/parser/terraform/target.proto";
 import "infracost/parser/terragrunt/target.proto";
+import "infracost/tree/tree.proto";
 
 // The ParserService provides a gRPC API for parsing infrastructure as code files.
 service ParserService {
@@ -15,6 +16,8 @@ service ParserService {
   rpc Initialize(InitializeRequest) returns (InitializeResponse);
   // Parse takes a ParseRequest message and returns a ParseResponse message.
   rpc Parse(ParseRequest) returns (ParseResponse);
+  // ParseToTree takes a ParseRequest message and returns a ParseToTreeResponse message.
+  rpc ParseToTree(ParseToTreeRequest) returns (ParseToTreeResponse);
 }
 
 // ParseRequest is the unified request for all parser types.
@@ -25,6 +28,25 @@ message ParseRequest {
   string working_directory = 2;
   // The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
   ParseRequestTarget target = 3;
+}
+
+// ParseToTreeRequest is the unified request for all parser types.
+message ParseToTreeRequest {
+  // The absolute root path of the repository to be parsed
+  string repo_directory = 1;
+  // The absolute working directory of the project in the repository being processed
+  string working_directory = 2;
+  // The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+  ParseRequestTarget target = 3;
+  // List of extra raw attribute values to include for the special terraform attribute-matching policies
+  repeated AttributeRequirement extra_attribute_values = 4;
+}
+
+message AttributeRequirement {
+  // The resource type for which the attribute is required, e.g. "aws_instance"
+  string resource_type = 1;
+  // The list of attribute names required for the resource type, e.g. ["ami", "instance_type"]
+  repeated string attributes = 2;
 }
 
 // ParseRequestTarget is the unified target for all parser types.
@@ -45,6 +67,16 @@ message ParseResponse {
   repeated Diagnostic diagnostics = 1;
   // The result of parsing the target, is one of cloudformation, terraform, terragrunt
   ParseResponseResult result = 2;
+  // Dependencies extracted during parsing (if DependencyRequest was provided in options)
+  repeated Dependency dependencies = 3;
+}
+
+// ParseToTreeResponse is the iac-agnostic parser response
+message ParseToTreeResponse {
+  // The diagnostics generated during parsing
+  repeated Diagnostic diagnostics = 1;
+  // The result of parsing the target as a tree structure
+  tree.Tree tree = 2;
   // Dependencies extracted during parsing (if DependencyRequest was provided in options)
   repeated Dependency dependencies = 3;
 }

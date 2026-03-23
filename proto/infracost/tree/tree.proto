@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package infracost.tree;
+
+import "infracost/parser/address.proto";
+import "infracost/parser/metadata.proto";
+import "infracost/parser/stack.proto";
+
+// This is the wire-format of the `Tree` struct from go-proto. You should not attempt to work with this directly,
+// but use the .ToProto() and FromProto() methods from `tree` in go-proto instead.
+message Tree {
+  map<string, Provider> providers = 1;
+  repeated Resource unsupported_resources = 2;
+}
+
+message Provider {
+  map<string, Service> services = 1;
+}
+
+message ProviderConfiguration {
+  parser.SourceRange source = 1;
+  string version_constraints = 2;
+}
+
+message Service {
+  repeated Resource resources = 1;
+}
+
+message Resource {
+  string id = 1; // unique identifier within the tree
+  string type = 2; // identifies type within tree service (only applicable within the tree)
+  optional Definition definition = 3;
+  string basic_checksum = 4;
+  string full_checksum = 5;
+  uint64 flags = 6;
+  bool is_debug = 7;
+  bool is_child = 8;
+  bool is_supported = 9;
+  bool is_free = 10;
+  string region = 11;
+  bool region_is_synthetic = 12;
+  bool supports_tags = 13;
+  bool supports_default_tags = 14;
+  repeated Tag tags = 15;
+  optional ValueObject attributes = 16;
+}
+
+message Definition {
+  parser.SourceRange source = 1;
+  string resource_type = 2;
+  parser.Address address = 3;
+  parser.CallStack call_stack = 4;
+  optional ProviderConfiguration provider_configuration = 5;
+  map<string, string> raw_string_attributes = 6;
+}
+
+message Tag {
+  Value key = 1;
+  Value value = 2;
+  bool is_default = 3;
+}
+
+message ValueList {
+  repeated Value values = 1;
+}
+
+message ValueObject {
+  map<string, Value> entries = 1;
+}
+
+message Value {
+  // flags is a bitmask that describes various properties of the value, e.g. whether it's a real value, or a synthetic one
+  uint64 flags = 1;
+  // the name of the field this value relates to, e.g. "name" or "tags.Environment"
+  // this is used in policy error messages, e.g. "change field tags.Environment to one of 'prod,', 'dev', or 'staging'"
+  // it is source-specific depending on the IaC/other source that created this resource.
+  optional string source_field_name = 2;
+  optional parser.SourceRange source = 3;
+  oneof value {
+    string string_value = 4;
+    bool bool_value = 5;
+    int64 int_value = 6;
+    double double_value = 7;
+    ValueList list_value = 8;
+    ValueObject object_value = 9;
+    uint32 enum_value = 10;
+  }
+}

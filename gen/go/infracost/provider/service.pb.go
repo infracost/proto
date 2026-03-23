@@ -109,6 +109,94 @@ func (x *ProcessResponse) GetOutput() *Output {
 	return nil
 }
 
+type ProcessTreeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Input         *TreeInput             `protobuf:"bytes,1,opt,name=input,proto3" json:"input,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProcessTreeRequest) Reset() {
+	*x = ProcessTreeRequest{}
+	mi := &file_infracost_provider_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProcessTreeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProcessTreeRequest) ProtoMessage() {}
+
+func (x *ProcessTreeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProcessTreeRequest.ProtoReflect.Descriptor instead.
+func (*ProcessTreeRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ProcessTreeRequest) GetInput() *TreeInput {
+	if x != nil {
+		return x.Input
+	}
+	return nil
+}
+
+type ProcessTreeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Output        *Output                `protobuf:"bytes,1,opt,name=output,proto3" json:"output,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProcessTreeResponse) Reset() {
+	*x = ProcessTreeResponse{}
+	mi := &file_infracost_provider_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProcessTreeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProcessTreeResponse) ProtoMessage() {}
+
+func (x *ProcessTreeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProcessTreeResponse.ProtoReflect.Descriptor instead.
+func (*ProcessTreeResponse) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ProcessTreeResponse) GetOutput() *Output {
+	if x != nil {
+		return x.Output
+	}
+	return nil
+}
+
 type ListFinopsPoliciesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -117,7 +205,7 @@ type ListFinopsPoliciesRequest struct {
 
 func (x *ListFinopsPoliciesRequest) Reset() {
 	*x = ListFinopsPoliciesRequest{}
-	mi := &file_infracost_provider_service_proto_msgTypes[2]
+	mi := &file_infracost_provider_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -129,7 +217,7 @@ func (x *ListFinopsPoliciesRequest) String() string {
 func (*ListFinopsPoliciesRequest) ProtoMessage() {}
 
 func (x *ListFinopsPoliciesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_service_proto_msgTypes[2]
+	mi := &file_infracost_provider_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -142,7 +230,7 @@ func (x *ListFinopsPoliciesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListFinopsPoliciesRequest.ProtoReflect.Descriptor instead.
 func (*ListFinopsPoliciesRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_service_proto_rawDescGZIP(), []int{2}
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{4}
 }
 
 type ListFinopsPoliciesResponse struct {
@@ -154,7 +242,7 @@ type ListFinopsPoliciesResponse struct {
 
 func (x *ListFinopsPoliciesResponse) Reset() {
 	*x = ListFinopsPoliciesResponse{}
-	mi := &file_infracost_provider_service_proto_msgTypes[3]
+	mi := &file_infracost_provider_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -166,7 +254,7 @@ func (x *ListFinopsPoliciesResponse) String() string {
 func (*ListFinopsPoliciesResponse) ProtoMessage() {}
 
 func (x *ListFinopsPoliciesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_service_proto_msgTypes[3]
+	mi := &file_infracost_provider_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -179,7 +267,7 @@ func (x *ListFinopsPoliciesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListFinopsPoliciesResponse.ProtoReflect.Descriptor instead.
 func (*ListFinopsPoliciesResponse) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_service_proto_rawDescGZIP(), []int{3}
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListFinopsPoliciesResponse) GetPolicies() []*FinopsPolicy {
@@ -202,7 +290,7 @@ type FinopsPolicy struct {
 
 func (x *FinopsPolicy) Reset() {
 	*x = FinopsPolicy{}
-	mi := &file_infracost_provider_service_proto_msgTypes[4]
+	mi := &file_infracost_provider_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -214,7 +302,7 @@ func (x *FinopsPolicy) String() string {
 func (*FinopsPolicy) ProtoMessage() {}
 
 func (x *FinopsPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_provider_service_proto_msgTypes[4]
+	mi := &file_infracost_provider_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -227,7 +315,7 @@ func (x *FinopsPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FinopsPolicy.ProtoReflect.Descriptor instead.
 func (*FinopsPolicy) Descriptor() ([]byte, []int) {
-	return file_infracost_provider_service_proto_rawDescGZIP(), []int{4}
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *FinopsPolicy) GetSlug() string {
@@ -269,11 +357,15 @@ var File_infracost_provider_service_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_service_proto_rawDesc = "" +
 	"\n" +
-	" infracost/provider/service.proto\x12\x12infracost.provider\x1a\x1einfracost/provider/input.proto\x1a\x1finfracost/provider/output.proto\"A\n" +
+	" infracost/provider/service.proto\x12\x12infracost.provider\x1a\x1einfracost/provider/input.proto\x1a\x1finfracost/provider/output.proto\x1a\x1dinfracost/provider/tree.proto\"A\n" +
 	"\x0eProcessRequest\x12/\n" +
 	"\x05input\x18\x01 \x01(\v2\x19.infracost.provider.InputR\x05input\"E\n" +
 	"\x0fProcessResponse\x122\n" +
-	"\x06output\x18\x02 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"\x1b\n" +
+	"\x06output\x18\x02 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"I\n" +
+	"\x12ProcessTreeRequest\x123\n" +
+	"\x05input\x18\x01 \x01(\v2\x1d.infracost.provider.TreeInputR\x05input\"I\n" +
+	"\x13ProcessTreeResponse\x122\n" +
+	"\x06output\x18\x01 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"\x1b\n" +
 	"\x19ListFinopsPoliciesRequest\"Z\n" +
 	"\x1aListFinopsPoliciesResponse\x12<\n" +
 	"\bpolicies\x18\x01 \x03(\v2 .infracost.provider.FinopsPolicyR\bpolicies\"\x9c\x01\n" +
@@ -282,9 +374,10 @@ const file_infracost_provider_service_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05group\x18\x03 \x01(\tR\x05group\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12,\n" +
-	"\x12only_new_resources\x18\x05 \x01(\bR\x10onlyNewResources2\xda\x01\n" +
+	"\x12only_new_resources\x18\x05 \x01(\bR\x10onlyNewResources2\xba\x02\n" +
 	"\x0fProviderService\x12R\n" +
-	"\aProcess\x12\".infracost.provider.ProcessRequest\x1a#.infracost.provider.ProcessResponse\x12s\n" +
+	"\aProcess\x12\".infracost.provider.ProcessRequest\x1a#.infracost.provider.ProcessResponse\x12^\n" +
+	"\vProcessTree\x12&.infracost.provider.ProcessTreeRequest\x1a'.infracost.provider.ProcessTreeResponse\x12s\n" +
 	"\x12ListFinopsPolicies\x12-.infracost.provider.ListFinopsPoliciesRequest\x1a..infracost.provider.ListFinopsPoliciesResponseB\xc5\x01\n" +
 	"\x16com.infracost.providerB\fServiceProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
@@ -300,29 +393,36 @@ func file_infracost_provider_service_proto_rawDescGZIP() []byte {
 	return file_infracost_provider_service_proto_rawDescData
 }
 
-var file_infracost_provider_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_infracost_provider_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_infracost_provider_service_proto_goTypes = []any{
 	(*ProcessRequest)(nil),             // 0: infracost.provider.ProcessRequest
 	(*ProcessResponse)(nil),            // 1: infracost.provider.ProcessResponse
-	(*ListFinopsPoliciesRequest)(nil),  // 2: infracost.provider.ListFinopsPoliciesRequest
-	(*ListFinopsPoliciesResponse)(nil), // 3: infracost.provider.ListFinopsPoliciesResponse
-	(*FinopsPolicy)(nil),               // 4: infracost.provider.FinopsPolicy
-	(*Input)(nil),                      // 5: infracost.provider.Input
-	(*Output)(nil),                     // 6: infracost.provider.Output
+	(*ProcessTreeRequest)(nil),         // 2: infracost.provider.ProcessTreeRequest
+	(*ProcessTreeResponse)(nil),        // 3: infracost.provider.ProcessTreeResponse
+	(*ListFinopsPoliciesRequest)(nil),  // 4: infracost.provider.ListFinopsPoliciesRequest
+	(*ListFinopsPoliciesResponse)(nil), // 5: infracost.provider.ListFinopsPoliciesResponse
+	(*FinopsPolicy)(nil),               // 6: infracost.provider.FinopsPolicy
+	(*Input)(nil),                      // 7: infracost.provider.Input
+	(*Output)(nil),                     // 8: infracost.provider.Output
+	(*TreeInput)(nil),                  // 9: infracost.provider.TreeInput
 }
 var file_infracost_provider_service_proto_depIdxs = []int32{
-	5, // 0: infracost.provider.ProcessRequest.input:type_name -> infracost.provider.Input
-	6, // 1: infracost.provider.ProcessResponse.output:type_name -> infracost.provider.Output
-	4, // 2: infracost.provider.ListFinopsPoliciesResponse.policies:type_name -> infracost.provider.FinopsPolicy
-	0, // 3: infracost.provider.ProviderService.Process:input_type -> infracost.provider.ProcessRequest
-	2, // 4: infracost.provider.ProviderService.ListFinopsPolicies:input_type -> infracost.provider.ListFinopsPoliciesRequest
-	1, // 5: infracost.provider.ProviderService.Process:output_type -> infracost.provider.ProcessResponse
-	3, // 6: infracost.provider.ProviderService.ListFinopsPolicies:output_type -> infracost.provider.ListFinopsPoliciesResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7, // 0: infracost.provider.ProcessRequest.input:type_name -> infracost.provider.Input
+	8, // 1: infracost.provider.ProcessResponse.output:type_name -> infracost.provider.Output
+	9, // 2: infracost.provider.ProcessTreeRequest.input:type_name -> infracost.provider.TreeInput
+	8, // 3: infracost.provider.ProcessTreeResponse.output:type_name -> infracost.provider.Output
+	6, // 4: infracost.provider.ListFinopsPoliciesResponse.policies:type_name -> infracost.provider.FinopsPolicy
+	0, // 5: infracost.provider.ProviderService.Process:input_type -> infracost.provider.ProcessRequest
+	2, // 6: infracost.provider.ProviderService.ProcessTree:input_type -> infracost.provider.ProcessTreeRequest
+	4, // 7: infracost.provider.ProviderService.ListFinopsPolicies:input_type -> infracost.provider.ListFinopsPoliciesRequest
+	1, // 8: infracost.provider.ProviderService.Process:output_type -> infracost.provider.ProcessResponse
+	3, // 9: infracost.provider.ProviderService.ProcessTree:output_type -> infracost.provider.ProcessTreeResponse
+	5, // 10: infracost.provider.ProviderService.ListFinopsPolicies:output_type -> infracost.provider.ListFinopsPoliciesResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_service_proto_init() }
@@ -332,13 +432,14 @@ func file_infracost_provider_service_proto_init() {
 	}
 	file_infracost_provider_input_proto_init()
 	file_infracost_provider_output_proto_init()
+	file_infracost_provider_tree_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_service_proto_rawDesc), len(file_infracost_provider_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
