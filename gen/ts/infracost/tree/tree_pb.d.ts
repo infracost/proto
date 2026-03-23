@@ -174,14 +174,14 @@ export declare type Resource = Message<"infracost.tree.Resource"> & {
   tags: Tag[];
 
   /**
-   * @generated from field: repeated infracost.tree.TagPropagationProblem tag_propagation_problems = 16;
-   */
-  tagPropagationProblems: TagPropagationProblem[];
-
-  /**
-   * @generated from field: optional infracost.tree.ValueObject attributes = 17;
+   * @generated from field: optional infracost.tree.ValueObject attributes = 16;
    */
   attributes?: ValueObject;
+
+  /**
+   * @generated from field: repeated infracost.tree.TagPropagationProblem tag_propagation_problems = 17;
+   */
+  tagPropagationProblems: TagPropagationProblem[];
 };
 
 /**

@@ -233,8 +233,8 @@ type Resource struct {
 	SupportsTags           bool                     `protobuf:"varint,13,opt,name=supports_tags,json=supportsTags,proto3" json:"supports_tags,omitempty"`
 	SupportsDefaultTags    bool                     `protobuf:"varint,14,opt,name=supports_default_tags,json=supportsDefaultTags,proto3" json:"supports_default_tags,omitempty"`
 	Tags                   []*Tag                   `protobuf:"bytes,15,rep,name=tags,proto3" json:"tags,omitempty"`
-	TagPropagationProblems []*TagPropagationProblem `protobuf:"bytes,16,rep,name=tag_propagation_problems,json=tagPropagationProblems,proto3" json:"tag_propagation_problems,omitempty"`
-	Attributes             *ValueObject             `protobuf:"bytes,17,opt,name=attributes,proto3,oneof" json:"attributes,omitempty"`
+	Attributes             *ValueObject             `protobuf:"bytes,16,opt,name=attributes,proto3,oneof" json:"attributes,omitempty"`
+	TagPropagationProblems []*TagPropagationProblem `protobuf:"bytes,17,rep,name=tag_propagation_problems,json=tagPropagationProblems,proto3" json:"tag_propagation_problems,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -374,16 +374,16 @@ func (x *Resource) GetTags() []*Tag {
 	return nil
 }
 
-func (x *Resource) GetTagPropagationProblems() []*TagPropagationProblem {
+func (x *Resource) GetAttributes() *ValueObject {
 	if x != nil {
-		return x.TagPropagationProblems
+		return x.Attributes
 	}
 	return nil
 }
 
-func (x *Resource) GetAttributes() *ValueObject {
+func (x *Resource) GetTagPropagationProblems() []*TagPropagationProblem {
 	if x != nil {
-		return x.Attributes
+		return x.TagPropagationProblems
 	}
 	return nil
 }
@@ -930,11 +930,11 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\x13region_is_synthetic\x18\f \x01(\bR\x11regionIsSynthetic\x12#\n" +
 	"\rsupports_tags\x18\r \x01(\bR\fsupportsTags\x122\n" +
 	"\x15supports_default_tags\x18\x0e \x01(\bR\x13supportsDefaultTags\x12'\n" +
-	"\x04tags\x18\x0f \x03(\v2\x13.infracost.tree.TagR\x04tags\x12_\n" +
-	"\x18tag_propagation_problems\x18\x10 \x03(\v2%.infracost.tree.TagPropagationProblemR\x16tagPropagationProblems\x12@\n" +
+	"\x04tags\x18\x0f \x03(\v2\x13.infracost.tree.TagR\x04tags\x12@\n" +
 	"\n" +
-	"attributes\x18\x11 \x01(\v2\x1b.infracost.tree.ValueObjectH\x01R\n" +
-	"attributes\x88\x01\x01B\r\n" +
+	"attributes\x18\x10 \x01(\v2\x1b.infracost.tree.ValueObjectH\x01R\n" +
+	"attributes\x88\x01\x01\x12_\n" +
+	"\x18tag_propagation_problems\x18\x11 \x03(\v2%.infracost.tree.TagPropagationProblemR\x16tagPropagationProblemsB\r\n" +
 	"\v_definitionB\r\n" +
 	"\v_attributes\"\xc5\x01\n" +
 	"\x15TagPropagationProblem\x12!\n" +
@@ -1029,8 +1029,8 @@ var file_infracost_tree_tree_proto_depIdxs = []int32{
 	4,  // 4: infracost.tree.Service.resources:type_name -> infracost.tree.Resource
 	6,  // 5: infracost.tree.Resource.definition:type_name -> infracost.tree.Definition
 	7,  // 6: infracost.tree.Resource.tags:type_name -> infracost.tree.Tag
-	5,  // 7: infracost.tree.Resource.tag_propagation_problems:type_name -> infracost.tree.TagPropagationProblem
-	9,  // 8: infracost.tree.Resource.attributes:type_name -> infracost.tree.ValueObject
+	9,  // 7: infracost.tree.Resource.attributes:type_name -> infracost.tree.ValueObject
+	5,  // 8: infracost.tree.Resource.tag_propagation_problems:type_name -> infracost.tree.TagPropagationProblem
 	15, // 9: infracost.tree.Definition.source:type_name -> infracost.parser.SourceRange
 	16, // 10: infracost.tree.Definition.address:type_name -> infracost.parser.Address
 	17, // 11: infracost.tree.Definition.call_stack:type_name -> infracost.parser.CallStack

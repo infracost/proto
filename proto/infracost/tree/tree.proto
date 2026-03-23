@@ -42,8 +42,8 @@ message Resource {
   bool supports_tags = 13;
   bool supports_default_tags = 14;
   repeated Tag tags = 15;
-  repeated TagPropagationProblem tag_propagation_problems = 16;
-  optional ValueObject attributes = 17;
+  optional ValueObject attributes = 16;
+  repeated TagPropagationProblem tag_propagation_problems = 17;
 }
 
 message TagPropagationProblem {
