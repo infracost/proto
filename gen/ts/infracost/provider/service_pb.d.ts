@@ -66,7 +66,7 @@ export declare const ProcessTreeRequestSchema: GenMessage<ProcessTreeRequest>;
  */
 export declare type ProcessTreeResponse = Message<"infracost.provider.ProcessTreeResponse"> & {
   /**
-   * @generated from field: infracost.provider.Output output = 2;
+   * @generated from field: infracost.provider.Output output = 1;
    */
   output?: Output;
 };

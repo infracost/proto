@@ -155,7 +155,7 @@ func (x *ProcessTreeRequest) GetInput() *TreeInput {
 
 type ProcessTreeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Output        *Output                `protobuf:"bytes,2,opt,name=output,proto3" json:"output,omitempty"`
+	Output        *Output                `protobuf:"bytes,1,opt,name=output,proto3" json:"output,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -365,7 +365,7 @@ const file_infracost_provider_service_proto_rawDesc = "" +
 	"\x12ProcessTreeRequest\x123\n" +
 	"\x05input\x18\x01 \x01(\v2\x1d.infracost.provider.TreeInputR\x05input\"I\n" +
 	"\x13ProcessTreeResponse\x122\n" +
-	"\x06output\x18\x02 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"\x1b\n" +
+	"\x06output\x18\x01 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"\x1b\n" +
 	"\x19ListFinopsPoliciesRequest\"Z\n" +
 	"\x1aListFinopsPoliciesResponse\x12<\n" +
 	"\bpolicies\x18\x01 \x03(\v2 .infracost.provider.FinopsPolicyR\bpolicies\"\x9c\x01\n" +
