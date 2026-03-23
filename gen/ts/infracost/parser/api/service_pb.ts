@@ -16,13 +16,15 @@ import type { Target } from "../terraform/target_pb.js";
 import { file_infracost_parser_terraform_target } from "../terraform/target_pb.js";
 import type { Target as Target$1 } from "../terragrunt/target_pb.js";
 import { file_infracost_parser_terragrunt_target } from "../terragrunt/target_pb.js";
+import type { Tree } from "../../tree/tree_pb.js";
+import { file_infracost_tree_tree } from "../../tree/tree_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0ItQBChJQYXJzZVJlcXVlc3RUYXJnZXQSNwoJdGVycmFmb3JtGAogASgLMiIuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uVGFyZ2V0SAASOQoKdGVycmFncnVudBgLIAEoCzIjLmluZnJhY29zdC5wYXJzZXIudGVycmFncnVudC5UYXJnZXRIABJBCg5jbG91ZGZvcm1hdGlvbhgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uVGFyZ2V0SABCBwoFdmFsdWUitQEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSOQoGcmVzdWx0GAIgASgLMikuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZVJlc3VsdBI2CgxkZXBlbmRlbmNpZXMYAyADKAsyIC5pbmZyYWNvc3QucGFyc2VyLmFwaS5EZXBlbmRlbmN5Iu4BCgpEZXBlbmRlbmN5EhEKCWZpbGVfcGF0aBgBIAEoCRISCgpsaW5lX3N0YXJ0GAIgASgDEhAKCGxpbmVfZW5kGAMgASgDEhkKEW1vZHVsZV9kZWZpbml0aW9uGAQgASgJEhgKEGlzX3JlbW90ZV9tb2R1bGUYBSABKAgSHQoVaXNfZXh0ZXJuYWxseV9kZWZpbmVkGAYgASgIEhgKEGV4dGVybmFsX3NuaXBwZXQYByABKAkSFAoMaXNfc3ludGhldGljGAggASgIEhQKDGlzX2dlbmVyYXRlZBgJIAEoCBINCgVkZXB0aBgKIAEoBSKgAQoTUGFyc2VSZXNwb25zZVJlc3VsdBI9Cgl0ZXJyYWZvcm0YASABKAsyKC5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5Nb2R1bGVSZXN1bHRIABJBCg5jbG91ZGZvcm1hdGlvbhgCIAEoCzInLmluZnJhY29zdC5wYXJzZXIuY2xvdWRmb3JtYXRpb24uUmVzdWx0SABCBwoFdmFsdWUi1wEKEUluaXRpYWxpemVSZXF1ZXN0Ek8KHXRlcnJhZm9ybV9zdXBwb3J0ZWRfcmVzb3VyY2VzGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzElQKImNsb3VkZm9ybWF0aW9uX3N1cHBvcnRlZF9yZXNvdXJjZXMYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5TdXBwb3J0ZWRSZXNvdXJjZXMSGwoTZGlzYWJsZV9ncmFwaF9jYWNoZRgDIAEoCCIUChJJbml0aWFsaXplUmVzcG9uc2UiVQoSU3VwcG9ydGVkUmVzb3VyY2VzEj8KDnJlc291cmNlX3R5cGVzGAEgAygLMicuaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2UiKgoRU3VwcG9ydGVkUmVzb3VyY2USFQoNcmVzb3VyY2VfdHlwZRgBIAEoCTLCAQoNUGFyc2VyU2VydmljZRJfCgpJbml0aWFsaXplEicuaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlcXVlc3QaKC5pbmZyYWNvc3QucGFyc2VyLmFwaS5Jbml0aWFsaXplUmVzcG9uc2USUAoFUGFyc2USIi5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlcXVlc3QaIy5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlQtIBChhjb20uaW5mcmFjb3N0LnBhcnNlci5hcGlCDFNlcnZpY2VQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9hcGmiAgNJUEGqAhRJbmZyYWNvc3QuUGFyc2VyLkFwacoCFEluZnJhY29zdFxQYXJzZXJcQXBp4gIgSW5mcmFjb3N0XFBhcnNlclxBcGlcR1BCTWV0YWRhdGHqAhZJbmZyYWNvc3Q6OlBhcnNlcjo6QXBpYgZwcm90bzM", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0Is0BChJQYXJzZVRvVHJlZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0EkoKFmV4dHJhX2F0dHJpYnV0ZV92YWx1ZXMYBCADKAsyKi5pbmZyYWNvc3QucGFyc2VyLmFwaS5BdHRyaWJ1dGVSZXF1aXJlbWVudCJBChRBdHRyaWJ1dGVSZXF1aXJlbWVudBIVCg1yZXNvdXJjZV90eXBlGAEgASgJEhIKCmF0dHJpYnV0ZXMYAiADKAki1AEKElBhcnNlUmVxdWVzdFRhcmdldBI3Cgl0ZXJyYWZvcm0YCiABKAsyIi5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5UYXJnZXRIABI5Cgp0ZXJyYWdydW50GAsgASgLMiMuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWdydW50LlRhcmdldEgAEkEKDmNsb3VkZm9ybWF0aW9uGAwgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5UYXJnZXRIAEIHCgV2YWx1ZSK1AQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0EjYKDGRlcGVuZGVuY2llcxgDIAMoCzIgLmluZnJhY29zdC5wYXJzZXIuYXBpLkRlcGVuZGVuY3kipAEKE1BhcnNlVG9UcmVlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSIgoEdHJlZRgCIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSNgoMZGVwZW5kZW5jaWVzGAMgAygLMiAuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGVwZW5kZW5jeSLuAQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh0KFWlzX2V4dGVybmFsbHlfZGVmaW5lZBgGIAEoCBIYChBleHRlcm5hbF9zbmlwcGV0GAcgASgJEhQKDGlzX3N5bnRoZXRpYxgIIAEoCBIUCgxpc19nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlItcBChFJbml0aWFsaXplUmVxdWVzdBJPCh10ZXJyYWZvcm1fc3VwcG9ydGVkX3Jlc291cmNlcxgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcxJUCiJjbG91ZGZvcm1hdGlvbl9zdXBwb3J0ZWRfcmVzb3VyY2VzGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzEhsKE2Rpc2FibGVfZ3JhcGhfY2FjaGUYAyABKAgiFAoSSW5pdGlhbGl6ZVJlc3BvbnNlIlUKElN1cHBvcnRlZFJlc291cmNlcxI/Cg5yZXNvdXJjZV90eXBlcxgBIAMoCzInLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlIioKEVN1cHBvcnRlZFJlc291cmNlEhUKDXJlc291cmNlX3R5cGUYASABKAkypgIKDVBhcnNlclNlcnZpY2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZRJiCgtQYXJzZVRvVHJlZRIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVxdWVzdBopLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVzcG9uc2VC0gEKGGNvbS5pbmZyYWNvc3QucGFyc2VyLmFwaUIMU2VydmljZVByb3RvUAFaNmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2FwaaICA0lQQaoCFEluZnJhY29zdC5QYXJzZXIuQXBpygIUSW5mcmFjb3N0XFBhcnNlclxBcGniAiBJbmZyYWNvc3RcUGFyc2VyXEFwaVxHUEJNZXRhZGF0YeoCFkluZnJhY29zdDo6UGFyc2VyOjpBcGliBnByb3RvMw", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target, file_infracost_tree_tree]);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -58,6 +60,74 @@ export type ParseRequest = Message<"infracost.parser.api.ParseRequest"> & {
  */
 export const ParseRequestSchema: GenMessage<ParseRequest> = /*@__PURE__*/
   messageDesc(file_infracost_parser_api_service, 0);
+
+/**
+ * ParseToTreeRequest is the unified request for all parser types.
+ *
+ * @generated from message infracost.parser.api.ParseToTreeRequest
+ */
+export type ParseToTreeRequest = Message<"infracost.parser.api.ParseToTreeRequest"> & {
+  /**
+   * The absolute root path of the repository to be parsed
+   *
+   * @generated from field: string repo_directory = 1;
+   */
+  repoDirectory: string;
+
+  /**
+   * The absolute working directory of the project in the repository being processed
+   *
+   * @generated from field: string working_directory = 2;
+   */
+  workingDirectory: string;
+
+  /**
+   * The Target type that is being parsed. Eg; cloudformation, terraform, terragrunt
+   *
+   * @generated from field: infracost.parser.api.ParseRequestTarget target = 3;
+   */
+  target?: ParseRequestTarget;
+
+  /**
+   * List of extra raw attribute values to include for the special terraform attribute-matching policies
+   *
+   * @generated from field: repeated infracost.parser.api.AttributeRequirement extra_attribute_values = 4;
+   */
+  extraAttributeValues: AttributeRequirement[];
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseToTreeRequest.
+ * Use `create(ParseToTreeRequestSchema)` to create a new message.
+ */
+export const ParseToTreeRequestSchema: GenMessage<ParseToTreeRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 1);
+
+/**
+ * @generated from message infracost.parser.api.AttributeRequirement
+ */
+export type AttributeRequirement = Message<"infracost.parser.api.AttributeRequirement"> & {
+  /**
+   * The resource type for which the attribute is required, e.g. "aws_instance"
+   *
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+
+  /**
+   * The list of attribute names required for the resource type, e.g. ["ami", "instance_type"]
+   *
+   * @generated from field: repeated string attributes = 2;
+   */
+  attributes: string[];
+};
+
+/**
+ * Describes the message infracost.parser.api.AttributeRequirement.
+ * Use `create(AttributeRequirementSchema)` to create a new message.
+ */
+export const AttributeRequirementSchema: GenMessage<AttributeRequirement> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 2);
 
 /**
  * ParseRequestTarget is the unified target for all parser types.
@@ -100,7 +170,7 @@ export type ParseRequestTarget = Message<"infracost.parser.api.ParseRequestTarge
  * Use `create(ParseRequestTargetSchema)` to create a new message.
  */
 export const ParseRequestTargetSchema: GenMessage<ParseRequestTarget> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 1);
+  messageDesc(file_infracost_parser_api_service, 3);
 
 /**
  * ParseResponse is the unified response for all parser types.
@@ -135,7 +205,42 @@ export type ParseResponse = Message<"infracost.parser.api.ParseResponse"> & {
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 2);
+  messageDesc(file_infracost_parser_api_service, 4);
+
+/**
+ * ParseToTreeResponse is the iac-agnostifc parser response
+ *
+ * @generated from message infracost.parser.api.ParseToTreeResponse
+ */
+export type ParseToTreeResponse = Message<"infracost.parser.api.ParseToTreeResponse"> & {
+  /**
+   * The diagnostics generated during parsing
+   *
+   * @generated from field: repeated infracost.parser.Diagnostic diagnostics = 1;
+   */
+  diagnostics: Diagnostic[];
+
+  /**
+   * The result of parsing the target as a tree structure
+   *
+   * @generated from field: infracost.tree.Tree tree = 2;
+   */
+  tree?: Tree;
+
+  /**
+   * Dependencies extracted during parsing (if DependencyRequest was provided in options)
+   *
+   * @generated from field: repeated infracost.parser.api.Dependency dependencies = 3;
+   */
+  dependencies: Dependency[];
+};
+
+/**
+ * Describes the message infracost.parser.api.ParseToTreeResponse.
+ * Use `create(ParseToTreeResponseSchema)` to create a new message.
+ */
+export const ParseToTreeResponseSchema: GenMessage<ParseToTreeResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 5);
 
 /**
  * Dependency represents a code dependency for a Terraform resource.
@@ -221,7 +326,7 @@ export type Dependency = Message<"infracost.parser.api.Dependency"> & {
  * Use `create(DependencySchema)` to create a new message.
  */
 export const DependencySchema: GenMessage<Dependency> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 3);
+  messageDesc(file_infracost_parser_api_service, 6);
 
 /**
  * ParseResponseResult is the unified result for all parser types.
@@ -256,7 +361,7 @@ export type ParseResponseResult = Message<"infracost.parser.api.ParseResponseRes
  * Use `create(ParseResponseResultSchema)` to create a new message.
  */
 export const ParseResponseResultSchema: GenMessage<ParseResponseResult> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 4);
+  messageDesc(file_infracost_parser_api_service, 7);
 
 /**
  * InitializeRequest is the request for the Initialize RPC.
@@ -292,7 +397,7 @@ export type InitializeRequest = Message<"infracost.parser.api.InitializeRequest"
  * Use `create(InitializeRequestSchema)` to create a new message.
  */
 export const InitializeRequestSchema: GenMessage<InitializeRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 5);
+  messageDesc(file_infracost_parser_api_service, 8);
 
 /**
  * InitializeResponse is the response for the Initialize RPC.
@@ -307,7 +412,7 @@ export type InitializeResponse = Message<"infracost.parser.api.InitializeRespons
  * Use `create(InitializeResponseSchema)` to create a new message.
  */
 export const InitializeResponseSchema: GenMessage<InitializeResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 6);
+  messageDesc(file_infracost_parser_api_service, 9);
 
 /**
  * SupportedResources lists the resource types supported by a parser.
@@ -326,7 +431,7 @@ export type SupportedResources = Message<"infracost.parser.api.SupportedResource
  * Use `create(SupportedResourcesSchema)` to create a new message.
  */
 export const SupportedResourcesSchema: GenMessage<SupportedResources> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 7);
+  messageDesc(file_infracost_parser_api_service, 10);
 
 /**
  * SupportedResource represents a single supported resource type.
@@ -345,7 +450,7 @@ export type SupportedResource = Message<"infracost.parser.api.SupportedResource"
  * Use `create(SupportedResourceSchema)` to create a new message.
  */
 export const SupportedResourceSchema: GenMessage<SupportedResource> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_api_service, 8);
+  messageDesc(file_infracost_parser_api_service, 11);
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.
@@ -372,6 +477,16 @@ export const ParserService: GenService<{
     methodKind: "unary";
     input: typeof ParseRequestSchema;
     output: typeof ParseResponseSchema;
+  },
+  /**
+   * ParseToTree takes a ParseRequest message and returns a ParseToTreeResponse message.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.ParseToTree
+   */
+  parseToTree: {
+    methodKind: "unary";
+    input: typeof ParseToTreeRequestSchema;
+    output: typeof ParseToTreeResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_infracost_parser_api_service, 0);

@@ -6,6 +6,7 @@ import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegen
 import type { Message } from "@bufbuild/protobuf";
 import type { Input } from "./input_pb.js";
 import type { Output } from "./output_pb.js";
+import type { TreeInput } from "./tree_pb.js";
 
 /**
  * Describes the file infracost/provider/service.proto.
@@ -43,6 +44,38 @@ export declare type ProcessResponse = Message<"infracost.provider.ProcessRespons
  * Use `create(ProcessResponseSchema)` to create a new message.
  */
 export declare const ProcessResponseSchema: GenMessage<ProcessResponse>;
+
+/**
+ * @generated from message infracost.provider.ProcessTreeRequest
+ */
+export declare type ProcessTreeRequest = Message<"infracost.provider.ProcessTreeRequest"> & {
+  /**
+   * @generated from field: infracost.provider.TreeInput input = 1;
+   */
+  input?: TreeInput;
+};
+
+/**
+ * Describes the message infracost.provider.ProcessTreeRequest.
+ * Use `create(ProcessTreeRequestSchema)` to create a new message.
+ */
+export declare const ProcessTreeRequestSchema: GenMessage<ProcessTreeRequest>;
+
+/**
+ * @generated from message infracost.provider.ProcessTreeResponse
+ */
+export declare type ProcessTreeResponse = Message<"infracost.provider.ProcessTreeResponse"> & {
+  /**
+   * @generated from field: infracost.provider.Output output = 2;
+   */
+  output?: Output;
+};
+
+/**
+ * Describes the message infracost.provider.ProcessTreeResponse.
+ * Use `create(ProcessTreeResponseSchema)` to create a new message.
+ */
+export declare const ProcessTreeResponseSchema: GenMessage<ProcessTreeResponse>;
 
 /**
  * @generated from message infracost.provider.ListFinopsPoliciesRequest
@@ -119,6 +152,14 @@ export declare const ProviderService: GenService<{
     methodKind: "unary";
     input: typeof ProcessRequestSchema;
     output: typeof ProcessResponseSchema;
+  },
+  /**
+   * @generated from rpc infracost.provider.ProviderService.ProcessTree
+   */
+  processTree: {
+    methodKind: "unary";
+    input: typeof ProcessTreeRequestSchema;
+    output: typeof ProcessTreeResponseSchema;
   },
   /**
    * @generated from rpc infracost.provider.ProviderService.ListFinopsPolicies

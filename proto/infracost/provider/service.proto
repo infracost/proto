@@ -4,9 +4,11 @@ package infracost.provider;
 
 import "infracost/provider/input.proto";
 import "infracost/provider/output.proto";
+import "infracost/provider/tree.proto";
 
 service ProviderService {
   rpc Process(ProcessRequest) returns (ProcessResponse);
+  rpc ProcessTree(ProcessTreeRequest) returns (ProcessTreeResponse);
   rpc ListFinopsPolicies(ListFinopsPoliciesRequest) returns (ListFinopsPoliciesResponse);
 }
 
@@ -16,6 +18,14 @@ message ProcessRequest {
 
 message ProcessResponse {
   Output output = 2;
+}
+
+message ProcessTreeRequest {
+  TreeInput input = 1;
+}
+
+message ProcessTreeResponse {
+  Output output = 1;
 }
 
 message ListFinopsPoliciesRequest {}
