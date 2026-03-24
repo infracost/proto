@@ -1158,7 +1158,19 @@ type FinopsPolicyFailingResource struct {
 	// the full address to the cause of the failure
 	CauseAddress string `protobuf:"bytes,2,opt,name=cause_address,json=causeAddress,proto3" json:"cause_address,omitempty"`
 	// Details of the individual issues for this resource
-	Issues        []*FinopsResourceIssue `protobuf:"bytes,3,rep,name=issues,proto3" json:"issues,omitempty"`
+	Issues []*FinopsResourceIssue `protobuf:"bytes,3,rep,name=issues,proto3" json:"issues,omitempty"`
+	// source filename where the resource is defined (from Resource.metadata.filename)
+	Path string `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	// line number in source file (from Resource.metadata.start_line)
+	StartLine int32 `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
+	// terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
+	ModulePath string `protobuf:"bytes,6,opt,name=module_path,json=modulePath,proto3" json:"module_path,omitempty"`
+	// module call address (from Resource.call_stack.frames[0].address)
+	ModuleCallPath string `protobuf:"bytes,7,opt,name=module_call_path,json=moduleCallPath,proto3" json:"module_call_path,omitempty"`
+	// line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
+	ModuleCallStartLine int32 `protobuf:"varint,8,opt,name=module_call_start_line,json=moduleCallStartLine,proto3" json:"module_call_start_line,omitempty"`
+	// project name(s) where this resource appears (from Input.project_info.name)
+	ProjectNames  []string `protobuf:"bytes,9,rep,name=project_names,json=projectNames,proto3" json:"project_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1210,6 +1222,48 @@ func (x *FinopsPolicyFailingResource) GetCauseAddress() string {
 func (x *FinopsPolicyFailingResource) GetIssues() []*FinopsResourceIssue {
 	if x != nil {
 		return x.Issues
+	}
+	return nil
+}
+
+func (x *FinopsPolicyFailingResource) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *FinopsPolicyFailingResource) GetStartLine() int32 {
+	if x != nil {
+		return x.StartLine
+	}
+	return 0
+}
+
+func (x *FinopsPolicyFailingResource) GetModulePath() string {
+	if x != nil {
+		return x.ModulePath
+	}
+	return ""
+}
+
+func (x *FinopsPolicyFailingResource) GetModuleCallPath() string {
+	if x != nil {
+		return x.ModuleCallPath
+	}
+	return ""
+}
+
+func (x *FinopsPolicyFailingResource) GetModuleCallStartLine() int32 {
+	if x != nil {
+		return x.ModuleCallStartLine
+	}
+	return 0
+}
+
+func (x *FinopsPolicyFailingResource) GetProjectNames() []string {
+	if x != nil {
+		return x.ProjectNames
 	}
 	return nil
 }
@@ -1702,11 +1756,19 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x11failing_resources\x18\x06 \x03(\v2/.infracost.provider.FinopsPolicyFailingResourceR\x10failingResources\x12,\n" +
 	"\x12block_pull_request\x18\a \x01(\bR\x10blockPullRequest\x12D\n" +
 	"\x1finclude_in_pull_request_comment\x18\b \x01(\bR\x1bincludeInPullRequestComment\x12@\n" +
-	"\x1donly_applies_to_new_resources\x18\t \x01(\bR\x19onlyAppliesToNewResources\"\x93\x01\n" +
+	"\x1donly_applies_to_new_resources\x18\t \x01(\bR\x19onlyAppliesToNewResources\"\xeb\x02\n" +
 	"\x1bFinopsPolicyFailingResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12#\n" +
 	"\rcause_address\x18\x02 \x01(\tR\fcauseAddress\x12?\n" +
-	"\x06issues\x18\x03 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\"\xde\x04\n" +
+	"\x06issues\x18\x03 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\x12\x12\n" +
+	"\x04path\x18\x04 \x01(\tR\x04path\x12\x1d\n" +
+	"\n" +
+	"start_line\x18\x05 \x01(\x05R\tstartLine\x12\x1f\n" +
+	"\vmodule_path\x18\x06 \x01(\tR\n" +
+	"modulePath\x12(\n" +
+	"\x10module_call_path\x18\a \x01(\tR\x0emoduleCallPath\x123\n" +
+	"\x16module_call_start_line\x18\b \x01(\x05R\x13moduleCallStartLine\x12#\n" +
+	"\rproject_names\x18\t \x03(\tR\fprojectNames\"\xde\x04\n" +
 	"\x13FinopsResourceIssue\x12@\n" +
 	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x0emonthlySavings\x12a\n" +
 	"!monthly_carbon_savings_grams_co2e\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x1dmonthlyCarbonSavingsGramsCo2e\x12X\n" +

@@ -630,6 +630,48 @@ export declare type FinopsPolicyFailingResource = Message<"infracost.provider.Fi
    * @generated from field: repeated infracost.provider.FinopsResourceIssue issues = 3;
    */
   issues: FinopsResourceIssue[];
+
+  /**
+   * source filename where the resource is defined (from Resource.metadata.filename)
+   *
+   * @generated from field: string path = 4;
+   */
+  path: string;
+
+  /**
+   * line number in source file (from Resource.metadata.start_line)
+   *
+   * @generated from field: int32 start_line = 5;
+   */
+  startLine: number;
+
+  /**
+   * terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
+   *
+   * @generated from field: string module_path = 6;
+   */
+  modulePath: string;
+
+  /**
+   * module call address (from Resource.call_stack.frames[0].address)
+   *
+   * @generated from field: string module_call_path = 7;
+   */
+  moduleCallPath: string;
+
+  /**
+   * line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
+   *
+   * @generated from field: int32 module_call_start_line = 8;
+   */
+  moduleCallStartLine: number;
+
+  /**
+   * project name(s) where this resource appears (from Input.project_info.name)
+   *
+   * @generated from field: repeated string project_names = 9;
+   */
+  projectNames: string[];
 };
 
 /**
