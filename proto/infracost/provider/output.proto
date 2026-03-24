@@ -192,6 +192,18 @@ message FinopsPolicyFailingResource {
   string cause_address = 2;
   // Details of the individual issues for this resource
   repeated FinopsResourceIssue issues = 3;
+  // source filename where the resource is defined (from Resource.metadata.filename)
+  string path = 4;
+  // line number in source file (from Resource.metadata.start_line)
+  int32 start_line = 5;
+  // terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
+  string module_path = 6;
+  // module call address (from Resource.call_stack.frames[0].address)
+  string module_call_path = 7;
+  // line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
+  int32 module_call_start_line = 8;
+  // project name(s) where this resource appears (from Input.project_info.name)
+  repeated string project_names = 9;
 }
 
 message FinopsResourceIssue {
