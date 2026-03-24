@@ -641,9 +641,9 @@ export declare type FinopsPolicyFailingResource = Message<"infracost.provider.Fi
   /**
    * line number in source file (from Resource.metadata.start_line)
    *
-   * @generated from field: int32 start_line = 5;
+   * @generated from field: int64 start_line = 5;
    */
-  startLine: number;
+  startLine: bigint;
 
   /**
    * terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
@@ -662,9 +662,9 @@ export declare type FinopsPolicyFailingResource = Message<"infracost.provider.Fi
   /**
    * line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
    *
-   * @generated from field: int32 module_call_start_line = 8;
+   * @generated from field: int64 module_call_start_line = 8;
    */
-  moduleCallStartLine: number;
+  moduleCallStartLine: bigint;
 
   /**
    * project name(s) where this resource appears (from Input.project_info.name)

@@ -1162,13 +1162,13 @@ type FinopsPolicyFailingResource struct {
 	// source filename where the resource is defined (from Resource.metadata.filename)
 	Path string `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
 	// line number in source file (from Resource.metadata.start_line)
-	StartLine int32 `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
+	StartLine int64 `protobuf:"varint,5,opt,name=start_line,json=startLine,proto3" json:"start_line,omitempty"`
 	// terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
 	ModulePath string `protobuf:"bytes,6,opt,name=module_path,json=modulePath,proto3" json:"module_path,omitempty"`
 	// module call address (from Resource.call_stack.frames[0].address)
 	ModuleCallPath string `protobuf:"bytes,7,opt,name=module_call_path,json=moduleCallPath,proto3" json:"module_call_path,omitempty"`
 	// line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
-	ModuleCallStartLine int32 `protobuf:"varint,8,opt,name=module_call_start_line,json=moduleCallStartLine,proto3" json:"module_call_start_line,omitempty"`
+	ModuleCallStartLine int64 `protobuf:"varint,8,opt,name=module_call_start_line,json=moduleCallStartLine,proto3" json:"module_call_start_line,omitempty"`
 	// project name(s) where this resource appears (from Input.project_info.name)
 	ProjectNames  []string `protobuf:"bytes,9,rep,name=project_names,json=projectNames,proto3" json:"project_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1233,7 +1233,7 @@ func (x *FinopsPolicyFailingResource) GetPath() string {
 	return ""
 }
 
-func (x *FinopsPolicyFailingResource) GetStartLine() int32 {
+func (x *FinopsPolicyFailingResource) GetStartLine() int64 {
 	if x != nil {
 		return x.StartLine
 	}
@@ -1254,7 +1254,7 @@ func (x *FinopsPolicyFailingResource) GetModuleCallPath() string {
 	return ""
 }
 
-func (x *FinopsPolicyFailingResource) GetModuleCallStartLine() int32 {
+func (x *FinopsPolicyFailingResource) GetModuleCallStartLine() int64 {
 	if x != nil {
 		return x.ModuleCallStartLine
 	}
@@ -1763,11 +1763,11 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x06issues\x18\x03 \x03(\v2'.infracost.provider.FinopsResourceIssueR\x06issues\x12\x12\n" +
 	"\x04path\x18\x04 \x01(\tR\x04path\x12\x1d\n" +
 	"\n" +
-	"start_line\x18\x05 \x01(\x05R\tstartLine\x12\x1f\n" +
+	"start_line\x18\x05 \x01(\x03R\tstartLine\x12\x1f\n" +
 	"\vmodule_path\x18\x06 \x01(\tR\n" +
 	"modulePath\x12(\n" +
 	"\x10module_call_path\x18\a \x01(\tR\x0emoduleCallPath\x123\n" +
-	"\x16module_call_start_line\x18\b \x01(\x05R\x13moduleCallStartLine\x12#\n" +
+	"\x16module_call_start_line\x18\b \x01(\x03R\x13moduleCallStartLine\x12#\n" +
 	"\rproject_names\x18\t \x03(\tR\fprojectNames\"\xde\x04\n" +
 	"\x13FinopsResourceIssue\x12@\n" +
 	"\x0fmonthly_savings\x18\x01 \x01(\v2\x17.infracost.rational.RatR\x0emonthlySavings\x12a\n" +
