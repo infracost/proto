@@ -126,6 +126,7 @@ message JobBehavior {
   string custom_property_mapping_script = 4;
   FeatureFlags feature_flags = 5;
   bool force_run = 6;
+  bool backtesting = 7;
 }
 
 // How it gets executed

@@ -518,6 +518,11 @@ export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> 
    * @generated from field: bool force_run = 6;
    */
   forceRun: boolean;
+
+  /**
+   * @generated from field: bool backtesting = 7;
+   */
+  backtesting: boolean;
 };
 
 /**

@@ -959,6 +959,7 @@ type JobBehavior struct {
 	CustomPropertyMappingScript string                 `protobuf:"bytes,4,opt,name=custom_property_mapping_script,json=customPropertyMappingScript,proto3" json:"custom_property_mapping_script,omitempty"`
 	FeatureFlags                *FeatureFlags          `protobuf:"bytes,5,opt,name=feature_flags,json=featureFlags,proto3" json:"feature_flags,omitempty"`
 	ForceRun                    bool                   `protobuf:"varint,6,opt,name=force_run,json=forceRun,proto3" json:"force_run,omitempty"`
+	Backtesting                 bool                   `protobuf:"varint,7,opt,name=backtesting,proto3" json:"backtesting,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -1031,6 +1032,13 @@ func (x *JobBehavior) GetFeatureFlags() *FeatureFlags {
 func (x *JobBehavior) GetForceRun() bool {
 	if x != nil {
 		return x.ForceRun
+	}
+	return false
+}
+
+func (x *JobBehavior) GetBacktesting() bool {
+	if x != nil {
+		return x.Backtesting
 	}
 	return false
 }
@@ -1533,7 +1541,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\fFeatureFlags\x12.\n" +
 	"\x13enable_cisco_stacks\x18\x03 \x01(\bR\x11enableCiscoStacks\x12A\n" +
 	"\x1denable_client_side_guardrails\x18\x04 \x01(\bR\x1aenableClientSideGuardrails\x12=\n" +
-	"\x1benable_client_side_comments\x18\x05 \x01(\bR\x18enableClientSideCommentsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xa8\x02\n" +
+	"\x1benable_client_side_comments\x18\x05 \x01(\bR\x18enableClientSideCommentsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xca\x02\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
@@ -1541,7 +1549,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\fbuild_script\x18\x03 \x01(\tR\vbuildScript\x12C\n" +
 	"\x1ecustom_property_mapping_script\x18\x04 \x01(\tR\x1bcustomPropertyMappingScript\x12I\n" +
 	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\x12\x1b\n" +
-	"\tforce_run\x18\x06 \x01(\bR\bforceRun\"\xd6\x05\n" +
+	"\tforce_run\x18\x06 \x01(\bR\bforceRun\x12 \n" +
+	"\vbacktesting\x18\a \x01(\bR\vbacktesting\"\xd6\x05\n" +
 	"\x10JobConfiguration\x12\x1b\n" +
 	"\tlog_level\x18\x01 \x01(\tR\blogLevel\x12\x1f\n" +
 	"\vprompt_path\x18\x02 \x01(\tR\n" +
