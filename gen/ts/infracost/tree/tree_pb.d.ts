@@ -327,6 +327,11 @@ export declare type ValueObject = Message<"infracost.tree.ValueObject"> & {
    * @generated from field: map<string, infracost.tree.Value> entries = 1;
    */
   entries: { [key: string]: Value };
+
+  /**
+   * @generated from field: optional infracost.tree.Resource resource = 2;
+   */
+  resource?: Resource;
 };
 
 /**
