@@ -80,6 +80,7 @@ message ValueList {
 
 message ValueObject {
   map<string, Value> entries = 1;
+  optional Resource resource = 2;
 }
 
 message Value {

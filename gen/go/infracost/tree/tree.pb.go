@@ -660,6 +660,7 @@ func (x *ValueList) GetValues() []*Value {
 type ValueObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Entries       map[string]*Value      `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Resource      *Resource              `protobuf:"bytes,2,opt,name=resource,proto3,oneof" json:"resource,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -697,6 +698,13 @@ func (*ValueObject) Descriptor() ([]byte, []int) {
 func (x *ValueObject) GetEntries() map[string]*Value {
 	if x != nil {
 		return x.Entries
+	}
+	return nil
+}
+
+func (x *ValueObject) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
 	}
 	return nil
 }
@@ -962,12 +970,14 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\n" +
 	"is_default\x18\x03 \x01(\bR\tisDefault\":\n" +
 	"\tValueList\x12-\n" +
-	"\x06values\x18\x01 \x03(\v2\x15.infracost.tree.ValueR\x06values\"\xa4\x01\n" +
+	"\x06values\x18\x01 \x03(\v2\x15.infracost.tree.ValueR\x06values\"\xec\x01\n" +
 	"\vValueObject\x12B\n" +
-	"\aentries\x18\x01 \x03(\v2(.infracost.tree.ValueObject.EntriesEntryR\aentries\x1aQ\n" +
+	"\aentries\x18\x01 \x03(\v2(.infracost.tree.ValueObject.EntriesEntryR\aentries\x129\n" +
+	"\bresource\x18\x02 \x01(\v2\x18.infracost.tree.ResourceH\x00R\bresource\x88\x01\x01\x1aQ\n" +
 	"\fEntriesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12+\n" +
-	"\x05value\x18\x02 \x01(\v2\x15.infracost.tree.ValueR\x05value:\x028\x01\"\xdd\x03\n" +
+	"\x05value\x18\x02 \x01(\v2\x15.infracost.tree.ValueR\x05value:\x028\x01B\v\n" +
+	"\t_resource\"\xdd\x03\n" +
 	"\x05Value\x12\x14\n" +
 	"\x05flags\x18\x01 \x01(\x04R\x05flags\x12/\n" +
 	"\x11source_field_name\x18\x02 \x01(\tH\x01R\x0fsourceFieldName\x88\x01\x01\x12:\n" +
@@ -1040,17 +1050,18 @@ var file_infracost_tree_tree_proto_depIdxs = []int32{
 	10, // 15: infracost.tree.Tag.value:type_name -> infracost.tree.Value
 	10, // 16: infracost.tree.ValueList.values:type_name -> infracost.tree.Value
 	14, // 17: infracost.tree.ValueObject.entries:type_name -> infracost.tree.ValueObject.EntriesEntry
-	15, // 18: infracost.tree.Value.source:type_name -> infracost.parser.SourceRange
-	8,  // 19: infracost.tree.Value.list_value:type_name -> infracost.tree.ValueList
-	9,  // 20: infracost.tree.Value.object_value:type_name -> infracost.tree.ValueObject
-	1,  // 21: infracost.tree.Tree.ProvidersEntry.value:type_name -> infracost.tree.Provider
-	3,  // 22: infracost.tree.Provider.ServicesEntry.value:type_name -> infracost.tree.Service
-	10, // 23: infracost.tree.ValueObject.EntriesEntry.value:type_name -> infracost.tree.Value
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	4,  // 18: infracost.tree.ValueObject.resource:type_name -> infracost.tree.Resource
+	15, // 19: infracost.tree.Value.source:type_name -> infracost.parser.SourceRange
+	8,  // 20: infracost.tree.Value.list_value:type_name -> infracost.tree.ValueList
+	9,  // 21: infracost.tree.Value.object_value:type_name -> infracost.tree.ValueObject
+	1,  // 22: infracost.tree.Tree.ProvidersEntry.value:type_name -> infracost.tree.Provider
+	3,  // 23: infracost.tree.Provider.ServicesEntry.value:type_name -> infracost.tree.Service
+	10, // 24: infracost.tree.ValueObject.EntriesEntry.value:type_name -> infracost.tree.Value
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_infracost_tree_tree_proto_init() }
@@ -1060,6 +1071,7 @@ func file_infracost_tree_tree_proto_init() {
 	}
 	file_infracost_tree_tree_proto_msgTypes[4].OneofWrappers = []any{}
 	file_infracost_tree_tree_proto_msgTypes[6].OneofWrappers = []any{}
+	file_infracost_tree_tree_proto_msgTypes[9].OneofWrappers = []any{}
 	file_infracost_tree_tree_proto_msgTypes[10].OneofWrappers = []any{
 		(*Value_StringValue)(nil),
 		(*Value_BoolValue)(nil),
