@@ -474,6 +474,11 @@ export declare type FinopsPolicySettings = Message<"infracost.parser.event.Finop
    * @generated from field: bool only_new_resources = 11;
    */
   onlyNewResources: boolean;
+
+  /**
+   * @generated from field: infracost.parser.event.FinopsPolicySettings.Group group = 12;
+   */
+  group: FinopsPolicySettings_Group;
 };
 
 /**
@@ -481,6 +486,31 @@ export declare type FinopsPolicySettings = Message<"infracost.parser.event.Finop
  * Use `create(FinopsPolicySettingsSchema)` to create a new message.
  */
 export declare const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings>;
+
+/**
+ * @generated from enum infracost.parser.event.FinopsPolicySettings.Group
+ */
+export enum FinopsPolicySettings_Group {
+  /**
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: FINOPS = 1;
+   */
+  FINOPS = 1,
+
+  /**
+   * @generated from enum value: CLOUD_SECURITY = 2;
+   */
+  CLOUD_SECURITY = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.event.FinopsPolicySettings.Group.
+ */
+export declare const FinopsPolicySettings_GroupSchema: GenEnum<FinopsPolicySettings_Group>;
 
 /**
  * @generated from message infracost.parser.event.Guardrail

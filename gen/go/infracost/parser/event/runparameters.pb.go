@@ -127,6 +127,55 @@ func (TagPolicyRequirement_Type) EnumDescriptor() ([]byte, []int) {
 	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9, 0}
 }
 
+type FinopsPolicySettings_Group int32
+
+const (
+	FinopsPolicySettings_UNSPECIFIED    FinopsPolicySettings_Group = 0
+	FinopsPolicySettings_FINOPS         FinopsPolicySettings_Group = 1
+	FinopsPolicySettings_CLOUD_SECURITY FinopsPolicySettings_Group = 2
+)
+
+// Enum value maps for FinopsPolicySettings_Group.
+var (
+	FinopsPolicySettings_Group_name = map[int32]string{
+		0: "UNSPECIFIED",
+		1: "FINOPS",
+		2: "CLOUD_SECURITY",
+	}
+	FinopsPolicySettings_Group_value = map[string]int32{
+		"UNSPECIFIED":    0,
+		"FINOPS":         1,
+		"CLOUD_SECURITY": 2,
+	}
+)
+
+func (x FinopsPolicySettings_Group) Enum() *FinopsPolicySettings_Group {
+	p := new(FinopsPolicySettings_Group)
+	*p = x
+	return p
+}
+
+func (x FinopsPolicySettings_Group) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (FinopsPolicySettings_Group) Descriptor() protoreflect.EnumDescriptor {
+	return file_infracost_parser_event_runparameters_proto_enumTypes[2].Descriptor()
+}
+
+func (FinopsPolicySettings_Group) Type() protoreflect.EnumType {
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[2]
+}
+
+func (x FinopsPolicySettings_Group) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use FinopsPolicySettings_Group.Descriptor instead.
+func (FinopsPolicySettings_Group) EnumDescriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12, 0}
+}
+
 type Guardrail_Scope int32
 
 const (
@@ -160,11 +209,11 @@ func (x Guardrail_Scope) String() string {
 }
 
 func (Guardrail_Scope) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_parser_event_runparameters_proto_enumTypes[2].Descriptor()
+	return file_infracost_parser_event_runparameters_proto_enumTypes[3].Descriptor()
 }
 
 func (Guardrail_Scope) Type() protoreflect.EnumType {
-	return &file_infracost_parser_event_runparameters_proto_enumTypes[2]
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[3]
 }
 
 func (x Guardrail_Scope) Number() protoreflect.EnumNumber {
@@ -935,18 +984,19 @@ func (x *MapFilter) GetExclude() map[string]string {
 }
 
 type FinopsPolicySettings struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Slug             string                 `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
-	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Message          string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
-	ProjectFilter    *StringFilter          `protobuf:"bytes,5,opt,name=project_filter,json=projectFilter,proto3" json:"project_filter,omitempty"`
-	BranchFilter     *StringFilter          `protobuf:"bytes,6,opt,name=branch_filter,json=branchFilter,proto3" json:"branch_filter,omitempty"`
-	TagFilter        *MapFilter             `protobuf:"bytes,7,opt,name=tag_filter,json=tagFilter,proto3" json:"tag_filter,omitempty"`
-	Settings         string                 `protobuf:"bytes,8,opt,name=settings,proto3" json:"settings,omitempty"` // JSON blob
-	PrComment        bool                   `protobuf:"varint,9,opt,name=pr_comment,json=prComment,proto3" json:"pr_comment,omitempty"`
-	BlockPr          bool                   `protobuf:"varint,10,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
-	OnlyNewResources bool                   `protobuf:"varint,11,opt,name=only_new_resources,json=onlyNewResources,proto3" json:"only_new_resources,omitempty"`
+	state            protoimpl.MessageState     `protogen:"open.v1"`
+	Id               string                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug             string                     `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name             string                     `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Message          string                     `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	ProjectFilter    *StringFilter              `protobuf:"bytes,5,opt,name=project_filter,json=projectFilter,proto3" json:"project_filter,omitempty"`
+	BranchFilter     *StringFilter              `protobuf:"bytes,6,opt,name=branch_filter,json=branchFilter,proto3" json:"branch_filter,omitempty"`
+	TagFilter        *MapFilter                 `protobuf:"bytes,7,opt,name=tag_filter,json=tagFilter,proto3" json:"tag_filter,omitempty"`
+	Settings         string                     `protobuf:"bytes,8,opt,name=settings,proto3" json:"settings,omitempty"` // JSON blob
+	PrComment        bool                       `protobuf:"varint,9,opt,name=pr_comment,json=prComment,proto3" json:"pr_comment,omitempty"`
+	BlockPr          bool                       `protobuf:"varint,10,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
+	OnlyNewResources bool                       `protobuf:"varint,11,opt,name=only_new_resources,json=onlyNewResources,proto3" json:"only_new_resources,omitempty"`
+	Group            FinopsPolicySettings_Group `protobuf:"varint,12,opt,name=group,proto3,enum=infracost.parser.event.FinopsPolicySettings_Group" json:"group,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1056,6 +1106,13 @@ func (x *FinopsPolicySettings) GetOnlyNewResources() bool {
 		return x.OnlyNewResources
 	}
 	return false
+}
+
+func (x *FinopsPolicySettings) GetGroup() FinopsPolicySettings_Group {
+	if x != nil {
+		return x.Group
+	}
+	return FinopsPolicySettings_UNSPECIFIED
 }
 
 type Guardrail struct {
@@ -1266,7 +1323,7 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a:\n" +
 	"\fExcludeEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc6\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xca\x04\n" +
 	"\x14FinopsPolicySettings\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\x12\x12\n" +
@@ -1281,7 +1338,13 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"pr_comment\x18\t \x01(\bR\tprComment\x12\x19\n" +
 	"\bblock_pr\x18\n" +
 	" \x01(\bR\ablockPr\x12,\n" +
-	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResources\"\xfa\x04\n" +
+	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResources\x12H\n" +
+	"\x05group\x18\f \x01(\x0e22.infracost.parser.event.FinopsPolicySettings.GroupR\x05group\"8\n" +
+	"\x05Group\x12\x0f\n" +
+	"\vUNSPECIFIED\x10\x00\x12\n" +
+	"\n" +
+	"\x06FINOPS\x10\x01\x12\x12\n" +
+	"\x0eCLOUD_SECURITY\x10\x02\"\xfa\x04\n" +
 	"\tGuardrail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
@@ -1316,68 +1379,70 @@ func file_infracost_parser_event_runparameters_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_event_runparameters_proto_rawDescData
 }
 
-var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_infracost_parser_event_runparameters_proto_goTypes = []any{
-	(ProductionFilter_Type)(0),     // 0: infracost.parser.event.ProductionFilter.Type
-	(TagPolicyRequirement_Type)(0), // 1: infracost.parser.event.TagPolicyRequirement.Type
-	(Guardrail_Scope)(0),           // 2: infracost.parser.event.Guardrail.Scope
-	(*RunParameters)(nil),          // 3: infracost.parser.event.RunParameters
-	(*BaseScope)(nil),              // 4: infracost.parser.event.BaseScope
-	(*UsageDefaults)(nil),          // 5: infracost.parser.event.UsageDefaults
-	(*UsageResourceMap)(nil),       // 6: infracost.parser.event.UsageResourceMap
-	(*UsageDefaultList)(nil),       // 7: infracost.parser.event.UsageDefaultList
-	(*UsageDefault)(nil),           // 8: infracost.parser.event.UsageDefault
-	(*UsageFilters)(nil),           // 9: infracost.parser.event.UsageFilters
-	(*ProductionFilter)(nil),       // 10: infracost.parser.event.ProductionFilter
-	(*TagPolicy)(nil),              // 11: infracost.parser.event.TagPolicy
-	(*TagPolicyRequirement)(nil),   // 12: infracost.parser.event.TagPolicyRequirement
-	(*StringFilter)(nil),           // 13: infracost.parser.event.StringFilter
-	(*MapFilter)(nil),              // 14: infracost.parser.event.MapFilter
-	(*FinopsPolicySettings)(nil),   // 15: infracost.parser.event.FinopsPolicySettings
-	(*Guardrail)(nil),              // 16: infracost.parser.event.Guardrail
-	nil,                            // 17: infracost.parser.event.UsageDefaults.ResourcesEntry
-	nil,                            // 18: infracost.parser.event.UsageResourceMap.UsagesEntry
-	nil,                            // 19: infracost.parser.event.MapFilter.IncludeEntry
-	nil,                            // 20: infracost.parser.event.MapFilter.ExcludeEntry
-	(*rational.Rat)(nil),           // 21: infracost.rational.Rat
+	(ProductionFilter_Type)(0),      // 0: infracost.parser.event.ProductionFilter.Type
+	(TagPolicyRequirement_Type)(0),  // 1: infracost.parser.event.TagPolicyRequirement.Type
+	(FinopsPolicySettings_Group)(0), // 2: infracost.parser.event.FinopsPolicySettings.Group
+	(Guardrail_Scope)(0),            // 3: infracost.parser.event.Guardrail.Scope
+	(*RunParameters)(nil),           // 4: infracost.parser.event.RunParameters
+	(*BaseScope)(nil),               // 5: infracost.parser.event.BaseScope
+	(*UsageDefaults)(nil),           // 6: infracost.parser.event.UsageDefaults
+	(*UsageResourceMap)(nil),        // 7: infracost.parser.event.UsageResourceMap
+	(*UsageDefaultList)(nil),        // 8: infracost.parser.event.UsageDefaultList
+	(*UsageDefault)(nil),            // 9: infracost.parser.event.UsageDefault
+	(*UsageFilters)(nil),            // 10: infracost.parser.event.UsageFilters
+	(*ProductionFilter)(nil),        // 11: infracost.parser.event.ProductionFilter
+	(*TagPolicy)(nil),               // 12: infracost.parser.event.TagPolicy
+	(*TagPolicyRequirement)(nil),    // 13: infracost.parser.event.TagPolicyRequirement
+	(*StringFilter)(nil),            // 14: infracost.parser.event.StringFilter
+	(*MapFilter)(nil),               // 15: infracost.parser.event.MapFilter
+	(*FinopsPolicySettings)(nil),    // 16: infracost.parser.event.FinopsPolicySettings
+	(*Guardrail)(nil),               // 17: infracost.parser.event.Guardrail
+	nil,                             // 18: infracost.parser.event.UsageDefaults.ResourcesEntry
+	nil,                             // 19: infracost.parser.event.UsageResourceMap.UsagesEntry
+	nil,                             // 20: infracost.parser.event.MapFilter.IncludeEntry
+	nil,                             // 21: infracost.parser.event.MapFilter.ExcludeEntry
+	(*rational.Rat)(nil),            // 22: infracost.rational.Rat
 }
 var file_infracost_parser_event_runparameters_proto_depIdxs = []int32{
-	4,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
-	5,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
-	10, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
-	11, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
-	15, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
-	16, // 5: infracost.parser.event.RunParameters.guardrails:type_name -> infracost.parser.event.Guardrail
-	17, // 6: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
-	18, // 7: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
-	8,  // 8: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
-	9,  // 9: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
-	13, // 10: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
+	5,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
+	6,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
+	11, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
+	12, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
+	16, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	17, // 5: infracost.parser.event.RunParameters.guardrails:type_name -> infracost.parser.event.Guardrail
+	18, // 6: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
+	19, // 7: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
+	9,  // 8: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
+	10, // 9: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
+	14, // 10: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
 	0,  // 11: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
-	13, // 12: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 13: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 14: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
-	14, // 15: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
-	12, // 16: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
+	14, // 12: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 13: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 14: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
+	15, // 15: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
+	13, // 16: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
 	1,  // 17: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
-	19, // 18: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
-	20, // 19: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
-	13, // 20: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
-	13, // 21: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
-	14, // 22: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
-	2,  // 23: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
-	13, // 24: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
-	21, // 25: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
-	21, // 26: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
-	21, // 27: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
-	6,  // 28: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
-	7,  // 29: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	20, // 18: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
+	21, // 19: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
+	14, // 20: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
+	14, // 21: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
+	15, // 22: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
+	2,  // 23: infracost.parser.event.FinopsPolicySettings.group:type_name -> infracost.parser.event.FinopsPolicySettings.Group
+	3,  // 24: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
+	14, // 25: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
+	22, // 26: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
+	22, // 27: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
+	22, // 28: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
+	7,  // 29: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
+	8,  // 30: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_runparameters_proto_init() }
@@ -1391,7 +1456,7 @@ func file_infracost_parser_event_runparameters_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_event_runparameters_proto_rawDesc), len(file_infracost_parser_event_runparameters_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,

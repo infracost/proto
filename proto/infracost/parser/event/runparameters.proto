@@ -102,6 +102,12 @@ message MapFilter {
 }
 
 message FinopsPolicySettings {
+  enum Group {
+    UNSPECIFIED = 0;
+    FINOPS = 1;
+    CLOUD_SECURITY = 2;
+  }
+
   string id = 1;
   string slug = 2;
   string name = 3;
@@ -113,6 +119,7 @@ message FinopsPolicySettings {
   bool pr_comment = 9;
   bool block_pr = 10;
   bool only_new_resources = 11;
+  Group group = 12;
 }
 
 message Guardrail {
