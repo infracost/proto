@@ -13,7 +13,6 @@ export declare const file_infracost_codesearch_codesearch: GenFile;
 
 /**
  * IndexData contains information gathered during the index of repository
- * it contains
  *
  * @generated from message infracost.codesearch.IndexData
  */

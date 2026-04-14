@@ -5,7 +5,6 @@ package infracost.codesearch;
 import "infracost/tree/tree.proto";
 
 // IndexData contains information gathered during the index of repository
-// it contains
 message IndexData {
   // organization id
   string org_id = 1;

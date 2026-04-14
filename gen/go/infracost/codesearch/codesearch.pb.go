@@ -23,7 +23,6 @@ const (
 )
 
 // IndexData contains information gathered during the index of repository
-// it contains
 type IndexData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// organization id

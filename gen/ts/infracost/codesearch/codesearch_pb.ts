@@ -16,7 +16,6 @@ export const file_infracost_codesearch_codesearch: GenFile = /*@__PURE__*/
 
 /**
  * IndexData contains information gathered during the index of repository
- * it contains
  *
  * @generated from message infracost.codesearch.IndexData
  */
