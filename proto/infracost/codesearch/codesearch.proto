@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package infracost.codesearch;
+
+import "infracost/tree/tree.proto";
+
+message IndexData {
+  string org_id = 1;
+  string repo_url = 2;
+  string ref = 3;
+  Attributes attributes = 4;
+  infracost.tree.Tree tree = 5;
+}
+
+message Attributes {
+  repeated ProviderAttributes provider_attributes = 1;
+  map<string, string> tags = 2;
+  repeated string environments = 3;
+  repeated string normalized_environments = 4;
+  repeated string components = 5;
+}
+
+message ProviderAttributes {
+  string provider_name = 1;
+  repeated string account_ids = 2;
+  repeated string regions = 3;
+}
