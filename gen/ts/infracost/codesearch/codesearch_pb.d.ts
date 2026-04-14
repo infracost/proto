@@ -12,33 +12,46 @@ import type { Tree } from "../tree/tree_pb.js";
 export declare const file_infracost_codesearch_codesearch: GenFile;
 
 /**
+ * IndexData contains information gathered during the index of repository
+ * it contains
+ *
  * @generated from message infracost.codesearch.IndexData
  */
 export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
   /**
+   * organization id
+   *
    * @generated from field: string org_id = 1;
    */
   orgId: string;
 
   /**
+   * clone url of the repo
+   *
    * @generated from field: string repo_url = 2;
    */
   repoUrl: string;
 
   /**
+   * the branch the index was run against
+   *
    * @generated from field: string ref = 3;
    */
   ref: string;
 
   /**
+   * repo-level attributes
+   *
    * @generated from field: infracost.codesearch.Attributes attributes = 4;
    */
   attributes?: Attributes;
 
   /**
-   * @generated from field: infracost.tree.Tree tree = 5;
+   * all projects discovered/parsed during the indexing (optional)
+   *
+   * @generated from field: repeated infracost.codesearch.IndexedProject indexed_projects = 5;
    */
-  tree?: Tree;
+  indexedProjects: IndexedProject[];
 };
 
 /**
@@ -48,30 +61,69 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
 export declare const IndexDataSchema: GenMessage<IndexData>;
 
 /**
+ * IndexedProject is the index result of an IaC project within a repository
+ *
+ * @generated from message infracost.codesearch.IndexedProject
+ */
+export declare type IndexedProject = Message<"infracost.codesearch.IndexedProject"> & {
+  /**
+   * project-level attributes
+   *
+   * @generated from field: infracost.codesearch.Attributes attributes = 1;
+   */
+  attributes?: Attributes;
+
+  /**
+   * parsed iac-agnostic tree representiation of the parsed IaC
+   *
+   * @generated from field: optional infracost.tree.Tree tree = 2;
+   */
+  tree?: Tree;
+};
+
+/**
+ * Describes the message infracost.codesearch.IndexedProject.
+ * Use `create(IndexedProjectSchema)` to create a new message.
+ */
+export declare const IndexedProjectSchema: GenMessage<IndexedProject>;
+
+/**
+ * Attributes is a set of indexing-attributes for a given repo or project
+ *
  * @generated from message infracost.codesearch.Attributes
  */
 export declare type Attributes = Message<"infracost.codesearch.Attributes"> & {
   /**
+   * per-provider attributes, such as account id(s) and region(s)
+   *
    * @generated from field: repeated infracost.codesearch.ProviderAttributes provider_attributes = 1;
    */
   providerAttributes: ProviderAttributes[];
 
   /**
+   * tag/label key/values
+   *
    * @generated from field: map<string, string> tags = 2;
    */
   tags: { [key: string]: string };
 
   /**
+   * environments list (raw values like "staging-123")
+   *
    * @generated from field: repeated string environments = 3;
    */
   environments: string[];
 
   /**
+   * normalized environment names (like "production")
+   *
    * @generated from field: repeated string normalized_environments = 4;
    */
   normalizedEnvironments: string[];
 
   /**
+   * component names (like "customer-api")
+   *
    * @generated from field: repeated string components = 5;
    */
   components: string[];
@@ -84,23 +136,31 @@ export declare type Attributes = Message<"infracost.codesearch.Attributes"> & {
 export declare const AttributesSchema: GenMessage<Attributes>;
 
 /**
+ * provider-level attributest, such as account id(s) and region(s)
+ *
  * @generated from message infracost.codesearch.ProviderAttributes
  */
 export declare type ProviderAttributes = Message<"infracost.codesearch.ProviderAttributes"> & {
   /**
-   * @generated from field: string provider_name = 1;
-   */
-  providerName: string;
-
-  /**
-   * @generated from field: repeated string account_ids = 2;
+   * account id(s) for the provider, e.g. AWS account ids, GCP project ids, Azure subscription ids
+   *
+   * @generated from field: repeated string account_ids = 1;
    */
   accountIds: string[];
 
   /**
-   * @generated from field: repeated string regions = 3;
+   * region(s) for the provider, e.g. AWS regions, GCP regions, Azure regions
+   *
+   * @generated from field: repeated string regions = 2;
    */
   regions: string[];
+
+  /**
+   * name of the project
+   *
+   * @generated from field: string provider_name = 3;
+   */
+  providerName: string;
 };
 
 /**

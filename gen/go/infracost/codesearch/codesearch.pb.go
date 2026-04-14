@@ -22,15 +22,22 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// IndexData contains information gathered during the index of repository
+// it contains
 type IndexData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`
-	RepoUrl       string                 `protobuf:"bytes,2,opt,name=repo_url,json=repoUrl,proto3" json:"repo_url,omitempty"`
-	Ref           string                 `protobuf:"bytes,3,opt,name=ref,proto3" json:"ref,omitempty"`
-	Attributes    *Attributes            `protobuf:"bytes,4,opt,name=attributes,proto3" json:"attributes,omitempty"`
-	Tree          *tree.Tree             `protobuf:"bytes,5,opt,name=tree,proto3" json:"tree,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// organization id
+	OrgId string `protobuf:"bytes,1,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`
+	// clone url of the repo
+	RepoUrl string `protobuf:"bytes,2,opt,name=repo_url,json=repoUrl,proto3" json:"repo_url,omitempty"`
+	// the branch the index was run against
+	Ref string `protobuf:"bytes,3,opt,name=ref,proto3" json:"ref,omitempty"`
+	// repo-level attributes
+	Attributes *Attributes `protobuf:"bytes,4,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	// all projects discovered/parsed during the indexing (optional)
+	IndexedProjects []*IndexedProject `protobuf:"bytes,5,rep,name=indexed_projects,json=indexedProjects,proto3" json:"indexed_projects,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *IndexData) Reset() {
@@ -91,27 +98,88 @@ func (x *IndexData) GetAttributes() *Attributes {
 	return nil
 }
 
-func (x *IndexData) GetTree() *tree.Tree {
+func (x *IndexData) GetIndexedProjects() []*IndexedProject {
+	if x != nil {
+		return x.IndexedProjects
+	}
+	return nil
+}
+
+// IndexedProject is the index result of an IaC project within a repository
+type IndexedProject struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// project-level attributes
+	Attributes *Attributes `protobuf:"bytes,1,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	// parsed iac-agnostic tree representiation of the parsed IaC
+	Tree          *tree.Tree `protobuf:"bytes,2,opt,name=tree,proto3,oneof" json:"tree,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IndexedProject) Reset() {
+	*x = IndexedProject{}
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IndexedProject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IndexedProject) ProtoMessage() {}
+
+func (x *IndexedProject) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IndexedProject.ProtoReflect.Descriptor instead.
+func (*IndexedProject) Descriptor() ([]byte, []int) {
+	return file_infracost_codesearch_codesearch_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *IndexedProject) GetAttributes() *Attributes {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
+func (x *IndexedProject) GetTree() *tree.Tree {
 	if x != nil {
 		return x.Tree
 	}
 	return nil
 }
 
+// Attributes is a set of indexing-attributes for a given repo or project
 type Attributes struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	ProviderAttributes     []*ProviderAttributes  `protobuf:"bytes,1,rep,name=provider_attributes,json=providerAttributes,proto3" json:"provider_attributes,omitempty"`
-	Tags                   map[string]string      `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Environments           []string               `protobuf:"bytes,3,rep,name=environments,proto3" json:"environments,omitempty"`
-	NormalizedEnvironments []string               `protobuf:"bytes,4,rep,name=normalized_environments,json=normalizedEnvironments,proto3" json:"normalized_environments,omitempty"`
-	Components             []string               `protobuf:"bytes,5,rep,name=components,proto3" json:"components,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// per-provider attributes, such as account id(s) and region(s)
+	ProviderAttributes []*ProviderAttributes `protobuf:"bytes,1,rep,name=provider_attributes,json=providerAttributes,proto3" json:"provider_attributes,omitempty"`
+	// tag/label key/values
+	Tags map[string]string `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// environments list (raw values like "staging-123")
+	Environments []string `protobuf:"bytes,3,rep,name=environments,proto3" json:"environments,omitempty"`
+	// normalized environment names (like "production")
+	NormalizedEnvironments []string `protobuf:"bytes,4,rep,name=normalized_environments,json=normalizedEnvironments,proto3" json:"normalized_environments,omitempty"`
+	// component names (like "customer-api")
+	Components    []string `protobuf:"bytes,5,rep,name=components,proto3" json:"components,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Attributes) Reset() {
 	*x = Attributes{}
-	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[1]
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -123,7 +191,7 @@ func (x *Attributes) String() string {
 func (*Attributes) ProtoMessage() {}
 
 func (x *Attributes) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[1]
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -136,7 +204,7 @@ func (x *Attributes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attributes.ProtoReflect.Descriptor instead.
 func (*Attributes) Descriptor() ([]byte, []int) {
-	return file_infracost_codesearch_codesearch_proto_rawDescGZIP(), []int{1}
+	return file_infracost_codesearch_codesearch_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Attributes) GetProviderAttributes() []*ProviderAttributes {
@@ -174,18 +242,22 @@ func (x *Attributes) GetComponents() []string {
 	return nil
 }
 
+// provider-level attributest, such as account id(s) and region(s)
 type ProviderAttributes struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProviderName  string                 `protobuf:"bytes,1,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	AccountIds    []string               `protobuf:"bytes,2,rep,name=account_ids,json=accountIds,proto3" json:"account_ids,omitempty"`
-	Regions       []string               `protobuf:"bytes,3,rep,name=regions,proto3" json:"regions,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// account id(s) for the provider, e.g. AWS account ids, GCP project ids, Azure subscription ids
+	AccountIds []string `protobuf:"bytes,1,rep,name=account_ids,json=accountIds,proto3" json:"account_ids,omitempty"`
+	// region(s) for the provider, e.g. AWS regions, GCP regions, Azure regions
+	Regions []string `protobuf:"bytes,2,rep,name=regions,proto3" json:"regions,omitempty"`
+	// name of the project
+	ProviderName  string `protobuf:"bytes,3,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ProviderAttributes) Reset() {
 	*x = ProviderAttributes{}
-	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[2]
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -197,7 +269,7 @@ func (x *ProviderAttributes) String() string {
 func (*ProviderAttributes) ProtoMessage() {}
 
 func (x *ProviderAttributes) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[2]
+	mi := &file_infracost_codesearch_codesearch_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -210,14 +282,7 @@ func (x *ProviderAttributes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProviderAttributes.ProtoReflect.Descriptor instead.
 func (*ProviderAttributes) Descriptor() ([]byte, []int) {
-	return file_infracost_codesearch_codesearch_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ProviderAttributes) GetProviderName() string {
-	if x != nil {
-		return x.ProviderName
-	}
-	return ""
+	return file_infracost_codesearch_codesearch_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ProviderAttributes) GetAccountIds() []string {
@@ -234,19 +299,32 @@ func (x *ProviderAttributes) GetRegions() []string {
 	return nil
 }
 
+func (x *ProviderAttributes) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
+	}
+	return ""
+}
+
 var File_infracost_codesearch_codesearch_proto protoreflect.FileDescriptor
 
 const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
-	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xbb\x01\n" +
+	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xe2\x01\n" +
 	"\tIndexData\x12\x15\n" +
 	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x10\n" +
 	"\x03ref\x18\x03 \x01(\tR\x03ref\x12@\n" +
 	"\n" +
 	"attributes\x18\x04 \x01(\v2 .infracost.codesearch.AttributesR\n" +
-	"attributes\x12(\n" +
-	"\x04tree\x18\x05 \x01(\v2\x14.infracost.tree.TreeR\x04tree\"\xdd\x02\n" +
+	"attributes\x12O\n" +
+	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\"\x8a\x01\n" +
+	"\x0eIndexedProject\x12@\n" +
+	"\n" +
+	"attributes\x18\x01 \x01(\v2 .infracost.codesearch.AttributesR\n" +
+	"attributes\x12-\n" +
+	"\x04tree\x18\x02 \x01(\v2\x14.infracost.tree.TreeH\x00R\x04tree\x88\x01\x01B\a\n" +
+	"\x05_tree\"\xdd\x02\n" +
 	"\n" +
 	"Attributes\x12Y\n" +
 	"\x13provider_attributes\x18\x01 \x03(\v2(.infracost.codesearch.ProviderAttributesR\x12providerAttributes\x12>\n" +
@@ -259,11 +337,11 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"t\n" +
-	"\x12ProviderAttributes\x12#\n" +
-	"\rprovider_name\x18\x01 \x01(\tR\fproviderName\x12\x1f\n" +
-	"\vaccount_ids\x18\x02 \x03(\tR\n" +
+	"\x12ProviderAttributes\x12\x1f\n" +
+	"\vaccount_ids\x18\x01 \x03(\tR\n" +
 	"accountIds\x12\x18\n" +
-	"\aregions\x18\x03 \x03(\tR\aregionsB\xd4\x01\n" +
+	"\aregions\x18\x02 \x03(\tR\aregions\x12#\n" +
+	"\rprovider_name\x18\x03 \x01(\tR\fproviderNameB\xd4\x01\n" +
 	"\x18com.infracost.codesearchB\x0fCodesearchProtoP\x01Z6github.com/infracost/proto/gen/go/infracost/codesearch\xa2\x02\x03ICX\xaa\x02\x14Infracost.Codesearch\xca\x02\x14Infracost\\Codesearch\xe2\x02 Infracost\\Codesearch\\GPBMetadata\xea\x02\x15Infracost::Codesearchb\x06proto3"
 
 var (
@@ -278,24 +356,27 @@ func file_infracost_codesearch_codesearch_proto_rawDescGZIP() []byte {
 	return file_infracost_codesearch_codesearch_proto_rawDescData
 }
 
-var file_infracost_codesearch_codesearch_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_infracost_codesearch_codesearch_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_infracost_codesearch_codesearch_proto_goTypes = []any{
 	(*IndexData)(nil),          // 0: infracost.codesearch.IndexData
-	(*Attributes)(nil),         // 1: infracost.codesearch.Attributes
-	(*ProviderAttributes)(nil), // 2: infracost.codesearch.ProviderAttributes
-	nil,                        // 3: infracost.codesearch.Attributes.TagsEntry
-	(*tree.Tree)(nil),          // 4: infracost.tree.Tree
+	(*IndexedProject)(nil),     // 1: infracost.codesearch.IndexedProject
+	(*Attributes)(nil),         // 2: infracost.codesearch.Attributes
+	(*ProviderAttributes)(nil), // 3: infracost.codesearch.ProviderAttributes
+	nil,                        // 4: infracost.codesearch.Attributes.TagsEntry
+	(*tree.Tree)(nil),          // 5: infracost.tree.Tree
 }
 var file_infracost_codesearch_codesearch_proto_depIdxs = []int32{
-	1, // 0: infracost.codesearch.IndexData.attributes:type_name -> infracost.codesearch.Attributes
-	4, // 1: infracost.codesearch.IndexData.tree:type_name -> infracost.tree.Tree
-	2, // 2: infracost.codesearch.Attributes.provider_attributes:type_name -> infracost.codesearch.ProviderAttributes
-	3, // 3: infracost.codesearch.Attributes.tags:type_name -> infracost.codesearch.Attributes.TagsEntry
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 0: infracost.codesearch.IndexData.attributes:type_name -> infracost.codesearch.Attributes
+	1, // 1: infracost.codesearch.IndexData.indexed_projects:type_name -> infracost.codesearch.IndexedProject
+	2, // 2: infracost.codesearch.IndexedProject.attributes:type_name -> infracost.codesearch.Attributes
+	5, // 3: infracost.codesearch.IndexedProject.tree:type_name -> infracost.tree.Tree
+	3, // 4: infracost.codesearch.Attributes.provider_attributes:type_name -> infracost.codesearch.ProviderAttributes
+	4, // 5: infracost.codesearch.Attributes.tags:type_name -> infracost.codesearch.Attributes.TagsEntry
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_infracost_codesearch_codesearch_proto_init() }
@@ -303,13 +384,14 @@ func file_infracost_codesearch_codesearch_proto_init() {
 	if File_infracost_codesearch_codesearch_proto != nil {
 		return
 	}
+	file_infracost_codesearch_codesearch_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_codesearch_codesearch_proto_rawDesc), len(file_infracost_codesearch_codesearch_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
