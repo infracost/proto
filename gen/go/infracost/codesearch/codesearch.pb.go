@@ -35,8 +35,10 @@ type IndexData struct {
 	Attributes *Attributes `protobuf:"bytes,4,opt,name=attributes,proto3" json:"attributes,omitempty"`
 	// all projects discovered/parsed during the indexing (optional)
 	IndexedProjects []*IndexedProject `protobuf:"bytes,5,rep,name=indexed_projects,json=indexedProjects,proto3" json:"indexed_projects,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// repo id
+	RepoId        string `protobuf:"bytes,6,opt,name=repo_id,json=repoId,proto3" json:"repo_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IndexData) Reset() {
@@ -102,6 +104,13 @@ func (x *IndexData) GetIndexedProjects() []*IndexedProject {
 		return x.IndexedProjects
 	}
 	return nil
+}
+
+func (x *IndexData) GetRepoId() string {
+	if x != nil {
+		return x.RepoId
+	}
+	return ""
 }
 
 // IndexedProject is the index result of an IaC project within a repository
@@ -309,7 +318,7 @@ var File_infracost_codesearch_codesearch_proto protoreflect.FileDescriptor
 
 const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
-	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xe2\x01\n" +
+	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xfb\x01\n" +
 	"\tIndexData\x12\x15\n" +
 	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x10\n" +
@@ -317,7 +326,8 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
 	"attributes\x18\x04 \x01(\v2 .infracost.codesearch.AttributesR\n" +
 	"attributes\x12O\n" +
-	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\"\x8a\x01\n" +
+	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\x12\x17\n" +
+	"\arepo_id\x18\x06 \x01(\tR\x06repoId\"\x8a\x01\n" +
 	"\x0eIndexedProject\x12@\n" +
 	"\n" +
 	"attributes\x18\x01 \x01(\v2 .infracost.codesearch.AttributesR\n" +
