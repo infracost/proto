@@ -51,6 +51,13 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: repeated infracost.codesearch.IndexedProject indexed_projects = 5;
    */
   indexedProjects: IndexedProject[];
+
+  /**
+   * repo id
+   *
+   * @generated from field: string repo_id = 6;
+   */
+  repoId: string;
 };
 
 /**

@@ -16,6 +16,8 @@ message IndexData {
   Attributes attributes = 4;
   // all projects discovered/parsed during the indexing (optional)
   repeated IndexedProject indexed_projects = 5;
+  // repo id
+  string repo_id = 6;
 }
 
 // IndexedProject is the index result of an IaC project within a repository
