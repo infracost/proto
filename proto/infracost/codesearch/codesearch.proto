@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package infracost.codesearch;
+
+import "infracost/tree/tree.proto";
+
+// IndexData contains information gathered during the index of repository
+message IndexData {
+  // organization id
+  string org_id = 1;
+  // clone url of the repo
+  string repo_url = 2;
+  // the branch the index was run against
+  string ref = 3;
+  // repo-level attributes
+  Attributes attributes = 4;
+  // all projects discovered/parsed during the indexing (optional)
+  repeated IndexedProject indexed_projects = 5;
+}
+
+// IndexedProject is the index result of an IaC project within a repository
+message IndexedProject {
+  // project-level attributes
+  Attributes attributes = 1;
+  // parsed iac-agnostic tree representation of the parsed IaC
+  optional infracost.tree.Tree tree = 2;
+}
+
+// Attributes is a set of indexing-attributes for a given repo or project
+message Attributes {
+  // per-provider attributes, such as account id(s) and region(s)
+  repeated ProviderAttributes provider_attributes = 1;
+  // tag/label key/values
+  map<string, string> tags = 2;
+  // environments list (raw values like "staging-123")
+  repeated string environments = 3;
+  // normalized environment names (like "production")
+  repeated string normalized_environments = 4;
+  // component names (like "customer-api")
+  repeated string components = 5;
+}
+
+// provider-level attributes, such as account id(s) and region(s)
+message ProviderAttributes {
+  // account id(s) for the provider, e.g. AWS account ids, GCP project ids, Azure subscription ids
+  repeated string account_ids = 1;
+  // region(s) for the provider, e.g. AWS regions, GCP regions, Azure regions
+  repeated string regions = 2;
+  // name of the project
+  string provider_name = 3;
+}
