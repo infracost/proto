@@ -22,7 +22,7 @@ message IndexData {
 message IndexedProject {
   // project-level attributes
   Attributes attributes = 1;
-  // parsed iac-agnostic tree representiation of the parsed IaC
+  // parsed iac-agnostic tree representation of the parsed IaC
   optional infracost.tree.Tree tree = 2;
 }
 
@@ -40,7 +40,7 @@ message Attributes {
   repeated string components = 5;
 }
 
-// provider-level attributest, such as account id(s) and region(s)
+// provider-level attributes, such as account id(s) and region(s)
 message ProviderAttributes {
   // account id(s) for the provider, e.g. AWS account ids, GCP project ids, Azure subscription ids
   repeated string account_ids = 1;

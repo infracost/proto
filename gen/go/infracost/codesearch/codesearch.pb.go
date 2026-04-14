@@ -109,7 +109,7 @@ type IndexedProject struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// project-level attributes
 	Attributes *Attributes `protobuf:"bytes,1,opt,name=attributes,proto3" json:"attributes,omitempty"`
-	// parsed iac-agnostic tree representiation of the parsed IaC
+	// parsed iac-agnostic tree representation of the parsed IaC
 	Tree          *tree.Tree `protobuf:"bytes,2,opt,name=tree,proto3,oneof" json:"tree,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -241,7 +241,7 @@ func (x *Attributes) GetComponents() []string {
 	return nil
 }
 
-// provider-level attributest, such as account id(s) and region(s)
+// provider-level attributes, such as account id(s) and region(s)
 type ProviderAttributes struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// account id(s) for the provider, e.g. AWS account ids, GCP project ids, Azure subscription ids

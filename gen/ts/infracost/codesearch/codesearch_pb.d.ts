@@ -73,7 +73,7 @@ export declare type IndexedProject = Message<"infracost.codesearch.IndexedProjec
   attributes?: Attributes;
 
   /**
-   * parsed iac-agnostic tree representiation of the parsed IaC
+   * parsed iac-agnostic tree representation of the parsed IaC
    *
    * @generated from field: optional infracost.tree.Tree tree = 2;
    */
@@ -135,7 +135,7 @@ export declare type Attributes = Message<"infracost.codesearch.Attributes"> & {
 export declare const AttributesSchema: GenMessage<Attributes>;
 
 /**
- * provider-level attributest, such as account id(s) and region(s)
+ * provider-level attributes, such as account id(s) and region(s)
  *
  * @generated from message infracost.codesearch.ProviderAttributes
  */
