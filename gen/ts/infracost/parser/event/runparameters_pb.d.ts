@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Rat } from "../../rational/rational_pb.js";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
@@ -44,6 +45,11 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.Guardrail guardrails = 6;
    */
   guardrails: Guardrail[];
+
+  /**
+   * @generated from field: repeated infracost.parser.event.Budget budgets = 7;
+   */
+  budgets: Budget[];
 };
 
 /**
@@ -606,4 +612,88 @@ export enum Guardrail_Scope {
  * Describes the enum infracost.parser.event.Guardrail.Scope.
  */
 export declare const Guardrail_ScopeSchema: GenEnum<Guardrail_Scope>;
+
+/**
+ * Budget defines a cost budget for resources matching a set of tags.
+ * The dashboard resolves current_cost from cloud billing data at
+ * getRunParameters time. The client displays it as-is.
+ *
+ * @generated from message infracost.parser.event.Budget
+ */
+export declare type Budget = Message<"infracost.parser.event.Budget"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: repeated infracost.parser.event.BudgetTag tags = 2;
+   */
+  tags: BudgetTag[];
+
+  /**
+   * @generated from field: infracost.rational.Rat amount = 3;
+   */
+  amount?: Rat;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp started_at = 4;
+   */
+  startedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp ended_at = 5;
+   */
+  endedAt?: Timestamp;
+
+  /**
+   * @generated from field: bool pr_comment = 6;
+   */
+  prComment: boolean;
+
+  /**
+   * @generated from field: string custom_overrun_message = 7;
+   */
+  customOverrunMessage: string;
+
+  /**
+   * @generated from field: string name = 8;
+   */
+  name: string;
+
+  /**
+   * Actual cloud spend for this budget's tag scope and date range,
+   * pre-resolved by the dashboard from cloud billing data.
+   *
+   * @generated from field: infracost.rational.Rat current_cost = 9;
+   */
+  currentCost?: Rat;
+};
+
+/**
+ * Describes the message infracost.parser.event.Budget.
+ * Use `create(BudgetSchema)` to create a new message.
+ */
+export declare const BudgetSchema: GenMessage<Budget>;
+
+/**
+ * @generated from message infracost.parser.event.BudgetTag
+ */
+export declare type BudgetTag = Message<"infracost.parser.event.BudgetTag"> & {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string value = 2;
+   */
+  value: string;
+};
+
+/**
+ * Describes the message infracost.parser.event.BudgetTag.
+ * Use `create(BudgetTagSchema)` to create a new message.
+ */
+export declare const BudgetTagSchema: GenMessage<BudgetTag>;
 

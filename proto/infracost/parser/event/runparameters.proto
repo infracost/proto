@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package infracost.parser.event;
 
+import "google/protobuf/timestamp.proto";
 import "infracost/rational/rational.proto";
 
 message RunParameters {
@@ -11,6 +12,7 @@ message RunParameters {
   repeated TagPolicy tag_policies = 4;
   repeated FinopsPolicySettings finops_policies = 5;
   repeated Guardrail guardrails = 6;
+  repeated Budget budgets = 7;
 }
 
 message BaseScope {
@@ -145,4 +147,26 @@ message Guardrail {
   bool pr_comment = 8;
   bool block_pr = 9;
   string message = 10;
+}
+
+// Budget defines a cost budget for resources matching a set of tags.
+// The dashboard resolves current_cost from cloud billing data at
+// getRunParameters time. The client displays it as-is.
+message Budget {
+  string id = 1;
+  repeated BudgetTag tags = 2;
+  infracost.rational.Rat amount = 3;
+  google.protobuf.Timestamp started_at = 4;
+  google.protobuf.Timestamp ended_at = 5;
+  bool pr_comment = 6;
+  string custom_overrun_message = 7;
+  string name = 8;
+  // Actual cloud spend for this budget's tag scope and date range,
+  // pre-resolved by the dashboard from cloud billing data.
+  infracost.rational.Rat current_cost = 9;
+}
+
+message BudgetTag {
+  string key = 1;
+  string value = 2;
 }
