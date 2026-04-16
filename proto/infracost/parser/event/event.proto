@@ -116,6 +116,7 @@ message FeatureFlags {
   bool enable_cisco_stacks = 3;
   bool enable_client_side_guardrails = 4;
   bool enable_client_side_comments = 5;
+  bool enable_code_search_indexing = 6;
 }
 
 // What gets executed
