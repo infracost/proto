@@ -26,6 +26,8 @@ message IndexedProject {
   Attributes attributes = 1;
   // parsed iac-agnostic tree representation of the parsed IaC
   optional infracost.tree.Tree tree = 2;
+  // name of the project being indexed
+  string name = 3;
 }
 
 // Attributes is a set of indexing-attributes for a given repo or project

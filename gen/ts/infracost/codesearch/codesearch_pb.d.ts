@@ -85,6 +85,13 @@ export declare type IndexedProject = Message<"infracost.codesearch.IndexedProjec
    * @generated from field: optional infracost.tree.Tree tree = 2;
    */
   tree?: Tree;
+
+  /**
+   * name of the project being indexed
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
 };
 
 /**
