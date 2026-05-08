@@ -480,6 +480,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_code_search_indexing = 6;
    */
   enableCodeSearchIndexing: boolean;
+
+  /**
+   * @generated from field: bool enable_client_side_budgets = 7;
+   */
+  enableClientSideBudgets: boolean;
 };
 
 /**

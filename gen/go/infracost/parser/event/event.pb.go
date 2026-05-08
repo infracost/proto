@@ -896,6 +896,7 @@ type FeatureFlags struct {
 	EnableClientSideGuardrails bool                   `protobuf:"varint,4,opt,name=enable_client_side_guardrails,json=enableClientSideGuardrails,proto3" json:"enable_client_side_guardrails,omitempty"`
 	EnableClientSideComments   bool                   `protobuf:"varint,5,opt,name=enable_client_side_comments,json=enableClientSideComments,proto3" json:"enable_client_side_comments,omitempty"`
 	EnableCodeSearchIndexing   bool                   `protobuf:"varint,6,opt,name=enable_code_search_indexing,json=enableCodeSearchIndexing,proto3" json:"enable_code_search_indexing,omitempty"`
+	EnableClientSideBudgets    bool                   `protobuf:"varint,7,opt,name=enable_client_side_budgets,json=enableClientSideBudgets,proto3" json:"enable_client_side_budgets,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -954,6 +955,13 @@ func (x *FeatureFlags) GetEnableClientSideComments() bool {
 func (x *FeatureFlags) GetEnableCodeSearchIndexing() bool {
 	if x != nil {
 		return x.EnableCodeSearchIndexing
+	}
+	return false
+}
+
+func (x *FeatureFlags) GetEnableClientSideBudgets() bool {
+	if x != nil {
+		return x.EnableClientSideBudgets
 	}
 	return false
 }
@@ -1545,12 +1553,13 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\n" +
 	"AzureRepos\x12A\n" +
 	"\faccess_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\vaccessToken\x12\x19\n" +
-	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\xbf\x02\n" +
+	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\xfc\x02\n" +
 	"\fFeatureFlags\x12.\n" +
 	"\x13enable_cisco_stacks\x18\x03 \x01(\bR\x11enableCiscoStacks\x12A\n" +
 	"\x1denable_client_side_guardrails\x18\x04 \x01(\bR\x1aenableClientSideGuardrails\x12=\n" +
 	"\x1benable_client_side_comments\x18\x05 \x01(\bR\x18enableClientSideComments\x12=\n" +
-	"\x1benable_code_search_indexing\x18\x06 \x01(\bR\x18enableCodeSearchIndexingJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xca\x02\n" +
+	"\x1benable_code_search_indexing\x18\x06 \x01(\bR\x18enableCodeSearchIndexing\x12;\n" +
+	"\x1aenable_client_side_budgets\x18\a \x01(\bR\x17enableClientSideBudgetsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xca\x02\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
