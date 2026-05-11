@@ -25,6 +25,7 @@ message Resource {
   bool free = 15;
   parser.CallStack call_stack = 16;
   bool debug = 17;
+  bool dependency_only = 18; // set if the resource only exists as a dependency - should not have policy failures or costs marked directly
 }
 
 message TagData {

@@ -42,6 +42,7 @@ type Resource struct {
 	Free                bool                   `protobuf:"varint,15,opt,name=free,proto3" json:"free,omitempty"`
 	CallStack           *parser.CallStack      `protobuf:"bytes,16,opt,name=call_stack,json=callStack,proto3" json:"call_stack,omitempty"`
 	Debug               bool                   `protobuf:"varint,17,opt,name=debug,proto3" json:"debug,omitempty"`
+	DependencyOnly      bool                   `protobuf:"varint,18,opt,name=dependency_only,json=dependencyOnly,proto3" json:"dependency_only,omitempty"` // set if the resource only exists as a dependency - should not have policy failures or costs marked directly
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -191,6 +192,13 @@ func (x *Resource) GetCallStack() *parser.CallStack {
 func (x *Resource) GetDebug() bool {
 	if x != nil {
 		return x.Debug
+	}
+	return false
+}
+
+func (x *Resource) GetDependencyOnly() bool {
+	if x != nil {
+		return x.DependencyOnly
 	}
 	return false
 }
@@ -503,7 +511,7 @@ var File_infracost_parser_terraform_resource_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_terraform_resource_proto_rawDesc = "" +
 	"\n" +
-	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xa7\x05\n" +
+	")infracost/parser/terraform/resource.proto\x12\x1ainfracost.parser.terraform\x1a\x1einfracost/parser/address.proto\x1a infracost/parser/hcl/value.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xd0\x05\n" +
 	"\bResource\x12/\n" +
 	"\x04data\x18\x01 \x01(\v2\x1b.infracost.parser.hcl.ValueR\x04data\x12@\n" +
 	"\bprovider\x18\x02 \x01(\v2$.infracost.parser.terraform.ProviderR\bprovider\x123\n" +
@@ -523,7 +531,8 @@ const file_infracost_parser_terraform_resource_proto_rawDesc = "" +
 	"\x04free\x18\x0f \x01(\bR\x04free\x12:\n" +
 	"\n" +
 	"call_stack\x18\x10 \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\x12\x14\n" +
-	"\x05debug\x18\x11 \x01(\bR\x05debug\"T\n" +
+	"\x05debug\x18\x11 \x01(\bR\x05debug\x12'\n" +
+	"\x0fdependency_only\x18\x12 \x01(\bR\x0edependencyOnly\"T\n" +
 	"\aTagData\x12\x14\n" +
 	"\x05flags\x18\x01 \x01(\x04R\x05flags\x123\n" +
 	"\x04tags\x18\x02 \x03(\v2\x1f.infracost.parser.terraform.TagR\x04tags\"\xf9\x02\n" +

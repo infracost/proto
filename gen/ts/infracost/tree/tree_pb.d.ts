@@ -182,6 +182,13 @@ export declare type Resource = Message<"infracost.tree.Resource"> & {
    * @generated from field: repeated infracost.tree.TagPropagationProblem tag_propagation_problems = 17;
    */
   tagPropagationProblems: TagPropagationProblem[];
+
+  /**
+   * set if the resource only exists as a dependency - should not have policy failures or costs marked directly
+   *
+   * @generated from field: bool dependency_only = 18;
+   */
+  dependencyOnly: boolean;
 };
 
 /**

@@ -102,6 +102,13 @@ export declare type Resource = Message<"infracost.parser.terraform.Resource"> & 
    * @generated from field: bool debug = 17;
    */
   debug: boolean;
+
+  /**
+   * set if the resource only exists as a dependency - should not have policy failures or costs marked directly
+   *
+   * @generated from field: bool dependency_only = 18;
+   */
+  dependencyOnly: boolean;
 };
 
 /**
