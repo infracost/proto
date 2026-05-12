@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { SupportedResources } from "../parser/api/service_pb.js";
+import { file_infracost_parser_api_service } from "../parser/api/service_pb.js";
 import type { Input } from "./input_pb.js";
 import { file_infracost_provider_input } from "./input_pb.js";
 import type { Output } from "./output_pb.js";
@@ -16,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/provider/service.proto.
  */
 export const file_infracost_provider_service: GenFile = /*@__PURE__*/
-  fileDesc("CiBpbmZyYWNvc3QvcHJvdmlkZXIvc2VydmljZS5wcm90bxISaW5mcmFjb3N0LnByb3ZpZGVyIjoKDlByb2Nlc3NSZXF1ZXN0EigKBWlucHV0GAEgASgLMhkuaW5mcmFjb3N0LnByb3ZpZGVyLklucHV0Ij0KD1Byb2Nlc3NSZXNwb25zZRIqCgZvdXRwdXQYAiABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IkIKElByb2Nlc3NUcmVlUmVxdWVzdBIsCgVpbnB1dBgBIAEoCzIdLmluZnJhY29zdC5wcm92aWRlci5UcmVlSW5wdXQiQQoTUHJvY2Vzc1RyZWVSZXNwb25zZRIqCgZvdXRwdXQYASABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IhsKGUxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QiUAoaTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2USMgoIcG9saWNpZXMYASADKAsyIC5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5ImoKDEZpbm9wc1BvbGljeRIMCgRzbHVnGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFZ3JvdXAYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSGgoSb25seV9uZXdfcmVzb3VyY2VzGAUgASgIMroCCg9Qcm92aWRlclNlcnZpY2USUgoHUHJvY2VzcxIiLmluZnJhY29zdC5wcm92aWRlci5Qcm9jZXNzUmVxdWVzdBojLmluZnJhY29zdC5wcm92aWRlci5Qcm9jZXNzUmVzcG9uc2USXgoLUHJvY2Vzc1RyZWUSJi5pbmZyYWNvc3QucHJvdmlkZXIuUHJvY2Vzc1RyZWVSZXF1ZXN0GicuaW5mcmFjb3N0LnByb3ZpZGVyLlByb2Nlc3NUcmVlUmVzcG9uc2UScwoSTGlzdEZpbm9wc1BvbGljaWVzEi0uaW5mcmFjb3N0LnByb3ZpZGVyLkxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QaLi5pbmZyYWNvc3QucHJvdmlkZXIuTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2VCxQEKFmNvbS5pbmZyYWNvc3QucHJvdmlkZXJCDFNlcnZpY2VQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z", [file_infracost_provider_input, file_infracost_provider_output, file_infracost_provider_tree]);
+  fileDesc("CiBpbmZyYWNvc3QvcHJvdmlkZXIvc2VydmljZS5wcm90bxISaW5mcmFjb3N0LnByb3ZpZGVyIjoKDlByb2Nlc3NSZXF1ZXN0EigKBWlucHV0GAEgASgLMhkuaW5mcmFjb3N0LnByb3ZpZGVyLklucHV0Ij0KD1Byb2Nlc3NSZXNwb25zZRIqCgZvdXRwdXQYAiABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IkIKElByb2Nlc3NUcmVlUmVxdWVzdBIsCgVpbnB1dBgBIAEoCzIdLmluZnJhY29zdC5wcm92aWRlci5UcmVlSW5wdXQiQQoTUHJvY2Vzc1RyZWVSZXNwb25zZRIqCgZvdXRwdXQYASABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IhsKGUxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QiUAoaTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2USMgoIcG9saWNpZXMYASADKAsyIC5pbmZyYWNvc3QucHJvdmlkZXIuRmlub3BzUG9saWN5ImoKDEZpbm9wc1BvbGljeRIMCgRzbHVnGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFZ3JvdXAYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSGgoSb25seV9uZXdfcmVzb3VyY2VzGAUgASgIIh8KHUxpc3RTdXBwb3J0ZWRSZXNvdXJjZXNSZXF1ZXN0ItYBCh5MaXN0U3VwcG9ydGVkUmVzb3VyY2VzUmVzcG9uc2USOwoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzEkAKDmNsb3VkZm9ybWF0aW9uGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzEjUKA2FybRgDIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlczK7AwoPUHJvdmlkZXJTZXJ2aWNlElIKB1Byb2Nlc3MSIi5pbmZyYWNvc3QucHJvdmlkZXIuUHJvY2Vzc1JlcXVlc3QaIy5pbmZyYWNvc3QucHJvdmlkZXIuUHJvY2Vzc1Jlc3BvbnNlEl4KC1Byb2Nlc3NUcmVlEiYuaW5mcmFjb3N0LnByb3ZpZGVyLlByb2Nlc3NUcmVlUmVxdWVzdBonLmluZnJhY29zdC5wcm92aWRlci5Qcm9jZXNzVHJlZVJlc3BvbnNlEnMKEkxpc3RGaW5vcHNQb2xpY2llcxItLmluZnJhY29zdC5wcm92aWRlci5MaXN0Rmlub3BzUG9saWNpZXNSZXF1ZXN0Gi4uaW5mcmFjb3N0LnByb3ZpZGVyLkxpc3RGaW5vcHNQb2xpY2llc1Jlc3BvbnNlEn8KFkxpc3RTdXBwb3J0ZWRSZXNvdXJjZXMSMS5pbmZyYWNvc3QucHJvdmlkZXIuTGlzdFN1cHBvcnRlZFJlc291cmNlc1JlcXVlc3QaMi5pbmZyYWNvc3QucHJvdmlkZXIuTGlzdFN1cHBvcnRlZFJlc291cmNlc1Jlc3BvbnNlQsUBChZjb20uaW5mcmFjb3N0LnByb3ZpZGVyQgxTZXJ2aWNlUHJvdG9QAVo0Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wcm92aWRlcqICA0lQWKoCEkluZnJhY29zdC5Qcm92aWRlcsoCEkluZnJhY29zdFxQcm92aWRlcuICHkluZnJhY29zdFxQcm92aWRlclxHUEJNZXRhZGF0YeoCE0luZnJhY29zdDo6UHJvdmlkZXJiBnByb3RvMw", [file_infracost_parser_api_service, file_infracost_provider_input, file_infracost_provider_output, file_infracost_provider_tree]);
 
 /**
  * @generated from message infracost.provider.ProcessRequest
@@ -154,6 +156,55 @@ export const FinopsPolicySchema: GenMessage<FinopsPolicy> = /*@__PURE__*/
   messageDesc(file_infracost_provider_service, 6);
 
 /**
+ * @generated from message infracost.provider.ListSupportedResourcesRequest
+ */
+export type ListSupportedResourcesRequest = Message<"infracost.provider.ListSupportedResourcesRequest"> & {
+};
+
+/**
+ * Describes the message infracost.provider.ListSupportedResourcesRequest.
+ * Use `create(ListSupportedResourcesRequestSchema)` to create a new message.
+ */
+export const ListSupportedResourcesRequestSchema: GenMessage<ListSupportedResourcesRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_provider_service, 7);
+
+/**
+ * @generated from message infracost.provider.ListSupportedResourcesResponse
+ */
+export type ListSupportedResourcesResponse = Message<"infracost.provider.ListSupportedResourcesResponse"> & {
+  /**
+   * Terraform resource types this plugin handles (e.g. aws_instance,
+   * azurerm_storage_account, google_compute_instance).
+   *
+   * @generated from field: infracost.parser.api.SupportedResources terraform = 1;
+   */
+  terraform?: SupportedResources;
+
+  /**
+   * CloudFormation resource types this plugin handles (e.g.
+   * AWS::EC2::Instance). Currently AWS-only.
+   *
+   * @generated from field: infracost.parser.api.SupportedResources cloudformation = 2;
+   */
+  cloudformation?: SupportedResources;
+
+  /**
+   * ARM resource types this plugin handles (e.g.
+   * Microsoft.Network/natGateways). Currently Azure-only.
+   *
+   * @generated from field: infracost.parser.api.SupportedResources arm = 3;
+   */
+  arm?: SupportedResources;
+};
+
+/**
+ * Describes the message infracost.provider.ListSupportedResourcesResponse.
+ * Use `create(ListSupportedResourcesResponseSchema)` to create a new message.
+ */
+export const ListSupportedResourcesResponseSchema: GenMessage<ListSupportedResourcesResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_provider_service, 8);
+
+/**
  * @generated from service infracost.provider.ProviderService
  */
 export const ProviderService: GenService<{
@@ -180,6 +231,26 @@ export const ProviderService: GenService<{
     methodKind: "unary";
     input: typeof ListFinopsPoliciesRequestSchema;
     output: typeof ListFinopsPoliciesResponseSchema;
+  },
+  /**
+   * ListSupportedResources reports which IaC resource types this
+   * provider plugin can produce cost components for. The CLI calls
+   * this during scan setup and passes the response into the parser's
+   * InitializeRequest, so unhandled resource types surface as
+   * "Unsupported" in scan output rather than being silently dropped
+   * (which is what would otherwise happen on the parser's
+   * supported-by-default fall-through). All three SupportedResources
+   * fields are populated identically across the AWS / Azurerm / Google
+   * builds — the underlying tree.IsSupportedX lookups walk the whole
+   * tree, the TargetProvider build flag only affects which policies
+   * load.
+   *
+   * @generated from rpc infracost.provider.ProviderService.ListSupportedResources
+   */
+  listSupportedResources: {
+    methodKind: "unary";
+    input: typeof ListSupportedResourcesRequestSchema;
+    output: typeof ListSupportedResourcesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_infracost_provider_service, 0);

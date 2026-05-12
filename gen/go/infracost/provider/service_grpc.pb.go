@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProviderService_Process_FullMethodName            = "/infracost.provider.ProviderService/Process"
-	ProviderService_ProcessTree_FullMethodName        = "/infracost.provider.ProviderService/ProcessTree"
-	ProviderService_ListFinopsPolicies_FullMethodName = "/infracost.provider.ProviderService/ListFinopsPolicies"
+	ProviderService_Process_FullMethodName                = "/infracost.provider.ProviderService/Process"
+	ProviderService_ProcessTree_FullMethodName            = "/infracost.provider.ProviderService/ProcessTree"
+	ProviderService_ListFinopsPolicies_FullMethodName     = "/infracost.provider.ProviderService/ListFinopsPolicies"
+	ProviderService_ListSupportedResources_FullMethodName = "/infracost.provider.ProviderService/ListSupportedResources"
 )
 
 // ProviderServiceClient is the client API for ProviderService service.
@@ -31,6 +32,18 @@ type ProviderServiceClient interface {
 	Process(ctx context.Context, in *ProcessRequest, opts ...grpc.CallOption) (*ProcessResponse, error)
 	ProcessTree(ctx context.Context, in *ProcessTreeRequest, opts ...grpc.CallOption) (*ProcessTreeResponse, error)
 	ListFinopsPolicies(ctx context.Context, in *ListFinopsPoliciesRequest, opts ...grpc.CallOption) (*ListFinopsPoliciesResponse, error)
+	// ListSupportedResources reports which IaC resource types this
+	// provider plugin can produce cost components for. The CLI calls
+	// this during scan setup and passes the response into the parser's
+	// InitializeRequest, so unhandled resource types surface as
+	// "Unsupported" in scan output rather than being silently dropped
+	// (which is what would otherwise happen on the parser's
+	// supported-by-default fall-through). All three SupportedResources
+	// fields are populated identically across the AWS / Azurerm / Google
+	// builds — the underlying tree.IsSupportedX lookups walk the whole
+	// tree, the TargetProvider build flag only affects which policies
+	// load.
+	ListSupportedResources(ctx context.Context, in *ListSupportedResourcesRequest, opts ...grpc.CallOption) (*ListSupportedResourcesResponse, error)
 }
 
 type providerServiceClient struct {
@@ -71,6 +84,16 @@ func (c *providerServiceClient) ListFinopsPolicies(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *providerServiceClient) ListSupportedResources(ctx context.Context, in *ListSupportedResourcesRequest, opts ...grpc.CallOption) (*ListSupportedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSupportedResourcesResponse)
+	err := c.cc.Invoke(ctx, ProviderService_ListSupportedResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProviderServiceServer is the server API for ProviderService service.
 // All implementations must embed UnimplementedProviderServiceServer
 // for forward compatibility.
@@ -78,6 +101,18 @@ type ProviderServiceServer interface {
 	Process(context.Context, *ProcessRequest) (*ProcessResponse, error)
 	ProcessTree(context.Context, *ProcessTreeRequest) (*ProcessTreeResponse, error)
 	ListFinopsPolicies(context.Context, *ListFinopsPoliciesRequest) (*ListFinopsPoliciesResponse, error)
+	// ListSupportedResources reports which IaC resource types this
+	// provider plugin can produce cost components for. The CLI calls
+	// this during scan setup and passes the response into the parser's
+	// InitializeRequest, so unhandled resource types surface as
+	// "Unsupported" in scan output rather than being silently dropped
+	// (which is what would otherwise happen on the parser's
+	// supported-by-default fall-through). All three SupportedResources
+	// fields are populated identically across the AWS / Azurerm / Google
+	// builds — the underlying tree.IsSupportedX lookups walk the whole
+	// tree, the TargetProvider build flag only affects which policies
+	// load.
+	ListSupportedResources(context.Context, *ListSupportedResourcesRequest) (*ListSupportedResourcesResponse, error)
 	mustEmbedUnimplementedProviderServiceServer()
 }
 
@@ -96,6 +131,9 @@ func (UnimplementedProviderServiceServer) ProcessTree(context.Context, *ProcessT
 }
 func (UnimplementedProviderServiceServer) ListFinopsPolicies(context.Context, *ListFinopsPoliciesRequest) (*ListFinopsPoliciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFinopsPolicies not implemented")
+}
+func (UnimplementedProviderServiceServer) ListSupportedResources(context.Context, *ListSupportedResourcesRequest) (*ListSupportedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSupportedResources not implemented")
 }
 func (UnimplementedProviderServiceServer) mustEmbedUnimplementedProviderServiceServer() {}
 func (UnimplementedProviderServiceServer) testEmbeddedByValue()                         {}
@@ -172,6 +210,24 @@ func _ProviderService_ListFinopsPolicies_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProviderService_ListSupportedResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSupportedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).ListSupportedResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_ListSupportedResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).ListSupportedResources(ctx, req.(*ListSupportedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProviderService_ServiceDesc is the grpc.ServiceDesc for ProviderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +246,10 @@ var ProviderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFinopsPolicies",
 			Handler:    _ProviderService_ListFinopsPolicies_Handler,
+		},
+		{
+			MethodName: "ListSupportedResources",
+			Handler:    _ProviderService_ListSupportedResources_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

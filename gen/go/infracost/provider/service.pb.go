@@ -7,6 +7,7 @@
 package provider
 
 import (
+	api "github.com/infracost/proto/gen/go/infracost/parser/api"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -353,11 +354,113 @@ func (x *FinopsPolicy) GetOnlyNewResources() bool {
 	return false
 }
 
+type ListSupportedResourcesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSupportedResourcesRequest) Reset() {
+	*x = ListSupportedResourcesRequest{}
+	mi := &file_infracost_provider_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSupportedResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSupportedResourcesRequest) ProtoMessage() {}
+
+func (x *ListSupportedResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSupportedResourcesRequest.ProtoReflect.Descriptor instead.
+func (*ListSupportedResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{7}
+}
+
+type ListSupportedResourcesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Terraform resource types this plugin handles (e.g. aws_instance,
+	// azurerm_storage_account, google_compute_instance).
+	Terraform *api.SupportedResources `protobuf:"bytes,1,opt,name=terraform,proto3" json:"terraform,omitempty"`
+	// CloudFormation resource types this plugin handles (e.g.
+	// AWS::EC2::Instance). Currently AWS-only.
+	Cloudformation *api.SupportedResources `protobuf:"bytes,2,opt,name=cloudformation,proto3" json:"cloudformation,omitempty"`
+	// ARM resource types this plugin handles (e.g.
+	// Microsoft.Network/natGateways). Currently Azure-only.
+	Arm           *api.SupportedResources `protobuf:"bytes,3,opt,name=arm,proto3" json:"arm,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSupportedResourcesResponse) Reset() {
+	*x = ListSupportedResourcesResponse{}
+	mi := &file_infracost_provider_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSupportedResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSupportedResourcesResponse) ProtoMessage() {}
+
+func (x *ListSupportedResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_provider_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSupportedResourcesResponse.ProtoReflect.Descriptor instead.
+func (*ListSupportedResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_infracost_provider_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListSupportedResourcesResponse) GetTerraform() *api.SupportedResources {
+	if x != nil {
+		return x.Terraform
+	}
+	return nil
+}
+
+func (x *ListSupportedResourcesResponse) GetCloudformation() *api.SupportedResources {
+	if x != nil {
+		return x.Cloudformation
+	}
+	return nil
+}
+
+func (x *ListSupportedResourcesResponse) GetArm() *api.SupportedResources {
+	if x != nil {
+		return x.Arm
+	}
+	return nil
+}
+
 var File_infracost_provider_service_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_service_proto_rawDesc = "" +
 	"\n" +
-	" infracost/provider/service.proto\x12\x12infracost.provider\x1a\x1einfracost/provider/input.proto\x1a\x1finfracost/provider/output.proto\x1a\x1dinfracost/provider/tree.proto\"A\n" +
+	" infracost/provider/service.proto\x12\x12infracost.provider\x1a\"infracost/parser/api/service.proto\x1a\x1einfracost/provider/input.proto\x1a\x1finfracost/provider/output.proto\x1a\x1dinfracost/provider/tree.proto\"A\n" +
 	"\x0eProcessRequest\x12/\n" +
 	"\x05input\x18\x01 \x01(\v2\x19.infracost.provider.InputR\x05input\"E\n" +
 	"\x0fProcessResponse\x122\n" +
@@ -374,11 +477,17 @@ const file_infracost_provider_service_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05group\x18\x03 \x01(\tR\x05group\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12,\n" +
-	"\x12only_new_resources\x18\x05 \x01(\bR\x10onlyNewResources2\xba\x02\n" +
+	"\x12only_new_resources\x18\x05 \x01(\bR\x10onlyNewResources\"\x1f\n" +
+	"\x1dListSupportedResourcesRequest\"\xf6\x01\n" +
+	"\x1eListSupportedResourcesResponse\x12F\n" +
+	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.api.SupportedResourcesR\tterraform\x12P\n" +
+	"\x0ecloudformation\x18\x02 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x0ecloudformation\x12:\n" +
+	"\x03arm\x18\x03 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x03arm2\xbb\x03\n" +
 	"\x0fProviderService\x12R\n" +
 	"\aProcess\x12\".infracost.provider.ProcessRequest\x1a#.infracost.provider.ProcessResponse\x12^\n" +
 	"\vProcessTree\x12&.infracost.provider.ProcessTreeRequest\x1a'.infracost.provider.ProcessTreeResponse\x12s\n" +
-	"\x12ListFinopsPolicies\x12-.infracost.provider.ListFinopsPoliciesRequest\x1a..infracost.provider.ListFinopsPoliciesResponseB\xc5\x01\n" +
+	"\x12ListFinopsPolicies\x12-.infracost.provider.ListFinopsPoliciesRequest\x1a..infracost.provider.ListFinopsPoliciesResponse\x12\x7f\n" +
+	"\x16ListSupportedResources\x121.infracost.provider.ListSupportedResourcesRequest\x1a2.infracost.provider.ListSupportedResourcesResponseB\xc5\x01\n" +
 	"\x16com.infracost.providerB\fServiceProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
 var (
@@ -393,36 +502,44 @@ func file_infracost_provider_service_proto_rawDescGZIP() []byte {
 	return file_infracost_provider_service_proto_rawDescData
 }
 
-var file_infracost_provider_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_infracost_provider_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_infracost_provider_service_proto_goTypes = []any{
-	(*ProcessRequest)(nil),             // 0: infracost.provider.ProcessRequest
-	(*ProcessResponse)(nil),            // 1: infracost.provider.ProcessResponse
-	(*ProcessTreeRequest)(nil),         // 2: infracost.provider.ProcessTreeRequest
-	(*ProcessTreeResponse)(nil),        // 3: infracost.provider.ProcessTreeResponse
-	(*ListFinopsPoliciesRequest)(nil),  // 4: infracost.provider.ListFinopsPoliciesRequest
-	(*ListFinopsPoliciesResponse)(nil), // 5: infracost.provider.ListFinopsPoliciesResponse
-	(*FinopsPolicy)(nil),               // 6: infracost.provider.FinopsPolicy
-	(*Input)(nil),                      // 7: infracost.provider.Input
-	(*Output)(nil),                     // 8: infracost.provider.Output
-	(*TreeInput)(nil),                  // 9: infracost.provider.TreeInput
+	(*ProcessRequest)(nil),                 // 0: infracost.provider.ProcessRequest
+	(*ProcessResponse)(nil),                // 1: infracost.provider.ProcessResponse
+	(*ProcessTreeRequest)(nil),             // 2: infracost.provider.ProcessTreeRequest
+	(*ProcessTreeResponse)(nil),            // 3: infracost.provider.ProcessTreeResponse
+	(*ListFinopsPoliciesRequest)(nil),      // 4: infracost.provider.ListFinopsPoliciesRequest
+	(*ListFinopsPoliciesResponse)(nil),     // 5: infracost.provider.ListFinopsPoliciesResponse
+	(*FinopsPolicy)(nil),                   // 6: infracost.provider.FinopsPolicy
+	(*ListSupportedResourcesRequest)(nil),  // 7: infracost.provider.ListSupportedResourcesRequest
+	(*ListSupportedResourcesResponse)(nil), // 8: infracost.provider.ListSupportedResourcesResponse
+	(*Input)(nil),                          // 9: infracost.provider.Input
+	(*Output)(nil),                         // 10: infracost.provider.Output
+	(*TreeInput)(nil),                      // 11: infracost.provider.TreeInput
+	(*api.SupportedResources)(nil),         // 12: infracost.parser.api.SupportedResources
 }
 var file_infracost_provider_service_proto_depIdxs = []int32{
-	7, // 0: infracost.provider.ProcessRequest.input:type_name -> infracost.provider.Input
-	8, // 1: infracost.provider.ProcessResponse.output:type_name -> infracost.provider.Output
-	9, // 2: infracost.provider.ProcessTreeRequest.input:type_name -> infracost.provider.TreeInput
-	8, // 3: infracost.provider.ProcessTreeResponse.output:type_name -> infracost.provider.Output
-	6, // 4: infracost.provider.ListFinopsPoliciesResponse.policies:type_name -> infracost.provider.FinopsPolicy
-	0, // 5: infracost.provider.ProviderService.Process:input_type -> infracost.provider.ProcessRequest
-	2, // 6: infracost.provider.ProviderService.ProcessTree:input_type -> infracost.provider.ProcessTreeRequest
-	4, // 7: infracost.provider.ProviderService.ListFinopsPolicies:input_type -> infracost.provider.ListFinopsPoliciesRequest
-	1, // 8: infracost.provider.ProviderService.Process:output_type -> infracost.provider.ProcessResponse
-	3, // 9: infracost.provider.ProviderService.ProcessTree:output_type -> infracost.provider.ProcessTreeResponse
-	5, // 10: infracost.provider.ProviderService.ListFinopsPolicies:output_type -> infracost.provider.ListFinopsPoliciesResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	9,  // 0: infracost.provider.ProcessRequest.input:type_name -> infracost.provider.Input
+	10, // 1: infracost.provider.ProcessResponse.output:type_name -> infracost.provider.Output
+	11, // 2: infracost.provider.ProcessTreeRequest.input:type_name -> infracost.provider.TreeInput
+	10, // 3: infracost.provider.ProcessTreeResponse.output:type_name -> infracost.provider.Output
+	6,  // 4: infracost.provider.ListFinopsPoliciesResponse.policies:type_name -> infracost.provider.FinopsPolicy
+	12, // 5: infracost.provider.ListSupportedResourcesResponse.terraform:type_name -> infracost.parser.api.SupportedResources
+	12, // 6: infracost.provider.ListSupportedResourcesResponse.cloudformation:type_name -> infracost.parser.api.SupportedResources
+	12, // 7: infracost.provider.ListSupportedResourcesResponse.arm:type_name -> infracost.parser.api.SupportedResources
+	0,  // 8: infracost.provider.ProviderService.Process:input_type -> infracost.provider.ProcessRequest
+	2,  // 9: infracost.provider.ProviderService.ProcessTree:input_type -> infracost.provider.ProcessTreeRequest
+	4,  // 10: infracost.provider.ProviderService.ListFinopsPolicies:input_type -> infracost.provider.ListFinopsPoliciesRequest
+	7,  // 11: infracost.provider.ProviderService.ListSupportedResources:input_type -> infracost.provider.ListSupportedResourcesRequest
+	1,  // 12: infracost.provider.ProviderService.Process:output_type -> infracost.provider.ProcessResponse
+	3,  // 13: infracost.provider.ProviderService.ProcessTree:output_type -> infracost.provider.ProcessTreeResponse
+	5,  // 14: infracost.provider.ProviderService.ListFinopsPolicies:output_type -> infracost.provider.ListFinopsPoliciesResponse
+	8,  // 15: infracost.provider.ProviderService.ListSupportedResources:output_type -> infracost.provider.ListSupportedResourcesResponse
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_service_proto_init() }
@@ -439,7 +556,7 @@ func file_infracost_provider_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_service_proto_rawDesc), len(file_infracost_provider_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
