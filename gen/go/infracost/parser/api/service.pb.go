@@ -8,6 +8,7 @@ package api
 
 import (
 	parser "github.com/infracost/proto/gen/go/infracost/parser"
+	arm "github.com/infracost/proto/gen/go/infracost/parser/arm"
 	cloudformation "github.com/infracost/proto/gen/go/infracost/parser/cloudformation"
 	terraform "github.com/infracost/proto/gen/go/infracost/parser/terraform"
 	terragrunt "github.com/infracost/proto/gen/go/infracost/parser/terragrunt"
@@ -225,6 +226,7 @@ type ParseRequestTarget struct {
 	//	*ParseRequestTarget_Terraform
 	//	*ParseRequestTarget_Terragrunt
 	//	*ParseRequestTarget_Cloudformation
+	//	*ParseRequestTarget_Arm
 	Value         isParseRequestTarget_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -294,6 +296,15 @@ func (x *ParseRequestTarget) GetCloudformation() *cloudformation.Target {
 	return nil
 }
 
+func (x *ParseRequestTarget) GetArm() *arm.Target {
+	if x != nil {
+		if x, ok := x.Value.(*ParseRequestTarget_Arm); ok {
+			return x.Arm
+		}
+	}
+	return nil
+}
+
 type isParseRequestTarget_Value interface {
 	isParseRequestTarget_Value()
 }
@@ -313,11 +324,20 @@ type ParseRequestTarget_Cloudformation struct {
 	Cloudformation *cloudformation.Target `protobuf:"bytes,12,opt,name=cloudformation,proto3,oneof"`
 }
 
+type ParseRequestTarget_Arm struct {
+	// The target type for ARM JSON files. Bicep is supported by
+	// transpiling to ARM JSON first (caller-side); the parser itself
+	// only accepts JSON.
+	Arm *arm.Target `protobuf:"bytes,13,opt,name=arm,proto3,oneof"`
+}
+
 func (*ParseRequestTarget_Terraform) isParseRequestTarget_Value() {}
 
 func (*ParseRequestTarget_Terragrunt) isParseRequestTarget_Value() {}
 
 func (*ParseRequestTarget_Cloudformation) isParseRequestTarget_Value() {}
+
+func (*ParseRequestTarget_Arm) isParseRequestTarget_Value() {}
 
 // ParseResponse is the unified response for all parser types.
 type ParseResponse struct {
@@ -583,6 +603,7 @@ type ParseResponseResult struct {
 	//
 	//	*ParseResponseResult_Terraform
 	//	*ParseResponseResult_Cloudformation
+	//	*ParseResponseResult_Arm
 	Value         isParseResponseResult_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -643,6 +664,15 @@ func (x *ParseResponseResult) GetCloudformation() *cloudformation.Result {
 	return nil
 }
 
+func (x *ParseResponseResult) GetArm() *arm.Result {
+	if x != nil {
+		if x, ok := x.Value.(*ParseResponseResult_Arm); ok {
+			return x.Arm
+		}
+	}
+	return nil
+}
+
 type isParseResponseResult_Value interface {
 	isParseResponseResult_Value()
 }
@@ -657,9 +687,16 @@ type ParseResponseResult_Cloudformation struct {
 	Cloudformation *cloudformation.Result `protobuf:"bytes,2,opt,name=cloudformation,proto3,oneof"`
 }
 
+type ParseResponseResult_Arm struct {
+	// The result type for ARM files
+	Arm *arm.Result `protobuf:"bytes,3,opt,name=arm,proto3,oneof"`
+}
+
 func (*ParseResponseResult_Terraform) isParseResponseResult_Value() {}
 
 func (*ParseResponseResult_Cloudformation) isParseResponseResult_Value() {}
+
+func (*ParseResponseResult_Arm) isParseResponseResult_Value() {}
 
 // InitializeRequest is the request for the Initialize RPC.
 type InitializeRequest struct {
@@ -671,8 +708,10 @@ type InitializeRequest struct {
 	// Whether to disable the GraphCache. This supports the LSP which needs
 	// fast responses from the parser without getting cached values on save
 	DisableGraphCache bool `protobuf:"varint,3,opt,name=disable_graph_cache,json=disableGraphCache,proto3" json:"disable_graph_cache,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// The supported resources for ARM from providers
+	ArmSupportedResources *SupportedResources `protobuf:"bytes,4,opt,name=arm_supported_resources,json=armSupportedResources,proto3" json:"arm_supported_resources,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *InitializeRequest) Reset() {
@@ -724,6 +763,13 @@ func (x *InitializeRequest) GetDisableGraphCache() bool {
 		return x.DisableGraphCache
 	}
 	return false
+}
+
+func (x *InitializeRequest) GetArmSupportedResources() *SupportedResources {
+	if x != nil {
+		return x.ArmSupportedResources
+	}
+	return nil
 }
 
 // InitializeResponse is the response for the Initialize RPC.
@@ -857,7 +903,7 @@ var File_infracost_parser_api_service_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a,infracost/parser/cloudformation/result.proto\x1a,infracost/parser/cloudformation/target.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\x1a(infracost/parser/terragrunt/target.proto\x1a\x19infracost/tree/tree.proto\"\xa4\x01\n" +
+	"\"infracost/parser/api/service.proto\x12\x14infracost.parser.api\x1a!infracost/parser/arm/result.proto\x1a!infracost/parser/arm/target.proto\x1a,infracost/parser/cloudformation/result.proto\x1a,infracost/parser/cloudformation/target.proto\x1a!infracost/parser/diagnostic.proto\x1a'infracost/parser/terraform/module.proto\x1a'infracost/parser/terraform/target.proto\x1a(infracost/parser/terragrunt/target.proto\x1a\x19infracost/tree/tree.proto\"\xa4\x01\n" +
 	"\fParseRequest\x12%\n" +
 	"\x0erepo_directory\x18\x01 \x01(\tR\rrepoDirectory\x12+\n" +
 	"\x11working_directory\x18\x02 \x01(\tR\x10workingDirectory\x12@\n" +
@@ -871,14 +917,15 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12\x1e\n" +
 	"\n" +
 	"attributes\x18\x02 \x03(\tR\n" +
-	"attributes\"\xfb\x01\n" +
+	"attributes\"\xad\x02\n" +
 	"\x12ParseRequestTarget\x12B\n" +
 	"\tterraform\x18\n" +
 	" \x01(\v2\".infracost.parser.terraform.TargetH\x00R\tterraform\x12E\n" +
 	"\n" +
 	"terragrunt\x18\v \x01(\v2#.infracost.parser.terragrunt.TargetH\x00R\n" +
 	"terragrunt\x12Q\n" +
-	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.TargetH\x00R\x0ecloudformationB\a\n" +
+	"\x0ecloudformation\x18\f \x01(\v2'.infracost.parser.cloudformation.TargetH\x00R\x0ecloudformation\x120\n" +
+	"\x03arm\x18\r \x01(\v2\x1c.infracost.parser.arm.TargetH\x00R\x03armB\a\n" +
 	"\x05value\"\xd8\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12A\n" +
@@ -901,15 +948,17 @@ const file_infracost_parser_api_service_proto_rawDesc = "" +
 	"\fis_synthetic\x18\b \x01(\bR\visSynthetic\x12!\n" +
 	"\fis_generated\x18\t \x01(\bR\visGenerated\x12\x14\n" +
 	"\x05depth\x18\n" +
-	" \x01(\x05R\x05depth\"\xbb\x01\n" +
+	" \x01(\x05R\x05depth\"\xed\x01\n" +
 	"\x13ParseResponseResult\x12H\n" +
 	"\tterraform\x18\x01 \x01(\v2(.infracost.parser.terraform.ModuleResultH\x00R\tterraform\x12Q\n" +
-	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformationB\a\n" +
-	"\x05value\"\xa9\x02\n" +
+	"\x0ecloudformation\x18\x02 \x01(\v2'.infracost.parser.cloudformation.ResultH\x00R\x0ecloudformation\x120\n" +
+	"\x03arm\x18\x03 \x01(\v2\x1c.infracost.parser.arm.ResultH\x00R\x03armB\a\n" +
+	"\x05value\"\x8b\x03\n" +
 	"\x11InitializeRequest\x12l\n" +
 	"\x1dterraform_supported_resources\x18\x01 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x1bterraformSupportedResources\x12v\n" +
 	"\"cloudformation_supported_resources\x18\x02 \x01(\v2(.infracost.parser.api.SupportedResourcesR cloudformationSupportedResources\x12.\n" +
-	"\x13disable_graph_cache\x18\x03 \x01(\bR\x11disableGraphCache\"\x14\n" +
+	"\x13disable_graph_cache\x18\x03 \x01(\bR\x11disableGraphCache\x12`\n" +
+	"\x17arm_supported_resources\x18\x04 \x01(\v2(.infracost.parser.api.SupportedResourcesR\x15armSupportedResources\"\x14\n" +
 	"\x12InitializeResponse\"d\n" +
 	"\x12SupportedResources\x12N\n" +
 	"\x0eresource_types\x18\x01 \x03(\v2'.infracost.parser.api.SupportedResourceR\rresourceTypes\"8\n" +
@@ -951,10 +1000,12 @@ var file_infracost_parser_api_service_proto_goTypes = []any{
 	(*terraform.Target)(nil),       // 12: infracost.parser.terraform.Target
 	(*terragrunt.Target)(nil),      // 13: infracost.parser.terragrunt.Target
 	(*cloudformation.Target)(nil),  // 14: infracost.parser.cloudformation.Target
-	(*parser.Diagnostic)(nil),      // 15: infracost.parser.Diagnostic
-	(*tree.Tree)(nil),              // 16: infracost.tree.Tree
-	(*terraform.ModuleResult)(nil), // 17: infracost.parser.terraform.ModuleResult
-	(*cloudformation.Result)(nil),  // 18: infracost.parser.cloudformation.Result
+	(*arm.Target)(nil),             // 15: infracost.parser.arm.Target
+	(*parser.Diagnostic)(nil),      // 16: infracost.parser.Diagnostic
+	(*tree.Tree)(nil),              // 17: infracost.tree.Tree
+	(*terraform.ModuleResult)(nil), // 18: infracost.parser.terraform.ModuleResult
+	(*cloudformation.Result)(nil),  // 19: infracost.parser.cloudformation.Result
+	(*arm.Result)(nil),             // 20: infracost.parser.arm.Result
 }
 var file_infracost_parser_api_service_proto_depIdxs = []int32{
 	3,  // 0: infracost.parser.api.ParseRequest.target:type_name -> infracost.parser.api.ParseRequestTarget
@@ -963,28 +1014,31 @@ var file_infracost_parser_api_service_proto_depIdxs = []int32{
 	12, // 3: infracost.parser.api.ParseRequestTarget.terraform:type_name -> infracost.parser.terraform.Target
 	13, // 4: infracost.parser.api.ParseRequestTarget.terragrunt:type_name -> infracost.parser.terragrunt.Target
 	14, // 5: infracost.parser.api.ParseRequestTarget.cloudformation:type_name -> infracost.parser.cloudformation.Target
-	15, // 6: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	7,  // 7: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
-	6,  // 8: infracost.parser.api.ParseResponse.dependencies:type_name -> infracost.parser.api.Dependency
-	15, // 9: infracost.parser.api.ParseToTreeResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	16, // 10: infracost.parser.api.ParseToTreeResponse.tree:type_name -> infracost.tree.Tree
-	6,  // 11: infracost.parser.api.ParseToTreeResponse.dependencies:type_name -> infracost.parser.api.Dependency
-	17, // 12: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
-	18, // 13: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
-	10, // 14: infracost.parser.api.InitializeRequest.terraform_supported_resources:type_name -> infracost.parser.api.SupportedResources
-	10, // 15: infracost.parser.api.InitializeRequest.cloudformation_supported_resources:type_name -> infracost.parser.api.SupportedResources
-	11, // 16: infracost.parser.api.SupportedResources.resource_types:type_name -> infracost.parser.api.SupportedResource
-	8,  // 17: infracost.parser.api.ParserService.Initialize:input_type -> infracost.parser.api.InitializeRequest
-	0,  // 18: infracost.parser.api.ParserService.Parse:input_type -> infracost.parser.api.ParseRequest
-	1,  // 19: infracost.parser.api.ParserService.ParseToTree:input_type -> infracost.parser.api.ParseToTreeRequest
-	9,  // 20: infracost.parser.api.ParserService.Initialize:output_type -> infracost.parser.api.InitializeResponse
-	4,  // 21: infracost.parser.api.ParserService.Parse:output_type -> infracost.parser.api.ParseResponse
-	5,  // 22: infracost.parser.api.ParserService.ParseToTree:output_type -> infracost.parser.api.ParseToTreeResponse
-	20, // [20:23] is the sub-list for method output_type
-	17, // [17:20] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	15, // 6: infracost.parser.api.ParseRequestTarget.arm:type_name -> infracost.parser.arm.Target
+	16, // 7: infracost.parser.api.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	7,  // 8: infracost.parser.api.ParseResponse.result:type_name -> infracost.parser.api.ParseResponseResult
+	6,  // 9: infracost.parser.api.ParseResponse.dependencies:type_name -> infracost.parser.api.Dependency
+	16, // 10: infracost.parser.api.ParseToTreeResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	17, // 11: infracost.parser.api.ParseToTreeResponse.tree:type_name -> infracost.tree.Tree
+	6,  // 12: infracost.parser.api.ParseToTreeResponse.dependencies:type_name -> infracost.parser.api.Dependency
+	18, // 13: infracost.parser.api.ParseResponseResult.terraform:type_name -> infracost.parser.terraform.ModuleResult
+	19, // 14: infracost.parser.api.ParseResponseResult.cloudformation:type_name -> infracost.parser.cloudformation.Result
+	20, // 15: infracost.parser.api.ParseResponseResult.arm:type_name -> infracost.parser.arm.Result
+	10, // 16: infracost.parser.api.InitializeRequest.terraform_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	10, // 17: infracost.parser.api.InitializeRequest.cloudformation_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	10, // 18: infracost.parser.api.InitializeRequest.arm_supported_resources:type_name -> infracost.parser.api.SupportedResources
+	11, // 19: infracost.parser.api.SupportedResources.resource_types:type_name -> infracost.parser.api.SupportedResource
+	8,  // 20: infracost.parser.api.ParserService.Initialize:input_type -> infracost.parser.api.InitializeRequest
+	0,  // 21: infracost.parser.api.ParserService.Parse:input_type -> infracost.parser.api.ParseRequest
+	1,  // 22: infracost.parser.api.ParserService.ParseToTree:input_type -> infracost.parser.api.ParseToTreeRequest
+	9,  // 23: infracost.parser.api.ParserService.Initialize:output_type -> infracost.parser.api.InitializeResponse
+	4,  // 24: infracost.parser.api.ParserService.Parse:output_type -> infracost.parser.api.ParseResponse
+	5,  // 25: infracost.parser.api.ParserService.ParseToTree:output_type -> infracost.parser.api.ParseToTreeResponse
+	23, // [23:26] is the sub-list for method output_type
+	20, // [20:23] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_api_service_proto_init() }
@@ -996,10 +1050,12 @@ func file_infracost_parser_api_service_proto_init() {
 		(*ParseRequestTarget_Terraform)(nil),
 		(*ParseRequestTarget_Terragrunt)(nil),
 		(*ParseRequestTarget_Cloudformation)(nil),
+		(*ParseRequestTarget_Arm)(nil),
 	}
 	file_infracost_parser_api_service_proto_msgTypes[7].OneofWrappers = []any{
 		(*ParseResponseResult_Terraform)(nil),
 		(*ParseResponseResult_Cloudformation)(nil),
+		(*ParseResponseResult_Arm)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

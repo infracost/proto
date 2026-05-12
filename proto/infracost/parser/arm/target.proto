@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package infracost.parser.arm;
+
+import "infracost/parser/options/options.proto";
+
+// Mirrors infracost/parser/cloudformation/target.proto with the
+// Azure-shaped context (subscription / tenant / resource group /
+// location). The parser accepts ARM JSON only; Bicep transpilation is
+// a separate caller-side step (see pkg/arm/bicep in the parser repo)
+// so this target only carries the JSON path. That mirrors how
+// CloudFormation handles CDK output — parse the JSON, don't run the
+// transpiler.
+
+message Target {
+  // Absolute or working-directory-relative path to the ARM JSON
+  // template file. For Bicep input, callers transpile to JSON first
+  // and pass the resulting path here.
+  string template_path = 1;
+  // Flags applied across every source range read from this template.
+  // OR'd into the framework's per-value flags.
+  uint64 flags = 2;
+  // Optional parser configuration.
+  Options options = 3;
+}
+
+message Options {
+  // Generic options that aren't specific to ARM.
+  options.GenericOptions generic = 1;
+  // Input parameter values. Override the template's defaults.
+  map<string, string> input_parameters = 2;
+  // Azure deployment-scope context. Drives resourceGroup(),
+  // subscription(), tenant() function results during evaluation.
+  AzureContext azure_context = 3;
+}
+
+message AzureContext {
+  // The Azure subscription ID (a GUID).
+  string subscription_id = 1;
+  // The Azure tenant ID (a GUID).
+  string tenant_id = 2;
+  // The Azure resource group name.
+  string resource_group_name = 3;
+  // The default location for resources that don't specify one.
+  string location = 4;
+  // The management group ID, when deploying at management-group scope.
+  string management_group_id = 5;
+}
