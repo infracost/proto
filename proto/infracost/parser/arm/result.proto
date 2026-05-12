@@ -35,10 +35,13 @@ message Resource {
   // The ARM resource type, e.g. "Microsoft.Storage/storageAccounts".
   string type = 2;
   parser.Address address = 3;
-  // The whole resource object as a value tree. Mirrors how
-  // CloudFormation's Resource.properties carries the bag — translators
-  // drill into it via the value tree's Map navigation.
-  map<string, Value> data = 4;
+  // The whole resource object as a value tree. ARM resources have
+  // useful fields at multiple levels (sku and kind alongside
+  // properties), so unlike CloudFormation we carry the entire object
+  // here rather than only the properties block. Top-level named
+  // fields below (type, name, location, api_version, scope, tags) are
+  // convenience views into commonly-accessed parts of this same data.
+  Value data = 4;
   map<string, Value> metadata = 5;
   parser.SourceRange source_range = 6;
   uint64 flags = 7;

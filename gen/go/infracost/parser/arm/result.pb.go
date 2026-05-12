@@ -169,10 +169,13 @@ type Resource struct {
 	// The ARM resource type, e.g. "Microsoft.Storage/storageAccounts".
 	Type    string          `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	Address *parser.Address `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	// The whole resource object as a value tree. Mirrors how
-	// CloudFormation's Resource.properties carries the bag — translators
-	// drill into it via the value tree's Map navigation.
-	Data        map[string]*Value   `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// The whole resource object as a value tree. ARM resources have
+	// useful fields at multiple levels (sku and kind alongside
+	// properties), so unlike CloudFormation we carry the entire object
+	// here rather than only the properties block. Top-level named
+	// fields below (type, name, location, api_version, scope, tags) are
+	// convenience views into commonly-accessed parts of this same data.
+	Data        *Value              `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	Metadata    map[string]*Value   `protobuf:"bytes,5,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	SourceRange *parser.SourceRange `protobuf:"bytes,6,opt,name=source_range,json=sourceRange,proto3" json:"source_range,omitempty"`
 	Flags       uint64              `protobuf:"varint,7,opt,name=flags,proto3" json:"flags,omitempty"`
@@ -255,7 +258,7 @@ func (x *Resource) GetAddress() *parser.Address {
 	return nil
 }
 
-func (x *Resource) GetData() map[string]*Value {
+func (x *Resource) GetData() *Value {
 	if x != nil {
 		return x.Data
 	}
@@ -534,12 +537,12 @@ const file_infracost_parser_arm_result_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\x1e.infracost.parser.arm.ResourceR\x05value:\x028\x01\x1aW\n" +
 	"\fOutputsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.arm.ValueR\x05value:\x028\x01\"\xac\a\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.arm.ValueR\x05value:\x028\x01\"\xc9\x06\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x123\n" +
-	"\aaddress\x18\x03 \x01(\v2\x19.infracost.parser.AddressR\aaddress\x12<\n" +
-	"\x04data\x18\x04 \x03(\v2(.infracost.parser.arm.Resource.DataEntryR\x04data\x12H\n" +
+	"\aaddress\x18\x03 \x01(\v2\x19.infracost.parser.AddressR\aaddress\x12/\n" +
+	"\x04data\x18\x04 \x01(\v2\x1b.infracost.parser.arm.ValueR\x04data\x12H\n" +
 	"\bmetadata\x18\x05 \x03(\v2,.infracost.parser.arm.Resource.MetadataEntryR\bmetadata\x12@\n" +
 	"\fsource_range\x18\x06 \x01(\v2\x1d.infracost.parser.SourceRangeR\vsourceRange\x12\x14\n" +
 	"\x05flags\x18\a \x01(\x04R\x05flags\x12\x1c\n" +
@@ -556,10 +559,7 @@ const file_infracost_parser_arm_result_proto_rawDesc = "" +
 	"\vapi_version\x18\x10 \x01(\tR\n" +
 	"apiVersion\x121\n" +
 	"\x05scope\x18\x11 \x01(\x0e2\x1b.infracost.parser.arm.ScopeR\x05scope\x12\x12\n" +
-	"\x04name\x18\x12 \x01(\tR\x04name\x1aT\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.arm.ValueR\x05value:\x028\x01\x1aX\n" +
+	"\x04name\x18\x12 \x01(\tR\x04name\x1aX\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
 	"\x05value\x18\x02 \x01(\v2\x1b.infracost.parser.arm.ValueR\x05value:\x028\x01\"N\n" +
@@ -596,7 +596,7 @@ func file_infracost_parser_arm_result_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_arm_result_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_arm_result_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_infracost_parser_arm_result_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_infracost_parser_arm_result_proto_goTypes = []any{
 	(Scope)(0),                 // 0: infracost.parser.arm.Scope
 	(*Result)(nil),             // 1: infracost.parser.arm.Result
@@ -608,12 +608,11 @@ var file_infracost_parser_arm_result_proto_goTypes = []any{
 	nil,                        // 7: infracost.parser.arm.Result.ConditionsEntry
 	nil,                        // 8: infracost.parser.arm.Result.ResourcesEntry
 	nil,                        // 9: infracost.parser.arm.Result.OutputsEntry
-	nil,                        // 10: infracost.parser.arm.Resource.DataEntry
-	nil,                        // 11: infracost.parser.arm.Resource.MetadataEntry
-	(*parser.Address)(nil),     // 12: infracost.parser.Address
+	nil,                        // 10: infracost.parser.arm.Resource.MetadataEntry
+	(*parser.Address)(nil),     // 11: infracost.parser.Address
+	(*Value)(nil),              // 12: infracost.parser.arm.Value
 	(*parser.SourceRange)(nil), // 13: infracost.parser.SourceRange
 	(*parser.CallStack)(nil),   // 14: infracost.parser.CallStack
-	(*Value)(nil),              // 15: infracost.parser.arm.Value
 }
 var file_infracost_parser_arm_result_proto_depIdxs = []int32{
 	5,  // 0: infracost.parser.arm.Result.parameters:type_name -> infracost.parser.arm.Result.ParametersEntry
@@ -621,9 +620,9 @@ var file_infracost_parser_arm_result_proto_depIdxs = []int32{
 	7,  // 2: infracost.parser.arm.Result.conditions:type_name -> infracost.parser.arm.Result.ConditionsEntry
 	8,  // 3: infracost.parser.arm.Result.resources:type_name -> infracost.parser.arm.Result.ResourcesEntry
 	9,  // 4: infracost.parser.arm.Result.outputs:type_name -> infracost.parser.arm.Result.OutputsEntry
-	12, // 5: infracost.parser.arm.Resource.address:type_name -> infracost.parser.Address
-	10, // 6: infracost.parser.arm.Resource.data:type_name -> infracost.parser.arm.Resource.DataEntry
-	11, // 7: infracost.parser.arm.Resource.metadata:type_name -> infracost.parser.arm.Resource.MetadataEntry
+	11, // 5: infracost.parser.arm.Resource.address:type_name -> infracost.parser.Address
+	12, // 6: infracost.parser.arm.Resource.data:type_name -> infracost.parser.arm.Value
+	10, // 7: infracost.parser.arm.Resource.metadata:type_name -> infracost.parser.arm.Resource.MetadataEntry
 	13, // 8: infracost.parser.arm.Resource.source_range:type_name -> infracost.parser.SourceRange
 	14, // 9: infracost.parser.arm.Resource.call_stack:type_name -> infracost.parser.CallStack
 	3,  // 10: infracost.parser.arm.Resource.tag_data:type_name -> infracost.parser.arm.TagData
@@ -631,17 +630,16 @@ var file_infracost_parser_arm_result_proto_depIdxs = []int32{
 	4,  // 12: infracost.parser.arm.TagData.tags:type_name -> infracost.parser.arm.Tag
 	13, // 13: infracost.parser.arm.Tag.key_source_range:type_name -> infracost.parser.SourceRange
 	13, // 14: infracost.parser.arm.Tag.value_source_range:type_name -> infracost.parser.SourceRange
-	15, // 15: infracost.parser.arm.Result.ParametersEntry.value:type_name -> infracost.parser.arm.Value
-	15, // 16: infracost.parser.arm.Result.VariablesEntry.value:type_name -> infracost.parser.arm.Value
+	12, // 15: infracost.parser.arm.Result.ParametersEntry.value:type_name -> infracost.parser.arm.Value
+	12, // 16: infracost.parser.arm.Result.VariablesEntry.value:type_name -> infracost.parser.arm.Value
 	2,  // 17: infracost.parser.arm.Result.ResourcesEntry.value:type_name -> infracost.parser.arm.Resource
-	15, // 18: infracost.parser.arm.Result.OutputsEntry.value:type_name -> infracost.parser.arm.Value
-	15, // 19: infracost.parser.arm.Resource.DataEntry.value:type_name -> infracost.parser.arm.Value
-	15, // 20: infracost.parser.arm.Resource.MetadataEntry.value:type_name -> infracost.parser.arm.Value
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	12, // 18: infracost.parser.arm.Result.OutputsEntry.value:type_name -> infracost.parser.arm.Value
+	12, // 19: infracost.parser.arm.Resource.MetadataEntry.value:type_name -> infracost.parser.arm.Value
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_arm_result_proto_init() }
@@ -656,7 +654,7 @@ func file_infracost_parser_arm_result_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_arm_result_proto_rawDesc), len(file_infracost_parser_arm_result_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

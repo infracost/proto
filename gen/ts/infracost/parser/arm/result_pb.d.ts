@@ -83,13 +83,16 @@ export declare type Resource = Message<"infracost.parser.arm.Resource"> & {
   address?: Address;
 
   /**
-   * The whole resource object as a value tree. Mirrors how
-   * CloudFormation's Resource.properties carries the bag — translators
-   * drill into it via the value tree's Map navigation.
+   * The whole resource object as a value tree. ARM resources have
+   * useful fields at multiple levels (sku and kind alongside
+   * properties), so unlike CloudFormation we carry the entire object
+   * here rather than only the properties block. Top-level named
+   * fields below (type, name, location, api_version, scope, tags) are
+   * convenience views into commonly-accessed parts of this same data.
    *
-   * @generated from field: map<string, infracost.parser.arm.Value> data = 4;
+   * @generated from field: infracost.parser.arm.Value data = 4;
    */
-  data: { [key: string]: Value };
+  data?: Value;
 
   /**
    * @generated from field: map<string, infracost.parser.arm.Value> metadata = 5;
