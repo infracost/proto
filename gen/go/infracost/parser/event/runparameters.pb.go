@@ -235,6 +235,7 @@ type RunParameters struct {
 	FinopsPolicies    []*FinopsPolicySettings `protobuf:"bytes,5,rep,name=finops_policies,json=finopsPolicies,proto3" json:"finops_policies,omitempty"`
 	Guardrails        []*Guardrail            `protobuf:"bytes,6,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	Budgets           []*Budget               `protobuf:"bytes,7,rep,name=budgets,proto3" json:"budgets,omitempty"`
+	ConfigTemplate    *string                 `protobuf:"bytes,8,opt,name=config_template,json=configTemplate,proto3,oneof" json:"config_template,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -316,6 +317,13 @@ func (x *RunParameters) GetBudgets() []*Budget {
 		return x.Budgets
 	}
 	return nil
+}
+
+func (x *RunParameters) GetConfigTemplate() string {
+	if x != nil && x.ConfigTemplate != nil {
+		return *x.ConfigTemplate
+	}
+	return ""
 }
 
 type BaseScope struct {
@@ -1415,7 +1423,7 @@ var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\x89\x04\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xcb\x04\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
@@ -1425,7 +1433,9 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
 	"guardrails\x18\x06 \x03(\v2!.infracost.parser.event.GuardrailR\n" +
 	"guardrails\x128\n" +
-	"\abudgets\x18\a \x03(\v2\x1e.infracost.parser.event.BudgetR\abudgets\"d\n" +
+	"\abudgets\x18\a \x03(\v2\x1e.infracost.parser.event.BudgetR\abudgets\x12,\n" +
+	"\x0fconfig_template\x18\b \x01(\tH\x00R\x0econfigTemplate\x88\x01\x01B\x12\n" +
+	"\x10_config_template\"d\n" +
 	"\tBaseScope\x12\x1b\n" +
 	"\trepo_name\x18\x01 \x01(\tR\brepoName\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x1f\n" +
@@ -1649,6 +1659,7 @@ func file_infracost_parser_event_runparameters_proto_init() {
 	if File_infracost_parser_event_runparameters_proto != nil {
 		return
 	}
+	file_infracost_parser_event_runparameters_proto_msgTypes[0].OneofWrappers = []any{}
 	file_infracost_parser_event_runparameters_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

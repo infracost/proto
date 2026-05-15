@@ -13,6 +13,7 @@ message RunParameters {
   repeated FinopsPolicySettings finops_policies = 5;
   repeated Guardrail guardrails = 6;
   repeated Budget budgets = 7;
+  optional string config_template = 8;
 }
 
 message BaseScope {
