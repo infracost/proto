@@ -50,6 +50,11 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.Budget budgets = 7;
    */
   budgets: Budget[];
+
+  /**
+   * @generated from field: optional string config_template = 8;
+   */
+  configTemplate?: string;
 };
 
 /**
