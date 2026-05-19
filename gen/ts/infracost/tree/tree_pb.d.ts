@@ -189,6 +189,11 @@ export declare type Resource = Message<"infracost.tree.Resource"> & {
    * @generated from field: bool dependency_only = 18;
    */
   dependencyOnly: boolean;
+
+  /**
+   * @generated from field: bool is_production = 19;
+   */
+  isProduction: boolean;
 };
 
 /**

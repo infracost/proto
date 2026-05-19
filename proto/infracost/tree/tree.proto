@@ -45,6 +45,7 @@ message Resource {
   optional ValueObject attributes = 16;
   repeated TagPropagationProblem tag_propagation_problems = 17;
   bool dependency_only = 18; // set if the resource only exists as a dependency - should not have policy failures or costs marked directly
+  bool is_production = 19;
 }
 
 message TagPropagationProblem {
