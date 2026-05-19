@@ -236,6 +236,7 @@ type Resource struct {
 	Attributes             *ValueObject             `protobuf:"bytes,16,opt,name=attributes,proto3,oneof" json:"attributes,omitempty"`
 	TagPropagationProblems []*TagPropagationProblem `protobuf:"bytes,17,rep,name=tag_propagation_problems,json=tagPropagationProblems,proto3" json:"tag_propagation_problems,omitempty"`
 	DependencyOnly         bool                     `protobuf:"varint,18,opt,name=dependency_only,json=dependencyOnly,proto3" json:"dependency_only,omitempty"` // set if the resource only exists as a dependency - should not have policy failures or costs marked directly
+	IsProduction           bool                     `protobuf:"varint,19,opt,name=is_production,json=isProduction,proto3" json:"is_production,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -392,6 +393,13 @@ func (x *Resource) GetTagPropagationProblems() []*TagPropagationProblem {
 func (x *Resource) GetDependencyOnly() bool {
 	if x != nil {
 		return x.DependencyOnly
+	}
+	return false
+}
+
+func (x *Resource) GetIsProduction() bool {
+	if x != nil {
+		return x.IsProduction
 	}
 	return false
 }
@@ -927,7 +935,7 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\x06source\x18\x01 \x01(\v2\x1d.infracost.parser.SourceRangeR\x06source\x12/\n" +
 	"\x13version_constraints\x18\x02 \x01(\tR\x12versionConstraints\"A\n" +
 	"\aService\x126\n" +
-	"\tresources\x18\x01 \x03(\v2\x18.infracost.tree.ResourceR\tresources\"\xf7\x05\n" +
+	"\tresources\x18\x01 \x03(\v2\x18.infracost.tree.ResourceR\tresources\"\x9c\x06\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12?\n" +
@@ -951,7 +959,8 @@ const file_infracost_tree_tree_proto_rawDesc = "" +
 	"attributes\x18\x10 \x01(\v2\x1b.infracost.tree.ValueObjectH\x01R\n" +
 	"attributes\x88\x01\x01\x12_\n" +
 	"\x18tag_propagation_problems\x18\x11 \x03(\v2%.infracost.tree.TagPropagationProblemR\x16tagPropagationProblems\x12'\n" +
-	"\x0fdependency_only\x18\x12 \x01(\bR\x0edependencyOnlyB\r\n" +
+	"\x0fdependency_only\x18\x12 \x01(\bR\x0edependencyOnly\x12#\n" +
+	"\ris_production\x18\x13 \x01(\bR\fisProductionB\r\n" +
 	"\v_definitionB\r\n" +
 	"\v_attributes\"\xc5\x01\n" +
 	"\x15TagPropagationProblem\x12!\n" +
