@@ -485,6 +485,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_client_side_budgets = 7;
    */
   enableClientSideBudgets: boolean;
+
+  /**
+   * @generated from field: bool enable_iac_agnostic_scanning = 8;
+   */
+  enableIacAgnosticScanning: boolean;
 };
 
 /**
