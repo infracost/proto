@@ -28,6 +28,8 @@ message IndexedProject {
   optional infracost.tree.Tree tree = 2;
   // name of the project being indexed
   string name = 3;
+  // iac type of the project, as per the infracost config file
+  string iac_type = 4;
 }
 
 // Attributes is a set of indexing-attributes for a given repo or project

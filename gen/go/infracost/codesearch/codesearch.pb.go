@@ -121,7 +121,9 @@ type IndexedProject struct {
 	// parsed iac-agnostic tree representation of the parsed IaC
 	Tree *tree.Tree `protobuf:"bytes,2,opt,name=tree,proto3,oneof" json:"tree,omitempty"`
 	// name of the project being indexed
-	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// iac type of the project, as per the infracost config file
+	IacType       string `protobuf:"bytes,4,opt,name=iac_type,json=iacType,proto3" json:"iac_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -173,6 +175,13 @@ func (x *IndexedProject) GetTree() *tree.Tree {
 func (x *IndexedProject) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *IndexedProject) GetIacType() string {
+	if x != nil {
+		return x.IacType
 	}
 	return ""
 }
@@ -336,13 +345,14 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"attributes\x18\x04 \x01(\v2 .infracost.codesearch.AttributesR\n" +
 	"attributes\x12O\n" +
 	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\x12\x17\n" +
-	"\arepo_id\x18\x06 \x01(\tR\x06repoId\"\x9e\x01\n" +
+	"\arepo_id\x18\x06 \x01(\tR\x06repoId\"\xb9\x01\n" +
 	"\x0eIndexedProject\x12@\n" +
 	"\n" +
 	"attributes\x18\x01 \x01(\v2 .infracost.codesearch.AttributesR\n" +
 	"attributes\x12-\n" +
 	"\x04tree\x18\x02 \x01(\v2\x14.infracost.tree.TreeH\x00R\x04tree\x88\x01\x01\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04nameB\a\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x19\n" +
+	"\biac_type\x18\x04 \x01(\tR\aiacTypeB\a\n" +
 	"\x05_tree\"\xdd\x02\n" +
 	"\n" +
 	"Attributes\x12Y\n" +
