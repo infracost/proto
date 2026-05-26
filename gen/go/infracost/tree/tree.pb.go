@@ -28,6 +28,8 @@ type Tree struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Providers            map[string]*Provider   `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	UnsupportedResources []*Resource            `protobuf:"bytes,2,rep,name=unsupported_resources,json=unsupportedResources,proto3" json:"unsupported_resources,omitempty"`
+	DependencyPaths      []string               `protobuf:"bytes,3,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
+	RemoteModuleCalls    []string               `protobuf:"bytes,4,rep,name=remote_module_calls,json=remoteModuleCalls,proto3" json:"remote_module_calls,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -72,6 +74,20 @@ func (x *Tree) GetProviders() map[string]*Provider {
 func (x *Tree) GetUnsupportedResources() []*Resource {
 	if x != nil {
 		return x.UnsupportedResources
+	}
+	return nil
+}
+
+func (x *Tree) GetDependencyPaths() []string {
+	if x != nil {
+		return x.DependencyPaths
+	}
+	return nil
+}
+
+func (x *Tree) GetRemoteModuleCalls() []string {
+	if x != nil {
+		return x.RemoteModuleCalls
 	}
 	return nil
 }
@@ -919,10 +935,12 @@ var File_infracost_tree_tree_proto protoreflect.FileDescriptor
 
 const file_infracost_tree_tree_proto_rawDesc = "" +
 	"\n" +
-	"\x19infracost/tree/tree.proto\x12\x0einfracost.tree\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xf0\x01\n" +
+	"\x19infracost/tree/tree.proto\x12\x0einfracost.tree\x1a\x1einfracost/parser/address.proto\x1a\x1finfracost/parser/metadata.proto\x1a\x1cinfracost/parser/stack.proto\"\xcb\x02\n" +
 	"\x04Tree\x12A\n" +
 	"\tproviders\x18\x01 \x03(\v2#.infracost.tree.Tree.ProvidersEntryR\tproviders\x12M\n" +
-	"\x15unsupported_resources\x18\x02 \x03(\v2\x18.infracost.tree.ResourceR\x14unsupportedResources\x1aV\n" +
+	"\x15unsupported_resources\x18\x02 \x03(\v2\x18.infracost.tree.ResourceR\x14unsupportedResources\x12)\n" +
+	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\x12.\n" +
+	"\x13remote_module_calls\x18\x04 \x03(\tR\x11remoteModuleCalls\x1aV\n" +
 	"\x0eProvidersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12.\n" +
 	"\x05value\x18\x02 \x01(\v2\x18.infracost.tree.ProviderR\x05value:\x028\x01\"\xa4\x01\n" +

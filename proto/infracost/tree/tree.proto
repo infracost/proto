@@ -11,6 +11,8 @@ import "infracost/parser/stack.proto";
 message Tree {
   map<string, Provider> providers = 1;
   repeated Resource unsupported_resources = 2;
+  repeated string dependency_paths = 3;
+  repeated string remote_module_calls = 4;
 }
 
 message Provider {
