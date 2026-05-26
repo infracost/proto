@@ -92,6 +92,13 @@ export declare type IndexedProject = Message<"infracost.codesearch.IndexedProjec
    * @generated from field: string name = 3;
    */
   name: string;
+
+  /**
+   * iac type of the project, as per the infracost config file
+   *
+   * @generated from field: string iac_type = 4;
+   */
+  iacType: string;
 };
 
 /**
