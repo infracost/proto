@@ -29,6 +29,16 @@ export declare type Tree = Message<"infracost.tree.Tree"> & {
    * @generated from field: repeated infracost.tree.Resource unsupported_resources = 2;
    */
   unsupportedResources: Resource[];
+
+  /**
+   * @generated from field: repeated string dependency_paths = 3;
+   */
+  dependencyPaths: string[];
+
+  /**
+   * @generated from field: repeated string remote_module_calls = 4;
+   */
+  remoteModuleCalls: string[];
 };
 
 /**
