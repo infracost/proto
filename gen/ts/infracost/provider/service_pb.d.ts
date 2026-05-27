@@ -7,6 +7,7 @@ import type { Message } from "@bufbuild/protobuf";
 import type { Input } from "./input_pb.js";
 import type { Output } from "./output_pb.js";
 import type { TreeInput } from "./tree_pb.js";
+import type { SupportedResources } from "../parser/api/service_pb.js";
 
 /**
  * Describes the file infracost/provider/service.proto.
@@ -142,6 +143,53 @@ export declare type FinopsPolicy = Message<"infracost.provider.FinopsPolicy"> & 
 export declare const FinopsPolicySchema: GenMessage<FinopsPolicy>;
 
 /**
+ * @generated from message infracost.provider.ListSupportedResourcesRequest
+ */
+export declare type ListSupportedResourcesRequest = Message<"infracost.provider.ListSupportedResourcesRequest"> & {
+};
+
+/**
+ * Describes the message infracost.provider.ListSupportedResourcesRequest.
+ * Use `create(ListSupportedResourcesRequestSchema)` to create a new message.
+ */
+export declare const ListSupportedResourcesRequestSchema: GenMessage<ListSupportedResourcesRequest>;
+
+/**
+ * @generated from message infracost.provider.ListSupportedResourcesResponse
+ */
+export declare type ListSupportedResourcesResponse = Message<"infracost.provider.ListSupportedResourcesResponse"> & {
+  /**
+   * Terraform resource types this plugin handles (e.g. aws_instance,
+   * azurerm_storage_account, google_compute_instance).
+   *
+   * @generated from field: infracost.parser.api.SupportedResources terraform = 1;
+   */
+  terraform?: SupportedResources;
+
+  /**
+   * CloudFormation resource types this plugin handles (e.g.
+   * AWS::EC2::Instance). Currently AWS-only.
+   *
+   * @generated from field: infracost.parser.api.SupportedResources cloudformation = 2;
+   */
+  cloudformation?: SupportedResources;
+
+  /**
+   * ARM resource types this plugin handles (e.g.
+   * Microsoft.Network/natGateways). Currently Azure-only.
+   *
+   * @generated from field: infracost.parser.api.SupportedResources arm = 3;
+   */
+  arm?: SupportedResources;
+};
+
+/**
+ * Describes the message infracost.provider.ListSupportedResourcesResponse.
+ * Use `create(ListSupportedResourcesResponseSchema)` to create a new message.
+ */
+export declare const ListSupportedResourcesResponseSchema: GenMessage<ListSupportedResourcesResponse>;
+
+/**
  * @generated from service infracost.provider.ProviderService
  */
 export declare const ProviderService: GenService<{
@@ -168,6 +216,26 @@ export declare const ProviderService: GenService<{
     methodKind: "unary";
     input: typeof ListFinopsPoliciesRequestSchema;
     output: typeof ListFinopsPoliciesResponseSchema;
+  },
+  /**
+   * ListSupportedResources reports which IaC resource types this
+   * provider plugin can produce cost components for. The CLI calls
+   * this during scan setup and passes the response into the parser's
+   * InitializeRequest, so unhandled resource types surface as
+   * "Unsupported" in scan output rather than being silently dropped
+   * (which is what would otherwise happen on the parser's
+   * supported-by-default fall-through). All three SupportedResources
+   * fields are populated identically across the AWS / Azurerm / Google
+   * builds — the underlying tree.IsSupportedX lookups walk the whole
+   * tree, the TargetProvider build flag only affects which policies
+   * load.
+   *
+   * @generated from rpc infracost.provider.ProviderService.ListSupportedResources
+   */
+  listSupportedResources: {
+    methodKind: "unary";
+    input: typeof ListSupportedResourcesRequestSchema;
+    output: typeof ListSupportedResourcesResponseSchema;
   },
 }>;
 

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package infracost.parser.api;
 
+import "infracost/parser/arm/result.proto";
+import "infracost/parser/arm/target.proto";
 import "infracost/parser/cloudformation/result.proto";
 import "infracost/parser/cloudformation/target.proto";
 import "infracost/parser/diagnostic.proto";
@@ -62,6 +64,10 @@ message ParseRequestTarget {
     terragrunt.Target terragrunt = 11;
     // The target type for CloudFormation files
     cloudformation.Target cloudformation = 12;
+    // The target type for ARM JSON files. Bicep is supported by
+    // transpiling to ARM JSON first (caller-side); the parser itself
+    // only accepts JSON.
+    arm.Target arm = 13;
   }
 }
 
@@ -118,6 +124,8 @@ message ParseResponseResult {
     terraform.ModuleResult terraform = 1;
     // The result type for CloudFormation files
     cloudformation.Result cloudformation = 2;
+    // The result type for ARM files
+    arm.Result arm = 3;
   }
 }
 
@@ -130,6 +138,8 @@ message InitializeRequest {
   // Whether to disable the GraphCache. This supports the LSP which needs
   // fast responses from the parser without getting cached values on save
   bool disable_graph_cache = 3;
+  // The supported resources for ARM from providers
+  SupportedResources arm_supported_resources = 4;
 }
 
 // InitializeResponse is the response for the Initialize RPC.

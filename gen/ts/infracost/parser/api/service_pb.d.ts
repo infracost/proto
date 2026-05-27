@@ -7,10 +7,12 @@ import type { Message } from "@bufbuild/protobuf";
 import type { Target } from "../terraform/target_pb.js";
 import type { Target as Target$1 } from "../terragrunt/target_pb.js";
 import type { Target as Target$2 } from "../cloudformation/target_pb.js";
+import type { Target as Target$3 } from "../arm/target_pb.js";
 import type { Diagnostic } from "../diagnostic_pb.js";
 import type { Tree } from "../../tree/tree_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import type { Result } from "../cloudformation/result_pb.js";
+import type { Result as Result$1 } from "../arm/result_pb.js";
 
 /**
  * Describes the file infracost/parser/api/service.proto.
@@ -150,6 +152,16 @@ export declare type ParseRequestTarget = Message<"infracost.parser.api.ParseRequ
      */
     value: Target$2;
     case: "cloudformation";
+  } | {
+    /**
+     * The target type for ARM JSON files. Bicep is supported by
+     * transpiling to ARM JSON first (caller-side); the parser itself
+     * only accepts JSON.
+     *
+     * @generated from field: infracost.parser.arm.Target arm = 13;
+     */
+    value: Target$3;
+    case: "arm";
   } | { case: undefined; value?: undefined };
 };
 
@@ -337,6 +349,14 @@ export declare type ParseResponseResult = Message<"infracost.parser.api.ParseRes
      */
     value: Result;
     case: "cloudformation";
+  } | {
+    /**
+     * The result type for ARM files
+     *
+     * @generated from field: infracost.parser.arm.Result arm = 3;
+     */
+    value: Result$1;
+    case: "arm";
   } | { case: undefined; value?: undefined };
 };
 
@@ -373,6 +393,13 @@ export declare type InitializeRequest = Message<"infracost.parser.api.Initialize
    * @generated from field: bool disable_graph_cache = 3;
    */
   disableGraphCache: boolean;
+
+  /**
+   * The supported resources for ARM from providers
+   *
+   * @generated from field: infracost.parser.api.SupportedResources arm_supported_resources = 4;
+   */
+  armSupportedResources?: SupportedResources;
 };
 
 /**

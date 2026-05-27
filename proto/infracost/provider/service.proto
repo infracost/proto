@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package infracost.provider;
 
+import "infracost/parser/api/service.proto";
 import "infracost/provider/input.proto";
 import "infracost/provider/output.proto";
 import "infracost/provider/tree.proto";
@@ -10,6 +11,18 @@ service ProviderService {
   rpc Process(ProcessRequest) returns (ProcessResponse);
   rpc ProcessTree(ProcessTreeRequest) returns (ProcessTreeResponse);
   rpc ListFinopsPolicies(ListFinopsPoliciesRequest) returns (ListFinopsPoliciesResponse);
+  // ListSupportedResources reports which IaC resource types this
+  // provider plugin can produce cost components for. The CLI calls
+  // this during scan setup and passes the response into the parser's
+  // InitializeRequest, so unhandled resource types surface as
+  // "Unsupported" in scan output rather than being silently dropped
+  // (which is what would otherwise happen on the parser's
+  // supported-by-default fall-through). All three SupportedResources
+  // fields are populated identically across the AWS / Azurerm / Google
+  // builds — the underlying tree.IsSupportedX lookups walk the whole
+  // tree, the TargetProvider build flag only affects which policies
+  // load.
+  rpc ListSupportedResources(ListSupportedResourcesRequest) returns (ListSupportedResourcesResponse);
 }
 
 message ProcessRequest {
@@ -40,4 +53,18 @@ message FinopsPolicy {
   string group = 3;
   string description = 4;
   bool only_new_resources = 5;
+}
+
+message ListSupportedResourcesRequest {}
+
+message ListSupportedResourcesResponse {
+  // Terraform resource types this plugin handles (e.g. aws_instance,
+  // azurerm_storage_account, google_compute_instance).
+  infracost.parser.api.SupportedResources terraform = 1;
+  // CloudFormation resource types this plugin handles (e.g.
+  // AWS::EC2::Instance). Currently AWS-only.
+  infracost.parser.api.SupportedResources cloudformation = 2;
+  // ARM resource types this plugin handles (e.g.
+  // Microsoft.Network/natGateways). Currently Azure-only.
+  infracost.parser.api.SupportedResources arm = 3;
 }
