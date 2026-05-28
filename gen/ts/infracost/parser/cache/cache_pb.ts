@@ -12,6 +12,8 @@ import type { Diagnostic } from "../diagnostic_pb.js";
 import { file_infracost_parser_diagnostic } from "../diagnostic_pb.js";
 import type { ModuleResult } from "../terraform/module_pb.js";
 import { file_infracost_parser_terraform_module } from "../terraform/module_pb.js";
+import type { Tree } from "../../tree/tree_pb.js";
+import { file_infracost_tree_tree } from "../../tree/tree_pb.js";
 import type { Usage } from "../../usage/usage_pb.js";
 import { file_infracost_usage_usage } from "../../usage/usage_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -20,7 +22,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/cache/cache.proto.
  */
 export const file_infracost_parser_cache_cache: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2NhY2hlL2NhY2hlLnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmNhY2hlIpcDChBUZXJyYWZvcm1Qcm9qZWN0EjgKBnJlc3VsdBgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSFQoNaXNfdGVycmFncnVudBgGIAEoCBIfChd0ZXJyYWZvcm1fbW9kdWxlX3N1ZmZpeBgHIAEoCRIlCgV1c2FnZRgJIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYCiABKAkSEgoKY29uZmlnX3NoYRgLIAEoCRIMCgRwYXRoGAwgASgJEhEKCXdvcmtzcGFjZRgNIAEoCUoECAQQBUoECAUQBkoECAgQCVIKdXNhZ2VfZmlsZVIOcHJvamVjdF9jb25maWdSEGRlcGVuZGVuY3lfcGF0aHMipwEKCE1ldGFkYXRhEgsKA2tleRgBIAEoCRIuCgZmbGF2b3IYAiABKA4yHi5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkZsYXZvchIWCg5ydW5uZXJfdmVyc2lvbhgDIAEoCRIWCg5wYXJzZXJfdmVyc2lvbhgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIgCg9EZXBlbmRlbmN5UGF0aHMSDQoFcGF0aHMYASADKAkivAUKDUJyYW5jaFN1bW1hcnkSDgoGYnJhbmNoGAEgASgJEkwKDXNoYV90b19pZF9tYXAYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkJyYW5jaFN1bW1hcnkuU2hhVG9JZE1hcEVudHJ5El8KF3NoYV90b19wcm9qZWN0X25hbWVfbWFwGAMgAygLMj4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5CcmFuY2hTdW1tYXJ5LlNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRJUChFzaGFfdG9fZmxhdm9yX21hcBgEIAMoCzI5LmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0ZsYXZvck1hcEVudHJ5EmcKG3NoYV90b19kZXBlbmRlbmN5X3BhdGhzX21hcBgFIAMoCzJCLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0RlcGVuZGVuY3lQYXRoc01hcEVudHJ5GjEKD1NoYVRvSWRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGjoKGFNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGlUKE1NoYVRvRmxhdm9yTWFwRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3I6AjgBGmcKHFNoYVRvRGVwZW5kZW5jeVBhdGhzTWFwRW50cnkSCwoDa2V5GAEgASgJEjYKBXZhbHVlGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5EZXBlbmRlbmN5UGF0aHM6AjgBIk8KEkVuY3J5cHRpb25FbnZlbG9wZRIVCg1lbmNyeXB0ZWRfZGVrGAEgASgMEgoKAml2GAIgASgMEhYKDmVuY3J5cHRlZF9kYXRhGAMgASgJIt4CChVDbG91ZEZvcm1hdGlvblByb2plY3QSNwoGcmVzdWx0GAEgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHQSMgoIbWV0YWRhdGEYAiABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLk1ldGFkYXRhEisKBWRpYWdzGAMgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEiUKBXVzYWdlGAggASgLMhYuaW5mcmFjb3N0LnVzYWdlLlVzYWdlEhQKDHByb2plY3RfdHlwZRgJIAEoCRISCgpjb25maWdfc2hhGAogASgJEgwKBHBhdGgYCyABKAlKBAgEEAVKBAgFEAZKBAgGEAdKBAgHEAhSCnVzYWdlX2ZpbGVSDnByb2plY3RfY29uZmlnUgZpc19jZGtSEGRlcGVuZGVuY3lfcGF0aHMqUQoGRmxhdm9yEhYKEkZMQVZPUl9VTlNQRUNJRklFRBAAEhQKEEZMQVZPUl9URVJSQUZPUk0QARIZChVGTEFWT1JfQ0xPVURGT1JNQVRJT04QAkLcAQoaY29tLmluZnJhY29zdC5wYXJzZXIuY2FjaGVCCkNhY2hlUHJvdG9QAVo4Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvY2FjaGWiAgNJUEOqAhZJbmZyYWNvc3QuUGFyc2VyLkNhY2hlygIWSW5mcmFjb3N0XFBhcnNlclxDYWNoZeICIkluZnJhY29zdFxQYXJzZXJcQ2FjaGVcR1BCTWV0YWRhdGHqAhhJbmZyYWNvc3Q6OlBhcnNlcjo6Q2FjaGViBnByb3RvMw", [file_google_protobuf_timestamp, file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_usage_usage]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2NhY2hlL2NhY2hlLnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmNhY2hlIpcDChBUZXJyYWZvcm1Qcm9qZWN0EjgKBnJlc3VsdBgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSFQoNaXNfdGVycmFncnVudBgGIAEoCBIfChd0ZXJyYWZvcm1fbW9kdWxlX3N1ZmZpeBgHIAEoCRIlCgV1c2FnZRgJIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYCiABKAkSEgoKY29uZmlnX3NoYRgLIAEoCRIMCgRwYXRoGAwgASgJEhEKCXdvcmtzcGFjZRgNIAEoCUoECAQQBUoECAUQBkoECAgQCVIKdXNhZ2VfZmlsZVIOcHJvamVjdF9jb25maWdSEGRlcGVuZGVuY3lfcGF0aHMipwEKCE1ldGFkYXRhEgsKA2tleRgBIAEoCRIuCgZmbGF2b3IYAiABKA4yHi5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkZsYXZvchIWCg5ydW5uZXJfdmVyc2lvbhgDIAEoCRIWCg5wYXJzZXJfdmVyc2lvbhgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIgCg9EZXBlbmRlbmN5UGF0aHMSDQoFcGF0aHMYASADKAkivAUKDUJyYW5jaFN1bW1hcnkSDgoGYnJhbmNoGAEgASgJEkwKDXNoYV90b19pZF9tYXAYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkJyYW5jaFN1bW1hcnkuU2hhVG9JZE1hcEVudHJ5El8KF3NoYV90b19wcm9qZWN0X25hbWVfbWFwGAMgAygLMj4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5CcmFuY2hTdW1tYXJ5LlNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRJUChFzaGFfdG9fZmxhdm9yX21hcBgEIAMoCzI5LmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0ZsYXZvck1hcEVudHJ5EmcKG3NoYV90b19kZXBlbmRlbmN5X3BhdGhzX21hcBgFIAMoCzJCLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0RlcGVuZGVuY3lQYXRoc01hcEVudHJ5GjEKD1NoYVRvSWRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGjoKGFNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGlUKE1NoYVRvRmxhdm9yTWFwRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3I6AjgBGmcKHFNoYVRvRGVwZW5kZW5jeVBhdGhzTWFwRW50cnkSCwoDa2V5GAEgASgJEjYKBXZhbHVlGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5EZXBlbmRlbmN5UGF0aHM6AjgBIk8KEkVuY3J5cHRpb25FbnZlbG9wZRIVCg1lbmNyeXB0ZWRfZGVrGAEgASgMEgoKAml2GAIgASgMEhYKDmVuY3J5cHRlZF9kYXRhGAMgASgJIt4CChVDbG91ZEZvcm1hdGlvblByb2plY3QSNwoGcmVzdWx0GAEgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHQSMgoIbWV0YWRhdGEYAiABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLk1ldGFkYXRhEisKBWRpYWdzGAMgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEiUKBXVzYWdlGAggASgLMhYuaW5mcmFjb3N0LnVzYWdlLlVzYWdlEhQKDHByb2plY3RfdHlwZRgJIAEoCRISCgpjb25maWdfc2hhGAogASgJEgwKBHBhdGgYCyABKAlKBAgEEAVKBAgFEAZKBAgGEAdKBAgHEAhSCnVzYWdlX2ZpbGVSDnByb2plY3RfY29uZmlnUgZpc19jZGtSEGRlcGVuZGVuY3lfcGF0aHMihAIKC1RyZWVQcm9qZWN0EiIKBHRyZWUYASABKAsyFC5pbmZyYWNvc3QudHJlZS5UcmVlEjIKCG1ldGFkYXRhGAIgASgLMiAuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5NZXRhZGF0YRIrCgVkaWFncxgDIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIlCgV1c2FnZRgEIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYBSABKAkSEgoKY29uZmlnX3NoYRgGIAEoCRIMCgRwYXRoGAcgASgJEhEKCXdvcmtzcGFjZRgIIAEoCSpmCgZGbGF2b3ISFgoSRkxBVk9SX1VOU1BFQ0lGSUVEEAASFAoQRkxBVk9SX1RFUlJBRk9STRABEhkKFUZMQVZPUl9DTE9VREZPUk1BVElPThACEhMKD0ZMQVZPUl9BR05PU1RJQxADQtwBChpjb20uaW5mcmFjb3N0LnBhcnNlci5jYWNoZUIKQ2FjaGVQcm90b1ABWjhnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9jYWNoZaICA0lQQ6oCFkluZnJhY29zdC5QYXJzZXIuQ2FjaGXKAhZJbmZyYWNvc3RcUGFyc2VyXENhY2hl4gIiSW5mcmFjb3N0XFBhcnNlclxDYWNoZVxHUEJNZXRhZGF0YeoCGEluZnJhY29zdDo6UGFyc2VyOjpDYWNoZWIGcHJvdG8z", [file_google_protobuf_timestamp, file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_tree_tree, file_infracost_usage_usage]);
 
 /**
  * @generated from message infracost.parser.cache.TerraformProject
@@ -254,6 +256,58 @@ export const CloudFormationProjectSchema: GenMessage<CloudFormationProject> = /*
   messageDesc(file_infracost_parser_cache_cache, 5);
 
 /**
+ * @generated from message infracost.parser.cache.TreeProject
+ */
+export type TreeProject = Message<"infracost.parser.cache.TreeProject"> & {
+  /**
+   * @generated from field: infracost.tree.Tree tree = 1;
+   */
+  tree?: Tree;
+
+  /**
+   * @generated from field: infracost.parser.cache.Metadata metadata = 2;
+   */
+  metadata?: Metadata;
+
+  /**
+   * @generated from field: repeated infracost.parser.Diagnostic diags = 3;
+   */
+  diags: Diagnostic[];
+
+  /**
+   * @generated from field: infracost.usage.Usage usage = 4;
+   */
+  usage?: Usage;
+
+  /**
+   * @generated from field: string project_type = 5;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 6;
+   */
+  configSha: string;
+
+  /**
+   * @generated from field: string path = 7;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string workspace = 8;
+   */
+  workspace: string;
+};
+
+/**
+ * Describes the message infracost.parser.cache.TreeProject.
+ * Use `create(TreeProjectSchema)` to create a new message.
+ */
+export const TreeProjectSchema: GenMessage<TreeProject> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_cache_cache, 6);
+
+/**
  * @generated from enum infracost.parser.cache.Flavor
  */
 export enum Flavor {
@@ -271,6 +325,11 @@ export enum Flavor {
    * @generated from enum value: FLAVOR_CLOUDFORMATION = 2;
    */
   CLOUDFORMATION = 2,
+
+  /**
+   * @generated from enum value: FLAVOR_AGNOSTIC = 3;
+   */
+  AGNOSTIC = 3,
 }
 
 /**
