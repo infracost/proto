@@ -82,18 +82,11 @@ message CloudFormationProject {
 
 message TreeProject {
   tree.Tree tree = 1;
-  TreeMetadata metadata = 2;
+  Metadata metadata = 2;
   repeated parser.Diagnostic diags = 3;
   infracost.usage.Usage usage = 4;
   string project_type = 5;
   string config_sha = 6;
   string path = 7;
   string workspace = 8;
-}
-
-message TreeMetadata {
-  string key = 1;
-  string runner_version = 2;
-  string parser_version = 3;
-  google.protobuf.Timestamp created_at = 4;
 }

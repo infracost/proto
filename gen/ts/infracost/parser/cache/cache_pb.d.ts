@@ -251,9 +251,9 @@ export declare type TreeProject = Message<"infracost.parser.cache.TreeProject"> 
   tree?: Tree;
 
   /**
-   * @generated from field: infracost.parser.cache.TreeMetadata metadata = 2;
+   * @generated from field: infracost.parser.cache.Metadata metadata = 2;
    */
-  metadata?: TreeMetadata;
+  metadata?: Metadata;
 
   /**
    * @generated from field: repeated infracost.parser.Diagnostic diags = 3;
@@ -291,37 +291,6 @@ export declare type TreeProject = Message<"infracost.parser.cache.TreeProject"> 
  * Use `create(TreeProjectSchema)` to create a new message.
  */
 export declare const TreeProjectSchema: GenMessage<TreeProject>;
-
-/**
- * @generated from message infracost.parser.cache.TreeMetadata
- */
-export declare type TreeMetadata = Message<"infracost.parser.cache.TreeMetadata"> & {
-  /**
-   * @generated from field: string key = 1;
-   */
-  key: string;
-
-  /**
-   * @generated from field: string runner_version = 2;
-   */
-  runnerVersion: string;
-
-  /**
-   * @generated from field: string parser_version = 3;
-   */
-  parserVersion: string;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp created_at = 4;
-   */
-  createdAt?: Timestamp;
-};
-
-/**
- * Describes the message infracost.parser.cache.TreeMetadata.
- * Use `create(TreeMetadataSchema)` to create a new message.
- */
-export declare const TreeMetadataSchema: GenMessage<TreeMetadata>;
 
 /**
  * @generated from enum infracost.parser.cache.Flavor
