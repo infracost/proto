@@ -547,7 +547,7 @@ func (x *CloudFormationProject) GetPath() string {
 type TreeProject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Tree          *tree.Tree             `protobuf:"bytes,1,opt,name=tree,proto3" json:"tree,omitempty"`
-	Metadata      *Metadata              `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Metadata      *TreeMetadata          `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Diags         []*parser.Diagnostic   `protobuf:"bytes,3,rep,name=diags,proto3" json:"diags,omitempty"`
 	Usage         *usage.Usage           `protobuf:"bytes,4,opt,name=usage,proto3" json:"usage,omitempty"`
 	ProjectType   string                 `protobuf:"bytes,5,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
@@ -595,7 +595,7 @@ func (x *TreeProject) GetTree() *tree.Tree {
 	return nil
 }
 
-func (x *TreeProject) GetMetadata() *Metadata {
+func (x *TreeProject) GetMetadata() *TreeMetadata {
 	if x != nil {
 		return x.Metadata
 	}
@@ -773,10 +773,10 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"config_sha\x18\n" +
 	" \x01(\tR\tconfigSha\x12\x12\n" +
 	"\x04path\x18\v \x01(\tR\x04pathJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bR\n" +
-	"usage_fileR\x0eproject_configR\x06is_cdkR\x10dependency_paths\"\xcb\x02\n" +
+	"usage_fileR\x0eproject_configR\x06is_cdkR\x10dependency_paths\"\xcf\x02\n" +
 	"\vTreeProject\x12(\n" +
-	"\x04tree\x18\x01 \x01(\v2\x14.infracost.tree.TreeR\x04tree\x12<\n" +
-	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.cache.MetadataR\bmetadata\x122\n" +
+	"\x04tree\x18\x01 \x01(\v2\x14.infracost.tree.TreeR\x04tree\x12@\n" +
+	"\bmetadata\x18\x02 \x01(\v2$.infracost.parser.cache.TreeMetadataR\bmetadata\x122\n" +
 	"\x05diags\x18\x03 \x03(\v2\x1c.infracost.parser.DiagnosticR\x05diags\x12,\n" +
 	"\x05usage\x18\x04 \x01(\v2\x16.infracost.usage.UsageR\x05usage\x12!\n" +
 	"\fproject_type\x18\x05 \x01(\tR\vprojectType\x12\x1d\n" +
@@ -849,7 +849,7 @@ var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
 	14, // 12: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
 	15, // 13: infracost.parser.cache.CloudFormationProject.usage:type_name -> infracost.usage.Usage
 	18, // 14: infracost.parser.cache.TreeProject.tree:type_name -> infracost.tree.Tree
-	2,  // 15: infracost.parser.cache.TreeProject.metadata:type_name -> infracost.parser.cache.Metadata
+	8,  // 15: infracost.parser.cache.TreeProject.metadata:type_name -> infracost.parser.cache.TreeMetadata
 	14, // 16: infracost.parser.cache.TreeProject.diags:type_name -> infracost.parser.Diagnostic
 	15, // 17: infracost.parser.cache.TreeProject.usage:type_name -> infracost.usage.Usage
 	16, // 18: infracost.parser.cache.TreeMetadata.created_at:type_name -> google.protobuf.Timestamp

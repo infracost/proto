@@ -251,9 +251,9 @@ export declare type TreeProject = Message<"infracost.parser.cache.TreeProject"> 
   tree?: Tree;
 
   /**
-   * @generated from field: infracost.parser.cache.Metadata metadata = 2;
+   * @generated from field: infracost.parser.cache.TreeMetadata metadata = 2;
    */
-  metadata?: Metadata;
+  metadata?: TreeMetadata;
 
   /**
    * @generated from field: repeated infracost.parser.Diagnostic diags = 3;

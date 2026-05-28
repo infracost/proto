@@ -82,7 +82,7 @@ message CloudFormationProject {
 
 message TreeProject {
   tree.Tree tree = 1;
-  Metadata metadata = 2;
+  TreeMetadata metadata = 2;
   repeated parser.Diagnostic diags = 3;
   infracost.usage.Usage usage = 4;
   string project_type = 5;
