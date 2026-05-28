@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "infracost/parser/cloudformation/result.proto";
 import "infracost/parser/diagnostic.proto";
 import "infracost/parser/terraform/module.proto";
+import "infracost/tree/tree.proto";
 import "infracost/usage/usage.proto";
 
 message TerraformProject {
@@ -39,6 +40,7 @@ enum Flavor {
   FLAVOR_UNSPECIFIED = 0;
   FLAVOR_TERRAFORM = 1;
   FLAVOR_CLOUDFORMATION = 2;
+  FLAVOR_AGNOSTIC = 3;
 }
 
 message DependencyPaths {
@@ -76,4 +78,22 @@ message CloudFormationProject {
   string project_type = 9;
   string config_sha = 10;
   string path = 11;
+}
+
+message TreeProject {
+  tree.Tree tree = 1;
+  Metadata metadata = 2;
+  repeated parser.Diagnostic diags = 3;
+  infracost.usage.Usage usage = 4;
+  string project_type = 5;
+  string config_sha = 6;
+  string path = 7;
+  string workspace = 8;
+}
+
+message TreeMetadata {
+  string key = 1;
+  string runner_version = 2;
+  string parser_version = 3;
+  google.protobuf.Timestamp created_at = 4;
 }

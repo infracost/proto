@@ -9,6 +9,7 @@ import type { Diagnostic } from "../diagnostic_pb.js";
 import type { Usage } from "../../usage/usage_pb.js";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Result } from "../cloudformation/result_pb.js";
+import type { Tree } from "../../tree/tree_pb.js";
 
 /**
  * Describes the file infracost/parser/cache/cache.proto.
@@ -241,6 +242,88 @@ export declare type CloudFormationProject = Message<"infracost.parser.cache.Clou
 export declare const CloudFormationProjectSchema: GenMessage<CloudFormationProject>;
 
 /**
+ * @generated from message infracost.parser.cache.TreeProject
+ */
+export declare type TreeProject = Message<"infracost.parser.cache.TreeProject"> & {
+  /**
+   * @generated from field: infracost.tree.Tree tree = 1;
+   */
+  tree?: Tree;
+
+  /**
+   * @generated from field: infracost.parser.cache.Metadata metadata = 2;
+   */
+  metadata?: Metadata;
+
+  /**
+   * @generated from field: repeated infracost.parser.Diagnostic diags = 3;
+   */
+  diags: Diagnostic[];
+
+  /**
+   * @generated from field: infracost.usage.Usage usage = 4;
+   */
+  usage?: Usage;
+
+  /**
+   * @generated from field: string project_type = 5;
+   */
+  projectType: string;
+
+  /**
+   * @generated from field: string config_sha = 6;
+   */
+  configSha: string;
+
+  /**
+   * @generated from field: string path = 7;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string workspace = 8;
+   */
+  workspace: string;
+};
+
+/**
+ * Describes the message infracost.parser.cache.TreeProject.
+ * Use `create(TreeProjectSchema)` to create a new message.
+ */
+export declare const TreeProjectSchema: GenMessage<TreeProject>;
+
+/**
+ * @generated from message infracost.parser.cache.TreeMetadata
+ */
+export declare type TreeMetadata = Message<"infracost.parser.cache.TreeMetadata"> & {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string runner_version = 2;
+   */
+  runnerVersion: string;
+
+  /**
+   * @generated from field: string parser_version = 3;
+   */
+  parserVersion: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message infracost.parser.cache.TreeMetadata.
+ * Use `create(TreeMetadataSchema)` to create a new message.
+ */
+export declare const TreeMetadataSchema: GenMessage<TreeMetadata>;
+
+/**
  * @generated from enum infracost.parser.cache.Flavor
  */
 export enum Flavor {
@@ -258,6 +341,11 @@ export enum Flavor {
    * @generated from enum value: FLAVOR_CLOUDFORMATION = 2;
    */
   CLOUDFORMATION = 2,
+
+  /**
+   * @generated from enum value: FLAVOR_AGNOSTIC = 3;
+   */
+  AGNOSTIC = 3,
 }
 
 /**
