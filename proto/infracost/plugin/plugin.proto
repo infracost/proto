@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package infracost.plugin;
+
+// The PluginService provides a gRPC API for identifying the plugin type and metadata
+service PluginService {
+  rpc GetPluginInfo(GetPluginInfoRequest) returns (GetPluginInfoResponse);
+}
+
+message GetPluginInfoRequest {}
+
+message GetPluginInfoResponse {
+  // type of plugin, e.g. parser or provider
+  PluginType type = 1;
+  // human-readable name for the plugin e.g. "terraform", "cloudformation", "terragrunt" etc.
+  string name = 2;
+  // version of the plugin - recommended to use semver format but not required
+  string version = 3;
+  // human-readable description for the plugin
+  string description = 4;
+  // url where the plugin is documented and downloaded from
+  string url = 5;
+  // author of the plugin - company/individual etc.
+  string author = 6;
+}
+
+enum PluginType {
+  PLUGIN_TYPE_UNKNOWN = 0;
+  PARSER = 1; // plugins that parse config files e.g. terraform, cloudformation, terragrunt
+  PROVIDER = 2; // plugins that process parsed resources for e.g. price lookups, policy enforcement etc.
+}

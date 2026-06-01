@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package infracost.plugin;
+
+import "infracost/parser/diagnostic.proto";
+import "infracost/parser/options/options.proto";
+import "infracost/tree/tree.proto";
+
+// The ParserService provides a gRPC API for parsing infrastructure as code files into an IaC agnostic result.
+service ParserService {
+  // GetParserConfig returns settings that the system can use to identify if/how this plugin should be used to parse a given project/directory.
+  rpc GetParserConfig(GetParserConfigRequest) returns (GetParserConfigResponse);
+
+  // IdentifyProjects attempts to identify one or more IaC projects in the given directory - this should NOT recurse.
+  rpc IdentifyProjects(IdentifyProjectsRequest) returns (IdentifyProjectsResponse);
+
+  // Parse parses the given IaC path into an IaC agnostic tree format.
+  rpc Parse(ParseRequest) returns (ParseResponse);
+}
+
+message GetParserConfigRequest {}
+
+message GetParserConfigResponse {
+  // higher values prioritise over other plugins - recommended to set this to zero unless required
+  uint32 identification_priority = 1;
+  // maps to infracost/config project types, e.g. "terraform", "cloudformation", "terragrunt"
+  // can also specify custom type strings. if empty will default to the plugin name (recommended)
+  optional string config_file_project_type = 2;
+}
+
+message IdentifyProjectsRequest {
+  string directory = 1;
+}
+
+message IdentifyProjectsResponse {
+  // true if the whole directory is identified as a single project.
+  bool directory = 1;
+  // a list of individual files which are projects in their own right. directory cannot be true if this list contains one or more entries.
+  repeated string files = 2;
+}
+
+// ParseRequest is the unified request for all parser types.
+message ParseRequest {
+  // The path to the project file or directory
+  string path = 1;
+  // Generic options that aren't specific to any IaC
+  infracost.parser.options.GenericOptions generic_options = 2;
+  // Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+  bytes raw_options = 3;
+  // Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
+  string raw_options_format = 4;
+}
+
+// ParseResponse is the iac-agnostic parser response
+message ParseResponse {
+  // The diagnostics generated during parsing
+  repeated infracost.parser.Diagnostic diagnostics = 1;
+  // The result of parsing the target as a tree structure
+  tree.Tree tree = 2;
+  // Dependencies extracted during parsing (if DependencyRequest was provided in options)
+  repeated Dependency requested_dependencies = 3;
+}
+
+// Dependency represents a code dependency for a resource.
+// This includes file location, module context, and content for non-local dependencies.
+message Dependency {
+  // The path to the file containing the dependency
+  string file_path = 1;
+  // The starting line number of the dependency definition
+  int64 line_start = 2;
+  // The ending line number of the dependency definition
+  int64 line_end = 3;
+  // The definition of the module that contains this dependency
+  string module_definition = 4;
+  // True if the dependency is within a remote module
+  bool is_remote_module = 5;
+  // True if the dependency value is defined outside of the source code
+  // (e.g., passed in terraform variable, synthesized variable)
+  bool is_externally_defined = 6;
+  // A raw code snippet for dependencies not locally defined
+  string external_snippet = 7;
+  // True if the dependency was synthesized (not from actual source)
+  bool is_synthetic = 8;
+  // True if this is generated (temporary files)
+  bool is_generated = 9;
+  // The recursion depth at which this dependency was found
+  int32 depth = 10;
+}
