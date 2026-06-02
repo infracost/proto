@@ -84,6 +84,13 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
    * @generated from field: repeated string files = 2;
    */
   files: string[];
+
+  /**
+   * dependencies, relative to the directory
+   *
+   * @generated from field: repeated string dependency_paths = 3;
+   */
+  dependencyPaths: string[];
 };
 
 /**

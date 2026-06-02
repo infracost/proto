@@ -37,6 +37,8 @@ message IdentifyProjectsResponse {
   bool directory = 1;
   // a list of individual files which are projects in their own right. directory cannot be true if this list contains one or more entries.
   repeated string files = 2;
+  // dependencies, relative to the directory
+  repeated string dependency_paths = 3;
 }
 
 // ParseRequest is the unified request for all parser types.
