@@ -164,9 +164,11 @@ type IdentifyProjectsResponse struct {
 	// true if the whole directory is identified as a single project.
 	Directory bool `protobuf:"varint,1,opt,name=directory,proto3" json:"directory,omitempty"`
 	// a list of individual files which are projects in their own right. directory cannot be true if this list contains one or more entries.
-	Files         []string `protobuf:"bytes,2,rep,name=files,proto3" json:"files,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Files []string `protobuf:"bytes,2,rep,name=files,proto3" json:"files,omitempty"`
+	// dependencies, relative to the directory
+	DependencyPaths []string `protobuf:"bytes,3,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *IdentifyProjectsResponse) Reset() {
@@ -209,6 +211,13 @@ func (x *IdentifyProjectsResponse) GetDirectory() bool {
 func (x *IdentifyProjectsResponse) GetFiles() []string {
 	if x != nil {
 		return x.Files
+	}
+	return nil
+}
+
+func (x *IdentifyProjectsResponse) GetDependencyPaths() []string {
+	if x != nil {
+		return x.DependencyPaths
 	}
 	return nil
 }
@@ -490,10 +499,11 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01B\x1b\n" +
 	"\x19_config_file_project_type\"7\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
-	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"N\n" +
+	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"y\n" +
 	"\x18IdentifyProjectsResponse\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\bR\tdirectory\x12\x14\n" +
-	"\x05files\x18\x02 \x03(\tR\x05files\"\xc4\x01\n" +
+	"\x05files\x18\x02 \x03(\tR\x05files\x12)\n" +
+	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\"\xc4\x01\n" +
 	"\fParseRequest\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12Q\n" +
 	"\x0fgeneric_options\x18\x02 \x01(\v2(.infracost.parser.options.GenericOptionsR\x0egenericOptions\x12\x1f\n" +
