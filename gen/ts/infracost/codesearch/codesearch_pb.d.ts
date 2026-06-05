@@ -58,6 +58,13 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: string repo_id = 6;
    */
   repoId: string;
+
+  /**
+   * the repo name
+   *
+   * @generated from field: string repo_name = 7;
+   */
+  repoName: string;
 };
 
 /**
