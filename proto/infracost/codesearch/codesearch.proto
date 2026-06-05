@@ -18,6 +18,8 @@ message IndexData {
   repeated IndexedProject indexed_projects = 5;
   // repo id
   string repo_id = 6;
+  // the repo name
+  string repo_name = 7;
 }
 
 // IndexedProject is the index result of an IaC project within a repository
