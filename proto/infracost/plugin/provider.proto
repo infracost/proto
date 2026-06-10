@@ -1,0 +1,384 @@
+syntax = "proto3";
+
+package infracost.plugin;
+
+import "infracost/parser/diagnostic.proto";
+import "infracost/parser/event/runparameters.proto";
+import "infracost/parser/stack.proto";
+import "infracost/rational/rational.proto";
+import "infracost/tree/tree.proto";
+import "infracost/usage/usage.proto";
+
+service ProviderService {
+  rpc Process(ProcessRequest) returns (ProcessResponse);
+  rpc ListFinopsPolicies(ListFinopsPoliciesRequest) returns (ListFinopsPoliciesResponse);
+}
+
+message ProcessRequest {
+  ProviderInput input = 1;
+}
+
+message ProcessResponse {
+  ProviderOutput output = 1;
+}
+
+message ListFinopsPoliciesRequest {}
+
+message ListFinopsPoliciesResponse {
+  repeated FinopsPolicy policies = 1;
+}
+
+message FinopsPolicy {
+  string slug = 1;
+  string name = 2;
+  string group = 3;
+  string description = 4;
+  bool only_new_resources = 5;
+}
+
+message ProviderInput {
+  // The output of a parser, as a tree
+  tree.Tree tree = 1;
+
+  // Absolute path of the project/template being scanned
+  // For Terraform/Terragrunt this will be a directory, for CFN this will be a template file
+  string absolute_path = 2; // path to project
+
+  // This comes from zero or more of the cloud db, and/or a customer's committed usage file
+  ProjectInfo project_info = 3;
+
+  // Resource addresses (including module prefix) that have been seen on a previous run (if relevant), which helps us figure
+  // out if a resource is to be considered "new" or not.
+  // This is mainly so we can ignore policies that only want to consider "new" resources
+  repeated string previous_resource_addresses = 4;
+
+  // usage data, usually set by combining dashboard API data with any usage file data committed in the target repo
+  infracost.usage.Usage usage = 5;
+
+  // Specifies which policies need to be run, and any custom settings for each.
+  // Only relevant if features.enable_finops_policies is true.
+  FinopsPolicyConfiguration finops_policy_config = 6;
+
+  // Feature flags
+  Features features = 7;
+
+  // settings that affect the provider behaviour e.g. currency, disk cache usage
+  ProviderSettings settings = 8;
+
+  // infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
+  InfracostSettings infracost = 9;
+}
+
+message ProviderSettings {
+  // currency code (ISO 4217) as used in infracost config file e.g. USD, GBP, EUR
+  string currency = 1;
+  // whether to write caches to the disk - disable if the disk is ephemeral and caches won't persist between runs
+  bool use_disk_caches = 2;
+}
+
+message InfracostSettings {
+  // infracost api key to access pricing data + recommendations
+  string api_key = 1;
+  // pricing api endpoint to use for price lookups + recommendations
+  string pricing_api_endpoint = 2;
+  // trace id for correlating requests - mainly for internal use/debugging
+  string trace_id = 3;
+  // optional org id provided by the CLI that is fact checked in the pricing api
+  optional string org_id = 4;
+}
+
+message Features {
+  // Enable price lookups
+  bool enable_price_lookups = 1;
+  // Enable recommendations
+  bool enable_recommendations = 2;
+  // Enable finops policy evaluations
+  bool enable_finops_policies = 3;
+  // Enable environmental metrics lookups
+  bool enable_environmental_metrics = 4;
+}
+
+// Extra information about the project (formerly known as Scope in the runner)
+message ProjectInfo {
+  // Project name as it appears in the config file
+  string name = 1;
+  // Git branch name being scanned, if applicable
+  string branch_name = 2;
+  // Workspace name (currently only used for Terraform workspace)
+  string workspace = 3;
+  // If the environment being scanned is production (only relevant for ICP)
+  bool is_production = 4;
+}
+
+message FinopsPolicyConfiguration {
+  // Finops policies to evaluate (matched by slug) - if none are supplied, all available (default) policies should be run.
+  repeated infracost.parser.event.FinopsPolicySettings policies = 1;
+}
+
+message ProviderOutput {
+  // Normalised list of resources, made IaC-agnostic.
+  repeated Resource resources = 1;
+  // Details of passes/failures for each configured finops policy
+  repeated FinopsPolicyResult finops_results = 2;
+}
+
+message Resource {
+  // Unique resource id - this is supplied by the relevant parser
+  string id = 1;
+  // The resource type as supplied by the parser e.g. aws_instance or AWS::EC2::Instance
+  string type = 2; // tf or cfn resource type
+  // a unique resource name, usually populated with the full address of the resource
+  string name = 3;
+  // region if applicable, e.g. eu-west2
+  string region = 4;
+  // filename, line numbers, checksums
+  ResourceMetadata metadata = 5;
+  // string describing where the provider is defined for this resource
+  string provider_link = 6;
+  // If explicitly supported by Infracost
+  bool is_supported = 7;
+  // If the resource has no associated costs
+  bool is_free = 8;
+  // If the provider of the resource is supported
+  bool is_provider_supported = 9;
+  // if the resource was added/modified/deleted/unchanged for this run
+  ResourceAction action = 10;
+  // The resource costs - individual cost components - including environmental metrics
+  ResourceCosts costs = 11;
+  // Resource-level tags
+  Tagging tagging = 12;
+  // Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
+  repeated Resource child_resources = 13;
+  // the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
+  parser.CallStack call_stack = 14;
+}
+
+enum ResourceAction {
+  RESOURCE_ACTION_UNSPECIFIED = 0;
+  NOOP = 1;
+  CREATE = 2;
+  MODIFY = 3;
+  DELETE = 4;
+}
+
+message ResourceMetadata {
+  // the path to the file (relative to the repository) where the resource is defined
+  string filename = 1;
+  // line numbers where the resource is defined
+  int64 start_line = 2;
+  int64 end_line = 3;
+  // module calls leading to this resource (e.g. module.a -> module.b -> resource.c)
+  repeated ModuleCall module_calls = 4;
+  // basic checksum identifying the unique resource (address etc.), not its children or contents
+  string basic_checksum = 5;
+  // deep checksum identifying the resource including its children and contents
+  string deep_checksum = 6;
+  // checksum of default tag values applied to this resource
+  string default_tags_checksum = 7;
+  // checksum of the attribute value(s) - could be replaced with the deep_checksum in future, but needed for dashboard atm
+  string attribute_value_checksum = 8;
+}
+
+message ModuleCall {
+  // the name of the thing that defined this module, e.g. "module.x" in terraform
+  string definition_name = 1; // i.e. block name
+  // filename where this module was called
+  string filename = 2;
+  // line numbers where this module was called
+  int64 start_line = 3;
+  int64 end_line = 4;
+}
+
+message Tagging {
+  // tag values
+  repeated Tag tags = 1;
+  // if this resource supports tags at all
+  bool supports_tags = 2;
+  // If the provider supports default tags here (so we can differentiate between this and there being no defaults)
+  bool supports_default_tags = 3;
+  // Propagation data. This tells us if the tags are propagated from one resource to another, and whether this is configured properly.
+  repeated TagPropagationProblem propagation_problems = 4;
+}
+
+message Tag {
+  // tag key (name)
+  string key = 1;
+  // tag value
+  string value = 2;
+  // whether this is a default tag
+  bool is_default = 3;
+  // whether the key was synthetically generated (e.g. we made up a value because the real one was not defined)
+  bool is_key_synthetic = 4;
+  // whether the value was synthetically generated (e.g. we made up a value because the real one was not defined)
+  bool is_value_synthetic = 5;
+}
+
+message TagPropagationProblem {
+  // actual discovered value for the attribute (formerly known as "From" for some reason)
+  string actual_value = 1;
+  // valid values for the attribute which would enable propagation (formerly known as "ValidSources")
+  repeated string valid_values = 2;
+  // the attribute which dictates whether propagation is enabled
+  string attribute = 3;
+  // a noun describing the recipient of the tags if propagation is enabled (formerly known as "To")
+  string tag_recipient = 4;
+  // tag keys which are affected by this propagation problem
+  repeated string affected_tags = 5;
+}
+
+message ResourceCosts {
+  // a list of cost line items directly associated with this resource
+  repeated CostComponent components = 1;
+}
+
+message CostComponent {
+  // Display name for cost component, but also contains some attributes e.g. Compute (t3.small, on-demand)
+  string name = 1;
+  // The `quantity` refers to the number of these `unit`s, and the `period_price` is for each of these. e.g. if `unit` is "cores", the `period_price` is per core, and the `quantity` is the number of cores.
+  string unit = 2;
+  // Whether the `period_price` is based on usage data
+  bool usage_based = 3;
+  // Whether we found a `period_price` for this (_false_ if a custom price was used)
+  bool price_not_found = 4;
+  // Whether the price was hardcoded in the provider plugin, or in the usage data
+  bool price_was_hardcoded = 5;
+  // The price, pre-discount, of each `unit` (per price period)
+  PeriodPrice period_price = 6;
+  // This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
+  infracost.rational.Rat quantity = 7;
+  // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+  infracost.rational.Rat discount_rate = 8;
+  // Information on how fast your infrastructure is destroying the planet
+  EnvironmentalMetrics environmental_metrics = 9;
+}
+
+message PeriodPrice {
+  // the raw price as a rational number
+  infracost.rational.Rat price = 1;
+  // this is the period to which the price applies (i.e. monthly or hourly)
+  Period period = 2;
+}
+
+enum Period {
+  PERIOD_UNSPECIFIED = 0;
+  MONTH = 1;
+  HOUR = 2;
+}
+
+message EnvironmentalMetrics {
+  // the period to which the metrics apply (i.e. monthly or hourly)
+  Period period = 1;
+  // carbon emissions in grams CO2e
+  infracost.rational.Rat carbon_grams_co2e = 2;
+  // water usage in liters
+  infracost.rational.Rat water_liters = 3;
+}
+
+message FinopsPolicyResult {
+  // Unique policy ID (UUID v4, from dashboard API)
+  string policy_id = 1;
+  // Human-readable policy name
+  string policy_name = 2;
+  // Human-readable policy slug, used to identify specific policy code in provider plugins
+  string policy_slug = 3;
+  // Message describing the policy result
+  string policy_message = 4;
+  // Resource IDs that passed this policy
+  repeated string passing_resource_ids = 5;
+  // Resources that failed this policy, along with details of the individual issues
+  repeated FinopsPolicyFailingResource failing_resources = 6;
+  // should this failure cause the pull request to be blocked (if PR blocking is enabled at a higher level)
+  bool block_pull_request = 7;
+  // should this policy result be included in the pull request comment
+  bool include_in_pull_request_comment = 8;
+  // does this policy only apply to new resources
+  bool only_applies_to_new_resources = 9;
+}
+
+message FinopsPolicyFailingResource {
+  // Unique resource ID (can be matched against the Resource.id field to identify a full resource)
+  string id = 1;
+  // the full address to the cause of the failure
+  string cause_address = 2;
+  // Details of the individual issues for this resource
+  repeated FinopsResourceIssue issues = 3;
+  // source filename where the resource is defined (from Resource.metadata.filename)
+  string path = 4;
+  // line number in source file (from Resource.metadata.start_line)
+  int64 start_line = 5;
+  // terraform module source e.g. registry URL (from Resource.call_stack.frames[1].source)
+  string module_path = 6;
+  // module call address (from Resource.call_stack.frames[0].address)
+  string module_call_path = 7;
+  // line number of module call (from Resource.call_stack.frames[0].source_range.start_line)
+  int64 module_call_start_line = 8;
+  // project name(s) where this resource appears (from Input.project_info.name)
+  repeated string project_names = 9;
+}
+
+message FinopsResourceIssue {
+  // monthly financial savings (in configured currency) that could be realized by fixing this issue
+  infracost.rational.Rat monthly_savings = 1;
+  // monthly carbon savings in grams CO2e that could be realized by fixing this issue
+  infracost.rational.Rat monthly_carbon_savings_grams_co2e = 2;
+  // monthly water savings in liters that could be realized by fixing this issue
+  infracost.rational.Rat monthly_water_savings_liters = 3;
+  // human-readable address where the issue originates
+  string address = 4;
+  // attribute of the resource where the issue originates
+  string attribute = 5;
+  // detailed description of the issue
+  string description = 6;
+  // extra details pertaining to the financial savings
+  optional string savings_details = 7;
+  // breakdowns of costs before and after fixing the issue
+  repeated IssueBreakdown before_fix_breakdowns = 8;
+  repeated IssueBreakdown after_fix_breakdowns = 9;
+}
+
+message IssueBreakdown {
+  // name of the resource or subresource
+  string resource_name = 1;
+  // region of the resource or subresource
+  string region = 2;
+  // cost components for this resource or subresource
+  repeated IssueCostComponent cost_components = 3;
+  // nested subresources
+  repeated IssueBreakdown subresources = 4;
+}
+
+message IssueCostComponent {
+  // name of the cost component e.g. "compute cost"
+  string name = 1;
+  // unit the cost is measured in e.g. "hours", "GB", "vCPU/seconds"
+  string unit = 2;
+  // Whether the `period_price` is based on usage data
+  bool usage_based = 3;
+  // The price, pre-discount, of each `unit` (per price period)
+  PeriodPrice period_price = 4;
+  // This is the number we need to multiply `period_price` by to arrive at a pre-discounted cost
+  infracost.rational.Rat quantity = 5;
+  // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
+  infracost.rational.Rat discount_rate = 6;
+}
+
+message InvalidTag {
+  // tag key (name)
+  string key = 1;
+  // tag value
+  string value = 2;
+  // message describing why the tag is invalid
+  string message = 3;
+  // valid values for the tag
+  repeated string valid_values = 4;
+  // whether the valid values list was truncated (sometimes there are ~100k!)
+  bool valid_values_truncated = 5;
+  // whether this tag came from default tags
+  bool from_default_tags = 6;
+  // whether this tag is missing but mandatory
+  bool missing_mandatory = 7;
+  // when the value must match a regex, the regex pattern
+  optional string valid_regex = 8;
+  // suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
+  optional string suggestion = 9;
+}
