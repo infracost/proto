@@ -2230,123 +2230,6 @@ func (x *IssueCostComponent) GetDiscountRate() *rational.Rat {
 	return nil
 }
 
-type InvalidTag struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// tag key (name)
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	// tag value
-	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	// message describing why the tag is invalid
-	Message string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	// valid values for the tag
-	ValidValues []string `protobuf:"bytes,4,rep,name=valid_values,json=validValues,proto3" json:"valid_values,omitempty"`
-	// whether the valid values list was truncated (sometimes there are ~100k!)
-	ValidValuesTruncated bool `protobuf:"varint,5,opt,name=valid_values_truncated,json=validValuesTruncated,proto3" json:"valid_values_truncated,omitempty"`
-	// whether this tag came from default tags
-	FromDefaultTags bool `protobuf:"varint,6,opt,name=from_default_tags,json=fromDefaultTags,proto3" json:"from_default_tags,omitempty"`
-	// whether this tag is missing but mandatory
-	MissingMandatory bool `protobuf:"varint,7,opt,name=missing_mandatory,json=missingMandatory,proto3" json:"missing_mandatory,omitempty"`
-	// when the value must match a regex, the regex pattern
-	ValidRegex *string `protobuf:"bytes,8,opt,name=valid_regex,json=validRegex,proto3,oneof" json:"valid_regex,omitempty"`
-	// suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
-	Suggestion    *string `protobuf:"bytes,9,opt,name=suggestion,proto3,oneof" json:"suggestion,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InvalidTag) Reset() {
-	*x = InvalidTag{}
-	mi := &file_infracost_plugin_provider_proto_msgTypes[27]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InvalidTag) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InvalidTag) ProtoMessage() {}
-
-func (x *InvalidTag) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_plugin_provider_proto_msgTypes[27]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InvalidTag.ProtoReflect.Descriptor instead.
-func (*InvalidTag) Descriptor() ([]byte, []int) {
-	return file_infracost_plugin_provider_proto_rawDescGZIP(), []int{27}
-}
-
-func (x *InvalidTag) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *InvalidTag) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-func (x *InvalidTag) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-func (x *InvalidTag) GetValidValues() []string {
-	if x != nil {
-		return x.ValidValues
-	}
-	return nil
-}
-
-func (x *InvalidTag) GetValidValuesTruncated() bool {
-	if x != nil {
-		return x.ValidValuesTruncated
-	}
-	return false
-}
-
-func (x *InvalidTag) GetFromDefaultTags() bool {
-	if x != nil {
-		return x.FromDefaultTags
-	}
-	return false
-}
-
-func (x *InvalidTag) GetMissingMandatory() bool {
-	if x != nil {
-		return x.MissingMandatory
-	}
-	return false
-}
-
-func (x *InvalidTag) GetValidRegex() string {
-	if x != nil && x.ValidRegex != nil {
-		return *x.ValidRegex
-	}
-	return ""
-}
-
-func (x *InvalidTag) GetSuggestion() string {
-	if x != nil && x.Suggestion != nil {
-		return *x.Suggestion
-	}
-	return ""
-}
-
 var File_infracost_plugin_provider_proto protoreflect.FileDescriptor
 
 const file_infracost_plugin_provider_proto_rawDesc = "" +
@@ -2521,23 +2404,7 @@ const file_infracost_plugin_provider_proto_rawDesc = "" +
 	"usageBased\x12@\n" +
 	"\fperiod_price\x18\x04 \x01(\v2\x1d.infracost.plugin.PeriodPriceR\vperiodPrice\x123\n" +
 	"\bquantity\x18\x05 \x01(\v2\x17.infracost.rational.RatR\bquantity\x12<\n" +
-	"\rdiscount_rate\x18\x06 \x01(\v2\x17.infracost.rational.RatR\fdiscountRate\"\xea\x02\n" +
-	"\n" +
-	"InvalidTag\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\x12!\n" +
-	"\fvalid_values\x18\x04 \x03(\tR\vvalidValues\x124\n" +
-	"\x16valid_values_truncated\x18\x05 \x01(\bR\x14validValuesTruncated\x12*\n" +
-	"\x11from_default_tags\x18\x06 \x01(\bR\x0ffromDefaultTags\x12+\n" +
-	"\x11missing_mandatory\x18\a \x01(\bR\x10missingMandatory\x12$\n" +
-	"\vvalid_regex\x18\b \x01(\tH\x00R\n" +
-	"validRegex\x88\x01\x01\x12#\n" +
-	"\n" +
-	"suggestion\x18\t \x01(\tH\x01R\n" +
-	"suggestion\x88\x01\x01B\x0e\n" +
-	"\f_valid_regexB\r\n" +
-	"\v_suggestion*_\n" +
+	"\rdiscount_rate\x18\x06 \x01(\v2\x17.infracost.rational.RatR\fdiscountRate*_\n" +
 	"\x0eResourceAction\x12\x1f\n" +
 	"\x1bRESOURCE_ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04NOOP\x10\x01\x12\n" +
@@ -2569,7 +2436,7 @@ func file_infracost_plugin_provider_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_plugin_provider_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_infracost_plugin_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_infracost_plugin_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_infracost_plugin_provider_proto_goTypes = []any{
 	(ResourceAction)(0),                 // 0: infracost.plugin.ResourceAction
 	(Period)(0),                         // 1: infracost.plugin.Period
@@ -2600,25 +2467,24 @@ var file_infracost_plugin_provider_proto_goTypes = []any{
 	(*FinopsResourceIssue)(nil),         // 26: infracost.plugin.FinopsResourceIssue
 	(*IssueBreakdown)(nil),              // 27: infracost.plugin.IssueBreakdown
 	(*IssueCostComponent)(nil),          // 28: infracost.plugin.IssueCostComponent
-	(*InvalidTag)(nil),                  // 29: infracost.plugin.InvalidTag
-	(*tree.Tree)(nil),                   // 30: infracost.tree.Tree
-	(*usage.Usage)(nil),                 // 31: infracost.usage.Usage
-	(*event.FinopsPolicySettings)(nil),  // 32: infracost.parser.event.FinopsPolicySettings
-	(*parser.CallStack)(nil),            // 33: infracost.parser.CallStack
-	(*rational.Rat)(nil),                // 34: infracost.rational.Rat
+	(*tree.Tree)(nil),                   // 29: infracost.tree.Tree
+	(*usage.Usage)(nil),                 // 30: infracost.usage.Usage
+	(*event.FinopsPolicySettings)(nil),  // 31: infracost.parser.event.FinopsPolicySettings
+	(*parser.CallStack)(nil),            // 32: infracost.parser.CallStack
+	(*rational.Rat)(nil),                // 33: infracost.rational.Rat
 }
 var file_infracost_plugin_provider_proto_depIdxs = []int32{
 	7,  // 0: infracost.plugin.ProcessRequest.input:type_name -> infracost.plugin.ProviderInput
 	13, // 1: infracost.plugin.ProcessResponse.output:type_name -> infracost.plugin.ProviderOutput
 	6,  // 2: infracost.plugin.ListFinopsPoliciesResponse.policies:type_name -> infracost.plugin.FinopsPolicy
-	30, // 3: infracost.plugin.ProviderInput.tree:type_name -> infracost.tree.Tree
+	29, // 3: infracost.plugin.ProviderInput.tree:type_name -> infracost.tree.Tree
 	11, // 4: infracost.plugin.ProviderInput.project_info:type_name -> infracost.plugin.ProjectInfo
-	31, // 5: infracost.plugin.ProviderInput.usage:type_name -> infracost.usage.Usage
+	30, // 5: infracost.plugin.ProviderInput.usage:type_name -> infracost.usage.Usage
 	12, // 6: infracost.plugin.ProviderInput.finops_policy_config:type_name -> infracost.plugin.FinopsPolicyConfiguration
 	10, // 7: infracost.plugin.ProviderInput.features:type_name -> infracost.plugin.Features
 	8,  // 8: infracost.plugin.ProviderInput.settings:type_name -> infracost.plugin.ProviderSettings
 	9,  // 9: infracost.plugin.ProviderInput.infracost:type_name -> infracost.plugin.InfracostSettings
-	32, // 10: infracost.plugin.FinopsPolicyConfiguration.policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	31, // 10: infracost.plugin.FinopsPolicyConfiguration.policies:type_name -> infracost.parser.event.FinopsPolicySettings
 	14, // 11: infracost.plugin.ProviderOutput.resources:type_name -> infracost.plugin.Resource
 	24, // 12: infracost.plugin.ProviderOutput.finops_results:type_name -> infracost.plugin.FinopsPolicyResult
 	15, // 13: infracost.plugin.Resource.metadata:type_name -> infracost.plugin.ResourceMetadata
@@ -2626,32 +2492,32 @@ var file_infracost_plugin_provider_proto_depIdxs = []int32{
 	20, // 15: infracost.plugin.Resource.costs:type_name -> infracost.plugin.ResourceCosts
 	17, // 16: infracost.plugin.Resource.tagging:type_name -> infracost.plugin.Tagging
 	14, // 17: infracost.plugin.Resource.child_resources:type_name -> infracost.plugin.Resource
-	33, // 18: infracost.plugin.Resource.call_stack:type_name -> infracost.parser.CallStack
+	32, // 18: infracost.plugin.Resource.call_stack:type_name -> infracost.parser.CallStack
 	16, // 19: infracost.plugin.ResourceMetadata.module_calls:type_name -> infracost.plugin.ModuleCall
 	18, // 20: infracost.plugin.Tagging.tags:type_name -> infracost.plugin.Tag
 	19, // 21: infracost.plugin.Tagging.propagation_problems:type_name -> infracost.plugin.TagPropagationProblem
 	21, // 22: infracost.plugin.ResourceCosts.components:type_name -> infracost.plugin.CostComponent
 	22, // 23: infracost.plugin.CostComponent.period_price:type_name -> infracost.plugin.PeriodPrice
-	34, // 24: infracost.plugin.CostComponent.quantity:type_name -> infracost.rational.Rat
-	34, // 25: infracost.plugin.CostComponent.discount_rate:type_name -> infracost.rational.Rat
+	33, // 24: infracost.plugin.CostComponent.quantity:type_name -> infracost.rational.Rat
+	33, // 25: infracost.plugin.CostComponent.discount_rate:type_name -> infracost.rational.Rat
 	23, // 26: infracost.plugin.CostComponent.environmental_metrics:type_name -> infracost.plugin.EnvironmentalMetrics
-	34, // 27: infracost.plugin.PeriodPrice.price:type_name -> infracost.rational.Rat
+	33, // 27: infracost.plugin.PeriodPrice.price:type_name -> infracost.rational.Rat
 	1,  // 28: infracost.plugin.PeriodPrice.period:type_name -> infracost.plugin.Period
 	1,  // 29: infracost.plugin.EnvironmentalMetrics.period:type_name -> infracost.plugin.Period
-	34, // 30: infracost.plugin.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
-	34, // 31: infracost.plugin.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
+	33, // 30: infracost.plugin.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
+	33, // 31: infracost.plugin.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
 	25, // 32: infracost.plugin.FinopsPolicyResult.failing_resources:type_name -> infracost.plugin.FinopsPolicyFailingResource
 	26, // 33: infracost.plugin.FinopsPolicyFailingResource.issues:type_name -> infracost.plugin.FinopsResourceIssue
-	34, // 34: infracost.plugin.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
-	34, // 35: infracost.plugin.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
-	34, // 36: infracost.plugin.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
+	33, // 34: infracost.plugin.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
+	33, // 35: infracost.plugin.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
+	33, // 36: infracost.plugin.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
 	27, // 37: infracost.plugin.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.plugin.IssueBreakdown
 	27, // 38: infracost.plugin.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.plugin.IssueBreakdown
 	28, // 39: infracost.plugin.IssueBreakdown.cost_components:type_name -> infracost.plugin.IssueCostComponent
 	27, // 40: infracost.plugin.IssueBreakdown.subresources:type_name -> infracost.plugin.IssueBreakdown
 	22, // 41: infracost.plugin.IssueCostComponent.period_price:type_name -> infracost.plugin.PeriodPrice
-	34, // 42: infracost.plugin.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
-	34, // 43: infracost.plugin.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
+	33, // 42: infracost.plugin.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
+	33, // 43: infracost.plugin.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
 	2,  // 44: infracost.plugin.ProviderService.Process:input_type -> infracost.plugin.ProcessRequest
 	4,  // 45: infracost.plugin.ProviderService.ListFinopsPolicies:input_type -> infracost.plugin.ListFinopsPoliciesRequest
 	3,  // 46: infracost.plugin.ProviderService.Process:output_type -> infracost.plugin.ProcessResponse
@@ -2670,14 +2536,13 @@ func file_infracost_plugin_provider_proto_init() {
 	}
 	file_infracost_plugin_provider_proto_msgTypes[7].OneofWrappers = []any{}
 	file_infracost_plugin_provider_proto_msgTypes[24].OneofWrappers = []any{}
-	file_infracost_plugin_provider_proto_msgTypes[27].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_plugin_provider_proto_rawDesc), len(file_infracost_plugin_provider_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   28,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

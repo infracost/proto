@@ -361,24 +361,3 @@ message IssueCostComponent {
   // The rate to multiply the `period_price` by to calculate savings. i.e. discounted_cost = cost - (cost * discount_rate)
   infracost.rational.Rat discount_rate = 6;
 }
-
-message InvalidTag {
-  // tag key (name)
-  string key = 1;
-  // tag value
-  string value = 2;
-  // message describing why the tag is invalid
-  string message = 3;
-  // valid values for the tag
-  repeated string valid_values = 4;
-  // whether the valid values list was truncated (sometimes there are ~100k!)
-  bool valid_values_truncated = 5;
-  // whether this tag came from default tags
-  bool from_default_tags = 6;
-  // whether this tag is missing but mandatory
-  bool missing_mandatory = 7;
-  // when the value must match a regex, the regex pattern
-  optional string valid_regex = 8;
-  // suggestion for a valid value, so we can suggest "did you mean 'Production', not 'prdcutoin'?"
-  optional string suggestion = 9;
-}
