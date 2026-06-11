@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package infracost.plugin;
 
-import "infracost/provider/input.proto";
 import "infracost/provider/output.proto";
+import "infracost/provider/tree.proto";
 
 service ProviderService {
   rpc Process(ProcessRequest) returns (ProcessResponse);
@@ -11,7 +11,7 @@ service ProviderService {
 }
 
 message ProcessRequest {
-  provider.Input input = 1;
+  provider.TreeInput input = 1;
 }
 
 message ProcessResponse {

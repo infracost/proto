@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Input } from "../provider/input_pb.js";
+import type { TreeInput } from "../provider/tree_pb.js";
 import type { Output } from "../provider/output_pb.js";
 
 /**
@@ -17,9 +17,9 @@ export declare const file_infracost_plugin_provider: GenFile;
  */
 export declare type ProcessRequest = Message<"infracost.plugin.ProcessRequest"> & {
   /**
-   * @generated from field: infracost.provider.Input input = 1;
+   * @generated from field: infracost.provider.TreeInput input = 1;
    */
-  input?: Input;
+  input?: TreeInput;
 };
 
 /**

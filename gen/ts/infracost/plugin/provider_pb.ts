@@ -4,26 +4,26 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Input } from "../provider/input_pb.js";
-import { file_infracost_provider_input } from "../provider/input_pb.js";
 import type { Output } from "../provider/output_pb.js";
 import { file_infracost_provider_output } from "../provider/output_pb.js";
+import type { TreeInput } from "../provider/tree_pb.js";
+import { file_infracost_provider_tree } from "../provider/tree_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file infracost/plugin/provider.proto.
  */
 export const file_infracost_plugin_provider: GenFile = /*@__PURE__*/
-  fileDesc("Ch9pbmZyYWNvc3QvcGx1Z2luL3Byb3ZpZGVyLnByb3RvEhBpbmZyYWNvc3QucGx1Z2luIjoKDlByb2Nlc3NSZXF1ZXN0EigKBWlucHV0GAEgASgLMhkuaW5mcmFjb3N0LnByb3ZpZGVyLklucHV0Ij0KD1Byb2Nlc3NSZXNwb25zZRIqCgZvdXRwdXQYASABKAsyGi5pbmZyYWNvc3QucHJvdmlkZXIuT3V0cHV0IhsKGUxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QiTgoaTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2USMAoIcG9saWNpZXMYASADKAsyHi5pbmZyYWNvc3QucGx1Z2luLkZpbm9wc1BvbGljeSJqCgxGaW5vcHNQb2xpY3kSDAoEc2x1ZxgBIAEoCRIMCgRuYW1lGAIgASgJEg0KBWdyb3VwGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhoKEm9ubHlfbmV3X3Jlc291cmNlcxgFIAEoCDLSAQoPUHJvdmlkZXJTZXJ2aWNlEk4KB1Byb2Nlc3MSIC5pbmZyYWNvc3QucGx1Z2luLlByb2Nlc3NSZXF1ZXN0GiEuaW5mcmFjb3N0LnBsdWdpbi5Qcm9jZXNzUmVzcG9uc2USbwoSTGlzdEZpbm9wc1BvbGljaWVzEisuaW5mcmFjb3N0LnBsdWdpbi5MaXN0Rmlub3BzUG9saWNpZXNSZXF1ZXN0GiwuaW5mcmFjb3N0LnBsdWdpbi5MaXN0Rmlub3BzUG9saWNpZXNSZXNwb25zZUK6AQoUY29tLmluZnJhY29zdC5wbHVnaW5CDVByb3ZpZGVyUHJvdG9QAVoyZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wbHVnaW6iAgNJUFiqAhBJbmZyYWNvc3QuUGx1Z2luygIQSW5mcmFjb3N0XFBsdWdpbuICHEluZnJhY29zdFxQbHVnaW5cR1BCTWV0YWRhdGHqAhFJbmZyYWNvc3Q6OlBsdWdpbmIGcHJvdG8z", [file_infracost_provider_input, file_infracost_provider_output]);
+  fileDesc("Ch9pbmZyYWNvc3QvcGx1Z2luL3Byb3ZpZGVyLnByb3RvEhBpbmZyYWNvc3QucGx1Z2luIj4KDlByb2Nlc3NSZXF1ZXN0EiwKBWlucHV0GAEgASgLMh0uaW5mcmFjb3N0LnByb3ZpZGVyLlRyZWVJbnB1dCI9Cg9Qcm9jZXNzUmVzcG9uc2USKgoGb3V0cHV0GAEgASgLMhouaW5mcmFjb3N0LnByb3ZpZGVyLk91dHB1dCIbChlMaXN0Rmlub3BzUG9saWNpZXNSZXF1ZXN0Ik4KGkxpc3RGaW5vcHNQb2xpY2llc1Jlc3BvbnNlEjAKCHBvbGljaWVzGAEgAygLMh4uaW5mcmFjb3N0LnBsdWdpbi5GaW5vcHNQb2xpY3kiagoMRmlub3BzUG9saWN5EgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRINCgVncm91cBgDIAEoCRITCgtkZXNjcmlwdGlvbhgEIAEoCRIaChJvbmx5X25ld19yZXNvdXJjZXMYBSABKAgy0gEKD1Byb3ZpZGVyU2VydmljZRJOCgdQcm9jZXNzEiAuaW5mcmFjb3N0LnBsdWdpbi5Qcm9jZXNzUmVxdWVzdBohLmluZnJhY29zdC5wbHVnaW4uUHJvY2Vzc1Jlc3BvbnNlEm8KEkxpc3RGaW5vcHNQb2xpY2llcxIrLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVxdWVzdBosLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2VCugEKFGNvbS5pbmZyYWNvc3QucGx1Z2luQg1Qcm92aWRlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_provider_output, file_infracost_provider_tree]);
 
 /**
  * @generated from message infracost.plugin.ProcessRequest
  */
 export type ProcessRequest = Message<"infracost.plugin.ProcessRequest"> & {
   /**
-   * @generated from field: infracost.provider.Input input = 1;
+   * @generated from field: infracost.provider.TreeInput input = 1;
    */
-  input?: Input;
+  input?: TreeInput;
 };
 
 /**

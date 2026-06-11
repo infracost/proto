@@ -24,7 +24,7 @@ const (
 
 type ProcessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Input         *provider.Input        `protobuf:"bytes,1,opt,name=input,proto3" json:"input,omitempty"`
+	Input         *provider.TreeInput    `protobuf:"bytes,1,opt,name=input,proto3" json:"input,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -59,7 +59,7 @@ func (*ProcessRequest) Descriptor() ([]byte, []int) {
 	return file_infracost_plugin_provider_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProcessRequest) GetInput() *provider.Input {
+func (x *ProcessRequest) GetInput() *provider.TreeInput {
 	if x != nil {
 		return x.Input
 	}
@@ -270,9 +270,9 @@ var File_infracost_plugin_provider_proto protoreflect.FileDescriptor
 
 const file_infracost_plugin_provider_proto_rawDesc = "" +
 	"\n" +
-	"\x1finfracost/plugin/provider.proto\x12\x10infracost.plugin\x1a\x1einfracost/provider/input.proto\x1a\x1finfracost/provider/output.proto\"A\n" +
-	"\x0eProcessRequest\x12/\n" +
-	"\x05input\x18\x01 \x01(\v2\x19.infracost.provider.InputR\x05input\"E\n" +
+	"\x1finfracost/plugin/provider.proto\x12\x10infracost.plugin\x1a\x1finfracost/provider/output.proto\x1a\x1dinfracost/provider/tree.proto\"E\n" +
+	"\x0eProcessRequest\x123\n" +
+	"\x05input\x18\x01 \x01(\v2\x1d.infracost.provider.TreeInputR\x05input\"E\n" +
 	"\x0fProcessResponse\x122\n" +
 	"\x06output\x18\x01 \x01(\v2\x1a.infracost.provider.OutputR\x06output\"\x1b\n" +
 	"\x19ListFinopsPoliciesRequest\"X\n" +
@@ -308,11 +308,11 @@ var file_infracost_plugin_provider_proto_goTypes = []any{
 	(*ListFinopsPoliciesRequest)(nil),  // 2: infracost.plugin.ListFinopsPoliciesRequest
 	(*ListFinopsPoliciesResponse)(nil), // 3: infracost.plugin.ListFinopsPoliciesResponse
 	(*FinopsPolicy)(nil),               // 4: infracost.plugin.FinopsPolicy
-	(*provider.Input)(nil),             // 5: infracost.provider.Input
+	(*provider.TreeInput)(nil),         // 5: infracost.provider.TreeInput
 	(*provider.Output)(nil),            // 6: infracost.provider.Output
 }
 var file_infracost_plugin_provider_proto_depIdxs = []int32{
-	5, // 0: infracost.plugin.ProcessRequest.input:type_name -> infracost.provider.Input
+	5, // 0: infracost.plugin.ProcessRequest.input:type_name -> infracost.provider.TreeInput
 	6, // 1: infracost.plugin.ProcessResponse.output:type_name -> infracost.provider.Output
 	4, // 2: infracost.plugin.ListFinopsPoliciesResponse.policies:type_name -> infracost.plugin.FinopsPolicy
 	0, // 3: infracost.plugin.ProviderService.Process:input_type -> infracost.plugin.ProcessRequest
