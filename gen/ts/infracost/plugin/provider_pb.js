@@ -2,19 +2,15 @@
 // @generated from file infracost/plugin/provider.proto (package infracost.plugin, syntax proto3)
 /* eslint-disable */
 
-import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/protobuf/codegenv2";
-import { file_infracost_parser_diagnostic } from "../parser/diagnostic_pb.js";
-import { file_infracost_parser_event_runparameters } from "../parser/event/runparameters_pb.js";
-import { file_infracost_parser_stack } from "../parser/stack_pb.js";
-import { file_infracost_rational_rational } from "../rational/rational_pb.js";
-import { file_infracost_tree_tree } from "../tree/tree_pb.js";
-import { file_infracost_usage_usage } from "../usage/usage_pb.js";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import { file_infracost_provider_output } from "../provider/output_pb.js";
+import { file_infracost_provider_tree } from "../provider/tree_pb.js";
 
 /**
  * Describes the file infracost/plugin/provider.proto.
  */
 export const file_infracost_plugin_provider = /*@__PURE__*/
-  fileDesc("Ch9pbmZyYWNvc3QvcGx1Z2luL3Byb3ZpZGVyLnByb3RvEhBpbmZyYWNvc3QucGx1Z2luIkAKDlByb2Nlc3NSZXF1ZXN0Ei4KBWlucHV0GAEgASgLMh8uaW5mcmFjb3N0LnBsdWdpbi5Qcm92aWRlcklucHV0IkMKD1Byb2Nlc3NSZXNwb25zZRIwCgZvdXRwdXQYASABKAsyIC5pbmZyYWNvc3QucGx1Z2luLlByb3ZpZGVyT3V0cHV0IhsKGUxpc3RGaW5vcHNQb2xpY2llc1JlcXVlc3QiTgoaTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2USMAoIcG9saWNpZXMYASADKAsyHi5pbmZyYWNvc3QucGx1Z2luLkZpbm9wc1BvbGljeSJqCgxGaW5vcHNQb2xpY3kSDAoEc2x1ZxgBIAEoCRIMCgRuYW1lGAIgASgJEg0KBWdyb3VwGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhoKEm9ubHlfbmV3X3Jlc291cmNlcxgFIAEoCCKyAwoNUHJvdmlkZXJJbnB1dBIiCgR0cmVlGAEgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZRIVCg1hYnNvbHV0ZV9wYXRoGAIgASgJEjMKDHByb2plY3RfaW5mbxgDIAEoCzIdLmluZnJhY29zdC5wbHVnaW4uUHJvamVjdEluZm8SIwobcHJldmlvdXNfcmVzb3VyY2VfYWRkcmVzc2VzGAQgAygJEiUKBXVzYWdlGAUgASgLMhYuaW5mcmFjb3N0LnVzYWdlLlVzYWdlEkkKFGZpbm9wc19wb2xpY3lfY29uZmlnGAYgASgLMisuaW5mcmFjb3N0LnBsdWdpbi5GaW5vcHNQb2xpY3lDb25maWd1cmF0aW9uEiwKCGZlYXR1cmVzGAcgASgLMhouaW5mcmFjb3N0LnBsdWdpbi5GZWF0dXJlcxI0CghzZXR0aW5ncxgIIAEoCzIiLmluZnJhY29zdC5wbHVnaW4uUHJvdmlkZXJTZXR0aW5ncxI2CglpbmZyYWNvc3QYCSABKAsyIy5pbmZyYWNvc3QucGx1Z2luLkluZnJhY29zdFNldHRpbmdzIj0KEFByb3ZpZGVyU2V0dGluZ3MSEAoIY3VycmVuY3kYASABKAkSFwoPdXNlX2Rpc2tfY2FjaGVzGAIgASgIInQKEUluZnJhY29zdFNldHRpbmdzEg8KB2FwaV9rZXkYASABKAkSHAoUcHJpY2luZ19hcGlfZW5kcG9pbnQYAiABKAkSEAoIdHJhY2VfaWQYAyABKAkSEwoGb3JnX2lkGAQgASgJSACIAQFCCQoHX29yZ19pZCKOAQoIRmVhdHVyZXMSHAoUZW5hYmxlX3ByaWNlX2xvb2t1cHMYASABKAgSHgoWZW5hYmxlX3JlY29tbWVuZGF0aW9ucxgCIAEoCBIeChZlbmFibGVfZmlub3BzX3BvbGljaWVzGAMgASgIEiQKHGVuYWJsZV9lbnZpcm9ubWVudGFsX21ldHJpY3MYBCABKAgiWgoLUHJvamVjdEluZm8SDAoEbmFtZRgBIAEoCRITCgticmFuY2hfbmFtZRgCIAEoCRIRCgl3b3Jrc3BhY2UYAyABKAkSFQoNaXNfcHJvZHVjdGlvbhgEIAEoCCJbChlGaW5vcHNQb2xpY3lDb25maWd1cmF0aW9uEj4KCHBvbGljaWVzGAEgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncyJ9Cg5Qcm92aWRlck91dHB1dBItCglyZXNvdXJjZXMYASADKAsyGi5pbmZyYWNvc3QucGx1Z2luLlJlc291cmNlEjwKDmZpbm9wc19yZXN1bHRzGAIgAygLMiQuaW5mcmFjb3N0LnBsdWdpbi5GaW5vcHNQb2xpY3lSZXN1bHQiyQMKCFJlc291cmNlEgoKAmlkGAEgASgJEgwKBHR5cGUYAiABKAkSDAoEbmFtZRgDIAEoCRIOCgZyZWdpb24YBCABKAkSNAoIbWV0YWRhdGEYBSABKAsyIi5pbmZyYWNvc3QucGx1Z2luLlJlc291cmNlTWV0YWRhdGESFQoNcHJvdmlkZXJfbGluaxgGIAEoCRIUCgxpc19zdXBwb3J0ZWQYByABKAgSDwoHaXNfZnJlZRgIIAEoCBIdChVpc19wcm92aWRlcl9zdXBwb3J0ZWQYCSABKAgSMAoGYWN0aW9uGAogASgOMiAuaW5mcmFjb3N0LnBsdWdpbi5SZXNvdXJjZUFjdGlvbhIuCgVjb3N0cxgLIAEoCzIfLmluZnJhY29zdC5wbHVnaW4uUmVzb3VyY2VDb3N0cxIqCgd0YWdnaW5nGAwgASgLMhkuaW5mcmFjb3N0LnBsdWdpbi5UYWdnaW5nEjMKD2NoaWxkX3Jlc291cmNlcxgNIAMoCzIaLmluZnJhY29zdC5wbHVnaW4uUmVzb3VyY2USLwoKY2FsbF9zdGFjaxgOIAEoCzIbLmluZnJhY29zdC5wYXJzZXIuQ2FsbFN0YWNrIu4BChBSZXNvdXJjZU1ldGFkYXRhEhAKCGZpbGVuYW1lGAEgASgJEhIKCnN0YXJ0X2xpbmUYAiABKAMSEAoIZW5kX2xpbmUYAyABKAMSMgoMbW9kdWxlX2NhbGxzGAQgAygLMhwuaW5mcmFjb3N0LnBsdWdpbi5Nb2R1bGVDYWxsEhYKDmJhc2ljX2NoZWNrc3VtGAUgASgJEhUKDWRlZXBfY2hlY2tzdW0YBiABKAkSHQoVZGVmYXVsdF90YWdzX2NoZWNrc3VtGAcgASgJEiAKGGF0dHJpYnV0ZV92YWx1ZV9jaGVja3N1bRgIIAEoCSJdCgpNb2R1bGVDYWxsEhcKD2RlZmluaXRpb25fbmFtZRgBIAEoCRIQCghmaWxlbmFtZRgCIAEoCRISCgpzdGFydF9saW5lGAMgASgDEhAKCGVuZF9saW5lGAQgASgDIqsBCgdUYWdnaW5nEiMKBHRhZ3MYASADKAsyFS5pbmZyYWNvc3QucGx1Z2luLlRhZxIVCg1zdXBwb3J0c190YWdzGAIgASgIEh0KFXN1cHBvcnRzX2RlZmF1bHRfdGFncxgDIAEoCBJFChRwcm9wYWdhdGlvbl9wcm9ibGVtcxgEIAMoCzInLmluZnJhY29zdC5wbHVnaW4uVGFnUHJvcGFnYXRpb25Qcm9ibGVtImsKA1RhZxILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAkSEgoKaXNfZGVmYXVsdBgDIAEoCBIYChBpc19rZXlfc3ludGhldGljGAQgASgIEhoKEmlzX3ZhbHVlX3N5bnRoZXRpYxgFIAEoCCKEAQoVVGFnUHJvcGFnYXRpb25Qcm9ibGVtEhQKDGFjdHVhbF92YWx1ZRgBIAEoCRIUCgx2YWxpZF92YWx1ZXMYAiADKAkSEQoJYXR0cmlidXRlGAMgASgJEhUKDXRhZ19yZWNpcGllbnQYBCABKAkSFQoNYWZmZWN0ZWRfdGFncxgFIAMoCSJECg1SZXNvdXJjZUNvc3RzEjMKCmNvbXBvbmVudHMYASADKAsyHy5pbmZyYWNvc3QucGx1Z2luLkNvc3RDb21wb25lbnQizQIKDUNvc3RDb21wb25lbnQSDAoEbmFtZRgBIAEoCRIMCgR1bml0GAIgASgJEhMKC3VzYWdlX2Jhc2VkGAMgASgIEhcKD3ByaWNlX25vdF9mb3VuZBgEIAEoCBIbChNwcmljZV93YXNfaGFyZGNvZGVkGAUgASgIEjMKDHBlcmlvZF9wcmljZRgGIAEoCzIdLmluZnJhY29zdC5wbHVnaW4uUGVyaW9kUHJpY2USKQoIcXVhbnRpdHkYByABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ei4KDWRpc2NvdW50X3JhdGUYCCABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0EkUKFWVudmlyb25tZW50YWxfbWV0cmljcxgJIAEoCzImLmluZnJhY29zdC5wbHVnaW4uRW52aXJvbm1lbnRhbE1ldHJpY3MiXwoLUGVyaW9kUHJpY2USJgoFcHJpY2UYASABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0EigKBnBlcmlvZBgCIAEoDjIYLmluZnJhY29zdC5wbHVnaW4uUGVyaW9kIqMBChRFbnZpcm9ubWVudGFsTWV0cmljcxIoCgZwZXJpb2QYASABKA4yGC5pbmZyYWNvc3QucGx1Z2luLlBlcmlvZBIyChFjYXJib25fZ3JhbXNfY28yZRgCIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQSLQoMd2F0ZXJfbGl0ZXJzGAMgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdCK9AgoSRmlub3BzUG9saWN5UmVzdWx0EhEKCXBvbGljeV9pZBgBIAEoCRITCgtwb2xpY3lfbmFtZRgCIAEoCRITCgtwb2xpY3lfc2x1ZxgDIAEoCRIWCg5wb2xpY3lfbWVzc2FnZRgEIAEoCRIcChRwYXNzaW5nX3Jlc291cmNlX2lkcxgFIAMoCRJIChFmYWlsaW5nX3Jlc291cmNlcxgGIAMoCzItLmluZnJhY29zdC5wbHVnaW4uRmlub3BzUG9saWN5RmFpbGluZ1Jlc291cmNlEhoKEmJsb2NrX3B1bGxfcmVxdWVzdBgHIAEoCBInCh9pbmNsdWRlX2luX3B1bGxfcmVxdWVzdF9jb21tZW50GAggASgIEiUKHW9ubHlfYXBwbGllc190b19uZXdfcmVzb3VyY2VzGAkgASgIIv8BChtGaW5vcHNQb2xpY3lGYWlsaW5nUmVzb3VyY2USCgoCaWQYASABKAkSFQoNY2F1c2VfYWRkcmVzcxgCIAEoCRI1CgZpc3N1ZXMYAyADKAsyJS5pbmZyYWNvc3QucGx1Z2luLkZpbm9wc1Jlc291cmNlSXNzdWUSDAoEcGF0aBgEIAEoCRISCgpzdGFydF9saW5lGAUgASgDEhMKC21vZHVsZV9wYXRoGAYgASgJEhgKEG1vZHVsZV9jYWxsX3BhdGgYByABKAkSHgoWbW9kdWxlX2NhbGxfc3RhcnRfbGluZRgIIAEoAxIVCg1wcm9qZWN0X25hbWVzGAkgAygJIrYDChNGaW5vcHNSZXNvdXJjZUlzc3VlEjAKD21vbnRobHlfc2F2aW5ncxgBIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQSQgohbW9udGhseV9jYXJib25fc2F2aW5nc19ncmFtc19jbzJlGAIgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdBI9Chxtb250aGx5X3dhdGVyX3NhdmluZ3NfbGl0ZXJzGAMgASgLMhcuaW5mcmFjb3N0LnJhdGlvbmFsLlJhdBIPCgdhZGRyZXNzGAQgASgJEhEKCWF0dHJpYnV0ZRgFIAEoCRITCgtkZXNjcmlwdGlvbhgGIAEoCRIcCg9zYXZpbmdzX2RldGFpbHMYByABKAlIAIgBARI/ChViZWZvcmVfZml4X2JyZWFrZG93bnMYCCADKAsyIC5pbmZyYWNvc3QucGx1Z2luLklzc3VlQnJlYWtkb3duEj4KFGFmdGVyX2ZpeF9icmVha2Rvd25zGAkgAygLMiAuaW5mcmFjb3N0LnBsdWdpbi5Jc3N1ZUJyZWFrZG93bkISChBfc2F2aW5nc19kZXRhaWxzIq4BCg5Jc3N1ZUJyZWFrZG93bhIVCg1yZXNvdXJjZV9uYW1lGAEgASgJEg4KBnJlZ2lvbhgCIAEoCRI9Cg9jb3N0X2NvbXBvbmVudHMYAyADKAsyJC5pbmZyYWNvc3QucGx1Z2luLklzc3VlQ29zdENvbXBvbmVudBI2CgxzdWJyZXNvdXJjZXMYBCADKAsyIC5pbmZyYWNvc3QucGx1Z2luLklzc3VlQnJlYWtkb3duItUBChJJc3N1ZUNvc3RDb21wb25lbnQSDAoEbmFtZRgBIAEoCRIMCgR1bml0GAIgASgJEhMKC3VzYWdlX2Jhc2VkGAMgASgIEjMKDHBlcmlvZF9wcmljZRgEIAEoCzIdLmluZnJhY29zdC5wbHVnaW4uUGVyaW9kUHJpY2USKQoIcXVhbnRpdHkYBSABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ei4KDWRpc2NvdW50X3JhdGUYBiABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Kl8KDlJlc291cmNlQWN0aW9uEh8KG1JFU09VUkNFX0FDVElPTl9VTlNQRUNJRklFRBAAEggKBE5PT1AQARIKCgZDUkVBVEUQAhIKCgZNT0RJRlkQAxIKCgZERUxFVEUQBCo1CgZQZXJpb2QSFgoSUEVSSU9EX1VOU1BFQ0lGSUVEEAASCQoFTU9OVEgQARIICgRIT1VSEAIy0gEKD1Byb3ZpZGVyU2VydmljZRJOCgdQcm9jZXNzEiAuaW5mcmFjb3N0LnBsdWdpbi5Qcm9jZXNzUmVxdWVzdBohLmluZnJhY29zdC5wbHVnaW4uUHJvY2Vzc1Jlc3BvbnNlEm8KEkxpc3RGaW5vcHNQb2xpY2llcxIrLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVxdWVzdBosLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2VCugEKFGNvbS5pbmZyYWNvc3QucGx1Z2luQg1Qcm92aWRlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_parser_diagnostic, file_infracost_parser_event_runparameters, file_infracost_parser_stack, file_infracost_rational_rational, file_infracost_tree_tree, file_infracost_usage_usage]);
+  fileDesc("Ch9pbmZyYWNvc3QvcGx1Z2luL3Byb3ZpZGVyLnByb3RvEhBpbmZyYWNvc3QucGx1Z2luIj4KDlByb2Nlc3NSZXF1ZXN0EiwKBWlucHV0GAEgASgLMh0uaW5mcmFjb3N0LnByb3ZpZGVyLlRyZWVJbnB1dCI9Cg9Qcm9jZXNzUmVzcG9uc2USKgoGb3V0cHV0GAEgASgLMhouaW5mcmFjb3N0LnByb3ZpZGVyLk91dHB1dCIbChlMaXN0Rmlub3BzUG9saWNpZXNSZXF1ZXN0Ik4KGkxpc3RGaW5vcHNQb2xpY2llc1Jlc3BvbnNlEjAKCHBvbGljaWVzGAEgAygLMh4uaW5mcmFjb3N0LnBsdWdpbi5GaW5vcHNQb2xpY3kiagoMRmlub3BzUG9saWN5EgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRINCgVncm91cBgDIAEoCRITCgtkZXNjcmlwdGlvbhgEIAEoCRIaChJvbmx5X25ld19yZXNvdXJjZXMYBSABKAgy0gEKD1Byb3ZpZGVyU2VydmljZRJOCgdQcm9jZXNzEiAuaW5mcmFjb3N0LnBsdWdpbi5Qcm9jZXNzUmVxdWVzdBohLmluZnJhY29zdC5wbHVnaW4uUHJvY2Vzc1Jlc3BvbnNlEm8KEkxpc3RGaW5vcHNQb2xpY2llcxIrLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVxdWVzdBosLmluZnJhY29zdC5wbHVnaW4uTGlzdEZpbm9wc1BvbGljaWVzUmVzcG9uc2VCugEKFGNvbS5pbmZyYWNvc3QucGx1Z2luQg1Qcm92aWRlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_provider_output, file_infracost_provider_tree]);
 
 /**
  * Describes the message infracost.plugin.ProcessRequest.
@@ -50,184 +46,6 @@ export const ListFinopsPoliciesResponseSchema = /*@__PURE__*/
  */
 export const FinopsPolicySchema = /*@__PURE__*/
   messageDesc(file_infracost_plugin_provider, 4);
-
-/**
- * Describes the message infracost.plugin.ProviderInput.
- * Use `create(ProviderInputSchema)` to create a new message.
- */
-export const ProviderInputSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 5);
-
-/**
- * Describes the message infracost.plugin.ProviderSettings.
- * Use `create(ProviderSettingsSchema)` to create a new message.
- */
-export const ProviderSettingsSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 6);
-
-/**
- * Describes the message infracost.plugin.InfracostSettings.
- * Use `create(InfracostSettingsSchema)` to create a new message.
- */
-export const InfracostSettingsSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 7);
-
-/**
- * Describes the message infracost.plugin.Features.
- * Use `create(FeaturesSchema)` to create a new message.
- */
-export const FeaturesSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 8);
-
-/**
- * Describes the message infracost.plugin.ProjectInfo.
- * Use `create(ProjectInfoSchema)` to create a new message.
- */
-export const ProjectInfoSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 9);
-
-/**
- * Describes the message infracost.plugin.FinopsPolicyConfiguration.
- * Use `create(FinopsPolicyConfigurationSchema)` to create a new message.
- */
-export const FinopsPolicyConfigurationSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 10);
-
-/**
- * Describes the message infracost.plugin.ProviderOutput.
- * Use `create(ProviderOutputSchema)` to create a new message.
- */
-export const ProviderOutputSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 11);
-
-/**
- * Describes the message infracost.plugin.Resource.
- * Use `create(ResourceSchema)` to create a new message.
- */
-export const ResourceSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 12);
-
-/**
- * Describes the message infracost.plugin.ResourceMetadata.
- * Use `create(ResourceMetadataSchema)` to create a new message.
- */
-export const ResourceMetadataSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 13);
-
-/**
- * Describes the message infracost.plugin.ModuleCall.
- * Use `create(ModuleCallSchema)` to create a new message.
- */
-export const ModuleCallSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 14);
-
-/**
- * Describes the message infracost.plugin.Tagging.
- * Use `create(TaggingSchema)` to create a new message.
- */
-export const TaggingSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 15);
-
-/**
- * Describes the message infracost.plugin.Tag.
- * Use `create(TagSchema)` to create a new message.
- */
-export const TagSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 16);
-
-/**
- * Describes the message infracost.plugin.TagPropagationProblem.
- * Use `create(TagPropagationProblemSchema)` to create a new message.
- */
-export const TagPropagationProblemSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 17);
-
-/**
- * Describes the message infracost.plugin.ResourceCosts.
- * Use `create(ResourceCostsSchema)` to create a new message.
- */
-export const ResourceCostsSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 18);
-
-/**
- * Describes the message infracost.plugin.CostComponent.
- * Use `create(CostComponentSchema)` to create a new message.
- */
-export const CostComponentSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 19);
-
-/**
- * Describes the message infracost.plugin.PeriodPrice.
- * Use `create(PeriodPriceSchema)` to create a new message.
- */
-export const PeriodPriceSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 20);
-
-/**
- * Describes the message infracost.plugin.EnvironmentalMetrics.
- * Use `create(EnvironmentalMetricsSchema)` to create a new message.
- */
-export const EnvironmentalMetricsSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 21);
-
-/**
- * Describes the message infracost.plugin.FinopsPolicyResult.
- * Use `create(FinopsPolicyResultSchema)` to create a new message.
- */
-export const FinopsPolicyResultSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 22);
-
-/**
- * Describes the message infracost.plugin.FinopsPolicyFailingResource.
- * Use `create(FinopsPolicyFailingResourceSchema)` to create a new message.
- */
-export const FinopsPolicyFailingResourceSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 23);
-
-/**
- * Describes the message infracost.plugin.FinopsResourceIssue.
- * Use `create(FinopsResourceIssueSchema)` to create a new message.
- */
-export const FinopsResourceIssueSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 24);
-
-/**
- * Describes the message infracost.plugin.IssueBreakdown.
- * Use `create(IssueBreakdownSchema)` to create a new message.
- */
-export const IssueBreakdownSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 25);
-
-/**
- * Describes the message infracost.plugin.IssueCostComponent.
- * Use `create(IssueCostComponentSchema)` to create a new message.
- */
-export const IssueCostComponentSchema = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_provider, 26);
-
-/**
- * Describes the enum infracost.plugin.ResourceAction.
- */
-export const ResourceActionSchema = /*@__PURE__*/
-  enumDesc(file_infracost_plugin_provider, 0);
-
-/**
- * @generated from enum infracost.plugin.ResourceAction
- */
-export const ResourceAction = /*@__PURE__*/
-  tsEnum(ResourceActionSchema);
-
-/**
- * Describes the enum infracost.plugin.Period.
- */
-export const PeriodSchema = /*@__PURE__*/
-  enumDesc(file_infracost_plugin_provider, 1);
-
-/**
- * @generated from enum infracost.plugin.Period
- */
-export const Period = /*@__PURE__*/
-  tsEnum(PeriodSchema);
 
 /**
  * @generated from service infracost.plugin.ProviderService
