@@ -36,7 +36,9 @@ type IndexData struct {
 	// all projects discovered/parsed during the indexing (optional)
 	IndexedProjects []*IndexedProject `protobuf:"bytes,5,rep,name=indexed_projects,json=indexedProjects,proto3" json:"indexed_projects,omitempty"`
 	// repo id
-	RepoId        string `protobuf:"bytes,6,opt,name=repo_id,json=repoId,proto3" json:"repo_id,omitempty"`
+	RepoId string `protobuf:"bytes,6,opt,name=repo_id,json=repoId,proto3" json:"repo_id,omitempty"`
+	// the repo name
+	RepoName      string `protobuf:"bytes,7,opt,name=repo_name,json=repoName,proto3" json:"repo_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,6 +111,13 @@ func (x *IndexData) GetIndexedProjects() []*IndexedProject {
 func (x *IndexData) GetRepoId() string {
 	if x != nil {
 		return x.RepoId
+	}
+	return ""
+}
+
+func (x *IndexData) GetRepoName() string {
+	if x != nil {
+		return x.RepoName
 	}
 	return ""
 }
@@ -336,7 +345,7 @@ var File_infracost_codesearch_codesearch_proto protoreflect.FileDescriptor
 
 const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
-	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xfb\x01\n" +
+	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\x98\x02\n" +
 	"\tIndexData\x12\x15\n" +
 	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x10\n" +
@@ -345,7 +354,8 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"attributes\x18\x04 \x01(\v2 .infracost.codesearch.AttributesR\n" +
 	"attributes\x12O\n" +
 	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\x12\x17\n" +
-	"\arepo_id\x18\x06 \x01(\tR\x06repoId\"\xb9\x01\n" +
+	"\arepo_id\x18\x06 \x01(\tR\x06repoId\x12\x1b\n" +
+	"\trepo_name\x18\a \x01(\tR\brepoName\"\xb9\x01\n" +
 	"\x0eIndexedProject\x12@\n" +
 	"\n" +
 	"attributes\x18\x01 \x01(\v2 .infracost.codesearch.AttributesR\n" +
