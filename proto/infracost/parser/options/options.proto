@@ -30,6 +30,8 @@ message GenericOptions {
   RemoteModuleCacheConfig remote_module_cache_config = 12;
   // Optional request to extract dependencies for a specific resource during parsing
   optional DependencyRequest dependency_request = 13;
+  // Enable http first git normalization
+  bool enable_git_normalization = 14;
 }
 
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.
