@@ -210,7 +210,14 @@ type Resource struct {
 	// Child resources e.g. a disk belonging to a VM, defined as part of a greater resource
 	ChildResources []*Resource `protobuf:"bytes,13,rep,name=child_resources,json=childResources,proto3" json:"child_resources,omitempty"`
 	// the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
-	CallStack     *parser.CallStack `protobuf:"bytes,14,opt,name=call_stack,json=callStack,proto3" json:"call_stack,omitempty"`
+	CallStack *parser.CallStack `protobuf:"bytes,14,opt,name=call_stack,json=callStack,proto3" json:"call_stack,omitempty"`
+	// metric_labels are low-cardinality, non-PII dimensions a plugin attaches to a
+	// resource for usage telemetry — e.g. {"model": "claude-opus-4-8", "sdk":
+	// "@anthropic-ai/sdk"}. This is intentionally generic: any plugin, including
+	// third parties who cannot change this schema, can surface its own dimensions,
+	// and the CLI aggregates them into the run event without domain knowledge.
+	// Never put PII, secrets, or high-cardinality values (ids, prompt text) here.
+	MetricLabels  map[string]string `protobuf:"bytes,15,rep,name=metric_labels,json=metricLabels,proto3" json:"metric_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -339,6 +346,13 @@ func (x *Resource) GetChildResources() []*Resource {
 func (x *Resource) GetCallStack() *parser.CallStack {
 	if x != nil {
 		return x.CallStack
+	}
+	return nil
+}
+
+func (x *Resource) GetMetricLabels() map[string]string {
+	if x != nil {
+		return x.MetricLabels
 	}
 	return nil
 }
@@ -1670,7 +1684,7 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\x1finfracost/provider/output.proto\x12\x12infracost.provider\x1a\x1cinfracost/parser/stack.proto\x1a!infracost/rational/rational.proto\"\x93\x01\n" +
 	"\x06Output\x12:\n" +
 	"\tresources\x18\x01 \x03(\v2\x1c.infracost.provider.ResourceR\tresources\x12M\n" +
-	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\"\xe0\x04\n" +
+	"\x0efinops_results\x18\x02 \x03(\v2&.infracost.provider.FinopsPolicyResultR\rfinopsResults\"\xf6\x05\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
@@ -1687,7 +1701,11 @@ const file_infracost_provider_output_proto_rawDesc = "" +
 	"\atagging\x18\f \x01(\v2\x1b.infracost.provider.TaggingR\atagging\x12E\n" +
 	"\x0fchild_resources\x18\r \x03(\v2\x1c.infracost.provider.ResourceR\x0echildResources\x12:\n" +
 	"\n" +
-	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\"\xe5\x02\n" +
+	"call_stack\x18\x0e \x01(\v2\x1b.infracost.parser.CallStackR\tcallStack\x12S\n" +
+	"\rmetric_labels\x18\x0f \x03(\v2..infracost.provider.Resource.MetricLabelsEntryR\fmetricLabels\x1a?\n" +
+	"\x11MetricLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe5\x02\n" +
 	"\x10ResourceMetadata\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1d\n" +
 	"\n" +
@@ -1837,7 +1855,7 @@ func file_infracost_provider_output_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_provider_output_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_infracost_provider_output_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_infracost_provider_output_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_infracost_provider_output_proto_goTypes = []any{
 	(ResourceAction)(0),                 // 0: infracost.provider.ResourceAction
 	(Period)(0),                         // 1: infracost.provider.Period
@@ -1858,8 +1876,9 @@ var file_infracost_provider_output_proto_goTypes = []any{
 	(*IssueBreakdown)(nil),              // 16: infracost.provider.IssueBreakdown
 	(*IssueCostComponent)(nil),          // 17: infracost.provider.IssueCostComponent
 	(*InvalidTag)(nil),                  // 18: infracost.provider.InvalidTag
-	(*parser.CallStack)(nil),            // 19: infracost.parser.CallStack
-	(*rational.Rat)(nil),                // 20: infracost.rational.Rat
+	nil,                                 // 19: infracost.provider.Resource.MetricLabelsEntry
+	(*parser.CallStack)(nil),            // 20: infracost.parser.CallStack
+	(*rational.Rat)(nil),                // 21: infracost.rational.Rat
 }
 var file_infracost_provider_output_proto_depIdxs = []int32{
 	3,  // 0: infracost.provider.Output.resources:type_name -> infracost.provider.Resource
@@ -1869,37 +1888,38 @@ var file_infracost_provider_output_proto_depIdxs = []int32{
 	9,  // 4: infracost.provider.Resource.costs:type_name -> infracost.provider.ResourceCosts
 	6,  // 5: infracost.provider.Resource.tagging:type_name -> infracost.provider.Tagging
 	3,  // 6: infracost.provider.Resource.child_resources:type_name -> infracost.provider.Resource
-	19, // 7: infracost.provider.Resource.call_stack:type_name -> infracost.parser.CallStack
-	5,  // 8: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
-	7,  // 9: infracost.provider.Tagging.tags:type_name -> infracost.provider.Tag
-	8,  // 10: infracost.provider.Tagging.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
-	10, // 11: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
-	11, // 12: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
-	20, // 13: infracost.provider.CostComponent.quantity:type_name -> infracost.rational.Rat
-	20, // 14: infracost.provider.CostComponent.discount_rate:type_name -> infracost.rational.Rat
-	12, // 15: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
-	20, // 16: infracost.provider.PeriodPrice.price:type_name -> infracost.rational.Rat
-	1,  // 17: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
-	1,  // 18: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
-	20, // 19: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
-	20, // 20: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
-	14, // 21: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
-	15, // 22: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
-	20, // 23: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
-	20, // 24: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
-	20, // 25: infracost.provider.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
-	16, // 26: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
-	16, // 27: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
-	17, // 28: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent
-	16, // 29: infracost.provider.IssueBreakdown.subresources:type_name -> infracost.provider.IssueBreakdown
-	11, // 30: infracost.provider.IssueCostComponent.period_price:type_name -> infracost.provider.PeriodPrice
-	20, // 31: infracost.provider.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
-	20, // 32: infracost.provider.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	20, // 7: infracost.provider.Resource.call_stack:type_name -> infracost.parser.CallStack
+	19, // 8: infracost.provider.Resource.metric_labels:type_name -> infracost.provider.Resource.MetricLabelsEntry
+	5,  // 9: infracost.provider.ResourceMetadata.module_calls:type_name -> infracost.provider.ModuleCall
+	7,  // 10: infracost.provider.Tagging.tags:type_name -> infracost.provider.Tag
+	8,  // 11: infracost.provider.Tagging.propagation_problems:type_name -> infracost.provider.TagPropagationProblem
+	10, // 12: infracost.provider.ResourceCosts.components:type_name -> infracost.provider.CostComponent
+	11, // 13: infracost.provider.CostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	21, // 14: infracost.provider.CostComponent.quantity:type_name -> infracost.rational.Rat
+	21, // 15: infracost.provider.CostComponent.discount_rate:type_name -> infracost.rational.Rat
+	12, // 16: infracost.provider.CostComponent.environmental_metrics:type_name -> infracost.provider.EnvironmentalMetrics
+	21, // 17: infracost.provider.PeriodPrice.price:type_name -> infracost.rational.Rat
+	1,  // 18: infracost.provider.PeriodPrice.period:type_name -> infracost.provider.Period
+	1,  // 19: infracost.provider.EnvironmentalMetrics.period:type_name -> infracost.provider.Period
+	21, // 20: infracost.provider.EnvironmentalMetrics.carbon_grams_co2e:type_name -> infracost.rational.Rat
+	21, // 21: infracost.provider.EnvironmentalMetrics.water_liters:type_name -> infracost.rational.Rat
+	14, // 22: infracost.provider.FinopsPolicyResult.failing_resources:type_name -> infracost.provider.FinopsPolicyFailingResource
+	15, // 23: infracost.provider.FinopsPolicyFailingResource.issues:type_name -> infracost.provider.FinopsResourceIssue
+	21, // 24: infracost.provider.FinopsResourceIssue.monthly_savings:type_name -> infracost.rational.Rat
+	21, // 25: infracost.provider.FinopsResourceIssue.monthly_carbon_savings_grams_co2e:type_name -> infracost.rational.Rat
+	21, // 26: infracost.provider.FinopsResourceIssue.monthly_water_savings_liters:type_name -> infracost.rational.Rat
+	16, // 27: infracost.provider.FinopsResourceIssue.before_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	16, // 28: infracost.provider.FinopsResourceIssue.after_fix_breakdowns:type_name -> infracost.provider.IssueBreakdown
+	17, // 29: infracost.provider.IssueBreakdown.cost_components:type_name -> infracost.provider.IssueCostComponent
+	16, // 30: infracost.provider.IssueBreakdown.subresources:type_name -> infracost.provider.IssueBreakdown
+	11, // 31: infracost.provider.IssueCostComponent.period_price:type_name -> infracost.provider.PeriodPrice
+	21, // 32: infracost.provider.IssueCostComponent.quantity:type_name -> infracost.rational.Rat
+	21, // 33: infracost.provider.IssueCostComponent.discount_rate:type_name -> infracost.rational.Rat
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_infracost_provider_output_proto_init() }
@@ -1915,7 +1935,7 @@ func file_infracost_provider_output_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_provider_output_proto_rawDesc), len(file_infracost_provider_output_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

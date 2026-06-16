@@ -140,6 +140,18 @@ export declare type Resource = Message<"infracost.provider.Resource"> & {
    * @generated from field: infracost.parser.CallStack call_stack = 14;
    */
   callStack?: CallStack;
+
+  /**
+   * metric_labels are low-cardinality, non-PII dimensions a plugin attaches to a
+   * resource for usage telemetry — e.g. {"model": "claude-opus-4-8", "sdk":
+   * "@anthropic-ai/sdk"}. This is intentionally generic: any plugin, including
+   * third parties who cannot change this schema, can surface its own dimensions,
+   * and the CLI aggregates them into the run event without domain knowledge.
+   * Never put PII, secrets, or high-cardinality values (ids, prompt text) here.
+   *
+   * @generated from field: map<string, string> metric_labels = 15;
+   */
+  metricLabels: { [key: string]: string };
 };
 
 /**

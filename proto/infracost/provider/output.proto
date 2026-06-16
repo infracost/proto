@@ -41,6 +41,13 @@ message Resource {
   repeated Resource child_resources = 13;
   // the stack trace for this resource - e.g. module.X -> module.X.module.Y -> module.X.module.Y.resource.Z
   parser.CallStack call_stack = 14;
+  // metric_labels are low-cardinality, non-PII dimensions a plugin attaches to a
+  // resource for usage telemetry — e.g. {"model": "claude-opus-4-8", "sdk":
+  // "@anthropic-ai/sdk"}. This is intentionally generic: any plugin, including
+  // third parties who cannot change this schema, can surface its own dimensions,
+  // and the CLI aggregates them into the run event without domain knowledge.
+  // Never put PII, secrets, or high-cardinality values (ids, prompt text) here.
+  map<string, string> metric_labels = 15;
 }
 
 enum ResourceAction {
