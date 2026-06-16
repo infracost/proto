@@ -102,8 +102,10 @@ type GenericOptions struct {
 	RemoteModuleCacheConfig *RemoteModuleCacheConfig `protobuf:"bytes,12,opt,name=remote_module_cache_config,json=remoteModuleCacheConfig,proto3" json:"remote_module_cache_config,omitempty"`
 	// Optional request to extract dependencies for a specific resource during parsing
 	DependencyRequest *DependencyRequest `protobuf:"bytes,13,opt,name=dependency_request,json=dependencyRequest,proto3,oneof" json:"dependency_request,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Enable http first git normalization
+	EnableGitNormalization bool `protobuf:"varint,14,opt,name=enable_git_normalization,json=enableGitNormalization,proto3" json:"enable_git_normalization,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -225,6 +227,13 @@ func (x *GenericOptions) GetDependencyRequest() *DependencyRequest {
 		return x.DependencyRequest
 	}
 	return nil
+}
+
+func (x *GenericOptions) GetEnableGitNormalization() bool {
+	if x != nil {
+		return x.EnableGitNormalization
+	}
+	return false
 }
 
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.
@@ -610,7 +619,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xc3\x06\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xfd\x06\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -625,7 +634,8 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	" \x01(\bR\x0esparseCheckout\x12H\n" +
 	"\fproxy_router\x18\v \x01(\v2%.infracost.parser.options.ProxyRouterR\vproxyRouter\x12n\n" +
 	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\x12_\n" +
-	"\x12dependency_request\x18\r \x01(\v2+.infracost.parser.options.DependencyRequestH\x00R\x11dependencyRequest\x88\x01\x01B\x15\n" +
+	"\x12dependency_request\x18\r \x01(\v2+.infracost.parser.options.DependencyRequestH\x00R\x11dependencyRequest\x88\x01\x01\x128\n" +
+	"\x18enable_git_normalization\x18\x0e \x01(\bR\x16enableGitNormalizationB\x15\n" +
 	"\x13_dependency_request\"\xcb\x01\n" +
 	"\x11DependencyRequest\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +

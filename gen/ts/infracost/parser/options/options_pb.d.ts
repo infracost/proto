@@ -105,6 +105,13 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: optional infracost.parser.options.DependencyRequest dependency_request = 13;
    */
   dependencyRequest?: DependencyRequest;
+
+  /**
+   * Enable http first git normalization
+   *
+   * @generated from field: bool enable_git_normalization = 14;
+   */
+  enableGitNormalization: boolean;
 };
 
 /**
