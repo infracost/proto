@@ -32,6 +32,8 @@ message GenericOptions {
   optional DependencyRequest dependency_request = 13;
   // Enable http first git normalization
   bool enable_git_normalization = 14;
+  // Disables the Terraform Graph Cache
+  bool disable_graph_cache = 15;
 }
 
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.

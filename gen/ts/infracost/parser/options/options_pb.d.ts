@@ -112,6 +112,13 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: bool enable_git_normalization = 14;
    */
   enableGitNormalization: boolean;
+
+  /**
+   * Disables the Terraform Graph Cache
+   *
+   * @generated from field: bool disable_graph_cache = 15;
+   */
+  disableGraphCache: boolean;
 };
 
 /**

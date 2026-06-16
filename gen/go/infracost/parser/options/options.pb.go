@@ -104,8 +104,10 @@ type GenericOptions struct {
 	DependencyRequest *DependencyRequest `protobuf:"bytes,13,opt,name=dependency_request,json=dependencyRequest,proto3,oneof" json:"dependency_request,omitempty"`
 	// Enable http first git normalization
 	EnableGitNormalization bool `protobuf:"varint,14,opt,name=enable_git_normalization,json=enableGitNormalization,proto3" json:"enable_git_normalization,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Disables the Terraform Graph Cache
+	DisableGraphCache bool `protobuf:"varint,15,opt,name=disable_graph_cache,json=disableGraphCache,proto3" json:"disable_graph_cache,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -232,6 +234,13 @@ func (x *GenericOptions) GetDependencyRequest() *DependencyRequest {
 func (x *GenericOptions) GetEnableGitNormalization() bool {
 	if x != nil {
 		return x.EnableGitNormalization
+	}
+	return false
+}
+
+func (x *GenericOptions) GetDisableGraphCache() bool {
+	if x != nil {
+		return x.DisableGraphCache
 	}
 	return false
 }
@@ -619,7 +628,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xfd\x06\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xad\a\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -635,7 +644,8 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\fproxy_router\x18\v \x01(\v2%.infracost.parser.options.ProxyRouterR\vproxyRouter\x12n\n" +
 	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\x12_\n" +
 	"\x12dependency_request\x18\r \x01(\v2+.infracost.parser.options.DependencyRequestH\x00R\x11dependencyRequest\x88\x01\x01\x128\n" +
-	"\x18enable_git_normalization\x18\x0e \x01(\bR\x16enableGitNormalizationB\x15\n" +
+	"\x18enable_git_normalization\x18\x0e \x01(\bR\x16enableGitNormalization\x12.\n" +
+	"\x13disable_graph_cache\x18\x0f \x01(\bR\x11disableGraphCacheB\x15\n" +
 	"\x13_dependency_request\"\xcb\x01\n" +
 	"\x11DependencyRequest\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
