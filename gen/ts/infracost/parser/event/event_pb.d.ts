@@ -490,6 +490,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_iac_agnostic_scanning = 8;
    */
   enableIacAgnosticScanning: boolean;
+
+  /**
+   * @generated from field: bool enable_native_checkout = 9;
+   */
+  enableNativeCheckout: boolean;
 };
 
 /**
