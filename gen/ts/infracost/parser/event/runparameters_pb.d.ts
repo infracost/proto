@@ -55,6 +55,30 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: optional string config_template = 8;
    */
   configTemplate?: string;
+
+  /**
+   * @generated from field: optional string run_id = 9;
+   */
+  runId?: string;
+
+  /**
+   * ISO 4217 currency code e.g. USD
+   *
+   * @generated from field: string currency = 10;
+   */
+  currency: string;
+
+  /**
+   * project cost baselines for guardrails
+   *
+   * @generated from field: repeated infracost.parser.event.ProjectBaseline project_baselines = 11;
+   */
+  projectBaselines: ProjectBaseline[];
+
+  /**
+   * @generated from field: infracost.parser.event.CommentSettings comment_settings = 12;
+   */
+  commentSettings?: CommentSettings;
 };
 
 /**
@@ -62,6 +86,50 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * @generated from message infracost.parser.event.ProjectBaseline
+ */
+export declare type ProjectBaseline = Message<"infracost.parser.event.ProjectBaseline"> & {
+  /**
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * base-branch total
+   *
+   * @generated from field: infracost.rational.Rat total_monthly_cost = 2;
+   */
+  totalMonthlyCost?: Rat;
+};
+
+/**
+ * Describes the message infracost.parser.event.ProjectBaseline.
+ * Use `create(ProjectBaselineSchema)` to create a new message.
+ */
+export declare const ProjectBaselineSchema: GenMessage<ProjectBaseline>;
+
+/**
+ * @generated from message infracost.parser.event.CommentSettings
+ */
+export declare type CommentSettings = Message<"infracost.parser.event.CommentSettings"> & {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: bool show_cost_estimate = 2;
+   */
+  showCostEstimate: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.event.CommentSettings.
+ * Use `create(CommentSettingsSchema)` to create a new message.
+ */
+export declare const CommentSettingsSchema: GenMessage<CommentSettings>;
 
 /**
  * @generated from message infracost.parser.event.BaseScope

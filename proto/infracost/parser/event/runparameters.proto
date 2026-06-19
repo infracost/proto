@@ -14,6 +14,20 @@ message RunParameters {
   repeated Guardrail guardrails = 6;
   repeated Budget budgets = 7;
   optional string config_template = 8;
+  optional string run_id = 9;
+  string currency = 10; // ISO 4217 currency code e.g. USD
+  repeated ProjectBaseline project_baselines = 11; // project cost baselines for guardrails
+  CommentSettings comment_settings = 12;
+}
+
+message ProjectBaseline {
+  string project_name = 1;
+  infracost.rational.Rat total_monthly_cost = 2; // base-branch total
+}
+
+message CommentSettings {
+  bool enabled = 1;
+  bool show_cost_estimate = 2;
 }
 
 message BaseScope {
