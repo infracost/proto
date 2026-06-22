@@ -85,6 +85,25 @@ export declare type TreeInput = Message<"infracost.provider.TreeInput"> & {
    * @generated from field: infracost.provider.Infracost infracost = 9;
    */
   infracost?: Infracost;
+
+  /**
+   * Options data specific to the provider plugin. Mirrors the parser's
+   * ParseRequest.raw_options: different plugins may expect different
+   * formats/shapes/contents (protobuf, json, yaml etc.) - plugins document this
+   * themselves. The CLI populates it per provider plugin (e.g. the kubernetes
+   * provider receives its resolved cluster spec here).
+   *
+   * @generated from field: bytes raw_options = 10;
+   */
+  rawOptions: Uint8Array;
+
+  /**
+   * Used to tell the consuming plugin what format the raw_options data is in
+   * e.g. "application/json".
+   *
+   * @generated from field: string raw_options_format = 11;
+   */
+  rawOptionsFormat: string;
 };
 
 /**

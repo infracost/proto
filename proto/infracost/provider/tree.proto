@@ -37,4 +37,15 @@ message TreeInput {
 
   // infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
   Infracost infracost = 9;
+
+  // Options data specific to the provider plugin. Mirrors the parser's
+  // ParseRequest.raw_options: different plugins may expect different
+  // formats/shapes/contents (protobuf, json, yaml etc.) - plugins document this
+  // themselves. The CLI populates it per provider plugin (e.g. the kubernetes
+  // provider receives its resolved cluster spec here).
+  bytes raw_options = 10;
+
+  // Used to tell the consuming plugin what format the raw_options data is in
+  // e.g. "application/json".
+  string raw_options_format = 11;
 }

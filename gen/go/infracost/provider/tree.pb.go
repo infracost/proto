@@ -46,9 +46,18 @@ type TreeInput struct {
 	// settings that affect the provider behaviour e.g. currency, disk cache usage
 	Settings *Settings `protobuf:"bytes,8,opt,name=settings,proto3" json:"settings,omitempty"`
 	// infracost-specific settings such as API key, pricing endpoint, trace ID that will not apply to non-infracost plugins
-	Infracost     *Infracost `protobuf:"bytes,9,opt,name=infracost,proto3" json:"infracost,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Infracost *Infracost `protobuf:"bytes,9,opt,name=infracost,proto3" json:"infracost,omitempty"`
+	// Options data specific to the provider plugin. Mirrors the parser's
+	// ParseRequest.raw_options: different plugins may expect different
+	// formats/shapes/contents (protobuf, json, yaml etc.) - plugins document this
+	// themselves. The CLI populates it per provider plugin (e.g. the kubernetes
+	// provider receives its resolved cluster spec here).
+	RawOptions []byte `protobuf:"bytes,10,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	// Used to tell the consuming plugin what format the raw_options data is in
+	// e.g. "application/json".
+	RawOptionsFormat string `protobuf:"bytes,11,opt,name=raw_options_format,json=rawOptionsFormat,proto3" json:"raw_options_format,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *TreeInput) Reset() {
@@ -144,11 +153,25 @@ func (x *TreeInput) GetInfracost() *Infracost {
 	return nil
 }
 
+func (x *TreeInput) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
+func (x *TreeInput) GetRawOptionsFormat() string {
+	if x != nil {
+		return x.RawOptionsFormat
+	}
+	return ""
+}
+
 var File_infracost_provider_tree_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_tree_proto_rawDesc = "" +
 	"\n" +
-	"\x1dinfracost/provider/tree.proto\x12\x12infracost.provider\x1a\x1einfracost/provider/input.proto\x1a\x19infracost/tree/tree.proto\x1a\x1binfracost/usage/usage.proto\"\x9e\x04\n" +
+	"\x1dinfracost/provider/tree.proto\x12\x12infracost.provider\x1a\x1einfracost/provider/input.proto\x1a\x19infracost/tree/tree.proto\x1a\x1binfracost/usage/usage.proto\"\xed\x04\n" +
 	"\tTreeInput\x12(\n" +
 	"\x04tree\x18\x01 \x01(\v2\x14.infracost.tree.TreeR\x04tree\x12#\n" +
 	"\rabsolute_path\x18\x02 \x01(\tR\fabsolutePath\x12B\n" +
@@ -158,7 +181,11 @@ const file_infracost_provider_tree_proto_rawDesc = "" +
 	"\x14finops_policy_config\x18\x06 \x01(\v2-.infracost.provider.FinopsPolicyConfigurationR\x12finopsPolicyConfig\x128\n" +
 	"\bfeatures\x18\a \x01(\v2\x1c.infracost.provider.FeaturesR\bfeatures\x128\n" +
 	"\bsettings\x18\b \x01(\v2\x1c.infracost.provider.SettingsR\bsettings\x12;\n" +
-	"\tinfracost\x18\t \x01(\v2\x1d.infracost.provider.InfracostR\tinfracostB\xc2\x01\n" +
+	"\tinfracost\x18\t \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\x12\x1f\n" +
+	"\vraw_options\x18\n" +
+	" \x01(\fR\n" +
+	"rawOptions\x12,\n" +
+	"\x12raw_options_format\x18\v \x01(\tR\x10rawOptionsFormatB\xc2\x01\n" +
 	"\x16com.infracost.providerB\tTreeProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
 var (
