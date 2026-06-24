@@ -29,6 +29,7 @@ const (
 	Provider_PROVIDER_AWS         Provider = 1
 	Provider_PROVIDER_AZURERM     Provider = 2
 	Provider_PROVIDER_GOOGLE      Provider = 3
+	Provider_PROVIDER_KUBERNETES  Provider = 4
 )
 
 // Enum value maps for Provider.
@@ -38,12 +39,14 @@ var (
 		1: "PROVIDER_AWS",
 		2: "PROVIDER_AZURERM",
 		3: "PROVIDER_GOOGLE",
+		4: "PROVIDER_KUBERNETES",
 	}
 	Provider_value = map[string]int32{
 		"PROVIDER_UNSPECIFIED": 0,
 		"PROVIDER_AWS":         1,
 		"PROVIDER_AZURERM":     2,
 		"PROVIDER_GOOGLE":      3,
+		"PROVIDER_KUBERNETES":  4,
 	}
 )
 
@@ -78,12 +81,13 @@ var File_infracost_provider_provider_proto protoreflect.FileDescriptor
 
 const file_infracost_provider_provider_proto_rawDesc = "" +
 	"\n" +
-	"!infracost/provider/provider.proto\x12\x12infracost.provider*a\n" +
+	"!infracost/provider/provider.proto\x12\x12infracost.provider*z\n" +
 	"\bProvider\x12\x18\n" +
 	"\x14PROVIDER_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVIDER_AWS\x10\x01\x12\x14\n" +
 	"\x10PROVIDER_AZURERM\x10\x02\x12\x13\n" +
-	"\x0fPROVIDER_GOOGLE\x10\x03B\xc6\x01\n" +
+	"\x0fPROVIDER_GOOGLE\x10\x03\x12\x17\n" +
+	"\x13PROVIDER_KUBERNETES\x10\x04B\xc6\x01\n" +
 	"\x16com.infracost.providerB\rProviderProtoP\x01Z4github.com/infracost/proto/gen/go/infracost/provider\xa2\x02\x03IPX\xaa\x02\x12Infracost.Provider\xca\x02\x12Infracost\\Provider\xe2\x02\x1eInfracost\\Provider\\GPBMetadata\xea\x02\x13Infracost::Providerb\x06proto3"
 
 var (
