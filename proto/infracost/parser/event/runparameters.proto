@@ -18,6 +18,7 @@ message RunParameters {
   string currency = 10; // ISO 4217 currency code e.g. USD
   repeated ProjectBaseline project_baselines = 11; // project cost baselines for guardrails
   CommentSettings comment_settings = 12;
+  bool coast_enabled = 13; // whether org has coast agents enabled
 }
 
 message ProjectBaseline {
