@@ -18,6 +18,27 @@ message RunParameters {
   string currency = 10; // ISO 4217 currency code e.g. USD
   repeated ProjectBaseline project_baselines = 11; // project cost baselines for guardrails
   CommentSettings comment_settings = 12;
+  // policy_exclusions lists finops/tagging policy issues that a user has
+  // dismissed (ignored). The runner filters discovered failing resources
+  // matching these so dismissed issues are neither shown in the comment nor
+  // used to block the PR check.
+  repeated PolicyExclusion policy_exclusions = 13;
+}
+
+// PolicyExclusion identifies a single dismissed/ignored policy issue. The key
+// mirrors the dashboard's finops_policy_exclusions / tag_policy_exclusions
+// tables: a policy, a project and a resource address.
+message PolicyExclusion {
+  enum PolicyType {
+    UNSPECIFIED = 0;
+    FINOPS = 1;
+    TAGGING = 2;
+  }
+
+  PolicyType policy_type = 1;
+  string policy_id = 2;
+  string project_name = 3;
+  string address = 4;
 }
 
 message ProjectBaseline {
@@ -162,6 +183,11 @@ message Guardrail {
   bool pr_comment = 8;
   bool block_pr = 9;
   string message = 10;
+  // unblocked is true when a user has manually unblocked this guardrail for
+  // the current pull request. The runner still evaluates and reports the
+  // result, but must not block the PR check or render it in the comment when
+  // this is set.
+  bool unblocked = 11;
 }
 
 // Budget defines a cost budget for resources matching a set of tags.
