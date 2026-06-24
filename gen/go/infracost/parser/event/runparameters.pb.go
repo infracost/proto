@@ -240,6 +240,7 @@ type RunParameters struct {
 	Currency          string                  `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`                                         // ISO 4217 currency code e.g. USD
 	ProjectBaselines  []*ProjectBaseline      `protobuf:"bytes,11,rep,name=project_baselines,json=projectBaselines,proto3" json:"project_baselines,omitempty"` // project cost baselines for guardrails
 	CommentSettings   *CommentSettings        `protobuf:"bytes,12,opt,name=comment_settings,json=commentSettings,proto3" json:"comment_settings,omitempty"`
+	CoastEnabled      bool                    `protobuf:"varint,13,opt,name=coast_enabled,json=coastEnabled,proto3" json:"coast_enabled,omitempty"` // whether org has coast agents enabled
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -356,6 +357,13 @@ func (x *RunParameters) GetCommentSettings() *CommentSettings {
 		return x.CommentSettings
 	}
 	return nil
+}
+
+func (x *RunParameters) GetCoastEnabled() bool {
+	if x != nil {
+		return x.CoastEnabled
+	}
+	return false
 }
 
 type ProjectBaseline struct {
@@ -1559,7 +1567,7 @@ var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xb8\x06\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xdd\x06\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
@@ -1575,7 +1583,8 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\bcurrency\x18\n" +
 	" \x01(\tR\bcurrency\x12T\n" +
 	"\x11project_baselines\x18\v \x03(\v2'.infracost.parser.event.ProjectBaselineR\x10projectBaselines\x12R\n" +
-	"\x10comment_settings\x18\f \x01(\v2'.infracost.parser.event.CommentSettingsR\x0fcommentSettingsB\x12\n" +
+	"\x10comment_settings\x18\f \x01(\v2'.infracost.parser.event.CommentSettingsR\x0fcommentSettings\x12#\n" +
+	"\rcoast_enabled\x18\r \x01(\bR\fcoastEnabledB\x12\n" +
 	"\x10_config_templateB\t\n" +
 	"\a_run_id\"{\n" +
 	"\x0fProjectBaseline\x12!\n" +

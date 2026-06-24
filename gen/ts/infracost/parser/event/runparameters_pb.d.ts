@@ -79,6 +79,13 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: infracost.parser.event.CommentSettings comment_settings = 12;
    */
   commentSettings?: CommentSettings;
+
+  /**
+   * whether org has coast agents enabled
+   *
+   * @generated from field: bool coast_enabled = 13;
+   */
+  coastEnabled: boolean;
 };
 
 /**
