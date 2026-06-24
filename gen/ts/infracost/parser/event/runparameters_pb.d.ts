@@ -79,6 +79,16 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: infracost.parser.event.CommentSettings comment_settings = 12;
    */
   commentSettings?: CommentSettings;
+
+  /**
+   * policy_exclusions lists finops/tagging policy issues that a user has
+   * dismissed (ignored). The runner filters discovered failing resources
+   * matching these so dismissed issues are neither shown in the comment nor
+   * used to block the PR check.
+   *
+   * @generated from field: repeated infracost.parser.event.PolicyExclusion policy_exclusions = 13;
+   */
+  policyExclusions: PolicyExclusion[];
 };
 
 /**
@@ -86,6 +96,66 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * PolicyExclusion identifies a single dismissed/ignored policy issue. The key
+ * mirrors the dashboard's finops_policy_exclusions / tag_policy_exclusions
+ * tables: a policy, a project and a resource address.
+ *
+ * @generated from message infracost.parser.event.PolicyExclusion
+ */
+export declare type PolicyExclusion = Message<"infracost.parser.event.PolicyExclusion"> & {
+  /**
+   * @generated from field: infracost.parser.event.PolicyExclusion.PolicyType policy_type = 1;
+   */
+  policyType: PolicyExclusion_PolicyType;
+
+  /**
+   * @generated from field: string policy_id = 2;
+   */
+  policyId: string;
+
+  /**
+   * @generated from field: string project_name = 3;
+   */
+  projectName: string;
+
+  /**
+   * @generated from field: string address = 4;
+   */
+  address: string;
+};
+
+/**
+ * Describes the message infracost.parser.event.PolicyExclusion.
+ * Use `create(PolicyExclusionSchema)` to create a new message.
+ */
+export declare const PolicyExclusionSchema: GenMessage<PolicyExclusion>;
+
+/**
+ * @generated from enum infracost.parser.event.PolicyExclusion.PolicyType
+ */
+export enum PolicyExclusion_PolicyType {
+  /**
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: FINOPS = 1;
+   */
+  FINOPS = 1,
+
+  /**
+   * @generated from enum value: TAGGING = 2;
+   */
+  TAGGING = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.event.PolicyExclusion.PolicyType.
+ */
+export declare const PolicyExclusion_PolicyTypeSchema: GenEnum<PolicyExclusion_PolicyType>;
 
 /**
  * @generated from message infracost.parser.event.ProjectBaseline
@@ -653,6 +723,16 @@ export declare type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
    * @generated from field: string message = 10;
    */
   message: string;
+
+  /**
+   * unblocked is true when a user has manually unblocked this guardrail for
+   * the current pull request. The runner still evaluates and reports the
+   * result, but must not block the PR check or render it in the comment when
+   * this is set.
+   *
+   * @generated from field: bool unblocked = 11;
+   */
+  unblocked: boolean;
 };
 
 /**
