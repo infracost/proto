@@ -89,6 +89,18 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.PolicyExclusion policy_exclusions = 13;
    */
   policyExclusions: PolicyExclusion[];
+
+  /**
+   * project_preexisting_issues carries the dashboard's per-project count of
+   * base-branch pre-existing issues (finops + tagging, pr_comment policies,
+   * including dismissed/ignored). The runner sums these for the projects it
+   * did NOT re-run this PR and adds them to the projects it did re-run so the
+   * pre-existing-issues comment line reflects the whole repo, not just the
+   * changed projects.
+   *
+   * @generated from field: repeated infracost.parser.event.ProjectPreExistingIssues project_preexisting_issues = 14;
+   */
+  projectPreexistingIssues: ProjectPreExistingIssues[];
 };
 
 /**
@@ -96,6 +108,34 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
+ * issues for a single project, keyed by the raw infracost project name (the
+ * same name the runner reports via RunProjectResult.project_name). The count
+ * matches the dashboard's pre-existing definition: failing finops + tagging
+ * resources on the base branch's latest run, for pr_comment policies only,
+ * including dismissed/ignored issues (new + ignored).
+ *
+ * @generated from message infracost.parser.event.ProjectPreExistingIssues
+ */
+export declare type ProjectPreExistingIssues = Message<"infracost.parser.event.ProjectPreExistingIssues"> & {
+  /**
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * @generated from field: int32 issue_count = 2;
+   */
+  issueCount: number;
+};
+
+/**
+ * Describes the message infracost.parser.event.ProjectPreExistingIssues.
+ * Use `create(ProjectPreExistingIssuesSchema)` to create a new message.
+ */
+export declare const ProjectPreExistingIssuesSchema: GenMessage<ProjectPreExistingIssues>;
 
 /**
  * PolicyExclusion identifies a single dismissed/ignored policy issue. The key
