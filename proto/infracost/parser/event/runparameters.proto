@@ -23,6 +23,24 @@ message RunParameters {
   // matching these so dismissed issues are neither shown in the comment nor
   // used to block the PR check.
   repeated PolicyExclusion policy_exclusions = 13;
+  // project_preexisting_issues carries the dashboard's per-project count of
+  // base-branch pre-existing issues (finops + tagging, pr_comment policies,
+  // including dismissed/ignored). The runner sums these for the projects it
+  // did NOT re-run this PR and adds them to the projects it did re-run so the
+  // pre-existing-issues comment line reflects the whole repo, not just the
+  // changed projects.
+  repeated ProjectPreExistingIssues project_preexisting_issues = 14;
+}
+
+// ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
+// issues for a single project, keyed by the raw infracost project name (the
+// same name the runner reports via RunProjectResult.project_name). The count
+// matches the dashboard's pre-existing definition: failing finops + tagging
+// resources on the base branch's latest run, for pr_comment policies only,
+// including dismissed/ignored issues (new + ignored).
+message ProjectPreExistingIssues {
+  string project_name = 1;
+  int32 issue_count = 2;
 }
 
 // PolicyExclusion identifies a single dismissed/ignored policy issue. The key
