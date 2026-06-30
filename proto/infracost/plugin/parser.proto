@@ -14,6 +14,17 @@ service ParserService {
   // IdentifyProjects attempts to identify one or more IaC projects in the given directory - this should NOT recurse.
   rpc IdentifyProjects(IdentifyProjectsRequest) returns (IdentifyProjectsResponse);
 
+  // IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+  // project root previously returned by IdentifyProjects. The plugin that parses a format
+  // understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+  // ...) far better than any caller-side heuristic, so it is authoritative.
+  //
+  // This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+  // the caller treats as "this format has no environment support" and handles via its own fallback.
+  // Returning an empty environments list is distinct - it means "this project genuinely has no
+  // variants" and yields a single project.
+  rpc IdentifyEnvironments(IdentifyEnvironmentsRequest) returns (IdentifyEnvironmentsResponse);
+
   // Parse parses the given IaC path into an IaC agnostic tree format.
   rpc Parse(ParseRequest) returns (ParseResponse);
 }
@@ -39,6 +50,31 @@ message IdentifyProjectsResponse {
   repeated string files = 2;
   // dependencies, relative to the directory
   repeated string dependency_paths = 3;
+}
+
+message IdentifyEnvironmentsRequest {
+  // a project root previously returned by IdentifyProjects.
+  string directory = 1;
+}
+
+message IdentifyEnvironmentsResponse {
+  repeated Environment environments = 1;
+}
+
+// Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+// Environment becomes one final project downstream.
+message Environment {
+  // the environment name, e.g. "dev", "staging", "prod".
+  string name = 1;
+  // the build/parse path for this environment, relative to the request directory.
+  // Terraform: "."; Kustomize: "overlays/prod".
+  string path = 2;
+  // environment-specific input files, relative to path.
+  // Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+  repeated string files = 3;
+  // shared inputs this environment pulls in, relative to the request directory.
+  // Kustomize: base/components dirs; Terraform: n/a.
+  repeated string dependency_paths = 4;
 }
 
 // ParseRequest is the unified request for all parser types.

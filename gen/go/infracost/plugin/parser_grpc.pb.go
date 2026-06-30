@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ParserService_GetParserConfig_FullMethodName  = "/infracost.plugin.ParserService/GetParserConfig"
-	ParserService_IdentifyProjects_FullMethodName = "/infracost.plugin.ParserService/IdentifyProjects"
-	ParserService_Parse_FullMethodName            = "/infracost.plugin.ParserService/Parse"
+	ParserService_GetParserConfig_FullMethodName      = "/infracost.plugin.ParserService/GetParserConfig"
+	ParserService_IdentifyProjects_FullMethodName     = "/infracost.plugin.ParserService/IdentifyProjects"
+	ParserService_IdentifyEnvironments_FullMethodName = "/infracost.plugin.ParserService/IdentifyEnvironments"
+	ParserService_Parse_FullMethodName                = "/infracost.plugin.ParserService/Parse"
 )
 
 // ParserServiceClient is the client API for ParserService service.
@@ -34,6 +35,16 @@ type ParserServiceClient interface {
 	GetParserConfig(ctx context.Context, in *GetParserConfigRequest, opts ...grpc.CallOption) (*GetParserConfigResponse, error)
 	// IdentifyProjects attempts to identify one or more IaC projects in the given directory - this should NOT recurse.
 	IdentifyProjects(ctx context.Context, in *IdentifyProjectsRequest, opts ...grpc.CallOption) (*IdentifyProjectsResponse, error)
+	// IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+	// project root previously returned by IdentifyProjects. The plugin that parses a format
+	// understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+	// ...) far better than any caller-side heuristic, so it is authoritative.
+	//
+	// This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+	// the caller treats as "this format has no environment support" and handles via its own fallback.
+	// Returning an empty environments list is distinct - it means "this project genuinely has no
+	// variants" and yields a single project.
+	IdentifyEnvironments(ctx context.Context, in *IdentifyEnvironmentsRequest, opts ...grpc.CallOption) (*IdentifyEnvironmentsResponse, error)
 	// Parse parses the given IaC path into an IaC agnostic tree format.
 	Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error)
 }
@@ -66,6 +77,16 @@ func (c *parserServiceClient) IdentifyProjects(ctx context.Context, in *Identify
 	return out, nil
 }
 
+func (c *parserServiceClient) IdentifyEnvironments(ctx context.Context, in *IdentifyEnvironmentsRequest, opts ...grpc.CallOption) (*IdentifyEnvironmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifyEnvironmentsResponse)
+	err := c.cc.Invoke(ctx, ParserService_IdentifyEnvironments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *parserServiceClient) Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ParseResponse)
@@ -86,6 +107,16 @@ type ParserServiceServer interface {
 	GetParserConfig(context.Context, *GetParserConfigRequest) (*GetParserConfigResponse, error)
 	// IdentifyProjects attempts to identify one or more IaC projects in the given directory - this should NOT recurse.
 	IdentifyProjects(context.Context, *IdentifyProjectsRequest) (*IdentifyProjectsResponse, error)
+	// IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+	// project root previously returned by IdentifyProjects. The plugin that parses a format
+	// understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+	// ...) far better than any caller-side heuristic, so it is authoritative.
+	//
+	// This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+	// the caller treats as "this format has no environment support" and handles via its own fallback.
+	// Returning an empty environments list is distinct - it means "this project genuinely has no
+	// variants" and yields a single project.
+	IdentifyEnvironments(context.Context, *IdentifyEnvironmentsRequest) (*IdentifyEnvironmentsResponse, error)
 	// Parse parses the given IaC path into an IaC agnostic tree format.
 	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
 	mustEmbedUnimplementedParserServiceServer()
@@ -103,6 +134,9 @@ func (UnimplementedParserServiceServer) GetParserConfig(context.Context, *GetPar
 }
 func (UnimplementedParserServiceServer) IdentifyProjects(context.Context, *IdentifyProjectsRequest) (*IdentifyProjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IdentifyProjects not implemented")
+}
+func (UnimplementedParserServiceServer) IdentifyEnvironments(context.Context, *IdentifyEnvironmentsRequest) (*IdentifyEnvironmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IdentifyEnvironments not implemented")
 }
 func (UnimplementedParserServiceServer) Parse(context.Context, *ParseRequest) (*ParseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Parse not implemented")
@@ -164,6 +198,24 @@ func _ParserService_IdentifyProjects_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ParserService_IdentifyEnvironments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentifyEnvironmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParserServiceServer).IdentifyEnvironments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParserService_IdentifyEnvironments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParserServiceServer).IdentifyEnvironments(ctx, req.(*IdentifyEnvironmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ParserService_Parse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ParseRequest)
 	if err := dec(in); err != nil {
@@ -196,6 +248,10 @@ var ParserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IdentifyProjects",
 			Handler:    _ParserService_IdentifyProjects_Handler,
+		},
+		{
+			MethodName: "IdentifyEnvironments",
+			Handler:    _ParserService_IdentifyEnvironments_Handler,
 		},
 		{
 			MethodName: "Parse",
