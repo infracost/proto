@@ -100,6 +100,85 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
 export declare const IdentifyProjectsResponseSchema: GenMessage<IdentifyProjectsResponse>;
 
 /**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsRequest
+ */
+export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvironmentsRequest"> & {
+  /**
+   * a project root previously returned by IdentifyProjects.
+   *
+   * @generated from field: string directory = 1;
+   */
+  directory: string;
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsRequest.
+ * Use `create(IdentifyEnvironmentsRequestSchema)` to create a new message.
+ */
+export declare const IdentifyEnvironmentsRequestSchema: GenMessage<IdentifyEnvironmentsRequest>;
+
+/**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsResponse
+ */
+export declare type IdentifyEnvironmentsResponse = Message<"infracost.plugin.IdentifyEnvironmentsResponse"> & {
+  /**
+   * @generated from field: repeated infracost.plugin.Environment environments = 1;
+   */
+  environments: Environment[];
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsResponse.
+ * Use `create(IdentifyEnvironmentsResponseSchema)` to create a new message.
+ */
+export declare const IdentifyEnvironmentsResponseSchema: GenMessage<IdentifyEnvironmentsResponse>;
+
+/**
+ * Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+ * Environment becomes one final project downstream.
+ *
+ * @generated from message infracost.plugin.Environment
+ */
+export declare type Environment = Message<"infracost.plugin.Environment"> & {
+  /**
+   * the environment name, e.g. "dev", "staging", "prod".
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * the build/parse path for this environment, relative to the request directory.
+   * Terraform: "."; Kustomize: "overlays/prod".
+   *
+   * @generated from field: string path = 2;
+   */
+  path: string;
+
+  /**
+   * environment-specific input files, relative to path.
+   * Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+   *
+   * @generated from field: repeated string files = 3;
+   */
+  files: string[];
+
+  /**
+   * shared inputs this environment pulls in, relative to the request directory.
+   * Kustomize: base/components dirs; Terraform: n/a.
+   *
+   * @generated from field: repeated string dependency_paths = 4;
+   */
+  dependencyPaths: string[];
+};
+
+/**
+ * Describes the message infracost.plugin.Environment.
+ * Use `create(EnvironmentSchema)` to create a new message.
+ */
+export declare const EnvironmentSchema: GenMessage<Environment>;
+
+/**
  * ParseRequest is the unified request for all parser types.
  *
  * @generated from message infracost.plugin.ParseRequest
@@ -284,6 +363,24 @@ export declare const ParserService: GenService<{
     methodKind: "unary";
     input: typeof IdentifyProjectsRequestSchema;
     output: typeof IdentifyProjectsResponseSchema;
+  },
+  /**
+   * IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+   * project root previously returned by IdentifyProjects. The plugin that parses a format
+   * understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+   * ...) far better than any caller-side heuristic, so it is authoritative.
+   *
+   * This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+   * the caller treats as "this format has no environment support" and handles via its own fallback.
+   * Returning an empty environments list is distinct - it means "this project genuinely has no
+   * variants" and yields a single project.
+   *
+   * @generated from rpc infracost.plugin.ParserService.IdentifyEnvironments
+   */
+  identifyEnvironments: {
+    methodKind: "unary";
+    input: typeof IdentifyEnvironmentsRequestSchema;
+    output: typeof IdentifyEnvironmentsResponseSchema;
   },
   /**
    * Parse parses the given IaC path into an IaC agnostic tree format.
