@@ -55,6 +55,27 @@ message IdentifyProjectsResponse {
 message IdentifyEnvironmentsRequest {
   // a project root previously returned by IdentifyProjects.
   string directory = 1;
+
+  // var files the caller has already attributed to this project via its own tree-walk
+  // heuristics (including cross-directory sibling/pibling association). Paths are relative
+  // to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+  //
+  // This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+  // the caller's existing attribution while that logic is moved plugin-side, and is expected
+  // to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+  // and derive their environments from directory alone.
+  repeated AttributedVarFile attributed_files = 2;
+}
+
+// AttributedVarFile is one input file the caller has already associated with a project,
+// together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+message AttributedVarFile {
+  // path to the file, relative to the request directory; may contain "..".
+  string path = 1;
+  // resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+  string env = 2;
+  // true when the file is a global/shared input rather than environment-specific.
+  bool is_global = 3;
 }
 
 message IdentifyEnvironmentsResponse {
