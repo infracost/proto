@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/plugin/parser.proto.
  */
 export const file_infracost_plugin_parser: GenFile = /*@__PURE__*/
-  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJIlYKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCSIwChtJZGVudGlmeUVudmlyb25tZW50c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJIlMKHElkZW50aWZ5RW52aXJvbm1lbnRzUmVzcG9uc2USMwoMZW52aXJvbm1lbnRzGAEgAygLMh0uaW5mcmFjb3N0LnBsdWdpbi5FbnZpcm9ubWVudCJSCgtFbnZpcm9ubWVudBIMCgRuYW1lGAEgASgJEgwKBHBhdGgYAiABKAkSDQoFZmlsZXMYAyADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgEIAMoCSKQAQoMUGFyc2VSZXF1ZXN0EgwKBHBhdGgYASABKAkSQQoPZ2VuZXJpY19vcHRpb25zGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zEhMKC3Jhd19vcHRpb25zGAMgASgMEhoKEnJhd19vcHRpb25zX2Zvcm1hdBgEIAEoCSKkAQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIiCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZRI8ChZyZXF1ZXN0ZWRfZGVwZW5kZW5jaWVzGAMgAygLMhwuaW5mcmFjb3N0LnBsdWdpbi5EZXBlbmRlbmN5Iu4BCgpEZXBlbmRlbmN5EhEKCWZpbGVfcGF0aBgBIAEoCRISCgpsaW5lX3N0YXJ0GAIgASgDEhAKCGxpbmVfZW5kGAMgASgDEhkKEW1vZHVsZV9kZWZpbml0aW9uGAQgASgJEhgKEGlzX3JlbW90ZV9tb2R1bGUYBSABKAgSHQoVaXNfZXh0ZXJuYWxseV9kZWZpbmVkGAYgASgIEhgKEGV4dGVybmFsX3NuaXBwZXQYByABKAkSFAoMaXNfc3ludGhldGljGAggASgIEhQKDGlzX2dlbmVyYXRlZBgJIAEoCBINCgVkZXB0aBgKIAEoBTKjAwoNUGFyc2VyU2VydmljZRJmCg9HZXRQYXJzZXJDb25maWcSKC5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1JlcXVlc3QaKS5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEmkKEElkZW50aWZ5UHJvamVjdHMSKS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5UHJvamVjdHNSZXF1ZXN0GiouaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVzcG9uc2USdQoUSWRlbnRpZnlFbnZpcm9ubWVudHMSLS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5RW52aXJvbm1lbnRzUmVxdWVzdBouLmluZnJhY29zdC5wbHVnaW4uSWRlbnRpZnlFbnZpcm9ubWVudHNSZXNwb25zZRJICgVQYXJzZRIeLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXF1ZXN0Gh8uaW5mcmFjb3N0LnBsdWdpbi5QYXJzZVJlc3BvbnNlQrgBChRjb20uaW5mcmFjb3N0LnBsdWdpbkILUGFyc2VyUHJvdG9QAVoyZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wbHVnaW6iAgNJUFiqAhBJbmZyYWNvc3QuUGx1Z2luygIQSW5mcmFjb3N0XFBsdWdpbuICHEluZnJhY29zdFxQbHVnaW5cR1BCTWV0YWRhdGHqAhFJbmZyYWNvc3Q6OlBsdWdpbmIGcHJvdG8z", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
+  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJIlYKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCSJvChtJZGVudGlmeUVudmlyb25tZW50c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJEj0KEGF0dHJpYnV0ZWRfZmlsZXMYAiADKAsyIy5pbmZyYWNvc3QucGx1Z2luLkF0dHJpYnV0ZWRWYXJGaWxlIkEKEUF0dHJpYnV0ZWRWYXJGaWxlEgwKBHBhdGgYASABKAkSCwoDZW52GAIgASgJEhEKCWlzX2dsb2JhbBgDIAEoCCJTChxJZGVudGlmeUVudmlyb25tZW50c1Jlc3BvbnNlEjMKDGVudmlyb25tZW50cxgBIAMoCzIdLmluZnJhY29zdC5wbHVnaW4uRW52aXJvbm1lbnQiUgoLRW52aXJvbm1lbnQSDAoEbmFtZRgBIAEoCRIMCgRwYXRoGAIgASgJEg0KBWZpbGVzGAMgAygJEhgKEGRlcGVuZGVuY3lfcGF0aHMYBCADKAkikAEKDFBhcnNlUmVxdWVzdBIMCgRwYXRoGAEgASgJEkEKD2dlbmVyaWNfb3B0aW9ucxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucxITCgtyYXdfb3B0aW9ucxgDIAEoDBIaChJyYXdfb3B0aW9uc19mb3JtYXQYBCABKAkipAEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSIgoEdHJlZRgCIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSPAoWcmVxdWVzdGVkX2RlcGVuZGVuY2llcxgDIAMoCzIcLmluZnJhY29zdC5wbHVnaW4uRGVwZW5kZW5jeSLuAQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh0KFWlzX2V4dGVybmFsbHlfZGVmaW5lZBgGIAEoCBIYChBleHRlcm5hbF9zbmlwcGV0GAcgASgJEhQKDGlzX3N5bnRoZXRpYxgIIAEoCBIUCgxpc19nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUyowMKDVBhcnNlclNlcnZpY2USZgoPR2V0UGFyc2VyQ29uZmlnEiguaW5mcmFjb3N0LnBsdWdpbi5HZXRQYXJzZXJDb25maWdSZXF1ZXN0GikuaW5mcmFjb3N0LnBsdWdpbi5HZXRQYXJzZXJDb25maWdSZXNwb25zZRJpChBJZGVudGlmeVByb2plY3RzEikuaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVxdWVzdBoqLmluZnJhY29zdC5wbHVnaW4uSWRlbnRpZnlQcm9qZWN0c1Jlc3BvbnNlEnUKFElkZW50aWZ5RW52aXJvbm1lbnRzEi0uaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeUVudmlyb25tZW50c1JlcXVlc3QaLi5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5RW52aXJvbm1lbnRzUmVzcG9uc2USSAoFUGFyc2USHi5pbmZyYWNvc3QucGx1Z2luLlBhcnNlUmVxdWVzdBofLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXNwb25zZUK4AQoUY29tLmluZnJhY29zdC5wbHVnaW5CC1BhcnNlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
 
 /**
  * @generated from message infracost.plugin.GetParserConfigRequest
@@ -118,6 +118,20 @@ export type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvi
    * @generated from field: string directory = 1;
    */
   directory: string;
+
+  /**
+   * var files the caller has already attributed to this project via its own tree-walk
+   * heuristics (including cross-directory sibling/pibling association). Paths are relative
+   * to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+   *
+   * This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+   * the caller's existing attribution while that logic is moved plugin-side, and is expected
+   * to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+   * and derive their environments from directory alone.
+   *
+   * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
+   */
+  attributedFiles: AttributedVarFile[];
 };
 
 /**
@@ -126,6 +140,42 @@ export type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvi
  */
 export const IdentifyEnvironmentsRequestSchema: GenMessage<IdentifyEnvironmentsRequest> = /*@__PURE__*/
   messageDesc(file_infracost_plugin_parser, 4);
+
+/**
+ * AttributedVarFile is one input file the caller has already associated with a project,
+ * together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+ *
+ * @generated from message infracost.plugin.AttributedVarFile
+ */
+export type AttributedVarFile = Message<"infracost.plugin.AttributedVarFile"> & {
+  /**
+   * path to the file, relative to the request directory; may contain "..".
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+   *
+   * @generated from field: string env = 2;
+   */
+  env: string;
+
+  /**
+   * true when the file is a global/shared input rather than environment-specific.
+   *
+   * @generated from field: bool is_global = 3;
+   */
+  isGlobal: boolean;
+};
+
+/**
+ * Describes the message infracost.plugin.AttributedVarFile.
+ * Use `create(AttributedVarFileSchema)` to create a new message.
+ */
+export const AttributedVarFileSchema: GenMessage<AttributedVarFile> = /*@__PURE__*/
+  messageDesc(file_infracost_plugin_parser, 5);
 
 /**
  * @generated from message infracost.plugin.IdentifyEnvironmentsResponse
@@ -142,7 +192,7 @@ export type IdentifyEnvironmentsResponse = Message<"infracost.plugin.IdentifyEnv
  * Use `create(IdentifyEnvironmentsResponseSchema)` to create a new message.
  */
 export const IdentifyEnvironmentsResponseSchema: GenMessage<IdentifyEnvironmentsResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 5);
+  messageDesc(file_infracost_plugin_parser, 6);
 
 /**
  * Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
@@ -188,7 +238,7 @@ export type Environment = Message<"infracost.plugin.Environment"> & {
  * Use `create(EnvironmentSchema)` to create a new message.
  */
 export const EnvironmentSchema: GenMessage<Environment> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 6);
+  messageDesc(file_infracost_plugin_parser, 7);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -230,7 +280,7 @@ export type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
  * Use `create(ParseRequestSchema)` to create a new message.
  */
 export const ParseRequestSchema: GenMessage<ParseRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 7);
+  messageDesc(file_infracost_plugin_parser, 8);
 
 /**
  * ParseResponse is the iac-agnostic parser response
@@ -265,7 +315,7 @@ export type ParseResponse = Message<"infracost.plugin.ParseResponse"> & {
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 8);
+  messageDesc(file_infracost_plugin_parser, 9);
 
 /**
  * Dependency represents a code dependency for a resource.
@@ -351,7 +401,7 @@ export type Dependency = Message<"infracost.plugin.Dependency"> & {
  * Use `create(DependencySchema)` to create a new message.
  */
 export const DependencySchema: GenMessage<Dependency> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 9);
+  messageDesc(file_infracost_plugin_parser, 10);
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files into an IaC agnostic result.

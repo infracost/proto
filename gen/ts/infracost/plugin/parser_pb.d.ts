@@ -109,6 +109,20 @@ export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.Iden
    * @generated from field: string directory = 1;
    */
   directory: string;
+
+  /**
+   * var files the caller has already attributed to this project via its own tree-walk
+   * heuristics (including cross-directory sibling/pibling association). Paths are relative
+   * to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+   *
+   * This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+   * the caller's existing attribution while that logic is moved plugin-side, and is expected
+   * to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+   * and derive their environments from directory alone.
+   *
+   * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
+   */
+  attributedFiles: AttributedVarFile[];
 };
 
 /**
@@ -116,6 +130,41 @@ export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.Iden
  * Use `create(IdentifyEnvironmentsRequestSchema)` to create a new message.
  */
 export declare const IdentifyEnvironmentsRequestSchema: GenMessage<IdentifyEnvironmentsRequest>;
+
+/**
+ * AttributedVarFile is one input file the caller has already associated with a project,
+ * together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+ *
+ * @generated from message infracost.plugin.AttributedVarFile
+ */
+export declare type AttributedVarFile = Message<"infracost.plugin.AttributedVarFile"> & {
+  /**
+   * path to the file, relative to the request directory; may contain "..".
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+   *
+   * @generated from field: string env = 2;
+   */
+  env: string;
+
+  /**
+   * true when the file is a global/shared input rather than environment-specific.
+   *
+   * @generated from field: bool is_global = 3;
+   */
+  isGlobal: boolean;
+};
+
+/**
+ * Describes the message infracost.plugin.AttributedVarFile.
+ * Use `create(AttributedVarFileSchema)` to create a new message.
+ */
+export declare const AttributedVarFileSchema: GenMessage<AttributedVarFile>;
 
 /**
  * @generated from message infracost.plugin.IdentifyEnvironmentsResponse
