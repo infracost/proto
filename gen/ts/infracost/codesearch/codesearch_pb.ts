@@ -2,8 +2,8 @@
 // @generated from file infracost/codesearch/codesearch.proto (package infracost.codesearch, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Tree } from "../tree/tree_pb.js";
 import { file_infracost_tree_tree } from "../tree/tree_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/codesearch/codesearch.proto.
  */
 export const file_infracost_codesearch_codesearch: GenFile = /*@__PURE__*/
-  fileDesc("CiVpbmZyYWNvc3QvY29kZXNlYXJjaC9jb2Rlc2VhcmNoLnByb3RvEhRpbmZyYWNvc3QuY29kZXNlYXJjaCLUAQoJSW5kZXhEYXRhEg4KBm9yZ19pZBgBIAEoCRIQCghyZXBvX3VybBgCIAEoCRILCgNyZWYYAyABKAkSNAoKYXR0cmlidXRlcxgEIAEoCzIgLmluZnJhY29zdC5jb2Rlc2VhcmNoLkF0dHJpYnV0ZXMSPgoQaW5kZXhlZF9wcm9qZWN0cxgFIAMoCzIkLmluZnJhY29zdC5jb2Rlc2VhcmNoLkluZGV4ZWRQcm9qZWN0Eg8KB3JlcG9faWQYBiABKAkSEQoJcmVwb19uYW1lGAcgASgJIpgBCg5JbmRleGVkUHJvamVjdBI0CgphdHRyaWJ1dGVzGAEgASgLMiAuaW5mcmFjb3N0LmNvZGVzZWFyY2guQXR0cmlidXRlcxInCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZUgAiAEBEgwKBG5hbWUYAyABKAkSEAoIaWFjX3R5cGUYBCABKAlCBwoFX3RyZWUihQIKCkF0dHJpYnV0ZXMSRQoTcHJvdmlkZXJfYXR0cmlidXRlcxgBIAMoCzIoLmluZnJhY29zdC5jb2Rlc2VhcmNoLlByb3ZpZGVyQXR0cmlidXRlcxI4CgR0YWdzGAIgAygLMiouaW5mcmFjb3N0LmNvZGVzZWFyY2guQXR0cmlidXRlcy5UYWdzRW50cnkSFAoMZW52aXJvbm1lbnRzGAMgAygJEh8KF25vcm1hbGl6ZWRfZW52aXJvbm1lbnRzGAQgAygJEhIKCmNvbXBvbmVudHMYBSADKAkaKwoJVGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiUQoSUHJvdmlkZXJBdHRyaWJ1dGVzEhMKC2FjY291bnRfaWRzGAEgAygJEg8KB3JlZ2lvbnMYAiADKAkSFQoNcHJvdmlkZXJfbmFtZRgDIAEoCULUAQoYY29tLmluZnJhY29zdC5jb2Rlc2VhcmNoQg9Db2Rlc2VhcmNoUHJvdG9QAVo2Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9jb2Rlc2VhcmNoogIDSUNYqgIUSW5mcmFjb3N0LkNvZGVzZWFyY2jKAhRJbmZyYWNvc3RcQ29kZXNlYXJjaOICIEluZnJhY29zdFxDb2Rlc2VhcmNoXEdQQk1ldGFkYXRh6gIVSW5mcmFjb3N0OjpDb2Rlc2VhcmNoYgZwcm90bzM", [file_infracost_tree_tree]);
+  fileDesc("CiVpbmZyYWNvc3QvY29kZXNlYXJjaC9jb2Rlc2VhcmNoLnByb3RvEhRpbmZyYWNvc3QuY29kZXNlYXJjaCLVAgoJSW5kZXhEYXRhEg4KBm9yZ19pZBgBIAEoCRIQCghyZXBvX3VybBgCIAEoCRILCgNyZWYYAyABKAkSNAoKYXR0cmlidXRlcxgEIAEoCzIgLmluZnJhY29zdC5jb2Rlc2VhcmNoLkF0dHJpYnV0ZXMSPgoQaW5kZXhlZF9wcm9qZWN0cxgFIAMoCzIkLmluZnJhY29zdC5jb2Rlc2VhcmNoLkluZGV4ZWRQcm9qZWN0Eg8KB3JlcG9faWQYBiABKAkSEQoJcmVwb19uYW1lGAcgASgJEjkKCHZjc190eXBlGAggASgOMicuaW5mcmFjb3N0LmNvZGVzZWFyY2guSW5kZXhEYXRhLlZDU1R5cGUiRAoHVkNTVHlwZRIPCgtVTktOT1dOX1ZDUxAAEgoKBkdJVEhVQhABEgoKBkdJVExBQhACEhAKDEFaVVJFX0RFVk9QUxADIpgBCg5JbmRleGVkUHJvamVjdBI0CgphdHRyaWJ1dGVzGAEgASgLMiAuaW5mcmFjb3N0LmNvZGVzZWFyY2guQXR0cmlidXRlcxInCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZUgAiAEBEgwKBG5hbWUYAyABKAkSEAoIaWFjX3R5cGUYBCABKAlCBwoFX3RyZWUihQIKCkF0dHJpYnV0ZXMSRQoTcHJvdmlkZXJfYXR0cmlidXRlcxgBIAMoCzIoLmluZnJhY29zdC5jb2Rlc2VhcmNoLlByb3ZpZGVyQXR0cmlidXRlcxI4CgR0YWdzGAIgAygLMiouaW5mcmFjb3N0LmNvZGVzZWFyY2guQXR0cmlidXRlcy5UYWdzRW50cnkSFAoMZW52aXJvbm1lbnRzGAMgAygJEh8KF25vcm1hbGl6ZWRfZW52aXJvbm1lbnRzGAQgAygJEhIKCmNvbXBvbmVudHMYBSADKAkaKwoJVGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiUQoSUHJvdmlkZXJBdHRyaWJ1dGVzEhMKC2FjY291bnRfaWRzGAEgAygJEg8KB3JlZ2lvbnMYAiADKAkSFQoNcHJvdmlkZXJfbmFtZRgDIAEoCULUAQoYY29tLmluZnJhY29zdC5jb2Rlc2VhcmNoQg9Db2Rlc2VhcmNoUHJvdG9QAVo2Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9jb2Rlc2VhcmNoogIDSUNYqgIUSW5mcmFjb3N0LkNvZGVzZWFyY2jKAhRJbmZyYWNvc3RcQ29kZXNlYXJjaOICIEluZnJhY29zdFxDb2Rlc2VhcmNoXEdQQk1ldGFkYXRh6gIVSW5mcmFjb3N0OjpDb2Rlc2VhcmNoYgZwcm90bzM", [file_infracost_tree_tree]);
 
 /**
  * IndexData contains information gathered during the index of repository
@@ -68,6 +68,11 @@ export type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: string repo_name = 7;
    */
   repoName: string;
+
+  /**
+   * @generated from field: infracost.codesearch.IndexData.VCSType vcs_type = 8;
+   */
+  vcsType: IndexData_VCSType;
 };
 
 /**
@@ -76,6 +81,45 @@ export type IndexData = Message<"infracost.codesearch.IndexData"> & {
  */
 export const IndexDataSchema: GenMessage<IndexData> = /*@__PURE__*/
   messageDesc(file_infracost_codesearch_codesearch, 0);
+
+/**
+ * @generated from enum infracost.codesearch.IndexData.VCSType
+ */
+export enum IndexData_VCSType {
+  /**
+   * unknown vcs type
+   *
+   * @generated from enum value: UNKNOWN_VCS = 0;
+   */
+  UNKNOWN_VCS = 0,
+
+  /**
+   * github
+   *
+   * @generated from enum value: GITHUB = 1;
+   */
+  GITHUB = 1,
+
+  /**
+   * gitlab
+   *
+   * @generated from enum value: GITLAB = 2;
+   */
+  GITLAB = 2,
+
+  /**
+   * azure devops
+   *
+   * @generated from enum value: AZURE_DEVOPS = 3;
+   */
+  AZURE_DEVOPS = 3,
+}
+
+/**
+ * Describes the enum infracost.codesearch.IndexData.VCSType.
+ */
+export const IndexData_VCSTypeSchema: GenEnum<IndexData_VCSType> = /*@__PURE__*/
+  enumDesc(file_infracost_codesearch_codesearch, 0, 0);
 
 /**
  * IndexedProject is the index result of an IaC project within a repository
