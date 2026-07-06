@@ -495,6 +495,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_comment_generation = 9;
    */
   enableCommentGeneration: boolean;
+
+  /**
+   * @generated from field: bool enable_k8s_plugins = 10;
+   */
+  enableK8sPlugins: boolean;
 };
 
 /**

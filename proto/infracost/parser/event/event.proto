@@ -120,6 +120,7 @@ message FeatureFlags {
   bool enable_client_side_budgets = 7;
   bool enable_iac_agnostic_scanning = 8;
   bool enable_comment_generation = 9;
+  bool enable_k8s_plugins = 10;
 }
 
 // What gets executed
