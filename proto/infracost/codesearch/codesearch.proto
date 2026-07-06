@@ -20,6 +20,19 @@ message IndexData {
   string repo_id = 6;
   // the repo name
   string repo_name = 7;
+
+  enum VCSType {
+    // unknown vcs type
+    UNKNOWN_VCS = 0;
+    // github
+    GITHUB = 1;
+    // gitlab
+    GITLAB = 2;
+    // azure devops
+    AZURE_DEVOPS = 3;
+  }
+
+  VCSType vcs_type = 8;
 }
 
 // IndexedProject is the index result of an IaC project within a repository
