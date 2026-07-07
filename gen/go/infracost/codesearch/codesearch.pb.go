@@ -10,6 +10,7 @@ import (
 	tree "github.com/infracost/proto/gen/go/infracost/tree"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -94,10 +95,14 @@ type IndexData struct {
 	// repo id
 	RepoId string `protobuf:"bytes,6,opt,name=repo_id,json=repoId,proto3" json:"repo_id,omitempty"`
 	// the repo name
-	RepoName      string            `protobuf:"bytes,7,opt,name=repo_name,json=repoName,proto3" json:"repo_name,omitempty"`
-	VcsType       IndexData_VCSType `protobuf:"varint,8,opt,name=vcs_type,json=vcsType,proto3,enum=infracost.codesearch.IndexData_VCSType" json:"vcs_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RepoName string            `protobuf:"bytes,7,opt,name=repo_name,json=repoName,proto3" json:"repo_name,omitempty"`
+	VcsType  IndexData_VCSType `protobuf:"varint,8,opt,name=vcs_type,json=vcsType,proto3,enum=infracost.codesearch.IndexData_VCSType" json:"vcs_type,omitempty"`
+	// the commit being indexed
+	CommitSha string `protobuf:"bytes,9,opt,name=commit_sha,json=commitSha,proto3" json:"commit_sha,omitempty"`
+	// time the commit being indexed was created
+	CommitTimestamp *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=commit_timestamp,json=commitTimestamp,proto3" json:"commit_timestamp,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *IndexData) Reset() {
@@ -184,6 +189,20 @@ func (x *IndexData) GetVcsType() IndexData_VCSType {
 		return x.VcsType
 	}
 	return IndexData_UNKNOWN_VCS
+}
+
+func (x *IndexData) GetCommitSha() string {
+	if x != nil {
+		return x.CommitSha
+	}
+	return ""
+}
+
+func (x *IndexData) GetCommitTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CommitTimestamp
+	}
+	return nil
 }
 
 // IndexedProject is the index result of an IaC project within a repository
@@ -409,7 +428,7 @@ var File_infracost_codesearch_codesearch_proto protoreflect.FileDescriptor
 
 const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
-	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x19infracost/tree/tree.proto\"\xa2\x03\n" +
+	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19infracost/tree/tree.proto\"\x88\x04\n" +
 	"\tIndexData\x12\x15\n" +
 	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x10\n" +
@@ -420,7 +439,11 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\x10indexed_projects\x18\x05 \x03(\v2$.infracost.codesearch.IndexedProjectR\x0findexedProjects\x12\x17\n" +
 	"\arepo_id\x18\x06 \x01(\tR\x06repoId\x12\x1b\n" +
 	"\trepo_name\x18\a \x01(\tR\brepoName\x12B\n" +
-	"\bvcs_type\x18\b \x01(\x0e2'.infracost.codesearch.IndexData.VCSTypeR\avcsType\"D\n" +
+	"\bvcs_type\x18\b \x01(\x0e2'.infracost.codesearch.IndexData.VCSTypeR\avcsType\x12\x1d\n" +
+	"\n" +
+	"commit_sha\x18\t \x01(\tR\tcommitSha\x12E\n" +
+	"\x10commit_timestamp\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\x0fcommitTimestamp\"D\n" +
 	"\aVCSType\x12\x0f\n" +
 	"\vUNKNOWN_VCS\x10\x00\x12\n" +
 	"\n" +
@@ -470,27 +493,29 @@ func file_infracost_codesearch_codesearch_proto_rawDescGZIP() []byte {
 var file_infracost_codesearch_codesearch_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_infracost_codesearch_codesearch_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_infracost_codesearch_codesearch_proto_goTypes = []any{
-	(IndexData_VCSType)(0),     // 0: infracost.codesearch.IndexData.VCSType
-	(*IndexData)(nil),          // 1: infracost.codesearch.IndexData
-	(*IndexedProject)(nil),     // 2: infracost.codesearch.IndexedProject
-	(*Attributes)(nil),         // 3: infracost.codesearch.Attributes
-	(*ProviderAttributes)(nil), // 4: infracost.codesearch.ProviderAttributes
-	nil,                        // 5: infracost.codesearch.Attributes.TagsEntry
-	(*tree.Tree)(nil),          // 6: infracost.tree.Tree
+	(IndexData_VCSType)(0),        // 0: infracost.codesearch.IndexData.VCSType
+	(*IndexData)(nil),             // 1: infracost.codesearch.IndexData
+	(*IndexedProject)(nil),        // 2: infracost.codesearch.IndexedProject
+	(*Attributes)(nil),            // 3: infracost.codesearch.Attributes
+	(*ProviderAttributes)(nil),    // 4: infracost.codesearch.ProviderAttributes
+	nil,                           // 5: infracost.codesearch.Attributes.TagsEntry
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*tree.Tree)(nil),             // 7: infracost.tree.Tree
 }
 var file_infracost_codesearch_codesearch_proto_depIdxs = []int32{
 	3, // 0: infracost.codesearch.IndexData.attributes:type_name -> infracost.codesearch.Attributes
 	2, // 1: infracost.codesearch.IndexData.indexed_projects:type_name -> infracost.codesearch.IndexedProject
 	0, // 2: infracost.codesearch.IndexData.vcs_type:type_name -> infracost.codesearch.IndexData.VCSType
-	3, // 3: infracost.codesearch.IndexedProject.attributes:type_name -> infracost.codesearch.Attributes
-	6, // 4: infracost.codesearch.IndexedProject.tree:type_name -> infracost.tree.Tree
-	4, // 5: infracost.codesearch.Attributes.provider_attributes:type_name -> infracost.codesearch.ProviderAttributes
-	5, // 6: infracost.codesearch.Attributes.tags:type_name -> infracost.codesearch.Attributes.TagsEntry
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	6, // 3: infracost.codesearch.IndexData.commit_timestamp:type_name -> google.protobuf.Timestamp
+	3, // 4: infracost.codesearch.IndexedProject.attributes:type_name -> infracost.codesearch.Attributes
+	7, // 5: infracost.codesearch.IndexedProject.tree:type_name -> infracost.tree.Tree
+	4, // 6: infracost.codesearch.Attributes.provider_attributes:type_name -> infracost.codesearch.ProviderAttributes
+	5, // 7: infracost.codesearch.Attributes.tags:type_name -> infracost.codesearch.Attributes.TagsEntry
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_infracost_codesearch_codesearch_proto_init() }

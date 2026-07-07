@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Tree } from "../tree/tree_pb.js";
 
 /**
@@ -70,6 +71,20 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: infracost.codesearch.IndexData.VCSType vcs_type = 8;
    */
   vcsType: IndexData_VCSType;
+
+  /**
+   * the commit being indexed
+   *
+   * @generated from field: string commit_sha = 9;
+   */
+  commitSha: string;
+
+  /**
+   * time the commit being indexed was created
+   *
+   * @generated from field: google.protobuf.Timestamp commit_timestamp = 10;
+   */
+  commitTimestamp?: Timestamp;
 };
 
 /**
