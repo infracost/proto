@@ -30,6 +30,15 @@ message RunParameters {
   // pre-existing-issues comment line reflects the whole repo, not just the
   // changed projects.
   repeated ProjectPreExistingIssues project_preexisting_issues = 14;
+  optional PlanInfo plan_info = 15;
+}
+
+message PlanInfo {
+  bool is_active = 1;
+  bool is_poc = 2;
+  bool is_trial = 3;
+  bool is_enterprise = 4;
+  optional google.protobuf.Timestamp expiry = 5;
 }
 
 // ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
