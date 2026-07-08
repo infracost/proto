@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/event/runparameters.proto.
  */
 export const file_infracost_parser_event_runparameters: GenFile = /*@__PURE__*/
-  fileDesc("CippbmZyYWNvc3QvcGFyc2VyL2V2ZW50L3J1bnBhcmFtZXRlcnMucHJvdG8SFmluZnJhY29zdC5wYXJzZXIuZXZlbnQiswYKDVJ1blBhcmFtZXRlcnMSMAoFc2NvcGUYASABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJhc2VTY29wZRI9Cg51c2FnZV9kZWZhdWx0cxgCIAEoCzIlLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cxJEChJwcm9kdWN0aW9uX2ZpbHRlcnMYAyADKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXISNwoMdGFnX3BvbGljaWVzGAQgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3kSRQoPZmlub3BzX3BvbGljaWVzGAUgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncxI1CgpndWFyZHJhaWxzGAYgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5HdWFyZHJhaWwSLwoHYnVkZ2V0cxgHIAMoCzIeLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQnVkZ2V0EhwKD2NvbmZpZ190ZW1wbGF0ZRgIIAEoCUgAiAEBEhMKBnJ1bl9pZBgJIAEoCUgBiAEBEhAKCGN1cnJlbmN5GAogASgJEkIKEXByb2plY3RfYmFzZWxpbmVzGAsgAygLMicuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qcm9qZWN0QmFzZWxpbmUSQQoQY29tbWVudF9zZXR0aW5ncxgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQ29tbWVudFNldHRpbmdzEkIKEXBvbGljeV9leGNsdXNpb25zGA0gAygLMicuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qb2xpY3lFeGNsdXNpb24SVAoacHJvamVjdF9wcmVleGlzdGluZ19pc3N1ZXMYDiADKAsyMC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2plY3RQcmVFeGlzdGluZ0lzc3Vlc0ISChBfY29uZmlnX3RlbXBsYXRlQgkKB19ydW5faWQiRQoYUHJvamVjdFByZUV4aXN0aW5nSXNzdWVzEhQKDHByb2plY3RfbmFtZRgBIAEoCRITCgtpc3N1ZV9jb3VudBgCIAEoBSLMAQoPUG9saWN5RXhjbHVzaW9uEkcKC3BvbGljeV90eXBlGAEgASgOMjIuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qb2xpY3lFeGNsdXNpb24uUG9saWN5VHlwZRIRCglwb2xpY3lfaWQYAiABKAkSFAoMcHJvamVjdF9uYW1lGAMgASgJEg8KB2FkZHJlc3MYBCABKAkiNgoKUG9saWN5VHlwZRIPCgtVTlNQRUNJRklFRBAAEgoKBkZJTk9QUxABEgsKB1RBR0dJTkcQAiJcCg9Qcm9qZWN0QmFzZWxpbmUSFAoMcHJvamVjdF9uYW1lGAEgASgJEjMKEnRvdGFsX21vbnRobHlfY29zdBgCIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQiPgoPQ29tbWVudFNldHRpbmdzEg8KB2VuYWJsZWQYASABKAgSGgoSc2hvd19jb3N0X2VzdGltYXRlGAIgASgIIkUKCUJhc2VTY29wZRIRCglyZXBvX25hbWUYASABKAkSEAoIcmVwb191cmwYAiABKAkSEwoLYnJhbmNoX25hbWUYAyABKAkitAEKDVVzYWdlRGVmYXVsdHMSRwoJcmVzb3VyY2VzGAEgAygLMjQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZURlZmF1bHRzLlJlc291cmNlc0VudHJ5GloKDlJlc291cmNlc0VudHJ5EgsKA2tleRgBIAEoCRI3CgV2YWx1ZRgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VSZXNvdXJjZU1hcDoCOAEisQEKEFVzYWdlUmVzb3VyY2VNYXASRAoGdXNhZ2VzGAEgAygLMjQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZVJlc291cmNlTWFwLlVzYWdlc0VudHJ5GlcKC1VzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRI3CgV2YWx1ZRgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0TGlzdDoCOAEiRgoQVXNhZ2VEZWZhdWx0TGlzdBIyCgRsaXN0GAEgAygLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZURlZmF1bHQiaQoMVXNhZ2VEZWZhdWx0EhAKCHF1YW50aXR5GAEgASgJEhAKCHByaW9yaXR5GAIgASgFEjUKB2ZpbHRlcnMYAyABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRmlsdGVycyJFCgxVc2FnZUZpbHRlcnMSNQoHcHJvamVjdBgBIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyIrcBChBQcm9kdWN0aW9uRmlsdGVyEgoKAmlkGAEgASgJEjsKBHR5cGUYAiABKA4yLS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXIuVHlwZRINCgV2YWx1ZRgDIAEoCRIPCgdpbmNsdWRlGAQgASgIIjoKBFR5cGUSDwoLVU5TUEVDSUZJRUQQABIICgRSRVBPEAESCwoHUFJPSkVDVBACEgoKBkJSQU5DSBADIpEDCglUYWdQb2xpY3kSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIPCgdtZXNzYWdlGAMgASgJEj0KD3Jlc291cmNlX2ZpbHRlchgEIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjsKDWJyYW5jaF9maWx0ZXIYBSABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI8Cg5wcm9qZWN0X2ZpbHRlchgGIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjUKCnRhZ19maWx0ZXIYByABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlchJCCgxyZXF1aXJlbWVudHMYCCADKAsyLC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlRhZ1BvbGljeVJlcXVpcmVtZW50EhIKCnByX2NvbW1lbnQYCSABKAgSEAoIYmxvY2tfcHIYCiABKAgi7AEKFFRhZ1BvbGljeVJlcXVpcmVtZW50EgsKA2tleRgBIAEoCRI/CgR0eXBlGAIgASgOMjEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3lSZXF1aXJlbWVudC5UeXBlEhMKC3ZhbHVlX3JlZ2V4GAMgASgJEg8KB21lc3NhZ2UYBCABKAkSFgoOYWxsb3dlZF92YWx1ZXMYBSADKAkSEQoJbWFuZGF0b3J5GAYgASgIIjUKBFR5cGUSDwoLVU5TUEVDSUZJRUQQABIHCgNBTlkQARIICgRMSVNUEAISCQoFUkVHRVgQAyIwCgxTdHJpbmdGaWx0ZXISDwoHaW5jbHVkZRgBIAMoCRIPCgdleGNsdWRlGAIgAygJIu0BCglNYXBGaWx0ZXISPwoHaW5jbHVkZRgBIAMoCzIuLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyLkluY2x1ZGVFbnRyeRI/CgdleGNsdWRlGAIgAygLMi4uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXIuRXhjbHVkZUVudHJ5Gi4KDEluY2x1ZGVFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGi4KDEV4Y2x1ZGVFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBItIDChRGaW5vcHNQb2xpY3lTZXR0aW5ncxIKCgJpZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSDwoHbWVzc2FnZRgEIAEoCRI8Cg5wcm9qZWN0X2ZpbHRlchgFIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjsKDWJyYW5jaF9maWx0ZXIYBiABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI1Cgp0YWdfZmlsdGVyGAcgASgLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXISEAoIc2V0dGluZ3MYCCABKAkSEgoKcHJfY29tbWVudBgJIAEoCBIQCghibG9ja19wchgKIAEoCBIaChJvbmx5X25ld19yZXNvdXJjZXMYCyABKAgSQQoFZ3JvdXAYDCABKA4yMi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkZpbm9wc1BvbGljeVNldHRpbmdzLkdyb3VwIjgKBUdyb3VwEg8KC1VOU1BFQ0lGSUVEEAASCgoGRklOT1BTEAESEgoOQ0xPVURfU0VDVVJJVFkQAiKTBAoJR3VhcmRyYWlsEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSNgoFc2NvcGUYAyABKA4yJy5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lkd1YXJkcmFpbC5TY29wZRI8Cg5wcm9qZWN0X2ZpbHRlchgEIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjgKEmluY3JlYXNlX3RocmVzaG9sZBgFIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAIgBARJAChppbmNyZWFzZV9wZXJjZW50X3RocmVzaG9sZBgGIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAYgBARI1Cg90b3RhbF90aHJlc2hvbGQYByABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0SAKIAQESEgoKcHJfY29tbWVudBgIIAEoCBIQCghibG9ja19wchgJIAEoCBIPCgdtZXNzYWdlGAogASgJEhEKCXVuYmxvY2tlZBgLIAEoCCIvCgVTY29wZRIPCgtVTlNQRUNJRklFRBAAEggKBFJFUE8QARILCgdQUk9KRUNUEAJCFQoTX2luY3JlYXNlX3RocmVzaG9sZEIdChtfaW5jcmVhc2VfcGVyY2VudF90aHJlc2hvbGRCEgoQX3RvdGFsX3RocmVzaG9sZCK9AgoGQnVkZ2V0EgoKAmlkGAEgASgJEi8KBHRhZ3MYAiADKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJ1ZGdldFRhZxInCgZhbW91bnQYAyABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ei4KCnN0YXJ0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpwcl9jb21tZW50GAYgASgIEh4KFmN1c3RvbV9vdmVycnVuX21lc3NhZ2UYByABKAkSDAoEbmFtZRgIIAEoCRItCgxjdXJyZW50X2Nvc3QYCSABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0IicKCUJ1ZGdldFRhZxILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAlC5AEKGmNvbS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50QhJSdW5wYXJhbWV0ZXJzUHJvdG9QAVo4Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvZXZlbnSiAgNJUEWqAhZJbmZyYWNvc3QuUGFyc2VyLkV2ZW50ygIWSW5mcmFjb3N0XFBhcnNlclxFdmVudOICIkluZnJhY29zdFxQYXJzZXJcRXZlbnRcR1BCTWV0YWRhdGHqAhhJbmZyYWNvc3Q6OlBhcnNlcjo6RXZlbnRiBnByb3RvMw", [file_google_protobuf_timestamp, file_infracost_rational_rational]);
+  fileDesc("CippbmZyYWNvc3QvcGFyc2VyL2V2ZW50L3J1bnBhcmFtZXRlcnMucHJvdG8SFmluZnJhY29zdC5wYXJzZXIuZXZlbnQi+wYKDVJ1blBhcmFtZXRlcnMSMAoFc2NvcGUYASABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJhc2VTY29wZRI9Cg51c2FnZV9kZWZhdWx0cxgCIAEoCzIlLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0cxJEChJwcm9kdWN0aW9uX2ZpbHRlcnMYAyADKAsyKC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXISNwoMdGFnX3BvbGljaWVzGAQgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3kSRQoPZmlub3BzX3BvbGljaWVzGAUgAygLMiwuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5GaW5vcHNQb2xpY3lTZXR0aW5ncxI1CgpndWFyZHJhaWxzGAYgAygLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5HdWFyZHJhaWwSLwoHYnVkZ2V0cxgHIAMoCzIeLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQnVkZ2V0EhwKD2NvbmZpZ190ZW1wbGF0ZRgIIAEoCUgAiAEBEhMKBnJ1bl9pZBgJIAEoCUgBiAEBEhAKCGN1cnJlbmN5GAogASgJEkIKEXByb2plY3RfYmFzZWxpbmVzGAsgAygLMicuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qcm9qZWN0QmFzZWxpbmUSQQoQY29tbWVudF9zZXR0aW5ncxgMIAEoCzInLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuQ29tbWVudFNldHRpbmdzEkIKEXBvbGljeV9leGNsdXNpb25zGA0gAygLMicuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qb2xpY3lFeGNsdXNpb24SVAoacHJvamVjdF9wcmVleGlzdGluZ19pc3N1ZXMYDiADKAsyMC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2plY3RQcmVFeGlzdGluZ0lzc3VlcxI4CglwbGFuX2luZm8YDyABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlBsYW5JbmZvSAKIAQFCEgoQX2NvbmZpZ190ZW1wbGF0ZUIJCgdfcnVuX2lkQgwKCl9wbGFuX2luZm8ikAEKCFBsYW5JbmZvEg8KB2lzX3BhaWQYASABKAgSDgoGaXNfcG9jGAIgASgIEhAKCGlzX3RyaWFsGAMgASgIEhUKDWlzX2VudGVycHJpc2UYBCABKAgSLwoGZXhwaXJ5GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgAiAEBQgkKB19leHBpcnkiRQoYUHJvamVjdFByZUV4aXN0aW5nSXNzdWVzEhQKDHByb2plY3RfbmFtZRgBIAEoCRITCgtpc3N1ZV9jb3VudBgCIAEoBSLMAQoPUG9saWN5RXhjbHVzaW9uEkcKC3BvbGljeV90eXBlGAEgASgOMjIuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Qb2xpY3lFeGNsdXNpb24uUG9saWN5VHlwZRIRCglwb2xpY3lfaWQYAiABKAkSFAoMcHJvamVjdF9uYW1lGAMgASgJEg8KB2FkZHJlc3MYBCABKAkiNgoKUG9saWN5VHlwZRIPCgtVTlNQRUNJRklFRBAAEgoKBkZJTk9QUxABEgsKB1RBR0dJTkcQAiJcCg9Qcm9qZWN0QmFzZWxpbmUSFAoMcHJvamVjdF9uYW1lGAEgASgJEjMKEnRvdGFsX21vbnRobHlfY29zdBgCIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXQiPgoPQ29tbWVudFNldHRpbmdzEg8KB2VuYWJsZWQYASABKAgSGgoSc2hvd19jb3N0X2VzdGltYXRlGAIgASgIIkUKCUJhc2VTY29wZRIRCglyZXBvX25hbWUYASABKAkSEAoIcmVwb191cmwYAiABKAkSEwoLYnJhbmNoX25hbWUYAyABKAkitAEKDVVzYWdlRGVmYXVsdHMSRwoJcmVzb3VyY2VzGAEgAygLMjQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZURlZmF1bHRzLlJlc291cmNlc0VudHJ5GloKDlJlc291cmNlc0VudHJ5EgsKA2tleRgBIAEoCRI3CgV2YWx1ZRgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VSZXNvdXJjZU1hcDoCOAEisQEKEFVzYWdlUmVzb3VyY2VNYXASRAoGdXNhZ2VzGAEgAygLMjQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZVJlc291cmNlTWFwLlVzYWdlc0VudHJ5GlcKC1VzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRI3CgV2YWx1ZRgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuVXNhZ2VEZWZhdWx0TGlzdDoCOAEiRgoQVXNhZ2VEZWZhdWx0TGlzdBIyCgRsaXN0GAEgAygLMiQuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5Vc2FnZURlZmF1bHQiaQoMVXNhZ2VEZWZhdWx0EhAKCHF1YW50aXR5GAEgASgJEhAKCHByaW9yaXR5GAIgASgFEjUKB2ZpbHRlcnMYAyABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlVzYWdlRmlsdGVycyJFCgxVc2FnZUZpbHRlcnMSNQoHcHJvamVjdBgBIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyIrcBChBQcm9kdWN0aW9uRmlsdGVyEgoKAmlkGAEgASgJEjsKBHR5cGUYAiABKA4yLS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlByb2R1Y3Rpb25GaWx0ZXIuVHlwZRINCgV2YWx1ZRgDIAEoCRIPCgdpbmNsdWRlGAQgASgIIjoKBFR5cGUSDwoLVU5TUEVDSUZJRUQQABIICgRSRVBPEAESCwoHUFJPSkVDVBACEgoKBkJSQU5DSBADIpEDCglUYWdQb2xpY3kSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIPCgdtZXNzYWdlGAMgASgJEj0KD3Jlc291cmNlX2ZpbHRlchgEIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjsKDWJyYW5jaF9maWx0ZXIYBSABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI8Cg5wcm9qZWN0X2ZpbHRlchgGIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjUKCnRhZ19maWx0ZXIYByABKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lk1hcEZpbHRlchJCCgxyZXF1aXJlbWVudHMYCCADKAsyLC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlRhZ1BvbGljeVJlcXVpcmVtZW50EhIKCnByX2NvbW1lbnQYCSABKAgSEAoIYmxvY2tfcHIYCiABKAgi7AEKFFRhZ1BvbGljeVJlcXVpcmVtZW50EgsKA2tleRgBIAEoCRI/CgR0eXBlGAIgASgOMjEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5UYWdQb2xpY3lSZXF1aXJlbWVudC5UeXBlEhMKC3ZhbHVlX3JlZ2V4GAMgASgJEg8KB21lc3NhZ2UYBCABKAkSFgoOYWxsb3dlZF92YWx1ZXMYBSADKAkSEQoJbWFuZGF0b3J5GAYgASgIIjUKBFR5cGUSDwoLVU5TUEVDSUZJRUQQABIHCgNBTlkQARIICgRMSVNUEAISCQoFUkVHRVgQAyIwCgxTdHJpbmdGaWx0ZXISDwoHaW5jbHVkZRgBIAMoCRIPCgdleGNsdWRlGAIgAygJIu0BCglNYXBGaWx0ZXISPwoHaW5jbHVkZRgBIAMoCzIuLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuTWFwRmlsdGVyLkluY2x1ZGVFbnRyeRI/CgdleGNsdWRlGAIgAygLMi4uaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXIuRXhjbHVkZUVudHJ5Gi4KDEluY2x1ZGVFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGi4KDEV4Y2x1ZGVFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBItIDChRGaW5vcHNQb2xpY3lTZXR0aW5ncxIKCgJpZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSDwoHbWVzc2FnZRgEIAEoCRI8Cg5wcm9qZWN0X2ZpbHRlchgFIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjsKDWJyYW5jaF9maWx0ZXIYBiABKAsyJC5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LlN0cmluZ0ZpbHRlchI1Cgp0YWdfZmlsdGVyGAcgASgLMiEuaW5mcmFjb3N0LnBhcnNlci5ldmVudC5NYXBGaWx0ZXISEAoIc2V0dGluZ3MYCCABKAkSEgoKcHJfY29tbWVudBgJIAEoCBIQCghibG9ja19wchgKIAEoCBIaChJvbmx5X25ld19yZXNvdXJjZXMYCyABKAgSQQoFZ3JvdXAYDCABKA4yMi5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkZpbm9wc1BvbGljeVNldHRpbmdzLkdyb3VwIjgKBUdyb3VwEg8KC1VOU1BFQ0lGSUVEEAASCgoGRklOT1BTEAESEgoOQ0xPVURfU0VDVVJJVFkQAiKTBAoJR3VhcmRyYWlsEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSNgoFc2NvcGUYAyABKA4yJy5pbmZyYWNvc3QucGFyc2VyLmV2ZW50Lkd1YXJkcmFpbC5TY29wZRI8Cg5wcm9qZWN0X2ZpbHRlchgEIAEoCzIkLmluZnJhY29zdC5wYXJzZXIuZXZlbnQuU3RyaW5nRmlsdGVyEjgKEmluY3JlYXNlX3RocmVzaG9sZBgFIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAIgBARJAChppbmNyZWFzZV9wZXJjZW50X3RocmVzaG9sZBgGIAEoCzIXLmluZnJhY29zdC5yYXRpb25hbC5SYXRIAYgBARI1Cg90b3RhbF90aHJlc2hvbGQYByABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0SAKIAQESEgoKcHJfY29tbWVudBgIIAEoCBIQCghibG9ja19wchgJIAEoCBIPCgdtZXNzYWdlGAogASgJEhEKCXVuYmxvY2tlZBgLIAEoCCIvCgVTY29wZRIPCgtVTlNQRUNJRklFRBAAEggKBFJFUE8QARILCgdQUk9KRUNUEAJCFQoTX2luY3JlYXNlX3RocmVzaG9sZEIdChtfaW5jcmVhc2VfcGVyY2VudF90aHJlc2hvbGRCEgoQX3RvdGFsX3RocmVzaG9sZCK9AgoGQnVkZ2V0EgoKAmlkGAEgASgJEi8KBHRhZ3MYAiADKAsyIS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50LkJ1ZGdldFRhZxInCgZhbW91bnQYAyABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0Ei4KCnN0YXJ0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpwcl9jb21tZW50GAYgASgIEh4KFmN1c3RvbV9vdmVycnVuX21lc3NhZ2UYByABKAkSDAoEbmFtZRgIIAEoCRItCgxjdXJyZW50X2Nvc3QYCSABKAsyFy5pbmZyYWNvc3QucmF0aW9uYWwuUmF0IicKCUJ1ZGdldFRhZxILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAlC5AEKGmNvbS5pbmZyYWNvc3QucGFyc2VyLmV2ZW50QhJSdW5wYXJhbWV0ZXJzUHJvdG9QAVo4Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvZXZlbnSiAgNJUEWqAhZJbmZyYWNvc3QuUGFyc2VyLkV2ZW50ygIWSW5mcmFjb3N0XFBhcnNlclxFdmVudOICIkluZnJhY29zdFxQYXJzZXJcRXZlbnRcR1BCTWV0YWRhdGHqAhhJbmZyYWNvc3Q6OlBhcnNlcjo6RXZlbnRiBnByb3RvMw", [file_google_protobuf_timestamp, file_infracost_rational_rational]);
 
 /**
  * @generated from message infracost.parser.event.RunParameters
@@ -105,6 +105,11 @@ export type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
    * @generated from field: repeated infracost.parser.event.ProjectPreExistingIssues project_preexisting_issues = 14;
    */
   projectPreexistingIssues: ProjectPreExistingIssues[];
+
+  /**
+   * @generated from field: optional infracost.parser.event.PlanInfo plan_info = 15;
+   */
+  planInfo?: PlanInfo;
 };
 
 /**
@@ -113,6 +118,43 @@ export type RunParameters = Message<"infracost.parser.event.RunParameters"> & {
  */
 export const RunParametersSchema: GenMessage<RunParameters> = /*@__PURE__*/
   messageDesc(file_infracost_parser_event_runparameters, 0);
+
+/**
+ * @generated from message infracost.parser.event.PlanInfo
+ */
+export type PlanInfo = Message<"infracost.parser.event.PlanInfo"> & {
+  /**
+   * @generated from field: bool is_paid = 1;
+   */
+  isPaid: boolean;
+
+  /**
+   * @generated from field: bool is_poc = 2;
+   */
+  isPoc: boolean;
+
+  /**
+   * @generated from field: bool is_trial = 3;
+   */
+  isTrial: boolean;
+
+  /**
+   * @generated from field: bool is_enterprise = 4;
+   */
+  isEnterprise: boolean;
+
+  /**
+   * @generated from field: optional google.protobuf.Timestamp expiry = 5;
+   */
+  expiry?: Timestamp;
+};
+
+/**
+ * Describes the message infracost.parser.event.PlanInfo.
+ * Use `create(PlanInfoSchema)` to create a new message.
+ */
+export const PlanInfoSchema: GenMessage<PlanInfo> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_event_runparameters, 1);
 
 /**
  * ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
@@ -141,7 +183,7 @@ export type ProjectPreExistingIssues = Message<"infracost.parser.event.ProjectPr
  * Use `create(ProjectPreExistingIssuesSchema)` to create a new message.
  */
 export const ProjectPreExistingIssuesSchema: GenMessage<ProjectPreExistingIssues> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 1);
+  messageDesc(file_infracost_parser_event_runparameters, 2);
 
 /**
  * PolicyExclusion identifies a single dismissed/ignored policy issue. The key
@@ -177,7 +219,7 @@ export type PolicyExclusion = Message<"infracost.parser.event.PolicyExclusion"> 
  * Use `create(PolicyExclusionSchema)` to create a new message.
  */
 export const PolicyExclusionSchema: GenMessage<PolicyExclusion> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 2);
+  messageDesc(file_infracost_parser_event_runparameters, 3);
 
 /**
  * @generated from enum infracost.parser.event.PolicyExclusion.PolicyType
@@ -203,7 +245,7 @@ export enum PolicyExclusion_PolicyType {
  * Describes the enum infracost.parser.event.PolicyExclusion.PolicyType.
  */
 export const PolicyExclusion_PolicyTypeSchema: GenEnum<PolicyExclusion_PolicyType> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 2, 0);
+  enumDesc(file_infracost_parser_event_runparameters, 3, 0);
 
 /**
  * @generated from message infracost.parser.event.ProjectBaseline
@@ -227,7 +269,7 @@ export type ProjectBaseline = Message<"infracost.parser.event.ProjectBaseline"> 
  * Use `create(ProjectBaselineSchema)` to create a new message.
  */
 export const ProjectBaselineSchema: GenMessage<ProjectBaseline> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 3);
+  messageDesc(file_infracost_parser_event_runparameters, 4);
 
 /**
  * @generated from message infracost.parser.event.CommentSettings
@@ -249,7 +291,7 @@ export type CommentSettings = Message<"infracost.parser.event.CommentSettings"> 
  * Use `create(CommentSettingsSchema)` to create a new message.
  */
 export const CommentSettingsSchema: GenMessage<CommentSettings> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 4);
+  messageDesc(file_infracost_parser_event_runparameters, 5);
 
 /**
  * @generated from message infracost.parser.event.BaseScope
@@ -276,7 +318,7 @@ export type BaseScope = Message<"infracost.parser.event.BaseScope"> & {
  * Use `create(BaseScopeSchema)` to create a new message.
  */
 export const BaseScopeSchema: GenMessage<BaseScope> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 5);
+  messageDesc(file_infracost_parser_event_runparameters, 6);
 
 /**
  * @generated from message infracost.parser.event.UsageDefaults
@@ -295,7 +337,7 @@ export type UsageDefaults = Message<"infracost.parser.event.UsageDefaults"> & {
  * Use `create(UsageDefaultsSchema)` to create a new message.
  */
 export const UsageDefaultsSchema: GenMessage<UsageDefaults> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 6);
+  messageDesc(file_infracost_parser_event_runparameters, 7);
 
 /**
  * @generated from message infracost.parser.event.UsageResourceMap
@@ -314,7 +356,7 @@ export type UsageResourceMap = Message<"infracost.parser.event.UsageResourceMap"
  * Use `create(UsageResourceMapSchema)` to create a new message.
  */
 export const UsageResourceMapSchema: GenMessage<UsageResourceMap> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 7);
+  messageDesc(file_infracost_parser_event_runparameters, 8);
 
 /**
  * @generated from message infracost.parser.event.UsageDefaultList
@@ -331,7 +373,7 @@ export type UsageDefaultList = Message<"infracost.parser.event.UsageDefaultList"
  * Use `create(UsageDefaultListSchema)` to create a new message.
  */
 export const UsageDefaultListSchema: GenMessage<UsageDefaultList> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 8);
+  messageDesc(file_infracost_parser_event_runparameters, 9);
 
 /**
  * @generated from message infracost.parser.event.UsageDefault
@@ -358,7 +400,7 @@ export type UsageDefault = Message<"infracost.parser.event.UsageDefault"> & {
  * Use `create(UsageDefaultSchema)` to create a new message.
  */
 export const UsageDefaultSchema: GenMessage<UsageDefault> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 9);
+  messageDesc(file_infracost_parser_event_runparameters, 10);
 
 /**
  * @generated from message infracost.parser.event.UsageFilters
@@ -375,7 +417,7 @@ export type UsageFilters = Message<"infracost.parser.event.UsageFilters"> & {
  * Use `create(UsageFiltersSchema)` to create a new message.
  */
 export const UsageFiltersSchema: GenMessage<UsageFilters> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 10);
+  messageDesc(file_infracost_parser_event_runparameters, 11);
 
 /**
  * Filter represents a unified-input filter with a type and a value pattern
@@ -412,7 +454,7 @@ export type ProductionFilter = Message<"infracost.parser.event.ProductionFilter"
  * Use `create(ProductionFilterSchema)` to create a new message.
  */
 export const ProductionFilterSchema: GenMessage<ProductionFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 11);
+  messageDesc(file_infracost_parser_event_runparameters, 12);
 
 /**
  * Type represents the filter type (e.g., repo/project/branch) and aliases the proto enum.
@@ -445,7 +487,7 @@ export enum ProductionFilter_Type {
  * Describes the enum infracost.parser.event.ProductionFilter.Type.
  */
 export const ProductionFilter_TypeSchema: GenEnum<ProductionFilter_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 11, 0);
+  enumDesc(file_infracost_parser_event_runparameters, 12, 0);
 
 /**
  * @generated from message infracost.parser.event.TagPolicy
@@ -507,7 +549,7 @@ export type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
  * Use `create(TagPolicySchema)` to create a new message.
  */
 export const TagPolicySchema: GenMessage<TagPolicy> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 12);
+  messageDesc(file_infracost_parser_event_runparameters, 13);
 
 /**
  * @generated from message infracost.parser.event.TagPolicyRequirement
@@ -549,7 +591,7 @@ export type TagPolicyRequirement = Message<"infracost.parser.event.TagPolicyRequ
  * Use `create(TagPolicyRequirementSchema)` to create a new message.
  */
 export const TagPolicyRequirementSchema: GenMessage<TagPolicyRequirement> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 13);
+  messageDesc(file_infracost_parser_event_runparameters, 14);
 
 /**
  * @generated from enum infracost.parser.event.TagPolicyRequirement.Type
@@ -580,7 +622,7 @@ export enum TagPolicyRequirement_Type {
  * Describes the enum infracost.parser.event.TagPolicyRequirement.Type.
  */
 export const TagPolicyRequirement_TypeSchema: GenEnum<TagPolicyRequirement_Type> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 13, 0);
+  enumDesc(file_infracost_parser_event_runparameters, 14, 0);
 
 /**
  * @generated from message infracost.parser.event.StringFilter
@@ -602,7 +644,7 @@ export type StringFilter = Message<"infracost.parser.event.StringFilter"> & {
  * Use `create(StringFilterSchema)` to create a new message.
  */
 export const StringFilterSchema: GenMessage<StringFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 14);
+  messageDesc(file_infracost_parser_event_runparameters, 15);
 
 /**
  * @generated from message infracost.parser.event.MapFilter
@@ -624,7 +666,7 @@ export type MapFilter = Message<"infracost.parser.event.MapFilter"> & {
  * Use `create(MapFilterSchema)` to create a new message.
  */
 export const MapFilterSchema: GenMessage<MapFilter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 15);
+  messageDesc(file_infracost_parser_event_runparameters, 16);
 
 /**
  * @generated from message infracost.parser.event.FinopsPolicySettings
@@ -698,7 +740,7 @@ export type FinopsPolicySettings = Message<"infracost.parser.event.FinopsPolicyS
  * Use `create(FinopsPolicySettingsSchema)` to create a new message.
  */
 export const FinopsPolicySettingsSchema: GenMessage<FinopsPolicySettings> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 16);
+  messageDesc(file_infracost_parser_event_runparameters, 17);
 
 /**
  * @generated from enum infracost.parser.event.FinopsPolicySettings.Group
@@ -724,7 +766,7 @@ export enum FinopsPolicySettings_Group {
  * Describes the enum infracost.parser.event.FinopsPolicySettings.Group.
  */
 export const FinopsPolicySettings_GroupSchema: GenEnum<FinopsPolicySettings_Group> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 16, 0);
+  enumDesc(file_infracost_parser_event_runparameters, 17, 0);
 
 /**
  * @generated from message infracost.parser.event.Guardrail
@@ -805,7 +847,7 @@ export type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
  * Use `create(GuardrailSchema)` to create a new message.
  */
 export const GuardrailSchema: GenMessage<Guardrail> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 17);
+  messageDesc(file_infracost_parser_event_runparameters, 18);
 
 /**
  * @generated from enum infracost.parser.event.Guardrail.Scope
@@ -831,7 +873,7 @@ export enum Guardrail_Scope {
  * Describes the enum infracost.parser.event.Guardrail.Scope.
  */
 export const Guardrail_ScopeSchema: GenEnum<Guardrail_Scope> = /*@__PURE__*/
-  enumDesc(file_infracost_parser_event_runparameters, 17, 0);
+  enumDesc(file_infracost_parser_event_runparameters, 18, 0);
 
 /**
  * Budget defines a cost budget for resources matching a set of tags.
@@ -895,7 +937,7 @@ export type Budget = Message<"infracost.parser.event.Budget"> & {
  * Use `create(BudgetSchema)` to create a new message.
  */
 export const BudgetSchema: GenMessage<Budget> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 18);
+  messageDesc(file_infracost_parser_event_runparameters, 19);
 
 /**
  * @generated from message infracost.parser.event.BudgetTag
@@ -917,5 +959,5 @@ export type BudgetTag = Message<"infracost.parser.event.BudgetTag"> & {
  * Use `create(BudgetTagSchema)` to create a new message.
  */
 export const BudgetTagSchema: GenMessage<BudgetTag> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_event_runparameters, 19);
+  messageDesc(file_infracost_parser_event_runparameters, 20);
 

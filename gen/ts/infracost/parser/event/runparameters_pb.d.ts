@@ -4,8 +4,8 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Rat } from "../../rational/rational_pb.js";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Rat } from "../../rational/rational_pb.js";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
@@ -101,6 +101,11 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: repeated infracost.parser.event.ProjectPreExistingIssues project_preexisting_issues = 14;
    */
   projectPreexistingIssues: ProjectPreExistingIssues[];
+
+  /**
+   * @generated from field: optional infracost.parser.event.PlanInfo plan_info = 15;
+   */
+  planInfo?: PlanInfo;
 };
 
 /**
@@ -108,6 +113,42 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * @generated from message infracost.parser.event.PlanInfo
+ */
+export declare type PlanInfo = Message<"infracost.parser.event.PlanInfo"> & {
+  /**
+   * @generated from field: bool is_paid = 1;
+   */
+  isPaid: boolean;
+
+  /**
+   * @generated from field: bool is_poc = 2;
+   */
+  isPoc: boolean;
+
+  /**
+   * @generated from field: bool is_trial = 3;
+   */
+  isTrial: boolean;
+
+  /**
+   * @generated from field: bool is_enterprise = 4;
+   */
+  isEnterprise: boolean;
+
+  /**
+   * @generated from field: optional google.protobuf.Timestamp expiry = 5;
+   */
+  expiry?: Timestamp;
+};
+
+/**
+ * Describes the message infracost.parser.event.PlanInfo.
+ * Use `create(PlanInfoSchema)` to create a new message.
+ */
+export declare const PlanInfoSchema: GenMessage<PlanInfo>;
 
 /**
  * ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
