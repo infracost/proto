@@ -119,9 +119,9 @@ export declare const RunParametersSchema: GenMessage<RunParameters>;
  */
 export declare type PlanInfo = Message<"infracost.parser.event.PlanInfo"> & {
   /**
-   * @generated from field: bool is_active = 1;
+   * @generated from field: bool is_paid = 1;
    */
-  isActive: boolean;
+  isPaid: boolean;
 
   /**
    * @generated from field: bool is_poc = 2;

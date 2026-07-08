@@ -34,7 +34,7 @@ message RunParameters {
 }
 
 message PlanInfo {
-  bool is_active = 1;
+  bool is_paid = 1;
   bool is_poc = 2;
   bool is_trial = 3;
   bool is_enterprise = 4;

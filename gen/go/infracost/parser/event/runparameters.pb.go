@@ -443,7 +443,7 @@ func (x *RunParameters) GetPlanInfo() *PlanInfo {
 
 type PlanInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IsActive      bool                   `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	IsPaid        bool                   `protobuf:"varint,1,opt,name=is_paid,json=isPaid,proto3" json:"is_paid,omitempty"`
 	IsPoc         bool                   `protobuf:"varint,2,opt,name=is_poc,json=isPoc,proto3" json:"is_poc,omitempty"`
 	IsTrial       bool                   `protobuf:"varint,3,opt,name=is_trial,json=isTrial,proto3" json:"is_trial,omitempty"`
 	IsEnterprise  bool                   `protobuf:"varint,4,opt,name=is_enterprise,json=isEnterprise,proto3" json:"is_enterprise,omitempty"`
@@ -482,9 +482,9 @@ func (*PlanInfo) Descriptor() ([]byte, []int) {
 	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PlanInfo) GetIsActive() bool {
+func (x *PlanInfo) GetIsPaid() bool {
 	if x != nil {
-		return x.IsActive
+		return x.IsPaid
 	}
 	return false
 }
@@ -1882,9 +1882,9 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x10_config_templateB\t\n" +
 	"\a_run_idB\f\n" +
 	"\n" +
-	"_plan_info\"\xc2\x01\n" +
-	"\bPlanInfo\x12\x1b\n" +
-	"\tis_active\x18\x01 \x01(\bR\bisActive\x12\x15\n" +
+	"_plan_info\"\xbe\x01\n" +
+	"\bPlanInfo\x12\x17\n" +
+	"\ais_paid\x18\x01 \x01(\bR\x06isPaid\x12\x15\n" +
 	"\x06is_poc\x18\x02 \x01(\bR\x05isPoc\x12\x19\n" +
 	"\bis_trial\x18\x03 \x01(\bR\aisTrial\x12#\n" +
 	"\ris_enterprise\x18\x04 \x01(\bR\fisEnterprise\x127\n" +
