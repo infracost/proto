@@ -50,6 +50,11 @@ message IdentifyProjectsResponse {
   repeated string files = 2;
   // dependencies, relative to the directory
   repeated string dependency_paths = 3;
+  // Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+  // plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+  // YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+  // seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+  bytes raw_options = 4;
 }
 
 message IdentifyEnvironmentsRequest {
@@ -65,6 +70,10 @@ message IdentifyEnvironmentsRequest {
   // to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
   // and derive their environments from directory alone.
   repeated AttributedVarFile attributed_files = 2;
+
+  // the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+  // Always JSON, opaque to the caller.
+  bytes raw_options = 3;
 }
 
 // AttributedVarFile is one input file the caller has already associated with a project,
@@ -96,6 +105,10 @@ message Environment {
   // shared inputs this environment pulls in, relative to the request directory.
   // Kustomize: base/components dirs; Terraform: n/a.
   repeated string dependency_paths = 4;
+  // Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+  // persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+  // ParseRequest.raw_options for this environment. Opaque to the caller.
+  bytes raw_options = 5;
 }
 
 // ParseRequest is the unified request for all parser types.
@@ -104,10 +117,14 @@ message ParseRequest {
   string path = 1;
   // Generic options that aren't specific to any IaC
   infracost.parser.options.GenericOptions generic_options = 2;
-  // Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+  // Plugin-specific parse options for this project/environment, always JSON. This is the same
+  // blob generated during identification and persisted in the config file (see
+  // Environment.raw_options), passed through without the config library / CLI / runner
+  // interpreting it. Plugins document their own schema.
   bytes raw_options = 3;
-  // Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-  string raw_options_format = 4;
+  // field 4 was `string raw_options_format` - dropped: raw_options is always JSON.
+  reserved 4;
+  reserved "raw_options_format";
 }
 
 // ParseResponse is the iac-agnostic parser response

@@ -104,8 +104,24 @@ type GenericOptions struct {
 	DependencyRequest *DependencyRequest `protobuf:"bytes,13,opt,name=dependency_request,json=dependencyRequest,proto3,oneof" json:"dependency_request,omitempty"`
 	// Enable http first git normalization
 	EnableGitNormalization bool `protobuf:"varint,14,opt,name=enable_git_normalization,json=enableGitNormalization,proto3" json:"enable_git_normalization,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// FinOps naming-policy requirements (resource type -> required attributes). Source: org/dashboard
+	// policy. Cross-plugin (any IaC with taggable resources); today read by the terraform-family plugins.
+	RequiredAttributes []*AttributeRequirement `protobuf:"bytes,15,rep,name=required_attributes,json=requiredAttributes,proto3" json:"required_attributes,omitempty"`
+	// Default tags applied to all resources. Source: YOR config file / YOR_SIMPLE_TAGS env.
+	// Consumed by the terraform-family plugins.
+	DefaultTags map[string]string `protobuf:"bytes,16,rep,name=default_tags,json=defaultTags,proto3" json:"default_tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Flat module source map (module source -> replacement). Source: INFRACOST_TERRAFORM_SOURCE_MAP
+	// env. Consumed by the terraform-family plugins. NOTE: the regex source map from the config file
+	// (terraform.source_map) is user config and travels in the raw_options blob instead.
+	SourceMap map[string]string `protobuf:"bytes,17,rep,name=source_map,json=sourceMap,proto3" json:"source_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Environment variables for parsing (e.g. TF_VAR_*, TF_WORKSPACE). Source: runtime/integration
+	// env merged with the project's configured env. Consumed by the terraform-family plugins.
+	Env map[string]string `protobuf:"bytes,18,rep,name=env,proto3" json:"env,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
+	// Consumed by the terraform-family plugins.
+	ForceLocalModulePaths bool `protobuf:"varint,19,opt,name=force_local_module_paths,json=forceLocalModulePaths,proto3" json:"force_local_module_paths,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -236,6 +252,97 @@ func (x *GenericOptions) GetEnableGitNormalization() bool {
 	return false
 }
 
+func (x *GenericOptions) GetRequiredAttributes() []*AttributeRequirement {
+	if x != nil {
+		return x.RequiredAttributes
+	}
+	return nil
+}
+
+func (x *GenericOptions) GetDefaultTags() map[string]string {
+	if x != nil {
+		return x.DefaultTags
+	}
+	return nil
+}
+
+func (x *GenericOptions) GetSourceMap() map[string]string {
+	if x != nil {
+		return x.SourceMap
+	}
+	return nil
+}
+
+func (x *GenericOptions) GetEnv() map[string]string {
+	if x != nil {
+		return x.Env
+	}
+	return nil
+}
+
+func (x *GenericOptions) GetForceLocalModulePaths() bool {
+	if x != nil {
+		return x.ForceLocalModulePaths
+	}
+	return false
+}
+
+// AttributeRequirement lists the attributes a given resource type must set for a FinOps
+// naming/tagging policy.
+type AttributeRequirement struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The resource type the requirement applies to (e.g. "aws_instance").
+	ResourceType string `protobuf:"bytes,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	// The attributes that must be present on that resource type.
+	Attributes    []string `protobuf:"bytes,2,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttributeRequirement) Reset() {
+	*x = AttributeRequirement{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttributeRequirement) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttributeRequirement) ProtoMessage() {}
+
+func (x *AttributeRequirement) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttributeRequirement.ProtoReflect.Descriptor instead.
+func (*AttributeRequirement) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AttributeRequirement) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
+func (x *AttributeRequirement) GetAttributes() []string {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.
 // When set, the parser will use internal hooks to extract dependencies while the graph is available.
 type DependencyRequest struct {
@@ -254,7 +361,7 @@ type DependencyRequest struct {
 
 func (x *DependencyRequest) Reset() {
 	*x = DependencyRequest{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -266,7 +373,7 @@ func (x *DependencyRequest) String() string {
 func (*DependencyRequest) ProtoMessage() {}
 
 func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -279,7 +386,7 @@ func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DependencyRequest.ProtoReflect.Descriptor instead.
 func (*DependencyRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DependencyRequest) GetProjectName() string {
@@ -322,7 +429,7 @@ type Debug struct {
 
 func (x *Debug) Reset() {
 	*x = Debug{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -334,7 +441,7 @@ func (x *Debug) String() string {
 func (*Debug) ProtoMessage() {}
 
 func (x *Debug) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -347,7 +454,7 @@ func (x *Debug) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Debug.ProtoReflect.Descriptor instead.
 func (*Debug) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Debug) GetAddresses() []string {
@@ -378,7 +485,7 @@ type CredentialSet struct {
 
 func (x *CredentialSet) Reset() {
 	*x = CredentialSet{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -390,7 +497,7 @@ func (x *CredentialSet) String() string {
 func (*CredentialSet) ProtoMessage() {}
 
 func (x *CredentialSet) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -403,7 +510,7 @@ func (x *CredentialSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CredentialSet.ProtoReflect.Descriptor instead.
 func (*CredentialSet) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CredentialSet) GetToken() string {
@@ -443,7 +550,7 @@ type RemoteModuleCacheConfig struct {
 
 func (x *RemoteModuleCacheConfig) Reset() {
 	*x = RemoteModuleCacheConfig{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -455,7 +562,7 @@ func (x *RemoteModuleCacheConfig) String() string {
 func (*RemoteModuleCacheConfig) ProtoMessage() {}
 
 func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -468,7 +575,7 @@ func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoteModuleCacheConfig.ProtoReflect.Descriptor instead.
 func (*RemoteModuleCacheConfig) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *RemoteModuleCacheConfig) GetRegion() string {
@@ -515,7 +622,7 @@ type AwsCredentials struct {
 
 func (x *AwsCredentials) Reset() {
 	*x = AwsCredentials{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -527,7 +634,7 @@ func (x *AwsCredentials) String() string {
 func (*AwsCredentials) ProtoMessage() {}
 
 func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -540,7 +647,7 @@ func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AwsCredentials.ProtoReflect.Descriptor instead.
 func (*AwsCredentials) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AwsCredentials) GetAccessKeyId() string {
@@ -580,7 +687,7 @@ type ProxyRouter struct {
 
 func (x *ProxyRouter) Reset() {
 	*x = ProxyRouter{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -592,7 +699,7 @@ func (x *ProxyRouter) String() string {
 func (*ProxyRouter) ProtoMessage() {}
 
 func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -605,7 +712,7 @@ func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProxyRouter.ProtoReflect.Descriptor instead.
 func (*ProxyRouter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ProxyRouter) GetRoutes() map[string]string {
@@ -619,7 +726,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xfd\x06\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xc8\v\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -635,8 +742,28 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\fproxy_router\x18\v \x01(\v2%.infracost.parser.options.ProxyRouterR\vproxyRouter\x12n\n" +
 	"\x1aremote_module_cache_config\x18\f \x01(\v21.infracost.parser.options.RemoteModuleCacheConfigR\x17remoteModuleCacheConfig\x12_\n" +
 	"\x12dependency_request\x18\r \x01(\v2+.infracost.parser.options.DependencyRequestH\x00R\x11dependencyRequest\x88\x01\x01\x128\n" +
-	"\x18enable_git_normalization\x18\x0e \x01(\bR\x16enableGitNormalizationB\x15\n" +
-	"\x13_dependency_request\"\xcb\x01\n" +
+	"\x18enable_git_normalization\x18\x0e \x01(\bR\x16enableGitNormalization\x12_\n" +
+	"\x13required_attributes\x18\x0f \x03(\v2..infracost.parser.options.AttributeRequirementR\x12requiredAttributes\x12\\\n" +
+	"\fdefault_tags\x18\x10 \x03(\v29.infracost.parser.options.GenericOptions.DefaultTagsEntryR\vdefaultTags\x12V\n" +
+	"\n" +
+	"source_map\x18\x11 \x03(\v27.infracost.parser.options.GenericOptions.SourceMapEntryR\tsourceMap\x12C\n" +
+	"\x03env\x18\x12 \x03(\v21.infracost.parser.options.GenericOptions.EnvEntryR\x03env\x127\n" +
+	"\x18force_local_module_paths\x18\x13 \x01(\bR\x15forceLocalModulePaths\x1a>\n" +
+	"\x10DefaultTagsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a<\n" +
+	"\x0eSourceMapEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a6\n" +
+	"\bEnvEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x15\n" +
+	"\x13_dependency_request\"[\n" +
+	"\x14AttributeRequirement\x12#\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12\x1e\n" +
+	"\n" +
+	"attributes\x18\x02 \x03(\tR\n" +
+	"attributes\"\xcb\x01\n" +
 	"\x11DependencyRequest\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10resource_address\x18\x02 \x01(\tR\x0fresourceAddress\x12;\n" +
@@ -685,32 +812,40 @@ func file_infracost_parser_options_options_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_options_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_infracost_parser_options_options_proto_goTypes = []any{
 	(CredentialType)(0),             // 0: infracost.parser.options.CredentialType
 	(*GenericOptions)(nil),          // 1: infracost.parser.options.GenericOptions
-	(*DependencyRequest)(nil),       // 2: infracost.parser.options.DependencyRequest
-	(*Debug)(nil),                   // 3: infracost.parser.options.Debug
-	(*CredentialSet)(nil),           // 4: infracost.parser.options.CredentialSet
-	(*RemoteModuleCacheConfig)(nil), // 5: infracost.parser.options.RemoteModuleCacheConfig
-	(*AwsCredentials)(nil),          // 6: infracost.parser.options.AwsCredentials
-	(*ProxyRouter)(nil),             // 7: infracost.parser.options.ProxyRouter
-	nil,                             // 8: infracost.parser.options.ProxyRouter.RoutesEntry
+	(*AttributeRequirement)(nil),    // 2: infracost.parser.options.AttributeRequirement
+	(*DependencyRequest)(nil),       // 3: infracost.parser.options.DependencyRequest
+	(*Debug)(nil),                   // 4: infracost.parser.options.Debug
+	(*CredentialSet)(nil),           // 5: infracost.parser.options.CredentialSet
+	(*RemoteModuleCacheConfig)(nil), // 6: infracost.parser.options.RemoteModuleCacheConfig
+	(*AwsCredentials)(nil),          // 7: infracost.parser.options.AwsCredentials
+	(*ProxyRouter)(nil),             // 8: infracost.parser.options.ProxyRouter
+	nil,                             // 9: infracost.parser.options.GenericOptions.DefaultTagsEntry
+	nil,                             // 10: infracost.parser.options.GenericOptions.SourceMapEntry
+	nil,                             // 11: infracost.parser.options.GenericOptions.EnvEntry
+	nil,                             // 12: infracost.parser.options.ProxyRouter.RoutesEntry
 }
 var file_infracost_parser_options_options_proto_depIdxs = []int32{
-	4, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
-	6, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
-	3, // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
-	7, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
-	5, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
-	2, // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
-	0, // 6: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
-	8, // 7: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	5,  // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
+	7,  // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
+	4,  // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
+	8,  // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
+	6,  // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
+	3,  // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
+	2,  // 6: infracost.parser.options.GenericOptions.required_attributes:type_name -> infracost.parser.options.AttributeRequirement
+	9,  // 7: infracost.parser.options.GenericOptions.default_tags:type_name -> infracost.parser.options.GenericOptions.DefaultTagsEntry
+	10, // 8: infracost.parser.options.GenericOptions.source_map:type_name -> infracost.parser.options.GenericOptions.SourceMapEntry
+	11, // 9: infracost.parser.options.GenericOptions.env:type_name -> infracost.parser.options.GenericOptions.EnvEntry
+	0,  // 10: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
+	12, // 11: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_options_options_proto_init() }
@@ -725,7 +860,7 @@ func file_infracost_parser_options_options_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_options_options_proto_rawDesc), len(file_infracost_parser_options_options_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
