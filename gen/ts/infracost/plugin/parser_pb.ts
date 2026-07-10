@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/plugin/parser.proto.
  */
 export const file_infracost_plugin_parser: GenFile = /*@__PURE__*/
-  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJIlYKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCSJvChtJZGVudGlmeUVudmlyb25tZW50c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJEj0KEGF0dHJpYnV0ZWRfZmlsZXMYAiADKAsyIy5pbmZyYWNvc3QucGx1Z2luLkF0dHJpYnV0ZWRWYXJGaWxlIkEKEUF0dHJpYnV0ZWRWYXJGaWxlEgwKBHBhdGgYASABKAkSCwoDZW52GAIgASgJEhEKCWlzX2dsb2JhbBgDIAEoCCJTChxJZGVudGlmeUVudmlyb25tZW50c1Jlc3BvbnNlEjMKDGVudmlyb25tZW50cxgBIAMoCzIdLmluZnJhY29zdC5wbHVnaW4uRW52aXJvbm1lbnQiUgoLRW52aXJvbm1lbnQSDAoEbmFtZRgBIAEoCRIMCgRwYXRoGAIgASgJEg0KBWZpbGVzGAMgAygJEhgKEGRlcGVuZGVuY3lfcGF0aHMYBCADKAkikAEKDFBhcnNlUmVxdWVzdBIMCgRwYXRoGAEgASgJEkEKD2dlbmVyaWNfb3B0aW9ucxgCIAEoCzIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucxITCgtyYXdfb3B0aW9ucxgDIAEoDBIaChJyYXdfb3B0aW9uc19mb3JtYXQYBCABKAkipAEKDVBhcnNlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSIgoEdHJlZRgCIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSPAoWcmVxdWVzdGVkX2RlcGVuZGVuY2llcxgDIAMoCzIcLmluZnJhY29zdC5wbHVnaW4uRGVwZW5kZW5jeSLuAQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh0KFWlzX2V4dGVybmFsbHlfZGVmaW5lZBgGIAEoCBIYChBleHRlcm5hbF9zbmlwcGV0GAcgASgJEhQKDGlzX3N5bnRoZXRpYxgIIAEoCBIUCgxpc19nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUyowMKDVBhcnNlclNlcnZpY2USZgoPR2V0UGFyc2VyQ29uZmlnEiguaW5mcmFjb3N0LnBsdWdpbi5HZXRQYXJzZXJDb25maWdSZXF1ZXN0GikuaW5mcmFjb3N0LnBsdWdpbi5HZXRQYXJzZXJDb25maWdSZXNwb25zZRJpChBJZGVudGlmeVByb2plY3RzEikuaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVxdWVzdBoqLmluZnJhY29zdC5wbHVnaW4uSWRlbnRpZnlQcm9qZWN0c1Jlc3BvbnNlEnUKFElkZW50aWZ5RW52aXJvbm1lbnRzEi0uaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeUVudmlyb25tZW50c1JlcXVlc3QaLi5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5RW52aXJvbm1lbnRzUmVzcG9uc2USSAoFUGFyc2USHi5pbmZyYWNvc3QucGx1Z2luLlBhcnNlUmVxdWVzdBofLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXNwb25zZUK4AQoUY29tLmluZnJhY29zdC5wbHVnaW5CC1BhcnNlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
+  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJImsKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCRITCgtyYXdfb3B0aW9ucxgEIAEoDCKEAQobSWRlbnRpZnlFbnZpcm9ubWVudHNSZXF1ZXN0EhEKCWRpcmVjdG9yeRgBIAEoCRI9ChBhdHRyaWJ1dGVkX2ZpbGVzGAIgAygLMiMuaW5mcmFjb3N0LnBsdWdpbi5BdHRyaWJ1dGVkVmFyRmlsZRITCgtyYXdfb3B0aW9ucxgDIAEoDCJBChFBdHRyaWJ1dGVkVmFyRmlsZRIMCgRwYXRoGAEgASgJEgsKA2VudhgCIAEoCRIRCglpc19nbG9iYWwYAyABKAgiUwocSWRlbnRpZnlFbnZpcm9ubWVudHNSZXNwb25zZRIzCgxlbnZpcm9ubWVudHMYASADKAsyHS5pbmZyYWNvc3QucGx1Z2luLkVudmlyb25tZW50ImcKC0Vudmlyb25tZW50EgwKBG5hbWUYASABKAkSDAoEcGF0aBgCIAEoCRINCgVmaWxlcxgDIAMoCRIYChBkZXBlbmRlbmN5X3BhdGhzGAQgAygJEhMKC3Jhd19vcHRpb25zGAUgASgMIo4BCgxQYXJzZVJlcXVlc3QSDAoEcGF0aBgBIAEoCRJBCg9nZW5lcmljX29wdGlvbnMYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMSEwoLcmF3X29wdGlvbnMYAyABKAxKBAgEEAVSEnJhd19vcHRpb25zX2Zvcm1hdCKkAQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIiCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZRI8ChZyZXF1ZXN0ZWRfZGVwZW5kZW5jaWVzGAMgAygLMhwuaW5mcmFjb3N0LnBsdWdpbi5EZXBlbmRlbmN5Iu4BCgpEZXBlbmRlbmN5EhEKCWZpbGVfcGF0aBgBIAEoCRISCgpsaW5lX3N0YXJ0GAIgASgDEhAKCGxpbmVfZW5kGAMgASgDEhkKEW1vZHVsZV9kZWZpbml0aW9uGAQgASgJEhgKEGlzX3JlbW90ZV9tb2R1bGUYBSABKAgSHQoVaXNfZXh0ZXJuYWxseV9kZWZpbmVkGAYgASgIEhgKEGV4dGVybmFsX3NuaXBwZXQYByABKAkSFAoMaXNfc3ludGhldGljGAggASgIEhQKDGlzX2dlbmVyYXRlZBgJIAEoCBINCgVkZXB0aBgKIAEoBTKjAwoNUGFyc2VyU2VydmljZRJmCg9HZXRQYXJzZXJDb25maWcSKC5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1JlcXVlc3QaKS5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEmkKEElkZW50aWZ5UHJvamVjdHMSKS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5UHJvamVjdHNSZXF1ZXN0GiouaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVzcG9uc2USdQoUSWRlbnRpZnlFbnZpcm9ubWVudHMSLS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5RW52aXJvbm1lbnRzUmVxdWVzdBouLmluZnJhY29zdC5wbHVnaW4uSWRlbnRpZnlFbnZpcm9ubWVudHNSZXNwb25zZRJICgVQYXJzZRIeLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXF1ZXN0Gh8uaW5mcmFjb3N0LnBsdWdpbi5QYXJzZVJlc3BvbnNlQrgBChRjb20uaW5mcmFjb3N0LnBsdWdpbkILUGFyc2VyUHJvdG9QAVoyZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wbHVnaW6iAgNJUFiqAhBJbmZyYWNvc3QuUGx1Z2luygIQSW5mcmFjb3N0XFBsdWdpbuICHEluZnJhY29zdFxQbHVnaW5cR1BCTWV0YWRhdGHqAhFJbmZyYWNvc3Q6OlBsdWdpbmIGcHJvdG8z", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
 
 /**
  * @generated from message infracost.plugin.GetParserConfigRequest
@@ -99,6 +99,16 @@ export type IdentifyProjectsResponse = Message<"infracost.plugin.IdentifyProject
    * @generated from field: repeated string dependency_paths = 3;
    */
   dependencyPaths: string[];
+
+  /**
+   * Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+   * plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+   * YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+   * seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+   *
+   * @generated from field: bytes raw_options = 4;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -132,6 +142,14 @@ export type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvi
    * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
    */
   attributedFiles: AttributedVarFile[];
+
+  /**
+   * the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+   * Always JSON, opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 3;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -231,6 +249,15 @@ export type Environment = Message<"infracost.plugin.Environment"> & {
    * @generated from field: repeated string dependency_paths = 4;
    */
   dependencyPaths: string[];
+
+  /**
+   * Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+   * persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+   * ParseRequest.raw_options for this environment. Opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 5;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -261,18 +288,14 @@ export type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
   genericOptions?: GenericOptions;
 
   /**
-   * Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+   * Plugin-specific parse options for this project/environment, always JSON. This is the same
+   * blob generated during identification and persisted in the config file (see
+   * Environment.raw_options), passed through without the config library / CLI / runner
+   * interpreting it. Plugins document their own schema.
    *
    * @generated from field: bytes raw_options = 3;
    */
   rawOptions: Uint8Array;
-
-  /**
-   * Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-   *
-   * @generated from field: string raw_options_format = 4;
-   */
-  rawOptionsFormat: string;
 };
 
 /**

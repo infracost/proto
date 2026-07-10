@@ -112,6 +112,47 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: bool enable_git_normalization = 14;
    */
   enableGitNormalization: boolean;
+
+  /**
+   * FinOps naming-policy requirements (resource type -> required attributes). Source: org/dashboard
+   * policy. Cross-plugin (any IaC with taggable resources); today read by the terraform-family plugins.
+   *
+   * @generated from field: repeated infracost.parser.options.AttributeRequirement required_attributes = 15;
+   */
+  requiredAttributes: AttributeRequirement[];
+
+  /**
+   * Default tags applied to all resources. Source: YOR config file / YOR_SIMPLE_TAGS env.
+   * Consumed by the terraform-family plugins.
+   *
+   * @generated from field: map<string, string> default_tags = 16;
+   */
+  defaultTags: { [key: string]: string };
+
+  /**
+   * Flat module source map (module source -> replacement). Source: INFRACOST_TERRAFORM_SOURCE_MAP
+   * env. Consumed by the terraform-family plugins. NOTE: the regex source map from the config file
+   * (terraform.source_map) is user config and travels in the raw_options blob instead.
+   *
+   * @generated from field: map<string, string> source_map = 17;
+   */
+  sourceMap: { [key: string]: string };
+
+  /**
+   * Environment variables for parsing (e.g. TF_VAR_*, TF_WORKSPACE). Source: runtime/integration
+   * env merged with the project's configured env. Consumed by the terraform-family plugins.
+   *
+   * @generated from field: map<string, string> env = 18;
+   */
+  env: { [key: string]: string };
+
+  /**
+   * Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
+   * Consumed by the terraform-family plugins.
+   *
+   * @generated from field: bool force_local_module_paths = 19;
+   */
+  forceLocalModulePaths: boolean;
 };
 
 /**
@@ -119,6 +160,34 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
  * Use `create(GenericOptionsSchema)` to create a new message.
  */
 export declare const GenericOptionsSchema: GenMessage<GenericOptions>;
+
+/**
+ * AttributeRequirement lists the attributes a given resource type must set for a FinOps
+ * naming/tagging policy.
+ *
+ * @generated from message infracost.parser.options.AttributeRequirement
+ */
+export declare type AttributeRequirement = Message<"infracost.parser.options.AttributeRequirement"> & {
+  /**
+   * The resource type the requirement applies to (e.g. "aws_instance").
+   *
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+
+  /**
+   * The attributes that must be present on that resource type.
+   *
+   * @generated from field: repeated string attributes = 2;
+   */
+  attributes: string[];
+};
+
+/**
+ * Describes the message infracost.parser.options.AttributeRequirement.
+ * Use `create(AttributeRequirementSchema)` to create a new message.
+ */
+export declare const AttributeRequirementSchema: GenMessage<AttributeRequirement>;
 
 /**
  * DependencyRequest specifies parameters for extracting resource dependencies during parsing.

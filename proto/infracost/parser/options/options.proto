@@ -32,6 +32,36 @@ message GenericOptions {
   optional DependencyRequest dependency_request = 13;
   // Enable http first git normalization
   bool enable_git_normalization = 14;
+
+  // Caller-sourced options (flag/env/API): data the caller assembles that a plugin cannot derive
+  // from the repo, so it is typed here rather than in the opaque raw_options blob. Each is only
+  // consumed by the plugins noted; others ignore it.
+
+  // FinOps naming-policy requirements (resource type -> required attributes). Source: org/dashboard
+  // policy. Cross-plugin (any IaC with taggable resources); today read by the terraform-family plugins.
+  repeated AttributeRequirement required_attributes = 15;
+  // Default tags applied to all resources. Source: YOR config file / YOR_SIMPLE_TAGS env.
+  // Consumed by the terraform-family plugins.
+  map<string, string> default_tags = 16;
+  // Flat module source map (module source -> replacement). Source: INFRACOST_TERRAFORM_SOURCE_MAP
+  // env. Consumed by the terraform-family plugins. NOTE: the regex source map from the config file
+  // (terraform.source_map) is user config and travels in the raw_options blob instead.
+  map<string, string> source_map = 17;
+  // Environment variables for parsing (e.g. TF_VAR_*, TF_WORKSPACE). Source: runtime/integration
+  // env merged with the project's configured env. Consumed by the terraform-family plugins.
+  map<string, string> env = 18;
+  // Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
+  // Consumed by the terraform-family plugins.
+  bool force_local_module_paths = 19;
+}
+
+// AttributeRequirement lists the attributes a given resource type must set for a FinOps
+// naming/tagging policy.
+message AttributeRequirement {
+  // The resource type the requirement applies to (e.g. "aws_instance").
+  string resource_type = 1;
+  // The attributes that must be present on that resource type.
+  repeated string attributes = 2;
 }
 
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.

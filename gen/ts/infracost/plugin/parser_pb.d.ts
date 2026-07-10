@@ -91,6 +91,16 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
    * @generated from field: repeated string dependency_paths = 3;
    */
   dependencyPaths: string[];
+
+  /**
+   * Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+   * plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+   * YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+   * seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+   *
+   * @generated from field: bytes raw_options = 4;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -123,6 +133,14 @@ export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.Iden
    * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
    */
   attributedFiles: AttributedVarFile[];
+
+  /**
+   * the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+   * Always JSON, opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 3;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -219,6 +237,15 @@ export declare type Environment = Message<"infracost.plugin.Environment"> & {
    * @generated from field: repeated string dependency_paths = 4;
    */
   dependencyPaths: string[];
+
+  /**
+   * Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+   * persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+   * ParseRequest.raw_options for this environment. Opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 5;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -248,18 +275,14 @@ export declare type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
   genericOptions?: GenericOptions;
 
   /**
-   * Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+   * Plugin-specific parse options for this project/environment, always JSON. This is the same
+   * blob generated during identification and persisted in the config file (see
+   * Environment.raw_options), passed through without the config library / CLI / runner
+   * interpreting it. Plugins document their own schema.
    *
    * @generated from field: bytes raw_options = 3;
    */
   rawOptions: Uint8Array;
-
-  /**
-   * Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-   *
-   * @generated from field: string raw_options_format = 4;
-   */
-  rawOptionsFormat: string;
 };
 
 /**

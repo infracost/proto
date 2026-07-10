@@ -167,8 +167,13 @@ type IdentifyProjectsResponse struct {
 	Files []string `protobuf:"bytes,2,rep,name=files,proto3" json:"files,omitempty"`
 	// dependencies, relative to the directory
 	DependencyPaths []string `protobuf:"bytes,3,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+	// plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+	// YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+	// seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+	RawOptions    []byte `protobuf:"bytes,4,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentifyProjectsResponse) Reset() {
@@ -222,6 +227,13 @@ func (x *IdentifyProjectsResponse) GetDependencyPaths() []string {
 	return nil
 }
 
+func (x *IdentifyProjectsResponse) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
 type IdentifyEnvironmentsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// a project root previously returned by IdentifyProjects.
@@ -235,8 +247,11 @@ type IdentifyEnvironmentsRequest struct {
 	// to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
 	// and derive their environments from directory alone.
 	AttributedFiles []*AttributedVarFile `protobuf:"bytes,2,rep,name=attributed_files,json=attributedFiles,proto3" json:"attributed_files,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+	// Always JSON, opaque to the caller.
+	RawOptions    []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentifyEnvironmentsRequest) Reset() {
@@ -279,6 +294,13 @@ func (x *IdentifyEnvironmentsRequest) GetDirectory() string {
 func (x *IdentifyEnvironmentsRequest) GetAttributedFiles() []*AttributedVarFile {
 	if x != nil {
 		return x.AttributedFiles
+	}
+	return nil
+}
+
+func (x *IdentifyEnvironmentsRequest) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
 	}
 	return nil
 }
@@ -407,8 +429,12 @@ type Environment struct {
 	// shared inputs this environment pulls in, relative to the request directory.
 	// Kustomize: base/components dirs; Terraform: n/a.
 	DependencyPaths []string `protobuf:"bytes,4,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+	// persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+	// ParseRequest.raw_options for this environment. Opaque to the caller.
+	RawOptions    []byte `protobuf:"bytes,5,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Environment) Reset() {
@@ -469,6 +495,13 @@ func (x *Environment) GetDependencyPaths() []string {
 	return nil
 }
 
+func (x *Environment) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
 // ParseRequest is the unified request for all parser types.
 type ParseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -476,12 +509,13 @@ type ParseRequest struct {
 	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	// Generic options that aren't specific to any IaC
 	GenericOptions *options.GenericOptions `protobuf:"bytes,2,opt,name=generic_options,json=genericOptions,proto3" json:"generic_options,omitempty"`
-	// Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
-	RawOptions []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
-	// Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-	RawOptionsFormat string `protobuf:"bytes,4,opt,name=raw_options_format,json=rawOptionsFormat,proto3" json:"raw_options_format,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Plugin-specific parse options for this project/environment, always JSON. This is the same
+	// blob generated during identification and persisted in the config file (see
+	// Environment.raw_options), passed through without the config library / CLI / runner
+	// interpreting it. Plugins document their own schema.
+	RawOptions    []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ParseRequest) Reset() {
@@ -533,13 +567,6 @@ func (x *ParseRequest) GetRawOptions() []byte {
 		return x.RawOptions
 	}
 	return nil
-}
-
-func (x *ParseRequest) GetRawOptionsFormat() string {
-	if x != nil {
-		return x.RawOptionsFormat
-	}
-	return ""
 }
 
 // ParseResponse is the iac-agnostic parser response
@@ -746,31 +773,36 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01B\x1b\n" +
 	"\x19_config_file_project_type\"7\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
-	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"y\n" +
+	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"\x9a\x01\n" +
 	"\x18IdentifyProjectsResponse\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\bR\tdirectory\x12\x14\n" +
 	"\x05files\x18\x02 \x03(\tR\x05files\x12)\n" +
-	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\"\x8b\x01\n" +
+	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\x12\x1f\n" +
+	"\vraw_options\x18\x04 \x01(\fR\n" +
+	"rawOptions\"\xac\x01\n" +
 	"\x1bIdentifyEnvironmentsRequest\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12N\n" +
-	"\x10attributed_files\x18\x02 \x03(\v2#.infracost.plugin.AttributedVarFileR\x0fattributedFiles\"V\n" +
+	"\x10attributed_files\x18\x02 \x03(\v2#.infracost.plugin.AttributedVarFileR\x0fattributedFiles\x12\x1f\n" +
+	"\vraw_options\x18\x03 \x01(\fR\n" +
+	"rawOptions\"V\n" +
 	"\x11AttributedVarFile\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12\x10\n" +
 	"\x03env\x18\x02 \x01(\tR\x03env\x12\x1b\n" +
 	"\tis_global\x18\x03 \x01(\bR\bisGlobal\"a\n" +
 	"\x1cIdentifyEnvironmentsResponse\x12A\n" +
-	"\fenvironments\x18\x01 \x03(\v2\x1d.infracost.plugin.EnvironmentR\fenvironments\"v\n" +
+	"\fenvironments\x18\x01 \x03(\v2\x1d.infracost.plugin.EnvironmentR\fenvironments\"\x97\x01\n" +
 	"\vEnvironment\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12\x14\n" +
 	"\x05files\x18\x03 \x03(\tR\x05files\x12)\n" +
-	"\x10dependency_paths\x18\x04 \x03(\tR\x0fdependencyPaths\"\xc4\x01\n" +
+	"\x10dependency_paths\x18\x04 \x03(\tR\x0fdependencyPaths\x12\x1f\n" +
+	"\vraw_options\x18\x05 \x01(\fR\n" +
+	"rawOptions\"\xb0\x01\n" +
 	"\fParseRequest\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12Q\n" +
 	"\x0fgeneric_options\x18\x02 \x01(\v2(.infracost.parser.options.GenericOptionsR\x0egenericOptions\x12\x1f\n" +
 	"\vraw_options\x18\x03 \x01(\fR\n" +
-	"rawOptions\x12,\n" +
-	"\x12raw_options_format\x18\x04 \x01(\tR\x10rawOptionsFormat\"\xce\x01\n" +
+	"rawOptionsJ\x04\b\x04\x10\x05R\x12raw_options_format\"\xce\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12(\n" +
 	"\x04tree\x18\x02 \x01(\v2\x14.infracost.tree.TreeR\x04tree\x12S\n" +
