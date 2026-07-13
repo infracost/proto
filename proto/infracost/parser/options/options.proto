@@ -53,6 +53,30 @@ message GenericOptions {
   // Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
   // Consumed by the terraform-family plugins.
   bool force_local_module_paths = 19;
+  // The Terraform workspace to select when parsing. Source: the project's configured workspace
+  // (config file / INFRACOST_TERRAFORM_WORKSPACE env). Consumed by the terraform-family plugins.
+  // It is a caller-sourced runtime option, NOT part of the raw_options blob, because it is also read
+  // outside the plugin (e.g. the project's workspace in the cost output / provider input).
+  string workspace = 20;
+  // Terraform Cloud / Enterprise identity for the project. Source: the project's configured
+  // terraform.cloud.*. Consumed by the terraform-family plugins to read the remote workspace. Typed
+  // (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
+  // caller to pair with the token in a terraform-cloud credential_set.
+  TerraformCloudConfiguration terraform_cloud_configuration = 21;
+}
+
+// TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
+// plugin pairs it with its auth token by matching hostname against a credential_set's host, then
+// uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
+// remote workspace, distinct from GenericOptions.workspace (the terraform CLI workspace).
+message TerraformCloudConfiguration {
+  // The Terraform Cloud organization.
+  string organization = 1;
+  // The Terraform Cloud remote workspace name.
+  string workspace = 2;
+  // The Terraform Cloud / Enterprise hostname (e.g. app.terraform.io); the key used to pair with the
+  // credential_set that carries the token for this host.
+  string hostname = 3;
 }
 
 // AttributeRequirement lists the attributes a given resource type must set for a FinOps
