@@ -153,6 +153,26 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: bool force_local_module_paths = 19;
    */
   forceLocalModulePaths: boolean;
+
+  /**
+   * The Terraform workspace to select when parsing. Source: the project's configured workspace
+   * (config file / INFRACOST_TERRAFORM_WORKSPACE env). Consumed by the terraform-family plugins.
+   * It is a caller-sourced runtime option, NOT part of the raw_options blob, because it is also read
+   * outside the plugin (e.g. the project's workspace in the cost output / provider input).
+   *
+   * @generated from field: string workspace = 20;
+   */
+  workspace: string;
+
+  /**
+   * Terraform Cloud / Enterprise identity for the project. Source: the project's configured
+   * terraform.cloud.*. Consumed by the terraform-family plugins to read the remote workspace. Typed
+   * (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
+   * caller to pair with the token in a terraform-cloud credential_set.
+   *
+   * @generated from field: infracost.parser.options.TerraformCloudConfiguration terraform_cloud_configuration = 21;
+   */
+  terraformCloudConfiguration?: TerraformCloudConfiguration;
 };
 
 /**
@@ -160,6 +180,44 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
  * Use `create(GenericOptionsSchema)` to create a new message.
  */
 export declare const GenericOptionsSchema: GenMessage<GenericOptions>;
+
+/**
+ * TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
+ * plugin pairs it with its auth token by matching hostname against a credential_set's host, then
+ * uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
+ * remote workspace, distinct from GenericOptions.workspace (the terraform CLI workspace).
+ *
+ * @generated from message infracost.parser.options.TerraformCloudConfiguration
+ */
+export declare type TerraformCloudConfiguration = Message<"infracost.parser.options.TerraformCloudConfiguration"> & {
+  /**
+   * The Terraform Cloud organization.
+   *
+   * @generated from field: string organization = 1;
+   */
+  organization: string;
+
+  /**
+   * The Terraform Cloud remote workspace name.
+   *
+   * @generated from field: string workspace = 2;
+   */
+  workspace: string;
+
+  /**
+   * The Terraform Cloud / Enterprise hostname (e.g. app.terraform.io); the key used to pair with the
+   * credential_set that carries the token for this host.
+   *
+   * @generated from field: string hostname = 3;
+   */
+  hostname: string;
+};
+
+/**
+ * Describes the message infracost.parser.options.TerraformCloudConfiguration.
+ * Use `create(TerraformCloudConfigurationSchema)` to create a new message.
+ */
+export declare const TerraformCloudConfigurationSchema: GenMessage<TerraformCloudConfiguration>;
 
 /**
  * AttributeRequirement lists the attributes a given resource type must set for a FinOps

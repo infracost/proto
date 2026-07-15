@@ -120,8 +120,18 @@ type GenericOptions struct {
 	// Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
 	// Consumed by the terraform-family plugins.
 	ForceLocalModulePaths bool `protobuf:"varint,19,opt,name=force_local_module_paths,json=forceLocalModulePaths,proto3" json:"force_local_module_paths,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// The Terraform workspace to select when parsing. Source: the project's configured workspace
+	// (config file / INFRACOST_TERRAFORM_WORKSPACE env). Consumed by the terraform-family plugins.
+	// It is a caller-sourced runtime option, NOT part of the raw_options blob, because it is also read
+	// outside the plugin (e.g. the project's workspace in the cost output / provider input).
+	Workspace string `protobuf:"bytes,20,opt,name=workspace,proto3" json:"workspace,omitempty"`
+	// Terraform Cloud / Enterprise identity for the project. Source: the project's configured
+	// terraform.cloud.*. Consumed by the terraform-family plugins to read the remote workspace. Typed
+	// (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
+	// caller to pair with the token in a terraform-cloud credential_set.
+	TerraformCloudConfiguration *TerraformCloudConfiguration `protobuf:"bytes,21,opt,name=terraform_cloud_configuration,json=terraformCloudConfiguration,proto3" json:"terraform_cloud_configuration,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -287,6 +297,88 @@ func (x *GenericOptions) GetForceLocalModulePaths() bool {
 	return false
 }
 
+func (x *GenericOptions) GetWorkspace() string {
+	if x != nil {
+		return x.Workspace
+	}
+	return ""
+}
+
+func (x *GenericOptions) GetTerraformCloudConfiguration() *TerraformCloudConfiguration {
+	if x != nil {
+		return x.TerraformCloudConfiguration
+	}
+	return nil
+}
+
+// TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
+// plugin pairs it with its auth token by matching hostname against a credential_set's host, then
+// uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
+// remote workspace, distinct from GenericOptions.workspace (the terraform CLI workspace).
+type TerraformCloudConfiguration struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The Terraform Cloud organization.
+	Organization string `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+	// The Terraform Cloud remote workspace name.
+	Workspace string `protobuf:"bytes,2,opt,name=workspace,proto3" json:"workspace,omitempty"`
+	// The Terraform Cloud / Enterprise hostname (e.g. app.terraform.io); the key used to pair with the
+	// credential_set that carries the token for this host.
+	Hostname      string `protobuf:"bytes,3,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TerraformCloudConfiguration) Reset() {
+	*x = TerraformCloudConfiguration{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TerraformCloudConfiguration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TerraformCloudConfiguration) ProtoMessage() {}
+
+func (x *TerraformCloudConfiguration) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TerraformCloudConfiguration.ProtoReflect.Descriptor instead.
+func (*TerraformCloudConfiguration) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TerraformCloudConfiguration) GetOrganization() string {
+	if x != nil {
+		return x.Organization
+	}
+	return ""
+}
+
+func (x *TerraformCloudConfiguration) GetWorkspace() string {
+	if x != nil {
+		return x.Workspace
+	}
+	return ""
+}
+
+func (x *TerraformCloudConfiguration) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
 // AttributeRequirement lists the attributes a given resource type must set for a FinOps
 // naming/tagging policy.
 type AttributeRequirement struct {
@@ -301,7 +393,7 @@ type AttributeRequirement struct {
 
 func (x *AttributeRequirement) Reset() {
 	*x = AttributeRequirement{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -313,7 +405,7 @@ func (x *AttributeRequirement) String() string {
 func (*AttributeRequirement) ProtoMessage() {}
 
 func (x *AttributeRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -326,7 +418,7 @@ func (x *AttributeRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttributeRequirement.ProtoReflect.Descriptor instead.
 func (*AttributeRequirement) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AttributeRequirement) GetResourceType() string {
@@ -361,7 +453,7 @@ type DependencyRequest struct {
 
 func (x *DependencyRequest) Reset() {
 	*x = DependencyRequest{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -373,7 +465,7 @@ func (x *DependencyRequest) String() string {
 func (*DependencyRequest) ProtoMessage() {}
 
 func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,7 +478,7 @@ func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DependencyRequest.ProtoReflect.Descriptor instead.
 func (*DependencyRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DependencyRequest) GetProjectName() string {
@@ -429,7 +521,7 @@ type Debug struct {
 
 func (x *Debug) Reset() {
 	*x = Debug{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -441,7 +533,7 @@ func (x *Debug) String() string {
 func (*Debug) ProtoMessage() {}
 
 func (x *Debug) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -454,7 +546,7 @@ func (x *Debug) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Debug.ProtoReflect.Descriptor instead.
 func (*Debug) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Debug) GetAddresses() []string {
@@ -485,7 +577,7 @@ type CredentialSet struct {
 
 func (x *CredentialSet) Reset() {
 	*x = CredentialSet{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +589,7 @@ func (x *CredentialSet) String() string {
 func (*CredentialSet) ProtoMessage() {}
 
 func (x *CredentialSet) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +602,7 @@ func (x *CredentialSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CredentialSet.ProtoReflect.Descriptor instead.
 func (*CredentialSet) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CredentialSet) GetToken() string {
@@ -550,7 +642,7 @@ type RemoteModuleCacheConfig struct {
 
 func (x *RemoteModuleCacheConfig) Reset() {
 	*x = RemoteModuleCacheConfig{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +654,7 @@ func (x *RemoteModuleCacheConfig) String() string {
 func (*RemoteModuleCacheConfig) ProtoMessage() {}
 
 func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +667,7 @@ func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoteModuleCacheConfig.ProtoReflect.Descriptor instead.
 func (*RemoteModuleCacheConfig) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RemoteModuleCacheConfig) GetRegion() string {
@@ -622,7 +714,7 @@ type AwsCredentials struct {
 
 func (x *AwsCredentials) Reset() {
 	*x = AwsCredentials{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +726,7 @@ func (x *AwsCredentials) String() string {
 func (*AwsCredentials) ProtoMessage() {}
 
 func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -647,7 +739,7 @@ func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AwsCredentials.ProtoReflect.Descriptor instead.
 func (*AwsCredentials) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AwsCredentials) GetAccessKeyId() string {
@@ -687,7 +779,7 @@ type ProxyRouter struct {
 
 func (x *ProxyRouter) Reset() {
 	*x = ProxyRouter{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -699,7 +791,7 @@ func (x *ProxyRouter) String() string {
 func (*ProxyRouter) ProtoMessage() {}
 
 func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -712,7 +804,7 @@ func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProxyRouter.ProtoReflect.Descriptor instead.
 func (*ProxyRouter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ProxyRouter) GetRoutes() map[string]string {
@@ -726,7 +818,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xc8\v\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xe1\f\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -748,7 +840,9 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
 	"source_map\x18\x11 \x03(\v27.infracost.parser.options.GenericOptions.SourceMapEntryR\tsourceMap\x12C\n" +
 	"\x03env\x18\x12 \x03(\v21.infracost.parser.options.GenericOptions.EnvEntryR\x03env\x127\n" +
-	"\x18force_local_module_paths\x18\x13 \x01(\bR\x15forceLocalModulePaths\x1a>\n" +
+	"\x18force_local_module_paths\x18\x13 \x01(\bR\x15forceLocalModulePaths\x12\x1c\n" +
+	"\tworkspace\x18\x14 \x01(\tR\tworkspace\x12y\n" +
+	"\x1dterraform_cloud_configuration\x18\x15 \x01(\v25.infracost.parser.options.TerraformCloudConfigurationR\x1bterraformCloudConfiguration\x1a>\n" +
 	"\x10DefaultTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a<\n" +
@@ -758,7 +852,11 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\bEnvEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x15\n" +
-	"\x13_dependency_request\"[\n" +
+	"\x13_dependency_request\"{\n" +
+	"\x1bTerraformCloudConfiguration\x12\"\n" +
+	"\forganization\x18\x01 \x01(\tR\forganization\x12\x1c\n" +
+	"\tworkspace\x18\x02 \x01(\tR\tworkspace\x12\x1a\n" +
+	"\bhostname\x18\x03 \x01(\tR\bhostname\"[\n" +
 	"\x14AttributeRequirement\x12#\n" +
 	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12\x1e\n" +
 	"\n" +
@@ -812,40 +910,42 @@ func file_infracost_parser_options_options_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_options_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_infracost_parser_options_options_proto_goTypes = []any{
-	(CredentialType)(0),             // 0: infracost.parser.options.CredentialType
-	(*GenericOptions)(nil),          // 1: infracost.parser.options.GenericOptions
-	(*AttributeRequirement)(nil),    // 2: infracost.parser.options.AttributeRequirement
-	(*DependencyRequest)(nil),       // 3: infracost.parser.options.DependencyRequest
-	(*Debug)(nil),                   // 4: infracost.parser.options.Debug
-	(*CredentialSet)(nil),           // 5: infracost.parser.options.CredentialSet
-	(*RemoteModuleCacheConfig)(nil), // 6: infracost.parser.options.RemoteModuleCacheConfig
-	(*AwsCredentials)(nil),          // 7: infracost.parser.options.AwsCredentials
-	(*ProxyRouter)(nil),             // 8: infracost.parser.options.ProxyRouter
-	nil,                             // 9: infracost.parser.options.GenericOptions.DefaultTagsEntry
-	nil,                             // 10: infracost.parser.options.GenericOptions.SourceMapEntry
-	nil,                             // 11: infracost.parser.options.GenericOptions.EnvEntry
-	nil,                             // 12: infracost.parser.options.ProxyRouter.RoutesEntry
+	(CredentialType)(0),                 // 0: infracost.parser.options.CredentialType
+	(*GenericOptions)(nil),              // 1: infracost.parser.options.GenericOptions
+	(*TerraformCloudConfiguration)(nil), // 2: infracost.parser.options.TerraformCloudConfiguration
+	(*AttributeRequirement)(nil),        // 3: infracost.parser.options.AttributeRequirement
+	(*DependencyRequest)(nil),           // 4: infracost.parser.options.DependencyRequest
+	(*Debug)(nil),                       // 5: infracost.parser.options.Debug
+	(*CredentialSet)(nil),               // 6: infracost.parser.options.CredentialSet
+	(*RemoteModuleCacheConfig)(nil),     // 7: infracost.parser.options.RemoteModuleCacheConfig
+	(*AwsCredentials)(nil),              // 8: infracost.parser.options.AwsCredentials
+	(*ProxyRouter)(nil),                 // 9: infracost.parser.options.ProxyRouter
+	nil,                                 // 10: infracost.parser.options.GenericOptions.DefaultTagsEntry
+	nil,                                 // 11: infracost.parser.options.GenericOptions.SourceMapEntry
+	nil,                                 // 12: infracost.parser.options.GenericOptions.EnvEntry
+	nil,                                 // 13: infracost.parser.options.ProxyRouter.RoutesEntry
 }
 var file_infracost_parser_options_options_proto_depIdxs = []int32{
-	5,  // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
-	7,  // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
-	4,  // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
-	8,  // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
-	6,  // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
-	3,  // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
-	2,  // 6: infracost.parser.options.GenericOptions.required_attributes:type_name -> infracost.parser.options.AttributeRequirement
-	9,  // 7: infracost.parser.options.GenericOptions.default_tags:type_name -> infracost.parser.options.GenericOptions.DefaultTagsEntry
-	10, // 8: infracost.parser.options.GenericOptions.source_map:type_name -> infracost.parser.options.GenericOptions.SourceMapEntry
-	11, // 9: infracost.parser.options.GenericOptions.env:type_name -> infracost.parser.options.GenericOptions.EnvEntry
-	0,  // 10: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
-	12, // 11: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	6,  // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
+	8,  // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
+	5,  // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
+	9,  // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
+	7,  // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
+	4,  // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
+	3,  // 6: infracost.parser.options.GenericOptions.required_attributes:type_name -> infracost.parser.options.AttributeRequirement
+	10, // 7: infracost.parser.options.GenericOptions.default_tags:type_name -> infracost.parser.options.GenericOptions.DefaultTagsEntry
+	11, // 8: infracost.parser.options.GenericOptions.source_map:type_name -> infracost.parser.options.GenericOptions.SourceMapEntry
+	12, // 9: infracost.parser.options.GenericOptions.env:type_name -> infracost.parser.options.GenericOptions.EnvEntry
+	2,  // 10: infracost.parser.options.GenericOptions.terraform_cloud_configuration:type_name -> infracost.parser.options.TerraformCloudConfiguration
+	0,  // 11: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
+	13, // 12: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_options_options_proto_init() }
@@ -860,7 +960,7 @@ func file_infracost_parser_options_options_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_options_options_proto_rawDesc), len(file_infracost_parser_options_options_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
