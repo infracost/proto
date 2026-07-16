@@ -548,6 +548,15 @@ export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> 
    * @generated from field: bool backtesting = 7;
    */
   backtesting: boolean;
+
+  /**
+   * force_check_success forces the PR check-run conclusion to success even when
+   * governance policies fail. Set by the dashboard when the PR is snoozed, so
+   * the check stays green until the PR is merged or closed.
+   *
+   * @generated from field: bool force_check_success = 8;
+   */
+  forceCheckSuccess: boolean;
 };
 
 /**
