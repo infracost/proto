@@ -47,13 +47,42 @@ message DependencyPaths {
   repeated string paths = 1;
 }
 
-// BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
+// BranchSummary caches per-project data for a branch so that a later run of the same branch, or a
+// pull request opened against it, can look each project up by name to reuse its breakdown ID, detect
+// whether it changed via its stored hash, and recover its dependency paths without re-parsing.
 message BranchSummary {
   string branch = 1;
-  map<string, string> sha_to_id_map = 2;
-  map<string, string> sha_to_project_name_map = 3;
-  map<string, Flavor> sha_to_flavor_map = 4;
-  map<string, DependencyPaths> sha_to_dependency_paths_map = 5;
+
+  // Deprecated: superseded by the projects field below. New code must not write these; they remain
+  // only so that summaries written by older code can still be read. When projects is empty (an old
+  // summary), reconstruct it by joining these maps on their shared SHA key - sha_to_project_name_map
+  // gives each SHA its project name, and the others supply that project's id, flavor, and deps.
+  map<string, string> sha_to_id_map = 2 [deprecated = true];
+  map<string, string> sha_to_project_name_map = 3 [deprecated = true];
+  map<string, Flavor> sha_to_flavor_map = 4 [deprecated = true];
+  map<string, DependencyPaths> sha_to_dependency_paths_map = 5 [deprecated = true];
+
+  // Projects holds the summarised data for each project discovered in this branch, keyed by project
+  // name (which is unique within a branch).
+  map<string, ProjectSummary> projects = 6;
+}
+
+// ProjectSummary is the cached per-project data recorded for one project on the run that produced the
+// enclosing BranchSummary.
+message ProjectSummary {
+  // Breakdown ID assigned by the dashboard, reused across runs while the project is unchanged.
+  string breakdown_id = 1;
+
+  // The project's BreakdownSHA from that run - the content hash used as the parse-cache key. A later
+  // run compares its freshly computed hash against this to decide whether the project changed.
+  string breakdown_hash = 2;
+
+  // The project's flavor (Terraform, CloudFormation, or agnostic).
+  Flavor flavor = 3;
+
+  // The files this project depended on during its last parse, including files outside the project
+  // directory. Used to decide whether changed files are relevant and to invalidate caches.
+  DependencyPaths dependency_paths = 4;
 }
 
 message EncryptionEnvelope {
