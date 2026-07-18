@@ -2,8 +2,9 @@
 // @generated from file infracost/codesearch/codesearch.proto (package infracost.codesearch, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Tree } from "../tree/tree_pb.js";
 
 /**
@@ -65,6 +66,25 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: string repo_name = 7;
    */
   repoName: string;
+
+  /**
+   * @generated from field: infracost.codesearch.IndexData.VCSType vcs_type = 8;
+   */
+  vcsType: IndexData_VCSType;
+
+  /**
+   * the commit being indexed
+   *
+   * @generated from field: string commit_sha = 9;
+   */
+  commitSha: string;
+
+  /**
+   * time the commit being indexed was created
+   *
+   * @generated from field: google.protobuf.Timestamp commit_timestamp = 10;
+   */
+  commitTimestamp?: Timestamp;
 };
 
 /**
@@ -72,6 +92,44 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
  * Use `create(IndexDataSchema)` to create a new message.
  */
 export declare const IndexDataSchema: GenMessage<IndexData>;
+
+/**
+ * @generated from enum infracost.codesearch.IndexData.VCSType
+ */
+export enum IndexData_VCSType {
+  /**
+   * unknown vcs type
+   *
+   * @generated from enum value: UNKNOWN_VCS = 0;
+   */
+  UNKNOWN_VCS = 0,
+
+  /**
+   * github
+   *
+   * @generated from enum value: GITHUB = 1;
+   */
+  GITHUB = 1,
+
+  /**
+   * gitlab
+   *
+   * @generated from enum value: GITLAB = 2;
+   */
+  GITLAB = 2,
+
+  /**
+   * azure devops
+   *
+   * @generated from enum value: AZURE_DEVOPS = 3;
+   */
+  AZURE_DEVOPS = 3,
+}
+
+/**
+ * Describes the enum infracost.codesearch.IndexData.VCSType.
+ */
+export declare const IndexData_VCSTypeSchema: GenEnum<IndexData_VCSType>;
 
 /**
  * IndexedProject is the index result of an IaC project within a repository

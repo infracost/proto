@@ -91,6 +91,16 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
    * @generated from field: repeated string dependency_paths = 3;
    */
   dependencyPaths: string[];
+
+  /**
+   * Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+   * plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+   * YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+   * seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+   *
+   * @generated from field: bytes raw_options = 4;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -98,6 +108,151 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
  * Use `create(IdentifyProjectsResponseSchema)` to create a new message.
  */
 export declare const IdentifyProjectsResponseSchema: GenMessage<IdentifyProjectsResponse>;
+
+/**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsRequest
+ */
+export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvironmentsRequest"> & {
+  /**
+   * a project root previously returned by IdentifyProjects.
+   *
+   * @generated from field: string directory = 1;
+   */
+  directory: string;
+
+  /**
+   * var files the caller has already attributed to this project via its own tree-walk
+   * heuristics (including cross-directory sibling/pibling association). Paths are relative
+   * to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+   *
+   * This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+   * the caller's existing attribution while that logic is moved plugin-side, and is expected
+   * to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+   * and derive their environments from directory alone.
+   *
+   * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
+   */
+  attributedFiles: AttributedVarFile[];
+
+  /**
+   * the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+   * Always JSON, opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 3;
+   */
+  rawOptions: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsRequest.
+ * Use `create(IdentifyEnvironmentsRequestSchema)` to create a new message.
+ */
+export declare const IdentifyEnvironmentsRequestSchema: GenMessage<IdentifyEnvironmentsRequest>;
+
+/**
+ * AttributedVarFile is one input file the caller has already associated with a project,
+ * together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+ *
+ * @generated from message infracost.plugin.AttributedVarFile
+ */
+export declare type AttributedVarFile = Message<"infracost.plugin.AttributedVarFile"> & {
+  /**
+   * path to the file, relative to the request directory; may contain "..".
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+   *
+   * @generated from field: string env = 2;
+   */
+  env: string;
+
+  /**
+   * true when the file is a global/shared input rather than environment-specific.
+   *
+   * @generated from field: bool is_global = 3;
+   */
+  isGlobal: boolean;
+};
+
+/**
+ * Describes the message infracost.plugin.AttributedVarFile.
+ * Use `create(AttributedVarFileSchema)` to create a new message.
+ */
+export declare const AttributedVarFileSchema: GenMessage<AttributedVarFile>;
+
+/**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsResponse
+ */
+export declare type IdentifyEnvironmentsResponse = Message<"infracost.plugin.IdentifyEnvironmentsResponse"> & {
+  /**
+   * @generated from field: repeated infracost.plugin.Environment environments = 1;
+   */
+  environments: Environment[];
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsResponse.
+ * Use `create(IdentifyEnvironmentsResponseSchema)` to create a new message.
+ */
+export declare const IdentifyEnvironmentsResponseSchema: GenMessage<IdentifyEnvironmentsResponse>;
+
+/**
+ * Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+ * Environment becomes one final project downstream.
+ *
+ * @generated from message infracost.plugin.Environment
+ */
+export declare type Environment = Message<"infracost.plugin.Environment"> & {
+  /**
+   * the environment name, e.g. "dev", "staging", "prod".
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * the build/parse path for this environment, relative to the request directory.
+   * Terraform: "."; Kustomize: "overlays/prod".
+   *
+   * @generated from field: string path = 2;
+   */
+  path: string;
+
+  /**
+   * environment-specific input files, relative to path.
+   * Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+   *
+   * @generated from field: repeated string files = 3;
+   */
+  files: string[];
+
+  /**
+   * shared inputs this environment pulls in, relative to the request directory.
+   * Kustomize: base/components dirs; Terraform: n/a.
+   *
+   * @generated from field: repeated string dependency_paths = 4;
+   */
+  dependencyPaths: string[];
+
+  /**
+   * Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+   * persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+   * ParseRequest.raw_options for this environment. Opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 5;
+   */
+  rawOptions: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.plugin.Environment.
+ * Use `create(EnvironmentSchema)` to create a new message.
+ */
+export declare const EnvironmentSchema: GenMessage<Environment>;
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -120,18 +275,14 @@ export declare type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
   genericOptions?: GenericOptions;
 
   /**
-   * Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+   * Plugin-specific parse options for this project/environment, always JSON. This is the same
+   * blob generated during identification and persisted in the config file (see
+   * Environment.raw_options), passed through without the config library / CLI / runner
+   * interpreting it. Plugins document their own schema.
    *
    * @generated from field: bytes raw_options = 3;
    */
   rawOptions: Uint8Array;
-
-  /**
-   * Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-   *
-   * @generated from field: string raw_options_format = 4;
-   */
-  rawOptionsFormat: string;
 };
 
 /**
@@ -284,6 +435,24 @@ export declare const ParserService: GenService<{
     methodKind: "unary";
     input: typeof IdentifyProjectsRequestSchema;
     output: typeof IdentifyProjectsResponseSchema;
+  },
+  /**
+   * IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+   * project root previously returned by IdentifyProjects. The plugin that parses a format
+   * understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+   * ...) far better than any caller-side heuristic, so it is authoritative.
+   *
+   * This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+   * the caller treats as "this format has no environment support" and handles via its own fallback.
+   * Returning an empty environments list is distinct - it means "this project genuinely has no
+   * variants" and yields a single project.
+   *
+   * @generated from rpc infracost.plugin.ParserService.IdentifyEnvironments
+   */
+  identifyEnvironments: {
+    methodKind: "unary";
+    input: typeof IdentifyEnvironmentsRequestSchema;
+    output: typeof IdentifyEnvironmentsResponseSchema;
   },
   /**
    * Parse parses the given IaC path into an IaC agnostic tree format.

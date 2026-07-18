@@ -14,6 +14,17 @@ service ParserService {
   // IdentifyProjects attempts to identify one or more IaC projects in the given directory - this should NOT recurse.
   rpc IdentifyProjects(IdentifyProjectsRequest) returns (IdentifyProjectsResponse);
 
+  // IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+  // project root previously returned by IdentifyProjects. The plugin that parses a format
+  // understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+  // ...) far better than any caller-side heuristic, so it is authoritative.
+  //
+  // This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+  // the caller treats as "this format has no environment support" and handles via its own fallback.
+  // Returning an empty environments list is distinct - it means "this project genuinely has no
+  // variants" and yields a single project.
+  rpc IdentifyEnvironments(IdentifyEnvironmentsRequest) returns (IdentifyEnvironmentsResponse);
+
   // Parse parses the given IaC path into an IaC agnostic tree format.
   rpc Parse(ParseRequest) returns (ParseResponse);
 }
@@ -39,6 +50,65 @@ message IdentifyProjectsResponse {
   repeated string files = 2;
   // dependencies, relative to the directory
   repeated string dependency_paths = 3;
+  // Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+  // plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+  // YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+  // seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+  bytes raw_options = 4;
+}
+
+message IdentifyEnvironmentsRequest {
+  // a project root previously returned by IdentifyProjects.
+  string directory = 1;
+
+  // var files the caller has already attributed to this project via its own tree-walk
+  // heuristics (including cross-directory sibling/pibling association). Paths are relative
+  // to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+  //
+  // This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+  // the caller's existing attribution while that logic is moved plugin-side, and is expected
+  // to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+  // and derive their environments from directory alone.
+  repeated AttributedVarFile attributed_files = 2;
+
+  // the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+  // Always JSON, opaque to the caller.
+  bytes raw_options = 3;
+}
+
+// AttributedVarFile is one input file the caller has already associated with a project,
+// together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+message AttributedVarFile {
+  // path to the file, relative to the request directory; may contain "..".
+  string path = 1;
+  // resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+  string env = 2;
+  // true when the file is a global/shared input rather than environment-specific.
+  bool is_global = 3;
+}
+
+message IdentifyEnvironmentsResponse {
+  repeated Environment environments = 1;
+}
+
+// Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+// Environment becomes one final project downstream.
+message Environment {
+  // the environment name, e.g. "dev", "staging", "prod".
+  string name = 1;
+  // the build/parse path for this environment, relative to the request directory.
+  // Terraform: "."; Kustomize: "overlays/prod".
+  string path = 2;
+  // environment-specific input files, relative to path.
+  // Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+  repeated string files = 3;
+  // shared inputs this environment pulls in, relative to the request directory.
+  // Kustomize: base/components dirs; Terraform: n/a.
+  repeated string dependency_paths = 4;
+  // Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+  // persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+  // ParseRequest.raw_options for this environment. Opaque to the caller.
+  bytes raw_options = 5;
 }
 
 // ParseRequest is the unified request for all parser types.
@@ -47,10 +117,14 @@ message ParseRequest {
   string path = 1;
   // Generic options that aren't specific to any IaC
   infracost.parser.options.GenericOptions generic_options = 2;
-  // Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+  // Plugin-specific parse options for this project/environment, always JSON. This is the same
+  // blob generated during identification and persisted in the config file (see
+  // Environment.raw_options), passed through without the config library / CLI / runner
+  // interpreting it. Plugins document their own schema.
   bytes raw_options = 3;
-  // Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-  string raw_options_format = 4;
+  // field 4 was `string raw_options_format` - dropped: raw_options is always JSON.
+  reserved 4;
+  reserved "raw_options_format";
 }
 
 // ParseResponse is the iac-agnostic parser response

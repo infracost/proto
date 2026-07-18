@@ -22,7 +22,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/cache/cache.proto.
  */
 export const file_infracost_parser_cache_cache: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2NhY2hlL2NhY2hlLnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmNhY2hlIpcDChBUZXJyYWZvcm1Qcm9qZWN0EjgKBnJlc3VsdBgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSFQoNaXNfdGVycmFncnVudBgGIAEoCBIfChd0ZXJyYWZvcm1fbW9kdWxlX3N1ZmZpeBgHIAEoCRIlCgV1c2FnZRgJIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYCiABKAkSEgoKY29uZmlnX3NoYRgLIAEoCRIMCgRwYXRoGAwgASgJEhEKCXdvcmtzcGFjZRgNIAEoCUoECAQQBUoECAUQBkoECAgQCVIKdXNhZ2VfZmlsZVIOcHJvamVjdF9jb25maWdSEGRlcGVuZGVuY3lfcGF0aHMipwEKCE1ldGFkYXRhEgsKA2tleRgBIAEoCRIuCgZmbGF2b3IYAiABKA4yHi5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkZsYXZvchIWCg5ydW5uZXJfdmVyc2lvbhgDIAEoCRIWCg5wYXJzZXJfdmVyc2lvbhgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIgCg9EZXBlbmRlbmN5UGF0aHMSDQoFcGF0aHMYASADKAkivAUKDUJyYW5jaFN1bW1hcnkSDgoGYnJhbmNoGAEgASgJEkwKDXNoYV90b19pZF9tYXAYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkJyYW5jaFN1bW1hcnkuU2hhVG9JZE1hcEVudHJ5El8KF3NoYV90b19wcm9qZWN0X25hbWVfbWFwGAMgAygLMj4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5CcmFuY2hTdW1tYXJ5LlNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRJUChFzaGFfdG9fZmxhdm9yX21hcBgEIAMoCzI5LmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0ZsYXZvck1hcEVudHJ5EmcKG3NoYV90b19kZXBlbmRlbmN5X3BhdGhzX21hcBgFIAMoCzJCLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0RlcGVuZGVuY3lQYXRoc01hcEVudHJ5GjEKD1NoYVRvSWRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGjoKGFNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGlUKE1NoYVRvRmxhdm9yTWFwRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3I6AjgBGmcKHFNoYVRvRGVwZW5kZW5jeVBhdGhzTWFwRW50cnkSCwoDa2V5GAEgASgJEjYKBXZhbHVlGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5EZXBlbmRlbmN5UGF0aHM6AjgBIk8KEkVuY3J5cHRpb25FbnZlbG9wZRIVCg1lbmNyeXB0ZWRfZGVrGAEgASgMEgoKAml2GAIgASgMEhYKDmVuY3J5cHRlZF9kYXRhGAMgASgJIt4CChVDbG91ZEZvcm1hdGlvblByb2plY3QSNwoGcmVzdWx0GAEgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5SZXN1bHQSMgoIbWV0YWRhdGEYAiABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLk1ldGFkYXRhEisKBWRpYWdzGAMgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEiUKBXVzYWdlGAggASgLMhYuaW5mcmFjb3N0LnVzYWdlLlVzYWdlEhQKDHByb2plY3RfdHlwZRgJIAEoCRISCgpjb25maWdfc2hhGAogASgJEgwKBHBhdGgYCyABKAlKBAgEEAVKBAgFEAZKBAgGEAdKBAgHEAhSCnVzYWdlX2ZpbGVSDnByb2plY3RfY29uZmlnUgZpc19jZGtSEGRlcGVuZGVuY3lfcGF0aHMihAIKC1RyZWVQcm9qZWN0EiIKBHRyZWUYASABKAsyFC5pbmZyYWNvc3QudHJlZS5UcmVlEjIKCG1ldGFkYXRhGAIgASgLMiAuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5NZXRhZGF0YRIrCgVkaWFncxgDIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIlCgV1c2FnZRgEIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYBSABKAkSEgoKY29uZmlnX3NoYRgGIAEoCRIMCgRwYXRoGAcgASgJEhEKCXdvcmtzcGFjZRgIIAEoCSpmCgZGbGF2b3ISFgoSRkxBVk9SX1VOU1BFQ0lGSUVEEAASFAoQRkxBVk9SX1RFUlJBRk9STRABEhkKFUZMQVZPUl9DTE9VREZPUk1BVElPThACEhMKD0ZMQVZPUl9BR05PU1RJQxADQtwBChpjb20uaW5mcmFjb3N0LnBhcnNlci5jYWNoZUIKQ2FjaGVQcm90b1ABWjhnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9jYWNoZaICA0lQQ6oCFkluZnJhY29zdC5QYXJzZXIuQ2FjaGXKAhZJbmZyYWNvc3RcUGFyc2VyXENhY2hl4gIiSW5mcmFjb3N0XFBhcnNlclxDYWNoZVxHUEJNZXRhZGF0YeoCGEluZnJhY29zdDo6UGFyc2VyOjpDYWNoZWIGcHJvdG8z", [file_google_protobuf_timestamp, file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_tree_tree, file_infracost_usage_usage]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2NhY2hlL2NhY2hlLnByb3RvEhZpbmZyYWNvc3QucGFyc2VyLmNhY2hlIpcDChBUZXJyYWZvcm1Qcm9qZWN0EjgKBnJlc3VsdBgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIudGVycmFmb3JtLk1vZHVsZVJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSFQoNaXNfdGVycmFncnVudBgGIAEoCBIfChd0ZXJyYWZvcm1fbW9kdWxlX3N1ZmZpeBgHIAEoCRIlCgV1c2FnZRgJIAEoCzIWLmluZnJhY29zdC51c2FnZS5Vc2FnZRIUCgxwcm9qZWN0X3R5cGUYCiABKAkSEgoKY29uZmlnX3NoYRgLIAEoCRIMCgRwYXRoGAwgASgJEhEKCXdvcmtzcGFjZRgNIAEoCUoECAQQBUoECAUQBkoECAgQCVIKdXNhZ2VfZmlsZVIOcHJvamVjdF9jb25maWdSEGRlcGVuZGVuY3lfcGF0aHMipwEKCE1ldGFkYXRhEgsKA2tleRgBIAEoCRIuCgZmbGF2b3IYAiABKA4yHi5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkZsYXZvchIWCg5ydW5uZXJfdmVyc2lvbhgDIAEoCRIWCg5wYXJzZXJfdmVyc2lvbhgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIgCg9EZXBlbmRlbmN5UGF0aHMSDQoFcGF0aHMYASADKAki7AYKDUJyYW5jaFN1bW1hcnkSDgoGYnJhbmNoGAEgASgJElAKDXNoYV90b19pZF9tYXAYAiADKAsyNS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkJyYW5jaFN1bW1hcnkuU2hhVG9JZE1hcEVudHJ5QgIYARJjChdzaGFfdG9fcHJvamVjdF9uYW1lX21hcBgDIAMoCzI+LmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb1Byb2plY3ROYW1lTWFwRW50cnlCAhgBElgKEXNoYV90b19mbGF2b3JfbWFwGAQgAygLMjkuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5CcmFuY2hTdW1tYXJ5LlNoYVRvRmxhdm9yTWFwRW50cnlCAhgBEmsKG3NoYV90b19kZXBlbmRlbmN5X3BhdGhzX21hcBgFIAMoCzJCLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5TaGFUb0RlcGVuZGVuY3lQYXRoc01hcEVudHJ5QgIYARJFCghwcm9qZWN0cxgGIAMoCzIzLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuQnJhbmNoU3VtbWFyeS5Qcm9qZWN0c0VudHJ5GjEKD1NoYVRvSWRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGjoKGFNoYVRvUHJvamVjdE5hbWVNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGlUKE1NoYVRvRmxhdm9yTWFwRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgOMh4uaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5GbGF2b3I6AjgBGmcKHFNoYVRvRGVwZW5kZW5jeVBhdGhzTWFwRW50cnkSCwoDa2V5GAEgASgJEjYKBXZhbHVlGAIgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5EZXBlbmRlbmN5UGF0aHM6AjgBGlcKDVByb2plY3RzRW50cnkSCwoDa2V5GAEgASgJEjUKBXZhbHVlGAIgASgLMiYuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5Qcm9qZWN0U3VtbWFyeToCOAEisQEKDlByb2plY3RTdW1tYXJ5EhQKDGJyZWFrZG93bl9pZBgBIAEoCRIWCg5icmVha2Rvd25faGFzaBgCIAEoCRIuCgZmbGF2b3IYAyABKA4yHi5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLkZsYXZvchJBChBkZXBlbmRlbmN5X3BhdGhzGAQgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jYWNoZS5EZXBlbmRlbmN5UGF0aHMiTwoSRW5jcnlwdGlvbkVudmVsb3BlEhUKDWVuY3J5cHRlZF9kZWsYASABKAwSCgoCaXYYAiABKAwSFgoOZW5jcnlwdGVkX2RhdGEYAyABKAki3gIKFUNsb3VkRm9ybWF0aW9uUHJvamVjdBI3CgZyZXN1bHQYASABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdBIyCghtZXRhZGF0YRgCIAEoCzIgLmluZnJhY29zdC5wYXJzZXIuY2FjaGUuTWV0YWRhdGESKwoFZGlhZ3MYAyADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSJQoFdXNhZ2UYCCABKAsyFi5pbmZyYWNvc3QudXNhZ2UuVXNhZ2USFAoMcHJvamVjdF90eXBlGAkgASgJEhIKCmNvbmZpZ19zaGEYCiABKAkSDAoEcGF0aBgLIAEoCUoECAQQBUoECAUQBkoECAYQB0oECAcQCFIKdXNhZ2VfZmlsZVIOcHJvamVjdF9jb25maWdSBmlzX2Nka1IQZGVwZW5kZW5jeV9wYXRocyKEAgoLVHJlZVByb2plY3QSIgoEdHJlZRgBIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSMgoIbWV0YWRhdGEYAiABKAsyIC5pbmZyYWNvc3QucGFyc2VyLmNhY2hlLk1ldGFkYXRhEisKBWRpYWdzGAMgAygLMhwuaW5mcmFjb3N0LnBhcnNlci5EaWFnbm9zdGljEiUKBXVzYWdlGAQgASgLMhYuaW5mcmFjb3N0LnVzYWdlLlVzYWdlEhQKDHByb2plY3RfdHlwZRgFIAEoCRISCgpjb25maWdfc2hhGAYgASgJEgwKBHBhdGgYByABKAkSEQoJd29ya3NwYWNlGAggASgJKmYKBkZsYXZvchIWChJGTEFWT1JfVU5TUEVDSUZJRUQQABIUChBGTEFWT1JfVEVSUkFGT1JNEAESGQoVRkxBVk9SX0NMT1VERk9STUFUSU9OEAISEwoPRkxBVk9SX0FHTk9TVElDEANC3AEKGmNvbS5pbmZyYWNvc3QucGFyc2VyLmNhY2hlQgpDYWNoZVByb3RvUAFaOGdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2NhY2hlogIDSVBDqgIWSW5mcmFjb3N0LlBhcnNlci5DYWNoZcoCFkluZnJhY29zdFxQYXJzZXJcQ2FjaGXiAiJJbmZyYWNvc3RcUGFyc2VyXENhY2hlXEdQQk1ldGFkYXRh6gIYSW5mcmFjb3N0OjpQYXJzZXI6OkNhY2hlYgZwcm90bzM", [file_google_protobuf_timestamp, file_infracost_parser_cloudformation_result, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_tree_tree, file_infracost_usage_usage]);
 
 /**
  * @generated from message infracost.parser.cache.TerraformProject
@@ -141,7 +141,9 @@ export const DependencyPathsSchema: GenMessage<DependencyPaths> = /*@__PURE__*/
   messageDesc(file_infracost_parser_cache_cache, 2);
 
 /**
- * BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
+ * BranchSummary caches per-project data for a branch so that a later run of the same branch, or a
+ * pull request opened against it, can look each project up by name to reuse its breakdown ID, detect
+ * whether it changed via its stored hash, and recover its dependency paths without re-parsing.
  *
  * @generated from message infracost.parser.cache.BranchSummary
  */
@@ -152,24 +154,41 @@ export type BranchSummary = Message<"infracost.parser.cache.BranchSummary"> & {
   branch: string;
 
   /**
-   * @generated from field: map<string, string> sha_to_id_map = 2;
+   * Deprecated: superseded by the projects field below. New code must not write these; they remain
+   * only so that summaries written by older code can still be read. When projects is empty (an old
+   * summary), reconstruct it by joining these maps on their shared SHA key - sha_to_project_name_map
+   * gives each SHA its project name, and the others supply that project's id, flavor, and deps.
+   *
+   * @generated from field: map<string, string> sha_to_id_map = 2 [deprecated = true];
+   * @deprecated
    */
   shaToIdMap: { [key: string]: string };
 
   /**
-   * @generated from field: map<string, string> sha_to_project_name_map = 3;
+   * @generated from field: map<string, string> sha_to_project_name_map = 3 [deprecated = true];
+   * @deprecated
    */
   shaToProjectNameMap: { [key: string]: string };
 
   /**
-   * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4;
+   * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4 [deprecated = true];
+   * @deprecated
    */
   shaToFlavorMap: { [key: string]: Flavor };
 
   /**
-   * @generated from field: map<string, infracost.parser.cache.DependencyPaths> sha_to_dependency_paths_map = 5;
+   * @generated from field: map<string, infracost.parser.cache.DependencyPaths> sha_to_dependency_paths_map = 5 [deprecated = true];
+   * @deprecated
    */
   shaToDependencyPathsMap: { [key: string]: DependencyPaths };
+
+  /**
+   * Projects holds the summarised data for each project discovered in this branch, keyed by project
+   * name (which is unique within a branch).
+   *
+   * @generated from field: map<string, infracost.parser.cache.ProjectSummary> projects = 6;
+   */
+  projects: { [key: string]: ProjectSummary };
 };
 
 /**
@@ -178,6 +197,51 @@ export type BranchSummary = Message<"infracost.parser.cache.BranchSummary"> & {
  */
 export const BranchSummarySchema: GenMessage<BranchSummary> = /*@__PURE__*/
   messageDesc(file_infracost_parser_cache_cache, 3);
+
+/**
+ * ProjectSummary is the cached per-project data recorded for one project on the run that produced the
+ * enclosing BranchSummary.
+ *
+ * @generated from message infracost.parser.cache.ProjectSummary
+ */
+export type ProjectSummary = Message<"infracost.parser.cache.ProjectSummary"> & {
+  /**
+   * Breakdown ID assigned by the dashboard, reused across runs while the project is unchanged.
+   *
+   * @generated from field: string breakdown_id = 1;
+   */
+  breakdownId: string;
+
+  /**
+   * The project's BreakdownSHA from that run - the content hash used as the parse-cache key. A later
+   * run compares its freshly computed hash against this to decide whether the project changed.
+   *
+   * @generated from field: string breakdown_hash = 2;
+   */
+  breakdownHash: string;
+
+  /**
+   * The project's flavor (Terraform, CloudFormation, or agnostic).
+   *
+   * @generated from field: infracost.parser.cache.Flavor flavor = 3;
+   */
+  flavor: Flavor;
+
+  /**
+   * The files this project depended on during its last parse, including files outside the project
+   * directory. Used to decide whether changed files are relevant and to invalidate caches.
+   *
+   * @generated from field: infracost.parser.cache.DependencyPaths dependency_paths = 4;
+   */
+  dependencyPaths?: DependencyPaths;
+};
+
+/**
+ * Describes the message infracost.parser.cache.ProjectSummary.
+ * Use `create(ProjectSummarySchema)` to create a new message.
+ */
+export const ProjectSummarySchema: GenMessage<ProjectSummary> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_cache_cache, 4);
 
 /**
  * @generated from message infracost.parser.cache.EncryptionEnvelope
@@ -206,7 +270,7 @@ export type EncryptionEnvelope = Message<"infracost.parser.cache.EncryptionEnvel
  * Use `create(EncryptionEnvelopeSchema)` to create a new message.
  */
 export const EncryptionEnvelopeSchema: GenMessage<EncryptionEnvelope> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 4);
+  messageDesc(file_infracost_parser_cache_cache, 5);
 
 /**
  * @generated from message infracost.parser.cache.CloudFormationProject
@@ -253,7 +317,7 @@ export type CloudFormationProject = Message<"infracost.parser.cache.CloudFormati
  * Use `create(CloudFormationProjectSchema)` to create a new message.
  */
 export const CloudFormationProjectSchema: GenMessage<CloudFormationProject> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 5);
+  messageDesc(file_infracost_parser_cache_cache, 6);
 
 /**
  * @generated from message infracost.parser.cache.TreeProject
@@ -305,7 +369,7 @@ export type TreeProject = Message<"infracost.parser.cache.TreeProject"> & {
  * Use `create(TreeProjectSchema)` to create a new message.
  */
 export const TreeProjectSchema: GenMessage<TreeProject> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_cache_cache, 6);
+  messageDesc(file_infracost_parser_cache_cache, 7);
 
 /**
  * @generated from enum infracost.parser.cache.Flavor

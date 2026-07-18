@@ -23,6 +23,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PolicyExclusion_PolicyType int32
+
+const (
+	PolicyExclusion_UNSPECIFIED PolicyExclusion_PolicyType = 0
+	PolicyExclusion_FINOPS      PolicyExclusion_PolicyType = 1
+	PolicyExclusion_TAGGING     PolicyExclusion_PolicyType = 2
+)
+
+// Enum value maps for PolicyExclusion_PolicyType.
+var (
+	PolicyExclusion_PolicyType_name = map[int32]string{
+		0: "UNSPECIFIED",
+		1: "FINOPS",
+		2: "TAGGING",
+	}
+	PolicyExclusion_PolicyType_value = map[string]int32{
+		"UNSPECIFIED": 0,
+		"FINOPS":      1,
+		"TAGGING":     2,
+	}
+)
+
+func (x PolicyExclusion_PolicyType) Enum() *PolicyExclusion_PolicyType {
+	p := new(PolicyExclusion_PolicyType)
+	*p = x
+	return p
+}
+
+func (x PolicyExclusion_PolicyType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PolicyExclusion_PolicyType) Descriptor() protoreflect.EnumDescriptor {
+	return file_infracost_parser_event_runparameters_proto_enumTypes[0].Descriptor()
+}
+
+func (PolicyExclusion_PolicyType) Type() protoreflect.EnumType {
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[0]
+}
+
+func (x PolicyExclusion_PolicyType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PolicyExclusion_PolicyType.Descriptor instead.
+func (PolicyExclusion_PolicyType) EnumDescriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{3, 0}
+}
+
 // Type represents the filter type (e.g., repo/project/branch) and aliases the proto enum.
 type ProductionFilter_Type int32
 
@@ -60,11 +109,11 @@ func (x ProductionFilter_Type) String() string {
 }
 
 func (ProductionFilter_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_parser_event_runparameters_proto_enumTypes[0].Descriptor()
+	return file_infracost_parser_event_runparameters_proto_enumTypes[1].Descriptor()
 }
 
 func (ProductionFilter_Type) Type() protoreflect.EnumType {
-	return &file_infracost_parser_event_runparameters_proto_enumTypes[0]
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[1]
 }
 
 func (x ProductionFilter_Type) Number() protoreflect.EnumNumber {
@@ -73,7 +122,7 @@ func (x ProductionFilter_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ProductionFilter_Type.Descriptor instead.
 func (ProductionFilter_Type) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12, 0}
 }
 
 type TagPolicyRequirement_Type int32
@@ -112,11 +161,11 @@ func (x TagPolicyRequirement_Type) String() string {
 }
 
 func (TagPolicyRequirement_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_parser_event_runparameters_proto_enumTypes[1].Descriptor()
+	return file_infracost_parser_event_runparameters_proto_enumTypes[2].Descriptor()
 }
 
 func (TagPolicyRequirement_Type) Type() protoreflect.EnumType {
-	return &file_infracost_parser_event_runparameters_proto_enumTypes[1]
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[2]
 }
 
 func (x TagPolicyRequirement_Type) Number() protoreflect.EnumNumber {
@@ -125,7 +174,7 @@ func (x TagPolicyRequirement_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TagPolicyRequirement_Type.Descriptor instead.
 func (TagPolicyRequirement_Type) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{14, 0}
 }
 
 type FinopsPolicySettings_Group int32
@@ -161,11 +210,11 @@ func (x FinopsPolicySettings_Group) String() string {
 }
 
 func (FinopsPolicySettings_Group) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_parser_event_runparameters_proto_enumTypes[2].Descriptor()
+	return file_infracost_parser_event_runparameters_proto_enumTypes[3].Descriptor()
 }
 
 func (FinopsPolicySettings_Group) Type() protoreflect.EnumType {
-	return &file_infracost_parser_event_runparameters_proto_enumTypes[2]
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[3]
 }
 
 func (x FinopsPolicySettings_Group) Number() protoreflect.EnumNumber {
@@ -174,7 +223,7 @@ func (x FinopsPolicySettings_Group) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use FinopsPolicySettings_Group.Descriptor instead.
 func (FinopsPolicySettings_Group) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type Guardrail_Scope int32
@@ -210,11 +259,11 @@ func (x Guardrail_Scope) String() string {
 }
 
 func (Guardrail_Scope) Descriptor() protoreflect.EnumDescriptor {
-	return file_infracost_parser_event_runparameters_proto_enumTypes[3].Descriptor()
+	return file_infracost_parser_event_runparameters_proto_enumTypes[4].Descriptor()
 }
 
 func (Guardrail_Scope) Type() protoreflect.EnumType {
-	return &file_infracost_parser_event_runparameters_proto_enumTypes[3]
+	return &file_infracost_parser_event_runparameters_proto_enumTypes[4]
 }
 
 func (x Guardrail_Scope) Number() protoreflect.EnumNumber {
@@ -223,7 +272,7 @@ func (x Guardrail_Scope) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Guardrail_Scope.Descriptor instead.
 func (Guardrail_Scope) EnumDescriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13, 0}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{18, 0}
 }
 
 type RunParameters struct {
@@ -236,8 +285,25 @@ type RunParameters struct {
 	Guardrails        []*Guardrail            `protobuf:"bytes,6,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	Budgets           []*Budget               `protobuf:"bytes,7,rep,name=budgets,proto3" json:"budgets,omitempty"`
 	ConfigTemplate    *string                 `protobuf:"bytes,8,opt,name=config_template,json=configTemplate,proto3,oneof" json:"config_template,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	RunId             *string                 `protobuf:"bytes,9,opt,name=run_id,json=runId,proto3,oneof" json:"run_id,omitempty"`
+	Currency          string                  `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`                                         // ISO 4217 currency code e.g. USD
+	ProjectBaselines  []*ProjectBaseline      `protobuf:"bytes,11,rep,name=project_baselines,json=projectBaselines,proto3" json:"project_baselines,omitempty"` // project cost baselines for guardrails
+	CommentSettings   *CommentSettings        `protobuf:"bytes,12,opt,name=comment_settings,json=commentSettings,proto3" json:"comment_settings,omitempty"`
+	// policy_exclusions lists finops/tagging policy issues that a user has
+	// dismissed (ignored). The runner filters discovered failing resources
+	// matching these so dismissed issues are neither shown in the comment nor
+	// used to block the PR check.
+	PolicyExclusions []*PolicyExclusion `protobuf:"bytes,13,rep,name=policy_exclusions,json=policyExclusions,proto3" json:"policy_exclusions,omitempty"`
+	// project_preexisting_issues carries the dashboard's per-project count of
+	// base-branch pre-existing issues (finops + tagging, pr_comment policies,
+	// including dismissed/ignored). The runner sums these for the projects it
+	// did NOT re-run this PR and adds them to the projects it did re-run so the
+	// pre-existing-issues comment line reflects the whole repo, not just the
+	// changed projects.
+	ProjectPreexistingIssues []*ProjectPreExistingIssues `protobuf:"bytes,14,rep,name=project_preexisting_issues,json=projectPreexistingIssues,proto3" json:"project_preexisting_issues,omitempty"`
+	PlanInfo                 *PlanInfo                   `protobuf:"bytes,15,opt,name=plan_info,json=planInfo,proto3,oneof" json:"plan_info,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *RunParameters) Reset() {
@@ -326,6 +392,364 @@ func (x *RunParameters) GetConfigTemplate() string {
 	return ""
 }
 
+func (x *RunParameters) GetRunId() string {
+	if x != nil && x.RunId != nil {
+		return *x.RunId
+	}
+	return ""
+}
+
+func (x *RunParameters) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *RunParameters) GetProjectBaselines() []*ProjectBaseline {
+	if x != nil {
+		return x.ProjectBaselines
+	}
+	return nil
+}
+
+func (x *RunParameters) GetCommentSettings() *CommentSettings {
+	if x != nil {
+		return x.CommentSettings
+	}
+	return nil
+}
+
+func (x *RunParameters) GetPolicyExclusions() []*PolicyExclusion {
+	if x != nil {
+		return x.PolicyExclusions
+	}
+	return nil
+}
+
+func (x *RunParameters) GetProjectPreexistingIssues() []*ProjectPreExistingIssues {
+	if x != nil {
+		return x.ProjectPreexistingIssues
+	}
+	return nil
+}
+
+func (x *RunParameters) GetPlanInfo() *PlanInfo {
+	if x != nil {
+		return x.PlanInfo
+	}
+	return nil
+}
+
+type PlanInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsPaid        bool                   `protobuf:"varint,1,opt,name=is_paid,json=isPaid,proto3" json:"is_paid,omitempty"`
+	IsPoc         bool                   `protobuf:"varint,2,opt,name=is_poc,json=isPoc,proto3" json:"is_poc,omitempty"`
+	IsTrial       bool                   `protobuf:"varint,3,opt,name=is_trial,json=isTrial,proto3" json:"is_trial,omitempty"`
+	IsEnterprise  bool                   `protobuf:"varint,4,opt,name=is_enterprise,json=isEnterprise,proto3" json:"is_enterprise,omitempty"`
+	Expiry        *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=expiry,proto3,oneof" json:"expiry,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlanInfo) Reset() {
+	*x = PlanInfo{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlanInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlanInfo) ProtoMessage() {}
+
+func (x *PlanInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlanInfo.ProtoReflect.Descriptor instead.
+func (*PlanInfo) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PlanInfo) GetIsPaid() bool {
+	if x != nil {
+		return x.IsPaid
+	}
+	return false
+}
+
+func (x *PlanInfo) GetIsPoc() bool {
+	if x != nil {
+		return x.IsPoc
+	}
+	return false
+}
+
+func (x *PlanInfo) GetIsTrial() bool {
+	if x != nil {
+		return x.IsTrial
+	}
+	return false
+}
+
+func (x *PlanInfo) GetIsEnterprise() bool {
+	if x != nil {
+		return x.IsEnterprise
+	}
+	return false
+}
+
+func (x *PlanInfo) GetExpiry() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Expiry
+	}
+	return nil
+}
+
+// ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
+// issues for a single project, keyed by the raw infracost project name (the
+// same name the runner reports via RunProjectResult.project_name). The count
+// matches the dashboard's pre-existing definition: failing finops + tagging
+// resources on the base branch's latest run, for pr_comment policies only,
+// including dismissed/ignored issues (new + ignored).
+type ProjectPreExistingIssues struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProjectName   string                 `protobuf:"bytes,1,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
+	IssueCount    int32                  `protobuf:"varint,2,opt,name=issue_count,json=issueCount,proto3" json:"issue_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectPreExistingIssues) Reset() {
+	*x = ProjectPreExistingIssues{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectPreExistingIssues) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectPreExistingIssues) ProtoMessage() {}
+
+func (x *ProjectPreExistingIssues) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProjectPreExistingIssues.ProtoReflect.Descriptor instead.
+func (*ProjectPreExistingIssues) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ProjectPreExistingIssues) GetProjectName() string {
+	if x != nil {
+		return x.ProjectName
+	}
+	return ""
+}
+
+func (x *ProjectPreExistingIssues) GetIssueCount() int32 {
+	if x != nil {
+		return x.IssueCount
+	}
+	return 0
+}
+
+// PolicyExclusion identifies a single dismissed/ignored policy issue. The key
+// mirrors the dashboard's finops_policy_exclusions / tag_policy_exclusions
+// tables: a policy, a project and a resource address.
+type PolicyExclusion struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	PolicyType    PolicyExclusion_PolicyType `protobuf:"varint,1,opt,name=policy_type,json=policyType,proto3,enum=infracost.parser.event.PolicyExclusion_PolicyType" json:"policy_type,omitempty"`
+	PolicyId      string                     `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	ProjectName   string                     `protobuf:"bytes,3,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
+	Address       string                     `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PolicyExclusion) Reset() {
+	*x = PolicyExclusion{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PolicyExclusion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PolicyExclusion) ProtoMessage() {}
+
+func (x *PolicyExclusion) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PolicyExclusion.ProtoReflect.Descriptor instead.
+func (*PolicyExclusion) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PolicyExclusion) GetPolicyType() PolicyExclusion_PolicyType {
+	if x != nil {
+		return x.PolicyType
+	}
+	return PolicyExclusion_UNSPECIFIED
+}
+
+func (x *PolicyExclusion) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+func (x *PolicyExclusion) GetProjectName() string {
+	if x != nil {
+		return x.ProjectName
+	}
+	return ""
+}
+
+func (x *PolicyExclusion) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+type ProjectBaseline struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProjectName      string                 `protobuf:"bytes,1,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
+	TotalMonthlyCost *rational.Rat          `protobuf:"bytes,2,opt,name=total_monthly_cost,json=totalMonthlyCost,proto3" json:"total_monthly_cost,omitempty"` // base-branch total
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProjectBaseline) Reset() {
+	*x = ProjectBaseline{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectBaseline) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectBaseline) ProtoMessage() {}
+
+func (x *ProjectBaseline) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProjectBaseline.ProtoReflect.Descriptor instead.
+func (*ProjectBaseline) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ProjectBaseline) GetProjectName() string {
+	if x != nil {
+		return x.ProjectName
+	}
+	return ""
+}
+
+func (x *ProjectBaseline) GetTotalMonthlyCost() *rational.Rat {
+	if x != nil {
+		return x.TotalMonthlyCost
+	}
+	return nil
+}
+
+type CommentSettings struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Enabled          bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	ShowCostEstimate bool                   `protobuf:"varint,2,opt,name=show_cost_estimate,json=showCostEstimate,proto3" json:"show_cost_estimate,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CommentSettings) Reset() {
+	*x = CommentSettings{}
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommentSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommentSettings) ProtoMessage() {}
+
+func (x *CommentSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommentSettings.ProtoReflect.Descriptor instead.
+func (*CommentSettings) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CommentSettings) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *CommentSettings) GetShowCostEstimate() bool {
+	if x != nil {
+		return x.ShowCostEstimate
+	}
+	return false
+}
+
 type BaseScope struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RepoName      string                 `protobuf:"bytes,1,opt,name=repo_name,json=repoName,proto3" json:"repo_name,omitempty"`
@@ -337,7 +761,7 @@ type BaseScope struct {
 
 func (x *BaseScope) Reset() {
 	*x = BaseScope{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -349,7 +773,7 @@ func (x *BaseScope) String() string {
 func (*BaseScope) ProtoMessage() {}
 
 func (x *BaseScope) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[1]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -362,7 +786,7 @@ func (x *BaseScope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseScope.ProtoReflect.Descriptor instead.
 func (*BaseScope) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BaseScope) GetRepoName() string {
@@ -396,7 +820,7 @@ type UsageDefaults struct {
 
 func (x *UsageDefaults) Reset() {
 	*x = UsageDefaults{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -408,7 +832,7 @@ func (x *UsageDefaults) String() string {
 func (*UsageDefaults) ProtoMessage() {}
 
 func (x *UsageDefaults) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[2]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -421,7 +845,7 @@ func (x *UsageDefaults) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefaults.ProtoReflect.Descriptor instead.
 func (*UsageDefaults) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UsageDefaults) GetResources() map[string]*UsageResourceMap {
@@ -441,7 +865,7 @@ type UsageResourceMap struct {
 
 func (x *UsageResourceMap) Reset() {
 	*x = UsageResourceMap{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -453,7 +877,7 @@ func (x *UsageResourceMap) String() string {
 func (*UsageResourceMap) ProtoMessage() {}
 
 func (x *UsageResourceMap) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[3]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -466,7 +890,7 @@ func (x *UsageResourceMap) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageResourceMap.ProtoReflect.Descriptor instead.
 func (*UsageResourceMap) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UsageResourceMap) GetUsages() map[string]*UsageDefaultList {
@@ -485,7 +909,7 @@ type UsageDefaultList struct {
 
 func (x *UsageDefaultList) Reset() {
 	*x = UsageDefaultList{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +921,7 @@ func (x *UsageDefaultList) String() string {
 func (*UsageDefaultList) ProtoMessage() {}
 
 func (x *UsageDefaultList) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[4]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +934,7 @@ func (x *UsageDefaultList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefaultList.ProtoReflect.Descriptor instead.
 func (*UsageDefaultList) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UsageDefaultList) GetList() []*UsageDefault {
@@ -531,7 +955,7 @@ type UsageDefault struct {
 
 func (x *UsageDefault) Reset() {
 	*x = UsageDefault{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -543,7 +967,7 @@ func (x *UsageDefault) String() string {
 func (*UsageDefault) ProtoMessage() {}
 
 func (x *UsageDefault) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -556,7 +980,7 @@ func (x *UsageDefault) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageDefault.ProtoReflect.Descriptor instead.
 func (*UsageDefault) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UsageDefault) GetQuantity() string {
@@ -589,7 +1013,7 @@ type UsageFilters struct {
 
 func (x *UsageFilters) Reset() {
 	*x = UsageFilters{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -601,7 +1025,7 @@ func (x *UsageFilters) String() string {
 func (*UsageFilters) ProtoMessage() {}
 
 func (x *UsageFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -614,7 +1038,7 @@ func (x *UsageFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageFilters.ProtoReflect.Descriptor instead.
 func (*UsageFilters) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UsageFilters) GetProject() *StringFilter {
@@ -640,7 +1064,7 @@ type ProductionFilter struct {
 
 func (x *ProductionFilter) Reset() {
 	*x = ProductionFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -652,7 +1076,7 @@ func (x *ProductionFilter) String() string {
 func (*ProductionFilter) ProtoMessage() {}
 
 func (x *ProductionFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -665,7 +1089,7 @@ func (x *ProductionFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductionFilter.ProtoReflect.Descriptor instead.
 func (*ProductionFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProductionFilter) GetId() string {
@@ -714,7 +1138,7 @@ type TagPolicy struct {
 
 func (x *TagPolicy) Reset() {
 	*x = TagPolicy{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -726,7 +1150,7 @@ func (x *TagPolicy) String() string {
 func (*TagPolicy) ProtoMessage() {}
 
 func (x *TagPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,7 +1163,7 @@ func (x *TagPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagPolicy.ProtoReflect.Descriptor instead.
 func (*TagPolicy) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{8}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *TagPolicy) GetId() string {
@@ -826,7 +1250,7 @@ type TagPolicyRequirement struct {
 
 func (x *TagPolicyRequirement) Reset() {
 	*x = TagPolicyRequirement{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -838,7 +1262,7 @@ func (x *TagPolicyRequirement) String() string {
 func (*TagPolicyRequirement) ProtoMessage() {}
 
 func (x *TagPolicyRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -851,7 +1275,7 @@ func (x *TagPolicyRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagPolicyRequirement.ProtoReflect.Descriptor instead.
 func (*TagPolicyRequirement) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{9}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TagPolicyRequirement) GetKey() string {
@@ -906,7 +1330,7 @@ type StringFilter struct {
 
 func (x *StringFilter) Reset() {
 	*x = StringFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -918,7 +1342,7 @@ func (x *StringFilter) String() string {
 func (*StringFilter) ProtoMessage() {}
 
 func (x *StringFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -931,7 +1355,7 @@ func (x *StringFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringFilter.ProtoReflect.Descriptor instead.
 func (*StringFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{10}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *StringFilter) GetInclude() []string {
@@ -958,7 +1382,7 @@ type MapFilter struct {
 
 func (x *MapFilter) Reset() {
 	*x = MapFilter{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -970,7 +1394,7 @@ func (x *MapFilter) String() string {
 func (*MapFilter) ProtoMessage() {}
 
 func (x *MapFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +1407,7 @@ func (x *MapFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MapFilter.ProtoReflect.Descriptor instead.
 func (*MapFilter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{11}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *MapFilter) GetInclude() map[string]string {
@@ -1020,7 +1444,7 @@ type FinopsPolicySettings struct {
 
 func (x *FinopsPolicySettings) Reset() {
 	*x = FinopsPolicySettings{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1032,7 +1456,7 @@ func (x *FinopsPolicySettings) String() string {
 func (*FinopsPolicySettings) ProtoMessage() {}
 
 func (x *FinopsPolicySettings) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1045,7 +1469,7 @@ func (x *FinopsPolicySettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FinopsPolicySettings.ProtoReflect.Descriptor instead.
 func (*FinopsPolicySettings) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{12}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *FinopsPolicySettings) GetId() string {
@@ -1150,13 +1574,18 @@ type Guardrail struct {
 	PrComment      bool          `protobuf:"varint,8,opt,name=pr_comment,json=prComment,proto3" json:"pr_comment,omitempty"`
 	BlockPr        bool          `protobuf:"varint,9,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
 	Message        string        `protobuf:"bytes,10,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// unblocked is true when a user has manually unblocked this guardrail for
+	// the current pull request. The runner still evaluates and reports the
+	// result, but must not block the PR check or render it in the comment when
+	// this is set.
+	Unblocked     bool `protobuf:"varint,11,opt,name=unblocked,proto3" json:"unblocked,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Guardrail) Reset() {
 	*x = Guardrail{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1168,7 +1597,7 @@ func (x *Guardrail) String() string {
 func (*Guardrail) ProtoMessage() {}
 
 func (x *Guardrail) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[13]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1181,7 +1610,7 @@ func (x *Guardrail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Guardrail.ProtoReflect.Descriptor instead.
 func (*Guardrail) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{13}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *Guardrail) GetId() string {
@@ -1254,6 +1683,13 @@ func (x *Guardrail) GetMessage() string {
 	return ""
 }
 
+func (x *Guardrail) GetUnblocked() bool {
+	if x != nil {
+		return x.Unblocked
+	}
+	return false
+}
+
 // Budget defines a cost budget for resources matching a set of tags.
 // The dashboard resolves current_cost from cloud billing data at
 // getRunParameters time. The client displays it as-is.
@@ -1276,7 +1712,7 @@ type Budget struct {
 
 func (x *Budget) Reset() {
 	*x = Budget{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1288,7 +1724,7 @@ func (x *Budget) String() string {
 func (*Budget) ProtoMessage() {}
 
 func (x *Budget) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[14]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1301,7 +1737,7 @@ func (x *Budget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Budget.ProtoReflect.Descriptor instead.
 func (*Budget) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{14}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Budget) GetId() string {
@@ -1377,7 +1813,7 @@ type BudgetTag struct {
 
 func (x *BudgetTag) Reset() {
 	*x = BudgetTag{}
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[15]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1389,7 +1825,7 @@ func (x *BudgetTag) String() string {
 func (*BudgetTag) ProtoMessage() {}
 
 func (x *BudgetTag) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[15]
+	mi := &file_infracost_parser_event_runparameters_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1402,7 +1838,7 @@ func (x *BudgetTag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BudgetTag.ProtoReflect.Descriptor instead.
 func (*BudgetTag) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{15}
+	return file_infracost_parser_event_runparameters_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *BudgetTag) GetKey() string {
@@ -1423,7 +1859,7 @@ var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xcb\x04\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xd0\b\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
@@ -1434,8 +1870,48 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"guardrails\x18\x06 \x03(\v2!.infracost.parser.event.GuardrailR\n" +
 	"guardrails\x128\n" +
 	"\abudgets\x18\a \x03(\v2\x1e.infracost.parser.event.BudgetR\abudgets\x12,\n" +
-	"\x0fconfig_template\x18\b \x01(\tH\x00R\x0econfigTemplate\x88\x01\x01B\x12\n" +
-	"\x10_config_template\"d\n" +
+	"\x0fconfig_template\x18\b \x01(\tH\x00R\x0econfigTemplate\x88\x01\x01\x12\x1a\n" +
+	"\x06run_id\x18\t \x01(\tH\x01R\x05runId\x88\x01\x01\x12\x1a\n" +
+	"\bcurrency\x18\n" +
+	" \x01(\tR\bcurrency\x12T\n" +
+	"\x11project_baselines\x18\v \x03(\v2'.infracost.parser.event.ProjectBaselineR\x10projectBaselines\x12R\n" +
+	"\x10comment_settings\x18\f \x01(\v2'.infracost.parser.event.CommentSettingsR\x0fcommentSettings\x12T\n" +
+	"\x11policy_exclusions\x18\r \x03(\v2'.infracost.parser.event.PolicyExclusionR\x10policyExclusions\x12n\n" +
+	"\x1aproject_preexisting_issues\x18\x0e \x03(\v20.infracost.parser.event.ProjectPreExistingIssuesR\x18projectPreexistingIssues\x12B\n" +
+	"\tplan_info\x18\x0f \x01(\v2 .infracost.parser.event.PlanInfoH\x02R\bplanInfo\x88\x01\x01B\x12\n" +
+	"\x10_config_templateB\t\n" +
+	"\a_run_idB\f\n" +
+	"\n" +
+	"_plan_info\"\xbe\x01\n" +
+	"\bPlanInfo\x12\x17\n" +
+	"\ais_paid\x18\x01 \x01(\bR\x06isPaid\x12\x15\n" +
+	"\x06is_poc\x18\x02 \x01(\bR\x05isPoc\x12\x19\n" +
+	"\bis_trial\x18\x03 \x01(\bR\aisTrial\x12#\n" +
+	"\ris_enterprise\x18\x04 \x01(\bR\fisEnterprise\x127\n" +
+	"\x06expiry\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x06expiry\x88\x01\x01B\t\n" +
+	"\a_expiry\"^\n" +
+	"\x18ProjectPreExistingIssues\x12!\n" +
+	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12\x1f\n" +
+	"\vissue_count\x18\x02 \x01(\x05R\n" +
+	"issueCount\"\xf8\x01\n" +
+	"\x0fPolicyExclusion\x12S\n" +
+	"\vpolicy_type\x18\x01 \x01(\x0e22.infracost.parser.event.PolicyExclusion.PolicyTypeR\n" +
+	"policyType\x12\x1b\n" +
+	"\tpolicy_id\x18\x02 \x01(\tR\bpolicyId\x12!\n" +
+	"\fproject_name\x18\x03 \x01(\tR\vprojectName\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\"6\n" +
+	"\n" +
+	"PolicyType\x12\x0f\n" +
+	"\vUNSPECIFIED\x10\x00\x12\n" +
+	"\n" +
+	"\x06FINOPS\x10\x01\x12\v\n" +
+	"\aTAGGING\x10\x02\"{\n" +
+	"\x0fProjectBaseline\x12!\n" +
+	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12E\n" +
+	"\x12total_monthly_cost\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x10totalMonthlyCost\"Y\n" +
+	"\x0fCommentSettings\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12,\n" +
+	"\x12show_cost_estimate\x18\x02 \x01(\bR\x10showCostEstimate\"d\n" +
 	"\tBaseScope\x12\x1b\n" +
 	"\trepo_name\x18\x01 \x01(\tR\brepoName\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x1f\n" +
@@ -1529,7 +2005,7 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\vUNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06FINOPS\x10\x01\x12\x12\n" +
-	"\x0eCLOUD_SECURITY\x10\x02\"\xfa\x04\n" +
+	"\x0eCLOUD_SECURITY\x10\x02\"\x98\x05\n" +
 	"\tGuardrail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
@@ -1542,7 +2018,8 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"pr_comment\x18\b \x01(\bR\tprComment\x12\x19\n" +
 	"\bblock_pr\x18\t \x01(\bR\ablockPr\x12\x18\n" +
 	"\amessage\x18\n" +
-	" \x01(\tR\amessage\"/\n" +
+	" \x01(\tR\amessage\x12\x1c\n" +
+	"\tunblocked\x18\v \x01(\bR\tunblocked\"/\n" +
 	"\x05Scope\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04REPO\x10\x01\x12\v\n" +
@@ -1579,79 +2056,93 @@ func file_infracost_parser_event_runparameters_proto_rawDescGZIP() []byte {
 	return file_infracost_parser_event_runparameters_proto_rawDescData
 }
 
-var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_infracost_parser_event_runparameters_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_infracost_parser_event_runparameters_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_infracost_parser_event_runparameters_proto_goTypes = []any{
-	(ProductionFilter_Type)(0),      // 0: infracost.parser.event.ProductionFilter.Type
-	(TagPolicyRequirement_Type)(0),  // 1: infracost.parser.event.TagPolicyRequirement.Type
-	(FinopsPolicySettings_Group)(0), // 2: infracost.parser.event.FinopsPolicySettings.Group
-	(Guardrail_Scope)(0),            // 3: infracost.parser.event.Guardrail.Scope
-	(*RunParameters)(nil),           // 4: infracost.parser.event.RunParameters
-	(*BaseScope)(nil),               // 5: infracost.parser.event.BaseScope
-	(*UsageDefaults)(nil),           // 6: infracost.parser.event.UsageDefaults
-	(*UsageResourceMap)(nil),        // 7: infracost.parser.event.UsageResourceMap
-	(*UsageDefaultList)(nil),        // 8: infracost.parser.event.UsageDefaultList
-	(*UsageDefault)(nil),            // 9: infracost.parser.event.UsageDefault
-	(*UsageFilters)(nil),            // 10: infracost.parser.event.UsageFilters
-	(*ProductionFilter)(nil),        // 11: infracost.parser.event.ProductionFilter
-	(*TagPolicy)(nil),               // 12: infracost.parser.event.TagPolicy
-	(*TagPolicyRequirement)(nil),    // 13: infracost.parser.event.TagPolicyRequirement
-	(*StringFilter)(nil),            // 14: infracost.parser.event.StringFilter
-	(*MapFilter)(nil),               // 15: infracost.parser.event.MapFilter
-	(*FinopsPolicySettings)(nil),    // 16: infracost.parser.event.FinopsPolicySettings
-	(*Guardrail)(nil),               // 17: infracost.parser.event.Guardrail
-	(*Budget)(nil),                  // 18: infracost.parser.event.Budget
-	(*BudgetTag)(nil),               // 19: infracost.parser.event.BudgetTag
-	nil,                             // 20: infracost.parser.event.UsageDefaults.ResourcesEntry
-	nil,                             // 21: infracost.parser.event.UsageResourceMap.UsagesEntry
-	nil,                             // 22: infracost.parser.event.MapFilter.IncludeEntry
-	nil,                             // 23: infracost.parser.event.MapFilter.ExcludeEntry
-	(*rational.Rat)(nil),            // 24: infracost.rational.Rat
-	(*timestamppb.Timestamp)(nil),   // 25: google.protobuf.Timestamp
+	(PolicyExclusion_PolicyType)(0),  // 0: infracost.parser.event.PolicyExclusion.PolicyType
+	(ProductionFilter_Type)(0),       // 1: infracost.parser.event.ProductionFilter.Type
+	(TagPolicyRequirement_Type)(0),   // 2: infracost.parser.event.TagPolicyRequirement.Type
+	(FinopsPolicySettings_Group)(0),  // 3: infracost.parser.event.FinopsPolicySettings.Group
+	(Guardrail_Scope)(0),             // 4: infracost.parser.event.Guardrail.Scope
+	(*RunParameters)(nil),            // 5: infracost.parser.event.RunParameters
+	(*PlanInfo)(nil),                 // 6: infracost.parser.event.PlanInfo
+	(*ProjectPreExistingIssues)(nil), // 7: infracost.parser.event.ProjectPreExistingIssues
+	(*PolicyExclusion)(nil),          // 8: infracost.parser.event.PolicyExclusion
+	(*ProjectBaseline)(nil),          // 9: infracost.parser.event.ProjectBaseline
+	(*CommentSettings)(nil),          // 10: infracost.parser.event.CommentSettings
+	(*BaseScope)(nil),                // 11: infracost.parser.event.BaseScope
+	(*UsageDefaults)(nil),            // 12: infracost.parser.event.UsageDefaults
+	(*UsageResourceMap)(nil),         // 13: infracost.parser.event.UsageResourceMap
+	(*UsageDefaultList)(nil),         // 14: infracost.parser.event.UsageDefaultList
+	(*UsageDefault)(nil),             // 15: infracost.parser.event.UsageDefault
+	(*UsageFilters)(nil),             // 16: infracost.parser.event.UsageFilters
+	(*ProductionFilter)(nil),         // 17: infracost.parser.event.ProductionFilter
+	(*TagPolicy)(nil),                // 18: infracost.parser.event.TagPolicy
+	(*TagPolicyRequirement)(nil),     // 19: infracost.parser.event.TagPolicyRequirement
+	(*StringFilter)(nil),             // 20: infracost.parser.event.StringFilter
+	(*MapFilter)(nil),                // 21: infracost.parser.event.MapFilter
+	(*FinopsPolicySettings)(nil),     // 22: infracost.parser.event.FinopsPolicySettings
+	(*Guardrail)(nil),                // 23: infracost.parser.event.Guardrail
+	(*Budget)(nil),                   // 24: infracost.parser.event.Budget
+	(*BudgetTag)(nil),                // 25: infracost.parser.event.BudgetTag
+	nil,                              // 26: infracost.parser.event.UsageDefaults.ResourcesEntry
+	nil,                              // 27: infracost.parser.event.UsageResourceMap.UsagesEntry
+	nil,                              // 28: infracost.parser.event.MapFilter.IncludeEntry
+	nil,                              // 29: infracost.parser.event.MapFilter.ExcludeEntry
+	(*timestamppb.Timestamp)(nil),    // 30: google.protobuf.Timestamp
+	(*rational.Rat)(nil),             // 31: infracost.rational.Rat
 }
 var file_infracost_parser_event_runparameters_proto_depIdxs = []int32{
-	5,  // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
-	6,  // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
-	11, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
-	12, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
-	16, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
-	17, // 5: infracost.parser.event.RunParameters.guardrails:type_name -> infracost.parser.event.Guardrail
-	18, // 6: infracost.parser.event.RunParameters.budgets:type_name -> infracost.parser.event.Budget
-	20, // 7: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
-	21, // 8: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
-	9,  // 9: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
-	10, // 10: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
-	14, // 11: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
-	0,  // 12: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
-	14, // 13: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
-	14, // 14: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
-	14, // 15: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
-	15, // 16: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
-	13, // 17: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
-	1,  // 18: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
-	22, // 19: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
-	23, // 20: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
-	14, // 21: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
-	14, // 22: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
-	15, // 23: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
-	2,  // 24: infracost.parser.event.FinopsPolicySettings.group:type_name -> infracost.parser.event.FinopsPolicySettings.Group
-	3,  // 25: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
-	14, // 26: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
-	24, // 27: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
-	24, // 28: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
-	24, // 29: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
-	19, // 30: infracost.parser.event.Budget.tags:type_name -> infracost.parser.event.BudgetTag
-	24, // 31: infracost.parser.event.Budget.amount:type_name -> infracost.rational.Rat
-	25, // 32: infracost.parser.event.Budget.started_at:type_name -> google.protobuf.Timestamp
-	25, // 33: infracost.parser.event.Budget.ended_at:type_name -> google.protobuf.Timestamp
-	24, // 34: infracost.parser.event.Budget.current_cost:type_name -> infracost.rational.Rat
-	7,  // 35: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
-	8,  // 36: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
-	37, // [37:37] is the sub-list for method output_type
-	37, // [37:37] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	11, // 0: infracost.parser.event.RunParameters.scope:type_name -> infracost.parser.event.BaseScope
+	12, // 1: infracost.parser.event.RunParameters.usage_defaults:type_name -> infracost.parser.event.UsageDefaults
+	17, // 2: infracost.parser.event.RunParameters.production_filters:type_name -> infracost.parser.event.ProductionFilter
+	18, // 3: infracost.parser.event.RunParameters.tag_policies:type_name -> infracost.parser.event.TagPolicy
+	22, // 4: infracost.parser.event.RunParameters.finops_policies:type_name -> infracost.parser.event.FinopsPolicySettings
+	23, // 5: infracost.parser.event.RunParameters.guardrails:type_name -> infracost.parser.event.Guardrail
+	24, // 6: infracost.parser.event.RunParameters.budgets:type_name -> infracost.parser.event.Budget
+	9,  // 7: infracost.parser.event.RunParameters.project_baselines:type_name -> infracost.parser.event.ProjectBaseline
+	10, // 8: infracost.parser.event.RunParameters.comment_settings:type_name -> infracost.parser.event.CommentSettings
+	8,  // 9: infracost.parser.event.RunParameters.policy_exclusions:type_name -> infracost.parser.event.PolicyExclusion
+	7,  // 10: infracost.parser.event.RunParameters.project_preexisting_issues:type_name -> infracost.parser.event.ProjectPreExistingIssues
+	6,  // 11: infracost.parser.event.RunParameters.plan_info:type_name -> infracost.parser.event.PlanInfo
+	30, // 12: infracost.parser.event.PlanInfo.expiry:type_name -> google.protobuf.Timestamp
+	0,  // 13: infracost.parser.event.PolicyExclusion.policy_type:type_name -> infracost.parser.event.PolicyExclusion.PolicyType
+	31, // 14: infracost.parser.event.ProjectBaseline.total_monthly_cost:type_name -> infracost.rational.Rat
+	26, // 15: infracost.parser.event.UsageDefaults.resources:type_name -> infracost.parser.event.UsageDefaults.ResourcesEntry
+	27, // 16: infracost.parser.event.UsageResourceMap.usages:type_name -> infracost.parser.event.UsageResourceMap.UsagesEntry
+	15, // 17: infracost.parser.event.UsageDefaultList.list:type_name -> infracost.parser.event.UsageDefault
+	16, // 18: infracost.parser.event.UsageDefault.filters:type_name -> infracost.parser.event.UsageFilters
+	20, // 19: infracost.parser.event.UsageFilters.project:type_name -> infracost.parser.event.StringFilter
+	1,  // 20: infracost.parser.event.ProductionFilter.type:type_name -> infracost.parser.event.ProductionFilter.Type
+	20, // 21: infracost.parser.event.TagPolicy.resource_filter:type_name -> infracost.parser.event.StringFilter
+	20, // 22: infracost.parser.event.TagPolicy.branch_filter:type_name -> infracost.parser.event.StringFilter
+	20, // 23: infracost.parser.event.TagPolicy.project_filter:type_name -> infracost.parser.event.StringFilter
+	21, // 24: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
+	19, // 25: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
+	2,  // 26: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
+	28, // 27: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
+	29, // 28: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
+	20, // 29: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
+	20, // 30: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
+	21, // 31: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
+	3,  // 32: infracost.parser.event.FinopsPolicySettings.group:type_name -> infracost.parser.event.FinopsPolicySettings.Group
+	4,  // 33: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
+	20, // 34: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
+	31, // 35: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
+	31, // 36: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
+	31, // 37: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
+	25, // 38: infracost.parser.event.Budget.tags:type_name -> infracost.parser.event.BudgetTag
+	31, // 39: infracost.parser.event.Budget.amount:type_name -> infracost.rational.Rat
+	30, // 40: infracost.parser.event.Budget.started_at:type_name -> google.protobuf.Timestamp
+	30, // 41: infracost.parser.event.Budget.ended_at:type_name -> google.protobuf.Timestamp
+	31, // 42: infracost.parser.event.Budget.current_cost:type_name -> infracost.rational.Rat
+	13, // 43: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
+	14, // 44: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_runparameters_proto_init() }
@@ -1660,14 +2151,15 @@ func file_infracost_parser_event_runparameters_proto_init() {
 		return
 	}
 	file_infracost_parser_event_runparameters_proto_msgTypes[0].OneofWrappers = []any{}
-	file_infracost_parser_event_runparameters_proto_msgTypes[13].OneofWrappers = []any{}
+	file_infracost_parser_event_runparameters_proto_msgTypes[1].OneofWrappers = []any{}
+	file_infracost_parser_event_runparameters_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_event_runparameters_proto_rawDesc), len(file_infracost_parser_event_runparameters_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   20,
+			NumEnums:      5,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -9,7 +9,7 @@ import { enumDesc, fileDesc } from "@bufbuild/protobuf/codegenv2";
  * Describes the file infracost/provider/provider.proto.
  */
 export const file_infracost_provider_provider: GenFile = /*@__PURE__*/
-  fileDesc("CiFpbmZyYWNvc3QvcHJvdmlkZXIvcHJvdmlkZXIucHJvdG8SEmluZnJhY29zdC5wcm92aWRlciphCghQcm92aWRlchIYChRQUk9WSURFUl9VTlNQRUNJRklFRBAAEhAKDFBST1ZJREVSX0FXUxABEhQKEFBST1ZJREVSX0FaVVJFUk0QAhITCg9QUk9WSURFUl9HT09HTEUQA0LGAQoWY29tLmluZnJhY29zdC5wcm92aWRlckINUHJvdmlkZXJQcm90b1ABWjRnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3Byb3ZpZGVyogIDSVBYqgISSW5mcmFjb3N0LlByb3ZpZGVyygISSW5mcmFjb3N0XFByb3ZpZGVy4gIeSW5mcmFjb3N0XFByb3ZpZGVyXEdQQk1ldGFkYXRh6gITSW5mcmFjb3N0OjpQcm92aWRlcmIGcHJvdG8z");
+  fileDesc("CiFpbmZyYWNvc3QvcHJvdmlkZXIvcHJvdmlkZXIucHJvdG8SEmluZnJhY29zdC5wcm92aWRlcip6CghQcm92aWRlchIYChRQUk9WSURFUl9VTlNQRUNJRklFRBAAEhAKDFBST1ZJREVSX0FXUxABEhQKEFBST1ZJREVSX0FaVVJFUk0QAhITCg9QUk9WSURFUl9HT09HTEUQAxIXChNQUk9WSURFUl9LVUJFUk5FVEVTEARCxgEKFmNvbS5pbmZyYWNvc3QucHJvdmlkZXJCDVByb3ZpZGVyUHJvdG9QAVo0Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wcm92aWRlcqICA0lQWKoCEkluZnJhY29zdC5Qcm92aWRlcsoCEkluZnJhY29zdFxQcm92aWRlcuICHkluZnJhY29zdFxQcm92aWRlclxHUEJNZXRhZGF0YeoCE0luZnJhY29zdDo6UHJvdmlkZXJiBnByb3RvMw");
 
 /**
  * Provider provides the canonical list of providers that have an Infracost provider plugin.
@@ -36,6 +36,11 @@ export enum Provider {
    * @generated from enum value: PROVIDER_GOOGLE = 3;
    */
   GOOGLE = 3,
+
+  /**
+   * @generated from enum value: PROVIDER_KUBERNETES = 4;
+   */
+  KUBERNETES = 4,
 }
 
 /**

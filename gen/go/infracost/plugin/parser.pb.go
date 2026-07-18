@@ -167,8 +167,13 @@ type IdentifyProjectsResponse struct {
 	Files []string `protobuf:"bytes,2,rep,name=files,proto3" json:"files,omitempty"`
 	// dependencies, relative to the directory
 	DependencyPaths []string `protobuf:"bytes,3,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+	// plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+	// YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+	// seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+	RawOptions    []byte `protobuf:"bytes,4,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentifyProjectsResponse) Reset() {
@@ -222,6 +227,281 @@ func (x *IdentifyProjectsResponse) GetDependencyPaths() []string {
 	return nil
 }
 
+func (x *IdentifyProjectsResponse) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
+type IdentifyEnvironmentsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// a project root previously returned by IdentifyProjects.
+	Directory string `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
+	// var files the caller has already attributed to this project via its own tree-walk
+	// heuristics (including cross-directory sibling/pibling association). Paths are relative
+	// to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+	//
+	// This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+	// the caller's existing attribution while that logic is moved plugin-side, and is expected
+	// to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+	// and derive their environments from directory alone.
+	AttributedFiles []*AttributedVarFile `protobuf:"bytes,2,rep,name=attributed_files,json=attributedFiles,proto3" json:"attributed_files,omitempty"`
+	// the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+	// Always JSON, opaque to the caller.
+	RawOptions    []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentifyEnvironmentsRequest) Reset() {
+	*x = IdentifyEnvironmentsRequest{}
+	mi := &file_infracost_plugin_parser_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentifyEnvironmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentifyEnvironmentsRequest) ProtoMessage() {}
+
+func (x *IdentifyEnvironmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_plugin_parser_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentifyEnvironmentsRequest.ProtoReflect.Descriptor instead.
+func (*IdentifyEnvironmentsRequest) Descriptor() ([]byte, []int) {
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *IdentifyEnvironmentsRequest) GetDirectory() string {
+	if x != nil {
+		return x.Directory
+	}
+	return ""
+}
+
+func (x *IdentifyEnvironmentsRequest) GetAttributedFiles() []*AttributedVarFile {
+	if x != nil {
+		return x.AttributedFiles
+	}
+	return nil
+}
+
+func (x *IdentifyEnvironmentsRequest) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
+// AttributedVarFile is one input file the caller has already associated with a project,
+// together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+type AttributedVarFile struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// path to the file, relative to the request directory; may contain "..".
+	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	// resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+	Env string `protobuf:"bytes,2,opt,name=env,proto3" json:"env,omitempty"`
+	// true when the file is a global/shared input rather than environment-specific.
+	IsGlobal      bool `protobuf:"varint,3,opt,name=is_global,json=isGlobal,proto3" json:"is_global,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttributedVarFile) Reset() {
+	*x = AttributedVarFile{}
+	mi := &file_infracost_plugin_parser_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttributedVarFile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttributedVarFile) ProtoMessage() {}
+
+func (x *AttributedVarFile) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_plugin_parser_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttributedVarFile.ProtoReflect.Descriptor instead.
+func (*AttributedVarFile) Descriptor() ([]byte, []int) {
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AttributedVarFile) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *AttributedVarFile) GetEnv() string {
+	if x != nil {
+		return x.Env
+	}
+	return ""
+}
+
+func (x *AttributedVarFile) GetIsGlobal() bool {
+	if x != nil {
+		return x.IsGlobal
+	}
+	return false
+}
+
+type IdentifyEnvironmentsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Environments  []*Environment         `protobuf:"bytes,1,rep,name=environments,proto3" json:"environments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentifyEnvironmentsResponse) Reset() {
+	*x = IdentifyEnvironmentsResponse{}
+	mi := &file_infracost_plugin_parser_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentifyEnvironmentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentifyEnvironmentsResponse) ProtoMessage() {}
+
+func (x *IdentifyEnvironmentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_plugin_parser_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentifyEnvironmentsResponse.ProtoReflect.Descriptor instead.
+func (*IdentifyEnvironmentsResponse) Descriptor() ([]byte, []int) {
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *IdentifyEnvironmentsResponse) GetEnvironments() []*Environment {
+	if x != nil {
+		return x.Environments
+	}
+	return nil
+}
+
+// Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+// Environment becomes one final project downstream.
+type Environment struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// the environment name, e.g. "dev", "staging", "prod".
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// the build/parse path for this environment, relative to the request directory.
+	// Terraform: "."; Kustomize: "overlays/prod".
+	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	// environment-specific input files, relative to path.
+	// Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+	Files []string `protobuf:"bytes,3,rep,name=files,proto3" json:"files,omitempty"`
+	// shared inputs this environment pulls in, relative to the request directory.
+	// Kustomize: base/components dirs; Terraform: n/a.
+	DependencyPaths []string `protobuf:"bytes,4,rep,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
+	// Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+	// persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+	// ParseRequest.raw_options for this environment. Opaque to the caller.
+	RawOptions    []byte `protobuf:"bytes,5,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Environment) Reset() {
+	*x = Environment{}
+	mi := &file_infracost_plugin_parser_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Environment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Environment) ProtoMessage() {}
+
+func (x *Environment) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_plugin_parser_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Environment.ProtoReflect.Descriptor instead.
+func (*Environment) Descriptor() ([]byte, []int) {
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Environment) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Environment) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *Environment) GetFiles() []string {
+	if x != nil {
+		return x.Files
+	}
+	return nil
+}
+
+func (x *Environment) GetDependencyPaths() []string {
+	if x != nil {
+		return x.DependencyPaths
+	}
+	return nil
+}
+
+func (x *Environment) GetRawOptions() []byte {
+	if x != nil {
+		return x.RawOptions
+	}
+	return nil
+}
+
 // ParseRequest is the unified request for all parser types.
 type ParseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -229,17 +509,18 @@ type ParseRequest struct {
 	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	// Generic options that aren't specific to any IaC
 	GenericOptions *options.GenericOptions `protobuf:"bytes,2,opt,name=generic_options,json=genericOptions,proto3" json:"generic_options,omitempty"`
-	// Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
-	RawOptions []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
-	// Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-	RawOptionsFormat string `protobuf:"bytes,4,opt,name=raw_options_format,json=rawOptionsFormat,proto3" json:"raw_options_format,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Plugin-specific parse options for this project/environment, always JSON. This is the same
+	// blob generated during identification and persisted in the config file (see
+	// Environment.raw_options), passed through without the config library / CLI / runner
+	// interpreting it. Plugins document their own schema.
+	RawOptions    []byte `protobuf:"bytes,3,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ParseRequest) Reset() {
 	*x = ParseRequest{}
-	mi := &file_infracost_plugin_parser_proto_msgTypes[4]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -251,7 +532,7 @@ func (x *ParseRequest) String() string {
 func (*ParseRequest) ProtoMessage() {}
 
 func (x *ParseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_plugin_parser_proto_msgTypes[4]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -264,7 +545,7 @@ func (x *ParseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseRequest.ProtoReflect.Descriptor instead.
 func (*ParseRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{4}
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ParseRequest) GetPath() string {
@@ -288,13 +569,6 @@ func (x *ParseRequest) GetRawOptions() []byte {
 	return nil
 }
 
-func (x *ParseRequest) GetRawOptionsFormat() string {
-	if x != nil {
-		return x.RawOptionsFormat
-	}
-	return ""
-}
-
 // ParseResponse is the iac-agnostic parser response
 type ParseResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -310,7 +584,7 @@ type ParseResponse struct {
 
 func (x *ParseResponse) Reset() {
 	*x = ParseResponse{}
-	mi := &file_infracost_plugin_parser_proto_msgTypes[5]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +596,7 @@ func (x *ParseResponse) String() string {
 func (*ParseResponse) ProtoMessage() {}
 
 func (x *ParseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_plugin_parser_proto_msgTypes[5]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +609,7 @@ func (x *ParseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
 func (*ParseResponse) Descriptor() ([]byte, []int) {
-	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{5}
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ParseResponse) GetDiagnostics() []*parser.Diagnostic {
@@ -390,7 +664,7 @@ type Dependency struct {
 
 func (x *Dependency) Reset() {
 	*x = Dependency{}
-	mi := &file_infracost_plugin_parser_proto_msgTypes[6]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -402,7 +676,7 @@ func (x *Dependency) String() string {
 func (*Dependency) ProtoMessage() {}
 
 func (x *Dependency) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_plugin_parser_proto_msgTypes[6]
+	mi := &file_infracost_plugin_parser_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -415,7 +689,7 @@ func (x *Dependency) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dependency.ProtoReflect.Descriptor instead.
 func (*Dependency) Descriptor() ([]byte, []int) {
-	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{6}
+	return file_infracost_plugin_parser_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Dependency) GetFilePath() string {
@@ -499,17 +773,36 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01B\x1b\n" +
 	"\x19_config_file_project_type\"7\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
-	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"y\n" +
+	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"\x9a\x01\n" +
 	"\x18IdentifyProjectsResponse\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\bR\tdirectory\x12\x14\n" +
 	"\x05files\x18\x02 \x03(\tR\x05files\x12)\n" +
-	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\"\xc4\x01\n" +
+	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\x12\x1f\n" +
+	"\vraw_options\x18\x04 \x01(\fR\n" +
+	"rawOptions\"\xac\x01\n" +
+	"\x1bIdentifyEnvironmentsRequest\x12\x1c\n" +
+	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12N\n" +
+	"\x10attributed_files\x18\x02 \x03(\v2#.infracost.plugin.AttributedVarFileR\x0fattributedFiles\x12\x1f\n" +
+	"\vraw_options\x18\x03 \x01(\fR\n" +
+	"rawOptions\"V\n" +
+	"\x11AttributedVarFile\x12\x12\n" +
+	"\x04path\x18\x01 \x01(\tR\x04path\x12\x10\n" +
+	"\x03env\x18\x02 \x01(\tR\x03env\x12\x1b\n" +
+	"\tis_global\x18\x03 \x01(\bR\bisGlobal\"a\n" +
+	"\x1cIdentifyEnvironmentsResponse\x12A\n" +
+	"\fenvironments\x18\x01 \x03(\v2\x1d.infracost.plugin.EnvironmentR\fenvironments\"\x97\x01\n" +
+	"\vEnvironment\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path\x12\x14\n" +
+	"\x05files\x18\x03 \x03(\tR\x05files\x12)\n" +
+	"\x10dependency_paths\x18\x04 \x03(\tR\x0fdependencyPaths\x12\x1f\n" +
+	"\vraw_options\x18\x05 \x01(\fR\n" +
+	"rawOptions\"\xb0\x01\n" +
 	"\fParseRequest\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12Q\n" +
 	"\x0fgeneric_options\x18\x02 \x01(\v2(.infracost.parser.options.GenericOptionsR\x0egenericOptions\x12\x1f\n" +
 	"\vraw_options\x18\x03 \x01(\fR\n" +
-	"rawOptions\x12,\n" +
-	"\x12raw_options_format\x18\x04 \x01(\tR\x10rawOptionsFormat\"\xce\x01\n" +
+	"rawOptionsJ\x04\b\x04\x10\x05R\x12raw_options_format\"\xce\x01\n" +
 	"\rParseResponse\x12>\n" +
 	"\vdiagnostics\x18\x01 \x03(\v2\x1c.infracost.parser.DiagnosticR\vdiagnostics\x12(\n" +
 	"\x04tree\x18\x02 \x01(\v2\x14.infracost.tree.TreeR\x04tree\x12S\n" +
@@ -527,10 +820,11 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\fis_synthetic\x18\b \x01(\bR\visSynthetic\x12!\n" +
 	"\fis_generated\x18\t \x01(\bR\visGenerated\x12\x14\n" +
 	"\x05depth\x18\n" +
-	" \x01(\x05R\x05depth2\xac\x02\n" +
+	" \x01(\x05R\x05depth2\xa3\x03\n" +
 	"\rParserService\x12f\n" +
 	"\x0fGetParserConfig\x12(.infracost.plugin.GetParserConfigRequest\x1a).infracost.plugin.GetParserConfigResponse\x12i\n" +
-	"\x10IdentifyProjects\x12).infracost.plugin.IdentifyProjectsRequest\x1a*.infracost.plugin.IdentifyProjectsResponse\x12H\n" +
+	"\x10IdentifyProjects\x12).infracost.plugin.IdentifyProjectsRequest\x1a*.infracost.plugin.IdentifyProjectsResponse\x12u\n" +
+	"\x14IdentifyEnvironments\x12-.infracost.plugin.IdentifyEnvironmentsRequest\x1a..infracost.plugin.IdentifyEnvironmentsResponse\x12H\n" +
 	"\x05Parse\x12\x1e.infracost.plugin.ParseRequest\x1a\x1f.infracost.plugin.ParseResponseB\xb8\x01\n" +
 	"\x14com.infracost.pluginB\vParserProtoP\x01Z2github.com/infracost/proto/gen/go/infracost/plugin\xa2\x02\x03IPX\xaa\x02\x10Infracost.Plugin\xca\x02\x10Infracost\\Plugin\xe2\x02\x1cInfracost\\Plugin\\GPBMetadata\xea\x02\x11Infracost::Pluginb\x06proto3"
 
@@ -546,35 +840,43 @@ func file_infracost_plugin_parser_proto_rawDescGZIP() []byte {
 	return file_infracost_plugin_parser_proto_rawDescData
 }
 
-var file_infracost_plugin_parser_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_infracost_plugin_parser_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_infracost_plugin_parser_proto_goTypes = []any{
-	(*GetParserConfigRequest)(nil),   // 0: infracost.plugin.GetParserConfigRequest
-	(*GetParserConfigResponse)(nil),  // 1: infracost.plugin.GetParserConfigResponse
-	(*IdentifyProjectsRequest)(nil),  // 2: infracost.plugin.IdentifyProjectsRequest
-	(*IdentifyProjectsResponse)(nil), // 3: infracost.plugin.IdentifyProjectsResponse
-	(*ParseRequest)(nil),             // 4: infracost.plugin.ParseRequest
-	(*ParseResponse)(nil),            // 5: infracost.plugin.ParseResponse
-	(*Dependency)(nil),               // 6: infracost.plugin.Dependency
-	(*options.GenericOptions)(nil),   // 7: infracost.parser.options.GenericOptions
-	(*parser.Diagnostic)(nil),        // 8: infracost.parser.Diagnostic
-	(*tree.Tree)(nil),                // 9: infracost.tree.Tree
+	(*GetParserConfigRequest)(nil),       // 0: infracost.plugin.GetParserConfigRequest
+	(*GetParserConfigResponse)(nil),      // 1: infracost.plugin.GetParserConfigResponse
+	(*IdentifyProjectsRequest)(nil),      // 2: infracost.plugin.IdentifyProjectsRequest
+	(*IdentifyProjectsResponse)(nil),     // 3: infracost.plugin.IdentifyProjectsResponse
+	(*IdentifyEnvironmentsRequest)(nil),  // 4: infracost.plugin.IdentifyEnvironmentsRequest
+	(*AttributedVarFile)(nil),            // 5: infracost.plugin.AttributedVarFile
+	(*IdentifyEnvironmentsResponse)(nil), // 6: infracost.plugin.IdentifyEnvironmentsResponse
+	(*Environment)(nil),                  // 7: infracost.plugin.Environment
+	(*ParseRequest)(nil),                 // 8: infracost.plugin.ParseRequest
+	(*ParseResponse)(nil),                // 9: infracost.plugin.ParseResponse
+	(*Dependency)(nil),                   // 10: infracost.plugin.Dependency
+	(*options.GenericOptions)(nil),       // 11: infracost.parser.options.GenericOptions
+	(*parser.Diagnostic)(nil),            // 12: infracost.parser.Diagnostic
+	(*tree.Tree)(nil),                    // 13: infracost.tree.Tree
 }
 var file_infracost_plugin_parser_proto_depIdxs = []int32{
-	7, // 0: infracost.plugin.ParseRequest.generic_options:type_name -> infracost.parser.options.GenericOptions
-	8, // 1: infracost.plugin.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
-	9, // 2: infracost.plugin.ParseResponse.tree:type_name -> infracost.tree.Tree
-	6, // 3: infracost.plugin.ParseResponse.requested_dependencies:type_name -> infracost.plugin.Dependency
-	0, // 4: infracost.plugin.ParserService.GetParserConfig:input_type -> infracost.plugin.GetParserConfigRequest
-	2, // 5: infracost.plugin.ParserService.IdentifyProjects:input_type -> infracost.plugin.IdentifyProjectsRequest
-	4, // 6: infracost.plugin.ParserService.Parse:input_type -> infracost.plugin.ParseRequest
-	1, // 7: infracost.plugin.ParserService.GetParserConfig:output_type -> infracost.plugin.GetParserConfigResponse
-	3, // 8: infracost.plugin.ParserService.IdentifyProjects:output_type -> infracost.plugin.IdentifyProjectsResponse
-	5, // 9: infracost.plugin.ParserService.Parse:output_type -> infracost.plugin.ParseResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5,  // 0: infracost.plugin.IdentifyEnvironmentsRequest.attributed_files:type_name -> infracost.plugin.AttributedVarFile
+	7,  // 1: infracost.plugin.IdentifyEnvironmentsResponse.environments:type_name -> infracost.plugin.Environment
+	11, // 2: infracost.plugin.ParseRequest.generic_options:type_name -> infracost.parser.options.GenericOptions
+	12, // 3: infracost.plugin.ParseResponse.diagnostics:type_name -> infracost.parser.Diagnostic
+	13, // 4: infracost.plugin.ParseResponse.tree:type_name -> infracost.tree.Tree
+	10, // 5: infracost.plugin.ParseResponse.requested_dependencies:type_name -> infracost.plugin.Dependency
+	0,  // 6: infracost.plugin.ParserService.GetParserConfig:input_type -> infracost.plugin.GetParserConfigRequest
+	2,  // 7: infracost.plugin.ParserService.IdentifyProjects:input_type -> infracost.plugin.IdentifyProjectsRequest
+	4,  // 8: infracost.plugin.ParserService.IdentifyEnvironments:input_type -> infracost.plugin.IdentifyEnvironmentsRequest
+	8,  // 9: infracost.plugin.ParserService.Parse:input_type -> infracost.plugin.ParseRequest
+	1,  // 10: infracost.plugin.ParserService.GetParserConfig:output_type -> infracost.plugin.GetParserConfigResponse
+	3,  // 11: infracost.plugin.ParserService.IdentifyProjects:output_type -> infracost.plugin.IdentifyProjectsResponse
+	6,  // 12: infracost.plugin.ParserService.IdentifyEnvironments:output_type -> infracost.plugin.IdentifyEnvironmentsResponse
+	9,  // 13: infracost.plugin.ParserService.Parse:output_type -> infracost.plugin.ParseResponse
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_infracost_plugin_parser_proto_init() }
@@ -589,7 +891,7 @@ func file_infracost_plugin_parser_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_plugin_parser_proto_rawDesc), len(file_infracost_plugin_parser_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

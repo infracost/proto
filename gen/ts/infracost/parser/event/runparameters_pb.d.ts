@@ -4,8 +4,8 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Rat } from "../../rational/rational_pb.js";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Rat } from "../../rational/rational_pb.js";
 
 /**
  * Describes the file infracost/parser/event/runparameters.proto.
@@ -55,6 +55,57 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: optional string config_template = 8;
    */
   configTemplate?: string;
+
+  /**
+   * @generated from field: optional string run_id = 9;
+   */
+  runId?: string;
+
+  /**
+   * ISO 4217 currency code e.g. USD
+   *
+   * @generated from field: string currency = 10;
+   */
+  currency: string;
+
+  /**
+   * project cost baselines for guardrails
+   *
+   * @generated from field: repeated infracost.parser.event.ProjectBaseline project_baselines = 11;
+   */
+  projectBaselines: ProjectBaseline[];
+
+  /**
+   * @generated from field: infracost.parser.event.CommentSettings comment_settings = 12;
+   */
+  commentSettings?: CommentSettings;
+
+  /**
+   * policy_exclusions lists finops/tagging policy issues that a user has
+   * dismissed (ignored). The runner filters discovered failing resources
+   * matching these so dismissed issues are neither shown in the comment nor
+   * used to block the PR check.
+   *
+   * @generated from field: repeated infracost.parser.event.PolicyExclusion policy_exclusions = 13;
+   */
+  policyExclusions: PolicyExclusion[];
+
+  /**
+   * project_preexisting_issues carries the dashboard's per-project count of
+   * base-branch pre-existing issues (finops + tagging, pr_comment policies,
+   * including dismissed/ignored). The runner sums these for the projects it
+   * did NOT re-run this PR and adds them to the projects it did re-run so the
+   * pre-existing-issues comment line reflects the whole repo, not just the
+   * changed projects.
+   *
+   * @generated from field: repeated infracost.parser.event.ProjectPreExistingIssues project_preexisting_issues = 14;
+   */
+  projectPreexistingIssues: ProjectPreExistingIssues[];
+
+  /**
+   * @generated from field: optional infracost.parser.event.PlanInfo plan_info = 15;
+   */
+  planInfo?: PlanInfo;
 };
 
 /**
@@ -62,6 +113,174 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
  * Use `create(RunParametersSchema)` to create a new message.
  */
 export declare const RunParametersSchema: GenMessage<RunParameters>;
+
+/**
+ * @generated from message infracost.parser.event.PlanInfo
+ */
+export declare type PlanInfo = Message<"infracost.parser.event.PlanInfo"> & {
+  /**
+   * @generated from field: bool is_paid = 1;
+   */
+  isPaid: boolean;
+
+  /**
+   * @generated from field: bool is_poc = 2;
+   */
+  isPoc: boolean;
+
+  /**
+   * @generated from field: bool is_trial = 3;
+   */
+  isTrial: boolean;
+
+  /**
+   * @generated from field: bool is_enterprise = 4;
+   */
+  isEnterprise: boolean;
+
+  /**
+   * @generated from field: optional google.protobuf.Timestamp expiry = 5;
+   */
+  expiry?: Timestamp;
+};
+
+/**
+ * Describes the message infracost.parser.event.PlanInfo.
+ * Use `create(PlanInfoSchema)` to create a new message.
+ */
+export declare const PlanInfoSchema: GenMessage<PlanInfo>;
+
+/**
+ * ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
+ * issues for a single project, keyed by the raw infracost project name (the
+ * same name the runner reports via RunProjectResult.project_name). The count
+ * matches the dashboard's pre-existing definition: failing finops + tagging
+ * resources on the base branch's latest run, for pr_comment policies only,
+ * including dismissed/ignored issues (new + ignored).
+ *
+ * @generated from message infracost.parser.event.ProjectPreExistingIssues
+ */
+export declare type ProjectPreExistingIssues = Message<"infracost.parser.event.ProjectPreExistingIssues"> & {
+  /**
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * @generated from field: int32 issue_count = 2;
+   */
+  issueCount: number;
+};
+
+/**
+ * Describes the message infracost.parser.event.ProjectPreExistingIssues.
+ * Use `create(ProjectPreExistingIssuesSchema)` to create a new message.
+ */
+export declare const ProjectPreExistingIssuesSchema: GenMessage<ProjectPreExistingIssues>;
+
+/**
+ * PolicyExclusion identifies a single dismissed/ignored policy issue. The key
+ * mirrors the dashboard's finops_policy_exclusions / tag_policy_exclusions
+ * tables: a policy, a project and a resource address.
+ *
+ * @generated from message infracost.parser.event.PolicyExclusion
+ */
+export declare type PolicyExclusion = Message<"infracost.parser.event.PolicyExclusion"> & {
+  /**
+   * @generated from field: infracost.parser.event.PolicyExclusion.PolicyType policy_type = 1;
+   */
+  policyType: PolicyExclusion_PolicyType;
+
+  /**
+   * @generated from field: string policy_id = 2;
+   */
+  policyId: string;
+
+  /**
+   * @generated from field: string project_name = 3;
+   */
+  projectName: string;
+
+  /**
+   * @generated from field: string address = 4;
+   */
+  address: string;
+};
+
+/**
+ * Describes the message infracost.parser.event.PolicyExclusion.
+ * Use `create(PolicyExclusionSchema)` to create a new message.
+ */
+export declare const PolicyExclusionSchema: GenMessage<PolicyExclusion>;
+
+/**
+ * @generated from enum infracost.parser.event.PolicyExclusion.PolicyType
+ */
+export enum PolicyExclusion_PolicyType {
+  /**
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: FINOPS = 1;
+   */
+  FINOPS = 1,
+
+  /**
+   * @generated from enum value: TAGGING = 2;
+   */
+  TAGGING = 2,
+}
+
+/**
+ * Describes the enum infracost.parser.event.PolicyExclusion.PolicyType.
+ */
+export declare const PolicyExclusion_PolicyTypeSchema: GenEnum<PolicyExclusion_PolicyType>;
+
+/**
+ * @generated from message infracost.parser.event.ProjectBaseline
+ */
+export declare type ProjectBaseline = Message<"infracost.parser.event.ProjectBaseline"> & {
+  /**
+   * @generated from field: string project_name = 1;
+   */
+  projectName: string;
+
+  /**
+   * base-branch total
+   *
+   * @generated from field: infracost.rational.Rat total_monthly_cost = 2;
+   */
+  totalMonthlyCost?: Rat;
+};
+
+/**
+ * Describes the message infracost.parser.event.ProjectBaseline.
+ * Use `create(ProjectBaselineSchema)` to create a new message.
+ */
+export declare const ProjectBaselineSchema: GenMessage<ProjectBaseline>;
+
+/**
+ * @generated from message infracost.parser.event.CommentSettings
+ */
+export declare type CommentSettings = Message<"infracost.parser.event.CommentSettings"> & {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: bool show_cost_estimate = 2;
+   */
+  showCostEstimate: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.event.CommentSettings.
+ * Use `create(CommentSettingsSchema)` to create a new message.
+ */
+export declare const CommentSettingsSchema: GenMessage<CommentSettings>;
 
 /**
  * @generated from message infracost.parser.event.BaseScope
@@ -585,6 +804,16 @@ export declare type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
    * @generated from field: string message = 10;
    */
   message: string;
+
+  /**
+   * unblocked is true when a user has manually unblocked this guardrail for
+   * the current pull request. The runner still evaluates and reports the
+   * result, but must not block the PR check or render it in the comment when
+   * this is set.
+   *
+   * @generated from field: bool unblocked = 11;
+   */
+  unblocked: boolean;
 };
 
 /**

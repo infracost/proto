@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/plugin/parser.proto.
  */
 export const file_infracost_plugin_parser: GenFile = /*@__PURE__*/
-  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJIlYKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCSKQAQoMUGFyc2VSZXF1ZXN0EgwKBHBhdGgYASABKAkSQQoPZ2VuZXJpY19vcHRpb25zGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zEhMKC3Jhd19vcHRpb25zGAMgASgMEhoKEnJhd19vcHRpb25zX2Zvcm1hdBgEIAEoCSKkAQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIiCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZRI8ChZyZXF1ZXN0ZWRfZGVwZW5kZW5jaWVzGAMgAygLMhwuaW5mcmFjb3N0LnBsdWdpbi5EZXBlbmRlbmN5Iu4BCgpEZXBlbmRlbmN5EhEKCWZpbGVfcGF0aBgBIAEoCRISCgpsaW5lX3N0YXJ0GAIgASgDEhAKCGxpbmVfZW5kGAMgASgDEhkKEW1vZHVsZV9kZWZpbml0aW9uGAQgASgJEhgKEGlzX3JlbW90ZV9tb2R1bGUYBSABKAgSHQoVaXNfZXh0ZXJuYWxseV9kZWZpbmVkGAYgASgIEhgKEGV4dGVybmFsX3NuaXBwZXQYByABKAkSFAoMaXNfc3ludGhldGljGAggASgIEhQKDGlzX2dlbmVyYXRlZBgJIAEoCBINCgVkZXB0aBgKIAEoBTKsAgoNUGFyc2VyU2VydmljZRJmCg9HZXRQYXJzZXJDb25maWcSKC5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1JlcXVlc3QaKS5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEmkKEElkZW50aWZ5UHJvamVjdHMSKS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5UHJvamVjdHNSZXF1ZXN0GiouaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVzcG9uc2USSAoFUGFyc2USHi5pbmZyYWNvc3QucGx1Z2luLlBhcnNlUmVxdWVzdBofLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXNwb25zZUK4AQoUY29tLmluZnJhY29zdC5wbHVnaW5CC1BhcnNlclByb3RvUAFaMmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGx1Z2luogIDSVBYqgIQSW5mcmFjb3N0LlBsdWdpbsoCEEluZnJhY29zdFxQbHVnaW7iAhxJbmZyYWNvc3RcUGx1Z2luXEdQQk1ldGFkYXRh6gIRSW5mcmFjb3N0OjpQbHVnaW5iBnByb3RvMw", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
+  fileDesc("Ch1pbmZyYWNvc3QvcGx1Z2luL3BhcnNlci5wcm90bxIQaW5mcmFjb3N0LnBsdWdpbiIYChZHZXRQYXJzZXJDb25maWdSZXF1ZXN0In4KF0dldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEh8KF2lkZW50aWZpY2F0aW9uX3ByaW9yaXR5GAEgASgNEiUKGGNvbmZpZ19maWxlX3Byb2plY3RfdHlwZRgCIAEoCUgAiAEBQhsKGV9jb25maWdfZmlsZV9wcm9qZWN0X3R5cGUiLAoXSWRlbnRpZnlQcm9qZWN0c1JlcXVlc3QSEQoJZGlyZWN0b3J5GAEgASgJImsKGElkZW50aWZ5UHJvamVjdHNSZXNwb25zZRIRCglkaXJlY3RvcnkYASABKAgSDQoFZmlsZXMYAiADKAkSGAoQZGVwZW5kZW5jeV9wYXRocxgDIAMoCRITCgtyYXdfb3B0aW9ucxgEIAEoDCKEAQobSWRlbnRpZnlFbnZpcm9ubWVudHNSZXF1ZXN0EhEKCWRpcmVjdG9yeRgBIAEoCRI9ChBhdHRyaWJ1dGVkX2ZpbGVzGAIgAygLMiMuaW5mcmFjb3N0LnBsdWdpbi5BdHRyaWJ1dGVkVmFyRmlsZRITCgtyYXdfb3B0aW9ucxgDIAEoDCJBChFBdHRyaWJ1dGVkVmFyRmlsZRIMCgRwYXRoGAEgASgJEgsKA2VudhgCIAEoCRIRCglpc19nbG9iYWwYAyABKAgiUwocSWRlbnRpZnlFbnZpcm9ubWVudHNSZXNwb25zZRIzCgxlbnZpcm9ubWVudHMYASADKAsyHS5pbmZyYWNvc3QucGx1Z2luLkVudmlyb25tZW50ImcKC0Vudmlyb25tZW50EgwKBG5hbWUYASABKAkSDAoEcGF0aBgCIAEoCRINCgVmaWxlcxgDIAMoCRIYChBkZXBlbmRlbmN5X3BhdGhzGAQgAygJEhMKC3Jhd19vcHRpb25zGAUgASgMIo4BCgxQYXJzZVJlcXVlc3QSDAoEcGF0aBgBIAEoCRJBCg9nZW5lcmljX29wdGlvbnMYAiABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMSEwoLcmF3X29wdGlvbnMYAyABKAxKBAgEEAVSEnJhd19vcHRpb25zX2Zvcm1hdCKkAQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxIiCgR0cmVlGAIgASgLMhQuaW5mcmFjb3N0LnRyZWUuVHJlZRI8ChZyZXF1ZXN0ZWRfZGVwZW5kZW5jaWVzGAMgAygLMhwuaW5mcmFjb3N0LnBsdWdpbi5EZXBlbmRlbmN5Iu4BCgpEZXBlbmRlbmN5EhEKCWZpbGVfcGF0aBgBIAEoCRISCgpsaW5lX3N0YXJ0GAIgASgDEhAKCGxpbmVfZW5kGAMgASgDEhkKEW1vZHVsZV9kZWZpbml0aW9uGAQgASgJEhgKEGlzX3JlbW90ZV9tb2R1bGUYBSABKAgSHQoVaXNfZXh0ZXJuYWxseV9kZWZpbmVkGAYgASgIEhgKEGV4dGVybmFsX3NuaXBwZXQYByABKAkSFAoMaXNfc3ludGhldGljGAggASgIEhQKDGlzX2dlbmVyYXRlZBgJIAEoCBINCgVkZXB0aBgKIAEoBTKjAwoNUGFyc2VyU2VydmljZRJmCg9HZXRQYXJzZXJDb25maWcSKC5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1JlcXVlc3QaKS5pbmZyYWNvc3QucGx1Z2luLkdldFBhcnNlckNvbmZpZ1Jlc3BvbnNlEmkKEElkZW50aWZ5UHJvamVjdHMSKS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5UHJvamVjdHNSZXF1ZXN0GiouaW5mcmFjb3N0LnBsdWdpbi5JZGVudGlmeVByb2plY3RzUmVzcG9uc2USdQoUSWRlbnRpZnlFbnZpcm9ubWVudHMSLS5pbmZyYWNvc3QucGx1Z2luLklkZW50aWZ5RW52aXJvbm1lbnRzUmVxdWVzdBouLmluZnJhY29zdC5wbHVnaW4uSWRlbnRpZnlFbnZpcm9ubWVudHNSZXNwb25zZRJICgVQYXJzZRIeLmluZnJhY29zdC5wbHVnaW4uUGFyc2VSZXF1ZXN0Gh8uaW5mcmFjb3N0LnBsdWdpbi5QYXJzZVJlc3BvbnNlQrgBChRjb20uaW5mcmFjb3N0LnBsdWdpbkILUGFyc2VyUHJvdG9QAVoyZ2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wbHVnaW6iAgNJUFiqAhBJbmZyYWNvc3QuUGx1Z2luygIQSW5mcmFjb3N0XFBsdWdpbuICHEluZnJhY29zdFxQbHVnaW5cR1BCTWV0YWRhdGHqAhFJbmZyYWNvc3Q6OlBsdWdpbmIGcHJvdG8z", [file_infracost_parser_diagnostic, file_infracost_parser_options_options, file_infracost_tree_tree]);
 
 /**
  * @generated from message infracost.plugin.GetParserConfigRequest
@@ -99,6 +99,16 @@ export type IdentifyProjectsResponse = Message<"infracost.plugin.IdentifyProject
    * @generated from field: repeated string dependency_paths = 3;
    */
   dependencyPaths: string[];
+
+  /**
+   * Plugin-authored parse options for the identified project(s), always JSON. Same schema the
+   * plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
+   * YAML map in the config file) and forwarded, never interpreted. This is a directory-level
+   * seed; the authoritative per-project blob is produced by IdentifyEnvironments.
+   *
+   * @generated from field: bytes raw_options = 4;
+   */
+  rawOptions: Uint8Array;
 };
 
 /**
@@ -107,6 +117,155 @@ export type IdentifyProjectsResponse = Message<"infracost.plugin.IdentifyProject
  */
 export const IdentifyProjectsResponseSchema: GenMessage<IdentifyProjectsResponse> = /*@__PURE__*/
   messageDesc(file_infracost_plugin_parser, 3);
+
+/**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsRequest
+ */
+export type IdentifyEnvironmentsRequest = Message<"infracost.plugin.IdentifyEnvironmentsRequest"> & {
+  /**
+   * a project root previously returned by IdentifyProjects.
+   *
+   * @generated from field: string directory = 1;
+   */
+  directory: string;
+
+  /**
+   * var files the caller has already attributed to this project via its own tree-walk
+   * heuristics (including cross-directory sibling/pibling association). Paths are relative
+   * to directory and MAY escape it (e.g. "../../env/prod.tfvars").
+   *
+   * This is a Terraform/Terragrunt-specific migration aid: it lets those plugins reproduce
+   * the caller's existing attribution while that logic is moved plugin-side, and is expected
+   * to be retired once the heuristic is dropped. Plugins for other formats should IGNORE it
+   * and derive their environments from directory alone.
+   *
+   * @generated from field: repeated infracost.plugin.AttributedVarFile attributed_files = 2;
+   */
+  attributedFiles: AttributedVarFile[];
+
+  /**
+   * the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
+   * Always JSON, opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 3;
+   */
+  rawOptions: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsRequest.
+ * Use `create(IdentifyEnvironmentsRequestSchema)` to create a new message.
+ */
+export const IdentifyEnvironmentsRequestSchema: GenMessage<IdentifyEnvironmentsRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_plugin_parser, 4);
+
+/**
+ * AttributedVarFile is one input file the caller has already associated with a project,
+ * together with the environment it resolved. Terraform/Terragrunt only (see IdentifyEnvironmentsRequest).
+ *
+ * @generated from message infracost.plugin.AttributedVarFile
+ */
+export type AttributedVarFile = Message<"infracost.plugin.AttributedVarFile"> & {
+  /**
+   * path to the file, relative to the request directory; may contain "..".
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * resolved environment label (e.g. "prod"); empty when the file applies to all environments.
+   *
+   * @generated from field: string env = 2;
+   */
+  env: string;
+
+  /**
+   * true when the file is a global/shared input rather than environment-specific.
+   *
+   * @generated from field: bool is_global = 3;
+   */
+  isGlobal: boolean;
+};
+
+/**
+ * Describes the message infracost.plugin.AttributedVarFile.
+ * Use `create(AttributedVarFileSchema)` to create a new message.
+ */
+export const AttributedVarFileSchema: GenMessage<AttributedVarFile> = /*@__PURE__*/
+  messageDesc(file_infracost_plugin_parser, 5);
+
+/**
+ * @generated from message infracost.plugin.IdentifyEnvironmentsResponse
+ */
+export type IdentifyEnvironmentsResponse = Message<"infracost.plugin.IdentifyEnvironmentsResponse"> & {
+  /**
+   * @generated from field: repeated infracost.plugin.Environment environments = 1;
+   */
+  environments: Environment[];
+};
+
+/**
+ * Describes the message infracost.plugin.IdentifyEnvironmentsResponse.
+ * Use `create(IdentifyEnvironmentsResponseSchema)` to create a new message.
+ */
+export const IdentifyEnvironmentsResponseSchema: GenMessage<IdentifyEnvironmentsResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_plugin_parser, 6);
+
+/**
+ * Environment describes one deployable variant of a project (e.g. dev/staging/prod). Each
+ * Environment becomes one final project downstream.
+ *
+ * @generated from message infracost.plugin.Environment
+ */
+export type Environment = Message<"infracost.plugin.Environment"> & {
+  /**
+   * the environment name, e.g. "dev", "staging", "prod".
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * the build/parse path for this environment, relative to the request directory.
+   * Terraform: "."; Kustomize: "overlays/prod".
+   *
+   * @generated from field: string path = 2;
+   */
+  path: string;
+
+  /**
+   * environment-specific input files, relative to path.
+   * Terraform: dev.tfvars plus any global var files; Kustomize: usually empty.
+   *
+   * @generated from field: repeated string files = 3;
+   */
+  files: string[];
+
+  /**
+   * shared inputs this environment pulls in, relative to the request directory.
+   * Kustomize: base/components dirs; Terraform: n/a.
+   *
+   * @generated from field: repeated string dependency_paths = 4;
+   */
+  dependencyPaths: string[];
+
+  /**
+   * Per-environment, plugin-specific parse options, always JSON. This is the blob that is
+   * persisted in the config file (as a YAML map, readable/editable) and passed verbatim into
+   * ParseRequest.raw_options for this environment. Opaque to the caller.
+   *
+   * @generated from field: bytes raw_options = 5;
+   */
+  rawOptions: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.plugin.Environment.
+ * Use `create(EnvironmentSchema)` to create a new message.
+ */
+export const EnvironmentSchema: GenMessage<Environment> = /*@__PURE__*/
+  messageDesc(file_infracost_plugin_parser, 7);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -129,18 +288,14 @@ export type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
   genericOptions?: GenericOptions;
 
   /**
-   * Options data pertaining to the specific plugin. Different plugins may expect different formats/shapes/contents e.g. protobuf, json, yaml etc. - plugins should document this themselves.
+   * Plugin-specific parse options for this project/environment, always JSON. This is the same
+   * blob generated during identification and persisted in the config file (see
+   * Environment.raw_options), passed through without the config library / CLI / runner
+   * interpreting it. Plugins document their own schema.
    *
    * @generated from field: bytes raw_options = 3;
    */
   rawOptions: Uint8Array;
-
-  /**
-   * Used to tell the consuming plugin what format the raw_options data is in e.g. "application/json".
-   *
-   * @generated from field: string raw_options_format = 4;
-   */
-  rawOptionsFormat: string;
 };
 
 /**
@@ -148,7 +303,7 @@ export type ParseRequest = Message<"infracost.plugin.ParseRequest"> & {
  * Use `create(ParseRequestSchema)` to create a new message.
  */
 export const ParseRequestSchema: GenMessage<ParseRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 4);
+  messageDesc(file_infracost_plugin_parser, 8);
 
 /**
  * ParseResponse is the iac-agnostic parser response
@@ -183,7 +338,7 @@ export type ParseResponse = Message<"infracost.plugin.ParseResponse"> & {
  * Use `create(ParseResponseSchema)` to create a new message.
  */
 export const ParseResponseSchema: GenMessage<ParseResponse> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 5);
+  messageDesc(file_infracost_plugin_parser, 9);
 
 /**
  * Dependency represents a code dependency for a resource.
@@ -269,7 +424,7 @@ export type Dependency = Message<"infracost.plugin.Dependency"> & {
  * Use `create(DependencySchema)` to create a new message.
  */
 export const DependencySchema: GenMessage<Dependency> = /*@__PURE__*/
-  messageDesc(file_infracost_plugin_parser, 6);
+  messageDesc(file_infracost_plugin_parser, 10);
 
 /**
  * The ParserService provides a gRPC API for parsing infrastructure as code files into an IaC agnostic result.
@@ -296,6 +451,24 @@ export const ParserService: GenService<{
     methodKind: "unary";
     input: typeof IdentifyProjectsRequestSchema;
     output: typeof IdentifyProjectsResponseSchema;
+  },
+  /**
+   * IdentifyEnvironments returns the environments (e.g. dev/staging/prod variants) for a single
+   * project root previously returned by IdentifyProjects. The plugin that parses a format
+   * understands its environments (Terraform var files, Kustomize overlays, Helm values-<env>.yaml,
+   * ...) far better than any caller-side heuristic, so it is authoritative.
+   *
+   * This RPC is optional: a plugin that does not implement it returns codes.Unimplemented, which
+   * the caller treats as "this format has no environment support" and handles via its own fallback.
+   * Returning an empty environments list is distinct - it means "this project genuinely has no
+   * variants" and yields a single project.
+   *
+   * @generated from rpc infracost.plugin.ParserService.IdentifyEnvironments
+   */
+  identifyEnvironments: {
+    methodKind: "unary";
+    input: typeof IdentifyEnvironmentsRequestSchema;
+    output: typeof IdentifyEnvironmentsResponseSchema;
   },
   /**
    * Parse parses the given IaC path into an IaC agnostic tree format.

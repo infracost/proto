@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/options/options.proto.
  */
 export const file_infracost_parser_options_options: GenFile = /*@__PURE__*/
-  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIvAECg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBAUIVChNfZGVwZW5kZW5jeV9yZXF1ZXN0IoIBChFEZXBlbmRlbmN5UmVxdWVzdBIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQcmVzb3VyY2VfYWRkcmVzcxgCIAEoCRIiChp1c2VfcmVtb3RlX21vZHVsZV9zbmlwcGV0cxgDIAEoCBIZChF3b3JraW5nX2RpcmVjdG9yeRgEIAEoCSIxCgVEZWJ1ZxIRCglhZGRyZXNzZXMYASADKAkSFQoNaW5jbHVkZV9kdW1wcxgCIAEoCCJkCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZSJiChdSZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxIOCgZyZWdpb24YASABKAkSEwoLYnVja2V0X25hbWUYAiABKAkSDgoGcHJlZml4GAMgASgJEhIKCmlzX3ByaXZhdGUYBCABKAgiaAoOQXdzQ3JlZGVudGlhbHMSFQoNYWNjZXNzX2tleV9pZBgBIAEoCRIZChFzZWNyZXRfYWNjZXNzX2tleRgCIAEoCRIUCgxhY2Nlc3NfdG9rZW4YAyABKAkSDgoGcmVnaW9uGAQgASgJIn8KC1Byb3h5Um91dGVyEkEKBnJvdXRlcxgBIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlci5Sb3V0ZXNFbnRyeRotCgtSb3V0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKlEKDkNyZWRlbnRpYWxUeXBlEh8KG0NSRURFTlRJQUxfVFlQRV9VTlNQRUNJRklFRBAAEgkKBVRPS0VOEAESEwoPVEVSUkFGT1JNX0NMT1VEEAJC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
+  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIuIJCg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBARIgChhlbmFibGVfZ2l0X25vcm1hbGl6YXRpb24YDiABKAgSSwoTcmVxdWlyZWRfYXR0cmlidXRlcxgPIAMoCzIuLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5BdHRyaWJ1dGVSZXF1aXJlbWVudBJPCgxkZWZhdWx0X3RhZ3MYECADKAsyOS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMuRGVmYXVsdFRhZ3NFbnRyeRJLCgpzb3VyY2VfbWFwGBEgAygLMjcuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zLlNvdXJjZU1hcEVudHJ5Ej4KA2VudhgSIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucy5FbnZFbnRyeRIgChhmb3JjZV9sb2NhbF9tb2R1bGVfcGF0aHMYEyABKAgSEQoJd29ya3NwYWNlGBQgASgJElwKHXRlcnJhZm9ybV9jbG91ZF9jb25maWd1cmF0aW9uGBUgASgLMjUuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlRlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaMAoOU291cmNlTWFwRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoqCghFbnZFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhUKE19kZXBlbmRlbmN5X3JlcXVlc3QiWAobVGVycmFmb3JtQ2xvdWRDb25maWd1cmF0aW9uEhQKDG9yZ2FuaXphdGlvbhgBIAEoCRIRCgl3b3Jrc3BhY2UYAiABKAkSEAoIaG9zdG5hbWUYAyABKAkiQQoUQXR0cmlidXRlUmVxdWlyZW1lbnQSFQoNcmVzb3VyY2VfdHlwZRgBIAEoCRISCgphdHRyaWJ1dGVzGAIgAygJIoIBChFEZXBlbmRlbmN5UmVxdWVzdBIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQcmVzb3VyY2VfYWRkcmVzcxgCIAEoCRIiChp1c2VfcmVtb3RlX21vZHVsZV9zbmlwcGV0cxgDIAEoCBIZChF3b3JraW5nX2RpcmVjdG9yeRgEIAEoCSIxCgVEZWJ1ZxIRCglhZGRyZXNzZXMYASADKAkSFQoNaW5jbHVkZV9kdW1wcxgCIAEoCCJkCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZSJiChdSZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxIOCgZyZWdpb24YASABKAkSEwoLYnVja2V0X25hbWUYAiABKAkSDgoGcHJlZml4GAMgASgJEhIKCmlzX3ByaXZhdGUYBCABKAgiaAoOQXdzQ3JlZGVudGlhbHMSFQoNYWNjZXNzX2tleV9pZBgBIAEoCRIZChFzZWNyZXRfYWNjZXNzX2tleRgCIAEoCRIUCgxhY2Nlc3NfdG9rZW4YAyABKAkSDgoGcmVnaW9uGAQgASgJIn8KC1Byb3h5Um91dGVyEkEKBnJvdXRlcxgBIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlci5Sb3V0ZXNFbnRyeRotCgtSb3V0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKlEKDkNyZWRlbnRpYWxUeXBlEh8KG0NSRURFTlRJQUxfVFlQRV9VTlNQRUNJRklFRBAAEgkKBVRPS0VOEAESEwoPVEVSUkFGT1JNX0NMT1VEEAJC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
 
 /**
  * @generated from message infracost.parser.options.GenericOptions
@@ -107,6 +107,74 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
    * @generated from field: optional infracost.parser.options.DependencyRequest dependency_request = 13;
    */
   dependencyRequest?: DependencyRequest;
+
+  /**
+   * Enable http first git normalization
+   *
+   * @generated from field: bool enable_git_normalization = 14;
+   */
+  enableGitNormalization: boolean;
+
+  /**
+   * FinOps naming-policy requirements (resource type -> required attributes). Source: org/dashboard
+   * policy. Cross-plugin (any IaC with taggable resources); today read by the terraform-family plugins.
+   *
+   * @generated from field: repeated infracost.parser.options.AttributeRequirement required_attributes = 15;
+   */
+  requiredAttributes: AttributeRequirement[];
+
+  /**
+   * Default tags applied to all resources. Source: YOR config file / YOR_SIMPLE_TAGS env.
+   * Consumed by the terraform-family plugins.
+   *
+   * @generated from field: map<string, string> default_tags = 16;
+   */
+  defaultTags: { [key: string]: string };
+
+  /**
+   * Flat module source map (module source -> replacement). Source: INFRACOST_TERRAFORM_SOURCE_MAP
+   * env. Consumed by the terraform-family plugins. NOTE: the regex source map from the config file
+   * (terraform.source_map) is user config and travels in the raw_options blob instead.
+   *
+   * @generated from field: map<string, string> source_map = 17;
+   */
+  sourceMap: { [key: string]: string };
+
+  /**
+   * Environment variables for parsing (e.g. TF_VAR_*, TF_WORKSPACE). Source: runtime/integration
+   * env merged with the project's configured env. Consumed by the terraform-family plugins.
+   *
+   * @generated from field: map<string, string> env = 18;
+   */
+  env: { [key: string]: string };
+
+  /**
+   * Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
+   * Consumed by the terraform-family plugins.
+   *
+   * @generated from field: bool force_local_module_paths = 19;
+   */
+  forceLocalModulePaths: boolean;
+
+  /**
+   * The Terraform workspace to select when parsing. Source: the project's configured workspace
+   * (config file / INFRACOST_TERRAFORM_WORKSPACE env). Consumed by the terraform-family plugins.
+   * It is a caller-sourced runtime option, NOT part of the raw_options blob, because it is also read
+   * outside the plugin (e.g. the project's workspace in the cost output / provider input).
+   *
+   * @generated from field: string workspace = 20;
+   */
+  workspace: string;
+
+  /**
+   * Terraform Cloud / Enterprise identity for the project. Source: the project's configured
+   * terraform.cloud.*. Consumed by the terraform-family plugins to read the remote workspace. Typed
+   * (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
+   * caller to pair with the token in a terraform-cloud credential_set.
+   *
+   * @generated from field: infracost.parser.options.TerraformCloudConfiguration terraform_cloud_configuration = 21;
+   */
+  terraformCloudConfiguration?: TerraformCloudConfiguration;
 };
 
 /**
@@ -115,6 +183,74 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
  */
 export const GenericOptionsSchema: GenMessage<GenericOptions> = /*@__PURE__*/
   messageDesc(file_infracost_parser_options_options, 0);
+
+/**
+ * TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
+ * plugin pairs it with its auth token by matching hostname against a credential_set's host, then
+ * uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
+ * remote workspace, distinct from GenericOptions.workspace (the terraform CLI workspace).
+ *
+ * @generated from message infracost.parser.options.TerraformCloudConfiguration
+ */
+export type TerraformCloudConfiguration = Message<"infracost.parser.options.TerraformCloudConfiguration"> & {
+  /**
+   * The Terraform Cloud organization.
+   *
+   * @generated from field: string organization = 1;
+   */
+  organization: string;
+
+  /**
+   * The Terraform Cloud remote workspace name.
+   *
+   * @generated from field: string workspace = 2;
+   */
+  workspace: string;
+
+  /**
+   * The Terraform Cloud / Enterprise hostname (e.g. app.terraform.io); the key used to pair with the
+   * credential_set that carries the token for this host.
+   *
+   * @generated from field: string hostname = 3;
+   */
+  hostname: string;
+};
+
+/**
+ * Describes the message infracost.parser.options.TerraformCloudConfiguration.
+ * Use `create(TerraformCloudConfigurationSchema)` to create a new message.
+ */
+export const TerraformCloudConfigurationSchema: GenMessage<TerraformCloudConfiguration> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 1);
+
+/**
+ * AttributeRequirement lists the attributes a given resource type must set for a FinOps
+ * naming/tagging policy.
+ *
+ * @generated from message infracost.parser.options.AttributeRequirement
+ */
+export type AttributeRequirement = Message<"infracost.parser.options.AttributeRequirement"> & {
+  /**
+   * The resource type the requirement applies to (e.g. "aws_instance").
+   *
+   * @generated from field: string resource_type = 1;
+   */
+  resourceType: string;
+
+  /**
+   * The attributes that must be present on that resource type.
+   *
+   * @generated from field: repeated string attributes = 2;
+   */
+  attributes: string[];
+};
+
+/**
+ * Describes the message infracost.parser.options.AttributeRequirement.
+ * Use `create(AttributeRequirementSchema)` to create a new message.
+ */
+export const AttributeRequirementSchema: GenMessage<AttributeRequirement> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 2);
 
 /**
  * DependencyRequest specifies parameters for extracting resource dependencies during parsing.
@@ -157,7 +293,7 @@ export type DependencyRequest = Message<"infracost.parser.options.DependencyRequ
  * Use `create(DependencyRequestSchema)` to create a new message.
  */
 export const DependencyRequestSchema: GenMessage<DependencyRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 1);
+  messageDesc(file_infracost_parser_options_options, 3);
 
 /**
  * @generated from message infracost.parser.options.Debug
@@ -183,7 +319,7 @@ export type Debug = Message<"infracost.parser.options.Debug"> & {
  * Use `create(DebugSchema)` to create a new message.
  */
 export const DebugSchema: GenMessage<Debug> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 2);
+  messageDesc(file_infracost_parser_options_options, 4);
 
 /**
  * @generated from message infracost.parser.options.CredentialSet
@@ -216,7 +352,7 @@ export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & 
  * Use `create(CredentialSetSchema)` to create a new message.
  */
 export const CredentialSetSchema: GenMessage<CredentialSet> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 3);
+  messageDesc(file_infracost_parser_options_options, 5);
 
 /**
  * @generated from message infracost.parser.options.RemoteModuleCacheConfig
@@ -256,7 +392,7 @@ export type RemoteModuleCacheConfig = Message<"infracost.parser.options.RemoteMo
  * Use `create(RemoteModuleCacheConfigSchema)` to create a new message.
  */
 export const RemoteModuleCacheConfigSchema: GenMessage<RemoteModuleCacheConfig> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 4);
+  messageDesc(file_infracost_parser_options_options, 6);
 
 /**
  * @generated from message infracost.parser.options.AwsCredentials
@@ -296,7 +432,7 @@ export type AwsCredentials = Message<"infracost.parser.options.AwsCredentials"> 
  * Use `create(AwsCredentialsSchema)` to create a new message.
  */
 export const AwsCredentialsSchema: GenMessage<AwsCredentials> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 5);
+  messageDesc(file_infracost_parser_options_options, 7);
 
 /**
  * @generated from message infracost.parser.options.ProxyRouter
@@ -313,7 +449,7 @@ export type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"> & {
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export const ProxyRouterSchema: GenMessage<ProxyRouter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 6);
+  messageDesc(file_infracost_parser_options_options, 8);
 
 /**
  * @generated from enum infracost.parser.options.CredentialType

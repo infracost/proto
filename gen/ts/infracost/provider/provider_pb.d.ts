@@ -34,6 +34,11 @@ export enum Provider {
    * @generated from enum value: PROVIDER_GOOGLE = 3;
    */
   GOOGLE = 3,
+
+  /**
+   * @generated from enum value: PROVIDER_KUBERNETES = 4;
+   */
+  KUBERNETES = 4,
 }
 
 /**

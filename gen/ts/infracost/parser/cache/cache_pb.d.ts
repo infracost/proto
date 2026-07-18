@@ -130,7 +130,9 @@ export declare type DependencyPaths = Message<"infracost.parser.cache.Dependency
 export declare const DependencyPathsSchema: GenMessage<DependencyPaths>;
 
 /**
- * BranchSummary is a summary of the cache for a branch. For a given branch, it contains a map of SHA to breakdown ID.
+ * BranchSummary caches per-project data for a branch so that a later run of the same branch, or a
+ * pull request opened against it, can look each project up by name to reuse its breakdown ID, detect
+ * whether it changed via its stored hash, and recover its dependency paths without re-parsing.
  *
  * @generated from message infracost.parser.cache.BranchSummary
  */
@@ -141,24 +143,41 @@ export declare type BranchSummary = Message<"infracost.parser.cache.BranchSummar
   branch: string;
 
   /**
-   * @generated from field: map<string, string> sha_to_id_map = 2;
+   * Deprecated: superseded by the projects field below. New code must not write these; they remain
+   * only so that summaries written by older code can still be read. When projects is empty (an old
+   * summary), reconstruct it by joining these maps on their shared SHA key - sha_to_project_name_map
+   * gives each SHA its project name, and the others supply that project's id, flavor, and deps.
+   *
+   * @generated from field: map<string, string> sha_to_id_map = 2 [deprecated = true];
+   * @deprecated
    */
   shaToIdMap: { [key: string]: string };
 
   /**
-   * @generated from field: map<string, string> sha_to_project_name_map = 3;
+   * @generated from field: map<string, string> sha_to_project_name_map = 3 [deprecated = true];
+   * @deprecated
    */
   shaToProjectNameMap: { [key: string]: string };
 
   /**
-   * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4;
+   * @generated from field: map<string, infracost.parser.cache.Flavor> sha_to_flavor_map = 4 [deprecated = true];
+   * @deprecated
    */
   shaToFlavorMap: { [key: string]: Flavor };
 
   /**
-   * @generated from field: map<string, infracost.parser.cache.DependencyPaths> sha_to_dependency_paths_map = 5;
+   * @generated from field: map<string, infracost.parser.cache.DependencyPaths> sha_to_dependency_paths_map = 5 [deprecated = true];
+   * @deprecated
    */
   shaToDependencyPathsMap: { [key: string]: DependencyPaths };
+
+  /**
+   * Projects holds the summarised data for each project discovered in this branch, keyed by project
+   * name (which is unique within a branch).
+   *
+   * @generated from field: map<string, infracost.parser.cache.ProjectSummary> projects = 6;
+   */
+  projects: { [key: string]: ProjectSummary };
 };
 
 /**
@@ -166,6 +185,50 @@ export declare type BranchSummary = Message<"infracost.parser.cache.BranchSummar
  * Use `create(BranchSummarySchema)` to create a new message.
  */
 export declare const BranchSummarySchema: GenMessage<BranchSummary>;
+
+/**
+ * ProjectSummary is the cached per-project data recorded for one project on the run that produced the
+ * enclosing BranchSummary.
+ *
+ * @generated from message infracost.parser.cache.ProjectSummary
+ */
+export declare type ProjectSummary = Message<"infracost.parser.cache.ProjectSummary"> & {
+  /**
+   * Breakdown ID assigned by the dashboard, reused across runs while the project is unchanged.
+   *
+   * @generated from field: string breakdown_id = 1;
+   */
+  breakdownId: string;
+
+  /**
+   * The project's BreakdownSHA from that run - the content hash used as the parse-cache key. A later
+   * run compares its freshly computed hash against this to decide whether the project changed.
+   *
+   * @generated from field: string breakdown_hash = 2;
+   */
+  breakdownHash: string;
+
+  /**
+   * The project's flavor (Terraform, CloudFormation, or agnostic).
+   *
+   * @generated from field: infracost.parser.cache.Flavor flavor = 3;
+   */
+  flavor: Flavor;
+
+  /**
+   * The files this project depended on during its last parse, including files outside the project
+   * directory. Used to decide whether changed files are relevant and to invalidate caches.
+   *
+   * @generated from field: infracost.parser.cache.DependencyPaths dependency_paths = 4;
+   */
+  dependencyPaths?: DependencyPaths;
+};
+
+/**
+ * Describes the message infracost.parser.cache.ProjectSummary.
+ * Use `create(ProjectSummarySchema)` to create a new message.
+ */
+export declare const ProjectSummarySchema: GenMessage<ProjectSummary>;
 
 /**
  * @generated from message infracost.parser.cache.EncryptionEnvelope

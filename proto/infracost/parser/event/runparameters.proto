@@ -14,6 +14,68 @@ message RunParameters {
   repeated Guardrail guardrails = 6;
   repeated Budget budgets = 7;
   optional string config_template = 8;
+  optional string run_id = 9;
+  string currency = 10; // ISO 4217 currency code e.g. USD
+  repeated ProjectBaseline project_baselines = 11; // project cost baselines for guardrails
+  CommentSettings comment_settings = 12;
+  // policy_exclusions lists finops/tagging policy issues that a user has
+  // dismissed (ignored). The runner filters discovered failing resources
+  // matching these so dismissed issues are neither shown in the comment nor
+  // used to block the PR check.
+  repeated PolicyExclusion policy_exclusions = 13;
+  // project_preexisting_issues carries the dashboard's per-project count of
+  // base-branch pre-existing issues (finops + tagging, pr_comment policies,
+  // including dismissed/ignored). The runner sums these for the projects it
+  // did NOT re-run this PR and adds them to the projects it did re-run so the
+  // pre-existing-issues comment line reflects the whole repo, not just the
+  // changed projects.
+  repeated ProjectPreExistingIssues project_preexisting_issues = 14;
+  optional PlanInfo plan_info = 15;
+}
+
+message PlanInfo {
+  bool is_paid = 1;
+  bool is_poc = 2;
+  bool is_trial = 3;
+  bool is_enterprise = 4;
+  optional google.protobuf.Timestamp expiry = 5;
+}
+
+// ProjectPreExistingIssues is the dashboard's count of base-branch pre-existing
+// issues for a single project, keyed by the raw infracost project name (the
+// same name the runner reports via RunProjectResult.project_name). The count
+// matches the dashboard's pre-existing definition: failing finops + tagging
+// resources on the base branch's latest run, for pr_comment policies only,
+// including dismissed/ignored issues (new + ignored).
+message ProjectPreExistingIssues {
+  string project_name = 1;
+  int32 issue_count = 2;
+}
+
+// PolicyExclusion identifies a single dismissed/ignored policy issue. The key
+// mirrors the dashboard's finops_policy_exclusions / tag_policy_exclusions
+// tables: a policy, a project and a resource address.
+message PolicyExclusion {
+  enum PolicyType {
+    UNSPECIFIED = 0;
+    FINOPS = 1;
+    TAGGING = 2;
+  }
+
+  PolicyType policy_type = 1;
+  string policy_id = 2;
+  string project_name = 3;
+  string address = 4;
+}
+
+message ProjectBaseline {
+  string project_name = 1;
+  infracost.rational.Rat total_monthly_cost = 2; // base-branch total
+}
+
+message CommentSettings {
+  bool enabled = 1;
+  bool show_cost_estimate = 2;
 }
 
 message BaseScope {
@@ -148,6 +210,11 @@ message Guardrail {
   bool pr_comment = 8;
   bool block_pr = 9;
   string message = 10;
+  // unblocked is true when a user has manually unblocked this guardrail for
+  // the current pull request. The runner still evaluates and reports the
+  // result, but must not block the PR check or render it in the comment when
+  // this is set.
+  bool unblocked = 11;
 }
 
 // Budget defines a cost budget for resources matching a set of tags.

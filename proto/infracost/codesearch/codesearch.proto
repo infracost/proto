@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package infracost.codesearch;
 
+import "google/protobuf/timestamp.proto";
 import "infracost/tree/tree.proto";
 
 // IndexData contains information gathered during the index of repository
@@ -20,6 +21,25 @@ message IndexData {
   string repo_id = 6;
   // the repo name
   string repo_name = 7;
+
+  enum VCSType {
+    // unknown vcs type
+    UNKNOWN_VCS = 0;
+    // github
+    GITHUB = 1;
+    // gitlab
+    GITLAB = 2;
+    // azure devops
+    AZURE_DEVOPS = 3;
+  }
+
+  VCSType vcs_type = 8;
+
+  // the commit being indexed
+  string commit_sha = 9;
+
+  // time the commit being indexed was created
+  google.protobuf.Timestamp commit_timestamp = 10;
 }
 
 // IndexedProject is the index result of an IaC project within a repository

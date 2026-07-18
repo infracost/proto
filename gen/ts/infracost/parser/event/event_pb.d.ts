@@ -490,6 +490,16 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_iac_agnostic_scanning = 8;
    */
   enableIacAgnosticScanning: boolean;
+
+  /**
+   * @generated from field: bool enable_comment_generation = 9;
+   */
+  enableCommentGeneration: boolean;
+
+  /**
+   * @generated from field: bool enable_k8s_plugins = 10;
+   */
+  enableK8sPlugins: boolean;
 };
 
 /**
@@ -538,6 +548,15 @@ export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> 
    * @generated from field: bool backtesting = 7;
    */
   backtesting: boolean;
+
+  /**
+   * force_check_success forces the PR check-run conclusion to success even when
+   * governance policies fail. Set by the dashboard when the PR is snoozed, so
+   * the check stays green until the PR is merged or closed.
+   *
+   * @generated from field: bool force_check_success = 8;
+   */
+  forceCheckSuccess: boolean;
 };
 
 /**

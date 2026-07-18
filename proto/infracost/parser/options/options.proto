@@ -30,6 +30,62 @@ message GenericOptions {
   RemoteModuleCacheConfig remote_module_cache_config = 12;
   // Optional request to extract dependencies for a specific resource during parsing
   optional DependencyRequest dependency_request = 13;
+  // Enable http first git normalization
+  bool enable_git_normalization = 14;
+
+  // Caller-sourced options (flag/env/API): data the caller assembles that a plugin cannot derive
+  // from the repo, so it is typed here rather than in the opaque raw_options blob. Each is only
+  // consumed by the plugins noted; others ignore it.
+
+  // FinOps naming-policy requirements (resource type -> required attributes). Source: org/dashboard
+  // policy. Cross-plugin (any IaC with taggable resources); today read by the terraform-family plugins.
+  repeated AttributeRequirement required_attributes = 15;
+  // Default tags applied to all resources. Source: YOR config file / YOR_SIMPLE_TAGS env.
+  // Consumed by the terraform-family plugins.
+  map<string, string> default_tags = 16;
+  // Flat module source map (module source -> replacement). Source: INFRACOST_TERRAFORM_SOURCE_MAP
+  // env. Consumed by the terraform-family plugins. NOTE: the regex source map from the config file
+  // (terraform.source_map) is user config and travels in the raw_options blob instead.
+  map<string, string> source_map = 17;
+  // Environment variables for parsing (e.g. TF_VAR_*, TF_WORKSPACE). Source: runtime/integration
+  // env merged with the project's configured env. Consumed by the terraform-family plugins.
+  map<string, string> env = 18;
+  // Force module sources to resolve as local paths instead of downloading them. Source: caller flag.
+  // Consumed by the terraform-family plugins.
+  bool force_local_module_paths = 19;
+  // The Terraform workspace to select when parsing. Source: the project's configured workspace
+  // (config file / INFRACOST_TERRAFORM_WORKSPACE env). Consumed by the terraform-family plugins.
+  // It is a caller-sourced runtime option, NOT part of the raw_options blob, because it is also read
+  // outside the plugin (e.g. the project's workspace in the cost output / provider input).
+  string workspace = 20;
+  // Terraform Cloud / Enterprise identity for the project. Source: the project's configured
+  // terraform.cloud.*. Consumed by the terraform-family plugins to read the remote workspace. Typed
+  // (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
+  // caller to pair with the token in a terraform-cloud credential_set.
+  TerraformCloudConfiguration terraform_cloud_configuration = 21;
+}
+
+// TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
+// plugin pairs it with its auth token by matching hostname against a credential_set's host, then
+// uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
+// remote workspace, distinct from GenericOptions.workspace (the terraform CLI workspace).
+message TerraformCloudConfiguration {
+  // The Terraform Cloud organization.
+  string organization = 1;
+  // The Terraform Cloud remote workspace name.
+  string workspace = 2;
+  // The Terraform Cloud / Enterprise hostname (e.g. app.terraform.io); the key used to pair with the
+  // credential_set that carries the token for this host.
+  string hostname = 3;
+}
+
+// AttributeRequirement lists the attributes a given resource type must set for a FinOps
+// naming/tagging policy.
+message AttributeRequirement {
+  // The resource type the requirement applies to (e.g. "aws_instance").
+  string resource_type = 1;
+  // The attributes that must be present on that resource type.
+  repeated string attributes = 2;
 }
 
 // DependencyRequest specifies parameters for extracting resource dependencies during parsing.
