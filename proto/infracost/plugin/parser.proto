@@ -41,6 +41,8 @@ message GetParserConfigResponse {
 
 message IdentifyProjectsRequest {
   string directory = 1;
+  // known environment names for this project - useful for plugins for identify env-level var files etc.
+  repeated string environment_names = 2;
 }
 
 message IdentifyProjectsResponse {
@@ -74,6 +76,9 @@ message IdentifyEnvironmentsRequest {
   // the seed blob IdentifyProjects produced for this project root, for the plugin to refine.
   // Always JSON, opaque to the caller.
   bytes raw_options = 3;
+
+  // known environment names for this project - useful for plugins for identify env-level var files etc.
+  repeated string environment_names = 4;
 }
 
 // AttributedVarFile is one input file the caller has already associated with a project,
