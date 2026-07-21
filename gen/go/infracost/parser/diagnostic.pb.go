@@ -84,6 +84,12 @@ const (
 	DiagnosticType_DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR DiagnosticType = 31
 	// building loader options failure
 	DiagnosticType_DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR DiagnosticType = 32
+	// iac-agnostic parse error
+	DiagnosticType_DIAGNOSTIC_TYPE_PARSE_ERROR DiagnosticType = 33
+	// iac-agnostic evaluation error
+	DiagnosticType_DIAGNOSTIC_TYPE_EVALUATION_ERROR DiagnosticType = 34
+	// iac-agnostic cyclic dependencies detected
+	DiagnosticType_DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED DiagnosticType = 35
 )
 
 // Enum value maps for DiagnosticType.
@@ -122,6 +128,9 @@ var (
 		30: "DIAGNOSTIC_TYPE_INPUT_TARGET_ERROR",
 		31: "DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR",
 		32: "DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR",
+		33: "DIAGNOSTIC_TYPE_PARSE_ERROR",
+		34: "DIAGNOSTIC_TYPE_EVALUATION_ERROR",
+		35: "DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED",
 	}
 	DiagnosticType_value = map[string]int32{
 		"DIAGNOSTIC_TYPE_UNSPECIFIED":                                   0,
@@ -157,6 +166,9 @@ var (
 		"DIAGNOSTIC_TYPE_INPUT_TARGET_ERROR":                            30,
 		"DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR":                    31,
 		"DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR":                 32,
+		"DIAGNOSTIC_TYPE_PARSE_ERROR":                                   33,
+		"DIAGNOSTIC_TYPE_EVALUATION_ERROR":                              34,
+		"DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED":                    35,
 	}
 )
 
@@ -300,7 +312,7 @@ const file_infracost_parser_diagnostic_proto_rawDesc = "" +
 	"\aignored\x18\a \x01(\bR\aignored\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xc9\v\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xc0\f\n" +
 	"\x0eDiagnosticType\x12\x1f\n" +
 	"\x1bDIAGNOSTIC_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" DIAGNOSTIC_TYPE_FAILED_OPERATION\x10\x01\x12\x1a\n" +
@@ -335,7 +347,10 @@ const file_infracost_parser_diagnostic_proto_rawDesc = "" +
 	"#DIAGNOSTIC_TYPE_LOADER_OPTION_ERROR\x10\x1d\x12&\n" +
 	"\"DIAGNOSTIC_TYPE_INPUT_TARGET_ERROR\x10\x1e\x12.\n" +
 	"*DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR\x10\x1f\x121\n" +
-	"-DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR\x10 B\xbc\x01\n" +
+	"-DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR\x10 \x12\x1f\n" +
+	"\x1bDIAGNOSTIC_TYPE_PARSE_ERROR\x10!\x12$\n" +
+	" DIAGNOSTIC_TYPE_EVALUATION_ERROR\x10\"\x12.\n" +
+	"*DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED\x10#B\xbc\x01\n" +
 	"\x14com.infracost.parserB\x0fDiagnosticProtoP\x01Z2github.com/infracost/proto/gen/go/infracost/parser\xa2\x02\x03IPX\xaa\x02\x10Infracost.Parser\xca\x02\x10Infracost\\Parser\xe2\x02\x1cInfracost\\Parser\\GPBMetadata\xea\x02\x11Infracost::Parserb\x06proto3"
 
 var (

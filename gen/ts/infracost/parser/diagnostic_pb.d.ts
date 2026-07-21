@@ -293,6 +293,27 @@ export enum DiagnosticType {
    * @generated from enum value: DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR = 32;
    */
   BUILDING_LOADER_OPTIONS_ERROR = 32,
+
+  /**
+   * iac-agnostic parse error
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_PARSE_ERROR = 33;
+   */
+  PARSE_ERROR = 33,
+
+  /**
+   * iac-agnostic evaluation error
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_EVALUATION_ERROR = 34;
+   */
+  EVALUATION_ERROR = 34,
+
+  /**
+   * iac-agnostic cyclic dependencies detected
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED = 35;
+   */
+  CYCLIC_DEPENDENCY_DETECTED = 35,
 }
 
 /**
