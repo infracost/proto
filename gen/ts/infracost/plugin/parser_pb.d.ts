@@ -141,6 +141,13 @@ export declare type IdentifyEnvironmentsRequest = Message<"infracost.plugin.Iden
    * @generated from field: bytes raw_options = 3;
    */
   rawOptions: Uint8Array;
+
+  /**
+   * known environment names for this project - useful for plugins for identify env-level var files etc.
+   *
+   * @generated from field: repeated string environment_names = 4;
+   */
+  environmentNames: string[];
 };
 
 /**
