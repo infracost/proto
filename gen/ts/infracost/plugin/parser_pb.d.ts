@@ -101,6 +101,13 @@ export declare type IdentifyProjectsResponse = Message<"infracost.plugin.Identif
    * @generated from field: bytes raw_options = 4;
    */
   rawOptions: Uint8Array;
+
+  /**
+   * known environment names for this project - useful for plugins for identify env-level var files etc.
+   *
+   * @generated from field: repeated string environment_names = 5;
+   */
+  environmentNames: string[];
 };
 
 /**

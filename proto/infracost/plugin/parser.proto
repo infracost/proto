@@ -55,6 +55,9 @@ message IdentifyProjectsResponse {
   // YAML map in the config file) and forwarded, never interpreted. This is a directory-level
   // seed; the authoritative per-project blob is produced by IdentifyEnvironments.
   bytes raw_options = 4;
+
+  // known environment names for this project - useful for plugins for identify env-level var files etc.
+  repeated string environment_names = 5;
 }
 
 message IdentifyEnvironmentsRequest {

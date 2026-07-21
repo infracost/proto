@@ -171,9 +171,11 @@ type IdentifyProjectsResponse struct {
 	// plugin consumes in ParseRequest.raw_options. Opaque to the caller: it is persisted (as a
 	// YAML map in the config file) and forwarded, never interpreted. This is a directory-level
 	// seed; the authoritative per-project blob is produced by IdentifyEnvironments.
-	RawOptions    []byte `protobuf:"bytes,4,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RawOptions []byte `protobuf:"bytes,4,opt,name=raw_options,json=rawOptions,proto3" json:"raw_options,omitempty"`
+	// known environment names for this project - useful for plugins for identify env-level var files etc.
+	EnvironmentNames []string `protobuf:"bytes,5,rep,name=environment_names,json=environmentNames,proto3" json:"environment_names,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *IdentifyProjectsResponse) Reset() {
@@ -230,6 +232,13 @@ func (x *IdentifyProjectsResponse) GetDependencyPaths() []string {
 func (x *IdentifyProjectsResponse) GetRawOptions() []byte {
 	if x != nil {
 		return x.RawOptions
+	}
+	return nil
+}
+
+func (x *IdentifyProjectsResponse) GetEnvironmentNames() []string {
+	if x != nil {
+		return x.EnvironmentNames
 	}
 	return nil
 }
@@ -782,13 +791,14 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01B\x1b\n" +
 	"\x19_config_file_project_type\"7\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
-	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"\x9a\x01\n" +
+	"\tdirectory\x18\x01 \x01(\tR\tdirectory\"\xc7\x01\n" +
 	"\x18IdentifyProjectsResponse\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\bR\tdirectory\x12\x14\n" +
 	"\x05files\x18\x02 \x03(\tR\x05files\x12)\n" +
 	"\x10dependency_paths\x18\x03 \x03(\tR\x0fdependencyPaths\x12\x1f\n" +
 	"\vraw_options\x18\x04 \x01(\fR\n" +
-	"rawOptions\"\xd9\x01\n" +
+	"rawOptions\x12+\n" +
+	"\x11environment_names\x18\x05 \x03(\tR\x10environmentNames\"\xd9\x01\n" +
 	"\x1bIdentifyEnvironmentsRequest\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12N\n" +
 	"\x10attributed_files\x18\x02 \x03(\v2#.infracost.plugin.AttributedVarFileR\x0fattributedFiles\x12\x1f\n" +
