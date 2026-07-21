@@ -80,4 +80,10 @@ enum DiagnosticType {
   DIAGNOSTIC_TYPE_INPUT_TARGET_OPTIONS_ERROR = 31;
   // building loader options failure
   DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR = 32;
+  // iac-agnostic parse error
+  DIAGNOSTIC_TYPE_PARSE_ERROR = 33;
+  // iac-agnostic evaluation error
+  DIAGNOSTIC_TYPE_EVALUATION_ERROR = 34;
+  // iac-agnostic cyclic dependencies detected
+  DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED = 35;
 }
