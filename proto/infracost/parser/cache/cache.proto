@@ -83,6 +83,27 @@ message ProjectSummary {
   // The files this project depended on during its last parse, including files outside the project
   // directory. Used to decide whether changed files are relevant and to invalidate caches.
   DependencyPaths dependency_paths = 4;
+
+  // The resource counts from this project's breakdown on the run that stored the summary. A later
+  // run that serves the (unchanged) project from cache instead of re-running it folds these into
+  // its repo-wide totals (e.g. the PR comment's "N cloud resources were detected"), which are
+  // otherwise computed only over the projects that run produced. Unset on summaries written by
+  // older runners; callers must treat that as "counts unknown", not zero.
+  ResourceCounts resource_counts = 5;
+}
+
+// ResourceCounts is a project's resource summary: how many resources were detected in its breakdown
+// and how they were classified. Mirrors the count fields of the runner's per-project Summary.
+message ResourceCounts {
+  int32 total_detected_resources = 1;
+  // Resources with cost estimates (rendered as "estimated" in the PR comment).
+  int32 total_supported_resources = 2;
+  int32 total_unsupported_resources = 3;
+  int32 total_usage_based_resources = 4;
+  // Resources that are free (rendered as "free" in the PR comment).
+  int32 total_no_price_resources = 5;
+  // Unsupported resource type -> count, e.g. "aws_codepipeline" -> 2.
+  map<string, int32> unsupported_resource_counts = 6;
 }
 
 message EncryptionEnvelope {

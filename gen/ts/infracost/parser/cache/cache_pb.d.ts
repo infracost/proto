@@ -222,6 +222,17 @@ export declare type ProjectSummary = Message<"infracost.parser.cache.ProjectSumm
    * @generated from field: infracost.parser.cache.DependencyPaths dependency_paths = 4;
    */
   dependencyPaths?: DependencyPaths;
+
+  /**
+   * The resource counts from this project's breakdown on the run that stored the summary. A later
+   * run that serves the (unchanged) project from cache instead of re-running it folds these into
+   * its repo-wide totals (e.g. the PR comment's "N cloud resources were detected"), which are
+   * otherwise computed only over the projects that run produced. Unset on summaries written by
+   * older runners; callers must treat that as "counts unknown", not zero.
+   *
+   * @generated from field: infracost.parser.cache.ResourceCounts resource_counts = 5;
+   */
+  resourceCounts?: ResourceCounts;
 };
 
 /**
@@ -229,6 +240,56 @@ export declare type ProjectSummary = Message<"infracost.parser.cache.ProjectSumm
  * Use `create(ProjectSummarySchema)` to create a new message.
  */
 export declare const ProjectSummarySchema: GenMessage<ProjectSummary>;
+
+/**
+ * ResourceCounts is a project's resource summary: how many resources were detected in its breakdown
+ * and how they were classified. Mirrors the count fields of the runner's per-project Summary.
+ *
+ * @generated from message infracost.parser.cache.ResourceCounts
+ */
+export declare type ResourceCounts = Message<"infracost.parser.cache.ResourceCounts"> & {
+  /**
+   * @generated from field: int32 total_detected_resources = 1;
+   */
+  totalDetectedResources: number;
+
+  /**
+   * Resources with cost estimates (rendered as "estimated" in the PR comment).
+   *
+   * @generated from field: int32 total_supported_resources = 2;
+   */
+  totalSupportedResources: number;
+
+  /**
+   * @generated from field: int32 total_unsupported_resources = 3;
+   */
+  totalUnsupportedResources: number;
+
+  /**
+   * @generated from field: int32 total_usage_based_resources = 4;
+   */
+  totalUsageBasedResources: number;
+
+  /**
+   * Resources that are free (rendered as "free" in the PR comment).
+   *
+   * @generated from field: int32 total_no_price_resources = 5;
+   */
+  totalNoPriceResources: number;
+
+  /**
+   * Unsupported resource type -> count, e.g. "aws_codepipeline" -> 2.
+   *
+   * @generated from field: map<string, int32> unsupported_resource_counts = 6;
+   */
+  unsupportedResourceCounts: { [key: string]: number };
+};
+
+/**
+ * Describes the message infracost.parser.cache.ResourceCounts.
+ * Use `create(ResourceCountsSchema)` to create a new message.
+ */
+export declare const ResourceCountsSchema: GenMessage<ResourceCounts>;
 
 /**
  * @generated from message infracost.parser.cache.EncryptionEnvelope
