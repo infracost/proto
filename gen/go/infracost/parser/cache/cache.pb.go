@@ -431,8 +431,14 @@ type ProjectSummary struct {
 	// The files this project depended on during its last parse, including files outside the project
 	// directory. Used to decide whether changed files are relevant and to invalidate caches.
 	DependencyPaths *DependencyPaths `protobuf:"bytes,4,opt,name=dependency_paths,json=dependencyPaths,proto3" json:"dependency_paths,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The resource counts from this project's breakdown on the run that stored the summary. A later
+	// run that serves the (unchanged) project from cache instead of re-running it folds these into
+	// its repo-wide totals (e.g. the PR comment's "N cloud resources were detected"), which are
+	// otherwise computed only over the projects that run produced. Unset on summaries written by
+	// older runners; callers must treat that as "counts unknown", not zero.
+	ResourceCounts *ResourceCounts `protobuf:"bytes,5,opt,name=resource_counts,json=resourceCounts,proto3" json:"resource_counts,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ProjectSummary) Reset() {
@@ -493,6 +499,102 @@ func (x *ProjectSummary) GetDependencyPaths() *DependencyPaths {
 	return nil
 }
 
+func (x *ProjectSummary) GetResourceCounts() *ResourceCounts {
+	if x != nil {
+		return x.ResourceCounts
+	}
+	return nil
+}
+
+// ResourceCounts is a project's resource summary: how many resources were detected in its breakdown
+// and how they were classified. Mirrors the count fields of the runner's per-project Summary.
+type ResourceCounts struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	TotalDetectedResources int32                  `protobuf:"varint,1,opt,name=total_detected_resources,json=totalDetectedResources,proto3" json:"total_detected_resources,omitempty"`
+	// Resources with cost estimates (rendered as "estimated" in the PR comment).
+	TotalSupportedResources   int32 `protobuf:"varint,2,opt,name=total_supported_resources,json=totalSupportedResources,proto3" json:"total_supported_resources,omitempty"`
+	TotalUnsupportedResources int32 `protobuf:"varint,3,opt,name=total_unsupported_resources,json=totalUnsupportedResources,proto3" json:"total_unsupported_resources,omitempty"`
+	TotalUsageBasedResources  int32 `protobuf:"varint,4,opt,name=total_usage_based_resources,json=totalUsageBasedResources,proto3" json:"total_usage_based_resources,omitempty"`
+	// Resources that are free (rendered as "free" in the PR comment).
+	TotalNoPriceResources int32 `protobuf:"varint,5,opt,name=total_no_price_resources,json=totalNoPriceResources,proto3" json:"total_no_price_resources,omitempty"`
+	// Unsupported resource type -> count, e.g. "aws_codepipeline" -> 2.
+	UnsupportedResourceCounts map[string]int32 `protobuf:"bytes,6,rep,name=unsupported_resource_counts,json=unsupportedResourceCounts,proto3" json:"unsupported_resource_counts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *ResourceCounts) Reset() {
+	*x = ResourceCounts{}
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceCounts) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceCounts) ProtoMessage() {}
+
+func (x *ResourceCounts) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceCounts.ProtoReflect.Descriptor instead.
+func (*ResourceCounts) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ResourceCounts) GetTotalDetectedResources() int32 {
+	if x != nil {
+		return x.TotalDetectedResources
+	}
+	return 0
+}
+
+func (x *ResourceCounts) GetTotalSupportedResources() int32 {
+	if x != nil {
+		return x.TotalSupportedResources
+	}
+	return 0
+}
+
+func (x *ResourceCounts) GetTotalUnsupportedResources() int32 {
+	if x != nil {
+		return x.TotalUnsupportedResources
+	}
+	return 0
+}
+
+func (x *ResourceCounts) GetTotalUsageBasedResources() int32 {
+	if x != nil {
+		return x.TotalUsageBasedResources
+	}
+	return 0
+}
+
+func (x *ResourceCounts) GetTotalNoPriceResources() int32 {
+	if x != nil {
+		return x.TotalNoPriceResources
+	}
+	return 0
+}
+
+func (x *ResourceCounts) GetUnsupportedResourceCounts() map[string]int32 {
+	if x != nil {
+		return x.UnsupportedResourceCounts
+	}
+	return nil
+}
+
 type EncryptionEnvelope struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EncryptedDek  []byte                 `protobuf:"bytes,1,opt,name=encrypted_dek,json=encryptedDek,proto3" json:"encrypted_dek,omitempty"`
@@ -504,7 +606,7 @@ type EncryptionEnvelope struct {
 
 func (x *EncryptionEnvelope) Reset() {
 	*x = EncryptionEnvelope{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -516,7 +618,7 @@ func (x *EncryptionEnvelope) String() string {
 func (*EncryptionEnvelope) ProtoMessage() {}
 
 func (x *EncryptionEnvelope) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[5]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +631,7 @@ func (x *EncryptionEnvelope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EncryptionEnvelope.ProtoReflect.Descriptor instead.
 func (*EncryptionEnvelope) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *EncryptionEnvelope) GetEncryptedDek() []byte {
@@ -568,7 +670,7 @@ type CloudFormationProject struct {
 
 func (x *CloudFormationProject) Reset() {
 	*x = CloudFormationProject{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[6]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -580,7 +682,7 @@ func (x *CloudFormationProject) String() string {
 func (*CloudFormationProject) ProtoMessage() {}
 
 func (x *CloudFormationProject) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[6]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -593,7 +695,7 @@ func (x *CloudFormationProject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloudFormationProject.ProtoReflect.Descriptor instead.
 func (*CloudFormationProject) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CloudFormationProject) GetResult() *cloudformation.Result {
@@ -661,7 +763,7 @@ type TreeProject struct {
 
 func (x *TreeProject) Reset() {
 	*x = TreeProject{}
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[7]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -673,7 +775,7 @@ func (x *TreeProject) String() string {
 func (*TreeProject) ProtoMessage() {}
 
 func (x *TreeProject) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_cache_cache_proto_msgTypes[7]
+	mi := &file_infracost_parser_cache_cache_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -686,7 +788,7 @@ func (x *TreeProject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TreeProject.ProtoReflect.Descriptor instead.
 func (*TreeProject) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_cache_cache_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *TreeProject) GetTree() *tree.Tree {
@@ -795,12 +897,23 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x05value:\x028\x01\x1ac\n" +
 	"\rProjectsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
-	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cache.ProjectSummaryR\x05value:\x028\x01\"\xe6\x01\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cache.ProjectSummaryR\x05value:\x028\x01\"\xb7\x02\n" +
 	"\x0eProjectSummary\x12!\n" +
 	"\fbreakdown_id\x18\x01 \x01(\tR\vbreakdownId\x12%\n" +
 	"\x0ebreakdown_hash\x18\x02 \x01(\tR\rbreakdownHash\x126\n" +
 	"\x06flavor\x18\x03 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12R\n" +
-	"\x10dependency_paths\x18\x04 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x0fdependencyPaths\"p\n" +
+	"\x10dependency_paths\x18\x04 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x0fdependencyPaths\x12O\n" +
+	"\x0fresource_counts\x18\x05 \x01(\v2&.infracost.parser.cache.ResourceCountsR\x0eresourceCounts\"\x94\x04\n" +
+	"\x0eResourceCounts\x128\n" +
+	"\x18total_detected_resources\x18\x01 \x01(\x05R\x16totalDetectedResources\x12:\n" +
+	"\x19total_supported_resources\x18\x02 \x01(\x05R\x17totalSupportedResources\x12>\n" +
+	"\x1btotal_unsupported_resources\x18\x03 \x01(\x05R\x19totalUnsupportedResources\x12=\n" +
+	"\x1btotal_usage_based_resources\x18\x04 \x01(\x05R\x18totalUsageBasedResources\x127\n" +
+	"\x18total_no_price_resources\x18\x05 \x01(\x05R\x15totalNoPriceResources\x12\x85\x01\n" +
+	"\x1bunsupported_resource_counts\x18\x06 \x03(\v2E.infracost.parser.cache.ResourceCounts.UnsupportedResourceCountsEntryR\x19unsupportedResourceCounts\x1aL\n" +
+	"\x1eUnsupportedResourceCountsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"p\n" +
 	"\x12EncryptionEnvelope\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\fR\fencryptedDek\x12\x0e\n" +
 	"\x02iv\x18\x02 \x01(\fR\x02iv\x12%\n" +
@@ -847,7 +960,7 @@ func file_infracost_parser_cache_cache_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_cache_cache_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_infracost_parser_cache_cache_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_infracost_parser_cache_cache_proto_goTypes = []any{
 	(Flavor)(0),                    // 0: infracost.parser.cache.Flavor
 	(*TerraformProject)(nil),       // 1: infracost.parser.cache.TerraformProject
@@ -855,51 +968,55 @@ var file_infracost_parser_cache_cache_proto_goTypes = []any{
 	(*DependencyPaths)(nil),        // 3: infracost.parser.cache.DependencyPaths
 	(*BranchSummary)(nil),          // 4: infracost.parser.cache.BranchSummary
 	(*ProjectSummary)(nil),         // 5: infracost.parser.cache.ProjectSummary
-	(*EncryptionEnvelope)(nil),     // 6: infracost.parser.cache.EncryptionEnvelope
-	(*CloudFormationProject)(nil),  // 7: infracost.parser.cache.CloudFormationProject
-	(*TreeProject)(nil),            // 8: infracost.parser.cache.TreeProject
-	nil,                            // 9: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	nil,                            // 10: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	nil,                            // 11: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	nil,                            // 12: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
-	nil,                            // 13: infracost.parser.cache.BranchSummary.ProjectsEntry
-	(*terraform.ModuleResult)(nil), // 14: infracost.parser.terraform.ModuleResult
-	(*parser.Diagnostic)(nil),      // 15: infracost.parser.Diagnostic
-	(*usage.Usage)(nil),            // 16: infracost.usage.Usage
-	(*timestamppb.Timestamp)(nil),  // 17: google.protobuf.Timestamp
-	(*cloudformation.Result)(nil),  // 18: infracost.parser.cloudformation.Result
-	(*tree.Tree)(nil),              // 19: infracost.tree.Tree
+	(*ResourceCounts)(nil),         // 6: infracost.parser.cache.ResourceCounts
+	(*EncryptionEnvelope)(nil),     // 7: infracost.parser.cache.EncryptionEnvelope
+	(*CloudFormationProject)(nil),  // 8: infracost.parser.cache.CloudFormationProject
+	(*TreeProject)(nil),            // 9: infracost.parser.cache.TreeProject
+	nil,                            // 10: infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	nil,                            // 11: infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	nil,                            // 12: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	nil,                            // 13: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
+	nil,                            // 14: infracost.parser.cache.BranchSummary.ProjectsEntry
+	nil,                            // 15: infracost.parser.cache.ResourceCounts.UnsupportedResourceCountsEntry
+	(*terraform.ModuleResult)(nil), // 16: infracost.parser.terraform.ModuleResult
+	(*parser.Diagnostic)(nil),      // 17: infracost.parser.Diagnostic
+	(*usage.Usage)(nil),            // 18: infracost.usage.Usage
+	(*timestamppb.Timestamp)(nil),  // 19: google.protobuf.Timestamp
+	(*cloudformation.Result)(nil),  // 20: infracost.parser.cloudformation.Result
+	(*tree.Tree)(nil),              // 21: infracost.tree.Tree
 }
 var file_infracost_parser_cache_cache_proto_depIdxs = []int32{
-	14, // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
+	16, // 0: infracost.parser.cache.TerraformProject.result:type_name -> infracost.parser.terraform.ModuleResult
 	2,  // 1: infracost.parser.cache.TerraformProject.metadata:type_name -> infracost.parser.cache.Metadata
-	15, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
-	16, // 3: infracost.parser.cache.TerraformProject.usage:type_name -> infracost.usage.Usage
+	17, // 2: infracost.parser.cache.TerraformProject.diags:type_name -> infracost.parser.Diagnostic
+	18, // 3: infracost.parser.cache.TerraformProject.usage:type_name -> infracost.usage.Usage
 	0,  // 4: infracost.parser.cache.Metadata.flavor:type_name -> infracost.parser.cache.Flavor
-	17, // 5: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 6: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
-	10, // 7: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
-	11, // 8: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
-	12, // 9: infracost.parser.cache.BranchSummary.sha_to_dependency_paths_map:type_name -> infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
-	13, // 10: infracost.parser.cache.BranchSummary.projects:type_name -> infracost.parser.cache.BranchSummary.ProjectsEntry
+	19, // 5: infracost.parser.cache.Metadata.created_at:type_name -> google.protobuf.Timestamp
+	10, // 6: infracost.parser.cache.BranchSummary.sha_to_id_map:type_name -> infracost.parser.cache.BranchSummary.ShaToIdMapEntry
+	11, // 7: infracost.parser.cache.BranchSummary.sha_to_project_name_map:type_name -> infracost.parser.cache.BranchSummary.ShaToProjectNameMapEntry
+	12, // 8: infracost.parser.cache.BranchSummary.sha_to_flavor_map:type_name -> infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry
+	13, // 9: infracost.parser.cache.BranchSummary.sha_to_dependency_paths_map:type_name -> infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry
+	14, // 10: infracost.parser.cache.BranchSummary.projects:type_name -> infracost.parser.cache.BranchSummary.ProjectsEntry
 	0,  // 11: infracost.parser.cache.ProjectSummary.flavor:type_name -> infracost.parser.cache.Flavor
 	3,  // 12: infracost.parser.cache.ProjectSummary.dependency_paths:type_name -> infracost.parser.cache.DependencyPaths
-	18, // 13: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
-	2,  // 14: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
-	15, // 15: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
-	16, // 16: infracost.parser.cache.CloudFormationProject.usage:type_name -> infracost.usage.Usage
-	19, // 17: infracost.parser.cache.TreeProject.tree:type_name -> infracost.tree.Tree
-	2,  // 18: infracost.parser.cache.TreeProject.metadata:type_name -> infracost.parser.cache.Metadata
-	15, // 19: infracost.parser.cache.TreeProject.diags:type_name -> infracost.parser.Diagnostic
-	16, // 20: infracost.parser.cache.TreeProject.usage:type_name -> infracost.usage.Usage
-	0,  // 21: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
-	3,  // 22: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry.value:type_name -> infracost.parser.cache.DependencyPaths
-	5,  // 23: infracost.parser.cache.BranchSummary.ProjectsEntry.value:type_name -> infracost.parser.cache.ProjectSummary
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	6,  // 13: infracost.parser.cache.ProjectSummary.resource_counts:type_name -> infracost.parser.cache.ResourceCounts
+	15, // 14: infracost.parser.cache.ResourceCounts.unsupported_resource_counts:type_name -> infracost.parser.cache.ResourceCounts.UnsupportedResourceCountsEntry
+	20, // 15: infracost.parser.cache.CloudFormationProject.result:type_name -> infracost.parser.cloudformation.Result
+	2,  // 16: infracost.parser.cache.CloudFormationProject.metadata:type_name -> infracost.parser.cache.Metadata
+	17, // 17: infracost.parser.cache.CloudFormationProject.diags:type_name -> infracost.parser.Diagnostic
+	18, // 18: infracost.parser.cache.CloudFormationProject.usage:type_name -> infracost.usage.Usage
+	21, // 19: infracost.parser.cache.TreeProject.tree:type_name -> infracost.tree.Tree
+	2,  // 20: infracost.parser.cache.TreeProject.metadata:type_name -> infracost.parser.cache.Metadata
+	17, // 21: infracost.parser.cache.TreeProject.diags:type_name -> infracost.parser.Diagnostic
+	18, // 22: infracost.parser.cache.TreeProject.usage:type_name -> infracost.usage.Usage
+	0,  // 23: infracost.parser.cache.BranchSummary.ShaToFlavorMapEntry.value:type_name -> infracost.parser.cache.Flavor
+	3,  // 24: infracost.parser.cache.BranchSummary.ShaToDependencyPathsMapEntry.value:type_name -> infracost.parser.cache.DependencyPaths
+	5,  // 25: infracost.parser.cache.BranchSummary.ProjectsEntry.value:type_name -> infracost.parser.cache.ProjectSummary
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_cache_cache_proto_init() }
@@ -913,7 +1030,7 @@ func file_infracost_parser_cache_cache_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_cache_cache_proto_rawDesc), len(file_infracost_parser_cache_cache_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
