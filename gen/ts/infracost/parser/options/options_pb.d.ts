@@ -173,6 +173,17 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: infracost.parser.options.TerraformCloudConfiguration terraform_cloud_configuration = 21;
    */
   terraformCloudConfiguration?: TerraformCloudConfiguration;
+
+  /**
+   * Transport-level authentication for fetching remote references (git-over-ssh keys, mTLS client
+   * certificates, extra CA bundles, host-key policy). Source: the runner decrypts these from the job
+   * event; the CLI leaves it unset and relies on the developer's own system git/ssh configuration.
+   * Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
+   * git-over-https credentials (username/password) travel in credential_sets, not here.
+   *
+   * @generated from field: infracost.parser.options.FetchAuth fetch_auth = 22;
+   */
+  fetchAuth?: FetchAuth;
 };
 
 /**
@@ -180,6 +191,116 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
  * Use `create(GenericOptionsSchema)` to create a new message.
  */
 export declare const GenericOptionsSchema: GenMessage<GenericOptions>;
+
+/**
+ * FetchAuth carries the transport-level authentication material used to fetch remote references
+ * (Terraform modules, Kustomize bases, Helm chart dependencies). Previously this reached the fetcher
+ * only as process-global side effects (GIT_SSH_COMMAND with an -i keyfile, GIT_SSL_CERT/CAINFO, a
+ * permissive ssh config); it is passed explicitly now so the in-process getter applies it without
+ * mutating the environment or touching disk.
+ *
+ * @generated from message infracost.parser.options.FetchAuth
+ */
+export declare type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & {
+  /**
+   * SSH private keys (PEM) for git-over-ssh clones, matched to a host. An entry with an empty host is
+   * the default, used when no host-specific key matches.
+   *
+   * @generated from field: repeated infracost.parser.options.SSHKey ssh_keys = 1;
+   */
+  sshKeys: SSHKey[];
+
+  /**
+   * mTLS client certificates presented to servers that require them, matched to a host. An entry with
+   * an empty host is the default.
+   *
+   * @generated from field: repeated infracost.parser.options.ClientCertificate client_certificates = 2;
+   */
+  clientCertificates: ClientCertificate[];
+
+  /**
+   * Additional CA certificates (PEM) trusted when verifying server TLS, on top of the system roots.
+   *
+   * @generated from field: repeated bytes ca_certs = 3;
+   */
+  caCerts: Uint8Array[];
+
+  /**
+   * Skip SSH host-key verification. The hosted runner sets this (its containers carry no known_hosts
+   * and clone ephemeral repos, matching the current permissive ssh config); the CLI leaves it false
+   * so a developer's own ~/.ssh/known_hosts is honored.
+   *
+   * @generated from field: bool insecure_skip_host_key_verify = 4;
+   */
+  insecureSkipHostKeyVerify: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.options.FetchAuth.
+ * Use `create(FetchAuthSchema)` to create a new message.
+ */
+export declare const FetchAuthSchema: GenMessage<FetchAuth>;
+
+/**
+ * SSHKey is a git-over-ssh private key scoped to a host.
+ *
+ * @generated from message infracost.parser.options.SSHKey
+ */
+export declare type SSHKey = Message<"infracost.parser.options.SSHKey"> & {
+  /**
+   * The host this key authenticates to; empty means use it as the default key.
+   *
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * The PEM-encoded private key.
+   *
+   * @generated from field: bytes private_key = 2;
+   */
+  privateKey: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.parser.options.SSHKey.
+ * Use `create(SSHKeySchema)` to create a new message.
+ */
+export declare const SSHKeySchema: GenMessage<SSHKey>;
+
+/**
+ * ClientCertificate is an mTLS client certificate/key pair scoped to a host.
+ *
+ * @generated from message infracost.parser.options.ClientCertificate
+ */
+export declare type ClientCertificate = Message<"infracost.parser.options.ClientCertificate"> & {
+  /**
+   * The host this certificate is presented to; empty means use it as the default.
+   *
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * The PEM-encoded client certificate.
+   *
+   * @generated from field: bytes certificate = 2;
+   */
+  certificate: Uint8Array;
+
+  /**
+   * The PEM-encoded private key for the certificate.
+   *
+   * @generated from field: bytes private_key = 3;
+   */
+  privateKey: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.parser.options.ClientCertificate.
+ * Use `create(ClientCertificateSchema)` to create a new message.
+ */
+export declare const ClientCertificateSchema: GenMessage<ClientCertificate>;
 
 /**
  * TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
@@ -319,14 +440,14 @@ export declare const DebugSchema: GenMessage<Debug>;
  */
 export declare type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & {
   /**
-   * The access token for authentication
+   * The access token for authentication. For GIT_HTTP this is the password (or token).
    *
    * @generated from field: string token = 1;
    */
   token: string;
 
   /**
-   * The host for the authentication server
+   * The host for the authentication server.
    *
    * @generated from field: string host = 2;
    */
@@ -338,6 +459,21 @@ export declare type CredentialSet = Message<"infracost.parser.options.Credential
    * @generated from field: infracost.parser.options.CredentialType type = 3;
    */
   type: CredentialType;
+
+  /**
+   * The username. Used by GIT_HTTP basic auth; empty for token-only credential types.
+   *
+   * @generated from field: string username = 4;
+   */
+  username: string;
+
+  /**
+   * Optional path prefix that scopes a GIT_HTTP credential to a subset of the host (e.g. an org).
+   * Empty matches any path on the host. Ignored by other credential types.
+   *
+   * @generated from field: string path = 5;
+   */
+  path: string;
 };
 
 /**
@@ -464,6 +600,14 @@ export enum CredentialType {
    * @generated from enum value: TERRAFORM_CLOUD = 2;
    */
   TERRAFORM_CLOUD = 2,
+
+  /**
+   * git-over-https / http(s) archive basic auth (username + password/token), matched by host and
+   * optional path prefix. Replaces the on-disk git credential helper for remote fetches.
+   *
+   * @generated from enum value: GIT_HTTP = 3;
+   */
+  GIT_HTTP = 3,
 }
 
 /**

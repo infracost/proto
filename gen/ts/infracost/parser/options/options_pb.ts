@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/options/options.proto.
  */
 export const file_infracost_parser_options_options: GenFile = /*@__PURE__*/
-  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIuIJCg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBARIgChhlbmFibGVfZ2l0X25vcm1hbGl6YXRpb24YDiABKAgSSwoTcmVxdWlyZWRfYXR0cmlidXRlcxgPIAMoCzIuLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5BdHRyaWJ1dGVSZXF1aXJlbWVudBJPCgxkZWZhdWx0X3RhZ3MYECADKAsyOS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMuRGVmYXVsdFRhZ3NFbnRyeRJLCgpzb3VyY2VfbWFwGBEgAygLMjcuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zLlNvdXJjZU1hcEVudHJ5Ej4KA2VudhgSIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucy5FbnZFbnRyeRIgChhmb3JjZV9sb2NhbF9tb2R1bGVfcGF0aHMYEyABKAgSEQoJd29ya3NwYWNlGBQgASgJElwKHXRlcnJhZm9ybV9jbG91ZF9jb25maWd1cmF0aW9uGBUgASgLMjUuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlRlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaMAoOU291cmNlTWFwRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoqCghFbnZFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhUKE19kZXBlbmRlbmN5X3JlcXVlc3QiWAobVGVycmFmb3JtQ2xvdWRDb25maWd1cmF0aW9uEhQKDG9yZ2FuaXphdGlvbhgBIAEoCRIRCgl3b3Jrc3BhY2UYAiABKAkSEAoIaG9zdG5hbWUYAyABKAkiQQoUQXR0cmlidXRlUmVxdWlyZW1lbnQSFQoNcmVzb3VyY2VfdHlwZRgBIAEoCRISCgphdHRyaWJ1dGVzGAIgAygJIoIBChFEZXBlbmRlbmN5UmVxdWVzdBIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQcmVzb3VyY2VfYWRkcmVzcxgCIAEoCRIiChp1c2VfcmVtb3RlX21vZHVsZV9zbmlwcGV0cxgDIAEoCBIZChF3b3JraW5nX2RpcmVjdG9yeRgEIAEoCSIxCgVEZWJ1ZxIRCglhZGRyZXNzZXMYASADKAkSFQoNaW5jbHVkZV9kdW1wcxgCIAEoCCJkCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZSJiChdSZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxIOCgZyZWdpb24YASABKAkSEwoLYnVja2V0X25hbWUYAiABKAkSDgoGcHJlZml4GAMgASgJEhIKCmlzX3ByaXZhdGUYBCABKAgiaAoOQXdzQ3JlZGVudGlhbHMSFQoNYWNjZXNzX2tleV9pZBgBIAEoCRIZChFzZWNyZXRfYWNjZXNzX2tleRgCIAEoCRIUCgxhY2Nlc3NfdG9rZW4YAyABKAkSDgoGcmVnaW9uGAQgASgJIn8KC1Byb3h5Um91dGVyEkEKBnJvdXRlcxgBIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlci5Sb3V0ZXNFbnRyeRotCgtSb3V0ZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKlEKDkNyZWRlbnRpYWxUeXBlEh8KG0NSRURFTlRJQUxfVFlQRV9VTlNQRUNJRklFRBAAEgkKBVRPS0VOEAESEwoPVEVSUkFGT1JNX0NMT1VEEAJC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
+  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIpsKCg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBARIgChhlbmFibGVfZ2l0X25vcm1hbGl6YXRpb24YDiABKAgSSwoTcmVxdWlyZWRfYXR0cmlidXRlcxgPIAMoCzIuLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5BdHRyaWJ1dGVSZXF1aXJlbWVudBJPCgxkZWZhdWx0X3RhZ3MYECADKAsyOS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMuRGVmYXVsdFRhZ3NFbnRyeRJLCgpzb3VyY2VfbWFwGBEgAygLMjcuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zLlNvdXJjZU1hcEVudHJ5Ej4KA2VudhgSIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucy5FbnZFbnRyeRIgChhmb3JjZV9sb2NhbF9tb2R1bGVfcGF0aHMYEyABKAgSEQoJd29ya3NwYWNlGBQgASgJElwKHXRlcnJhZm9ybV9jbG91ZF9jb25maWd1cmF0aW9uGBUgASgLMjUuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlRlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhI3CgpmZXRjaF9hdXRoGBYgASgLMiMuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkZldGNoQXV0aBoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaMAoOU291cmNlTWFwRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoqCghFbnZFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhUKE19kZXBlbmRlbmN5X3JlcXVlc3QiwgEKCUZldGNoQXV0aBIyCghzc2hfa2V5cxgBIAMoCzIgLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5TU0hLZXkSSAoTY2xpZW50X2NlcnRpZmljYXRlcxgCIAMoCzIrLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DbGllbnRDZXJ0aWZpY2F0ZRIQCghjYV9jZXJ0cxgDIAMoDBIlCh1pbnNlY3VyZV9za2lwX2hvc3Rfa2V5X3ZlcmlmeRgEIAEoCCIrCgZTU0hLZXkSDAoEaG9zdBgBIAEoCRITCgtwcml2YXRlX2tleRgCIAEoDCJLChFDbGllbnRDZXJ0aWZpY2F0ZRIMCgRob3N0GAEgASgJEhMKC2NlcnRpZmljYXRlGAIgASgMEhMKC3ByaXZhdGVfa2V5GAMgASgMIlgKG1RlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhIUCgxvcmdhbml6YXRpb24YASABKAkSEQoJd29ya3NwYWNlGAIgASgJEhAKCGhvc3RuYW1lGAMgASgJIkEKFEF0dHJpYnV0ZVJlcXVpcmVtZW50EhUKDXJlc291cmNlX3R5cGUYASABKAkSEgoKYXR0cmlidXRlcxgCIAMoCSKCAQoRRGVwZW5kZW5jeVJlcXVlc3QSFAoMcHJvamVjdF9uYW1lGAEgASgJEhgKEHJlc291cmNlX2FkZHJlc3MYAiABKAkSIgoadXNlX3JlbW90ZV9tb2R1bGVfc25pcHBldHMYAyABKAgSGQoRd29ya2luZ19kaXJlY3RvcnkYBCABKAkiMQoFRGVidWcSEQoJYWRkcmVzc2VzGAEgAygJEhUKDWluY2x1ZGVfZHVtcHMYAiABKAgihAEKDUNyZWRlbnRpYWxTZXQSDQoFdG9rZW4YASABKAkSDAoEaG9zdBgCIAEoCRI2CgR0eXBlGAMgASgOMiguaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkNyZWRlbnRpYWxUeXBlEhAKCHVzZXJuYW1lGAQgASgJEgwKBHBhdGgYBSABKAkiYgoXUmVtb3RlTW9kdWxlQ2FjaGVDb25maWcSDgoGcmVnaW9uGAEgASgJEhMKC2J1Y2tldF9uYW1lGAIgASgJEg4KBnByZWZpeBgDIAEoCRISCgppc19wcml2YXRlGAQgASgIImgKDkF3c0NyZWRlbnRpYWxzEhUKDWFjY2Vzc19rZXlfaWQYASABKAkSGQoRc2VjcmV0X2FjY2Vzc19rZXkYAiABKAkSFAoMYWNjZXNzX3Rva2VuGAMgASgJEg4KBnJlZ2lvbhgEIAEoCSJ/CgtQcm94eVJvdXRlchJBCgZyb3V0ZXMYASADKAsyMS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuUHJveHlSb3V0ZXIuUm91dGVzRW50cnkaLQoLUm91dGVzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASpfCg5DcmVkZW50aWFsVHlwZRIfChtDUkVERU5USUFMX1RZUEVfVU5TUEVDSUZJRUQQABIJCgVUT0tFThABEhMKD1RFUlJBRk9STV9DTE9VRBACEgwKCEdJVF9IVFRQEANC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
 
 /**
  * @generated from message infracost.parser.options.GenericOptions
@@ -175,6 +175,17 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
    * @generated from field: infracost.parser.options.TerraformCloudConfiguration terraform_cloud_configuration = 21;
    */
   terraformCloudConfiguration?: TerraformCloudConfiguration;
+
+  /**
+   * Transport-level authentication for fetching remote references (git-over-ssh keys, mTLS client
+   * certificates, extra CA bundles, host-key policy). Source: the runner decrypts these from the job
+   * event; the CLI leaves it unset and relies on the developer's own system git/ssh configuration.
+   * Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
+   * git-over-https credentials (username/password) travel in credential_sets, not here.
+   *
+   * @generated from field: infracost.parser.options.FetchAuth fetch_auth = 22;
+   */
+  fetchAuth?: FetchAuth;
 };
 
 /**
@@ -183,6 +194,119 @@ export type GenericOptions = Message<"infracost.parser.options.GenericOptions"> 
  */
 export const GenericOptionsSchema: GenMessage<GenericOptions> = /*@__PURE__*/
   messageDesc(file_infracost_parser_options_options, 0);
+
+/**
+ * FetchAuth carries the transport-level authentication material used to fetch remote references
+ * (Terraform modules, Kustomize bases, Helm chart dependencies). Previously this reached the fetcher
+ * only as process-global side effects (GIT_SSH_COMMAND with an -i keyfile, GIT_SSL_CERT/CAINFO, a
+ * permissive ssh config); it is passed explicitly now so the in-process getter applies it without
+ * mutating the environment or touching disk.
+ *
+ * @generated from message infracost.parser.options.FetchAuth
+ */
+export type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & {
+  /**
+   * SSH private keys (PEM) for git-over-ssh clones, matched to a host. An entry with an empty host is
+   * the default, used when no host-specific key matches.
+   *
+   * @generated from field: repeated infracost.parser.options.SSHKey ssh_keys = 1;
+   */
+  sshKeys: SSHKey[];
+
+  /**
+   * mTLS client certificates presented to servers that require them, matched to a host. An entry with
+   * an empty host is the default.
+   *
+   * @generated from field: repeated infracost.parser.options.ClientCertificate client_certificates = 2;
+   */
+  clientCertificates: ClientCertificate[];
+
+  /**
+   * Additional CA certificates (PEM) trusted when verifying server TLS, on top of the system roots.
+   *
+   * @generated from field: repeated bytes ca_certs = 3;
+   */
+  caCerts: Uint8Array[];
+
+  /**
+   * Skip SSH host-key verification. The hosted runner sets this (its containers carry no known_hosts
+   * and clone ephemeral repos, matching the current permissive ssh config); the CLI leaves it false
+   * so a developer's own ~/.ssh/known_hosts is honored.
+   *
+   * @generated from field: bool insecure_skip_host_key_verify = 4;
+   */
+  insecureSkipHostKeyVerify: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.options.FetchAuth.
+ * Use `create(FetchAuthSchema)` to create a new message.
+ */
+export const FetchAuthSchema: GenMessage<FetchAuth> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 1);
+
+/**
+ * SSHKey is a git-over-ssh private key scoped to a host.
+ *
+ * @generated from message infracost.parser.options.SSHKey
+ */
+export type SSHKey = Message<"infracost.parser.options.SSHKey"> & {
+  /**
+   * The host this key authenticates to; empty means use it as the default key.
+   *
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * The PEM-encoded private key.
+   *
+   * @generated from field: bytes private_key = 2;
+   */
+  privateKey: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.parser.options.SSHKey.
+ * Use `create(SSHKeySchema)` to create a new message.
+ */
+export const SSHKeySchema: GenMessage<SSHKey> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 2);
+
+/**
+ * ClientCertificate is an mTLS client certificate/key pair scoped to a host.
+ *
+ * @generated from message infracost.parser.options.ClientCertificate
+ */
+export type ClientCertificate = Message<"infracost.parser.options.ClientCertificate"> & {
+  /**
+   * The host this certificate is presented to; empty means use it as the default.
+   *
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * The PEM-encoded client certificate.
+   *
+   * @generated from field: bytes certificate = 2;
+   */
+  certificate: Uint8Array;
+
+  /**
+   * The PEM-encoded private key for the certificate.
+   *
+   * @generated from field: bytes private_key = 3;
+   */
+  privateKey: Uint8Array;
+};
+
+/**
+ * Describes the message infracost.parser.options.ClientCertificate.
+ * Use `create(ClientCertificateSchema)` to create a new message.
+ */
+export const ClientCertificateSchema: GenMessage<ClientCertificate> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 3);
 
 /**
  * TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
@@ -221,7 +345,7 @@ export type TerraformCloudConfiguration = Message<"infracost.parser.options.Terr
  * Use `create(TerraformCloudConfigurationSchema)` to create a new message.
  */
 export const TerraformCloudConfigurationSchema: GenMessage<TerraformCloudConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 1);
+  messageDesc(file_infracost_parser_options_options, 4);
 
 /**
  * AttributeRequirement lists the attributes a given resource type must set for a FinOps
@@ -250,7 +374,7 @@ export type AttributeRequirement = Message<"infracost.parser.options.AttributeRe
  * Use `create(AttributeRequirementSchema)` to create a new message.
  */
 export const AttributeRequirementSchema: GenMessage<AttributeRequirement> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 2);
+  messageDesc(file_infracost_parser_options_options, 5);
 
 /**
  * DependencyRequest specifies parameters for extracting resource dependencies during parsing.
@@ -293,7 +417,7 @@ export type DependencyRequest = Message<"infracost.parser.options.DependencyRequ
  * Use `create(DependencyRequestSchema)` to create a new message.
  */
 export const DependencyRequestSchema: GenMessage<DependencyRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 3);
+  messageDesc(file_infracost_parser_options_options, 6);
 
 /**
  * @generated from message infracost.parser.options.Debug
@@ -319,21 +443,21 @@ export type Debug = Message<"infracost.parser.options.Debug"> & {
  * Use `create(DebugSchema)` to create a new message.
  */
 export const DebugSchema: GenMessage<Debug> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 4);
+  messageDesc(file_infracost_parser_options_options, 7);
 
 /**
  * @generated from message infracost.parser.options.CredentialSet
  */
 export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & {
   /**
-   * The access token for authentication
+   * The access token for authentication. For GIT_HTTP this is the password (or token).
    *
    * @generated from field: string token = 1;
    */
   token: string;
 
   /**
-   * The host for the authentication server
+   * The host for the authentication server.
    *
    * @generated from field: string host = 2;
    */
@@ -345,6 +469,21 @@ export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & 
    * @generated from field: infracost.parser.options.CredentialType type = 3;
    */
   type: CredentialType;
+
+  /**
+   * The username. Used by GIT_HTTP basic auth; empty for token-only credential types.
+   *
+   * @generated from field: string username = 4;
+   */
+  username: string;
+
+  /**
+   * Optional path prefix that scopes a GIT_HTTP credential to a subset of the host (e.g. an org).
+   * Empty matches any path on the host. Ignored by other credential types.
+   *
+   * @generated from field: string path = 5;
+   */
+  path: string;
 };
 
 /**
@@ -352,7 +491,7 @@ export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & 
  * Use `create(CredentialSetSchema)` to create a new message.
  */
 export const CredentialSetSchema: GenMessage<CredentialSet> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 5);
+  messageDesc(file_infracost_parser_options_options, 8);
 
 /**
  * @generated from message infracost.parser.options.RemoteModuleCacheConfig
@@ -392,7 +531,7 @@ export type RemoteModuleCacheConfig = Message<"infracost.parser.options.RemoteMo
  * Use `create(RemoteModuleCacheConfigSchema)` to create a new message.
  */
 export const RemoteModuleCacheConfigSchema: GenMessage<RemoteModuleCacheConfig> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 6);
+  messageDesc(file_infracost_parser_options_options, 9);
 
 /**
  * @generated from message infracost.parser.options.AwsCredentials
@@ -432,7 +571,7 @@ export type AwsCredentials = Message<"infracost.parser.options.AwsCredentials"> 
  * Use `create(AwsCredentialsSchema)` to create a new message.
  */
 export const AwsCredentialsSchema: GenMessage<AwsCredentials> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 7);
+  messageDesc(file_infracost_parser_options_options, 10);
 
 /**
  * @generated from message infracost.parser.options.ProxyRouter
@@ -449,7 +588,7 @@ export type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"> & {
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export const ProxyRouterSchema: GenMessage<ProxyRouter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 8);
+  messageDesc(file_infracost_parser_options_options, 11);
 
 /**
  * @generated from enum infracost.parser.options.CredentialType
@@ -475,6 +614,14 @@ export enum CredentialType {
    * @generated from enum value: TERRAFORM_CLOUD = 2;
    */
   TERRAFORM_CLOUD = 2,
+
+  /**
+   * git-over-https / http(s) archive basic auth (username + password/token), matched by host and
+   * optional path prefix. Replaces the on-disk git credential helper for remote fetches.
+   *
+   * @generated from enum value: GIT_HTTP = 3;
+   */
+  GIT_HTTP = 3,
 }
 
 /**
