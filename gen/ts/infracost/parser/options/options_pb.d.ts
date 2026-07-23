@@ -233,6 +233,16 @@ export declare type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & 
    * @generated from field: bool insecure_skip_host_key_verify = 4;
    */
   insecureSkipHostKeyVerify: boolean;
+
+  /**
+   * A git credential helper the in-process getter consults for hosts it cannot resolve from the
+   * static credential_sets. The runner points this at its /git-credential-helper binary to reach the
+   * dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
+   * org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
+   *
+   * @generated from field: infracost.parser.options.GitCredentialHelper git_credential_helper = 5;
+   */
+  gitCredentialHelper?: GitCredentialHelper;
 };
 
 /**
@@ -240,6 +250,38 @@ export declare type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & 
  * Use `create(FetchAuthSchema)` to create a new message.
  */
 export declare const FetchAuthSchema: GenMessage<FetchAuth>;
+
+/**
+ * GitCredentialHelper names an external git credential helper the getter execs (speaking the
+ * git-credential wire protocol) to resolve credentials dynamically, and scopes which hosts it is
+ * consulted for. It is the dynamic complement to the static credential_sets: those are tried first,
+ * and only a miss on one of the listed hosts falls through to the helper.
+ *
+ * @generated from message infracost.parser.options.GitCredentialHelper
+ */
+export declare type GitCredentialHelper = Message<"infracost.parser.options.GitCredentialHelper"> & {
+  /**
+   * The command to exec (e.g. "/git-credential-helper"). Empty disables the helper.
+   *
+   * @generated from field: string command = 1;
+   */
+  command: string;
+
+  /**
+   * The hosts the helper is able to serve (e.g. the GitHub host(s) for this run). The helper is only
+   * consulted for these hosts; requests for any other host skip it and fall through to the getter's
+   * remaining resolution steps, so no exec/round-trip is wasted on hosts the helper cannot serve.
+   *
+   * @generated from field: repeated string hosts = 2;
+   */
+  hosts: string[];
+};
+
+/**
+ * Describes the message infracost.parser.options.GitCredentialHelper.
+ * Use `create(GitCredentialHelperSchema)` to create a new message.
+ */
+export declare const GitCredentialHelperSchema: GenMessage<GitCredentialHelper>;
 
 /**
  * SSHKey is a git-over-ssh private key scoped to a host.

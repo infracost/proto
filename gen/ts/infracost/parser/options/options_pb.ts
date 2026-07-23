@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/options/options.proto.
  */
 export const file_infracost_parser_options_options: GenFile = /*@__PURE__*/
-  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIpsKCg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBARIgChhlbmFibGVfZ2l0X25vcm1hbGl6YXRpb24YDiABKAgSSwoTcmVxdWlyZWRfYXR0cmlidXRlcxgPIAMoCzIuLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5BdHRyaWJ1dGVSZXF1aXJlbWVudBJPCgxkZWZhdWx0X3RhZ3MYECADKAsyOS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMuRGVmYXVsdFRhZ3NFbnRyeRJLCgpzb3VyY2VfbWFwGBEgAygLMjcuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zLlNvdXJjZU1hcEVudHJ5Ej4KA2VudhgSIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucy5FbnZFbnRyeRIgChhmb3JjZV9sb2NhbF9tb2R1bGVfcGF0aHMYEyABKAgSEQoJd29ya3NwYWNlGBQgASgJElwKHXRlcnJhZm9ybV9jbG91ZF9jb25maWd1cmF0aW9uGBUgASgLMjUuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlRlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhI3CgpmZXRjaF9hdXRoGBYgASgLMiMuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkZldGNoQXV0aBoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaMAoOU291cmNlTWFwRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoqCghFbnZFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhUKE19kZXBlbmRlbmN5X3JlcXVlc3QiwgEKCUZldGNoQXV0aBIyCghzc2hfa2V5cxgBIAMoCzIgLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5TU0hLZXkSSAoTY2xpZW50X2NlcnRpZmljYXRlcxgCIAMoCzIrLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DbGllbnRDZXJ0aWZpY2F0ZRIQCghjYV9jZXJ0cxgDIAMoDBIlCh1pbnNlY3VyZV9za2lwX2hvc3Rfa2V5X3ZlcmlmeRgEIAEoCCIrCgZTU0hLZXkSDAoEaG9zdBgBIAEoCRITCgtwcml2YXRlX2tleRgCIAEoDCJLChFDbGllbnRDZXJ0aWZpY2F0ZRIMCgRob3N0GAEgASgJEhMKC2NlcnRpZmljYXRlGAIgASgMEhMKC3ByaXZhdGVfa2V5GAMgASgMIlgKG1RlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhIUCgxvcmdhbml6YXRpb24YASABKAkSEQoJd29ya3NwYWNlGAIgASgJEhAKCGhvc3RuYW1lGAMgASgJIkEKFEF0dHJpYnV0ZVJlcXVpcmVtZW50EhUKDXJlc291cmNlX3R5cGUYASABKAkSEgoKYXR0cmlidXRlcxgCIAMoCSKCAQoRRGVwZW5kZW5jeVJlcXVlc3QSFAoMcHJvamVjdF9uYW1lGAEgASgJEhgKEHJlc291cmNlX2FkZHJlc3MYAiABKAkSIgoadXNlX3JlbW90ZV9tb2R1bGVfc25pcHBldHMYAyABKAgSGQoRd29ya2luZ19kaXJlY3RvcnkYBCABKAkiMQoFRGVidWcSEQoJYWRkcmVzc2VzGAEgAygJEhUKDWluY2x1ZGVfZHVtcHMYAiABKAgihAEKDUNyZWRlbnRpYWxTZXQSDQoFdG9rZW4YASABKAkSDAoEaG9zdBgCIAEoCRI2CgR0eXBlGAMgASgOMiguaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkNyZWRlbnRpYWxUeXBlEhAKCHVzZXJuYW1lGAQgASgJEgwKBHBhdGgYBSABKAkiYgoXUmVtb3RlTW9kdWxlQ2FjaGVDb25maWcSDgoGcmVnaW9uGAEgASgJEhMKC2J1Y2tldF9uYW1lGAIgASgJEg4KBnByZWZpeBgDIAEoCRISCgppc19wcml2YXRlGAQgASgIImgKDkF3c0NyZWRlbnRpYWxzEhUKDWFjY2Vzc19rZXlfaWQYASABKAkSGQoRc2VjcmV0X2FjY2Vzc19rZXkYAiABKAkSFAoMYWNjZXNzX3Rva2VuGAMgASgJEg4KBnJlZ2lvbhgEIAEoCSJ/CgtQcm94eVJvdXRlchJBCgZyb3V0ZXMYASADKAsyMS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuUHJveHlSb3V0ZXIuUm91dGVzRW50cnkaLQoLUm91dGVzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASpfCg5DcmVkZW50aWFsVHlwZRIfChtDUkVERU5USUFMX1RZUEVfVU5TUEVDSUZJRUQQABIJCgVUT0tFThABEhMKD1RFUlJBRk9STV9DTE9VRBACEgwKCEdJVF9IVFRQEANC6gEKHGNvbS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnNCDE9wdGlvbnNQcm90b1ABWjpnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L3BhcnNlci9vcHRpb25zogIDSVBPqgIYSW5mcmFjb3N0LlBhcnNlci5PcHRpb25zygIYSW5mcmFjb3N0XFBhcnNlclxPcHRpb25z4gIkSW5mcmFjb3N0XFBhcnNlclxPcHRpb25zXEdQQk1ldGFkYXRh6gIaSW5mcmFjb3N0OjpQYXJzZXI6Ok9wdGlvbnNiBnByb3RvMw");
+  fileDesc("CiZpbmZyYWNvc3QvcGFyc2VyL29wdGlvbnMvb3B0aW9ucy5wcm90bxIYaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zIpsKCg5HZW5lcmljT3B0aW9ucxIUCgxwcm9qZWN0X25hbWUYASABKAkSGAoQZW52aXJvbm1lbnRfbmFtZRgCIAEoCRIWCg5yZXBvX2RpcmVjdG9yeRgDIAEoCRIbChN0ZW1wb3JhcnlfZGlyZWN0b3J5GAQgASgJEhcKD2NhY2hlX2RpcmVjdG9yeRgFIAEoCRIZChF3b3JraW5nX2RpcmVjdG9yeRgGIAEoCRJACg9jcmVkZW50aWFsX3NldHMYByADKAsyJy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQ3JlZGVudGlhbFNldBJBCg9hd3NfY3JlZGVudGlhbHMYCCABKAsyKC5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuQXdzQ3JlZGVudGlhbHMSLgoFZGVidWcYCSABKAsyHy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVidWcSFwoPc3BhcnNlX2NoZWNrb3V0GAogASgIEjsKDHByb3h5X3JvdXRlchgLIAEoCzIlLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5Qcm94eVJvdXRlchJVChpyZW1vdGVfbW9kdWxlX2NhY2hlX2NvbmZpZxgMIAEoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5SZW1vdGVNb2R1bGVDYWNoZUNvbmZpZxJMChJkZXBlbmRlbmN5X3JlcXVlc3QYDSABKAsyKy5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuRGVwZW5kZW5jeVJlcXVlc3RIAIgBARIgChhlbmFibGVfZ2l0X25vcm1hbGl6YXRpb24YDiABKAgSSwoTcmVxdWlyZWRfYXR0cmlidXRlcxgPIAMoCzIuLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5BdHRyaWJ1dGVSZXF1aXJlbWVudBJPCgxkZWZhdWx0X3RhZ3MYECADKAsyOS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2VuZXJpY09wdGlvbnMuRGVmYXVsdFRhZ3NFbnRyeRJLCgpzb3VyY2VfbWFwGBEgAygLMjcuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkdlbmVyaWNPcHRpb25zLlNvdXJjZU1hcEVudHJ5Ej4KA2VudhgSIAMoCzIxLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5HZW5lcmljT3B0aW9ucy5FbnZFbnRyeRIgChhmb3JjZV9sb2NhbF9tb2R1bGVfcGF0aHMYEyABKAgSEQoJd29ya3NwYWNlGBQgASgJElwKHXRlcnJhZm9ybV9jbG91ZF9jb25maWd1cmF0aW9uGBUgASgLMjUuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlRlcnJhZm9ybUNsb3VkQ29uZmlndXJhdGlvbhI3CgpmZXRjaF9hdXRoGBYgASgLMiMuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLkZldGNoQXV0aBoyChBEZWZhdWx0VGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaMAoOU291cmNlTWFwRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARoqCghFbnZFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhUKE19kZXBlbmRlbmN5X3JlcXVlc3QikAIKCUZldGNoQXV0aBIyCghzc2hfa2V5cxgBIAMoCzIgLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5TU0hLZXkSSAoTY2xpZW50X2NlcnRpZmljYXRlcxgCIAMoCzIrLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DbGllbnRDZXJ0aWZpY2F0ZRIQCghjYV9jZXJ0cxgDIAMoDBIlCh1pbnNlY3VyZV9za2lwX2hvc3Rfa2V5X3ZlcmlmeRgEIAEoCBJMChVnaXRfY3JlZGVudGlhbF9oZWxwZXIYBSABKAsyLS5pbmZyYWNvc3QucGFyc2VyLm9wdGlvbnMuR2l0Q3JlZGVudGlhbEhlbHBlciI1ChNHaXRDcmVkZW50aWFsSGVscGVyEg8KB2NvbW1hbmQYASABKAkSDQoFaG9zdHMYAiADKAkiKwoGU1NIS2V5EgwKBGhvc3QYASABKAkSEwoLcHJpdmF0ZV9rZXkYAiABKAwiSwoRQ2xpZW50Q2VydGlmaWNhdGUSDAoEaG9zdBgBIAEoCRITCgtjZXJ0aWZpY2F0ZRgCIAEoDBITCgtwcml2YXRlX2tleRgDIAEoDCJYChtUZXJyYWZvcm1DbG91ZENvbmZpZ3VyYXRpb24SFAoMb3JnYW5pemF0aW9uGAEgASgJEhEKCXdvcmtzcGFjZRgCIAEoCRIQCghob3N0bmFtZRgDIAEoCSJBChRBdHRyaWJ1dGVSZXF1aXJlbWVudBIVCg1yZXNvdXJjZV90eXBlGAEgASgJEhIKCmF0dHJpYnV0ZXMYAiADKAkiggEKEURlcGVuZGVuY3lSZXF1ZXN0EhQKDHByb2plY3RfbmFtZRgBIAEoCRIYChByZXNvdXJjZV9hZGRyZXNzGAIgASgJEiIKGnVzZV9yZW1vdGVfbW9kdWxlX3NuaXBwZXRzGAMgASgIEhkKEXdvcmtpbmdfZGlyZWN0b3J5GAQgASgJIjEKBURlYnVnEhEKCWFkZHJlc3NlcxgBIAMoCRIVCg1pbmNsdWRlX2R1bXBzGAIgASgIIoQBCg1DcmVkZW50aWFsU2V0Eg0KBXRva2VuGAEgASgJEgwKBGhvc3QYAiABKAkSNgoEdHlwZRgDIAEoDjIoLmluZnJhY29zdC5wYXJzZXIub3B0aW9ucy5DcmVkZW50aWFsVHlwZRIQCgh1c2VybmFtZRgEIAEoCRIMCgRwYXRoGAUgASgJImIKF1JlbW90ZU1vZHVsZUNhY2hlQ29uZmlnEg4KBnJlZ2lvbhgBIAEoCRITCgtidWNrZXRfbmFtZRgCIAEoCRIOCgZwcmVmaXgYAyABKAkSEgoKaXNfcHJpdmF0ZRgEIAEoCCJoCg5Bd3NDcmVkZW50aWFscxIVCg1hY2Nlc3Nfa2V5X2lkGAEgASgJEhkKEXNlY3JldF9hY2Nlc3Nfa2V5GAIgASgJEhQKDGFjY2Vzc190b2tlbhgDIAEoCRIOCgZyZWdpb24YBCABKAkifwoLUHJveHlSb3V0ZXISQQoGcm91dGVzGAEgAygLMjEuaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zLlByb3h5Um91dGVyLlJvdXRlc0VudHJ5Gi0KC1JvdXRlc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEqXwoOQ3JlZGVudGlhbFR5cGUSHwobQ1JFREVOVElBTF9UWVBFX1VOU1BFQ0lGSUVEEAASCQoFVE9LRU4QARITCg9URVJSQUZPUk1fQ0xPVUQQAhIMCghHSVRfSFRUUBADQuoBChxjb20uaW5mcmFjb3N0LnBhcnNlci5vcHRpb25zQgxPcHRpb25zUHJvdG9QAVo6Z2l0aHViLmNvbS9pbmZyYWNvc3QvcHJvdG8vZ2VuL2dvL2luZnJhY29zdC9wYXJzZXIvb3B0aW9uc6ICA0lQT6oCGEluZnJhY29zdC5QYXJzZXIuT3B0aW9uc8oCGEluZnJhY29zdFxQYXJzZXJcT3B0aW9uc+ICJEluZnJhY29zdFxQYXJzZXJcT3B0aW9uc1xHUEJNZXRhZGF0YeoCGkluZnJhY29zdDo6UGFyc2VyOjpPcHRpb25zYgZwcm90bzM");
 
 /**
  * @generated from message infracost.parser.options.GenericOptions
@@ -236,6 +236,16 @@ export type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & {
    * @generated from field: bool insecure_skip_host_key_verify = 4;
    */
   insecureSkipHostKeyVerify: boolean;
+
+  /**
+   * A git credential helper the in-process getter consults for hosts it cannot resolve from the
+   * static credential_sets. The runner points this at its /git-credential-helper binary to reach the
+   * dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
+   * org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
+   *
+   * @generated from field: infracost.parser.options.GitCredentialHelper git_credential_helper = 5;
+   */
+  gitCredentialHelper?: GitCredentialHelper;
 };
 
 /**
@@ -244,6 +254,39 @@ export type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & {
  */
 export const FetchAuthSchema: GenMessage<FetchAuth> = /*@__PURE__*/
   messageDesc(file_infracost_parser_options_options, 1);
+
+/**
+ * GitCredentialHelper names an external git credential helper the getter execs (speaking the
+ * git-credential wire protocol) to resolve credentials dynamically, and scopes which hosts it is
+ * consulted for. It is the dynamic complement to the static credential_sets: those are tried first,
+ * and only a miss on one of the listed hosts falls through to the helper.
+ *
+ * @generated from message infracost.parser.options.GitCredentialHelper
+ */
+export type GitCredentialHelper = Message<"infracost.parser.options.GitCredentialHelper"> & {
+  /**
+   * The command to exec (e.g. "/git-credential-helper"). Empty disables the helper.
+   *
+   * @generated from field: string command = 1;
+   */
+  command: string;
+
+  /**
+   * The hosts the helper is able to serve (e.g. the GitHub host(s) for this run). The helper is only
+   * consulted for these hosts; requests for any other host skip it and fall through to the getter's
+   * remaining resolution steps, so no exec/round-trip is wasted on hosts the helper cannot serve.
+   *
+   * @generated from field: repeated string hosts = 2;
+   */
+  hosts: string[];
+};
+
+/**
+ * Describes the message infracost.parser.options.GitCredentialHelper.
+ * Use `create(GitCredentialHelperSchema)` to create a new message.
+ */
+export const GitCredentialHelperSchema: GenMessage<GitCredentialHelper> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_options_options, 2);
 
 /**
  * SSHKey is a git-over-ssh private key scoped to a host.
@@ -271,7 +314,7 @@ export type SSHKey = Message<"infracost.parser.options.SSHKey"> & {
  * Use `create(SSHKeySchema)` to create a new message.
  */
 export const SSHKeySchema: GenMessage<SSHKey> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 2);
+  messageDesc(file_infracost_parser_options_options, 3);
 
 /**
  * ClientCertificate is an mTLS client certificate/key pair scoped to a host.
@@ -306,7 +349,7 @@ export type ClientCertificate = Message<"infracost.parser.options.ClientCertific
  * Use `create(ClientCertificateSchema)` to create a new message.
  */
 export const ClientCertificateSchema: GenMessage<ClientCertificate> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 3);
+  messageDesc(file_infracost_parser_options_options, 4);
 
 /**
  * TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
@@ -345,7 +388,7 @@ export type TerraformCloudConfiguration = Message<"infracost.parser.options.Terr
  * Use `create(TerraformCloudConfigurationSchema)` to create a new message.
  */
 export const TerraformCloudConfigurationSchema: GenMessage<TerraformCloudConfiguration> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 4);
+  messageDesc(file_infracost_parser_options_options, 5);
 
 /**
  * AttributeRequirement lists the attributes a given resource type must set for a FinOps
@@ -374,7 +417,7 @@ export type AttributeRequirement = Message<"infracost.parser.options.AttributeRe
  * Use `create(AttributeRequirementSchema)` to create a new message.
  */
 export const AttributeRequirementSchema: GenMessage<AttributeRequirement> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 5);
+  messageDesc(file_infracost_parser_options_options, 6);
 
 /**
  * DependencyRequest specifies parameters for extracting resource dependencies during parsing.
@@ -417,7 +460,7 @@ export type DependencyRequest = Message<"infracost.parser.options.DependencyRequ
  * Use `create(DependencyRequestSchema)` to create a new message.
  */
 export const DependencyRequestSchema: GenMessage<DependencyRequest> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 6);
+  messageDesc(file_infracost_parser_options_options, 7);
 
 /**
  * @generated from message infracost.parser.options.Debug
@@ -443,7 +486,7 @@ export type Debug = Message<"infracost.parser.options.Debug"> & {
  * Use `create(DebugSchema)` to create a new message.
  */
 export const DebugSchema: GenMessage<Debug> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 7);
+  messageDesc(file_infracost_parser_options_options, 8);
 
 /**
  * @generated from message infracost.parser.options.CredentialSet
@@ -491,7 +534,7 @@ export type CredentialSet = Message<"infracost.parser.options.CredentialSet"> & 
  * Use `create(CredentialSetSchema)` to create a new message.
  */
 export const CredentialSetSchema: GenMessage<CredentialSet> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 8);
+  messageDesc(file_infracost_parser_options_options, 9);
 
 /**
  * @generated from message infracost.parser.options.RemoteModuleCacheConfig
@@ -531,7 +574,7 @@ export type RemoteModuleCacheConfig = Message<"infracost.parser.options.RemoteMo
  * Use `create(RemoteModuleCacheConfigSchema)` to create a new message.
  */
 export const RemoteModuleCacheConfigSchema: GenMessage<RemoteModuleCacheConfig> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 9);
+  messageDesc(file_infracost_parser_options_options, 10);
 
 /**
  * @generated from message infracost.parser.options.AwsCredentials
@@ -571,7 +614,7 @@ export type AwsCredentials = Message<"infracost.parser.options.AwsCredentials"> 
  * Use `create(AwsCredentialsSchema)` to create a new message.
  */
 export const AwsCredentialsSchema: GenMessage<AwsCredentials> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 10);
+  messageDesc(file_infracost_parser_options_options, 11);
 
 /**
  * @generated from message infracost.parser.options.ProxyRouter
@@ -588,7 +631,7 @@ export type ProxyRouter = Message<"infracost.parser.options.ProxyRouter"> & {
  * Use `create(ProxyRouterSchema)` to create a new message.
  */
 export const ProxyRouterSchema: GenMessage<ProxyRouter> = /*@__PURE__*/
-  messageDesc(file_infracost_parser_options_options, 11);
+  messageDesc(file_infracost_parser_options_options, 12);
 
 /**
  * @generated from enum infracost.parser.options.CredentialType

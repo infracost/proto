@@ -89,6 +89,24 @@ message FetchAuth {
   // and clone ephemeral repos, matching the current permissive ssh config); the CLI leaves it false
   // so a developer's own ~/.ssh/known_hosts is honored.
   bool insecure_skip_host_key_verify = 4;
+  // A git credential helper the in-process getter consults for hosts it cannot resolve from the
+  // static credential_sets. The runner points this at its /git-credential-helper binary to reach the
+  // dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
+  // org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
+  GitCredentialHelper git_credential_helper = 5;
+}
+
+// GitCredentialHelper names an external git credential helper the getter execs (speaking the
+// git-credential wire protocol) to resolve credentials dynamically, and scopes which hosts it is
+// consulted for. It is the dynamic complement to the static credential_sets: those are tried first,
+// and only a miss on one of the listed hosts falls through to the helper.
+message GitCredentialHelper {
+  // The command to exec (e.g. "/git-credential-helper"). Empty disables the helper.
+  string command = 1;
+  // The hosts the helper is able to serve (e.g. the GitHub host(s) for this run). The helper is only
+  // consulted for these hosts; requests for any other host skip it and fall through to the getter's
+  // remaining resolution steps, so no exec/round-trip is wasted on hosts the helper cannot serve.
+  repeated string hosts = 2;
 }
 
 // SSHKey is a git-over-ssh private key scoped to a host.
