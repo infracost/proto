@@ -30,6 +30,9 @@ const (
 	CredentialType_TOKEN CredentialType = 1
 	// Terraform Cloud
 	CredentialType_TERRAFORM_CLOUD CredentialType = 2
+	// git-over-https / http(s) archive basic auth (username + password/token), matched by host and
+	// optional path prefix. Replaces the on-disk git credential helper for remote fetches.
+	CredentialType_GIT_HTTP CredentialType = 3
 )
 
 // Enum value maps for CredentialType.
@@ -38,11 +41,13 @@ var (
 		0: "CREDENTIAL_TYPE_UNSPECIFIED",
 		1: "TOKEN",
 		2: "TERRAFORM_CLOUD",
+		3: "GIT_HTTP",
 	}
 	CredentialType_value = map[string]int32{
 		"CREDENTIAL_TYPE_UNSPECIFIED": 0,
 		"TOKEN":                       1,
 		"TERRAFORM_CLOUD":             2,
+		"GIT_HTTP":                    3,
 	}
 )
 
@@ -130,8 +135,14 @@ type GenericOptions struct {
 	// (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
 	// caller to pair with the token in a terraform-cloud credential_set.
 	TerraformCloudConfiguration *TerraformCloudConfiguration `protobuf:"bytes,21,opt,name=terraform_cloud_configuration,json=terraformCloudConfiguration,proto3" json:"terraform_cloud_configuration,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// Transport-level authentication for fetching remote references (git-over-ssh keys, mTLS client
+	// certificates, extra CA bundles, host-key policy). Source: the runner decrypts these from the job
+	// event; the CLI leaves it unset and relies on the developer's own system git/ssh configuration.
+	// Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
+	// git-over-https credentials (username/password) travel in credential_sets, not here.
+	FetchAuth     *FetchAuth `protobuf:"bytes,22,opt,name=fetch_auth,json=fetchAuth,proto3" json:"fetch_auth,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -311,6 +322,285 @@ func (x *GenericOptions) GetTerraformCloudConfiguration() *TerraformCloudConfigu
 	return nil
 }
 
+func (x *GenericOptions) GetFetchAuth() *FetchAuth {
+	if x != nil {
+		return x.FetchAuth
+	}
+	return nil
+}
+
+// FetchAuth carries the transport-level authentication material used to fetch remote references
+// (Terraform modules, Kustomize bases, Helm chart dependencies). Previously this reached the fetcher
+// only as process-global side effects (GIT_SSH_COMMAND with an -i keyfile, GIT_SSL_CERT/CAINFO, a
+// permissive ssh config); it is passed explicitly now so the in-process getter applies it without
+// mutating the environment or touching disk.
+type FetchAuth struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// SSH private keys (PEM) for git-over-ssh clones, matched to a host. An entry with an empty host is
+	// the default, used when no host-specific key matches.
+	SshKeys []*SSHKey `protobuf:"bytes,1,rep,name=ssh_keys,json=sshKeys,proto3" json:"ssh_keys,omitempty"`
+	// mTLS client certificates presented to servers that require them, matched to a host. An entry with
+	// an empty host is the default.
+	ClientCertificates []*ClientCertificate `protobuf:"bytes,2,rep,name=client_certificates,json=clientCertificates,proto3" json:"client_certificates,omitempty"`
+	// Additional CA certificates (PEM) trusted when verifying server TLS, on top of the system roots.
+	CaCerts [][]byte `protobuf:"bytes,3,rep,name=ca_certs,json=caCerts,proto3" json:"ca_certs,omitempty"`
+	// Skip SSH host-key verification. The hosted runner sets this (its containers carry no known_hosts
+	// and clone ephemeral repos, matching the current permissive ssh config); the CLI leaves it false
+	// so a developer's own ~/.ssh/known_hosts is honored.
+	InsecureSkipHostKeyVerify bool `protobuf:"varint,4,opt,name=insecure_skip_host_key_verify,json=insecureSkipHostKeyVerify,proto3" json:"insecure_skip_host_key_verify,omitempty"`
+	// A git credential helper the in-process getter consults for hosts it cannot resolve from the
+	// static credential_sets. The runner points this at its /git-credential-helper binary to reach the
+	// dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
+	// org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
+	GitCredentialHelper *GitCredentialHelper `protobuf:"bytes,5,opt,name=git_credential_helper,json=gitCredentialHelper,proto3" json:"git_credential_helper,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *FetchAuth) Reset() {
+	*x = FetchAuth{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FetchAuth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchAuth) ProtoMessage() {}
+
+func (x *FetchAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchAuth.ProtoReflect.Descriptor instead.
+func (*FetchAuth) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *FetchAuth) GetSshKeys() []*SSHKey {
+	if x != nil {
+		return x.SshKeys
+	}
+	return nil
+}
+
+func (x *FetchAuth) GetClientCertificates() []*ClientCertificate {
+	if x != nil {
+		return x.ClientCertificates
+	}
+	return nil
+}
+
+func (x *FetchAuth) GetCaCerts() [][]byte {
+	if x != nil {
+		return x.CaCerts
+	}
+	return nil
+}
+
+func (x *FetchAuth) GetInsecureSkipHostKeyVerify() bool {
+	if x != nil {
+		return x.InsecureSkipHostKeyVerify
+	}
+	return false
+}
+
+func (x *FetchAuth) GetGitCredentialHelper() *GitCredentialHelper {
+	if x != nil {
+		return x.GitCredentialHelper
+	}
+	return nil
+}
+
+// GitCredentialHelper names an external git credential helper the getter execs (speaking the
+// git-credential wire protocol) to resolve credentials dynamically, and scopes which hosts it is
+// consulted for. It is the dynamic complement to the static credential_sets: those are tried first,
+// and only a miss on one of the listed hosts falls through to the helper.
+type GitCredentialHelper struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The command to exec (e.g. "/git-credential-helper"). Empty disables the helper.
+	Command string `protobuf:"bytes,1,opt,name=command,proto3" json:"command,omitempty"`
+	// The hosts the helper is able to serve (e.g. the GitHub host(s) for this run). The helper is only
+	// consulted for these hosts; requests for any other host skip it and fall through to the getter's
+	// remaining resolution steps, so no exec/round-trip is wasted on hosts the helper cannot serve.
+	Hosts         []string `protobuf:"bytes,2,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GitCredentialHelper) Reset() {
+	*x = GitCredentialHelper{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GitCredentialHelper) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GitCredentialHelper) ProtoMessage() {}
+
+func (x *GitCredentialHelper) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GitCredentialHelper.ProtoReflect.Descriptor instead.
+func (*GitCredentialHelper) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GitCredentialHelper) GetCommand() string {
+	if x != nil {
+		return x.Command
+	}
+	return ""
+}
+
+func (x *GitCredentialHelper) GetHosts() []string {
+	if x != nil {
+		return x.Hosts
+	}
+	return nil
+}
+
+// SSHKey is a git-over-ssh private key scoped to a host.
+type SSHKey struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The host this key authenticates to; empty means use it as the default key.
+	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// The PEM-encoded private key.
+	PrivateKey    []byte `protobuf:"bytes,2,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SSHKey) Reset() {
+	*x = SSHKey{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SSHKey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SSHKey) ProtoMessage() {}
+
+func (x *SSHKey) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SSHKey.ProtoReflect.Descriptor instead.
+func (*SSHKey) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SSHKey) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *SSHKey) GetPrivateKey() []byte {
+	if x != nil {
+		return x.PrivateKey
+	}
+	return nil
+}
+
+// ClientCertificate is an mTLS client certificate/key pair scoped to a host.
+type ClientCertificate struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The host this certificate is presented to; empty means use it as the default.
+	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// The PEM-encoded client certificate.
+	Certificate []byte `protobuf:"bytes,2,opt,name=certificate,proto3" json:"certificate,omitempty"`
+	// The PEM-encoded private key for the certificate.
+	PrivateKey    []byte `protobuf:"bytes,3,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClientCertificate) Reset() {
+	*x = ClientCertificate{}
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientCertificate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientCertificate) ProtoMessage() {}
+
+func (x *ClientCertificate) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClientCertificate.ProtoReflect.Descriptor instead.
+func (*ClientCertificate) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ClientCertificate) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *ClientCertificate) GetCertificate() []byte {
+	if x != nil {
+		return x.Certificate
+	}
+	return nil
+}
+
+func (x *ClientCertificate) GetPrivateKey() []byte {
+	if x != nil {
+		return x.PrivateKey
+	}
+	return nil
+}
+
 // TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
 // plugin pairs it with its auth token by matching hostname against a credential_set's host, then
 // uses organization + workspace to address the remote workspace. NOTE: this workspace is the TFC
@@ -330,7 +620,7 @@ type TerraformCloudConfiguration struct {
 
 func (x *TerraformCloudConfiguration) Reset() {
 	*x = TerraformCloudConfiguration{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -342,7 +632,7 @@ func (x *TerraformCloudConfiguration) String() string {
 func (*TerraformCloudConfiguration) ProtoMessage() {}
 
 func (x *TerraformCloudConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[1]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,7 +645,7 @@ func (x *TerraformCloudConfiguration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TerraformCloudConfiguration.ProtoReflect.Descriptor instead.
 func (*TerraformCloudConfiguration) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{1}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TerraformCloudConfiguration) GetOrganization() string {
@@ -393,7 +683,7 @@ type AttributeRequirement struct {
 
 func (x *AttributeRequirement) Reset() {
 	*x = AttributeRequirement{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -405,7 +695,7 @@ func (x *AttributeRequirement) String() string {
 func (*AttributeRequirement) ProtoMessage() {}
 
 func (x *AttributeRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[2]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -418,7 +708,7 @@ func (x *AttributeRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttributeRequirement.ProtoReflect.Descriptor instead.
 func (*AttributeRequirement) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{2}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AttributeRequirement) GetResourceType() string {
@@ -453,7 +743,7 @@ type DependencyRequest struct {
 
 func (x *DependencyRequest) Reset() {
 	*x = DependencyRequest{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -465,7 +755,7 @@ func (x *DependencyRequest) String() string {
 func (*DependencyRequest) ProtoMessage() {}
 
 func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[3]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -478,7 +768,7 @@ func (x *DependencyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DependencyRequest.ProtoReflect.Descriptor instead.
 func (*DependencyRequest) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{3}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DependencyRequest) GetProjectName() string {
@@ -521,7 +811,7 @@ type Debug struct {
 
 func (x *Debug) Reset() {
 	*x = Debug{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -533,7 +823,7 @@ func (x *Debug) String() string {
 func (*Debug) ProtoMessage() {}
 
 func (x *Debug) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[4]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -546,7 +836,7 @@ func (x *Debug) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Debug.ProtoReflect.Descriptor instead.
 func (*Debug) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{4}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Debug) GetAddresses() []string {
@@ -565,19 +855,24 @@ func (x *Debug) GetIncludeDumps() bool {
 
 type CredentialSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The access token for authentication
+	// The access token for authentication. For GIT_HTTP this is the password (or token).
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	// The host for the authentication server
+	// The host for the authentication server.
 	Host string `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
 	// The type of credential
-	Type          CredentialType `protobuf:"varint,3,opt,name=type,proto3,enum=infracost.parser.options.CredentialType" json:"type,omitempty"`
+	Type CredentialType `protobuf:"varint,3,opt,name=type,proto3,enum=infracost.parser.options.CredentialType" json:"type,omitempty"`
+	// The username. Used by GIT_HTTP basic auth; empty for token-only credential types.
+	Username string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
+	// Optional path prefix that scopes a GIT_HTTP credential to a subset of the host (e.g. an org).
+	// Empty matches any path on the host. Ignored by other credential types.
+	Path          string `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CredentialSet) Reset() {
 	*x = CredentialSet{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -589,7 +884,7 @@ func (x *CredentialSet) String() string {
 func (*CredentialSet) ProtoMessage() {}
 
 func (x *CredentialSet) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[5]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,7 +897,7 @@ func (x *CredentialSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CredentialSet.ProtoReflect.Descriptor instead.
 func (*CredentialSet) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CredentialSet) GetToken() string {
@@ -626,6 +921,20 @@ func (x *CredentialSet) GetType() CredentialType {
 	return CredentialType_CREDENTIAL_TYPE_UNSPECIFIED
 }
 
+func (x *CredentialSet) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *CredentialSet) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 type RemoteModuleCacheConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The region for the cache
@@ -642,7 +951,7 @@ type RemoteModuleCacheConfig struct {
 
 func (x *RemoteModuleCacheConfig) Reset() {
 	*x = RemoteModuleCacheConfig{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +963,7 @@ func (x *RemoteModuleCacheConfig) String() string {
 func (*RemoteModuleCacheConfig) ProtoMessage() {}
 
 func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[6]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +976,7 @@ func (x *RemoteModuleCacheConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoteModuleCacheConfig.ProtoReflect.Descriptor instead.
 func (*RemoteModuleCacheConfig) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RemoteModuleCacheConfig) GetRegion() string {
@@ -714,7 +1023,7 @@ type AwsCredentials struct {
 
 func (x *AwsCredentials) Reset() {
 	*x = AwsCredentials{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -726,7 +1035,7 @@ func (x *AwsCredentials) String() string {
 func (*AwsCredentials) ProtoMessage() {}
 
 func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[7]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,7 +1048,7 @@ func (x *AwsCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AwsCredentials.ProtoReflect.Descriptor instead.
 func (*AwsCredentials) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *AwsCredentials) GetAccessKeyId() string {
@@ -779,7 +1088,7 @@ type ProxyRouter struct {
 
 func (x *ProxyRouter) Reset() {
 	*x = ProxyRouter{}
-	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +1100,7 @@ func (x *ProxyRouter) String() string {
 func (*ProxyRouter) ProtoMessage() {}
 
 func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_options_options_proto_msgTypes[8]
+	mi := &file_infracost_parser_options_options_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +1113,7 @@ func (x *ProxyRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProxyRouter.ProtoReflect.Descriptor instead.
 func (*ProxyRouter) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{8}
+	return file_infracost_parser_options_options_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProxyRouter) GetRoutes() map[string]string {
@@ -818,7 +1127,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xe1\f\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xa5\r\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -842,7 +1151,9 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x03env\x18\x12 \x03(\v21.infracost.parser.options.GenericOptions.EnvEntryR\x03env\x127\n" +
 	"\x18force_local_module_paths\x18\x13 \x01(\bR\x15forceLocalModulePaths\x12\x1c\n" +
 	"\tworkspace\x18\x14 \x01(\tR\tworkspace\x12y\n" +
-	"\x1dterraform_cloud_configuration\x18\x15 \x01(\v25.infracost.parser.options.TerraformCloudConfigurationR\x1bterraformCloudConfiguration\x1a>\n" +
+	"\x1dterraform_cloud_configuration\x18\x15 \x01(\v25.infracost.parser.options.TerraformCloudConfigurationR\x1bterraformCloudConfiguration\x12B\n" +
+	"\n" +
+	"fetch_auth\x18\x16 \x01(\v2#.infracost.parser.options.FetchAuthR\tfetchAuth\x1a>\n" +
 	"\x10DefaultTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a<\n" +
@@ -852,7 +1163,25 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\bEnvEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x15\n" +
-	"\x13_dependency_request\"{\n" +
+	"\x13_dependency_request\"\xe6\x02\n" +
+	"\tFetchAuth\x12;\n" +
+	"\bssh_keys\x18\x01 \x03(\v2 .infracost.parser.options.SSHKeyR\asshKeys\x12\\\n" +
+	"\x13client_certificates\x18\x02 \x03(\v2+.infracost.parser.options.ClientCertificateR\x12clientCertificates\x12\x19\n" +
+	"\bca_certs\x18\x03 \x03(\fR\acaCerts\x12@\n" +
+	"\x1dinsecure_skip_host_key_verify\x18\x04 \x01(\bR\x19insecureSkipHostKeyVerify\x12a\n" +
+	"\x15git_credential_helper\x18\x05 \x01(\v2-.infracost.parser.options.GitCredentialHelperR\x13gitCredentialHelper\"E\n" +
+	"\x13GitCredentialHelper\x12\x18\n" +
+	"\acommand\x18\x01 \x01(\tR\acommand\x12\x14\n" +
+	"\x05hosts\x18\x02 \x03(\tR\x05hosts\"=\n" +
+	"\x06SSHKey\x12\x12\n" +
+	"\x04host\x18\x01 \x01(\tR\x04host\x12\x1f\n" +
+	"\vprivate_key\x18\x02 \x01(\fR\n" +
+	"privateKey\"j\n" +
+	"\x11ClientCertificate\x12\x12\n" +
+	"\x04host\x18\x01 \x01(\tR\x04host\x12 \n" +
+	"\vcertificate\x18\x02 \x01(\fR\vcertificate\x12\x1f\n" +
+	"\vprivate_key\x18\x03 \x01(\fR\n" +
+	"privateKey\"{\n" +
 	"\x1bTerraformCloudConfiguration\x12\"\n" +
 	"\forganization\x18\x01 \x01(\tR\forganization\x12\x1c\n" +
 	"\tworkspace\x18\x02 \x01(\tR\tworkspace\x12\x1a\n" +
@@ -869,11 +1198,13 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x11working_directory\x18\x04 \x01(\tR\x10workingDirectory\"J\n" +
 	"\x05Debug\x12\x1c\n" +
 	"\taddresses\x18\x01 \x03(\tR\taddresses\x12#\n" +
-	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"w\n" +
+	"\rinclude_dumps\x18\x02 \x01(\bR\fincludeDumps\"\xa7\x01\n" +
 	"\rCredentialSet\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x12\n" +
 	"\x04host\x18\x02 \x01(\tR\x04host\x12<\n" +
-	"\x04type\x18\x03 \x01(\x0e2(.infracost.parser.options.CredentialTypeR\x04type\"\x89\x01\n" +
+	"\x04type\x18\x03 \x01(\x0e2(.infracost.parser.options.CredentialTypeR\x04type\x12\x1a\n" +
+	"\busername\x18\x04 \x01(\tR\busername\x12\x12\n" +
+	"\x04path\x18\x05 \x01(\tR\x04path\"\x89\x01\n" +
 	"\x17RemoteModuleCacheConfig\x12\x16\n" +
 	"\x06region\x18\x01 \x01(\tR\x06region\x12\x1f\n" +
 	"\vbucket_name\x18\x02 \x01(\tR\n" +
@@ -890,11 +1221,12 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\x06routes\x18\x01 \x03(\v21.infracost.parser.options.ProxyRouter.RoutesEntryR\x06routes\x1a9\n" +
 	"\vRoutesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*Q\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*_\n" +
 	"\x0eCredentialType\x12\x1f\n" +
 	"\x1bCREDENTIAL_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05TOKEN\x10\x01\x12\x13\n" +
-	"\x0fTERRAFORM_CLOUD\x10\x02B\xea\x01\n" +
+	"\x0fTERRAFORM_CLOUD\x10\x02\x12\f\n" +
+	"\bGIT_HTTP\x10\x03B\xea\x01\n" +
 	"\x1ccom.infracost.parser.optionsB\fOptionsProtoP\x01Z:github.com/infracost/proto/gen/go/infracost/parser/options\xa2\x02\x03IPO\xaa\x02\x18Infracost.Parser.Options\xca\x02\x18Infracost\\Parser\\Options\xe2\x02$Infracost\\Parser\\Options\\GPBMetadata\xea\x02\x1aInfracost::Parser::Optionsb\x06proto3"
 
 var (
@@ -910,42 +1242,50 @@ func file_infracost_parser_options_options_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_options_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_infracost_parser_options_options_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_infracost_parser_options_options_proto_goTypes = []any{
 	(CredentialType)(0),                 // 0: infracost.parser.options.CredentialType
 	(*GenericOptions)(nil),              // 1: infracost.parser.options.GenericOptions
-	(*TerraformCloudConfiguration)(nil), // 2: infracost.parser.options.TerraformCloudConfiguration
-	(*AttributeRequirement)(nil),        // 3: infracost.parser.options.AttributeRequirement
-	(*DependencyRequest)(nil),           // 4: infracost.parser.options.DependencyRequest
-	(*Debug)(nil),                       // 5: infracost.parser.options.Debug
-	(*CredentialSet)(nil),               // 6: infracost.parser.options.CredentialSet
-	(*RemoteModuleCacheConfig)(nil),     // 7: infracost.parser.options.RemoteModuleCacheConfig
-	(*AwsCredentials)(nil),              // 8: infracost.parser.options.AwsCredentials
-	(*ProxyRouter)(nil),                 // 9: infracost.parser.options.ProxyRouter
-	nil,                                 // 10: infracost.parser.options.GenericOptions.DefaultTagsEntry
-	nil,                                 // 11: infracost.parser.options.GenericOptions.SourceMapEntry
-	nil,                                 // 12: infracost.parser.options.GenericOptions.EnvEntry
-	nil,                                 // 13: infracost.parser.options.ProxyRouter.RoutesEntry
+	(*FetchAuth)(nil),                   // 2: infracost.parser.options.FetchAuth
+	(*GitCredentialHelper)(nil),         // 3: infracost.parser.options.GitCredentialHelper
+	(*SSHKey)(nil),                      // 4: infracost.parser.options.SSHKey
+	(*ClientCertificate)(nil),           // 5: infracost.parser.options.ClientCertificate
+	(*TerraformCloudConfiguration)(nil), // 6: infracost.parser.options.TerraformCloudConfiguration
+	(*AttributeRequirement)(nil),        // 7: infracost.parser.options.AttributeRequirement
+	(*DependencyRequest)(nil),           // 8: infracost.parser.options.DependencyRequest
+	(*Debug)(nil),                       // 9: infracost.parser.options.Debug
+	(*CredentialSet)(nil),               // 10: infracost.parser.options.CredentialSet
+	(*RemoteModuleCacheConfig)(nil),     // 11: infracost.parser.options.RemoteModuleCacheConfig
+	(*AwsCredentials)(nil),              // 12: infracost.parser.options.AwsCredentials
+	(*ProxyRouter)(nil),                 // 13: infracost.parser.options.ProxyRouter
+	nil,                                 // 14: infracost.parser.options.GenericOptions.DefaultTagsEntry
+	nil,                                 // 15: infracost.parser.options.GenericOptions.SourceMapEntry
+	nil,                                 // 16: infracost.parser.options.GenericOptions.EnvEntry
+	nil,                                 // 17: infracost.parser.options.ProxyRouter.RoutesEntry
 }
 var file_infracost_parser_options_options_proto_depIdxs = []int32{
-	6,  // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
-	8,  // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
-	5,  // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
-	9,  // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
-	7,  // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
-	4,  // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
-	3,  // 6: infracost.parser.options.GenericOptions.required_attributes:type_name -> infracost.parser.options.AttributeRequirement
-	10, // 7: infracost.parser.options.GenericOptions.default_tags:type_name -> infracost.parser.options.GenericOptions.DefaultTagsEntry
-	11, // 8: infracost.parser.options.GenericOptions.source_map:type_name -> infracost.parser.options.GenericOptions.SourceMapEntry
-	12, // 9: infracost.parser.options.GenericOptions.env:type_name -> infracost.parser.options.GenericOptions.EnvEntry
-	2,  // 10: infracost.parser.options.GenericOptions.terraform_cloud_configuration:type_name -> infracost.parser.options.TerraformCloudConfiguration
-	0,  // 11: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
-	13, // 12: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	10, // 0: infracost.parser.options.GenericOptions.credential_sets:type_name -> infracost.parser.options.CredentialSet
+	12, // 1: infracost.parser.options.GenericOptions.aws_credentials:type_name -> infracost.parser.options.AwsCredentials
+	9,  // 2: infracost.parser.options.GenericOptions.debug:type_name -> infracost.parser.options.Debug
+	13, // 3: infracost.parser.options.GenericOptions.proxy_router:type_name -> infracost.parser.options.ProxyRouter
+	11, // 4: infracost.parser.options.GenericOptions.remote_module_cache_config:type_name -> infracost.parser.options.RemoteModuleCacheConfig
+	8,  // 5: infracost.parser.options.GenericOptions.dependency_request:type_name -> infracost.parser.options.DependencyRequest
+	7,  // 6: infracost.parser.options.GenericOptions.required_attributes:type_name -> infracost.parser.options.AttributeRequirement
+	14, // 7: infracost.parser.options.GenericOptions.default_tags:type_name -> infracost.parser.options.GenericOptions.DefaultTagsEntry
+	15, // 8: infracost.parser.options.GenericOptions.source_map:type_name -> infracost.parser.options.GenericOptions.SourceMapEntry
+	16, // 9: infracost.parser.options.GenericOptions.env:type_name -> infracost.parser.options.GenericOptions.EnvEntry
+	6,  // 10: infracost.parser.options.GenericOptions.terraform_cloud_configuration:type_name -> infracost.parser.options.TerraformCloudConfiguration
+	2,  // 11: infracost.parser.options.GenericOptions.fetch_auth:type_name -> infracost.parser.options.FetchAuth
+	4,  // 12: infracost.parser.options.FetchAuth.ssh_keys:type_name -> infracost.parser.options.SSHKey
+	5,  // 13: infracost.parser.options.FetchAuth.client_certificates:type_name -> infracost.parser.options.ClientCertificate
+	3,  // 14: infracost.parser.options.FetchAuth.git_credential_helper:type_name -> infracost.parser.options.GitCredentialHelper
+	0,  // 15: infracost.parser.options.CredentialSet.type:type_name -> infracost.parser.options.CredentialType
+	17, // 16: infracost.parser.options.ProxyRouter.routes:type_name -> infracost.parser.options.ProxyRouter.RoutesEntry
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_options_options_proto_init() }
@@ -960,7 +1300,7 @@ func file_infracost_parser_options_options_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_options_options_proto_rawDesc), len(file_infracost_parser_options_options_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   13,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

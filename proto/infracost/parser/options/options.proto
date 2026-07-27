@@ -63,6 +63,68 @@ message GenericOptions {
   // (not in the raw_options blob) because it is caller-sourced and the hostname is also read by the
   // caller to pair with the token in a terraform-cloud credential_set.
   TerraformCloudConfiguration terraform_cloud_configuration = 21;
+  // Transport-level authentication for fetching remote references (git-over-ssh keys, mTLS client
+  // certificates, extra CA bundles, host-key policy). Source: the runner decrypts these from the job
+  // event; the CLI leaves it unset and relies on the developer's own system git/ssh configuration.
+  // Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
+  // git-over-https credentials (username/password) travel in credential_sets, not here.
+  FetchAuth fetch_auth = 22;
+}
+
+// FetchAuth carries the transport-level authentication material used to fetch remote references
+// (Terraform modules, Kustomize bases, Helm chart dependencies). Previously this reached the fetcher
+// only as process-global side effects (GIT_SSH_COMMAND with an -i keyfile, GIT_SSL_CERT/CAINFO, a
+// permissive ssh config); it is passed explicitly now so the in-process getter applies it without
+// mutating the environment or touching disk.
+message FetchAuth {
+  // SSH private keys (PEM) for git-over-ssh clones, matched to a host. An entry with an empty host is
+  // the default, used when no host-specific key matches.
+  repeated SSHKey ssh_keys = 1;
+  // mTLS client certificates presented to servers that require them, matched to a host. An entry with
+  // an empty host is the default.
+  repeated ClientCertificate client_certificates = 2;
+  // Additional CA certificates (PEM) trusted when verifying server TLS, on top of the system roots.
+  repeated bytes ca_certs = 3;
+  // Skip SSH host-key verification. The hosted runner sets this (its containers carry no known_hosts
+  // and clone ephemeral repos, matching the current permissive ssh config); the CLI leaves it false
+  // so a developer's own ~/.ssh/known_hosts is honored.
+  bool insecure_skip_host_key_verify = 4;
+  // A git credential helper the in-process getter consults for hosts it cannot resolve from the
+  // static credential_sets. The runner points this at its /git-credential-helper binary to reach the
+  // dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
+  // org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
+  GitCredentialHelper git_credential_helper = 5;
+}
+
+// GitCredentialHelper names an external git credential helper the getter execs (speaking the
+// git-credential wire protocol) to resolve credentials dynamically, and scopes which hosts it is
+// consulted for. It is the dynamic complement to the static credential_sets: those are tried first,
+// and only a miss on one of the listed hosts falls through to the helper.
+message GitCredentialHelper {
+  // The command to exec (e.g. "/git-credential-helper"). Empty disables the helper.
+  string command = 1;
+  // The hosts the helper is able to serve (e.g. the GitHub host(s) for this run). The helper is only
+  // consulted for these hosts; requests for any other host skip it and fall through to the getter's
+  // remaining resolution steps, so no exec/round-trip is wasted on hosts the helper cannot serve.
+  repeated string hosts = 2;
+}
+
+// SSHKey is a git-over-ssh private key scoped to a host.
+message SSHKey {
+  // The host this key authenticates to; empty means use it as the default key.
+  string host = 1;
+  // The PEM-encoded private key.
+  bytes private_key = 2;
+}
+
+// ClientCertificate is an mTLS client certificate/key pair scoped to a host.
+message ClientCertificate {
+  // The host this certificate is presented to; empty means use it as the default.
+  string host = 1;
+  // The PEM-encoded client certificate.
+  bytes certificate = 2;
+  // The PEM-encoded private key for the certificate.
+  bytes private_key = 3;
 }
 
 // TerraformCloudConfiguration identifies the Terraform Cloud / Enterprise workspace to read. The
@@ -115,15 +177,23 @@ enum CredentialType {
   TOKEN = 1;
   // Terraform Cloud
   TERRAFORM_CLOUD = 2;
+  // git-over-https / http(s) archive basic auth (username + password/token), matched by host and
+  // optional path prefix. Replaces the on-disk git credential helper for remote fetches.
+  GIT_HTTP = 3;
 }
 
 message CredentialSet {
-  // The access token for authentication
+  // The access token for authentication. For GIT_HTTP this is the password (or token).
   string token = 1;
-  // The host for the authentication server
+  // The host for the authentication server.
   string host = 2;
   // The type of credential
   CredentialType type = 3;
+  // The username. Used by GIT_HTTP basic auth; empty for token-only credential types.
+  string username = 4;
+  // Optional path prefix that scopes a GIT_HTTP credential to a subset of the host (e.g. an org).
+  // Empty matches any path on the host. Ignored by other credential types.
+  string path = 5;
 }
 
 message RemoteModuleCacheConfig {
