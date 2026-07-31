@@ -52,6 +52,18 @@ message IndexedProject {
   string name = 3;
   // iac type of the project, as per the infracost config file
   string iac_type = 4;
+  // CloudFormation deployment identity, when known at index time
+  optional CloudFormationMetadata cloudformation = 5;
+}
+
+// CloudFormationMetadata identifies the stack represented by an indexed project
+message CloudFormationMetadata {
+  // physical CloudFormation stack name
+  string stack_name = 1;
+  // AWS account containing the stack
+  string account_id = 2;
+  // AWS region containing the stack
+  string region = 3;
 }
 
 // Attributes is a set of indexing-attributes for a given repo or project

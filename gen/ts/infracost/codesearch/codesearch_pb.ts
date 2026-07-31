@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/codesearch/codesearch.proto.
  */
 export const file_infracost_codesearch_codesearch: GenFile = /*@__PURE__*/
-  fileDesc("CiVpbmZyYWNvc3QvY29kZXNlYXJjaC9jb2Rlc2VhcmNoLnByb3RvEhRpbmZyYWNvc3QuY29kZXNlYXJjaCKfAwoJSW5kZXhEYXRhEg4KBm9yZ19pZBgBIAEoCRIQCghyZXBvX3VybBgCIAEoCRILCgNyZWYYAyABKAkSNAoKYXR0cmlidXRlcxgEIAEoCzIgLmluZnJhY29zdC5jb2Rlc2VhcmNoLkF0dHJpYnV0ZXMSPgoQaW5kZXhlZF9wcm9qZWN0cxgFIAMoCzIkLmluZnJhY29zdC5jb2Rlc2VhcmNoLkluZGV4ZWRQcm9qZWN0Eg8KB3JlcG9faWQYBiABKAkSEQoJcmVwb19uYW1lGAcgASgJEjkKCHZjc190eXBlGAggASgOMicuaW5mcmFjb3N0LmNvZGVzZWFyY2guSW5kZXhEYXRhLlZDU1R5cGUSEgoKY29tbWl0X3NoYRgJIAEoCRI0ChBjb21taXRfdGltZXN0YW1wGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJECgdWQ1NUeXBlEg8KC1VOS05PV05fVkNTEAASCgoGR0lUSFVCEAESCgoGR0lUTEFCEAISEAoMQVpVUkVfREVWT1BTEAMimAEKDkluZGV4ZWRQcm9qZWN0EjQKCmF0dHJpYnV0ZXMYASABKAsyIC5pbmZyYWNvc3QuY29kZXNlYXJjaC5BdHRyaWJ1dGVzEicKBHRyZWUYAiABKAsyFC5pbmZyYWNvc3QudHJlZS5UcmVlSACIAQESDAoEbmFtZRgDIAEoCRIQCghpYWNfdHlwZRgEIAEoCUIHCgVfdHJlZSKFAgoKQXR0cmlidXRlcxJFChNwcm92aWRlcl9hdHRyaWJ1dGVzGAEgAygLMiguaW5mcmFjb3N0LmNvZGVzZWFyY2guUHJvdmlkZXJBdHRyaWJ1dGVzEjgKBHRhZ3MYAiADKAsyKi5pbmZyYWNvc3QuY29kZXNlYXJjaC5BdHRyaWJ1dGVzLlRhZ3NFbnRyeRIUCgxlbnZpcm9ubWVudHMYAyADKAkSHwoXbm9ybWFsaXplZF9lbnZpcm9ubWVudHMYBCADKAkSEgoKY29tcG9uZW50cxgFIAMoCRorCglUYWdzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASJRChJQcm92aWRlckF0dHJpYnV0ZXMSEwoLYWNjb3VudF9pZHMYASADKAkSDwoHcmVnaW9ucxgCIAMoCRIVCg1wcm92aWRlcl9uYW1lGAMgASgJQtQBChhjb20uaW5mcmFjb3N0LmNvZGVzZWFyY2hCD0NvZGVzZWFyY2hQcm90b1ABWjZnaXRodWIuY29tL2luZnJhY29zdC9wcm90by9nZW4vZ28vaW5mcmFjb3N0L2NvZGVzZWFyY2iiAgNJQ1iqAhRJbmZyYWNvc3QuQ29kZXNlYXJjaMoCFEluZnJhY29zdFxDb2Rlc2VhcmNo4gIgSW5mcmFjb3N0XENvZGVzZWFyY2hcR1BCTWV0YWRhdGHqAhVJbmZyYWNvc3Q6OkNvZGVzZWFyY2hiBnByb3RvMw", [file_google_protobuf_timestamp, file_infracost_tree_tree]);
+  fileDesc("CiVpbmZyYWNvc3QvY29kZXNlYXJjaC9jb2Rlc2VhcmNoLnByb3RvEhRpbmZyYWNvc3QuY29kZXNlYXJjaCKfAwoJSW5kZXhEYXRhEg4KBm9yZ19pZBgBIAEoCRIQCghyZXBvX3VybBgCIAEoCRILCgNyZWYYAyABKAkSNAoKYXR0cmlidXRlcxgEIAEoCzIgLmluZnJhY29zdC5jb2Rlc2VhcmNoLkF0dHJpYnV0ZXMSPgoQaW5kZXhlZF9wcm9qZWN0cxgFIAMoCzIkLmluZnJhY29zdC5jb2Rlc2VhcmNoLkluZGV4ZWRQcm9qZWN0Eg8KB3JlcG9faWQYBiABKAkSEQoJcmVwb19uYW1lGAcgASgJEjkKCHZjc190eXBlGAggASgOMicuaW5mcmFjb3N0LmNvZGVzZWFyY2guSW5kZXhEYXRhLlZDU1R5cGUSEgoKY29tbWl0X3NoYRgJIAEoCRI0ChBjb21taXRfdGltZXN0YW1wGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJECgdWQ1NUeXBlEg8KC1VOS05PV05fVkNTEAASCgoGR0lUSFVCEAESCgoGR0lUTEFCEAISEAoMQVpVUkVfREVWT1BTEAMi9gEKDkluZGV4ZWRQcm9qZWN0EjQKCmF0dHJpYnV0ZXMYASABKAsyIC5pbmZyYWNvc3QuY29kZXNlYXJjaC5BdHRyaWJ1dGVzEicKBHRyZWUYAiABKAsyFC5pbmZyYWNvc3QudHJlZS5UcmVlSACIAQESDAoEbmFtZRgDIAEoCRIQCghpYWNfdHlwZRgEIAEoCRJJCg5jbG91ZGZvcm1hdGlvbhgFIAEoCzIsLmluZnJhY29zdC5jb2Rlc2VhcmNoLkNsb3VkRm9ybWF0aW9uTWV0YWRhdGFIAYgBAUIHCgVfdHJlZUIRCg9fY2xvdWRmb3JtYXRpb24iUAoWQ2xvdWRGb3JtYXRpb25NZXRhZGF0YRISCgpzdGFja19uYW1lGAEgASgJEhIKCmFjY291bnRfaWQYAiABKAkSDgoGcmVnaW9uGAMgASgJIoUCCgpBdHRyaWJ1dGVzEkUKE3Byb3ZpZGVyX2F0dHJpYnV0ZXMYASADKAsyKC5pbmZyYWNvc3QuY29kZXNlYXJjaC5Qcm92aWRlckF0dHJpYnV0ZXMSOAoEdGFncxgCIAMoCzIqLmluZnJhY29zdC5jb2Rlc2VhcmNoLkF0dHJpYnV0ZXMuVGFnc0VudHJ5EhQKDGVudmlyb25tZW50cxgDIAMoCRIfChdub3JtYWxpemVkX2Vudmlyb25tZW50cxgEIAMoCRISCgpjb21wb25lbnRzGAUgAygJGisKCVRhZ3NFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIlEKElByb3ZpZGVyQXR0cmlidXRlcxITCgthY2NvdW50X2lkcxgBIAMoCRIPCgdyZWdpb25zGAIgAygJEhUKDXByb3ZpZGVyX25hbWUYAyABKAlC1AEKGGNvbS5pbmZyYWNvc3QuY29kZXNlYXJjaEIPQ29kZXNlYXJjaFByb3RvUAFaNmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvY29kZXNlYXJjaKICA0lDWKoCFEluZnJhY29zdC5Db2Rlc2VhcmNoygIUSW5mcmFjb3N0XENvZGVzZWFyY2jiAiBJbmZyYWNvc3RcQ29kZXNlYXJjaFxHUEJNZXRhZGF0YeoCFUluZnJhY29zdDo6Q29kZXNlYXJjaGIGcHJvdG8z", [file_google_protobuf_timestamp, file_infracost_tree_tree]);
 
 /**
  * IndexData contains information gathered during the index of repository
@@ -170,6 +170,13 @@ export type IndexedProject = Message<"infracost.codesearch.IndexedProject"> & {
    * @generated from field: string iac_type = 4;
    */
   iacType: string;
+
+  /**
+   * CloudFormation deployment identity, when known at index time
+   *
+   * @generated from field: optional infracost.codesearch.CloudFormationMetadata cloudformation = 5;
+   */
+  cloudformation?: CloudFormationMetadata;
 };
 
 /**
@@ -178,6 +185,41 @@ export type IndexedProject = Message<"infracost.codesearch.IndexedProject"> & {
  */
 export const IndexedProjectSchema: GenMessage<IndexedProject> = /*@__PURE__*/
   messageDesc(file_infracost_codesearch_codesearch, 1);
+
+/**
+ * CloudFormationMetadata identifies the stack represented by an indexed project
+ *
+ * @generated from message infracost.codesearch.CloudFormationMetadata
+ */
+export type CloudFormationMetadata = Message<"infracost.codesearch.CloudFormationMetadata"> & {
+  /**
+   * physical CloudFormation stack name
+   *
+   * @generated from field: string stack_name = 1;
+   */
+  stackName: string;
+
+  /**
+   * AWS account containing the stack
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * AWS region containing the stack
+   *
+   * @generated from field: string region = 3;
+   */
+  region: string;
+};
+
+/**
+ * Describes the message infracost.codesearch.CloudFormationMetadata.
+ * Use `create(CloudFormationMetadataSchema)` to create a new message.
+ */
+export const CloudFormationMetadataSchema: GenMessage<CloudFormationMetadata> = /*@__PURE__*/
+  messageDesc(file_infracost_codesearch_codesearch, 2);
 
 /**
  * Attributes is a set of indexing-attributes for a given repo or project
@@ -226,7 +268,7 @@ export type Attributes = Message<"infracost.codesearch.Attributes"> & {
  * Use `create(AttributesSchema)` to create a new message.
  */
 export const AttributesSchema: GenMessage<Attributes> = /*@__PURE__*/
-  messageDesc(file_infracost_codesearch_codesearch, 2);
+  messageDesc(file_infracost_codesearch_codesearch, 3);
 
 /**
  * provider-level attributes, such as account id(s) and region(s)
@@ -261,5 +303,5 @@ export type ProviderAttributes = Message<"infracost.codesearch.ProviderAttribute
  * Use `create(ProviderAttributesSchema)` to create a new message.
  */
 export const ProviderAttributesSchema: GenMessage<ProviderAttributes> = /*@__PURE__*/
-  messageDesc(file_infracost_codesearch_codesearch, 3);
+  messageDesc(file_infracost_codesearch_codesearch, 4);
 

@@ -164,6 +164,13 @@ export declare type IndexedProject = Message<"infracost.codesearch.IndexedProjec
    * @generated from field: string iac_type = 4;
    */
   iacType: string;
+
+  /**
+   * CloudFormation deployment identity, when known at index time
+   *
+   * @generated from field: optional infracost.codesearch.CloudFormationMetadata cloudformation = 5;
+   */
+  cloudformation?: CloudFormationMetadata;
 };
 
 /**
@@ -171,6 +178,40 @@ export declare type IndexedProject = Message<"infracost.codesearch.IndexedProjec
  * Use `create(IndexedProjectSchema)` to create a new message.
  */
 export declare const IndexedProjectSchema: GenMessage<IndexedProject>;
+
+/**
+ * CloudFormationMetadata identifies the stack represented by an indexed project
+ *
+ * @generated from message infracost.codesearch.CloudFormationMetadata
+ */
+export declare type CloudFormationMetadata = Message<"infracost.codesearch.CloudFormationMetadata"> & {
+  /**
+   * physical CloudFormation stack name
+   *
+   * @generated from field: string stack_name = 1;
+   */
+  stackName: string;
+
+  /**
+   * AWS account containing the stack
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * AWS region containing the stack
+   *
+   * @generated from field: string region = 3;
+   */
+  region: string;
+};
+
+/**
+ * Describes the message infracost.codesearch.CloudFormationMetadata.
+ * Use `create(CloudFormationMetadataSchema)` to create a new message.
+ */
+export declare const CloudFormationMetadataSchema: GenMessage<CloudFormationMetadata>;
 
 /**
  * Attributes is a set of indexing-attributes for a given repo or project
