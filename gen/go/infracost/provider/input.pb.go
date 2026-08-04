@@ -353,7 +353,11 @@ type ProjectInfo struct {
 	// Workspace name (currently only used for Terraform workspace)
 	Workspace string `protobuf:"bytes,3,opt,name=workspace,proto3" json:"workspace,omitempty"`
 	// If the environment being scanned is production (only relevant for ICP)
-	IsProduction  bool `protobuf:"varint,4,opt,name=is_production,json=isProduction,proto3" json:"is_production,omitempty"`
+	IsProduction bool `protobuf:"varint,4,opt,name=is_production,json=isProduction,proto3" json:"is_production,omitempty"`
+	// Project type as reported by the parser plugin's GetParserConfig, e.g.
+	// "terraform", "cloudformation", "kubernetes". Empty when no type was
+	// recorded, which callers should treat as Terraform.
+	Type          string `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,6 +418,13 @@ func (x *ProjectInfo) GetIsProduction() bool {
 		return x.IsProduction
 	}
 	return false
+}
+
+func (x *ProjectInfo) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
 }
 
 type FinopsPolicyConfiguration struct {
@@ -489,13 +500,14 @@ const file_infracost_provider_input_proto_rawDesc = "" +
 	"\x14enable_price_lookups\x18\x01 \x01(\bR\x12enablePriceLookups\x125\n" +
 	"\x16enable_recommendations\x18\x02 \x01(\bR\x15enableRecommendations\x124\n" +
 	"\x16enable_finops_policies\x18\x03 \x01(\bR\x14enableFinopsPolicies\x12@\n" +
-	"\x1cenable_environmental_metrics\x18\x04 \x01(\bR\x1aenableEnvironmentalMetrics\"\x85\x01\n" +
+	"\x1cenable_environmental_metrics\x18\x04 \x01(\bR\x1aenableEnvironmentalMetrics\"\x99\x01\n" +
 	"\vProjectInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1f\n" +
 	"\vbranch_name\x18\x02 \x01(\tR\n" +
 	"branchName\x12\x1c\n" +
 	"\tworkspace\x18\x03 \x01(\tR\tworkspace\x12#\n" +
-	"\ris_production\x18\x04 \x01(\bR\fisProduction\"e\n" +
+	"\ris_production\x18\x04 \x01(\bR\fisProduction\x12\x12\n" +
+	"\x04type\x18\x05 \x01(\tR\x04type\"e\n" +
 	"\x19FinopsPolicyConfiguration\x12H\n" +
 	"\bpolicies\x18\x01 \x03(\v2,.infracost.parser.event.FinopsPolicySettingsR\bpoliciesB\xc3\x01\n" +
 	"\x16com.infracost.providerB\n" +

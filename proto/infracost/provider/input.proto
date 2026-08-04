@@ -78,6 +78,10 @@ message ProjectInfo {
   string workspace = 3;
   // If the environment being scanned is production (only relevant for ICP)
   bool is_production = 4;
+  // Project type as reported by the parser plugin's GetParserConfig, e.g.
+  // "terraform", "cloudformation", "kubernetes". Empty when no type was
+  // recorded, which callers should treat as Terraform.
+  string type = 5;
 }
 
 message FinopsPolicyConfiguration {

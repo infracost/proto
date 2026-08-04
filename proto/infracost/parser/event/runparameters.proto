@@ -138,6 +138,8 @@ message TagPolicy {
   repeated TagPolicyRequirement requirements = 8;
   bool pr_comment = 9;
   bool block_pr = 10;
+  // Matched against ProjectInfo.type, e.g. "terraform", "kubernetes".
+  StringFilter iac_type_filter = 11;
 }
 
 message TagPolicyRequirement {

@@ -229,6 +229,15 @@ export declare type ProjectInfo = Message<"infracost.provider.ProjectInfo"> & {
    * @generated from field: bool is_production = 4;
    */
   isProduction: boolean;
+
+  /**
+   * Project type as reported by the parser plugin's GetParserConfig, e.g.
+   * "terraform", "cloudformation", "kubernetes". Empty when no type was
+   * recorded, which callers should treat as Terraform.
+   *
+   * @generated from field: string type = 5;
+   */
+  type: string;
 };
 
 /**

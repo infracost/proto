@@ -523,6 +523,13 @@ export declare type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
    * @generated from field: bool block_pr = 10;
    */
   blockPr: boolean;
+
+  /**
+   * Matched against ProjectInfo.type, e.g. "terraform", "kubernetes".
+   *
+   * @generated from field: infracost.parser.event.StringFilter iac_type_filter = 11;
+   */
+  iacTypeFilter?: StringFilter;
 };
 
 /**
