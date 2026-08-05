@@ -500,6 +500,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_k8s_plugins = 10;
    */
   enableK8sPlugins: boolean;
+
+  /**
+   * @generated from field: bool enable_arm_plugin = 11;
+   */
+  enableArmPlugin: boolean;
 };
 
 /**
