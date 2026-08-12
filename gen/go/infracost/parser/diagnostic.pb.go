@@ -90,6 +90,15 @@ const (
 	DiagnosticType_DIAGNOSTIC_TYPE_EVALUATION_ERROR DiagnosticType = 34
 	// iac-agnostic cyclic dependencies detected
 	DiagnosticType_DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED DiagnosticType = 35
+	// iac-agnostic recognised construct that the parser does not model, so
+	// resources it would add or change are not costed, e.g. a kustomize generator
+	DiagnosticType_DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT DiagnosticType = 36
+	// helm chart that helm itself refuses to load: the Chart.yaml parsed, but its
+	// metadata is invalid, e.g. no version, or a version that is not semver
+	DiagnosticType_DIAGNOSTIC_TYPE_INVALID_HELM_CHART DiagnosticType = 37
+	// helm chart that failed to render, e.g. a template that fails to execute
+	// against the merged values
+	DiagnosticType_DIAGNOSTIC_TYPE_HELM_RENDER_ERROR DiagnosticType = 38
 )
 
 // Enum value maps for DiagnosticType.
@@ -131,6 +140,9 @@ var (
 		33: "DIAGNOSTIC_TYPE_PARSE_ERROR",
 		34: "DIAGNOSTIC_TYPE_EVALUATION_ERROR",
 		35: "DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED",
+		36: "DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT",
+		37: "DIAGNOSTIC_TYPE_INVALID_HELM_CHART",
+		38: "DIAGNOSTIC_TYPE_HELM_RENDER_ERROR",
 	}
 	DiagnosticType_value = map[string]int32{
 		"DIAGNOSTIC_TYPE_UNSPECIFIED":                                   0,
@@ -169,6 +181,9 @@ var (
 		"DIAGNOSTIC_TYPE_PARSE_ERROR":                                   33,
 		"DIAGNOSTIC_TYPE_EVALUATION_ERROR":                              34,
 		"DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED":                    35,
+		"DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT":                         36,
+		"DIAGNOSTIC_TYPE_INVALID_HELM_CHART":                            37,
+		"DIAGNOSTIC_TYPE_HELM_RENDER_ERROR":                             38,
 	}
 )
 
@@ -312,7 +327,7 @@ const file_infracost_parser_diagnostic_proto_rawDesc = "" +
 	"\aignored\x18\a \x01(\bR\aignored\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xc0\f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xba\r\n" +
 	"\x0eDiagnosticType\x12\x1f\n" +
 	"\x1bDIAGNOSTIC_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" DIAGNOSTIC_TYPE_FAILED_OPERATION\x10\x01\x12\x1a\n" +
@@ -350,7 +365,10 @@ const file_infracost_parser_diagnostic_proto_rawDesc = "" +
 	"-DIAGNOSTIC_TYPE_BUILDING_LOADER_OPTIONS_ERROR\x10 \x12\x1f\n" +
 	"\x1bDIAGNOSTIC_TYPE_PARSE_ERROR\x10!\x12$\n" +
 	" DIAGNOSTIC_TYPE_EVALUATION_ERROR\x10\"\x12.\n" +
-	"*DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED\x10#B\xbc\x01\n" +
+	"*DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED\x10#\x12)\n" +
+	"%DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT\x10$\x12&\n" +
+	"\"DIAGNOSTIC_TYPE_INVALID_HELM_CHART\x10%\x12%\n" +
+	"!DIAGNOSTIC_TYPE_HELM_RENDER_ERROR\x10&B\xbc\x01\n" +
 	"\x14com.infracost.parserB\x0fDiagnosticProtoP\x01Z2github.com/infracost/proto/gen/go/infracost/parser\xa2\x02\x03IPX\xaa\x02\x10Infracost.Parser\xca\x02\x10Infracost\\Parser\xe2\x02\x1cInfracost\\Parser\\GPBMetadata\xea\x02\x11Infracost::Parserb\x06proto3"
 
 var (
