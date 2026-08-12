@@ -90,7 +90,7 @@ const (
 	DiagnosticType_DIAGNOSTIC_TYPE_EVALUATION_ERROR DiagnosticType = 34
 	// iac-agnostic cyclic dependencies detected
 	DiagnosticType_DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED DiagnosticType = 35
-	// iac-agnostic recognised construct that the parser does not model, so
+	// iac-agnostic recognized construct that the parser does not model, so
 	// resources it would add or change are not costed, e.g. a kustomize generator
 	DiagnosticType_DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT DiagnosticType = 36
 	// helm chart that helm itself refuses to load: the Chart.yaml parsed, but its

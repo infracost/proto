@@ -316,7 +316,7 @@ export enum DiagnosticType {
   CYCLIC_DEPENDENCY_DETECTED = 35,
 
   /**
-   * iac-agnostic recognised construct that the parser does not model, so
+   * iac-agnostic recognized construct that the parser does not model, so
    * resources it would add or change are not costed, e.g. a kustomize generator
    *
    * @generated from enum value: DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT = 36;
