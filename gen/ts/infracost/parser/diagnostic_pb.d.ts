@@ -314,6 +314,30 @@ export enum DiagnosticType {
    * @generated from enum value: DIAGNOSTIC_TYPE_CYCLIC_DEPENDENCY_DETECTED = 35;
    */
   CYCLIC_DEPENDENCY_DETECTED = 35,
+
+  /**
+   * iac-agnostic recognized construct that the parser does not model, so
+   * resources it would add or change are not costed, e.g. a kustomize generator
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_UNSUPPORTED_CONSTRUCT = 36;
+   */
+  UNSUPPORTED_CONSTRUCT = 36,
+
+  /**
+   * helm chart that helm itself refuses to load: the Chart.yaml parsed, but its
+   * metadata is invalid, e.g. no version, or a version that is not semver
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_INVALID_HELM_CHART = 37;
+   */
+  INVALID_HELM_CHART = 37,
+
+  /**
+   * helm chart that failed to render, e.g. a template that fails to execute
+   * against the merged values
+   *
+   * @generated from enum value: DIAGNOSTIC_TYPE_HELM_RENDER_ERROR = 38;
+   */
+  HELM_RENDER_ERROR = 38,
 }
 
 /**
