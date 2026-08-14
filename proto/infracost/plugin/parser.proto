@@ -37,6 +37,15 @@ message GetParserConfigResponse {
   // maps to infracost/config project types, e.g. "terraform", "cloudformation", "terragrunt"
   // can also specify custom type strings. if empty will default to the plugin name (recommended)
   optional string config_file_project_type = 2;
+
+  // drop this plugin's projects if any of these project types exist anywhere in the repo.
+  // terraform sets ["terragrunt"]. empty (default) means never exclude.
+  repeated string exclude_if_repo_contains = 3;
+
+  // drop this plugin's projects if any of these project types own an ancestor directory (at any
+  // depth, not just the direct parent). cloudformation sets ["terraform", "terragrunt"]. only
+  // ancestors that survive the caller's own filtering count. empty (default) means never exclude.
+  repeated string exclude_if_inside = 4;
 }
 
 message IdentifyProjectsRequest {

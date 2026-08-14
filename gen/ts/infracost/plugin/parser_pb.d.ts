@@ -43,6 +43,23 @@ export declare type GetParserConfigResponse = Message<"infracost.plugin.GetParse
    * @generated from field: optional string config_file_project_type = 2;
    */
   configFileProjectType?: string;
+
+  /**
+   * drop this plugin's projects if any of these project types exist anywhere in the repo.
+   * terraform sets ["terragrunt"]. empty (default) means never exclude.
+   *
+   * @generated from field: repeated string exclude_if_repo_contains = 3;
+   */
+  excludeIfRepoContains: string[];
+
+  /**
+   * drop this plugin's projects if any of these project types own an ancestor directory (at any
+   * depth, not just the direct parent). cloudformation sets ["terraform", "terragrunt"]. only
+   * ancestors that survive the caller's own filtering count. empty (default) means never exclude.
+   *
+   * @generated from field: repeated string exclude_if_inside = 4;
+   */
+  excludeIfInside: string[];
 };
 
 /**
