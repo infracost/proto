@@ -67,8 +67,15 @@ type GetParserConfigResponse struct {
 	// maps to infracost/config project types, e.g. "terraform", "cloudformation", "terragrunt"
 	// can also specify custom type strings. if empty will default to the plugin name (recommended)
 	ConfigFileProjectType *string `protobuf:"bytes,2,opt,name=config_file_project_type,json=configFileProjectType,proto3,oneof" json:"config_file_project_type,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// drop this plugin's projects if any of these project types exist anywhere in the repo.
+	// terraform sets ["terragrunt"]. empty (default) means never exclude.
+	ExcludeIfRepoContains []string `protobuf:"bytes,3,rep,name=exclude_if_repo_contains,json=excludeIfRepoContains,proto3" json:"exclude_if_repo_contains,omitempty"`
+	// drop this plugin's projects if any of these project types own an ancestor directory (at any
+	// depth, not just the direct parent). cloudformation sets ["terraform", "terragrunt"]. only
+	// ancestors that survive the caller's own filtering count. empty (default) means never exclude.
+	ExcludeIfInside []string `protobuf:"bytes,4,rep,name=exclude_if_inside,json=excludeIfInside,proto3" json:"exclude_if_inside,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetParserConfigResponse) Reset() {
@@ -113,6 +120,20 @@ func (x *GetParserConfigResponse) GetConfigFileProjectType() string {
 		return *x.ConfigFileProjectType
 	}
 	return ""
+}
+
+func (x *GetParserConfigResponse) GetExcludeIfRepoContains() []string {
+	if x != nil {
+		return x.ExcludeIfRepoContains
+	}
+	return nil
+}
+
+func (x *GetParserConfigResponse) GetExcludeIfInside() []string {
+	if x != nil {
+		return x.ExcludeIfInside
+	}
+	return nil
 }
 
 type IdentifyProjectsRequest struct {
@@ -785,10 +806,12 @@ var File_infracost_plugin_parser_proto protoreflect.FileDescriptor
 const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\n" +
 	"\x1dinfracost/plugin/parser.proto\x12\x10infracost.plugin\x1a!infracost/parser/diagnostic.proto\x1a&infracost/parser/options/options.proto\x1a\x19infracost/tree/tree.proto\"\x18\n" +
-	"\x16GetParserConfigRequest\"\xad\x01\n" +
+	"\x16GetParserConfigRequest\"\x92\x02\n" +
 	"\x17GetParserConfigResponse\x127\n" +
 	"\x17identification_priority\x18\x01 \x01(\rR\x16identificationPriority\x12<\n" +
-	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01B\x1b\n" +
+	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01\x127\n" +
+	"\x18exclude_if_repo_contains\x18\x03 \x03(\tR\x15excludeIfRepoContains\x12*\n" +
+	"\x11exclude_if_inside\x18\x04 \x03(\tR\x0fexcludeIfInsideB\x1b\n" +
 	"\x19_config_file_project_type\"d\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12+\n" +
