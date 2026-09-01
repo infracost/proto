@@ -12,6 +12,10 @@ import "infracost/tree/tree.proto";
 
 // The ParserService provides a gRPC API for parsing infrastructure as code files.
 service ParserService {
+  // Describe returns plugin metadata (name, display name, priority, supported extensions).
+  rpc Describe(DescribeRequest) returns (DescribeResponse);
+  // Detect checks whether this plugin can handle the given file or directory path.
+  rpc Detect(DetectRequest) returns (DetectResponse);
   // Initialize initializes the parser with supported resources.
   rpc Initialize(InitializeRequest) returns (InitializeResponse);
   // Parse takes a ParseRequest message and returns a ParseResponse message.
@@ -139,4 +143,54 @@ message SupportedResources {
 // SupportedResource represents a single supported resource type.
 message SupportedResource {
   string resource_type = 1;
+}
+
+// DescribeRequest is the request for the Describe RPC.
+message DescribeRequest {}
+
+// DescribeResponse returns metadata about this parser plugin.
+message DescribeResponse {
+  // Short identifier for this plugin, e.g. "terraform", "cloudformation"
+  string name = 1;
+  // Human-readable display name, e.g. "Terraform", "AWS CloudFormation"
+  string display_name = 2;
+  // Detection priority — lower values are checked first.
+  // Used to resolve ambiguous files (e.g. Crossplane YAML vs plain K8s YAML).
+  int32 priority = 3;
+  // File extensions this plugin may handle, e.g. [".tf", ".tf.json"]
+  repeated string file_extensions = 4;
+  // Whether this plugin can detect and parse directories (not just individual files)
+  bool supports_directories = 5;
+}
+
+// DetectRequest asks the plugin whether it can handle a given path.
+message DetectRequest {
+  // Absolute path to a file or directory
+  string path = 1;
+  // Optional: file content already read by the caller (avoids redundant I/O,
+  // supports LSP virtual documents). Only set for single files, not directories.
+  bytes content = 2;
+  // True if the content field is populated
+  bool content_provided = 3;
+}
+
+// DetectResponse indicates whether this plugin claims the given path.
+message DetectResponse {
+  // True if this plugin can parse the given path
+  bool detected = 1;
+  // The project type identifier, e.g. "terraform", "terragrunt", "cloudformation", "cdk_typescript"
+  string project_type = 2;
+  // How confident the detection is
+  DetectConfidence confidence = 3;
+}
+
+// DetectConfidence indicates how strongly a plugin claims a path.
+enum DetectConfidence {
+  DETECT_CONFIDENCE_UNSPECIFIED = 0;
+  // Extension-only heuristic match
+  DETECT_CONFIDENCE_LOW = 1;
+  // Content sniffing match (e.g. apiVersion field present)
+  DETECT_CONFIDENCE_MEDIUM = 2;
+  // Definitive match (e.g. schema URL, magic bytes, .tf extension)
+  DETECT_CONFIDENCE_HIGH = 3;
 }
