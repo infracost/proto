@@ -76,6 +76,9 @@ message ProjectBaseline {
 message CommentSettings {
   bool enabled = 1;
   bool show_cost_estimate = 2;
+  // Drop the comment lines that link to Infracost Cloud, for organizations whose
+  // engineers have no dashboard access.
+  bool hide_dashboard_links = 3;
 }
 
 message BaseScope {

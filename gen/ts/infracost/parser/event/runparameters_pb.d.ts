@@ -274,6 +274,14 @@ export declare type CommentSettings = Message<"infracost.parser.event.CommentSet
    * @generated from field: bool show_cost_estimate = 2;
    */
   showCostEstimate: boolean;
+
+  /**
+   * Drop the comment lines that link to Infracost Cloud, for organizations whose
+   * engineers have no dashboard access.
+   *
+   * @generated from field: bool hide_dashboard_links = 3;
+   */
+  hideDashboardLinks: boolean;
 };
 
 /**
