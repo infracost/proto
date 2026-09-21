@@ -1134,6 +1134,10 @@ type TagPolicy struct {
 	BlockPr        bool                    `protobuf:"varint,10,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
 	// Matched against ProjectInfo.type, e.g. "terraform", "kubernetes".
 	IacTypeFilter *StringFilter `protobuf:"bytes,11,opt,name=iac_type_filter,json=iacTypeFilter,proto3" json:"iac_type_filter,omitempty"`
+	// Matched against the pull request's title and description, line by line. A
+	// policy whose filter does not match is not evaluated. Ignored when the run
+	// has no pull request.
+	PrTextFilter  *StringFilter `protobuf:"bytes,12,opt,name=pr_text_filter,json=prTextFilter,proto3" json:"pr_text_filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1241,6 +1245,13 @@ func (x *TagPolicy) GetBlockPr() bool {
 func (x *TagPolicy) GetIacTypeFilter() *StringFilter {
 	if x != nil {
 		return x.IacTypeFilter
+	}
+	return nil
+}
+
+func (x *TagPolicy) GetPrTextFilter() *StringFilter {
+	if x != nil {
+		return x.PrTextFilter
 	}
 	return nil
 }
@@ -1447,8 +1458,12 @@ type FinopsPolicySettings struct {
 	BlockPr          bool                       `protobuf:"varint,10,opt,name=block_pr,json=blockPr,proto3" json:"block_pr,omitempty"`
 	OnlyNewResources bool                       `protobuf:"varint,11,opt,name=only_new_resources,json=onlyNewResources,proto3" json:"only_new_resources,omitempty"`
 	Group            FinopsPolicySettings_Group `protobuf:"varint,12,opt,name=group,proto3,enum=infracost.parser.event.FinopsPolicySettings_Group" json:"group,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Matched against the pull request's title and description, line by line. A
+	// policy whose filter does not match is not evaluated. Ignored when the run
+	// has no pull request.
+	PrTextFilter  *StringFilter `protobuf:"bytes,13,opt,name=pr_text_filter,json=prTextFilter,proto3" json:"pr_text_filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FinopsPolicySettings) Reset() {
@@ -1565,6 +1580,13 @@ func (x *FinopsPolicySettings) GetGroup() FinopsPolicySettings_Group {
 	return FinopsPolicySettings_UNSPECIFIED
 }
 
+func (x *FinopsPolicySettings) GetPrTextFilter() *StringFilter {
+	if x != nil {
+		return x.PrTextFilter
+	}
+	return nil
+}
+
 type Guardrail struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1587,7 +1609,11 @@ type Guardrail struct {
 	// the current pull request. The runner still evaluates and reports the
 	// result, but must not block the PR check or render it in the comment when
 	// this is set.
-	Unblocked     bool `protobuf:"varint,11,opt,name=unblocked,proto3" json:"unblocked,omitempty"`
+	Unblocked bool `protobuf:"varint,11,opt,name=unblocked,proto3" json:"unblocked,omitempty"`
+	// Matched against the pull request's title and description, line by line. A
+	// guardrail whose filter does not match is not evaluated. Ignored when the
+	// run has no pull request.
+	PrTextFilter  *StringFilter `protobuf:"bytes,12,opt,name=pr_text_filter,json=prTextFilter,proto3" json:"pr_text_filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1697,6 +1723,13 @@ func (x *Guardrail) GetUnblocked() bool {
 		return x.Unblocked
 	}
 	return false
+}
+
+func (x *Guardrail) GetPrTextFilter() *StringFilter {
+	if x != nil {
+		return x.PrTextFilter
+	}
+	return nil
 }
 
 // Budget defines a cost budget for resources matching a set of tags.
@@ -1954,7 +1987,7 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x04REPO\x10\x01\x12\v\n" +
 	"\aPROJECT\x10\x02\x12\n" +
 	"\n" +
-	"\x06BRANCH\x10\x03\"\xcc\x04\n" +
+	"\x06BRANCH\x10\x03\"\x98\x05\n" +
 	"\tTagPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
@@ -1969,7 +2002,8 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"pr_comment\x18\t \x01(\bR\tprComment\x12\x19\n" +
 	"\bblock_pr\x18\n" +
 	" \x01(\bR\ablockPr\x12L\n" +
-	"\x0fiac_type_filter\x18\v \x01(\v2$.infracost.parser.event.StringFilterR\riacTypeFilter\"\xa6\x02\n" +
+	"\x0fiac_type_filter\x18\v \x01(\v2$.infracost.parser.event.StringFilterR\riacTypeFilter\x12J\n" +
+	"\x0epr_text_filter\x18\f \x01(\v2$.infracost.parser.event.StringFilterR\fprTextFilter\"\xa6\x02\n" +
 	"\x14TagPolicyRequirement\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12E\n" +
 	"\x04type\x18\x02 \x01(\x0e21.infracost.parser.event.TagPolicyRequirement.TypeR\x04type\x12\x1f\n" +
@@ -1994,7 +2028,7 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a:\n" +
 	"\fExcludeEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xca\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x05\n" +
 	"\x14FinopsPolicySettings\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\x12\x12\n" +
@@ -2010,12 +2044,13 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\bblock_pr\x18\n" +
 	" \x01(\bR\ablockPr\x12,\n" +
 	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResources\x12H\n" +
-	"\x05group\x18\f \x01(\x0e22.infracost.parser.event.FinopsPolicySettings.GroupR\x05group\"8\n" +
+	"\x05group\x18\f \x01(\x0e22.infracost.parser.event.FinopsPolicySettings.GroupR\x05group\x12J\n" +
+	"\x0epr_text_filter\x18\r \x01(\v2$.infracost.parser.event.StringFilterR\fprTextFilter\"8\n" +
 	"\x05Group\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06FINOPS\x10\x01\x12\x12\n" +
-	"\x0eCLOUD_SECURITY\x10\x02\"\x98\x05\n" +
+	"\x0eCLOUD_SECURITY\x10\x02\"\xe4\x05\n" +
 	"\tGuardrail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
@@ -2029,7 +2064,8 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\bblock_pr\x18\t \x01(\bR\ablockPr\x12\x18\n" +
 	"\amessage\x18\n" +
 	" \x01(\tR\amessage\x12\x1c\n" +
-	"\tunblocked\x18\v \x01(\bR\tunblocked\"/\n" +
+	"\tunblocked\x18\v \x01(\bR\tunblocked\x12J\n" +
+	"\x0epr_text_filter\x18\f \x01(\v2$.infracost.parser.event.StringFilterR\fprTextFilter\"/\n" +
 	"\x05Scope\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04REPO\x10\x01\x12\v\n" +
@@ -2130,30 +2166,33 @@ var file_infracost_parser_event_runparameters_proto_depIdxs = []int32{
 	21, // 24: infracost.parser.event.TagPolicy.tag_filter:type_name -> infracost.parser.event.MapFilter
 	19, // 25: infracost.parser.event.TagPolicy.requirements:type_name -> infracost.parser.event.TagPolicyRequirement
 	20, // 26: infracost.parser.event.TagPolicy.iac_type_filter:type_name -> infracost.parser.event.StringFilter
-	2,  // 27: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
-	28, // 28: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
-	29, // 29: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
-	20, // 30: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
-	20, // 31: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
-	21, // 32: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
-	3,  // 33: infracost.parser.event.FinopsPolicySettings.group:type_name -> infracost.parser.event.FinopsPolicySettings.Group
-	4,  // 34: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
-	20, // 35: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
-	31, // 36: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
-	31, // 37: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
-	31, // 38: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
-	25, // 39: infracost.parser.event.Budget.tags:type_name -> infracost.parser.event.BudgetTag
-	31, // 40: infracost.parser.event.Budget.amount:type_name -> infracost.rational.Rat
-	30, // 41: infracost.parser.event.Budget.started_at:type_name -> google.protobuf.Timestamp
-	30, // 42: infracost.parser.event.Budget.ended_at:type_name -> google.protobuf.Timestamp
-	31, // 43: infracost.parser.event.Budget.current_cost:type_name -> infracost.rational.Rat
-	13, // 44: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
-	14, // 45: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	20, // 27: infracost.parser.event.TagPolicy.pr_text_filter:type_name -> infracost.parser.event.StringFilter
+	2,  // 28: infracost.parser.event.TagPolicyRequirement.type:type_name -> infracost.parser.event.TagPolicyRequirement.Type
+	28, // 29: infracost.parser.event.MapFilter.include:type_name -> infracost.parser.event.MapFilter.IncludeEntry
+	29, // 30: infracost.parser.event.MapFilter.exclude:type_name -> infracost.parser.event.MapFilter.ExcludeEntry
+	20, // 31: infracost.parser.event.FinopsPolicySettings.project_filter:type_name -> infracost.parser.event.StringFilter
+	20, // 32: infracost.parser.event.FinopsPolicySettings.branch_filter:type_name -> infracost.parser.event.StringFilter
+	21, // 33: infracost.parser.event.FinopsPolicySettings.tag_filter:type_name -> infracost.parser.event.MapFilter
+	3,  // 34: infracost.parser.event.FinopsPolicySettings.group:type_name -> infracost.parser.event.FinopsPolicySettings.Group
+	20, // 35: infracost.parser.event.FinopsPolicySettings.pr_text_filter:type_name -> infracost.parser.event.StringFilter
+	4,  // 36: infracost.parser.event.Guardrail.scope:type_name -> infracost.parser.event.Guardrail.Scope
+	20, // 37: infracost.parser.event.Guardrail.project_filter:type_name -> infracost.parser.event.StringFilter
+	31, // 38: infracost.parser.event.Guardrail.increase_threshold:type_name -> infracost.rational.Rat
+	31, // 39: infracost.parser.event.Guardrail.increase_percent_threshold:type_name -> infracost.rational.Rat
+	31, // 40: infracost.parser.event.Guardrail.total_threshold:type_name -> infracost.rational.Rat
+	20, // 41: infracost.parser.event.Guardrail.pr_text_filter:type_name -> infracost.parser.event.StringFilter
+	25, // 42: infracost.parser.event.Budget.tags:type_name -> infracost.parser.event.BudgetTag
+	31, // 43: infracost.parser.event.Budget.amount:type_name -> infracost.rational.Rat
+	30, // 44: infracost.parser.event.Budget.started_at:type_name -> google.protobuf.Timestamp
+	30, // 45: infracost.parser.event.Budget.ended_at:type_name -> google.protobuf.Timestamp
+	31, // 46: infracost.parser.event.Budget.current_cost:type_name -> infracost.rational.Rat
+	13, // 47: infracost.parser.event.UsageDefaults.ResourcesEntry.value:type_name -> infracost.parser.event.UsageResourceMap
+	14, // 48: infracost.parser.event.UsageResourceMap.UsagesEntry.value:type_name -> infracost.parser.event.UsageDefaultList
+	49, // [49:49] is the sub-list for method output_type
+	49, // [49:49] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_runparameters_proto_init() }

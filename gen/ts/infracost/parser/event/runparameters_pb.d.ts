@@ -530,6 +530,15 @@ export declare type TagPolicy = Message<"infracost.parser.event.TagPolicy"> & {
    * @generated from field: infracost.parser.event.StringFilter iac_type_filter = 11;
    */
   iacTypeFilter?: StringFilter;
+
+  /**
+   * Matched against the pull request's title and description, line by line. A
+   * policy whose filter does not match is not evaluated. Ignored when the run
+   * has no pull request.
+   *
+   * @generated from field: infracost.parser.event.StringFilter pr_text_filter = 12;
+   */
+  prTextFilter?: StringFilter;
 };
 
 /**
@@ -716,6 +725,15 @@ export declare type FinopsPolicySettings = Message<"infracost.parser.event.Finop
    * @generated from field: infracost.parser.event.FinopsPolicySettings.Group group = 12;
    */
   group: FinopsPolicySettings_Group;
+
+  /**
+   * Matched against the pull request's title and description, line by line. A
+   * policy whose filter does not match is not evaluated. Ignored when the run
+   * has no pull request.
+   *
+   * @generated from field: infracost.parser.event.StringFilter pr_text_filter = 13;
+   */
+  prTextFilter?: StringFilter;
 };
 
 /**
@@ -821,6 +839,15 @@ export declare type Guardrail = Message<"infracost.parser.event.Guardrail"> & {
    * @generated from field: bool unblocked = 11;
    */
   unblocked: boolean;
+
+  /**
+   * Matched against the pull request's title and description, line by line. A
+   * guardrail whose filter does not match is not evaluated. Ignored when the
+   * run has no pull request.
+   *
+   * @generated from field: infracost.parser.event.StringFilter pr_text_filter = 12;
+   */
+  prTextFilter?: StringFilter;
 };
 
 /**
