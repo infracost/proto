@@ -140,6 +140,10 @@ message TagPolicy {
   bool block_pr = 10;
   // Matched against ProjectInfo.type, e.g. "terraform", "kubernetes".
   StringFilter iac_type_filter = 11;
+  // Matched against the pull request's title and description, line by line. A
+  // policy whose filter does not match is not evaluated. Ignored when the run
+  // has no pull request.
+  StringFilter pr_text_filter = 12;
 }
 
 message TagPolicyRequirement {
@@ -187,6 +191,10 @@ message FinopsPolicySettings {
   bool block_pr = 10;
   bool only_new_resources = 11;
   Group group = 12;
+  // Matched against the pull request's title and description, line by line. A
+  // policy whose filter does not match is not evaluated. Ignored when the run
+  // has no pull request.
+  StringFilter pr_text_filter = 13;
 }
 
 message Guardrail {
@@ -217,6 +225,10 @@ message Guardrail {
   // result, but must not block the PR check or render it in the comment when
   // this is set.
   bool unblocked = 11;
+  // Matched against the pull request's title and description, line by line. A
+  // guardrail whose filter does not match is not evaluated. Ignored when the
+  // run has no pull request.
+  StringFilter pr_text_filter = 12;
 }
 
 // Budget defines a cost budget for resources matching a set of tags.
