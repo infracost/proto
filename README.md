@@ -24,6 +24,8 @@ make generate
 
 Commit both the `.proto` changes and the generated code in `gen/`.
 
+To release a new version, see [RELEASING.md](RELEASING.md).
+
 ## IDE Setup
 
 If your IDE shows broken imports for proto files:

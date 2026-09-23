@@ -21,7 +21,7 @@ jobs:
           lock=$(jq -r .version package-lock.json)
           lock_root=$(jq -r '.packages[""].version' package-lock.json)
           if [ "$pkg" != "$lock" ] || [ "$pkg" != "$lock_root" ]; then
-            echo "package.json is $pkg but package-lock.json is $lock / $lock_root. Run 'npm version $pkg --no-git-tag-version'."
+            echo "package.json is $pkg but package-lock.json is $lock / $lock_root. Run 'npm version $pkg --allow-same-version'."
             exit 1
           fi
 
@@ -40,6 +40,6 @@ jobs:
           highest=$(printf '%s\n%s\n' "$base" "$head" | sort -V | tail -n 1)
           if [ "$head" = "$base" ] || [ "$highest" != "$head" ]; then
             echo "proto/ changed, so package.json version must be higher than $base on ${{ github.base_ref }} (found $head)."
-            echo "Run 'npm version minor --no-git-tag-version' (or patch/major)."
+            echo "Run 'npm version minor' (or patch/major)."
             exit 1
           fi
