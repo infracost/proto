@@ -4,8 +4,12 @@ on:
   push:
     branches:
       - main
+    # proto/ and gen/ too: a PR that reuses an already tagged version leaves
+    # package.json untouched on main, and its changes still need a tag
     paths:
       - "package.json"
+      - "proto/**"
+      - "gen/**"
   workflow_dispatch:
 
 permissions:
@@ -40,14 +44,20 @@ jobs:
         id: version
         run: echo "tag=v$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
 
-      # Tags are never moved, so a version that is already tagged is left alone
+      # Tags are never moved. An existing tag is fine only if it already holds
+      # what consumers get; otherwise two PRs picked the same version and the
+      # second one's changes would ship untagged
       - name: Create and push tag
         env:
           TAG: ${{ steps.version.outputs.tag }}
         run: |
           if git rev-parse --verify --quiet "refs/tags/$TAG" > /dev/null; then
-            echo "$TAG already exists, nothing to do"
-            exit 0
+            if git diff --quiet "$TAG" HEAD -- proto/ gen/; then
+              echo "$TAG already exists and covers proto/ and gen/, nothing to do"
+              exit 0
+            fi
+            echo "$TAG already exists at $(git rev-parse --short "$TAG") but proto/ or gen/ changed since. Bump the version in a new PR."
+            exit 1
           fi
           git tag "$TAG"
           git push origin "$TAG"

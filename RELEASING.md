@@ -7,7 +7,7 @@ hand.
 
 ## Release a new version
 
-1. In the PR that changes `proto/`, bump the version:
+1. In any PR that changes `proto/` or `gen/`, bump the version:
 
    ```bash
    npm version minor   # or patch / major
@@ -32,11 +32,18 @@ hand.
 - **major**: breaking changes. `buf breaking` blocks these on PRs, so a
   major bump should be rare and agreed with the team first.
 
+  For Go, a major bump is more than a version number. Go ignores a `v2.0.0`
+  tag unless the module path ends in `/v2`, so the release also needs the
+  module path in `go.mod` changed to `github.com/infracost/proto/v2`, the
+  `go_package_prefix` in `buf.gen.yaml` updated to match, and the code in
+  `gen/go` regenerated.
+
 ## Checks on the PR
 
 The `Version check` workflow fails a PR when:
 
-- files under `proto/` changed but the version is not higher than on `main`
+- files under `proto/` or `gen/` changed but the version is not higher
+  than on `main`
 - `package-lock.json` has a different version than `package.json`
 
 ## Tag missing after a merge
@@ -49,3 +56,9 @@ gh workflow run tag-release.yml --ref main
 
 It only creates a tag that does not exist yet, so running it again is safe.
 Existing tags are never moved.
+
+## Tag workflow fails with "already exists"
+
+Two PRs picked the same version, and the second one merged after the first
+was tagged. Its changes are on `main` but not in any tag. Open a new PR
+that bumps the version again; merging it tags everything.
