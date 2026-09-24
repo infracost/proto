@@ -1,0 +1,63 @@
+name: Tag release from package.json
+
+on:
+  push:
+    branches:
+      - main
+    # proto/ and gen/ too: a PR that reuses an already tagged version leaves
+    # package.json untouched on main, and its changes still need a tag
+    paths:
+      - "package.json"
+      - "proto/**"
+      - "gen/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Two runs close together would both see the tag missing and race to push it
+concurrency:
+  group: tag-release
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    # A manual run from another branch would tag a commit that never reached main
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: infracost/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.INFRACOST_CI_APP_ID }}
+          private-key: ${{ secrets.INFRACOST_CI_APP_PRIVATE_KEY }}
+          owner: infracost
+          repositories: proto
+
+      # The app token can push tags to this repo; GITHUB_TOKEN is read-only here
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Read version from package.json
+        id: version
+        run: echo "tag=v$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
+
+      # Tags are never moved. An existing tag is fine only if it already holds
+      # what consumers get; otherwise two PRs picked the same version and the
+      # second one's changes would ship untagged
+      - name: Create and push tag
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if git rev-parse --verify --quiet "refs/tags/$TAG" > /dev/null; then
+            if git diff --quiet "$TAG" HEAD -- proto/ gen/; then
+              echo "$TAG already exists and covers proto/ and gen/, nothing to do"
+              exit 0
+            fi
+            echo "$TAG already exists at $(git rev-parse --short "$TAG") but proto/ or gen/ changed since. Bump the version in a new PR."
+            exit 1
+          fi
+          git tag "$TAG"
+          git push origin "$TAG"

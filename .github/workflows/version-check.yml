@@ -1,0 +1,46 @@
+name: Version check
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # npm writes the version into both files; a mismatch means one was edited by hand
+      - name: Check package-lock.json matches package.json
+        run: |
+          pkg=$(jq -r .version package.json)
+          lock=$(jq -r .version package-lock.json)
+          lock_root=$(jq -r '.packages[""].version' package-lock.json)
+          if [ "$pkg" != "$lock" ] || [ "$pkg" != "$lock_root" ]; then
+            echo "package.json is $pkg but package-lock.json is $lock / $lock_root. Run 'npm version $pkg --allow-same-version'."
+            exit 1
+          fi
+
+      # Merging to main tags the package.json version, and Go reads versions from
+      # tags, so a change without a bump would ship untagged. gen/ counts too:
+      # a plugin bump in buf.gen.yaml changes the generated code with no .proto edit
+      - name: Check version is bumped when proto or generated files change
+        env:
+          BASE: origin/${{ github.base_ref }}
+        run: |
+          if git diff --quiet "$BASE"...HEAD -- proto/ gen/; then
+            echo "No changes under proto/ or gen/, no version bump needed"
+            exit 0
+          fi
+          head=$(jq -r .version package.json)
+          base=$(git show "$BASE:package.json" | jq -r .version)
+          highest=$(printf '%s\n%s\n' "$base" "$head" | sort -V | tail -n 1)
+          if [ "$head" = "$base" ] || [ "$highest" != "$head" ]; then
+            echo "proto/ or gen/ changed, so package.json version must be higher than $base on ${{ github.base_ref }} (found $head)."
+            echo "Run 'npm version minor' (or patch/major)."
+            exit 1
+          fi
