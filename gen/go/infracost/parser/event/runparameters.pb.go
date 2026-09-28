@@ -705,8 +705,10 @@ type CommentSettings struct {
 	// Drop the comment lines that link to Infracost Cloud, for organizations whose
 	// engineers have no dashboard access.
 	HideDashboardLinks bool `protobuf:"varint,3,opt,name=hide_dashboard_links,json=hideDashboardLinks,proto3" json:"hide_dashboard_links,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Link for the PR check when dashboard links are hidden. Empty means no link.
+	PrCheckUrl    string `protobuf:"bytes,4,opt,name=pr_check_url,json=prCheckUrl,proto3" json:"pr_check_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CommentSettings) Reset() {
@@ -758,6 +760,13 @@ func (x *CommentSettings) GetHideDashboardLinks() bool {
 		return x.HideDashboardLinks
 	}
 	return false
+}
+
+func (x *CommentSettings) GetPrCheckUrl() string {
+	if x != nil {
+		return x.PrCheckUrl
+	}
+	return ""
 }
 
 type BaseScope struct {
@@ -1960,11 +1969,13 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\aTAGGING\x10\x02\"{\n" +
 	"\x0fProjectBaseline\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12E\n" +
-	"\x12total_monthly_cost\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x10totalMonthlyCost\"\x8b\x01\n" +
+	"\x12total_monthly_cost\x18\x02 \x01(\v2\x17.infracost.rational.RatR\x10totalMonthlyCost\"\xad\x01\n" +
 	"\x0fCommentSettings\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12,\n" +
 	"\x12show_cost_estimate\x18\x02 \x01(\bR\x10showCostEstimate\x120\n" +
-	"\x14hide_dashboard_links\x18\x03 \x01(\bR\x12hideDashboardLinks\"d\n" +
+	"\x14hide_dashboard_links\x18\x03 \x01(\bR\x12hideDashboardLinks\x12 \n" +
+	"\fpr_check_url\x18\x04 \x01(\tR\n" +
+	"prCheckUrl\"d\n" +
 	"\tBaseScope\x12\x1b\n" +
 	"\trepo_name\x18\x01 \x01(\tR\brepoName\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x1f\n" +
