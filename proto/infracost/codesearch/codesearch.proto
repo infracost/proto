@@ -40,6 +40,9 @@ message IndexData {
 
   // time the commit being indexed was created
   google.protobuf.Timestamp commit_timestamp = 10;
+
+  // the VCS provider's own id for the repo (e.g. GitLab project id)
+  string repo_external_id = 11;
 }
 
 // IndexedProject is the index result of an IaC project within a repository

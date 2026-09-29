@@ -85,6 +85,13 @@ export declare type IndexData = Message<"infracost.codesearch.IndexData"> & {
    * @generated from field: google.protobuf.Timestamp commit_timestamp = 10;
    */
   commitTimestamp?: Timestamp;
+
+  /**
+   * the VCS provider's own id for the repo (e.g. GitLab project id)
+   *
+   * @generated from field: string repo_external_id = 11;
+   */
+  repoExternalId: string;
 };
 
 /**
