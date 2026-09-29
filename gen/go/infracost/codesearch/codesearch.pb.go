@@ -101,8 +101,10 @@ type IndexData struct {
 	CommitSha string `protobuf:"bytes,9,opt,name=commit_sha,json=commitSha,proto3" json:"commit_sha,omitempty"`
 	// time the commit being indexed was created
 	CommitTimestamp *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=commit_timestamp,json=commitTimestamp,proto3" json:"commit_timestamp,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// the VCS provider's own id for the repo (e.g. GitLab project id)
+	RepoExternalId string `protobuf:"bytes,11,opt,name=repo_external_id,json=repoExternalId,proto3" json:"repo_external_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *IndexData) Reset() {
@@ -203,6 +205,13 @@ func (x *IndexData) GetCommitTimestamp() *timestamppb.Timestamp {
 		return x.CommitTimestamp
 	}
 	return nil
+}
+
+func (x *IndexData) GetRepoExternalId() string {
+	if x != nil {
+		return x.RepoExternalId
+	}
+	return ""
 }
 
 // IndexedProject is the index result of an IaC project within a repository
@@ -501,7 +510,7 @@ var File_infracost_codesearch_codesearch_proto protoreflect.FileDescriptor
 
 const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
-	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19infracost/tree/tree.proto\"\x88\x04\n" +
+	"%infracost/codesearch/codesearch.proto\x12\x14infracost.codesearch\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19infracost/tree/tree.proto\"\xb2\x04\n" +
 	"\tIndexData\x12\x15\n" +
 	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x19\n" +
 	"\brepo_url\x18\x02 \x01(\tR\arepoUrl\x12\x10\n" +
@@ -516,7 +525,8 @@ const file_infracost_codesearch_codesearch_proto_rawDesc = "" +
 	"\n" +
 	"commit_sha\x18\t \x01(\tR\tcommitSha\x12E\n" +
 	"\x10commit_timestamp\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\x0fcommitTimestamp\"D\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\x0fcommitTimestamp\x12(\n" +
+	"\x10repo_external_id\x18\v \x01(\tR\x0erepoExternalId\"D\n" +
 	"\aVCSType\x12\x0f\n" +
 	"\vUNKNOWN_VCS\x10\x00\x12\n" +
 	"\n" +
