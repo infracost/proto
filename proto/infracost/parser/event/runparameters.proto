@@ -79,6 +79,8 @@ message CommentSettings {
   // Drop the comment lines that link to Infracost Cloud, for organizations whose
   // engineers have no dashboard access.
   bool hide_dashboard_links = 3;
+  // Link for the PR check when dashboard links are hidden. Empty means no link.
+  string pr_check_url = 4;
 }
 
 message BaseScope {

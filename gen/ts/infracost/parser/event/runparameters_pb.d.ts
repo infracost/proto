@@ -282,6 +282,13 @@ export declare type CommentSettings = Message<"infracost.parser.event.CommentSet
    * @generated from field: bool hide_dashboard_links = 3;
    */
   hideDashboardLinks: boolean;
+
+  /**
+   * Link for the PR check when dashboard links are hidden. Empty means no link.
+   *
+   * @generated from field: string pr_check_url = 4;
+   */
+  prCheckUrl: string;
 };
 
 /**
