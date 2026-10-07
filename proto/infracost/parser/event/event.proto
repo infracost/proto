@@ -137,6 +137,10 @@ message JobBehavior {
   // governance policies fail. Set by the dashboard when the PR is snoozed, so
   // the check stays green until the PR is merged or closed.
   bool force_check_success = 8;
+  // scan_iac runs the IaC and Kubernetes parser plugins.
+  bool scan_iac = 9;
+  // scan_app_code runs the appcode parser plugin.
+  bool scan_app_code = 10;
 }
 
 // How it gets executed
