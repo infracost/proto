@@ -562,6 +562,20 @@ export declare type JobBehavior = Message<"infracost.parser.event.JobBehavior"> 
    * @generated from field: bool force_check_success = 8;
    */
   forceCheckSuccess: boolean;
+
+  /**
+   * scan_iac runs the IaC and Kubernetes parser plugins.
+   *
+   * @generated from field: bool scan_iac = 9;
+   */
+  scanIac: boolean;
+
+  /**
+   * scan_app_code runs the appcode parser plugin.
+   *
+   * @generated from field: bool scan_app_code = 10;
+   */
+  scanAppCode: boolean;
 };
 
 /**

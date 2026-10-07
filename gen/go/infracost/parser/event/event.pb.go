@@ -1012,8 +1012,12 @@ type JobBehavior struct {
 	// governance policies fail. Set by the dashboard when the PR is snoozed, so
 	// the check stays green until the PR is merged or closed.
 	ForceCheckSuccess bool `protobuf:"varint,8,opt,name=force_check_success,json=forceCheckSuccess,proto3" json:"force_check_success,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// scan_iac runs the IaC and Kubernetes parser plugins.
+	ScanIac bool `protobuf:"varint,9,opt,name=scan_iac,json=scanIac,proto3" json:"scan_iac,omitempty"`
+	// scan_app_code runs the appcode parser plugin.
+	ScanAppCode   bool `protobuf:"varint,10,opt,name=scan_app_code,json=scanAppCode,proto3" json:"scan_app_code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *JobBehavior) Reset() {
@@ -1098,6 +1102,20 @@ func (x *JobBehavior) GetBacktesting() bool {
 func (x *JobBehavior) GetForceCheckSuccess() bool {
 	if x != nil {
 		return x.ForceCheckSuccess
+	}
+	return false
+}
+
+func (x *JobBehavior) GetScanIac() bool {
+	if x != nil {
+		return x.ScanIac
+	}
+	return false
+}
+
+func (x *JobBehavior) GetScanAppCode() bool {
+	if x != nil {
+		return x.ScanAppCode
 	}
 	return false
 }
@@ -1607,7 +1625,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x19enable_comment_generation\x18\t \x01(\bR\x17enableCommentGeneration\x12,\n" +
 	"\x12enable_k8s_plugins\x18\n" +
 	" \x01(\bR\x10enableK8sPlugins\x12*\n" +
-	"\x11enable_arm_plugin\x18\v \x01(\bR\x0fenableArmPluginJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xfa\x02\n" +
+	"\x11enable_arm_plugin\x18\v \x01(\bR\x0fenableArmPluginJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xb9\x03\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
@@ -1617,7 +1635,10 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\rfeature_flags\x18\x05 \x01(\v2$.infracost.parser.event.FeatureFlagsR\ffeatureFlags\x12\x1b\n" +
 	"\tforce_run\x18\x06 \x01(\bR\bforceRun\x12 \n" +
 	"\vbacktesting\x18\a \x01(\bR\vbacktesting\x12.\n" +
-	"\x13force_check_success\x18\b \x01(\bR\x11forceCheckSuccess\"\xd6\x05\n" +
+	"\x13force_check_success\x18\b \x01(\bR\x11forceCheckSuccess\x12\x19\n" +
+	"\bscan_iac\x18\t \x01(\bR\ascanIac\x12\"\n" +
+	"\rscan_app_code\x18\n" +
+	" \x01(\bR\vscanAppCode\"\xd6\x05\n" +
 	"\x10JobConfiguration\x12\x1b\n" +
 	"\tlog_level\x18\x01 \x01(\tR\blogLevel\x12\x1f\n" +
 	"\vprompt_path\x18\x02 \x01(\tR\n" +
