@@ -141,8 +141,13 @@ type IdentifyProjectsRequest struct {
 	Directory string                 `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
 	// known environment names for this project - useful for plugins for identify env-level var files etc.
 	EnvironmentNames []string `protobuf:"bytes,2,rep,name=environment_names,json=environmentNames,proto3" json:"environment_names,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// the root of the repository being searched, which directory is inside. plugins use it to bound
+	// checks on directory's ancestors to the repository, e.g. to refuse a directory inside a folder
+	// of installed dependencies without considering where the repository is checked out. empty when
+	// the caller doesn't know it, in which case plugins must not rely on it.
+	RepoDirectory string `protobuf:"bytes,3,opt,name=repo_directory,json=repoDirectory,proto3" json:"repo_directory,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentifyProjectsRequest) Reset() {
@@ -187,6 +192,13 @@ func (x *IdentifyProjectsRequest) GetEnvironmentNames() []string {
 		return x.EnvironmentNames
 	}
 	return nil
+}
+
+func (x *IdentifyProjectsRequest) GetRepoDirectory() string {
+	if x != nil {
+		return x.RepoDirectory
+	}
+	return ""
 }
 
 type IdentifyProjectsResponse struct {
@@ -812,10 +824,11 @@ const file_infracost_plugin_parser_proto_rawDesc = "" +
 	"\x18config_file_project_type\x18\x02 \x01(\tH\x00R\x15configFileProjectType\x88\x01\x01\x127\n" +
 	"\x18exclude_if_repo_contains\x18\x03 \x03(\tR\x15excludeIfRepoContains\x12*\n" +
 	"\x11exclude_if_inside\x18\x04 \x03(\tR\x0fexcludeIfInsideB\x1b\n" +
-	"\x19_config_file_project_type\"d\n" +
+	"\x19_config_file_project_type\"\x8b\x01\n" +
 	"\x17IdentifyProjectsRequest\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\tR\tdirectory\x12+\n" +
-	"\x11environment_names\x18\x02 \x03(\tR\x10environmentNames\"\x9a\x01\n" +
+	"\x11environment_names\x18\x02 \x03(\tR\x10environmentNames\x12%\n" +
+	"\x0erepo_directory\x18\x03 \x01(\tR\rrepoDirectory\"\x9a\x01\n" +
 	"\x18IdentifyProjectsResponse\x12\x1c\n" +
 	"\tdirectory\x18\x01 \x01(\bR\tdirectory\x12\x14\n" +
 	"\x05files\x18\x02 \x03(\tR\x05files\x12)\n" +

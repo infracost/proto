@@ -83,6 +83,16 @@ export declare type IdentifyProjectsRequest = Message<"infracost.plugin.Identify
    * @generated from field: repeated string environment_names = 2;
    */
   environmentNames: string[];
+
+  /**
+   * the root of the repository being searched, which directory is inside. plugins use it to bound
+   * checks on directory's ancestors to the repository, e.g. to refuse a directory inside a folder
+   * of installed dependencies without considering where the repository is checked out. empty when
+   * the caller doesn't know it, in which case plugins must not rely on it.
+   *
+   * @generated from field: string repo_directory = 3;
+   */
+  repoDirectory: string;
 };
 
 /**

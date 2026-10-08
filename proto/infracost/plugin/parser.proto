@@ -52,6 +52,11 @@ message IdentifyProjectsRequest {
   string directory = 1;
   // known environment names for this project - useful for plugins for identify env-level var files etc.
   repeated string environment_names = 2;
+  // the root of the repository being searched, which directory is inside. plugins use it to bound
+  // checks on directory's ancestors to the repository, e.g. to refuse a directory inside a folder
+  // of installed dependencies without considering where the repository is checked out. empty when
+  // the caller doesn't know it, in which case plugins must not rely on it.
+  string repo_directory = 3;
 }
 
 message IdentifyProjectsResponse {
