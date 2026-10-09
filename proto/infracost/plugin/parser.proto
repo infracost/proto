@@ -52,6 +52,12 @@ message IdentifyProjectsRequest {
   string directory = 1;
   // known environment names for this project - useful for plugins for identify env-level var files etc.
   repeated string environment_names = 2;
+  // absolute, cleaned path of the root of the repository being searched. directory is always
+  // inside it and is given in the same form, so plugins can compare the two with filepath.Rel.
+  // plugins use it to limit checks on directory's ancestors to the repository, e.g. to skip a
+  // directory under node_modules inside the repo, but not a repo that is itself checked out under
+  // a node_modules folder. empty when the caller does not know it; plugins must not rely on it then.
+  string repo_directory = 3;
 }
 
 message IdentifyProjectsResponse {
