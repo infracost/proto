@@ -141,10 +141,11 @@ type IdentifyProjectsRequest struct {
 	Directory string                 `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
 	// known environment names for this project - useful for plugins for identify env-level var files etc.
 	EnvironmentNames []string `protobuf:"bytes,2,rep,name=environment_names,json=environmentNames,proto3" json:"environment_names,omitempty"`
-	// the root of the repository being searched, which directory is inside. plugins use it to bound
-	// checks on directory's ancestors to the repository, e.g. to refuse a directory inside a folder
-	// of installed dependencies without considering where the repository is checked out. empty when
-	// the caller doesn't know it, in which case plugins must not rely on it.
+	// absolute, cleaned path of the root of the repository being searched. directory is always
+	// inside it and is given in the same form, so plugins can compare the two with filepath.Rel.
+	// plugins use it to limit checks on directory's ancestors to the repository, e.g. to skip a
+	// directory under node_modules inside the repo, but not a repo that is itself checked out under
+	// a node_modules folder. empty when the caller does not know it; plugins must not rely on it then.
 	RepoDirectory string `protobuf:"bytes,3,opt,name=repo_directory,json=repoDirectory,proto3" json:"repo_directory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

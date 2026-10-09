@@ -85,10 +85,11 @@ export declare type IdentifyProjectsRequest = Message<"infracost.plugin.Identify
   environmentNames: string[];
 
   /**
-   * the root of the repository being searched, which directory is inside. plugins use it to bound
-   * checks on directory's ancestors to the repository, e.g. to refuse a directory inside a folder
-   * of installed dependencies without considering where the repository is checked out. empty when
-   * the caller doesn't know it, in which case plugins must not rely on it.
+   * absolute, cleaned path of the root of the repository being searched. directory is always
+   * inside it and is given in the same form, so plugins can compare the two with filepath.Rel.
+   * plugins use it to limit checks on directory's ancestors to the repository, e.g. to skip a
+   * directory under node_modules inside the repo, but not a repo that is itself checked out under
+   * a node_modules folder. empty when the caller does not know it; plugins must not rely on it then.
    *
    * @generated from field: string repo_directory = 3;
    */
