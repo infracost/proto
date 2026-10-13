@@ -2,8 +2,8 @@
 // @generated from file infracost/parser/api/service.proto (package infracost.parser.api, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Result } from "../cloudformation/result_pb.js";
 import { file_infracost_parser_cloudformation_result } from "../cloudformation/result_pb.js";
 import type { Target as Target$2 } from "../cloudformation/target_pb.js";
@@ -24,7 +24,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file infracost/parser/api/service.proto.
  */
 export const file_infracost_parser_api_service: GenFile = /*@__PURE__*/
-  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0Is0BChJQYXJzZVRvVHJlZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0EkoKFmV4dHJhX2F0dHJpYnV0ZV92YWx1ZXMYBCADKAsyKi5pbmZyYWNvc3QucGFyc2VyLmFwaS5BdHRyaWJ1dGVSZXF1aXJlbWVudCJBChRBdHRyaWJ1dGVSZXF1aXJlbWVudBIVCg1yZXNvdXJjZV90eXBlGAEgASgJEhIKCmF0dHJpYnV0ZXMYAiADKAki1AEKElBhcnNlUmVxdWVzdFRhcmdldBI3Cgl0ZXJyYWZvcm0YCiABKAsyIi5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5UYXJnZXRIABI5Cgp0ZXJyYWdydW50GAsgASgLMiMuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWdydW50LlRhcmdldEgAEkEKDmNsb3VkZm9ybWF0aW9uGAwgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5UYXJnZXRIAEIHCgV2YWx1ZSK1AQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0EjYKDGRlcGVuZGVuY2llcxgDIAMoCzIgLmluZnJhY29zdC5wYXJzZXIuYXBpLkRlcGVuZGVuY3kipAEKE1BhcnNlVG9UcmVlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSIgoEdHJlZRgCIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSNgoMZGVwZW5kZW5jaWVzGAMgAygLMiAuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGVwZW5kZW5jeSLuAQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh0KFWlzX2V4dGVybmFsbHlfZGVmaW5lZBgGIAEoCBIYChBleHRlcm5hbF9zbmlwcGV0GAcgASgJEhQKDGlzX3N5bnRoZXRpYxgIIAEoCBIUCgxpc19nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlItcBChFJbml0aWFsaXplUmVxdWVzdBJPCh10ZXJyYWZvcm1fc3VwcG9ydGVkX3Jlc291cmNlcxgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcxJUCiJjbG91ZGZvcm1hdGlvbl9zdXBwb3J0ZWRfcmVzb3VyY2VzGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzEhsKE2Rpc2FibGVfZ3JhcGhfY2FjaGUYAyABKAgiFAoSSW5pdGlhbGl6ZVJlc3BvbnNlIlUKElN1cHBvcnRlZFJlc291cmNlcxI/Cg5yZXNvdXJjZV90eXBlcxgBIAMoCzInLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlIioKEVN1cHBvcnRlZFJlc291cmNlEhUKDXJlc291cmNlX3R5cGUYASABKAkypgIKDVBhcnNlclNlcnZpY2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZRJiCgtQYXJzZVRvVHJlZRIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVxdWVzdBopLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVzcG9uc2VC0gEKGGNvbS5pbmZyYWNvc3QucGFyc2VyLmFwaUIMU2VydmljZVByb3RvUAFaNmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2FwaaICA0lQQaoCFEluZnJhY29zdC5QYXJzZXIuQXBpygIUSW5mcmFjb3N0XFBhcnNlclxBcGniAiBJbmZyYWNvc3RcUGFyc2VyXEFwaVxHUEJNZXRhZGF0YeoCFkluZnJhY29zdDo6UGFyc2VyOjpBcGliBnByb3RvMw", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target, file_infracost_tree_tree]);
+  fileDesc("CiJpbmZyYWNvc3QvcGFyc2VyL2FwaS9zZXJ2aWNlLnByb3RvEhRpbmZyYWNvc3QucGFyc2VyLmFwaSJ7CgxQYXJzZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0Is0BChJQYXJzZVRvVHJlZVJlcXVlc3QSFgoOcmVwb19kaXJlY3RvcnkYASABKAkSGQoRd29ya2luZ19kaXJlY3RvcnkYAiABKAkSOAoGdGFyZ2V0GAMgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0VGFyZ2V0EkoKFmV4dHJhX2F0dHJpYnV0ZV92YWx1ZXMYBCADKAsyKi5pbmZyYWNvc3QucGFyc2VyLmFwaS5BdHRyaWJ1dGVSZXF1aXJlbWVudCJBChRBdHRyaWJ1dGVSZXF1aXJlbWVudBIVCg1yZXNvdXJjZV90eXBlGAEgASgJEhIKCmF0dHJpYnV0ZXMYAiADKAki1AEKElBhcnNlUmVxdWVzdFRhcmdldBI3Cgl0ZXJyYWZvcm0YCiABKAsyIi5pbmZyYWNvc3QucGFyc2VyLnRlcnJhZm9ybS5UYXJnZXRIABI5Cgp0ZXJyYWdydW50GAsgASgLMiMuaW5mcmFjb3N0LnBhcnNlci50ZXJyYWdydW50LlRhcmdldEgAEkEKDmNsb3VkZm9ybWF0aW9uGAwgASgLMicuaW5mcmFjb3N0LnBhcnNlci5jbG91ZGZvcm1hdGlvbi5UYXJnZXRIAEIHCgV2YWx1ZSK1AQoNUGFyc2VSZXNwb25zZRIxCgtkaWFnbm9zdGljcxgBIAMoCzIcLmluZnJhY29zdC5wYXJzZXIuRGlhZ25vc3RpYxI5CgZyZXN1bHQYAiABKAsyKS5pbmZyYWNvc3QucGFyc2VyLmFwaS5QYXJzZVJlc3BvbnNlUmVzdWx0EjYKDGRlcGVuZGVuY2llcxgDIAMoCzIgLmluZnJhY29zdC5wYXJzZXIuYXBpLkRlcGVuZGVuY3kipAEKE1BhcnNlVG9UcmVlUmVzcG9uc2USMQoLZGlhZ25vc3RpY3MYASADKAsyHC5pbmZyYWNvc3QucGFyc2VyLkRpYWdub3N0aWMSIgoEdHJlZRgCIAEoCzIULmluZnJhY29zdC50cmVlLlRyZWUSNgoMZGVwZW5kZW5jaWVzGAMgAygLMiAuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGVwZW5kZW5jeSLuAQoKRGVwZW5kZW5jeRIRCglmaWxlX3BhdGgYASABKAkSEgoKbGluZV9zdGFydBgCIAEoAxIQCghsaW5lX2VuZBgDIAEoAxIZChFtb2R1bGVfZGVmaW5pdGlvbhgEIAEoCRIYChBpc19yZW1vdGVfbW9kdWxlGAUgASgIEh0KFWlzX2V4dGVybmFsbHlfZGVmaW5lZBgGIAEoCBIYChBleHRlcm5hbF9zbmlwcGV0GAcgASgJEhQKDGlzX3N5bnRoZXRpYxgIIAEoCBIUCgxpc19nZW5lcmF0ZWQYCSABKAgSDQoFZGVwdGgYCiABKAUioAEKE1BhcnNlUmVzcG9uc2VSZXN1bHQSPQoJdGVycmFmb3JtGAEgASgLMiguaW5mcmFjb3N0LnBhcnNlci50ZXJyYWZvcm0uTW9kdWxlUmVzdWx0SAASQQoOY2xvdWRmb3JtYXRpb24YAiABKAsyJy5pbmZyYWNvc3QucGFyc2VyLmNsb3VkZm9ybWF0aW9uLlJlc3VsdEgAQgcKBXZhbHVlItcBChFJbml0aWFsaXplUmVxdWVzdBJPCh10ZXJyYWZvcm1fc3VwcG9ydGVkX3Jlc291cmNlcxgBIAEoCzIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlcxJUCiJjbG91ZGZvcm1hdGlvbl9zdXBwb3J0ZWRfcmVzb3VyY2VzGAIgASgLMiguaW5mcmFjb3N0LnBhcnNlci5hcGkuU3VwcG9ydGVkUmVzb3VyY2VzEhsKE2Rpc2FibGVfZ3JhcGhfY2FjaGUYAyABKAgiFAoSSW5pdGlhbGl6ZVJlc3BvbnNlIlUKElN1cHBvcnRlZFJlc291cmNlcxI/Cg5yZXNvdXJjZV90eXBlcxgBIAMoCzInLmluZnJhY29zdC5wYXJzZXIuYXBpLlN1cHBvcnRlZFJlc291cmNlIioKEVN1cHBvcnRlZFJlc291cmNlEhUKDXJlc291cmNlX3R5cGUYASABKAkiEQoPRGVzY3JpYmVSZXF1ZXN0In8KEERlc2NyaWJlUmVzcG9uc2USDAoEbmFtZRgBIAEoCRIUCgxkaXNwbGF5X25hbWUYAiABKAkSEAoIcHJpb3JpdHkYAyABKAUSFwoPZmlsZV9leHRlbnNpb25zGAQgAygJEhwKFHN1cHBvcnRzX2RpcmVjdG9yaWVzGAUgASgIIkgKDURldGVjdFJlcXVlc3QSDAoEcGF0aBgBIAEoCRIPCgdjb250ZW50GAIgASgMEhgKEGNvbnRlbnRfcHJvdmlkZWQYAyABKAgidAoORGV0ZWN0UmVzcG9uc2USEAoIZGV0ZWN0ZWQYASABKAgSFAoMcHJvamVjdF90eXBlGAIgASgJEjoKCmNvbmZpZGVuY2UYAyABKA4yJi5pbmZyYWNvc3QucGFyc2VyLmFwaS5EZXRlY3RDb25maWRlbmNlKooBChBEZXRlY3RDb25maWRlbmNlEiEKHURFVEVDVF9DT05GSURFTkNFX1VOU1BFQ0lGSUVEEAASGQoVREVURUNUX0NPTkZJREVOQ0VfTE9XEAESHAoYREVURUNUX0NPTkZJREVOQ0VfTUVESVVNEAISGgoWREVURUNUX0NPTkZJREVOQ0VfSElHSBADMtYDCg1QYXJzZXJTZXJ2aWNlElkKCERlc2NyaWJlEiUuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGVzY3JpYmVSZXF1ZXN0GiYuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGVzY3JpYmVSZXNwb25zZRJTCgZEZXRlY3QSIy5pbmZyYWNvc3QucGFyc2VyLmFwaS5EZXRlY3RSZXF1ZXN0GiQuaW5mcmFjb3N0LnBhcnNlci5hcGkuRGV0ZWN0UmVzcG9uc2USXwoKSW5pdGlhbGl6ZRInLmluZnJhY29zdC5wYXJzZXIuYXBpLkluaXRpYWxpemVSZXF1ZXN0GiguaW5mcmFjb3N0LnBhcnNlci5hcGkuSW5pdGlhbGl6ZVJlc3BvbnNlElAKBVBhcnNlEiIuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXF1ZXN0GiMuaW5mcmFjb3N0LnBhcnNlci5hcGkuUGFyc2VSZXNwb25zZRJiCgtQYXJzZVRvVHJlZRIoLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVxdWVzdBopLmluZnJhY29zdC5wYXJzZXIuYXBpLlBhcnNlVG9UcmVlUmVzcG9uc2VC0gEKGGNvbS5pbmZyYWNvc3QucGFyc2VyLmFwaUIMU2VydmljZVByb3RvUAFaNmdpdGh1Yi5jb20vaW5mcmFjb3N0L3Byb3RvL2dlbi9nby9pbmZyYWNvc3QvcGFyc2VyL2FwaaICA0lQQaoCFEluZnJhY29zdC5QYXJzZXIuQXBpygIUSW5mcmFjb3N0XFBhcnNlclxBcGniAiBJbmZyYWNvc3RcUGFyc2VyXEFwaVxHUEJNZXRhZGF0YeoCFkluZnJhY29zdDo6UGFyc2VyOjpBcGliBnByb3RvMw", [file_infracost_parser_cloudformation_result, file_infracost_parser_cloudformation_target, file_infracost_parser_diagnostic, file_infracost_parser_terraform_module, file_infracost_parser_terraform_target, file_infracost_parser_terragrunt_target, file_infracost_tree_tree]);
 
 /**
  * ParseRequest is the unified request for all parser types.
@@ -453,11 +453,206 @@ export const SupportedResourceSchema: GenMessage<SupportedResource> = /*@__PURE_
   messageDesc(file_infracost_parser_api_service, 11);
 
 /**
+ * DescribeRequest is the request for the Describe RPC.
+ *
+ * @generated from message infracost.parser.api.DescribeRequest
+ */
+export type DescribeRequest = Message<"infracost.parser.api.DescribeRequest"> & {
+};
+
+/**
+ * Describes the message infracost.parser.api.DescribeRequest.
+ * Use `create(DescribeRequestSchema)` to create a new message.
+ */
+export const DescribeRequestSchema: GenMessage<DescribeRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 12);
+
+/**
+ * DescribeResponse returns metadata about this parser plugin.
+ *
+ * @generated from message infracost.parser.api.DescribeResponse
+ */
+export type DescribeResponse = Message<"infracost.parser.api.DescribeResponse"> & {
+  /**
+   * Short identifier for this plugin, e.g. "terraform", "cloudformation"
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Human-readable display name, e.g. "Terraform", "AWS CloudFormation"
+   *
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * Detection priority — lower values are checked first.
+   * Used to resolve ambiguous files (e.g. Crossplane YAML vs plain K8s YAML).
+   *
+   * @generated from field: int32 priority = 3;
+   */
+  priority: number;
+
+  /**
+   * File extensions this plugin may handle, e.g. [".tf", ".tf.json"]
+   *
+   * @generated from field: repeated string file_extensions = 4;
+   */
+  fileExtensions: string[];
+
+  /**
+   * Whether this plugin can detect and parse directories (not just individual files)
+   *
+   * @generated from field: bool supports_directories = 5;
+   */
+  supportsDirectories: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.api.DescribeResponse.
+ * Use `create(DescribeResponseSchema)` to create a new message.
+ */
+export const DescribeResponseSchema: GenMessage<DescribeResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 13);
+
+/**
+ * DetectRequest asks the plugin whether it can handle a given path.
+ *
+ * @generated from message infracost.parser.api.DetectRequest
+ */
+export type DetectRequest = Message<"infracost.parser.api.DetectRequest"> & {
+  /**
+   * Absolute path to a file or directory
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * Optional: file content already read by the caller (avoids redundant I/O,
+   * supports LSP virtual documents). Only set for single files, not directories.
+   *
+   * @generated from field: bytes content = 2;
+   */
+  content: Uint8Array;
+
+  /**
+   * True if the content field is populated
+   *
+   * @generated from field: bool content_provided = 3;
+   */
+  contentProvided: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.api.DetectRequest.
+ * Use `create(DetectRequestSchema)` to create a new message.
+ */
+export const DetectRequestSchema: GenMessage<DetectRequest> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 14);
+
+/**
+ * DetectResponse indicates whether this plugin claims the given path.
+ *
+ * @generated from message infracost.parser.api.DetectResponse
+ */
+export type DetectResponse = Message<"infracost.parser.api.DetectResponse"> & {
+  /**
+   * True if this plugin can parse the given path
+   *
+   * @generated from field: bool detected = 1;
+   */
+  detected: boolean;
+
+  /**
+   * The project type identifier, e.g. "terraform", "terragrunt", "cloudformation", "cdk_typescript"
+   *
+   * @generated from field: string project_type = 2;
+   */
+  projectType: string;
+
+  /**
+   * How confident the detection is
+   *
+   * @generated from field: infracost.parser.api.DetectConfidence confidence = 3;
+   */
+  confidence: DetectConfidence;
+};
+
+/**
+ * Describes the message infracost.parser.api.DetectResponse.
+ * Use `create(DetectResponseSchema)` to create a new message.
+ */
+export const DetectResponseSchema: GenMessage<DetectResponse> = /*@__PURE__*/
+  messageDesc(file_infracost_parser_api_service, 15);
+
+/**
+ * DetectConfidence indicates how strongly a plugin claims a path.
+ *
+ * @generated from enum infracost.parser.api.DetectConfidence
+ */
+export enum DetectConfidence {
+  /**
+   * @generated from enum value: DETECT_CONFIDENCE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Extension-only heuristic match
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_LOW = 1;
+   */
+  LOW = 1,
+
+  /**
+   * Content sniffing match (e.g. apiVersion field present)
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_MEDIUM = 2;
+   */
+  MEDIUM = 2,
+
+  /**
+   * Definitive match (e.g. schema URL, magic bytes, .tf extension)
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_HIGH = 3;
+   */
+  HIGH = 3,
+}
+
+/**
+ * Describes the enum infracost.parser.api.DetectConfidence.
+ */
+export const DetectConfidenceSchema: GenEnum<DetectConfidence> = /*@__PURE__*/
+  enumDesc(file_infracost_parser_api_service, 0);
+
+/**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.
  *
  * @generated from service infracost.parser.api.ParserService
  */
 export const ParserService: GenService<{
+  /**
+   * Describe returns plugin metadata (name, display name, priority, supported extensions).
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Describe
+   */
+  describe: {
+    methodKind: "unary";
+    input: typeof DescribeRequestSchema;
+    output: typeof DescribeResponseSchema;
+  },
+  /**
+   * Detect checks whether this plugin can handle the given file or directory path.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Detect
+   */
+  detect: {
+    methodKind: "unary";
+    input: typeof DetectRequestSchema;
+    output: typeof DetectResponseSchema;
+  },
   /**
    * Initialize initializes the parser with supported resources.
    *
