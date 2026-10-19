@@ -353,8 +353,13 @@ type FetchAuth struct {
 	// dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
 	// org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
 	GitCredentialHelper *GitCredentialHelper `protobuf:"bytes,5,opt,name=git_credential_helper,json=gitCredentialHelper,proto3" json:"git_credential_helper,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Stop s3:: and gcs:: fetches using the default SDK credential chain (env, profile, instance role,
+	// ADC). Only explicit credentials are used; otherwise the request is unauthenticated. The hosted
+	// runner sets this so a user's module source cannot borrow the runner's role; the CLI leaves it
+	// false.
+	NoAmbientCredentials bool `protobuf:"varint,6,opt,name=no_ambient_credentials,json=noAmbientCredentials,proto3" json:"no_ambient_credentials,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *FetchAuth) Reset() {
@@ -420,6 +425,13 @@ func (x *FetchAuth) GetGitCredentialHelper() *GitCredentialHelper {
 		return x.GitCredentialHelper
 	}
 	return nil
+}
+
+func (x *FetchAuth) GetNoAmbientCredentials() bool {
+	if x != nil {
+		return x.NoAmbientCredentials
+	}
+	return false
 }
 
 // GitCredentialHelper names an external git credential helper the getter execs (speaking the
@@ -1163,13 +1175,14 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\bEnvEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x15\n" +
-	"\x13_dependency_request\"\xe6\x02\n" +
+	"\x13_dependency_request\"\x9c\x03\n" +
 	"\tFetchAuth\x12;\n" +
 	"\bssh_keys\x18\x01 \x03(\v2 .infracost.parser.options.SSHKeyR\asshKeys\x12\\\n" +
 	"\x13client_certificates\x18\x02 \x03(\v2+.infracost.parser.options.ClientCertificateR\x12clientCertificates\x12\x19\n" +
 	"\bca_certs\x18\x03 \x03(\fR\acaCerts\x12@\n" +
 	"\x1dinsecure_skip_host_key_verify\x18\x04 \x01(\bR\x19insecureSkipHostKeyVerify\x12a\n" +
-	"\x15git_credential_helper\x18\x05 \x01(\v2-.infracost.parser.options.GitCredentialHelperR\x13gitCredentialHelper\"E\n" +
+	"\x15git_credential_helper\x18\x05 \x01(\v2-.infracost.parser.options.GitCredentialHelperR\x13gitCredentialHelper\x124\n" +
+	"\x16no_ambient_credentials\x18\x06 \x01(\bR\x14noAmbientCredentials\"E\n" +
 	"\x13GitCredentialHelper\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12\x14\n" +
 	"\x05hosts\x18\x02 \x03(\tR\x05hosts\"=\n" +
