@@ -243,6 +243,16 @@ export declare type FetchAuth = Message<"infracost.parser.options.FetchAuth"> & 
    * @generated from field: infracost.parser.options.GitCredentialHelper git_credential_helper = 5;
    */
   gitCredentialHelper?: GitCredentialHelper;
+
+  /**
+   * Stop s3:: and gcs:: fetches using the default SDK credential chain (env, profile, instance role,
+   * ADC). Only explicit credentials are used; otherwise the request is unauthenticated. The hosted
+   * runner sets this so a user's module source cannot borrow the runner's role; the CLI leaves it
+   * false.
+   *
+   * @generated from field: bool no_ambient_credentials = 6;
+   */
+  noAmbientCredentials: boolean;
 };
 
 /**

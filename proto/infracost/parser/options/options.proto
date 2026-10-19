@@ -94,6 +94,11 @@ message FetchAuth {
   // dynamic GitHub token lookup for orgs that were not pre-seeded into credential_sets, passing the
   // org path the getter's built-in system credential fallback cannot. The CLI leaves it unset.
   GitCredentialHelper git_credential_helper = 5;
+  // Stop s3:: and gcs:: fetches using the default SDK credential chain (env, profile, instance role,
+  // ADC). Only explicit credentials are used; otherwise the request is unauthenticated. The hosted
+  // runner sets this so a user's module source cannot borrow the runner's role; the CLI leaves it
+  // false.
+  bool no_ambient_credentials = 6;
 }
 
 // GitCredentialHelper names an external git credential helper the getter execs (speaking the
