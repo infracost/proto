@@ -122,6 +122,7 @@ message FeatureFlags {
   bool enable_comment_generation = 9;
   bool enable_k8s_plugins = 10;
   bool enable_arm_plugin = 11;
+  bool enable_inline_annotations = 12;
 }
 
 // What gets executed
