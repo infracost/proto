@@ -505,6 +505,11 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_arm_plugin = 11;
    */
   enableArmPlugin: boolean;
+
+  /**
+   * @generated from field: bool enable_inline_annotations = 12;
+   */
+  enableInlineAnnotations: boolean;
 };
 
 /**
