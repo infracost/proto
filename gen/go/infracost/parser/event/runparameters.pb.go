@@ -302,8 +302,12 @@ type RunParameters struct {
 	// changed projects.
 	ProjectPreexistingIssues []*ProjectPreExistingIssues `protobuf:"bytes,14,rep,name=project_preexisting_issues,json=projectPreexistingIssues,proto3" json:"project_preexisting_issues,omitempty"`
 	PlanInfo                 *PlanInfo                   `protobuf:"bytes,15,opt,name=plan_info,json=planInfo,proto3,oneof" json:"plan_info,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// pull_request_id is the dashboard's ID for the pull request this run belongs
+	// to. The runner uses it to link the PR comment to the PR page in Infracost
+	// Cloud, where blocking guardrails can be unblocked. Empty for branch runs.
+	PullRequestId *string `protobuf:"bytes,16,opt,name=pull_request_id,json=pullRequestId,proto3,oneof" json:"pull_request_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RunParameters) Reset() {
@@ -439,6 +443,13 @@ func (x *RunParameters) GetPlanInfo() *PlanInfo {
 		return x.PlanInfo
 	}
 	return nil
+}
+
+func (x *RunParameters) GetPullRequestId() string {
+	if x != nil && x.PullRequestId != nil {
+		return *x.PullRequestId
+	}
+	return ""
 }
 
 type PlanInfo struct {
@@ -1920,7 +1931,7 @@ var File_infracost_parser_event_runparameters_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\n" +
-	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\xd0\b\n" +
+	"*infracost/parser/event/runparameters.proto\x12\x16infracost.parser.event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!infracost/rational/rational.proto\"\x91\t\n" +
 	"\rRunParameters\x127\n" +
 	"\x05scope\x18\x01 \x01(\v2!.infracost.parser.event.BaseScopeR\x05scope\x12L\n" +
 	"\x0eusage_defaults\x18\x02 \x01(\v2%.infracost.parser.event.UsageDefaultsR\rusageDefaults\x12W\n" +
@@ -1939,11 +1950,13 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x10comment_settings\x18\f \x01(\v2'.infracost.parser.event.CommentSettingsR\x0fcommentSettings\x12T\n" +
 	"\x11policy_exclusions\x18\r \x03(\v2'.infracost.parser.event.PolicyExclusionR\x10policyExclusions\x12n\n" +
 	"\x1aproject_preexisting_issues\x18\x0e \x03(\v20.infracost.parser.event.ProjectPreExistingIssuesR\x18projectPreexistingIssues\x12B\n" +
-	"\tplan_info\x18\x0f \x01(\v2 .infracost.parser.event.PlanInfoH\x02R\bplanInfo\x88\x01\x01B\x12\n" +
+	"\tplan_info\x18\x0f \x01(\v2 .infracost.parser.event.PlanInfoH\x02R\bplanInfo\x88\x01\x01\x12+\n" +
+	"\x0fpull_request_id\x18\x10 \x01(\tH\x03R\rpullRequestId\x88\x01\x01B\x12\n" +
 	"\x10_config_templateB\t\n" +
 	"\a_run_idB\f\n" +
 	"\n" +
-	"_plan_info\"\xbe\x01\n" +
+	"_plan_infoB\x12\n" +
+	"\x10_pull_request_id\"\xbe\x01\n" +
 	"\bPlanInfo\x12\x17\n" +
 	"\ais_paid\x18\x01 \x01(\bR\x06isPaid\x12\x15\n" +
 	"\x06is_poc\x18\x02 \x01(\bR\x05isPoc\x12\x19\n" +
