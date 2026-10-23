@@ -106,6 +106,15 @@ export declare type RunParameters = Message<"infracost.parser.event.RunParameter
    * @generated from field: optional infracost.parser.event.PlanInfo plan_info = 15;
    */
   planInfo?: PlanInfo;
+
+  /**
+   * pull_request_id is the dashboard's ID for the pull request this run belongs
+   * to. The runner uses it to link the PR comment to the PR page in Infracost
+   * Cloud, where blocking guardrails can be unblocked. Empty for branch runs.
+   *
+   * @generated from field: optional string pull_request_id = 16;
+   */
+  pullRequestId?: string;
 };
 
 /**

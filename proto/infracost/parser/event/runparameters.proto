@@ -31,6 +31,10 @@ message RunParameters {
   // changed projects.
   repeated ProjectPreExistingIssues project_preexisting_issues = 14;
   optional PlanInfo plan_info = 15;
+  // pull_request_id is the dashboard's ID for the pull request this run belongs
+  // to. The runner uses it to link the PR comment to the PR page in Infracost
+  // Cloud, where blocking guardrails can be unblocked. Empty for branch runs.
+  optional string pull_request_id = 16;
 }
 
 message PlanInfo {
