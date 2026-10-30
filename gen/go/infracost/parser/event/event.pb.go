@@ -902,8 +902,11 @@ type FeatureFlags struct {
 	EnableK8SPlugins           bool                   `protobuf:"varint,10,opt,name=enable_k8s_plugins,json=enableK8sPlugins,proto3" json:"enable_k8s_plugins,omitempty"`
 	EnableArmPlugin            bool                   `protobuf:"varint,11,opt,name=enable_arm_plugin,json=enableArmPlugin,proto3" json:"enable_arm_plugin,omitempty"`
 	EnableInlineAnnotations    bool                   `protobuf:"varint,12,opt,name=enable_inline_annotations,json=enableInlineAnnotations,proto3" json:"enable_inline_annotations,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// enable_appcode_plugin gates the appcode parser plugin during rollout,
+	// independently of JobBehavior.scan_app_code.
+	EnableAppcodePlugin bool `protobuf:"varint,13,opt,name=enable_appcode_plugin,json=enableAppcodePlugin,proto3" json:"enable_appcode_plugin,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *FeatureFlags) Reset() {
@@ -1002,6 +1005,13 @@ func (x *FeatureFlags) GetEnableArmPlugin() bool {
 func (x *FeatureFlags) GetEnableInlineAnnotations() bool {
 	if x != nil {
 		return x.EnableInlineAnnotations
+	}
+	return false
+}
+
+func (x *FeatureFlags) GetEnableAppcodePlugin() bool {
+	if x != nil {
+		return x.EnableAppcodePlugin
 	}
 	return false
 }
@@ -1622,7 +1632,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\n" +
 	"AzureRepos\x12A\n" +
 	"\faccess_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\vaccessToken\x12\x19\n" +
-	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\x8f\x05\n" +
+	"\bbase_url\x18\x02 \x01(\tR\abaseUrl\"\xc3\x05\n" +
 	"\fFeatureFlags\x12.\n" +
 	"\x13enable_cisco_stacks\x18\x03 \x01(\bR\x11enableCiscoStacks\x12A\n" +
 	"\x1denable_client_side_guardrails\x18\x04 \x01(\bR\x1aenableClientSideGuardrails\x12=\n" +
@@ -1634,7 +1644,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x12enable_k8s_plugins\x18\n" +
 	" \x01(\bR\x10enableK8sPlugins\x12*\n" +
 	"\x11enable_arm_plugin\x18\v \x01(\bR\x0fenableArmPlugin\x12:\n" +
-	"\x19enable_inline_annotations\x18\f \x01(\bR\x17enableInlineAnnotationsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xb9\x03\n" +
+	"\x19enable_inline_annotations\x18\f \x01(\bR\x17enableInlineAnnotations\x122\n" +
+	"\x15enable_appcode_plugin\x18\r \x01(\bR\x13enableAppcodePluginJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16enable_cloud_formationR\x1aenable_cloud_formation_cdk\"\xb9\x03\n" +
 	"\vJobBehavior\x12\x1d\n" +
 	"\n" +
 	"no_comment\x18\x01 \x01(\bR\tnoComment\x12*\n" +
