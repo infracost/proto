@@ -510,6 +510,14 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_inline_annotations = 12;
    */
   enableInlineAnnotations: boolean;
+
+  /**
+   * enable_appcode_plugin gates the appcode parser plugin during rollout,
+   * independently of JobBehavior.scan_app_code.
+   *
+   * @generated from field: bool enable_appcode_plugin = 13;
+   */
+  enableAppcodePlugin: boolean;
 };
 
 /**

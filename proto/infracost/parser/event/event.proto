@@ -123,6 +123,9 @@ message FeatureFlags {
   bool enable_k8s_plugins = 10;
   bool enable_arm_plugin = 11;
   bool enable_inline_annotations = 12;
+  // enable_appcode_plugin gates the appcode parser plugin during rollout,
+  // independently of JobBehavior.scan_app_code.
+  bool enable_appcode_plugin = 13;
 }
 
 // What gets executed
