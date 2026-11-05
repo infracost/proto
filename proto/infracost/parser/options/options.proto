@@ -69,6 +69,13 @@ message GenericOptions {
   // Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
   // git-over-https credentials (username/password) travel in credential_sets, not here.
   FetchAuth fetch_auth = 22;
+  // Hosts, IPs or CIDR ranges that modules, charts and linked templates may be fetched from even
+  // though they resolve to a private address; the SSRF guard stays on for everything else. Loopback,
+  // link-local (including the cloud metadata address), multicast and the unspecified address are never
+  // opened, and entries that cover them are ignored. Caller-sourced: only from the customer's own
+  // environment, never from repo content. Consumed by the terraform-family, kubernetes (Helm,
+  // Kustomize) and ARM plugins.
+  repeated string private_source_allowlist = 23;
 }
 
 // FetchAuth carries the transport-level authentication material used to fetch remote references

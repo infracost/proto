@@ -140,9 +140,16 @@ type GenericOptions struct {
 	// event; the CLI leaves it unset and relies on the developer's own system git/ssh configuration.
 	// Cross-plugin: consumed by every fetch-capable plugin (terraform-family, kubernetes). Logical
 	// git-over-https credentials (username/password) travel in credential_sets, not here.
-	FetchAuth     *FetchAuth `protobuf:"bytes,22,opt,name=fetch_auth,json=fetchAuth,proto3" json:"fetch_auth,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	FetchAuth *FetchAuth `protobuf:"bytes,22,opt,name=fetch_auth,json=fetchAuth,proto3" json:"fetch_auth,omitempty"`
+	// Hosts, IPs or CIDR ranges that modules, charts and linked templates may be fetched from even
+	// though they resolve to a private address; the SSRF guard stays on for everything else. Loopback,
+	// link-local (including the cloud metadata address), multicast and the unspecified address are never
+	// opened, and entries that cover them are ignored. Caller-sourced: only from the customer's own
+	// environment, never from repo content. Consumed by the terraform-family, kubernetes (Helm,
+	// Kustomize) and ARM plugins.
+	PrivateSourceAllowlist []string `protobuf:"bytes,23,rep,name=private_source_allowlist,json=privateSourceAllowlist,proto3" json:"private_source_allowlist,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GenericOptions) Reset() {
@@ -325,6 +332,13 @@ func (x *GenericOptions) GetTerraformCloudConfiguration() *TerraformCloudConfigu
 func (x *GenericOptions) GetFetchAuth() *FetchAuth {
 	if x != nil {
 		return x.FetchAuth
+	}
+	return nil
+}
+
+func (x *GenericOptions) GetPrivateSourceAllowlist() []string {
+	if x != nil {
+		return x.PrivateSourceAllowlist
 	}
 	return nil
 }
@@ -1139,7 +1153,7 @@ var File_infracost_parser_options_options_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\n" +
-	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xa5\r\n" +
+	"&infracost/parser/options/options.proto\x12\x18infracost.parser.options\"\xdf\r\n" +
 	"\x0eGenericOptions\x12!\n" +
 	"\fproject_name\x18\x01 \x01(\tR\vprojectName\x12)\n" +
 	"\x10environment_name\x18\x02 \x01(\tR\x0fenvironmentName\x12%\n" +
@@ -1165,7 +1179,8 @@ const file_infracost_parser_options_options_proto_rawDesc = "" +
 	"\tworkspace\x18\x14 \x01(\tR\tworkspace\x12y\n" +
 	"\x1dterraform_cloud_configuration\x18\x15 \x01(\v25.infracost.parser.options.TerraformCloudConfigurationR\x1bterraformCloudConfiguration\x12B\n" +
 	"\n" +
-	"fetch_auth\x18\x16 \x01(\v2#.infracost.parser.options.FetchAuthR\tfetchAuth\x1a>\n" +
+	"fetch_auth\x18\x16 \x01(\v2#.infracost.parser.options.FetchAuthR\tfetchAuth\x128\n" +
+	"\x18private_source_allowlist\x18\x17 \x03(\tR\x16privateSourceAllowlist\x1a>\n" +
 	"\x10DefaultTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a<\n" +
