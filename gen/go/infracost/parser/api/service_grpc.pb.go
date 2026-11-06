@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	ParserService_Describe_FullMethodName    = "/infracost.parser.api.ParserService/Describe"
+	ParserService_Detect_FullMethodName      = "/infracost.parser.api.ParserService/Detect"
 	ParserService_Initialize_FullMethodName  = "/infracost.parser.api.ParserService/Initialize"
 	ParserService_Parse_FullMethodName       = "/infracost.parser.api.ParserService/Parse"
 	ParserService_ParseToTree_FullMethodName = "/infracost.parser.api.ParserService/ParseToTree"
@@ -30,6 +32,10 @@ const (
 //
 // The ParserService provides a gRPC API for parsing infrastructure as code files.
 type ParserServiceClient interface {
+	// Describe returns plugin metadata (name, display name, priority, supported extensions).
+	Describe(ctx context.Context, in *DescribeRequest, opts ...grpc.CallOption) (*DescribeResponse, error)
+	// Detect checks whether this plugin can handle the given file or directory path.
+	Detect(ctx context.Context, in *DetectRequest, opts ...grpc.CallOption) (*DetectResponse, error)
 	// Initialize initializes the parser with supported resources.
 	Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*InitializeResponse, error)
 	// Parse takes a ParseRequest message and returns a ParseResponse message.
@@ -44,6 +50,26 @@ type parserServiceClient struct {
 
 func NewParserServiceClient(cc grpc.ClientConnInterface) ParserServiceClient {
 	return &parserServiceClient{cc}
+}
+
+func (c *parserServiceClient) Describe(ctx context.Context, in *DescribeRequest, opts ...grpc.CallOption) (*DescribeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeResponse)
+	err := c.cc.Invoke(ctx, ParserService_Describe_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *parserServiceClient) Detect(ctx context.Context, in *DetectRequest, opts ...grpc.CallOption) (*DetectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DetectResponse)
+	err := c.cc.Invoke(ctx, ParserService_Detect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *parserServiceClient) Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*InitializeResponse, error) {
@@ -82,6 +108,10 @@ func (c *parserServiceClient) ParseToTree(ctx context.Context, in *ParseToTreeRe
 //
 // The ParserService provides a gRPC API for parsing infrastructure as code files.
 type ParserServiceServer interface {
+	// Describe returns plugin metadata (name, display name, priority, supported extensions).
+	Describe(context.Context, *DescribeRequest) (*DescribeResponse, error)
+	// Detect checks whether this plugin can handle the given file or directory path.
+	Detect(context.Context, *DetectRequest) (*DetectResponse, error)
 	// Initialize initializes the parser with supported resources.
 	Initialize(context.Context, *InitializeRequest) (*InitializeResponse, error)
 	// Parse takes a ParseRequest message and returns a ParseResponse message.
@@ -98,6 +128,12 @@ type ParserServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedParserServiceServer struct{}
 
+func (UnimplementedParserServiceServer) Describe(context.Context, *DescribeRequest) (*DescribeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Describe not implemented")
+}
+func (UnimplementedParserServiceServer) Detect(context.Context, *DetectRequest) (*DetectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Detect not implemented")
+}
 func (UnimplementedParserServiceServer) Initialize(context.Context, *InitializeRequest) (*InitializeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Initialize not implemented")
 }
@@ -126,6 +162,42 @@ func RegisterParserServiceServer(s grpc.ServiceRegistrar, srv ParserServiceServe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ParserService_ServiceDesc, srv)
+}
+
+func _ParserService_Describe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParserServiceServer).Describe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParserService_Describe_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParserServiceServer).Describe(ctx, req.(*DescribeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ParserService_Detect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ParserServiceServer).Detect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ParserService_Detect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ParserServiceServer).Detect(ctx, req.(*DetectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ParserService_Initialize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -189,6 +261,14 @@ var ParserService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "infracost.parser.api.ParserService",
 	HandlerType: (*ParserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Describe",
+			Handler:    _ParserService_Describe_Handler,
+		},
+		{
+			MethodName: "Detect",
+			Handler:    _ParserService_Detect_Handler,
+		},
 		{
 			MethodName: "Initialize",
 			Handler:    _ParserService_Initialize_Handler,

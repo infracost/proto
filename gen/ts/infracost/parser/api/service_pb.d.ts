@@ -2,7 +2,7 @@
 // @generated from file infracost/parser/api/service.proto (package infracost.parser.api, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Target } from "../terraform/target_pb.js";
 import type { Target as Target$1 } from "../terragrunt/target_pb.js";
@@ -432,11 +432,201 @@ export declare type SupportedResource = Message<"infracost.parser.api.SupportedR
 export declare const SupportedResourceSchema: GenMessage<SupportedResource>;
 
 /**
+ * DescribeRequest is the request for the Describe RPC.
+ *
+ * @generated from message infracost.parser.api.DescribeRequest
+ */
+export declare type DescribeRequest = Message<"infracost.parser.api.DescribeRequest"> & {
+};
+
+/**
+ * Describes the message infracost.parser.api.DescribeRequest.
+ * Use `create(DescribeRequestSchema)` to create a new message.
+ */
+export declare const DescribeRequestSchema: GenMessage<DescribeRequest>;
+
+/**
+ * DescribeResponse returns metadata about this parser plugin.
+ *
+ * @generated from message infracost.parser.api.DescribeResponse
+ */
+export declare type DescribeResponse = Message<"infracost.parser.api.DescribeResponse"> & {
+  /**
+   * Short identifier for this plugin, e.g. "terraform", "cloudformation"
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Human-readable display name, e.g. "Terraform", "AWS CloudFormation"
+   *
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * Detection priority — lower values are checked first.
+   * Used to resolve ambiguous files (e.g. Crossplane YAML vs plain K8s YAML).
+   *
+   * @generated from field: int32 priority = 3;
+   */
+  priority: number;
+
+  /**
+   * File extensions this plugin may handle, e.g. [".tf", ".tf.json"]
+   *
+   * @generated from field: repeated string file_extensions = 4;
+   */
+  fileExtensions: string[];
+
+  /**
+   * Whether this plugin can detect and parse directories (not just individual files)
+   *
+   * @generated from field: bool supports_directories = 5;
+   */
+  supportsDirectories: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.api.DescribeResponse.
+ * Use `create(DescribeResponseSchema)` to create a new message.
+ */
+export declare const DescribeResponseSchema: GenMessage<DescribeResponse>;
+
+/**
+ * DetectRequest asks the plugin whether it can handle a given path.
+ *
+ * @generated from message infracost.parser.api.DetectRequest
+ */
+export declare type DetectRequest = Message<"infracost.parser.api.DetectRequest"> & {
+  /**
+   * Absolute path to a file or directory
+   *
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * Optional: file content already read by the caller (avoids redundant I/O,
+   * supports LSP virtual documents). Only set for single files, not directories.
+   *
+   * @generated from field: bytes content = 2;
+   */
+  content: Uint8Array;
+
+  /**
+   * True if the content field is populated
+   *
+   * @generated from field: bool content_provided = 3;
+   */
+  contentProvided: boolean;
+};
+
+/**
+ * Describes the message infracost.parser.api.DetectRequest.
+ * Use `create(DetectRequestSchema)` to create a new message.
+ */
+export declare const DetectRequestSchema: GenMessage<DetectRequest>;
+
+/**
+ * DetectResponse indicates whether this plugin claims the given path.
+ *
+ * @generated from message infracost.parser.api.DetectResponse
+ */
+export declare type DetectResponse = Message<"infracost.parser.api.DetectResponse"> & {
+  /**
+   * True if this plugin can parse the given path
+   *
+   * @generated from field: bool detected = 1;
+   */
+  detected: boolean;
+
+  /**
+   * The project type identifier, e.g. "terraform", "terragrunt", "cloudformation", "cdk_typescript"
+   *
+   * @generated from field: string project_type = 2;
+   */
+  projectType: string;
+
+  /**
+   * How confident the detection is
+   *
+   * @generated from field: infracost.parser.api.DetectConfidence confidence = 3;
+   */
+  confidence: DetectConfidence;
+};
+
+/**
+ * Describes the message infracost.parser.api.DetectResponse.
+ * Use `create(DetectResponseSchema)` to create a new message.
+ */
+export declare const DetectResponseSchema: GenMessage<DetectResponse>;
+
+/**
+ * DetectConfidence indicates how strongly a plugin claims a path.
+ *
+ * @generated from enum infracost.parser.api.DetectConfidence
+ */
+export enum DetectConfidence {
+  /**
+   * @generated from enum value: DETECT_CONFIDENCE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Extension-only heuristic match
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_LOW = 1;
+   */
+  LOW = 1,
+
+  /**
+   * Content sniffing match (e.g. apiVersion field present)
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_MEDIUM = 2;
+   */
+  MEDIUM = 2,
+
+  /**
+   * Definitive match (e.g. schema URL, magic bytes, .tf extension)
+   *
+   * @generated from enum value: DETECT_CONFIDENCE_HIGH = 3;
+   */
+  HIGH = 3,
+}
+
+/**
+ * Describes the enum infracost.parser.api.DetectConfidence.
+ */
+export declare const DetectConfidenceSchema: GenEnum<DetectConfidence>;
+
+/**
  * The ParserService provides a gRPC API for parsing infrastructure as code files.
  *
  * @generated from service infracost.parser.api.ParserService
  */
 export declare const ParserService: GenService<{
+  /**
+   * Describe returns plugin metadata (name, display name, priority, supported extensions).
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Describe
+   */
+  describe: {
+    methodKind: "unary";
+    input: typeof DescribeRequestSchema;
+    output: typeof DescribeResponseSchema;
+  },
+  /**
+   * Detect checks whether this plugin can handle the given file or directory path.
+   *
+   * @generated from rpc infracost.parser.api.ParserService.Detect
+   */
+  detect: {
+    methodKind: "unary";
+    input: typeof DetectRequestSchema;
+    output: typeof DetectResponseSchema;
+  },
   /**
    * Initialize initializes the parser with supported resources.
    *
