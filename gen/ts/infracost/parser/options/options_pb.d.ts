@@ -184,6 +184,18 @@ export declare type GenericOptions = Message<"infracost.parser.options.GenericOp
    * @generated from field: infracost.parser.options.FetchAuth fetch_auth = 22;
    */
   fetchAuth?: FetchAuth;
+
+  /**
+   * Hosts, IPs or CIDR ranges that modules, charts and linked templates may be fetched from even
+   * though they resolve to a private address; the SSRF guard stays on for everything else. Loopback,
+   * link-local (including the cloud metadata address), multicast and the unspecified address are never
+   * opened, and entries that cover them are ignored. Caller-sourced: only from the customer's own
+   * environment, never from repo content. Consumed by the terraform-family, kubernetes (Helm,
+   * Kustomize) and ARM plugins.
+   *
+   * @generated from field: repeated string private_source_allowlist = 23;
+   */
+  privateSourceAllowlist: string[];
 };
 
 /**
