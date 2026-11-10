@@ -784,6 +784,11 @@ export enum FinopsPolicySettings_Group {
    * @generated from enum value: CLOUD_SECURITY = 2;
    */
   CLOUD_SECURITY = 2,
+
+  /**
+   * @generated from enum value: AI = 3;
+   */
+  AI = 3,
 }
 
 /**
