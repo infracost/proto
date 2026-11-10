@@ -186,6 +186,7 @@ message FinopsPolicySettings {
     UNSPECIFIED = 0;
     FINOPS = 1;
     CLOUD_SECURITY = 2;
+    AI = 3;
   }
 
   string id = 1;

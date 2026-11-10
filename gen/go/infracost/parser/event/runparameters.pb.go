@@ -183,6 +183,7 @@ const (
 	FinopsPolicySettings_UNSPECIFIED    FinopsPolicySettings_Group = 0
 	FinopsPolicySettings_FINOPS         FinopsPolicySettings_Group = 1
 	FinopsPolicySettings_CLOUD_SECURITY FinopsPolicySettings_Group = 2
+	FinopsPolicySettings_AI             FinopsPolicySettings_Group = 3
 )
 
 // Enum value maps for FinopsPolicySettings_Group.
@@ -191,11 +192,13 @@ var (
 		0: "UNSPECIFIED",
 		1: "FINOPS",
 		2: "CLOUD_SECURITY",
+		3: "AI",
 	}
 	FinopsPolicySettings_Group_value = map[string]int32{
 		"UNSPECIFIED":    0,
 		"FINOPS":         1,
 		"CLOUD_SECURITY": 2,
+		"AI":             3,
 	}
 )
 
@@ -2063,7 +2066,7 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a:\n" +
 	"\fExcludeEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9e\x05\n" +
 	"\x14FinopsPolicySettings\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\x12\x12\n" +
@@ -2080,12 +2083,13 @@ const file_infracost_parser_event_runparameters_proto_rawDesc = "" +
 	" \x01(\bR\ablockPr\x12,\n" +
 	"\x12only_new_resources\x18\v \x01(\bR\x10onlyNewResources\x12H\n" +
 	"\x05group\x18\f \x01(\x0e22.infracost.parser.event.FinopsPolicySettings.GroupR\x05group\x12J\n" +
-	"\x0epr_text_filter\x18\r \x01(\v2$.infracost.parser.event.StringFilterR\fprTextFilter\"8\n" +
+	"\x0epr_text_filter\x18\r \x01(\v2$.infracost.parser.event.StringFilterR\fprTextFilter\"@\n" +
 	"\x05Group\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06FINOPS\x10\x01\x12\x12\n" +
-	"\x0eCLOUD_SECURITY\x10\x02\"\xe4\x05\n" +
+	"\x0eCLOUD_SECURITY\x10\x02\x12\x06\n" +
+	"\x02AI\x10\x03\"\xe4\x05\n" +
 	"\tGuardrail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
