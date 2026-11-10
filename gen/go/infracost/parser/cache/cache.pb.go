@@ -27,6 +27,11 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Deprecated: a flavor names only Terraform and CloudFormation, and every tree written since
+// parser plugins is FLAVOR_AGNOSTIC, so it says nothing about the project. Use the project's type
+// instead: project_type on the tree's message, or on ProjectSummary.
+//
+// Deprecated: Marked as deprecated in infracost/parser/cache/cache.proto.
 type Flavor int32
 
 const (
@@ -196,8 +201,12 @@ func (x *TerraformProject) GetWorkspace() string {
 }
 
 type Metadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Key   string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Deprecated: every tree written since parser plugins is FLAVOR_AGNOSTIC, so it says nothing
+	// about the project. Use the enclosing message's project_type.
+	//
+	// Deprecated: Marked as deprecated in infracost/parser/cache/cache.proto.
 	Flavor        Flavor                 `protobuf:"varint,2,opt,name=flavor,proto3,enum=infracost.parser.cache.Flavor" json:"flavor,omitempty"`
 	RunnerVersion string                 `protobuf:"bytes,3,opt,name=runner_version,json=runnerVersion,proto3" json:"runner_version,omitempty"`
 	ParserVersion string                 `protobuf:"bytes,4,opt,name=parser_version,json=parserVersion,proto3" json:"parser_version,omitempty"`
@@ -243,6 +252,7 @@ func (x *Metadata) GetKey() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in infracost/parser/cache/cache.proto.
 func (x *Metadata) GetFlavor() Flavor {
 	if x != nil {
 		return x.Flavor
@@ -426,7 +436,10 @@ type ProjectSummary struct {
 	// The project's BreakdownSHA from that run - the content hash used as the parse-cache key. A later
 	// run compares its freshly computed hash against this to decide whether the project changed.
 	BreakdownHash string `protobuf:"bytes,2,opt,name=breakdown_hash,json=breakdownHash,proto3" json:"breakdown_hash,omitempty"`
-	// The project's flavor (Terraform, CloudFormation, or agnostic).
+	// Deprecated: use project_type. The project's flavor (Terraform, CloudFormation, or agnostic),
+	// which names no other type of project.
+	//
+	// Deprecated: Marked as deprecated in infracost/parser/cache/cache.proto.
 	Flavor Flavor `protobuf:"varint,3,opt,name=flavor,proto3,enum=infracost.parser.cache.Flavor" json:"flavor,omitempty"`
 	// The files this project depended on during its last parse, including files outside the project
 	// directory. Used to decide whether changed files are relevant and to invalidate caches.
@@ -437,8 +450,13 @@ type ProjectSummary struct {
 	// otherwise computed only over the projects that run produced. Unset on summaries written by
 	// older runners; callers must treat that as "counts unknown", not zero.
 	ResourceCounts *ResourceCounts `protobuf:"bytes,5,opt,name=resource_counts,json=resourceCounts,proto3" json:"resource_counts,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// The project's type in the Infracost config (e.g. "terraform", "terragrunt", "cloudformation",
+	// "kubernetes"), as on the project's cached tree, so a later run can tell what a project is
+	// without reading that tree. Empty on summaries written before this field existed; callers must
+	// treat that as unknown.
+	ProjectType   string `protobuf:"bytes,6,opt,name=project_type,json=projectType,proto3" json:"project_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ProjectSummary) Reset() {
@@ -485,6 +503,7 @@ func (x *ProjectSummary) GetBreakdownHash() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in infracost/parser/cache/cache.proto.
 func (x *ProjectSummary) GetFlavor() Flavor {
 	if x != nil {
 		return x.Flavor
@@ -504,6 +523,13 @@ func (x *ProjectSummary) GetResourceCounts() *ResourceCounts {
 		return x.ResourceCounts
 	}
 	return nil
+}
+
+func (x *ProjectSummary) GetProjectType() string {
+	if x != nil {
+		return x.ProjectType
+	}
+	return ""
 }
 
 // ResourceCounts is a project's resource summary: how many resources were detected in its breakdown
@@ -865,10 +891,10 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"config_sha\x18\v \x01(\tR\tconfigSha\x12\x12\n" +
 	"\x04path\x18\f \x01(\tR\x04path\x12\x1c\n" +
 	"\tworkspace\x18\r \x01(\tR\tworkspaceJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\b\x10\tR\n" +
-	"usage_fileR\x0eproject_configR\x10dependency_paths\"\xdd\x01\n" +
+	"usage_fileR\x0eproject_configR\x10dependency_paths\"\xe1\x01\n" +
 	"\bMetadata\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x126\n" +
-	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12%\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12:\n" +
+	"\x06flavor\x18\x02 \x01(\x0e2\x1e.infracost.parser.cache.FlavorB\x02\x18\x01R\x06flavor\x12%\n" +
 	"\x0erunner_version\x18\x03 \x01(\tR\rrunnerVersion\x12%\n" +
 	"\x0eparser_version\x18\x04 \x01(\tR\rparserVersion\x129\n" +
 	"\n" +
@@ -897,13 +923,14 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x05value:\x028\x01\x1ac\n" +
 	"\rProjectsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
-	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cache.ProjectSummaryR\x05value:\x028\x01\"\xb7\x02\n" +
+	"\x05value\x18\x02 \x01(\v2&.infracost.parser.cache.ProjectSummaryR\x05value:\x028\x01\"\xde\x02\n" +
 	"\x0eProjectSummary\x12!\n" +
 	"\fbreakdown_id\x18\x01 \x01(\tR\vbreakdownId\x12%\n" +
-	"\x0ebreakdown_hash\x18\x02 \x01(\tR\rbreakdownHash\x126\n" +
-	"\x06flavor\x18\x03 \x01(\x0e2\x1e.infracost.parser.cache.FlavorR\x06flavor\x12R\n" +
+	"\x0ebreakdown_hash\x18\x02 \x01(\tR\rbreakdownHash\x12:\n" +
+	"\x06flavor\x18\x03 \x01(\x0e2\x1e.infracost.parser.cache.FlavorB\x02\x18\x01R\x06flavor\x12R\n" +
 	"\x10dependency_paths\x18\x04 \x01(\v2'.infracost.parser.cache.DependencyPathsR\x0fdependencyPaths\x12O\n" +
-	"\x0fresource_counts\x18\x05 \x01(\v2&.infracost.parser.cache.ResourceCountsR\x0eresourceCounts\"\x94\x04\n" +
+	"\x0fresource_counts\x18\x05 \x01(\v2&.infracost.parser.cache.ResourceCountsR\x0eresourceCounts\x12!\n" +
+	"\fproject_type\x18\x06 \x01(\tR\vprojectType\"\x94\x04\n" +
 	"\x0eResourceCounts\x128\n" +
 	"\x18total_detected_resources\x18\x01 \x01(\x05R\x16totalDetectedResources\x12:\n" +
 	"\x19total_supported_resources\x18\x02 \x01(\x05R\x17totalSupportedResources\x12>\n" +
@@ -938,12 +965,12 @@ const file_infracost_parser_cache_cache_proto_rawDesc = "" +
 	"\n" +
 	"config_sha\x18\x06 \x01(\tR\tconfigSha\x12\x12\n" +
 	"\x04path\x18\a \x01(\tR\x04path\x12\x1c\n" +
-	"\tworkspace\x18\b \x01(\tR\tworkspace*f\n" +
+	"\tworkspace\x18\b \x01(\tR\tworkspace*j\n" +
 	"\x06Flavor\x12\x16\n" +
 	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FLAVOR_TERRAFORM\x10\x01\x12\x19\n" +
 	"\x15FLAVOR_CLOUDFORMATION\x10\x02\x12\x13\n" +
-	"\x0fFLAVOR_AGNOSTIC\x10\x03B\xdc\x01\n" +
+	"\x0fFLAVOR_AGNOSTIC\x10\x03\x1a\x02\x18\x01B\xdc\x01\n" +
 	"\x1acom.infracost.parser.cacheB\n" +
 	"CacheProtoP\x01Z8github.com/infracost/proto/gen/go/infracost/parser/cache\xa2\x02\x03IPC\xaa\x02\x16Infracost.Parser.Cache\xca\x02\x16Infracost\\Parser\\Cache\xe2\x02\"Infracost\\Parser\\Cache\\GPBMetadata\xea\x02\x18Infracost::Parser::Cacheb\x06proto3"
 

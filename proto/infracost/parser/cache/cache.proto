@@ -30,13 +30,19 @@ message TerraformProject {
 
 message Metadata {
   string key = 1;
-  Flavor flavor = 2;
+  // Deprecated: every tree written since parser plugins is FLAVOR_AGNOSTIC, so it says nothing
+  // about the project. Use the enclosing message's project_type.
+  Flavor flavor = 2 [deprecated = true];
   string runner_version = 3;
   string parser_version = 4;
   google.protobuf.Timestamp created_at = 5;
 }
 
+// Deprecated: a flavor names only Terraform and CloudFormation, and every tree written since
+// parser plugins is FLAVOR_AGNOSTIC, so it says nothing about the project. Use the project's type
+// instead: project_type on the tree's message, or on ProjectSummary.
 enum Flavor {
+  option deprecated = true;
   FLAVOR_UNSPECIFIED = 0;
   FLAVOR_TERRAFORM = 1;
   FLAVOR_CLOUDFORMATION = 2;
@@ -77,8 +83,9 @@ message ProjectSummary {
   // run compares its freshly computed hash against this to decide whether the project changed.
   string breakdown_hash = 2;
 
-  // The project's flavor (Terraform, CloudFormation, or agnostic).
-  Flavor flavor = 3;
+  // Deprecated: use project_type. The project's flavor (Terraform, CloudFormation, or agnostic),
+  // which names no other type of project.
+  Flavor flavor = 3 [deprecated = true];
 
   // The files this project depended on during its last parse, including files outside the project
   // directory. Used to decide whether changed files are relevant and to invalidate caches.
@@ -90,6 +97,12 @@ message ProjectSummary {
   // otherwise computed only over the projects that run produced. Unset on summaries written by
   // older runners; callers must treat that as "counts unknown", not zero.
   ResourceCounts resource_counts = 5;
+
+  // The project's type in the Infracost config (e.g. "terraform", "terragrunt", "cloudformation",
+  // "kubernetes"), as on the project's cached tree, so a later run can tell what a project is
+  // without reading that tree. Empty on summaries written before this field existed; callers must
+  // treat that as unknown.
+  string project_type = 6;
 }
 
 // ResourceCounts is a project's resource summary: how many resources were detected in its breakdown

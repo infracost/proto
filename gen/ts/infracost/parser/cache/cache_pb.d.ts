@@ -87,7 +87,11 @@ export declare type Metadata = Message<"infracost.parser.cache.Metadata"> & {
   key: string;
 
   /**
-   * @generated from field: infracost.parser.cache.Flavor flavor = 2;
+   * Deprecated: every tree written since parser plugins is FLAVOR_AGNOSTIC, so it says nothing
+   * about the project. Use the enclosing message's project_type.
+   *
+   * @generated from field: infracost.parser.cache.Flavor flavor = 2 [deprecated = true];
+   * @deprecated
    */
   flavor: Flavor;
 
@@ -209,9 +213,11 @@ export declare type ProjectSummary = Message<"infracost.parser.cache.ProjectSumm
   breakdownHash: string;
 
   /**
-   * The project's flavor (Terraform, CloudFormation, or agnostic).
+   * Deprecated: use project_type. The project's flavor (Terraform, CloudFormation, or agnostic),
+   * which names no other type of project.
    *
-   * @generated from field: infracost.parser.cache.Flavor flavor = 3;
+   * @generated from field: infracost.parser.cache.Flavor flavor = 3 [deprecated = true];
+   * @deprecated
    */
   flavor: Flavor;
 
@@ -233,6 +239,16 @@ export declare type ProjectSummary = Message<"infracost.parser.cache.ProjectSumm
    * @generated from field: infracost.parser.cache.ResourceCounts resource_counts = 5;
    */
   resourceCounts?: ResourceCounts;
+
+  /**
+   * The project's type in the Infracost config (e.g. "terraform", "terragrunt", "cloudformation",
+   * "kubernetes"), as on the project's cached tree, so a later run can tell what a project is
+   * without reading that tree. Empty on summaries written before this field existed; callers must
+   * treat that as unknown.
+   *
+   * @generated from field: string project_type = 6;
+   */
+  projectType: string;
 };
 
 /**
@@ -417,7 +433,12 @@ export declare type TreeProject = Message<"infracost.parser.cache.TreeProject"> 
 export declare const TreeProjectSchema: GenMessage<TreeProject>;
 
 /**
+ * Deprecated: a flavor names only Terraform and CloudFormation, and every tree written since
+ * parser plugins is FLAVOR_AGNOSTIC, so it says nothing about the project. Use the project's type
+ * instead: project_type on the tree's message, or on ProjectSummary.
+ *
  * @generated from enum infracost.parser.cache.Flavor
+ * @deprecated
  */
 export enum Flavor {
   /**
@@ -443,6 +464,7 @@ export enum Flavor {
 
 /**
  * Describes the enum infracost.parser.cache.Flavor.
+ * @deprecated
  */
 export declare const FlavorSchema: GenEnum<Flavor>;
 
