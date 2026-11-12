@@ -208,9 +208,12 @@ type Infracost struct {
 	// trace id for correlating requests - mainly for internal use/debugging
 	TraceId string `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	// optional org id provided by the CLI that is fact checked in the pricing api
-	OrgId         *string `protobuf:"bytes,4,opt,name=org_id,json=orgId,proto3,oneof" json:"org_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	OrgId *string `protobuf:"bytes,4,opt,name=org_id,json=orgId,proto3,oneof" json:"org_id,omitempty"`
+	// cost.dev api endpoint for its model catalog, read by the AI policies; empty means the public one,
+	// https://api.cost.dev
+	CostdevApiEndpoint string `protobuf:"bytes,5,opt,name=costdev_api_endpoint,json=costdevApiEndpoint,proto3" json:"costdev_api_endpoint,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Infracost) Reset() {
@@ -267,6 +270,13 @@ func (x *Infracost) GetTraceId() string {
 func (x *Infracost) GetOrgId() string {
 	if x != nil && x.OrgId != nil {
 		return *x.OrgId
+	}
+	return ""
+}
+
+func (x *Infracost) GetCostdevApiEndpoint() string {
+	if x != nil {
+		return x.CostdevApiEndpoint
 	}
 	return ""
 }
@@ -489,12 +499,13 @@ const file_infracost_provider_input_proto_rawDesc = "" +
 	"\tinfracost\x18\t \x01(\v2\x1d.infracost.provider.InfracostR\tinfracost\"N\n" +
 	"\bSettings\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12&\n" +
-	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"\x98\x01\n" +
+	"\x0fuse_disk_caches\x18\x02 \x01(\bR\ruseDiskCaches\"\xca\x01\n" +
 	"\tInfracost\x12\x17\n" +
 	"\aapi_key\x18\x01 \x01(\tR\x06apiKey\x120\n" +
 	"\x14pricing_api_endpoint\x18\x02 \x01(\tR\x12pricingApiEndpoint\x12\x19\n" +
 	"\btrace_id\x18\x03 \x01(\tR\atraceId\x12\x1a\n" +
-	"\x06org_id\x18\x04 \x01(\tH\x00R\x05orgId\x88\x01\x01B\t\n" +
+	"\x06org_id\x18\x04 \x01(\tH\x00R\x05orgId\x88\x01\x01\x120\n" +
+	"\x14costdev_api_endpoint\x18\x05 \x01(\tR\x12costdevApiEndpointB\t\n" +
 	"\a_org_id\"\xeb\x01\n" +
 	"\bFeatures\x120\n" +
 	"\x14enable_price_lookups\x18\x01 \x01(\bR\x12enablePriceLookups\x125\n" +

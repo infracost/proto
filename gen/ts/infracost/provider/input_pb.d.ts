@@ -149,6 +149,14 @@ export declare type Infracost = Message<"infracost.provider.Infracost"> & {
    * @generated from field: optional string org_id = 4;
    */
   orgId?: string;
+
+  /**
+   * cost.dev api endpoint for its model catalog, read by the AI policies; empty means the public one,
+   * https://api.cost.dev
+   *
+   * @generated from field: string costdev_api_endpoint = 5;
+   */
+  costdevApiEndpoint: string;
 };
 
 /**

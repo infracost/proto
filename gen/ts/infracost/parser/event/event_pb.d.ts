@@ -738,6 +738,13 @@ export declare type InfracostServices = Message<"infracost.parser.event.Infracos
    * @generated from field: bool use_graph_evaluator = 9;
    */
   useGraphEvaluator: boolean;
+
+  /**
+   * cost.dev api endpoint for its model catalog, passed to the provider plugins; empty means the public one
+   *
+   * @generated from field: string costdev_api_endpoint = 10;
+   */
+  costdevApiEndpoint: string;
 };
 
 /**
