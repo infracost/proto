@@ -55,6 +55,9 @@ message Infracost {
   string trace_id = 3;
   // optional org id provided by the CLI that is fact checked in the pricing api
   optional string org_id = 4;
+  // cost.dev api endpoint for its model catalog, read by the AI policies; empty means the public one,
+  // https://api.cost.dev
+  string costdev_api_endpoint = 5;
 }
 
 message Features {

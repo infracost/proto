@@ -1314,8 +1314,10 @@ type InfracostServices struct {
 	Auth0ClaimsNamespace      string                 `protobuf:"bytes,7,opt,name=auth0_claims_namespace,json=auth0ClaimsNamespace,proto3" json:"auth0_claims_namespace,omitempty"`
 	ApiClientTimeout          *durationpb.Duration   `protobuf:"bytes,8,opt,name=api_client_timeout,json=apiClientTimeout,proto3" json:"api_client_timeout,omitempty"`
 	UseGraphEvaluator         bool                   `protobuf:"varint,9,opt,name=use_graph_evaluator,json=useGraphEvaluator,proto3" json:"use_graph_evaluator,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// cost.dev api endpoint for its model catalog, passed to the provider plugins; empty means the public one
+	CostdevApiEndpoint string `protobuf:"bytes,10,opt,name=costdev_api_endpoint,json=costdevApiEndpoint,proto3" json:"costdev_api_endpoint,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *InfracostServices) Reset() {
@@ -1409,6 +1411,13 @@ func (x *InfracostServices) GetUseGraphEvaluator() bool {
 		return x.UseGraphEvaluator
 	}
 	return false
+}
+
+func (x *InfracostServices) GetCostdevApiEndpoint() string {
+	if x != nil {
+		return x.CostdevApiEndpoint
+	}
+	return ""
 }
 
 type Telemetry struct {
@@ -1678,7 +1687,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	" wait_for_metrics_during_shutdown\x18\r \x01(\bR\x1cwaitForMetricsDuringShutdown\x123\n" +
 	"\x05cache\x18\x0e \x01(\v2\x1d.infracost.parser.event.CacheR\x05cache\x12'\n" +
 	"\x10tls_ca_cert_file\x18\x0f \x01(\tR\rtlsCaCertFile\x12\x17\n" +
-	"\adry_run\x18\x10 \x01(\bR\x06dryRun\"\xe9\x03\n" +
+	"\adry_run\x18\x10 \x01(\bR\x06dryRun\"\x9b\x04\n" +
 	"\x11InfracostServices\x12=\n" +
 	"\n" +
 	"auth_token\x18\x01 \x01(\v2\x1e.infracost.parser.event.SecretR\tauthToken\x12%\n" +
@@ -1689,7 +1698,9 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x16dashboard_api_endpoint\x18\x06 \x01(\tR\x14dashboardApiEndpoint\x124\n" +
 	"\x16auth0_claims_namespace\x18\a \x01(\tR\x14auth0ClaimsNamespace\x12G\n" +
 	"\x12api_client_timeout\x18\b \x01(\v2\x19.google.protobuf.DurationR\x10apiClientTimeout\x12.\n" +
-	"\x13use_graph_evaluator\x18\t \x01(\bR\x11useGraphEvaluator\"\x82\x02\n" +
+	"\x13use_graph_evaluator\x18\t \x01(\bR\x11useGraphEvaluator\x120\n" +
+	"\x14costdev_api_endpoint\x18\n" +
+	" \x01(\tR\x12costdevApiEndpoint\"\x82\x02\n" +
 	"\tTelemetry\x12\x1d\n" +
 	"\n" +
 	"sentry_dsn\x18\x01 \x01(\tR\tsentryDsn\x12!\n" +

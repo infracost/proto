@@ -177,6 +177,8 @@ message InfracostServices {
   string auth0_claims_namespace = 7;
   google.protobuf.Duration api_client_timeout = 8;
   bool use_graph_evaluator = 9;
+  // cost.dev api endpoint for its model catalog, passed to the provider plugins; empty means the public one
+  string costdev_api_endpoint = 10;
 }
 
 message Telemetry {
