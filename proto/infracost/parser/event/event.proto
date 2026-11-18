@@ -126,6 +126,9 @@ message FeatureFlags {
   // enable_appcode_plugin gates the appcode parser plugin during rollout,
   // independently of JobBehavior.scan_app_code.
   bool enable_appcode_plugin = 13;
+  // enable_ai_plugin gates the ai provider plugin during rollout. The plugin
+  // also needs JobBehavior.scan_app_code: it runs only when both are true.
+  bool enable_ai_plugin = 14;
 }
 
 // What gets executed

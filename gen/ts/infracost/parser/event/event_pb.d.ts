@@ -518,6 +518,14 @@ export declare type FeatureFlags = Message<"infracost.parser.event.FeatureFlags"
    * @generated from field: bool enable_appcode_plugin = 13;
    */
   enableAppcodePlugin: boolean;
+
+  /**
+   * enable_ai_plugin gates the ai provider plugin during rollout. The plugin
+   * also needs JobBehavior.scan_app_code: it runs only when both are true.
+   *
+   * @generated from field: bool enable_ai_plugin = 14;
+   */
+  enableAiPlugin: boolean;
 };
 
 /**
