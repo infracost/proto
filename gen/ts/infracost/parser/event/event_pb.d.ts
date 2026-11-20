@@ -269,6 +269,14 @@ export declare type VCS = Message<"infracost.parser.event.VCS"> & {
    * @generated from field: string clone_base_dir = 7;
    */
   cloneBaseDir: string;
+
+  /**
+   * A non-empty list replaces legacy static credential delivery.
+   * An omitted or empty list retains legacy delivery.
+   *
+   * @generated from field: repeated infracost.parser.event.GitCredential git_credentials = 8;
+   */
+  gitCredentials: GitCredential[];
 };
 
 /**
@@ -306,6 +314,45 @@ export enum VCS_Type {
  * Describes the enum infracost.parser.event.VCS.Type.
  */
 export declare const VCS_TypeSchema: GenEnum<VCS_Type>;
+
+/**
+ * GitCredential authenticates Git HTTPS requests. Records are ordered by the sender.
+ *
+ * @generated from message infracost.parser.event.GitCredential
+ */
+export declare type GitCredential = Message<"infracost.parser.event.GitCredential"> & {
+  /**
+   * Literal host[:port][/path-prefix], e.g. "git.example.com:8443/org".
+   * Include the port if Git sends one; no scheme, wildcards, or trailing slash.
+   * The Git credential helper compares host and path case-insensitively.
+   * Scopes in git_credentials must be unique under that comparison.
+   * A path prefix must match the whole path or end at a slash boundary.
+   * The longest match wins.
+   *
+   * @generated from field: string scope = 1;
+   */
+  scope: string;
+
+  /**
+   * Both values use the same Secret handling as runner access tokens.
+   * Absent or empty secrets represent empty values. Usernames may contain
+   * tokens, as they do in Azure Repos, so they must be protected too.
+   *
+   * @generated from field: infracost.parser.event.Secret user = 2;
+   */
+  user?: Secret;
+
+  /**
+   * @generated from field: infracost.parser.event.Secret token = 3;
+   */
+  token?: Secret;
+};
+
+/**
+ * Describes the message infracost.parser.event.GitCredential.
+ * Use `create(GitCredentialSchema)` to create a new message.
+ */
+export declare const GitCredentialSchema: GenMessage<GitCredential>;
 
 /**
  * @generated from message infracost.parser.event.Metadata

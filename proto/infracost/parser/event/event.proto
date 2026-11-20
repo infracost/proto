@@ -74,6 +74,25 @@ message VCS {
   string pullrequest_check_id = 5;
   bool reuse_cloned_repos = 6;
   string clone_base_dir = 7;
+  // A non-empty list replaces legacy static credential delivery.
+  // An omitted or empty list retains legacy delivery.
+  repeated GitCredential git_credentials = 8;
+}
+
+// GitCredential authenticates Git HTTPS requests. Records are ordered by the sender.
+message GitCredential {
+  // Literal host[:port][/path-prefix], e.g. "git.example.com:8443/org".
+  // Include the port if Git sends one; no scheme, wildcards, or trailing slash.
+  // The Git credential helper compares host and path case-insensitively.
+  // Scopes in git_credentials must be unique under that comparison.
+  // A path prefix must match the whole path or end at a slash boundary.
+  // The longest match wins.
+  string scope = 1;
+  // Both values use the same Secret handling as runner access tokens.
+  // Absent or empty secrets represent empty values. Usernames may contain
+  // tokens, as they do in Azure Repos, so they must be protected too.
+  Secret user = 2;
+  Secret token = 3;
 }
 
 message Metadata {
