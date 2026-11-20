@@ -475,8 +475,11 @@ type VCS struct {
 	PullrequestCheckId string                 `protobuf:"bytes,5,opt,name=pullrequest_check_id,json=pullrequestCheckId,proto3" json:"pullrequest_check_id,omitempty"`
 	ReuseClonedRepos   bool                   `protobuf:"varint,6,opt,name=reuse_cloned_repos,json=reuseClonedRepos,proto3" json:"reuse_cloned_repos,omitempty"`
 	CloneBaseDir       string                 `protobuf:"bytes,7,opt,name=clone_base_dir,json=cloneBaseDir,proto3" json:"clone_base_dir,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// A non-empty list replaces legacy static credential delivery.
+	// An omitted or empty list retains legacy delivery.
+	GitCredentials []*GitCredential `protobuf:"bytes,8,rep,name=git_credentials,json=gitCredentials,proto3" json:"git_credentials,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *VCS) Reset() {
@@ -558,6 +561,83 @@ func (x *VCS) GetCloneBaseDir() string {
 	return ""
 }
 
+func (x *VCS) GetGitCredentials() []*GitCredential {
+	if x != nil {
+		return x.GitCredentials
+	}
+	return nil
+}
+
+// GitCredential authenticates Git HTTPS requests. Records are ordered by the sender.
+type GitCredential struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Literal host[:port][/path-prefix], e.g. "git.example.com:8443/org".
+	// Include the port if Git sends one; no scheme, wildcards, or trailing slash.
+	// The Git credential helper compares host and path case-insensitively.
+	// Scopes in git_credentials must be unique under that comparison.
+	// A path prefix must match the whole path or end at a slash boundary.
+	// The longest match wins.
+	Scope string `protobuf:"bytes,1,opt,name=scope,proto3" json:"scope,omitempty"`
+	// Both values use the same Secret handling as runner access tokens.
+	// Absent or empty secrets represent empty values. Usernames may contain
+	// tokens, as they do in Azure Repos, so they must be protected too.
+	User          *Secret `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	Token         *Secret `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GitCredential) Reset() {
+	*x = GitCredential{}
+	mi := &file_infracost_parser_event_event_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GitCredential) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GitCredential) ProtoMessage() {}
+
+func (x *GitCredential) ProtoReflect() protoreflect.Message {
+	mi := &file_infracost_parser_event_event_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GitCredential.ProtoReflect.Descriptor instead.
+func (*GitCredential) Descriptor() ([]byte, []int) {
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GitCredential) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *GitCredential) GetUser() *Secret {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *GitCredential) GetToken() *Secret {
+	if x != nil {
+		return x.Token
+	}
+	return nil
+}
+
 type Metadata struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	TimestampReceived *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp_received,json=timestampReceived,proto3" json:"timestamp_received,omitempty"`
@@ -573,7 +653,7 @@ type Metadata struct {
 
 func (x *Metadata) Reset() {
 	*x = Metadata{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -585,7 +665,7 @@ func (x *Metadata) String() string {
 func (*Metadata) ProtoMessage() {}
 
 func (x *Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[5]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -598,7 +678,7 @@ func (x *Metadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metadata.ProtoReflect.Descriptor instead.
 func (*Metadata) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{5}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Metadata) GetTimestampReceived() *timestamppb.Timestamp {
@@ -660,7 +740,7 @@ type AWSConfig struct {
 
 func (x *AWSConfig) Reset() {
 	*x = AWSConfig{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -672,7 +752,7 @@ func (x *AWSConfig) String() string {
 func (*AWSConfig) ProtoMessage() {}
 
 func (x *AWSConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[6]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -685,7 +765,7 @@ func (x *AWSConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AWSConfig.ProtoReflect.Descriptor instead.
 func (*AWSConfig) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{6}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AWSConfig) GetRegion() string {
@@ -715,7 +795,7 @@ type Cache struct {
 
 func (x *Cache) Reset() {
 	*x = Cache{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +807,7 @@ func (x *Cache) String() string {
 func (*Cache) ProtoMessage() {}
 
 func (x *Cache) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[7]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +820,7 @@ func (x *Cache) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cache.ProtoReflect.Descriptor instead.
 func (*Cache) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{7}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Cache) GetDisabled() bool {
@@ -789,7 +869,7 @@ type GitHubApplication struct {
 
 func (x *GitHubApplication) Reset() {
 	*x = GitHubApplication{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -801,7 +881,7 @@ func (x *GitHubApplication) String() string {
 func (*GitHubApplication) ProtoMessage() {}
 
 func (x *GitHubApplication) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[8]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -814,7 +894,7 @@ func (x *GitHubApplication) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GitHubApplication.ProtoReflect.Descriptor instead.
 func (*GitHubApplication) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{8}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GitHubApplication) GetAccessToken() *Secret {
@@ -848,7 +928,7 @@ type AzureRepos struct {
 
 func (x *AzureRepos) Reset() {
 	*x = AzureRepos{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -860,7 +940,7 @@ func (x *AzureRepos) String() string {
 func (*AzureRepos) ProtoMessage() {}
 
 func (x *AzureRepos) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[9]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -873,7 +953,7 @@ func (x *AzureRepos) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AzureRepos.ProtoReflect.Descriptor instead.
 func (*AzureRepos) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{9}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *AzureRepos) GetAccessToken() *Secret {
@@ -914,7 +994,7 @@ type FeatureFlags struct {
 
 func (x *FeatureFlags) Reset() {
 	*x = FeatureFlags{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -926,7 +1006,7 @@ func (x *FeatureFlags) String() string {
 func (*FeatureFlags) ProtoMessage() {}
 
 func (x *FeatureFlags) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[10]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -939,7 +1019,7 @@ func (x *FeatureFlags) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FeatureFlags.ProtoReflect.Descriptor instead.
 func (*FeatureFlags) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{10}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FeatureFlags) GetEnableCiscoStacks() bool {
@@ -1050,7 +1130,7 @@ type JobBehavior struct {
 
 func (x *JobBehavior) Reset() {
 	*x = JobBehavior{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1062,7 +1142,7 @@ func (x *JobBehavior) String() string {
 func (*JobBehavior) ProtoMessage() {}
 
 func (x *JobBehavior) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[11]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1075,7 +1155,7 @@ func (x *JobBehavior) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JobBehavior.ProtoReflect.Descriptor instead.
 func (*JobBehavior) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{11}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *JobBehavior) GetNoComment() bool {
@@ -1173,7 +1253,7 @@ type JobConfiguration struct {
 
 func (x *JobConfiguration) Reset() {
 	*x = JobConfiguration{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1185,7 +1265,7 @@ func (x *JobConfiguration) String() string {
 func (*JobConfiguration) ProtoMessage() {}
 
 func (x *JobConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[12]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1278,7 @@ func (x *JobConfiguration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JobConfiguration.ProtoReflect.Descriptor instead.
 func (*JobConfiguration) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{12}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *JobConfiguration) GetLogLevel() string {
@@ -1332,7 +1412,7 @@ type InfracostServices struct {
 
 func (x *InfracostServices) Reset() {
 	*x = InfracostServices{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[13]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1344,7 +1424,7 @@ func (x *InfracostServices) String() string {
 func (*InfracostServices) ProtoMessage() {}
 
 func (x *InfracostServices) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[13]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1357,7 +1437,7 @@ func (x *InfracostServices) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InfracostServices.ProtoReflect.Descriptor instead.
 func (*InfracostServices) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{13}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *InfracostServices) GetAuthToken() *Secret {
@@ -1443,7 +1523,7 @@ type Telemetry struct {
 
 func (x *Telemetry) Reset() {
 	*x = Telemetry{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[14]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1455,7 +1535,7 @@ func (x *Telemetry) String() string {
 func (*Telemetry) ProtoMessage() {}
 
 func (x *Telemetry) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[14]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1468,7 +1548,7 @@ func (x *Telemetry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Telemetry.ProtoReflect.Descriptor instead.
 func (*Telemetry) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{14}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Telemetry) GetSentryDsn() string {
@@ -1517,7 +1597,7 @@ type Langfuse struct {
 
 func (x *Langfuse) Reset() {
 	*x = Langfuse{}
-	mi := &file_infracost_parser_event_event_proto_msgTypes[15]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1529,7 +1609,7 @@ func (x *Langfuse) String() string {
 func (*Langfuse) ProtoMessage() {}
 
 func (x *Langfuse) ProtoReflect() protoreflect.Message {
-	mi := &file_infracost_parser_event_event_proto_msgTypes[15]
+	mi := &file_infracost_parser_event_event_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1542,7 +1622,7 @@ func (x *Langfuse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Langfuse.ProtoReflect.Descriptor instead.
 func (*Langfuse) Descriptor() ([]byte, []int) {
-	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{15}
+	return file_infracost_parser_event_event_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Langfuse) GetBaseUrl() string {
@@ -1608,7 +1688,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\rDecryptionKey\x12#\n" +
 	"\rencrypted_dek\x18\x01 \x01(\tR\fencryptedDek\"&\n" +
 	"\x06Secret\x12\x1c\n" +
-	"\tencrypted\x18\x01 \x01(\tR\tencrypted\"\xcc\x03\n" +
+	"\tencrypted\x18\x01 \x01(\tR\tencrypted\"\x9c\x04\n" +
 	"\x03VCS\x124\n" +
 	"\x04type\x18\x01 \x01(\x0e2 .infracost.parser.event.VCS.TypeR\x04type\x12(\n" +
 	"\x10source_raw_event\x18\x02 \x01(\tR\x0esourceRawEvent\x12X\n" +
@@ -1617,14 +1697,19 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"azureRepos\x120\n" +
 	"\x14pullrequest_check_id\x18\x05 \x01(\tR\x12pullrequestCheckId\x12,\n" +
 	"\x12reuse_cloned_repos\x18\x06 \x01(\bR\x10reuseClonedRepos\x12$\n" +
-	"\x0eclone_base_dir\x18\a \x01(\tR\fcloneBaseDir\"@\n" +
+	"\x0eclone_base_dir\x18\a \x01(\tR\fcloneBaseDir\x12N\n" +
+	"\x0fgit_credentials\x18\b \x03(\v2%.infracost.parser.event.GitCredentialR\x0egitCredentials\"@\n" +
 	"\x04Type\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06GITLAB\x10\x01\x12\n" +
 	"\n" +
 	"\x06GITHUB\x10\x02\x12\x0f\n" +
-	"\vAZURE_REPOS\x10\x03\"\xe4\x02\n" +
+	"\vAZURE_REPOS\x10\x03\"\x8f\x01\n" +
+	"\rGitCredential\x12\x14\n" +
+	"\x05scope\x18\x01 \x01(\tR\x05scope\x122\n" +
+	"\x04user\x18\x02 \x01(\v2\x1e.infracost.parser.event.SecretR\x04user\x124\n" +
+	"\x05token\x18\x03 \x01(\v2\x1e.infracost.parser.event.SecretR\x05token\"\xe4\x02\n" +
 	"\bMetadata\x12I\n" +
 	"\x12timestamp_received\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x11timestampReceived\x12G\n" +
 	"\x11timestamp_created\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x10timestampCreated\x12E\n" +
@@ -1741,7 +1826,7 @@ func file_infracost_parser_event_event_proto_rawDescGZIP() []byte {
 }
 
 var file_infracost_parser_event_event_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_infracost_parser_event_event_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_infracost_parser_event_event_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_infracost_parser_event_event_proto_goTypes = []any{
 	(Event_Type)(0),               // 0: infracost.parser.event.Event.Type
 	(Environment_Type)(0),         // 1: infracost.parser.event.Environment.Type
@@ -1751,54 +1836,58 @@ var file_infracost_parser_event_event_proto_goTypes = []any{
 	(*DecryptionKey)(nil),         // 5: infracost.parser.event.DecryptionKey
 	(*Secret)(nil),                // 6: infracost.parser.event.Secret
 	(*VCS)(nil),                   // 7: infracost.parser.event.VCS
-	(*Metadata)(nil),              // 8: infracost.parser.event.Metadata
-	(*AWSConfig)(nil),             // 9: infracost.parser.event.AWSConfig
-	(*Cache)(nil),                 // 10: infracost.parser.event.Cache
-	(*GitHubApplication)(nil),     // 11: infracost.parser.event.GitHubApplication
-	(*AzureRepos)(nil),            // 12: infracost.parser.event.AzureRepos
-	(*FeatureFlags)(nil),          // 13: infracost.parser.event.FeatureFlags
-	(*JobBehavior)(nil),           // 14: infracost.parser.event.JobBehavior
-	(*JobConfiguration)(nil),      // 15: infracost.parser.event.JobConfiguration
-	(*InfracostServices)(nil),     // 16: infracost.parser.event.InfracostServices
-	(*Telemetry)(nil),             // 17: infracost.parser.event.Telemetry
-	(*Langfuse)(nil),              // 18: infracost.parser.event.Langfuse
-	(*RunParameters)(nil),         // 19: infracost.parser.event.RunParameters
-	(*timestamppb.Timestamp)(nil), // 20: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),   // 21: google.protobuf.Duration
+	(*GitCredential)(nil),         // 8: infracost.parser.event.GitCredential
+	(*Metadata)(nil),              // 9: infracost.parser.event.Metadata
+	(*AWSConfig)(nil),             // 10: infracost.parser.event.AWSConfig
+	(*Cache)(nil),                 // 11: infracost.parser.event.Cache
+	(*GitHubApplication)(nil),     // 12: infracost.parser.event.GitHubApplication
+	(*AzureRepos)(nil),            // 13: infracost.parser.event.AzureRepos
+	(*FeatureFlags)(nil),          // 14: infracost.parser.event.FeatureFlags
+	(*JobBehavior)(nil),           // 15: infracost.parser.event.JobBehavior
+	(*JobConfiguration)(nil),      // 16: infracost.parser.event.JobConfiguration
+	(*InfracostServices)(nil),     // 17: infracost.parser.event.InfracostServices
+	(*Telemetry)(nil),             // 18: infracost.parser.event.Telemetry
+	(*Langfuse)(nil),              // 19: infracost.parser.event.Langfuse
+	(*RunParameters)(nil),         // 20: infracost.parser.event.RunParameters
+	(*timestamppb.Timestamp)(nil), // 21: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 22: google.protobuf.Duration
 }
 var file_infracost_parser_event_event_proto_depIdxs = []int32{
 	0,  // 0: infracost.parser.event.Event.type:type_name -> infracost.parser.event.Event.Type
-	8,  // 1: infracost.parser.event.Event.metadata:type_name -> infracost.parser.event.Metadata
+	9,  // 1: infracost.parser.event.Event.metadata:type_name -> infracost.parser.event.Metadata
 	4,  // 2: infracost.parser.event.Event.environment:type_name -> infracost.parser.event.Environment
-	9,  // 3: infracost.parser.event.Event.aws_config:type_name -> infracost.parser.event.AWSConfig
+	10, // 3: infracost.parser.event.Event.aws_config:type_name -> infracost.parser.event.AWSConfig
 	7,  // 4: infracost.parser.event.Event.vcs:type_name -> infracost.parser.event.VCS
-	14, // 5: infracost.parser.event.Event.job_behavior:type_name -> infracost.parser.event.JobBehavior
-	15, // 6: infracost.parser.event.Event.job_configuration:type_name -> infracost.parser.event.JobConfiguration
-	16, // 7: infracost.parser.event.Event.services:type_name -> infracost.parser.event.InfracostServices
-	17, // 8: infracost.parser.event.Event.telemetry:type_name -> infracost.parser.event.Telemetry
+	15, // 5: infracost.parser.event.Event.job_behavior:type_name -> infracost.parser.event.JobBehavior
+	16, // 6: infracost.parser.event.Event.job_configuration:type_name -> infracost.parser.event.JobConfiguration
+	17, // 7: infracost.parser.event.Event.services:type_name -> infracost.parser.event.InfracostServices
+	18, // 8: infracost.parser.event.Event.telemetry:type_name -> infracost.parser.event.Telemetry
 	5,  // 9: infracost.parser.event.Event.decryption_key:type_name -> infracost.parser.event.DecryptionKey
-	19, // 10: infracost.parser.event.Event.run_parameters:type_name -> infracost.parser.event.RunParameters
+	20, // 10: infracost.parser.event.Event.run_parameters:type_name -> infracost.parser.event.RunParameters
 	1,  // 11: infracost.parser.event.Environment.type:type_name -> infracost.parser.event.Environment.Type
 	2,  // 12: infracost.parser.event.VCS.type:type_name -> infracost.parser.event.VCS.Type
-	11, // 13: infracost.parser.event.VCS.github_application:type_name -> infracost.parser.event.GitHubApplication
-	12, // 14: infracost.parser.event.VCS.azure_repos:type_name -> infracost.parser.event.AzureRepos
-	20, // 15: infracost.parser.event.Metadata.timestamp_received:type_name -> google.protobuf.Timestamp
-	20, // 16: infracost.parser.event.Metadata.timestamp_created:type_name -> google.protobuf.Timestamp
-	20, // 17: infracost.parser.event.Metadata.timestamp_queued:type_name -> google.protobuf.Timestamp
-	6,  // 18: infracost.parser.event.GitHubApplication.access_token:type_name -> infracost.parser.event.Secret
-	6,  // 19: infracost.parser.event.AzureRepos.access_token:type_name -> infracost.parser.event.Secret
-	13, // 20: infracost.parser.event.JobBehavior.feature_flags:type_name -> infracost.parser.event.FeatureFlags
-	21, // 21: infracost.parser.event.JobConfiguration.max_wait_vcs_api:type_name -> google.protobuf.Duration
-	10, // 22: infracost.parser.event.JobConfiguration.cache:type_name -> infracost.parser.event.Cache
-	6,  // 23: infracost.parser.event.InfracostServices.auth_token:type_name -> infracost.parser.event.Secret
-	21, // 24: infracost.parser.event.InfracostServices.api_client_timeout:type_name -> google.protobuf.Duration
-	18, // 25: infracost.parser.event.Telemetry.langfuse:type_name -> infracost.parser.event.Langfuse
-	6,  // 26: infracost.parser.event.Langfuse.private_key:type_name -> infracost.parser.event.Secret
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	12, // 13: infracost.parser.event.VCS.github_application:type_name -> infracost.parser.event.GitHubApplication
+	13, // 14: infracost.parser.event.VCS.azure_repos:type_name -> infracost.parser.event.AzureRepos
+	8,  // 15: infracost.parser.event.VCS.git_credentials:type_name -> infracost.parser.event.GitCredential
+	6,  // 16: infracost.parser.event.GitCredential.user:type_name -> infracost.parser.event.Secret
+	6,  // 17: infracost.parser.event.GitCredential.token:type_name -> infracost.parser.event.Secret
+	21, // 18: infracost.parser.event.Metadata.timestamp_received:type_name -> google.protobuf.Timestamp
+	21, // 19: infracost.parser.event.Metadata.timestamp_created:type_name -> google.protobuf.Timestamp
+	21, // 20: infracost.parser.event.Metadata.timestamp_queued:type_name -> google.protobuf.Timestamp
+	6,  // 21: infracost.parser.event.GitHubApplication.access_token:type_name -> infracost.parser.event.Secret
+	6,  // 22: infracost.parser.event.AzureRepos.access_token:type_name -> infracost.parser.event.Secret
+	14, // 23: infracost.parser.event.JobBehavior.feature_flags:type_name -> infracost.parser.event.FeatureFlags
+	22, // 24: infracost.parser.event.JobConfiguration.max_wait_vcs_api:type_name -> google.protobuf.Duration
+	11, // 25: infracost.parser.event.JobConfiguration.cache:type_name -> infracost.parser.event.Cache
+	6,  // 26: infracost.parser.event.InfracostServices.auth_token:type_name -> infracost.parser.event.Secret
+	22, // 27: infracost.parser.event.InfracostServices.api_client_timeout:type_name -> google.protobuf.Duration
+	19, // 28: infracost.parser.event.Telemetry.langfuse:type_name -> infracost.parser.event.Langfuse
+	6,  // 29: infracost.parser.event.Langfuse.private_key:type_name -> infracost.parser.event.Secret
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_infracost_parser_event_event_proto_init() }
@@ -1813,7 +1902,7 @@ func file_infracost_parser_event_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infracost_parser_event_event_proto_rawDesc), len(file_infracost_parser_event_event_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
