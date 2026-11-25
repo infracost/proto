@@ -42,6 +42,9 @@ const (
 	Event_REPO_REEVALUATE_BASE_BRANCH Event_Type = 9
 	// ai
 	Event_FIX_ISSUE Event_Type = 10
+	// index application code only: clone the default branch, run just the
+	// appcode parser and upload the results
+	Event_INDEX_APP_CODE Event_Type = 11
 )
 
 // Enum value maps for Event_Type.
@@ -58,6 +61,7 @@ var (
 		8:  "DEV_INFRACOST_CLONE",
 		9:  "REPO_REEVALUATE_BASE_BRANCH",
 		10: "FIX_ISSUE",
+		11: "INDEX_APP_CODE",
 	}
 	Event_Type_value = map[string]int32{
 		"UNSPECIFIED":                 0,
@@ -71,6 +75,7 @@ var (
 		"DEV_INFRACOST_CLONE":         8,
 		"REPO_REEVALUATE_BASE_BRANCH": 9,
 		"FIX_ISSUE":                   10,
+		"INDEX_APP_CODE":              11,
 	}
 )
 
@@ -1650,7 +1655,7 @@ var File_infracost_parser_event_event_proto protoreflect.FileDescriptor
 
 const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\n" +
-	"\"infracost/parser/event/event.proto\x12\x16infracost.parser.event\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*infracost/parser/event/runparameters.proto\"\x89\b\n" +
+	"\"infracost/parser/event/event.proto\x12\x16infracost.parser.event\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*infracost/parser/event/runparameters.proto\"\x9d\b\n" +
 	"\x05Event\x126\n" +
 	"\x04type\x18\x01 \x01(\x0e2\".infracost.parser.event.Event.TypeR\x04type\x12<\n" +
 	"\bmetadata\x18\x02 \x01(\v2 .infracost.parser.event.MetadataR\bmetadata\x12E\n" +
@@ -1664,7 +1669,7 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\ttelemetry\x18\t \x01(\v2!.infracost.parser.event.TelemetryR\ttelemetry\x12L\n" +
 	"\x0edecryption_key\x18\n" +
 	" \x01(\v2%.infracost.parser.event.DecryptionKeyR\rdecryptionKey\x12L\n" +
-	"\x0erun_parameters\x18\v \x01(\v2%.infracost.parser.event.RunParametersR\rrunParameters\"\x8e\x02\n" +
+	"\x0erun_parameters\x18\v \x01(\v2%.infracost.parser.event.RunParametersR\rrunParameters\"\xa2\x02\n" +
 	"\x04Type\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13PULL_REQUEST_OPENED\x10\x01\x12\x18\n" +
@@ -1677,7 +1682,8 @@ const file_infracost_parser_event_event_proto_rawDesc = "" +
 	"\x13DEV_INFRACOST_CLONE\x10\b\x12\x1f\n" +
 	"\x1bREPO_REEVALUATE_BASE_BRANCH\x10\t\x12\r\n" +
 	"\tFIX_ISSUE\x10\n" +
-	"\"\x81\x01\n" +
+	"\x12\x12\n" +
+	"\x0eINDEX_APP_CODE\x10\v\"\x81\x01\n" +
 	"\vEnvironment\x12<\n" +
 	"\x04type\x18\x01 \x01(\x0e2(.infracost.parser.event.Environment.TypeR\x04type\x12\x0e\n" +
 	"\x02ci\x18\x02 \x01(\bR\x02ci\"$\n" +

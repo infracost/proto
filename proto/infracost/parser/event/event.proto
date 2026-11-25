@@ -24,6 +24,9 @@ message Event {
     REPO_REEVALUATE_BASE_BRANCH = 9;
     // ai
     FIX_ISSUE = 10;
+    // index application code only: clone the default branch, run just the
+    // appcode parser and upload the results
+    INDEX_APP_CODE = 11;
   }
 
   Type type = 1;

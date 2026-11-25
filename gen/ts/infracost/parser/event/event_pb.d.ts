@@ -146,6 +146,14 @@ export enum Event_Type {
    * @generated from enum value: FIX_ISSUE = 10;
    */
   FIX_ISSUE = 10,
+
+  /**
+   * index application code only: clone the default branch, run just the
+   * appcode parser and upload the results
+   *
+   * @generated from enum value: INDEX_APP_CODE = 11;
+   */
+  INDEX_APP_CODE = 11,
 }
 
 /**
